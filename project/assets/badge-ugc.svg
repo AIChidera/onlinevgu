@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <linearGradient id="ug" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C04036"></stop>
+      <stop offset="100%" stop-color="#821a12"></stop>
+    </linearGradient>
+  </defs>
+  <circle cx="40" cy="40" r="36" fill="url(#ug)"></circle>
+  <circle cx="40" cy="40" r="36" fill="none" stroke="#eecf63" stroke-width="2"></circle>
+  <text x="40" y="34" font-family="Nunito, sans-serif" font-weight="800" font-size="11" fill="#fff" text-anchor="middle" letter-spacing="1">UGC</text>
+  <text x="40" y="48" font-family="Nunito, sans-serif" font-weight="700" font-size="7" fill="#eecf63" text-anchor="middle" letter-spacing="0.5">ENTITLED</text>
+  <text x="40" y="58" font-family="Nunito, sans-serif" font-weight="600" font-size="5" fill="#fff" text-anchor="middle" letter-spacing="0.5">GOV. OF INDIA</text>
+</svg>

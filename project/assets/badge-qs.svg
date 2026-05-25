@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="qsg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A2A4E"></stop>
+      <stop offset="100%" stop-color="#0E1730"></stop>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#qsg)"></rect>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="1"></rect>
+  <g font-family="Nunito, &#39;Proxima Nova&#39;, sans-serif" font-weight="900" text-anchor="middle">
+    <text x="32" y="32" font-size="22" fill="#FFFFFF" letter-spacing="-0.5">QS</text>
+    <text x="32" y="46" font-size="9" fill="#eecf63" letter-spacing="2">ASIA</text>
+  </g>
+  <circle cx="20" cy="14" r="2" fill="#eecf63"></circle>
+  <circle cx="44" cy="14" r="2" fill="#eecf63"></circle>
+  <path d="M 12 50 Q 32 56, 52 50" stroke="#eecf63" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"></path>
+</svg>
