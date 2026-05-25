@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   VGU Brand CSS Variables (for use outside Tailwind classes)
+   ============================================================ */
+:root {
+  --vgu-red:      #C04036;
+  --vgu-red-dark: #821a12;
+  --vgu-yellow:   #FFA412;
+  --vgu-gold:     #eecf63;
+  --vgu-beige:    #F4D7C1;
+  --n-900: #111827;
+  --n-600: #4B5563;
+  --n-200: #E5E7EB;
+  --n-100: #F3F4F6;
+  --n-50:  #F9FAFB;
+  --ease:  cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   Base resets
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: var(--n-900);
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--vgu-red);
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+}
+
+a:hover {
+  color: var(--vgu-red-dark);
+}
+
+/* ============================================================
+   Focus ring
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--vgu-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Utility: smooth scroll offset for sticky nav
+   ============================================================ */
+[id] {
+  scroll-margin-top: 80px;
+}

@@ -810,6 +810,7 @@ window.FinalCTA = FinalCTA;
 const HomePage = ({ navigate, openLeadModal, openLeadPage }) =>
 <main>
     <Hero openLeadModal={openLeadModal} navigate={navigate} />
+    <QuickPickRow navigate={navigate} openLeadModal={openLeadModal} />
     <TrustBar />
     <ProgramGrid navigate={navigate} openLeadModal={openLeadModal} />
     <StatStrip />

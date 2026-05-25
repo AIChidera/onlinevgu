@@ -7,7 +7,7 @@ const { useState: useStateChrome, useEffect: useEffectChrome } = React;
 const NAV_LINKS = [
   { label: 'Home', page: 'home' },
   { label: 'Programs', page: 'programs', dropdown: true },
-  { label: 'About VGU', page: 'about' },
+  { label: 'About', page: 'about' },
   { label: 'Admissions', page: 'admissions' },
   { label: 'Placements', page: 'placements' },
   { label: 'Blog', page: 'blog' },

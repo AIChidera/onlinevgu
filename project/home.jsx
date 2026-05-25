@@ -2,23 +2,56 @@
 const { useState: useHomeState } = React;
 
 /* ============================================================
-   PROGRAM DATA — Indian-context photography curated per subject
+   PROGRAM DATA — category-coded colors, no photos (Manipal-style)
    ============================================================ */
 const PROGRAMS = {
   ug: [
-    { code: 'BBA', name: 'Online BBA', sub: 'Bachelor of Business Administration', dur: '3 years', fee: '₹45,000/yr', emi: '₹3,749/mo', popular: true, img: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=720&q=70&auto=format&fit=crop', specs: '6 specialisations', tag: 'UGC-entitled' },
-    { code: 'BCA', name: 'Online BCA', sub: 'Bachelor of Computer Applications', dur: '3 years', fee: '₹50,000/yr', emi: '₹4,166/mo', popular: true, img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=720&q=70&auto=format&fit=crop', specs: 'Data Science track', tag: 'UGC-entitled' },
-    { code: 'BCOM', name: 'Online B.Com', sub: 'Bachelor of Commerce', dur: '3 years', fee: '₹35,000/yr', emi: '₹2,916/mo', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=720&q=70&auto=format&fit=crop', specs: 'Finance & taxation', tag: 'UGC-entitled' },
-    { code: 'BSC', name: 'Online B.Sc', sub: 'Bachelor of Science', dur: '3 years', fee: '₹40,000/yr', emi: '₹3,333/mo', img: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=720&q=70&auto=format&fit=crop', specs: 'Maths / Stats', tag: 'UGC-entitled' },
-    { code: 'BLIB', name: 'Online B.Lib', sub: 'Bachelor of Library Science', dur: '1 year', fee: '₹35,000/yr', emi: '₹2,916/mo', img: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=720&q=70&auto=format&fit=crop', specs: 'Info science', tag: 'UGC-entitled' },
+    { code: 'BBA', name: 'Online BBA', sub: 'Bachelor of Business Administration',
+      dur: '3 years', fee: '₹45,000/yr', emi: '₹3,749/mo', popular: true,
+      color: 'linear-gradient(135deg, #ea580c 0%, #9a3412 100%)',
+      icon: 'trending-up', specs: '6 specialisations', tag: 'UGC-entitled' },
+    { code: 'BCA', name: 'Online BCA', sub: 'Bachelor of Computer Applications',
+      dur: '3 years', fee: '₹50,000/yr', emi: '₹4,166/mo', popular: true,
+      color: 'linear-gradient(135deg, #4338ca 0%, #312e81 100%)',
+      icon: 'monitor', specs: 'Data Science track', tag: 'UGC-entitled' },
+    { code: 'B.Com', name: 'Online B.Com', sub: 'Bachelor of Commerce',
+      dur: '3 years', fee: '₹35,000/yr', emi: '₹2,916/mo',
+      color: 'linear-gradient(135deg, #059669 0%, #064e3b 100%)',
+      icon: 'wallet', specs: 'Finance & taxation', tag: 'UGC-entitled' },
+    { code: 'B.Sc', name: 'Online B.Sc', sub: 'Bachelor of Science',
+      dur: '3 years', fee: '₹40,000/yr', emi: '₹3,333/mo',
+      color: 'linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%)',
+      icon: 'target', specs: 'Maths / Statistics', tag: 'UGC-entitled' },
+    { code: 'B.Lib', name: 'Online B.Lib', sub: 'Bachelor of Library Science',
+      dur: '1 year', fee: '₹35,000/yr', emi: '₹2,916/mo',
+      color: 'linear-gradient(135deg, #d97706 0%, #78350f 100%)',
+      icon: 'book-open', specs: 'Info science', tag: 'UGC-entitled' },
   ],
   pg: [
-    { code: 'MBA', name: 'Online MBA', sub: 'Master of Business Administration', dur: '2 years', fee: '₹85,000/yr', emi: '₹7,084/mo', popular: true, img: 'https://images.unsplash.com/photo-1664575600796-ffa828c5cb6e?w=720&q=70&auto=format&fit=crop', specs: 'Dual specialisation', tag: 'AICTE-approved', goPage: 'program' },
-    { code: 'MBAH', name: 'MBA in Healthcare', sub: 'MBA — Healthcare Management', dur: '2 years', fee: '₹90,000/yr', emi: '₹7,500/mo', img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=720&q=70&auto=format&fit=crop', specs: 'Industry-aligned', tag: 'New for 2025' },
-    { code: 'MCA', name: 'Online MCA', sub: 'Master of Computer Applications', dur: '2 years', fee: '₹70,000/yr', emi: '₹5,833/mo', popular: true, img: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=720&q=70&auto=format&fit=crop', specs: 'Cloud & AI', tag: 'AICTE-approved' },
-    { code: 'MCOM', name: 'Online M.Com', sub: 'Master of Commerce', dur: '2 years', fee: '₹50,000/yr', emi: '₹4,166/mo', img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=720&q=70&auto=format&fit=crop', specs: 'Accounting & finance', tag: 'UGC-entitled' },
-    { code: 'MA', name: 'Online MA', sub: 'Master of Arts', dur: '2 years', fee: '₹45,000/yr', emi: '₹3,749/mo', img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=720&q=70&auto=format&fit=crop', specs: 'English / Psychology', tag: 'UGC-entitled' },
-    { code: 'MLIB', name: 'Online M.Lib', sub: 'Master of Library Science', dur: '1 year', fee: '₹40,000/yr', emi: '₹3,333/mo', img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=720&q=70&auto=format&fit=crop', specs: 'Digital library', tag: 'UGC-entitled' },
+    { code: 'MBA', name: 'Online MBA', sub: 'Master of Business Administration',
+      dur: '2 years', fee: '₹85,000/yr', emi: '₹7,084/mo', popular: true,
+      color: 'linear-gradient(135deg, #C04036 0%, #821a12 100%)',
+      icon: 'briefcase', specs: 'Dual specialisation', tag: 'AICTE-approved', goPage: 'program' },
+    { code: 'MBA-HC', name: 'MBA in Healthcare', sub: 'MBA — Healthcare Management',
+      dur: '2 years', fee: '₹90,000/yr', emi: '₹7,500/mo',
+      color: 'linear-gradient(135deg, #be185d 0%, #831843 100%)',
+      icon: 'shield-check', specs: 'Industry-aligned', tag: 'New for 2025' },
+    { code: 'MCA', name: 'Online MCA', sub: 'Master of Computer Applications',
+      dur: '2 years', fee: '₹70,000/yr', emi: '₹5,833/mo', popular: true,
+      color: 'linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%)',
+      icon: 'monitor', specs: 'Cloud & AI', tag: 'AICTE-approved' },
+    { code: 'M.Com', name: 'Online M.Com', sub: 'Master of Commerce',
+      dur: '2 years', fee: '₹50,000/yr', emi: '₹4,166/mo',
+      color: 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)',
+      icon: 'wallet', specs: 'Accounting & finance', tag: 'UGC-entitled' },
+    { code: 'MA', name: 'Online MA', sub: 'Master of Arts',
+      dur: '2 years', fee: '₹45,000/yr', emi: '₹3,749/mo',
+      color: 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)',
+      icon: 'book-open', specs: 'English / Psychology', tag: 'UGC-entitled' },
+    { code: 'M.Lib', name: 'Online M.Lib', sub: 'Master of Library Science',
+      dur: '1 year', fee: '₹40,000/yr', emi: '₹3,333/mo',
+      color: 'linear-gradient(135deg, #b45309 0%, #78350f 100%)',
+      icon: 'book-open', specs: 'Digital library', tag: 'UGC-entitled' },
   ],
 };
 
@@ -29,7 +62,7 @@ window.PROGRAMS = PROGRAMS;
    ============================================================ */
 const Hero = ({ openLeadModal, navigate }) => (
   <section className="hero-section">
-    {/* Decorative background art (subtle, non-noisy) */}
+    {/* Decorative background art */}
     <div className="hero-bg" aria-hidden="true">
       <div className="hero-blob hero-blob-orange"></div>
       <div className="hero-blob hero-blob-beige"></div>
@@ -86,7 +119,6 @@ const Hero = ({ openLeadModal, navigate }) => (
         </div>
 
         <div className="hero-visual">
-          {/* Warm shape behind photo */}
           <div className="hero-shape" aria-hidden="true"></div>
           <svg className="hero-ring" aria-hidden="true" viewBox="0 0 200 200" fill="none">
             <circle cx="100" cy="100" r="96" stroke="#eecf63" strokeWidth="2" strokeDasharray="4 8" opacity="0.7"/>
@@ -94,7 +126,7 @@ const Hero = ({ openLeadModal, navigate }) => (
 
           <div className="hero-frame">
             <div className="hero-frame-clip">
-              <img src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=900&q=80&auto=format&fit=crop" alt="Online VGU student" />
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80&auto=format&fit=crop" alt="Online VGU students" />
               <div className="hero-overlay"></div>
               <div className="hero-badges">
                 <img src="assets/badge-ugc.svg" alt="UGC" />
@@ -335,18 +367,100 @@ const Hero = ({ openLeadModal, navigate }) => (
 window.Hero = Hero;
 
 /* ============================================================
-   (StatStrip is defined in home2.jsx as the canonical version)
+   QUICK-PICK PROGRAM ROW — horizontal chips right under hero
    ============================================================ */
+const QuickPickRow = ({ navigate, openLeadModal }) => {
+  const picks = [
+    { label: 'Online MBA', ic: 'briefcase', page: 'program' },
+    { label: 'Online MCA', ic: 'monitor', page: 'home' },
+    { label: 'Online BBA', ic: 'trending-up', page: 'home' },
+    { label: 'Online BCA', ic: 'zap', page: 'home' },
+    { label: 'Online M.Com', ic: 'wallet', page: 'home' },
+    { label: 'MBA — Healthcare', ic: 'shield-check', page: 'home' },
+  ];
+  return (
+    <section className="qpr-section">
+      <div className="container">
+        <div className="qpr-inner">
+          <span className="qpr-label">Browse programs</span>
+          <div className="qpr-scroll">
+            {picks.map((p) => (
+              <button key={p.label} className="qpr-pill" onClick={() => navigate(p.page)}>
+                <Icon name={p.ic} size={15} />
+                {p.label}
+                <Icon name="arrow-right" size={13} />
+              </button>
+            ))}
+            <button className="qpr-pill qpr-pill-more" onClick={openLeadModal}>
+              All 11 programs <Icon name="arrow-right" size={13} />
+            </button>
+          </div>
+        </div>
+      </div>
+      <style>{`
+        .qpr-section {
+          background: var(--white);
+          border-bottom: 1px solid var(--n-200);
+          padding: 14px 0;
+        }
+        .qpr-inner {
+          display: flex; align-items: center; gap: 20px;
+        }
+        .qpr-label {
+          font-family: var(--font-heading); font-weight: 700; font-size: 12px;
+          color: var(--n-400); text-transform: uppercase; letter-spacing: 0.08em;
+          white-space: nowrap; flex: none;
+        }
+        .qpr-scroll {
+          display: flex; gap: 8px; overflow-x: auto;
+          scrollbar-width: none; padding: 2px 0;
+        }
+        .qpr-scroll::-webkit-scrollbar { display: none; }
+        .qpr-pill {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 7px 14px;
+          background: var(--n-50); border: 1.5px solid var(--n-200);
+          border-radius: 9999px; cursor: pointer;
+          font-family: var(--font-heading); font-weight: 600; font-size: 13px;
+          color: var(--n-700); white-space: nowrap;
+          transition: all 150ms var(--ease);
+          --n-700: #374151;
+        }
+        .qpr-pill:hover {
+          border-color: var(--vgu-red); color: var(--vgu-red);
+          background: rgba(192,64,54,0.04);
+          transform: translateY(-1px);
+        }
+        .qpr-pill svg { color: var(--vgu-red); flex: none; }
+        .qpr-pill .icon:last-child { opacity: 0.5; }
+        .qpr-pill:hover .icon:last-child { opacity: 1; }
+        .qpr-pill-more {
+          background: var(--vgu-red); border-color: var(--vgu-red);
+          color: var(--white);
+        }
+        .qpr-pill-more:hover {
+          background: var(--vgu-red-dark); border-color: var(--vgu-red-dark);
+          color: var(--white);
+        }
+        .qpr-pill-more svg { color: var(--white); }
+        @media (max-width: 768px) {
+          .qpr-label { display: none; }
+        }
+      `}</style>
+    </section>
+  );
+};
+window.QuickPickRow = QuickPickRow;
 
 /* ============================================================
-   PROGRAM GRID (UG / PG tabs)
+   PROGRAM GRID — Manipal-style colored card backgrounds
    ============================================================ */
 const ProgramGrid = ({ navigate, openLeadModal }) => {
   const [tab, setTab] = useHomeState('pg');
   const items = PROGRAMS[tab];
 
   return (
-    <section className="block bg-white">
+    <section className="block bg-light">
       <div className="container">
         <div className="block-heading">
           <span className="eyebrow">Programs</span>
@@ -369,19 +483,24 @@ const ProgramGrid = ({ navigate, openLeadModal }) => {
 
         <div className="prog-grid">
           {items.map((p) => (
-            <article key={p.code} className="card hoverable prog-card"
+            <article key={p.code} className="prog-card"
               onClick={() => p.goPage && navigate(p.goPage)}
               style={{cursor: p.goPage ? 'pointer' : 'default'}}>
-              <div className="prog-thumb">
-                <img src={p.img} alt={p.name} loading="lazy" />
-                <div className="prog-tags">
-                  <span className="tag tag-red">{p.tag}</span>
-                  {p.popular && <span className="tag tag-yellow">Most popular</span>}
+              {/* Colored header */}
+              <div className="prog-head" style={{background: p.color}}>
+                <div className="prog-head-tags">
+                  <span className="prog-tag-white">{p.tag}</span>
+                  {p.popular && <span className="prog-tag-warm">Popular</span>}
                 </div>
+                <div className="prog-head-icon">
+                  <Icon name={p.icon} size={26} />
+                </div>
+                <div className="prog-code">{p.code}</div>
               </div>
+              {/* Card body */}
               <div className="prog-body">
                 <h3 className="h4">{p.name}</h3>
-                <p className="body-s" style={{marginTop: 4}}>{p.sub}</p>
+                <p className="body-s" style={{marginTop: 4, color: 'var(--n-600)'}}>{p.sub}</p>
                 <div className="prog-meta">
                   <span className="pill-meta"><Icon name="clock" size={14} /> {p.dur}</span>
                   <span className="pill-meta"><Icon name="sparkles" size={14} /> {p.specs}</span>
@@ -435,27 +554,85 @@ const ProgramGrid = ({ navigate, openLeadModal }) => {
         .prog-tabs button:not(.on) .ct { background: var(--n-200); color: var(--n-600); }
 
         .prog-grid {
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
         }
-        .prog-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-        .prog-thumb {
+
+        /* Card shell */
+        .prog-card {
+          background: var(--white);
+          border: 1px solid var(--n-200);
+          border-radius: 16px;
+          overflow: hidden;
+          display: flex; flex-direction: column;
+          transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), border-color 220ms var(--ease);
+        }
+        .prog-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(17,24,39,0.12);
+          border-color: transparent;
+        }
+
+        /* Colored header */
+        .prog-head {
           position: relative;
-          aspect-ratio: 16/10;
+          height: 140px;
+          padding: 16px;
+          display: flex; flex-direction: column; justify-content: space-between;
           overflow: hidden;
         }
-        .prog-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease); }
-        .prog-card:hover .prog-thumb img { transform: scale(1.04); }
-        .prog-tags {
-          position: absolute; top: 14px; left: 14px;
-          display: flex; gap: 6px; flex-wrap: wrap;
+        /* Subtle dot-grid overlay on colored header */
+        .prog-head::after {
+          content: '';
+          position: absolute; inset: 0;
+          background-image: radial-gradient(circle, rgba(255,255,255,0.20) 1px, transparent 1.5px);
+          background-size: 18px 18px;
+          pointer-events: none;
         }
+        .prog-head-tags {
+          display: flex; gap: 6px; flex-wrap: wrap;
+          position: relative; z-index: 1;
+        }
+        .prog-tag-white {
+          background: rgba(255,255,255,0.92); color: var(--n-900);
+          font-family: var(--font-heading); font-size: 10px; font-weight: 700;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          padding: 3px 8px; border-radius: 4px;
+        }
+        .prog-tag-warm {
+          background: var(--vgu-yellow); color: var(--n-900);
+          font-family: var(--font-heading); font-size: 10px; font-weight: 700;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          padding: 3px 8px; border-radius: 4px;
+        }
+        .prog-head-icon {
+          position: absolute; top: 50%; right: 20px;
+          transform: translateY(-50%);
+          width: 52px; height: 52px; border-radius: 12px;
+          background: rgba(255,255,255,0.18);
+          display: flex; align-items: center; justify-content: center;
+          color: rgba(255,255,255,0.95);
+          z-index: 1;
+          transition: background 200ms var(--ease), transform 200ms var(--ease);
+        }
+        .prog-card:hover .prog-head-icon {
+          background: rgba(255,255,255,0.28);
+          transform: translateY(-50%) scale(1.08);
+        }
+        .prog-code {
+          font-family: var(--font-heading); font-weight: 900;
+          font-size: 22px; color: rgba(255,255,255,0.95);
+          letter-spacing: -0.5px;
+          position: relative; z-index: 1;
+        }
+
+        /* Card body */
         .prog-body {
-          padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1;
+          padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1;
         }
         .prog-meta { display: flex; gap: 6px; flex-wrap: wrap; }
         .prog-foot {
           display: flex; align-items: center; justify-content: space-between;
-          padding-top: 16px; margin-top: auto;
+          padding-top: 14px; margin-top: auto;
           border-top: 1px solid var(--n-200);
         }
         .prog-emi-label {
@@ -469,7 +646,8 @@ const ProgramGrid = ({ navigate, openLeadModal }) => {
         .prog-link {
           display: inline-flex; align-items: center; gap: 4px;
           color: var(--vgu-red); font-family: var(--font-heading);
-          font-weight: 700; font-size: 14px;
+          font-weight: 700; font-size: 13px;
+          transition: gap 150ms var(--ease), color 150ms var(--ease);
         }
         .prog-link:hover { color: var(--vgu-red-dark); text-decoration: none; gap: 8px; }
 
