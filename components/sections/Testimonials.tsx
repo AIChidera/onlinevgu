@@ -82,7 +82,7 @@ export default function Testimonials() {
           </div>
 
           {/* Featured panel */}
-          <div className="grid gap-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm" style={{ gridTemplateColumns: '1.1fr 1fr' }}>
+          <div className="grid gap-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm grid-cols-1 md:grid-cols-[1.1fr_1fr]">
 
             {/* LEFT — video panel */}
             <div

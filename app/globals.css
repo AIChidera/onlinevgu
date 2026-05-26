@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 /* ============================================================
+   Scroll-reveal — applied by ScrollReveal.tsx
+   ============================================================ */
+.sr-ready {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.sr-ready.sr-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
    VGU Brand CSS Variables (for use outside Tailwind classes)
    ============================================================ */
 :root {

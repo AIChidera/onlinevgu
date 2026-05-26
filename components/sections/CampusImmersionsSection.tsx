@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import {
   IconStar,
   IconBriefcase,
@@ -86,8 +86,16 @@ function getTransform(offset: number, isMobile: boolean) {
 }
 
 export default function CampusImmersionsSection() {
-  const [active, setActive] = useState(0)
+  const [active, setActive]   = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const total = CARDS.length
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check, { passive: true })
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total])
   const next = useCallback(() => setActive((a) => (a + 1) % total), [total])
@@ -116,7 +124,7 @@ export default function CampusImmersionsSection() {
         <div className="relative" style={{ width: '320px', height: '420px' }}>
           {CARDS.map((card, i) => {
             const offset = (i - active + total) % total
-            const pos = getTransform(offset, false)
+            const pos = getTransform(offset, isMobile)
             const clickable = offset === 4 || offset === 1 // left1 or right1
 
             return (

@@ -79,8 +79,8 @@ export default function Hero({ onApply }: HeroProps) {
           </div>
         </div>
 
-        {/* ── Right: floating badge cluster ──────────────── */}
-        <div className="relative flex items-center justify-center min-h-[420px] lg:min-h-[320px] lg:max-w-[440px] lg:mx-auto lg:w-full">
+        {/* ── Right: floating badge cluster (hidden below lg) ── */}
+        <div className="relative hidden lg:flex items-center justify-center min-h-[420px] lg:min-h-[320px] lg:max-w-[440px] lg:mx-auto lg:w-full xl:flex">
           {/* Central glow orb */}
           <div
             aria-hidden="true"

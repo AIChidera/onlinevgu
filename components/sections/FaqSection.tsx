@@ -87,7 +87,13 @@ export default function FaqSection() {
       await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name:            form.name,
+          email:           form.email,
+          phone:           form.mobile,
+          programInterest: form.programme,
+          source:          'homepage-counsellor',
+        }),
       })
       setSubmitted(true)
     } catch {
@@ -179,10 +185,7 @@ export default function FaqSection() {
       >
         <StrokeArt variant="light" />
 
-        <div
-          className="relative z-10 mx-auto max-w-[1280px] grid min-h-[560px] lg:grid-cols-1"
-          style={{ gridTemplateColumns: '1fr 1fr' }}
-        >
+        <div className="relative z-10 mx-auto max-w-[1280px] grid grid-cols-1 min-h-[560px] lg:grid-cols-2">
           {/* ── LEFT: counsellor image ── */}
           <div className="relative overflow-hidden min-h-[400px] lg:min-h-[320px]">
             {/* Placeholder gradient until /images/counsellor.jpg supplied */}
