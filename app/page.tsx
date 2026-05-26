@@ -7,6 +7,7 @@ import ImpactSection from '@/components/sections/ImpactSection'
 import CampusImmersionsSection from '@/components/sections/CampusImmersionsSection'
 import Testimonials from '@/components/sections/Testimonials'
 import CourseExperienceSection from '@/components/sections/CourseExperienceSection'
+import FeaturesSection from '@/components/sections/FeaturesSection'
 import AdmissionTimeline from '@/components/sections/AdmissionTimeline'
 import FAQ from '@/components/sections/FAQ'
 import FooterCTA from '@/components/sections/FooterCTA'
@@ -23,7 +24,8 @@ export default function HomePage() {
       <CampusImmersionsSection />
       <Testimonials />
       <CourseExperienceSection />
-      {/* S8 Features, S9 Steps, S10 FAQ+Counsellor, S11 Accreditation — coming next */}
+      <FeaturesSection />
+      {/* S9 Steps, S10 FAQ+Counsellor, S11 Accreditation — coming next */}
       <AdmissionTimeline />
       <FAQ />
       <FooterCTA onApply={() => setModalOpen(true)} />
