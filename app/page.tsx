@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Hero from '@/components/sections/Hero'
 import ProgramsSection from '@/components/sections/ProgramsSection'
 import ImpactSection from '@/components/sections/ImpactSection'
@@ -10,15 +9,12 @@ import CourseExperienceSection from '@/components/sections/CourseExperienceSecti
 import FeaturesSection from '@/components/sections/FeaturesSection'
 import StepsSection from '@/components/sections/StepsSection'
 import FaqSection from '@/components/sections/FaqSection'
-import FooterCTA from '@/components/sections/FooterCTA'
-import EnquiryModal from '@/components/forms/EnquiryModal'
+import AccreditationStrip from '@/components/sections/AccreditationStrip'
 
 export default function HomePage() {
-  const [modalOpen, setModalOpen] = useState(false)
-
   return (
     <>
-      <Hero onApply={() => setModalOpen(true)} />
+      <Hero />
       <ProgramsSection />
       <ImpactSection />
       <CampusImmersionsSection />
@@ -27,9 +23,7 @@ export default function HomePage() {
       <FeaturesSection />
       <StepsSection />
       <FaqSection />
-      {/* S11 Accreditation, Footer, WhatsApp — coming next */}
-      <FooterCTA onApply={() => setModalOpen(true)} />
-      <EnquiryModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <AccreditationStrip />
     </>
   )
 }
