@@ -2,11 +2,7 @@
 
 import StrokeArt from '@/components/ui/StrokeArt'
 
-interface HeroProps {
-  onApply?: () => void
-}
-
-export default function Hero({ onApply }: HeroProps) {
+export default function Hero() {
   return (
     <section className="group relative min-h-screen bg-vgu-dark flex items-center overflow-hidden pt-[72px]">
       {/* Stroke art (hover-triggered) */}
@@ -50,12 +46,12 @@ export default function Hero({ onApply }: HeroProps) {
 
           {/* CTAs */}
           <div className="mt-9 flex flex-wrap gap-4">
-            <button
-              onClick={onApply}
+            <a
+              href="#counsellor"
               className="bg-vgu-red hover:bg-[#a8352b] text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.45)]"
             >
               Apply Now — It&apos;s Free
-            </button>
+            </a>
             <a
               href="#programs"
               className="bg-transparent border-2 border-white/40 hover:border-white text-white rounded-lg px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150"
