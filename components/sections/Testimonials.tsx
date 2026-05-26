@@ -2,120 +2,232 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import SectionWrapper from '@/components/layout/SectionWrapper'
+import { IconX, IconPlayerPlay } from '@tabler/icons-react'
+import StrokeArt from '@/components/ui/StrokeArt'
 
-const TESTIMONIALS = [
+interface Story {
+  name:      string
+  role:      string
+  program:   string
+  quote:     string
+  outcomes:  string[]
+  avatar:    string
+  videoBg:   string
+  videoLabel: string
+  videoUrl?: string
+}
+
+const STORIES: Story[] = [
   {
-    id: 1,
-    name: 'Priya Sharma',
-    role: 'MBA graduate · Deloitte India',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&q=80&auto=format&fit=crop',
-    quote: 'I completed my MBA while managing a full-time job and two kids. The flexibility was unreal. My salary jumped 40% within six months of graduating.',
-    rating: 5,
-    program: 'Online MBA',
+    name:      'Priya Sharma',
+    role:      'MBA · Batch 2023',
+    program:   'MBA',
+    quote:     'I completed my MBA while managing a full-time job and two kids. The flexibility was unreal — live sessions on weekends, recorded lectures I could replay at midnight. My salary jumped 40% within six months of graduating.',
+    outcomes:  ['40% salary hike', 'Placed at Deloitte', 'Promoted in 6 months'],
+    avatar:    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop',
+    videoBg:   'from-[#821a12] to-[#3b0d09]',
+    videoLabel: 'Priya\'s journey · 2 min',
   },
   {
-    id: 2,
-    name: 'Rahul Menon',
-    role: 'MCA graduate · TCS Digital',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&q=80&auto=format&fit=crop',
-    quote: 'The MCA program was intense but worth every rupee. The AWS and AI modules were cutting-edge. Got placed before the final semester even ended.',
-    rating: 5,
-    program: 'Online MCA',
+    name:      'Arjun Mehta',
+    role:      'BCA · Batch 2024',
+    program:   'BCA',
+    quote:     'The coding curriculum was cutting-edge — Docker, Kubernetes, React. By final semester I already had three freelance clients. VGU\'s placement cell got me into Infosys Digital before the exams were even over.',
+    outcomes:  ['3 freelance clients', 'Infosys Digital offer', 'Full-stack engineer'],
+    avatar:    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop',
+    videoBg:   'from-[#1e3a8a] to-[#0f172a]',
+    videoLabel: 'Arjun\'s story · 2 min',
   },
   {
-    id: 3,
-    name: 'Ananya Krishnan',
-    role: 'BBA graduate · Zomato',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&q=80&auto=format&fit=crop',
-    quote: 'I was skeptical about online education at first. But the live sessions and the peer community made it as good as any campus experience.',
-    rating: 5,
-    program: 'Online BBA',
+    name:      'Kavya Nair',
+    role:      'MBA Healthcare · Batch 2023',
+    program:   'MBA Healthcare',
+    quote:     'Hospital administration is a niche I never thought I could enter without a clinical background. VGU\'s healthcare MBA opened doors I didn\'t know existed — Apollo Hospitals called me before convocation.',
+    outcomes:  ['Apollo Hospitals offer', 'Healthcare manager', 'Zero entrance exam'],
+    avatar:    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop',
+    videoBg:   'from-[#065f46] to-[#022c22]',
+    videoLabel: 'Kavya\'s experience · 3 min',
   },
   {
-    id: 4,
-    name: 'Mohammed Farhan',
-    role: 'MBA Healthcare · Apollo Hospitals',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=96&q=80&auto=format&fit=crop',
-    quote: 'The healthcare specialisation filled gaps I didn\'t know I had. Hospital case studies led by actual CMOs. Invaluable for medical administration.',
-    rating: 5,
-    program: 'MBA Healthcare',
-  },
-  {
-    id: 5,
-    name: 'Sneha Patel',
-    role: 'M.Com graduate · KPMG India',
-    avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=96&q=80&auto=format&fit=crop',
-    quote: 'The taxation modules were incredibly detailed. My CA firm was impressed with what I knew before even starting articleship. VGU exceeded my expectations.',
-    rating: 5,
-    program: 'Online M.Com',
+    name:      'Rahul Verma',
+    role:      'MSc Data Science & AI · Batch 2024',
+    program:   'MSc Data Science',
+    quote:     'The Coursera integration meant I was simultaneously earning IBM and Google certificates while doing my MSc. My capstone on demand forecasting literally got me hired — Amazon India used the same model.',
+    outcomes:  ['Amazon India offer', 'IBM & Google certs', 'Research published'],
+    avatar:    'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop',
+    videoBg:   'from-[#4c1d95] to-[#1e0a3c]',
+    videoLabel: 'Rahul\'s outcome · 2 min',
   },
 ]
 
 export default function Testimonials() {
-  const [active, setActive] = useState(0)
+  const [active, setActive]       = useState(0)
+  const [modalOpen, setModalOpen] = useState(false)
+  const story = STORIES[active]
 
   return (
-    <SectionWrapper id="testimonials" bg="light">
-      <div className="text-center mb-12">
-        <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
-          Student stories
-        </p>
-        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
-          Real people. Real outcomes.
-        </h2>
-      </div>
+    <>
+      <section id="testimonials" className="group relative overflow-hidden bg-[#F9FAFB] py-24 px-12 lg:px-8 md:px-5 md:py-16">
+        <StrokeArt variant="light" />
 
-      {/* Cards row — shows 3 at a time, active is center */}
-      <div className="grid grid-cols-3 gap-5 lg:grid-cols-1">
-        {TESTIMONIALS.slice(active, active + 3).map((t, i) => (
-          <div
-            key={t.id}
-            className={[
-              'flex flex-col rounded-2xl bg-white border p-6 transition-all duration-300',
-              i === 1
-                ? 'border-vgu-red/30 shadow-lg scale-[1.02]'
-                : 'border-neutral-200 shadow-sm',
-            ].join(' ')}
-          >
-            <div className="flex gap-0.5 mb-3">
-              {Array.from({ length: t.rating }).map((_, j) => (
-                <span key={j} className="text-vgu-yellow">★</span>
-              ))}
-            </div>
-            <p className="text-[15px] text-neutral-700 leading-relaxed flex-1">
-              &ldquo;{t.quote}&rdquo;
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Student Stories
             </p>
-            <div className="mt-5 flex items-center gap-3">
-              <div className="relative h-10 w-10 flex-none overflow-hidden rounded-full">
-                <Image src={t.avatar} alt={t.name} fill className="object-cover" sizes="40px" />
+            <h2 className="font-heading font-extrabold text-[40px] tracking-tight leading-[1.2] text-gray-900 md:text-[28px]">
+              Real People. Real Outcomes.
+            </h2>
+          </div>
+
+          {/* Featured panel */}
+          <div className="grid gap-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm" style={{ gridTemplateColumns: '1.1fr 1fr' }}>
+
+            {/* LEFT — video panel */}
+            <div
+              className={`relative min-h-[420px] bg-gradient-to-br ${story.videoBg} flex items-center justify-center cursor-pointer group/video md:min-h-[280px]`}
+              onClick={() => setModalOpen(true)}
+              role="button"
+              aria-label={`Play ${story.videoLabel}`}
+            >
+              {/* Decorative circles */}
+              <div className="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-white/5" />
+              <div className="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-white/5" />
+
+              {/* Play button + pulse rings */}
+              <div className="relative z-10 flex items-center justify-center">
+                {/* Outer pulse ring */}
+                <div className="absolute w-28 h-28 rounded-full border-2 border-white/20 group-hover/video:scale-110 transition-transform duration-300" />
+                {/* Inner pulse ring — animates */}
+                <div className="absolute w-20 h-20 rounded-full border-2 border-white/35 animate-pulse-ring" />
+                {/* Play circle */}
+                <div className="relative w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/50 flex items-center justify-center group-hover/video:scale-110 group-hover/video:bg-white/30 transition-all duration-200">
+                  <IconPlayerPlay size={24} className="text-white ml-1" fill="white" />
+                </div>
               </div>
-              <div>
-                <div className="font-heading text-[14px] font-bold text-neutral-900">{t.name}</div>
-                <div className="text-[12px] text-neutral-500">{t.role}</div>
+
+              {/* Bottom label */}
+              <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+                <div>
+                  <p className="font-heading font-bold text-[15px] text-white">{story.name}</p>
+                  <p className="text-[12px] font-body text-white/60">{story.videoLabel}</p>
+                </div>
+                <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3 py-1 text-[11px] font-body font-semibold text-white/80 uppercase tracking-wide">
+                  {story.program}
+                </span>
               </div>
-              <div className="ml-auto rounded-full bg-vgu-beige px-2.5 py-0.5 text-[11px] font-heading font-semibold text-vgu-red whitespace-nowrap">
-                {t.program}
+            </div>
+
+            {/* RIGHT — quote panel */}
+            <div className="bg-white p-8 flex flex-col justify-center md:p-6">
+              {/* Giant quote mark */}
+              <div
+                className="font-heading font-extrabold leading-none select-none mb-2"
+                style={{ fontSize: '72px', color: '#C04036', opacity: 0.18, lineHeight: 1 }}
+                aria-hidden="true"
+              >
+                &ldquo;
+              </div>
+
+              <blockquote className="font-body text-[16px] leading-[1.75] text-gray-700 mt-[-18px]">
+                {story.quote}
+              </blockquote>
+
+              {/* Outcomes */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {story.outcomes.map((o) => (
+                  <span
+                    key={o}
+                    className="text-[12px] font-body font-semibold px-3 py-1.5 rounded-full"
+                    style={{
+                      background: 'rgba(192,64,54,0.07)',
+                      border:     '1px solid rgba(192,64,54,0.18)',
+                      color:      '#821a12',
+                    }}
+                  >
+                    {o}
+                  </span>
+                ))}
+              </div>
+
+              {/* Author */}
+              <div className="mt-6 pt-5 border-t border-gray-100 flex items-center gap-3">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden flex-none border-2 border-vgu-red/20">
+                  <Image
+                    src={story.avatar}
+                    alt={story.name}
+                    fill
+                    className="object-cover"
+                    sizes="44px"
+                  />
+                </div>
+                <div>
+                  <p className="font-heading font-bold text-[15px] text-gray-900">{story.name}</p>
+                  <p className="text-[12px] font-body text-gray-500">{story.role}</p>
+                </div>
               </div>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Dot navigation */}
-      <div className="mt-8 flex justify-center gap-2">
-        {Array.from({ length: TESTIMONIALS.length - 2 }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={[
-              'h-2 rounded-full transition-all duration-200',
-              i === active ? 'w-6 bg-vgu-red' : 'w-2 bg-neutral-300 hover:bg-neutral-400',
-            ].join(' ')}
-            aria-label={`Go to testimonials ${i + 1}`}
-          />
-        ))}
-      </div>
-    </SectionWrapper>
+          {/* Thumbnail strip */}
+          <div className="mt-6 grid grid-cols-4 gap-3 sm:grid-cols-2">
+            {STORIES.map((s, i) => (
+              <button
+                key={s.name}
+                onClick={() => setActive(i)}
+                className={[
+                  'flex items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 bg-white',
+                  'hover:shadow-md',
+                  active === i
+                    ? 'border-2 border-vgu-red shadow-sm'
+                    : 'border-2 border-transparent border border-gray-200',
+                ].join(' ')}
+              >
+                <div className="relative w-10 h-10 rounded-full overflow-hidden flex-none">
+                  <Image src={s.avatar} alt={s.name} fill className="object-cover" sizes="40px" />
+                </div>
+                <div className="min-w-0">
+                  <p className={`font-heading font-bold text-[13px] truncate ${active === i ? 'text-vgu-red' : 'text-gray-900'}`}>
+                    {s.name}
+                  </p>
+                  <p className="text-[11px] font-body text-gray-500 truncate">{s.program}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video modal */}
+      {modalOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-2xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Placeholder until client provides video URL */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${story.videoBg} opacity-60`} />
+            <div className="relative z-10 text-center px-8">
+              <p className="font-heading font-bold text-[20px] text-white mb-2">{story.videoLabel}</p>
+              <p className="font-body text-[14px] text-white/60">
+                Video URL to be supplied by client.<br />
+                Wire to <code className="bg-white/10 px-1.5 py-0.5 rounded text-[13px]">story.videoUrl</code> when available.
+              </p>
+            </div>
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
+              aria-label="Close"
+            >
+              <IconX size={18} />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
