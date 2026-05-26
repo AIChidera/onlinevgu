@@ -71,13 +71,23 @@ const config: Config = {
         heroSpin: {
           to: { transform: 'rotate(360deg)' },
         },
+        floatUp: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':       { transform: 'translateY(-10px)' },
+        },
+        floatUpSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':       { transform: 'translateY(-14px)' },
+        },
       },
       animation: {
-        'fade-in':    'fadeIn 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-        'rise-in':    'riseIn 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-        'float-y':    'floatY 5s cubic-bezier(0.22, 1, 0.36, 1) infinite',
-        'pulse-ring': 'pulseRing 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite',
-        'hero-spin':  'heroSpin 60s linear infinite',
+        'fade-in':       'fadeIn 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+        'rise-in':       'riseIn 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+        'float-y':       'floatY 5s cubic-bezier(0.22, 1, 0.36, 1) infinite',
+        'float-up':      'floatUp 4s ease-in-out infinite',
+        'float-up-slow': 'floatUpSlow 5.5s ease-in-out infinite',
+        'pulse-ring':    'pulseRing 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite',
+        'hero-spin':     'heroSpin 60s linear infinite',
       },
     },
   },
