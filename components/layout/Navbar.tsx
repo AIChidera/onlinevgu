@@ -8,6 +8,8 @@ const NAV_LINKS = [
   { label: 'Programmes', href: '#programs'     },
   { label: 'Campus Life', href: '#campus'       },
   { label: 'Stories',     href: '#testimonials' },
+  { label: 'Blog',        href: '/blog'         },
+  { label: 'Results',     href: '#'             },
   { label: 'FAQs',        href: '#faq'          },
 ]
 
@@ -65,7 +67,7 @@ export default function Navbar() {
           <div className="hidden lg:flex ml-auto">
             <a
               href="#counsellor"
-              className="bg-vgu-red hover:bg-vgu-dark text-white rounded-full px-7 py-3 text-[15px] font-semibold transition-colors duration-150"
+              className="border-2 border-vgu-red text-vgu-red bg-transparent hover:bg-vgu-red hover:text-white rounded-full px-7 py-3 text-[15px] font-semibold transition-colors duration-150"
             >
               Apply Now
             </a>
@@ -138,7 +140,7 @@ export default function Navbar() {
           <div className="p-5 border-t border-gray-100">
             <a
               href="#counsellor"
-              className="block w-full bg-vgu-red hover:bg-vgu-dark text-white text-center rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors duration-150"
+              className="block w-full border-2 border-vgu-red text-vgu-red bg-transparent hover:bg-vgu-red hover:text-white text-center rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors duration-150"
               onClick={() => setMobileOpen(false)}
             >
               Apply Now

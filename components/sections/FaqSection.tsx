@@ -272,7 +272,7 @@ export default function FaqSection() {
               <span className="text-vgu-red">We&apos;re Here to Help.</span>
             </h2>
             <p className="text-[16px] font-body leading-[1.7] text-gray-500 mb-7 max-w-[420px]">
-              Speak to a VGU admissions counsellor — free, no obligation. Get personalised
+              Speak to a VGU admissions counsellor, free and with no obligation. Get personalised
               guidance on programmes, fees, and eligibility.
             </p>
 

@@ -41,16 +41,16 @@ export default function Hero() {
           {/* Subtext */}
           <p className="mt-5 text-[18px] font-body leading-[1.7] text-white/75 max-w-[480px] md:text-[16px]">
             VGU&apos;s UGC-entitled online degrees are recognised by employers across
-            India and beyond — study fully online, at your own pace.
+            India and beyond. Study fully online, at your own pace.
           </p>
 
           {/* CTAs */}
           <div className="mt-9 flex flex-wrap gap-4">
             <a
               href="#counsellor"
-              className="bg-vgu-red hover:bg-[#a8352b] text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.45)]"
+              className="bg-white text-vgu-red border-2 border-white hover:bg-vgu-red hover:text-white hover:border-vgu-red rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.45)]"
             >
-              Apply Now — It&apos;s Free
+              Apply Now
             </a>
             <a
               href="#programs"

@@ -31,7 +31,7 @@ const PANELS: Panel[] = [
     label:   'Live Classes',
     tag:     'Live & recorded',
     title:   'Never miss a moment.',
-    desc:    'Attend live sessions or catch up with full recordings — everything is available 24/7 on the platform.',
+    desc:    'Attend live sessions or catch up with full recordings. Everything is available 24/7 on the platform.',
     bullets: ['Weekend & evening schedules', 'HD video with Q&A chat', 'Attendance auto-tracked', 'Lifetime access to recordings'],
     Icon:    IconVideo,
     color:   '#C04036',
@@ -40,7 +40,7 @@ const PANELS: Panel[] = [
     label:   'Mentor Access',
     tag:     '1-on-1 sessions',
     title:   'Your personal industry guide.',
-    desc:    'Book 30-minute slots with 500+ vetted industry mentors — from startup founders to Fortune 500 leaders.',
+    desc:    'Book 30-minute slots with 500+ vetted industry mentors, from startup founders to Fortune 500 leaders.',
     bullets: ['500+ mentors across sectors', 'Book slots in 60 seconds', 'Async chat between sessions', 'Recorded for review'],
     Icon:    IconUserHeart,
     color:   '#9333ea',
@@ -49,7 +49,7 @@ const PANELS: Panel[] = [
     label:   'Assessments',
     tag:     'Auto-graded',
     title:   'Test your knowledge, instantly.',
-    desc:    'From weekly quizzes to proctored final exams — all managed on the platform with instant AI-powered feedback.',
+    desc:    'From weekly quizzes to proctored final exams, all managed on the platform with instant feedback.',
     bullets: ['Auto-graded MCQ quizzes', 'Online proctored exams', 'Assignment submissions', 'Instant feedback & rubrics'],
     Icon:    IconClipboardCheck,
     color:   '#059669',
@@ -58,7 +58,7 @@ const PANELS: Panel[] = [
     label:   'Library',
     tag:     '25,000+ resources',
     title:   'Research without limits.',
-    desc:    "Access JSTOR, IEEE Xplore, and VGU's own digital library — all included, no extra subscription needed.",
+    desc:    "Access JSTOR, IEEE Xplore, and VGU's own digital library. All included, no extra subscription needed.",
     bullets: ['JSTOR & IEEE access', '25,000+ e-books & PDFs', 'Research paper database', 'Citation & reference tools'],
     Icon:    IconBooks,
     color:   '#0891b2',
@@ -67,7 +67,7 @@ const PANELS: Panel[] = [
     label:   'Coursera',
     tag:     'Included free',
     title:   '7,000+ courses. Zero extra cost.',
-    desc:    'Every VGU programme includes a full Coursera licence — learn from Google, IBM, Meta, and more at your own pace.',
+    desc:    'Every VGU programme includes a full Coursera licence. Learn from Google, IBM, Meta, and more at your own pace.',
     bullets: ['Google, IBM, Meta courses', 'Completion certificates', 'LinkedIn shareable badges', 'No extra subscription fee'],
     Icon:    IconCertificate,
     color:   '#0056D2',
@@ -76,7 +76,7 @@ const PANELS: Panel[] = [
     label:   'Career Centre',
     tag:     'End-to-end support',
     title:   'From classroom to career.',
-    desc:    'Our placement team works with you from day one — resume reviews, mock interviews, and direct recruiter connections.',
+    desc:    'Our placement team works with you from day one: resume reviews, mock interviews, and direct recruiter connections.',
     bullets: ['AI-powered resume builder', '500+ mock interviews/year', 'Live job board integration', 'Dedicated placement coordinator'],
     Icon:    IconBriefcase,
     color:   '#FFA412',
@@ -173,7 +173,7 @@ export default function CourseExperienceSection() {
               </h2>
               <p className="mt-5 text-[17px] font-body leading-[1.7] text-white/70 max-w-[480px] md:text-[15px]">
                 Live classes, mentor sessions, a full digital library, Coursera access, and end-to-end
-                career support — all inside the VGU learning platform.
+                career support, all inside the VGU learning platform.
               </p>
               <a
                 href="#counsellor"

@@ -31,7 +31,7 @@ const STEPS = [
   {
     badge:  'Step 4',
     title:  'Start Learning',
-    body:   'Get instant access to the learning portal — live classes begin on day one.',
+    body:   'Get instant access to the learning portal. Live classes begin on day one.',
     Icon:   IconRocket,
   },
 ]
@@ -155,14 +155,14 @@ export default function StepsSection() {
         <div className="mt-14 flex flex-col items-center gap-5">
           <a
             href="#counsellor"
-            className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-dark text-white transition-all duration-150 font-heading font-extrabold"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-vgu-red text-vgu-red bg-white hover:bg-vgu-red hover:text-white transition-all duration-150 font-heading font-extrabold"
             style={{
               fontSize: '18px',
               padding: '18px 52px',
               boxShadow: '0 8px 24px rgba(192,64,54,0.30)',
             }}
           >
-            Apply Now — It&apos;s Free
+            Apply Now
           </a>
 
           {/* Microcopy row — 3 items separated by dots */}

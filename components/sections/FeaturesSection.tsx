@@ -23,12 +23,12 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     title: 'UGC-Entitled Degree',
-    body:  'Employer-recognised, eligible for higher studies, valid for government jobs — the same weight as any campus degree.',
+    body:  'Employer-recognised, eligible for higher studies, and valid for government jobs. Same weight as any campus degree.',
     Icon:  IconAward,
   },
   {
     title: 'Live Classes & Recordings',
-    body:  'Attend live on weekends or watch recordings anytime. Every session is saved forever — no class ever missed.',
+    body:  'Attend live on weekends or watch recordings anytime. Every session is saved forever so no class is ever missed.',
     Icon:  IconVideo,
   },
   {
@@ -43,12 +43,12 @@ const FEATURES: Feature[] = [
   },
   {
     title: 'Mobile-First Learning',
-    body:  'Download lectures, join live classes, submit assignments, and check grades — all from one seamless mobile app.',
+    body:  'Download lectures, join live classes, submit assignments, and check grades. All from one seamless mobile app.',
     Icon:  IconDeviceMobile,
   },
   {
     title: 'Digital Library Access',
-    body:  '25,000+ e-books, JSTOR, IEEE Xplore and VGU\'s full research archive — included at no extra cost.',
+    body:  '25,000+ e-books, JSTOR, IEEE Xplore and VGU\'s full research archive. Included at no extra cost.',
     Icon:  IconBooks,
   },
   {
@@ -137,7 +137,7 @@ export default function FeaturesSection() {
                     </div>
                   </div>
                   <h3 className="font-heading font-bold text-[20px] leading-[1.3] text-white mb-2">
-                    7,000+ world-class courses — at no extra cost.
+                    7,000+ world-class courses at no extra cost.
                   </h3>
                   <p className="text-[14px] font-body text-white/60 leading-[1.7]">
                     Every VGU programme comes bundled with a full Coursera licence. Earn certificates

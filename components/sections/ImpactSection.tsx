@@ -91,7 +91,7 @@ export default function ImpactSection() {
             style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.15)' }}
           >
             <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold/80 text-center">
-              Placement & Career Support — At a Glance
+              Placement & Career Support at a Glance
             </p>
           </div>
 
