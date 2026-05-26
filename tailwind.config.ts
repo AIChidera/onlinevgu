@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         'vgu-red':      '#C04036',
+        'vgu-dark':     '#821a12',
         'vgu-red-dark': '#821a12',
         'vgu-yellow':   '#FFA412',
         'vgu-gold':     '#eecf63',
