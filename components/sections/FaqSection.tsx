@@ -209,15 +209,12 @@ export default function FaqSection() {
               style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.08), rgba(130,26,18,0.18))' }}
             />
 
-            {/* Placeholder icon (hidden when real image loads) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white/40 select-none">
+            {/* Placeholder silhouette (shown when counsellor.jpg is not yet supplied) */}
+            <div className="absolute inset-0 flex items-center justify-center text-white/40 select-none">
               <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
               </svg>
-              <p className="mt-3 text-[13px] font-body text-center px-4">
-                /images/counsellor.jpg
-              </p>
             </div>
 
             {/* Floating trust card */}

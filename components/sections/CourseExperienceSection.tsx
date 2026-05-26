@@ -227,10 +227,6 @@ export default function CourseExperienceSection() {
                         </div>
                       </div>
                     </div>
-                    {/* Swap message */}
-                    <div className="px-3 pb-2 text-center">
-                      <p className="text-[9px] text-white/30">Replace with /images/lms-screenshot.png</p>
-                    </div>
                   </div>
                 </div>
                 {/* Laptop base */}

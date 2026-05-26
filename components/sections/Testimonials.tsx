@@ -209,14 +209,10 @@ export default function Testimonials() {
             className="relative w-full max-w-3xl rounded-2xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Placeholder until client provides video URL */}
             <div className={`absolute inset-0 bg-gradient-to-br ${story.videoBg} opacity-60`} />
             <div className="relative z-10 text-center px-8">
               <p className="font-heading font-bold text-[20px] text-white mb-2">{story.videoLabel}</p>
-              <p className="font-body text-[14px] text-white/60">
-                Video URL to be supplied by client.<br />
-                Wire to <code className="bg-white/10 px-1.5 py-0.5 rounded text-[13px]">story.videoUrl</code> when available.
-              </p>
+              <p className="font-body text-[14px] text-white/60">Video coming soon.</p>
             </div>
             <button
               onClick={() => setModalOpen(false)}
