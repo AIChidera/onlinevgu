@@ -1,103 +1,100 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import SectionWrapper from '@/components/layout/SectionWrapper'
-import Button from '@/components/ui/Button'
+import {
+  IconBriefcase,
+  IconCode,
+  IconHeartRateMonitor,
+  IconTie,
+  IconDeviceLaptop,
+  IconBrain,
+  IconArrowRight,
+} from '@tabler/icons-react'
+import StrokeArt from '@/components/ui/StrokeArt'
 
 interface Program {
-  name: string
-  slug: string
-  level: 'ug' | 'pg'
+  name:     string
+  slug:     string
+  level:    'ug' | 'pg'
   duration: string
-  fee: string
+  fee:      string
   highlights: string[]
-  photo: string
-  badge?: string
+  gradient: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Icon:     React.ComponentType<any>
+  badge?:   string
 }
 
 const PROGRAMS: Program[] = [
   {
-    name: 'Online MBA',
-    slug: 'online-mba',
-    level: 'pg',
-    duration: '2 Years',
-    fee: '₹1,20,000',
-    highlights: ['15 specialisations', 'Industry mentors', 'Live sessions'],
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop',
-    badge: 'Most popular',
+    name:     'BBA',
+    slug:     'bba',
+    level:    'ug',
+    duration: '3 years',
+    fee:      'from ₹45,000/yr',
+    highlights: ['Management fundamentals', 'Startup ecosystem', 'Live projects'],
+    gradient: 'from-[#C04036] to-[#821a12]',
+    Icon:     IconBriefcase,
   },
   {
-    name: 'MBA in Healthcare',
-    slug: 'online-mba-healthcare',
-    level: 'pg',
-    duration: '2 Years',
-    fee: '₹1,30,000',
-    highlights: ['Healthcare focus', 'Hospital tie-ups', 'Internship support'],
-    photo: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop',
+    name:     'BCA',
+    slug:     'bca',
+    level:    'ug',
+    duration: '3 years',
+    fee:      'from ₹45,000/yr',
+    highlights: ['Full-stack development', 'Python & Java', 'Hackathons'],
+    gradient: 'from-[#1d4ed8] to-[#1e3a8a]',
+    Icon:     IconCode,
+    badge:    'High demand',
   },
   {
-    name: 'Online MCA',
-    slug: 'online-mca',
-    level: 'pg',
-    duration: '2 Years',
-    fee: '₹1,00,000',
+    name:     'MBA Healthcare',
+    slug:     'mba-healthcare',
+    level:    'pg',
+    duration: '2 years',
+    fee:      'from ₹60,000/yr',
+    highlights: ['Healthcare management', 'Hospital tie-ups', 'Internship support'],
+    gradient: 'from-[#059669] to-[#065f46]',
+    Icon:     IconHeartRateMonitor,
+  },
+  {
+    name:     'Executive MBA',
+    slug:     'exec-mba',
+    level:    'pg',
+    duration: '18 months',
+    fee:      'from ₹75,000/yr',
+    highlights: ['For working professionals', 'Weekend live sessions', 'Leadership track'],
+    gradient: 'from-[#9333ea] to-[#6b21a8]',
+    Icon:     IconTie,
+    badge:    'Most popular',
+  },
+  {
+    name:     'MCA',
+    slug:     'mca',
+    level:    'pg',
+    duration: '2 years',
+    fee:      'from ₹55,000/yr',
     highlights: ['Cloud & AI tracks', 'Coding bootcamps', 'Tech placements'],
-    photo: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&auto=format&fit=crop',
-    badge: 'High demand',
+    gradient: 'from-[#0891b2] to-[#155e75]',
+    Icon:     IconDeviceLaptop,
   },
   {
-    name: 'Online M.Com',
-    slug: 'online-mcom',
-    level: 'pg',
-    duration: '2 Years',
-    fee: '₹80,000',
-    highlights: ['Finance & tax', 'CA prep support', 'Industry case studies'],
-    photo: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    name: 'Online MA',
-    slug: 'online-ma',
-    level: 'pg',
-    duration: '2 Years',
-    fee: '₹70,000',
-    highlights: ['6 specialisations', 'Research-oriented', 'NET/SLET prep'],
-    photo: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    name: 'Online BBA',
-    slug: 'online-bba',
-    level: 'ug',
-    duration: '3 Years',
-    fee: '₹90,000',
-    highlights: ['Management core', 'Startup ecosystem', 'Live projects'],
-    photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    name: 'Online BCA',
-    slug: 'online-bca',
-    level: 'ug',
-    duration: '3 Years',
-    fee: '₹85,000',
-    highlights: ['Full-stack dev', 'Python & Java', 'Hackathons'],
-    photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    name: 'Online B.Com',
-    slug: 'online-bcom',
-    level: 'ug',
-    duration: '3 Years',
-    fee: '₹75,000',
-    highlights: ['Accounting & audit', 'Tally & ERP', 'ICAI prep'],
-    photo: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&auto=format&fit=crop',
+    name:     'MSc Data Science & AI',
+    slug:     'msc-data-science',
+    level:    'pg',
+    duration: '2 years',
+    fee:      'from ₹65,000/yr',
+    highlights: ['ML & deep learning', 'Coursera integration', 'Industry capstone'],
+    gradient: 'from-[#ea580c] to-[#9a3412]',
+    Icon:     IconBrain,
+    badge:    'New',
   },
 ]
 
 const FILTERS = [
-  { label: 'All programs', value: 'all' },
-  { label: 'Postgraduate', value: 'pg' },
-  { label: 'Undergraduate', value: 'ug' },
+  { label: 'All Programmes', value: 'all' },
+  { label: 'Undergraduate',  value: 'ug'  },
+  { label: 'Postgraduate',   value: 'pg'  },
 ]
 
 export default function ProgramsSection() {
@@ -105,106 +102,116 @@ export default function ProgramsSection() {
   const visible = PROGRAMS.filter((p) => filter === 'all' || p.level === filter)
 
   return (
-    <SectionWrapper id="programs" bg="light">
-      <div className="text-center mb-12">
-        <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
-          UGC-entitled online degrees
-        </p>
-        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
-          UGC-entitled degrees, built for outcomes
-        </h2>
-        <p className="mt-3 text-[17px] text-neutral-600 max-w-[520px] mx-auto leading-relaxed">
-          Flexible, industry-aligned degrees designed for working professionals and fresh graduates.
-        </p>
+    <section id="programs" className="group relative overflow-hidden bg-white py-24 px-12 lg:px-8 md:px-5 md:py-16">
+      <StrokeArt variant="light" />
 
-        <div className="mt-6 flex justify-center gap-2 flex-wrap">
-          {FILTERS.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setFilter(f.value as typeof filter)}
-              className={[
-                'px-5 py-2 rounded-full text-sm font-heading font-semibold transition-all duration-200',
-                filter === f.value
-                  ? 'bg-vgu-red text-white shadow-sm'
-                  : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red',
-              ].join(' ')}
-            >
-              {f.label}
-            </button>
+      <div className="relative z-10 mx-auto max-w-[1280px]">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+            UGC-Entitled Degrees
+          </p>
+          <h2 className="font-heading font-extrabold text-[40px] tracking-tight leading-[1.2] text-gray-900 md:text-[28px]">
+            Find Your Perfect Programme
+          </h2>
+          <p className="mt-4 text-[17px] font-body leading-[1.7] text-gray-500 max-w-[520px] mx-auto">
+            Industry-aligned degrees delivered fully online, recognised by employers across India and beyond.
+          </p>
+
+          {/* Filter tabs */}
+          <div className="mt-8 flex justify-center gap-2 flex-wrap">
+            {FILTERS.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setFilter(f.value as typeof filter)}
+                className={[
+                  'px-6 py-2.5 rounded-full text-[14px] font-body font-semibold transition-all duration-200',
+                  filter === f.value
+                    ? 'bg-vgu-red text-white shadow-sm'
+                    : 'bg-white border border-gray-200 text-gray-600 hover:border-vgu-red hover:text-vgu-red',
+                ].join(' ')}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-3 gap-6 lg:grid-cols-2 sm:grid-cols-1">
+          {visible.map((p) => (
+            <ProgramCard key={p.slug} program={p} />
           ))}
         </div>
-      </div>
 
-      <div className="grid grid-cols-4 gap-5 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
-        {visible.map((p) => (
-          <ProgramCard key={p.slug} program={p} />
-        ))}
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <a
+            href="/programs"
+            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-red-50 rounded-lg px-8 py-3 text-[15px] font-semibold transition-colors duration-150"
+          >
+            Explore All Programmes
+            <IconArrowRight size={16} />
+          </a>
+        </div>
       </div>
-
-      <div className="mt-10 text-center">
-        <Button variant="secondary" as="a" href="/programs" size="lg">
-          View all programs →
-        </Button>
-      </div>
-    </SectionWrapper>
+    </section>
   )
 }
 
 function ProgramCard({ program: p }: { program: Program }) {
   return (
-    <Link
+    <a
       href={`/programs/${p.slug}`}
-      className="group flex flex-col rounded-2xl overflow-hidden border border-neutral-200 bg-white
-                 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-transparent"
+      className="group/card flex flex-col rounded-2xl overflow-hidden border border-gray-200 bg-white
+                 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.12)]"
     >
-      {/* Photo header */}
-      <div className="relative h-[160px] overflow-hidden">
-        <Image
-          src={p.photo}
-          alt={p.name}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      {/* Gradient image placeholder (swap for next/image when photos supplied) */}
+      <div className={`relative h-[180px] bg-gradient-to-br ${p.gradient} flex items-center justify-center overflow-hidden`}>
+        {/* Decorative circles */}
+        <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-white/10" />
+        <div className="absolute -left-4 -bottom-6 w-20 h-20 rounded-full bg-white/10" />
+        {/* Icon */}
+        <p.Icon size={44} stroke={1.5} className="text-white/80 relative z-10" />
+        {/* Level pill */}
+        <span className="absolute bottom-3 left-3 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-[11px] font-body font-semibold text-white uppercase tracking-wide">
+          {p.level === 'ug' ? 'Undergraduate' : 'Postgraduate'}
+        </span>
+        {/* Badge */}
         {p.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900">
+          <span className="absolute top-3 right-3 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-gray-900">
             {p.badge}
           </span>
         )}
-        <div className="absolute bottom-3 left-3">
-          <span className="rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-[11px] font-heading font-semibold text-white uppercase tracking-wide">
-            {p.level === 'pg' ? 'Postgraduate' : 'Undergraduate'}
-          </span>
-        </div>
       </div>
 
       {/* Body */}
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-heading text-[17px] font-bold text-neutral-900 leading-tight">
+        <h3 className="font-heading font-semibold text-[20px] leading-[1.3] text-gray-900">
           {p.name}
         </h3>
-        <div className="mt-1 flex gap-3 text-[13px] text-neutral-500">
+        <div className="mt-1.5 flex items-center gap-2 text-[13px] text-gray-500">
           <span>{p.duration}</span>
-          <span>·</span>
-          <span>{p.fee}</span>
+          <span className="w-1 h-1 rounded-full bg-gray-300 flex-none" />
+          <span className="text-vgu-red font-semibold">{p.fee}</span>
         </div>
 
-        <ul className="mt-3 flex flex-col gap-1.5">
+        <ul className="mt-4 flex flex-col gap-2">
           {p.highlights.map((h) => (
-            <li key={h} className="flex items-center gap-2 text-[13px] text-neutral-600">
-              <span className="h-1.5 w-1.5 flex-none rounded-full bg-vgu-red/60" />
+            <li key={h} className="flex items-center gap-2 text-[13px] font-body text-gray-600">
+              <span className="h-1.5 w-1.5 flex-none rounded-full bg-vgu-red/50" />
               {h}
             </li>
           ))}
         </ul>
 
-        <div className="mt-4 pt-3 border-t border-neutral-100">
-          <span className="text-sm font-heading font-semibold text-vgu-red group-hover:underline underline-offset-2">
-            Explore program →
+        <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+          <span className="text-[14px] font-semibold font-body text-vgu-red group-hover/card:underline underline-offset-2">
+            Learn more
           </span>
+          <IconArrowRight size={15} className="text-vgu-red opacity-0 group-hover/card:opacity-100 transition-opacity duration-150" />
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
