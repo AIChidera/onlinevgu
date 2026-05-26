@@ -44,7 +44,7 @@ export default function ImpactSection() {
         {/* 4 main stat tiles */}
         <div
           ref={ref}
-          className="grid grid-cols-4 gap-5 lg:grid-cols-2 sm:grid-cols-1"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {MAIN_STATS.map((s, i) => (
             <div
@@ -67,7 +67,7 @@ export default function ImpactSection() {
                 style={{ background: 'linear-gradient(90deg,#C04036,#FFA412)' }}
               />
 
-              <div className="font-heading font-black text-[48px] leading-none text-vgu-yellow md:text-[40px]">
+              <div className="font-heading font-black text-[32px] sm:text-[40px] md:text-[48px] leading-none text-vgu-yellow">
                 {s.value}
               </div>
               <div className="mt-3 font-heading font-bold text-[17px] text-white leading-tight">
@@ -96,15 +96,15 @@ export default function ImpactSection() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-4 sm:grid-cols-2">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {PLACEMENT_STATS.map((s, i) => (
               <div
                 key={s.label}
                 className={[
                   'flex flex-col items-center justify-center py-7 px-4 text-center',
-                  i < PLACEMENT_STATS.length - 1
-                    ? 'border-r sm:border-r-0 sm:even:border-r-0 sm:border-b'
-                    : '',
+                  i % 2 === 0 ? 'border-r' : '',
+                  i < 2 ? 'border-b lg:border-b-0' : '',
+                  i < 3 ? 'lg:border-r' : '',
                 ].join(' ')}
                 style={{ borderColor: 'rgba(255,255,255,0.10)' }}
               >

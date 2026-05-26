@@ -101,7 +101,7 @@ export default function FeaturesSection() {
         </div>
 
         {/* 3-col grid — Coursera at [4] spans 2 cols */}
-        <div className="grid grid-cols-3 gap-5 lg:grid-cols-2 sm:grid-cols-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
           {/* Features 1–3 */}
           {FEATURES.slice(0, 3).map((f) => (
@@ -113,7 +113,7 @@ export default function FeaturesSection() {
 
           {/* ── Coursera card (col-span-2) ── */}
           <div
-            className="group/card relative rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1 lg:col-span-2 sm:col-span-1"
+            className="group/card relative rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1 sm:col-span-2 lg:col-span-2"
             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}
           >
             {/* Top gradient border on hover */}
@@ -122,9 +122,9 @@ export default function FeaturesSection() {
               className="absolute inset-x-0 top-0 h-[3px] opacity-0 group-hover/card:opacity-100 transition-opacity duration-200"
               style={{ background: 'linear-gradient(90deg, #C04036, #FFA412)' }}
             />
-            <div className="grid grid-cols-[1fr_1fr] h-full md:grid-cols-1">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] h-full">
               {/* Left: description */}
-              <div className="p-7 flex flex-col justify-between border-r border-white/10 md:border-r-0 md:border-b">
+              <div className="p-7 flex flex-col justify-between border-b border-white/10 md:border-b-0 md:border-r">
                 <div>
                   {/* Coursera logo mark */}
                   <div className="flex items-center gap-3 mb-4">

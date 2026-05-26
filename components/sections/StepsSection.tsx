@@ -96,7 +96,7 @@ export default function StepsSection() {
             />
           </svg>
 
-          <div className="grid grid-cols-4 gap-8 lg:grid-cols-2 sm:grid-cols-1">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 gap-y-12">
             {STEPS.map((step, i) => (
               <div
                 key={step.badge}
