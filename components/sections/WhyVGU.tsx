@@ -12,7 +12,7 @@ const REASONS = [
   {
     icon: '🏅',
     title: 'NAAC A+ accredited',
-    body: 'VGU holds the highest NAAC grade, placing us among India\'s top universities by quality of education and infrastructure.',
+    body: 'VGU holds the highest NAAC grade, placing us among India\'s top universities by quality of education.',
   },
   {
     icon: '⏰',
@@ -50,13 +50,13 @@ export default function WhyVGU() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 })
 
   return (
-    <SectionWrapper id="why-vgu" bg="white">
+    <SectionWrapper id="why-vgu" bg="light">
       <div className="text-center mb-12">
         <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
           Why choose us
         </p>
         <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
-          Education that works for you
+          Everything you need to succeed online
         </h2>
         <p className="mt-3 text-[17px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed">
           25 years of academic excellence, now accessible from wherever you are.
@@ -71,7 +71,7 @@ export default function WhyVGU() {
           <div
             key={r.title}
             className={[
-              'group rounded-xl p-6 border border-neutral-200 bg-white',
+              'group rounded-2xl p-6 border border-neutral-200 bg-white',
               'transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-vgu-red/30',
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
             ].join(' ')}

@@ -1,83 +1,96 @@
 import SectionWrapper from '@/components/layout/SectionWrapper'
+import Button from '@/components/ui/Button'
 
-const CERTIFICATES = [
-  { name: 'Google Data Analytics', provider: 'Google', color: '#4285F4' },
-  { name: 'IBM AI Foundations', provider: 'IBM', color: '#0530AD' },
-  { name: 'Meta Social Media Marketing', provider: 'Meta', color: '#0866FF' },
-  { name: 'AWS Cloud Practitioner Essentials', provider: 'AWS', color: '#FF9900' },
-  { name: 'Microsoft Azure Fundamentals', provider: 'Microsoft', color: '#00A4EF' },
-  { name: 'Project Management (Google)', provider: 'Google', color: '#34A853' },
+const PROVIDERS = [
+  { name: 'Google', color: '#4285F4' },
+  { name: 'IBM', color: '#0530AD' },
+  { name: 'Meta', color: '#0866FF' },
+  { name: 'AWS', color: '#FF9900' },
+  { name: 'Microsoft', color: '#00A4EF' },
+  { name: 'DeepLearning.AI', color: '#E84393' },
 ]
 
 export default function CourseraSection() {
   return (
     <SectionWrapper bg="beige" id="coursera">
-      <div className="grid grid-cols-2 gap-12 items-center lg:grid-cols-1 lg:gap-10">
+      <div className="grid grid-cols-2 gap-16 items-center lg:grid-cols-1 lg:gap-10">
+        {/* Left copy */}
         <div>
           <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
             Powered by Coursera
           </p>
-          <h2 className="font-heading text-[36px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[28px]">
-            Earn industry certificates<br />
-            alongside your degree
+          <h2 className="font-heading text-[38px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[28px]">
+            Get free access to 7,000+<br />
+            courses on Coursera
           </h2>
-          <p className="mt-4 text-[17px] text-neutral-600 leading-relaxed max-w-[480px]">
-            Every VGU online program comes bundled with a Coursera licence. Complete micro-credentials
-            from Google, IBM, Meta, and AWS — at no extra cost — and add them to your CV on day one.
+          <p className="mt-4 text-[17px] text-neutral-600 leading-relaxed max-w-[460px]">
+            Every VGU online program comes bundled with a Coursera licence. Access thousands of
+            courses from the world&apos;s top companies and universities — at no extra cost.
           </p>
 
-          <div className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-2">
-            {CERTIFICATES.map((c) => (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {PROVIDERS.map((p) => (
               <div
-                key={c.name}
-                className="rounded-xl bg-white border border-neutral-200 p-4 flex flex-col gap-2
-                           transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                key={p.name}
+                className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2"
               >
-                <div
-                  className="h-1.5 w-8 rounded-full"
-                  style={{ background: c.color }}
-                />
-                <div className="text-[11px] font-heading font-bold uppercase tracking-widest text-neutral-400">
-                  {c.provider}
-                </div>
-                <div className="text-[13px] font-medium text-neutral-800 leading-tight">{c.name}</div>
+                <div className="h-2.5 w-2.5 rounded-full flex-none" style={{ background: p.color }} />
+                <span className="text-[13px] font-heading font-semibold text-neutral-700">{p.name}</span>
               </div>
             ))}
           </div>
+
+          <div className="mt-8">
+            <Button as="a" href="/apply" size="lg">
+              Explore programs →
+            </Button>
+          </div>
         </div>
 
-        <div className="flex flex-col items-center gap-6">
-          <div className="relative w-full max-w-[380px] rounded-2xl bg-white border border-neutral-200 p-8 shadow-lg">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-10 w-10 rounded-xl bg-[#0056D2] flex items-center justify-center">
-                <span className="font-bold text-white text-sm">C</span>
+        {/* Right card */}
+        <div className="flex justify-center lg:justify-start">
+          <div className="relative w-full max-w-[400px] rounded-2xl bg-white border border-neutral-200 p-8 shadow-xl">
+            {/* Coursera logo area */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-12 w-12 rounded-xl bg-[#0056D2] flex items-center justify-center flex-none">
+                <span className="font-black text-white text-[20px]">C</span>
               </div>
               <div>
-                <div className="font-heading font-bold text-neutral-900">Coursera</div>
-                <div className="text-xs text-neutral-500">Bundled with your program</div>
+                <div className="font-heading text-[18px] font-bold text-neutral-900">Coursera</div>
+                <div className="text-[13px] text-neutral-500">Included with your program</div>
               </div>
             </div>
 
+            {/* Big number */}
+            <div className="mb-6 rounded-xl bg-neutral-50 p-5 text-center">
+              <div className="font-heading text-[56px] font-black leading-none text-neutral-900">
+                7,000+
+              </div>
+              <div className="mt-1 text-[14px] text-neutral-500">courses available</div>
+            </div>
+
+            {/* Features */}
             <div className="space-y-3">
-              {['Unlimited course access', 'Verified certificates', 'Graded assignments', 'Shareable on LinkedIn'].map((f) => (
-                <div key={f} className="flex items-center gap-2.5 text-[14px] text-neutral-700">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-green-500 flex-none">
+              {[
+                'Unlimited access for your program duration',
+                'Certificates from Google, IBM, Meta & more',
+                'Graded projects & peer reviews',
+                'Shareable on LinkedIn profile',
+              ].map((f) => (
+                <div key={f} className="flex items-start gap-2.5 text-[14px] text-neutral-700">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-green-500 flex-none mt-0.5" aria-hidden="true">
                     <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15"/>
-                    <path d="M8 12l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 12l3 3 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   {f}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 rounded-lg bg-vgu-beige px-4 py-3 text-[13px] text-neutral-700">
-              <span className="font-semibold">₹0 extra</span> — included in your program fee
+            <div className="mt-6 rounded-xl bg-vgu-beige border border-vgu-red/10 px-4 py-3 text-[13px] text-neutral-700 text-center">
+              <span className="font-heading font-bold text-vgu-red">₹0 extra</span> — bundled in your program fee
             </div>
           </div>
-
-          <p className="text-[13px] text-neutral-500 text-center max-w-[300px]">
-            Available from semester 1. Certificates are co-branded VGU × Coursera.
-          </p>
         </div>
       </div>
     </SectionWrapper>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
@@ -12,8 +13,7 @@ interface Program {
   duration: string
   fee: string
   highlights: string[]
-  gradient: string
-  icon: string
+  photo: string
   badge?: string
 }
 
@@ -22,83 +22,75 @@ const PROGRAMS: Program[] = [
     name: 'Online MBA',
     slug: 'online-mba',
     level: 'pg',
-    duration: '2 years',
+    duration: '2 Years',
     fee: '₹1,20,000',
     highlights: ['15 specialisations', 'Industry mentors', 'Live sessions'],
-    gradient: 'linear-gradient(135deg,#C04036 0%,#821a12 100%)',
-    icon: '📈',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop',
     badge: 'Most popular',
   },
   {
     name: 'MBA in Healthcare',
     slug: 'online-mba-healthcare',
     level: 'pg',
-    duration: '2 years',
+    duration: '2 Years',
     fee: '₹1,30,000',
     highlights: ['Healthcare focus', 'Hospital tie-ups', 'Internship support'],
-    gradient: 'linear-gradient(135deg,#e11d48 0%,#9f1239 100%)',
-    icon: '🏥',
+    photo: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop',
   },
   {
     name: 'Online MCA',
     slug: 'online-mca',
     level: 'pg',
-    duration: '2 years',
+    duration: '2 Years',
     fee: '₹1,00,000',
     highlights: ['Cloud & AI tracks', 'Coding bootcamps', 'Tech placements'],
-    gradient: 'linear-gradient(135deg,#2563eb 0%,#1e3a8a 100%)',
-    icon: '💻',
+    photo: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80&auto=format&fit=crop',
     badge: 'High demand',
   },
   {
     name: 'Online M.Com',
     slug: 'online-mcom',
     level: 'pg',
-    duration: '2 years',
+    duration: '2 Years',
     fee: '₹80,000',
     highlights: ['Finance & tax', 'CA prep support', 'Industry case studies'],
-    gradient: 'linear-gradient(135deg,#0d9488 0%,#134e4a 100%)',
-    icon: '📊',
+    photo: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&auto=format&fit=crop',
   },
   {
     name: 'Online MA',
     slug: 'online-ma',
     level: 'pg',
-    duration: '2 years',
+    duration: '2 Years',
     fee: '₹70,000',
     highlights: ['6 specialisations', 'Research-oriented', 'NET/SLET prep'],
-    gradient: 'linear-gradient(135deg,#7c3aed 0%,#4c1d95 100%)',
-    icon: '🎓',
+    photo: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80&auto=format&fit=crop',
   },
   {
     name: 'Online BBA',
     slug: 'online-bba',
     level: 'ug',
-    duration: '3 years',
+    duration: '3 Years',
     fee: '₹90,000',
     highlights: ['Management core', 'Startup ecosystem', 'Live projects'],
-    gradient: 'linear-gradient(135deg,#ea580c 0%,#7c2d12 100%)',
-    icon: '🚀',
+    photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop',
   },
   {
     name: 'Online BCA',
     slug: 'online-bca',
     level: 'ug',
-    duration: '3 years',
+    duration: '3 Years',
     fee: '₹85,000',
     highlights: ['Full-stack dev', 'Python & Java', 'Hackathons'],
-    gradient: 'linear-gradient(135deg,#4f46e5 0%,#312e81 100%)',
-    icon: '⚡',
+    photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80&auto=format&fit=crop',
   },
   {
     name: 'Online B.Com',
     slug: 'online-bcom',
     level: 'ug',
-    duration: '3 years',
+    duration: '3 Years',
     fee: '₹75,000',
     highlights: ['Accounting & audit', 'Tally & ERP', 'ICAI prep'],
-    gradient: 'linear-gradient(135deg,#059669 0%,#064e3b 100%)',
-    icon: '💰',
+    photo: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80&auto=format&fit=crop',
   },
 ]
 
@@ -110,7 +102,6 @@ const FILTERS = [
 
 export default function ProgramsSection() {
   const [filter, setFilter] = useState<'all' | 'ug' | 'pg'>('all')
-
   const visible = PROGRAMS.filter((p) => filter === 'all' || p.level === filter)
 
   return (
@@ -120,7 +111,7 @@ export default function ProgramsSection() {
           UGC-entitled online degrees
         </p>
         <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
-          Find your program
+          UGC-entitled degrees, built for outcomes
         </h2>
         <p className="mt-3 text-[17px] text-neutral-600 max-w-[520px] mx-auto leading-relaxed">
           Flexible, industry-aligned degrees designed for working professionals and fresh graduates.
@@ -163,28 +154,29 @@ function ProgramCard({ program: p }: { program: Program }) {
   return (
     <Link
       href={`/programs/${p.slug}`}
-      className="group flex flex-col rounded-xl overflow-hidden border border-neutral-200 bg-white
+      className="group flex flex-col rounded-2xl overflow-hidden border border-neutral-200 bg-white
                  transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-transparent"
     >
-      {/* Colored header */}
-      <div
-        className="relative flex h-[130px] items-end px-5 pb-4 overflow-hidden"
-        style={{ background: p.gradient }}
-      >
-        {/* Dot-grid overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-            backgroundSize: '18px 18px',
-          }}
+      {/* Photo header */}
+      <div className="relative h-[160px] overflow-hidden">
+        <Image
+          src={p.photo}
+          alt={p.name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
         />
-        <span className="relative z-10 text-[36px] leading-none">{p.icon}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         {p.badge && (
-          <span className="absolute right-3 top-3 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900">
+          <span className="absolute left-3 top-3 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900">
             {p.badge}
           </span>
         )}
+        <div className="absolute bottom-3 left-3">
+          <span className="rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-0.5 text-[11px] font-heading font-semibold text-white uppercase tracking-wide">
+            {p.level === 'pg' ? 'Postgraduate' : 'Undergraduate'}
+          </span>
+        </div>
       </div>
 
       {/* Body */}

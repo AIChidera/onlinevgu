@@ -7,109 +7,90 @@ import Button from '@/components/ui/Button'
 const STEPS = [
   {
     number: '01',
-    title: 'Fill enquiry form',
-    body: 'Share your details and program interest. A counsellor will call you within 2 hours.',
-    time: '5 minutes',
+    title: 'Register online',
+    body: 'Fill a quick enquiry form. A counsellor calls you within 2 hours.',
   },
   {
     number: '02',
     title: 'Choose your program',
-    body: 'Discuss specialisations, fee structure, and EMI options with your dedicated counsellor.',
-    time: '1 call',
+    body: 'Pick your degree and specialisation with guidance from our advisors.',
   },
   {
     number: '03',
-    title: 'Submit documents',
-    body: 'Upload marksheets, ID proof, and passport photo through our secure portal.',
-    time: '10 minutes',
+    title: 'Pay fees',
+    body: 'Pay securely online. EMI options available from ₹2,999/month.',
   },
   {
     number: '04',
-    title: 'Pay & enrol',
-    body: 'Complete admission fee online. Instant enrolment confirmation sent to your email.',
-    time: '2 minutes',
-  },
-  {
-    number: '05',
-    title: 'Start learning',
-    body: 'Get access to the learning portal, live schedule, and your first week of content.',
-    time: 'Same day',
+    title: 'Begin learning',
+    body: 'Get instant access to the learning portal and start on day one.',
   },
 ]
 
 export default function AdmissionTimeline() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 })
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 })
 
   return (
     <SectionWrapper id="admissions" bg="white">
-      <div className="grid grid-cols-2 gap-16 items-center lg:grid-cols-1 lg:gap-10">
-        <div>
-          <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
-            Simple admissions
-          </p>
-          <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
-            Enrol in under<br />
-            30 minutes — online
-          </h2>
-          <p className="mt-4 text-[17px] text-neutral-600 leading-relaxed max-w-[440px]">
-            No entrance exams. No campus visits. Just a simple online process from anywhere in India
-            (or the world).
-          </p>
+      <div className="text-center mb-12">
+        <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
+          Simple admissions
+        </p>
+        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
+          Join in 4 simple steps
+        </h2>
+        <p className="mt-3 text-[17px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed">
+          No entrance exams. No campus visits. Enrol 100% online in under 30 minutes.
+        </p>
+      </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button as="a" href="/apply" size="lg">
-              Apply now →
-            </Button>
-            <Button variant="secondary" size="lg" as="a" href="/apply#brochure">
-              Download brochure
-            </Button>
-          </div>
+      {/* Horizontal steps */}
+      <div ref={ref} className="relative">
+        {/* Connector line */}
+        <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-neutral-200 lg:hidden" />
 
-          <div className="mt-8 flex flex-wrap gap-6 pt-6 border-t border-neutral-100">
-            {[
-              { label: 'Intake', value: 'Jan & Jul' },
-              { label: 'Min. qualification', value: '10+2 / Graduation' },
-              { label: 'Entrance exam', value: 'Not required' },
-            ].map((i) => (
-              <div key={i.label}>
-                <div className="text-[12px] text-neutral-400 uppercase tracking-wider font-heading font-semibold mb-0.5">
-                  {i.label}
-                </div>
-                <div className="text-[15px] font-heading font-bold text-neutral-900">{i.value}</div>
+        <div className="grid grid-cols-4 gap-6 lg:grid-cols-2 md:grid-cols-1">
+          {STEPS.map((step, i) => (
+            <div
+              key={step.number}
+              className={[
+                'flex flex-col items-center text-center transition-all duration-500',
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+              ].join(' ')}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              {/* Number circle */}
+              <div className="relative z-10 mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-vgu-red shadow-[0_8px_24px_rgba(192,64,54,0.30)]">
+                <span className="font-heading text-[22px] font-black text-white">{step.number}</span>
               </div>
-            ))}
-          </div>
+
+              <h3 className="font-heading text-[17px] font-bold text-neutral-900 mb-2">
+                {step.title}
+              </h3>
+              <p className="text-[14px] text-neutral-600 leading-relaxed max-w-[200px]">
+                {step.body}
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        <div ref={ref} className="relative pl-4">
-          {/* Vertical line */}
-          <div className="absolute left-[28px] top-3 bottom-3 w-px bg-neutral-200" />
-
-          <div className="flex flex-col gap-6">
-            {STEPS.map((step, i) => (
-              <div
-                key={step.number}
-                className={[
-                  'flex gap-4 transition-all duration-500',
-                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6',
-                ].join(' ')}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full border-2 border-vgu-red bg-white">
-                  <span className="font-heading text-[13px] font-black text-vgu-red">{step.number}</span>
-                </div>
-                <div className="pt-1.5">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-heading text-[15px] font-bold text-neutral-900">{step.title}</h3>
-                    <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-500">
-                      {step.time}
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-neutral-600 leading-relaxed">{step.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* CTA */}
+      <div className="mt-12 flex flex-col items-center gap-4">
+        <Button as="a" href="/apply" size="lg">
+          Enrol now →
+        </Button>
+        <div className="flex flex-wrap justify-center gap-6 text-[13px] text-neutral-500">
+          {[
+            { label: 'Next intake', value: 'July 2025' },
+            { label: 'Min. qualification', value: '10+2 / Graduation' },
+            { label: 'Entrance exam', value: 'Not required' },
+          ].map((item) => (
+            <span key={item.label}>
+              <span className="text-neutral-400">{item.label}: </span>
+              <span className="font-heading font-semibold text-neutral-700">{item.value}</span>
+            </span>
+          ))}
         </div>
       </div>
     </SectionWrapper>
