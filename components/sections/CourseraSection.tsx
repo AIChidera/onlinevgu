@@ -19,13 +19,13 @@ export default function CourseraSection() {
           <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
             Powered by Coursera
           </p>
-          <h2 className="font-heading text-[38px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[28px]">
+          <h2 className="font-heading text-[28px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[38px]">
             Get free access to 7,000+<br />
             courses on Coursera
           </h2>
-          <p className="mt-4 text-[17px] text-neutral-600 leading-relaxed max-w-[460px]">
+          <p className="mt-4 text-[15px] text-neutral-600 leading-relaxed max-w-[460px] lg:text-[17px]">
             Every VGU online program comes bundled with a Coursera licence. Access thousands of
-            courses from the world&apos;s top companies and universities — at no extra cost.
+            courses from the world&apos;s top companies and universities - at no extra cost.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-2">
@@ -88,7 +88,7 @@ export default function CourseraSection() {
             </div>
 
             <div className="mt-6 rounded-xl bg-vgu-beige border border-vgu-red/10 px-4 py-3 text-[13px] text-neutral-700 text-center">
-              <span className="font-heading font-bold text-vgu-red">₹0 extra</span> — bundled in your program fee
+              <span className="font-heading font-bold text-vgu-red">₹0 extra</span> - bundled in your program fee
             </div>
           </div>
         </div>

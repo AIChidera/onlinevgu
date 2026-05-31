@@ -7,7 +7,7 @@ const REASONS = [
   {
     icon: '🎓',
     title: 'UGC-entitled degrees',
-    body: 'Our online degrees carry the same weight as on-campus qualifications — recognised by employers and eligible for higher studies.',
+    body: 'Our online degrees carry the same weight as on-campus qualifications - recognised by employers and eligible for higher studies.',
   },
   {
     icon: '🏅',
@@ -17,7 +17,7 @@ const REASONS = [
   {
     icon: '⏰',
     title: 'Learn on your schedule',
-    body: 'Live sessions are recorded. Study at 6am or midnight — your pace, your timeline, without pausing your career.',
+    body: 'Live sessions are recorded. Study at 6am or midnight - your pace, your timeline, without pausing your career.',
   },
   {
     icon: '👨‍🏫',
@@ -42,7 +42,7 @@ const REASONS = [
   {
     icon: '📱',
     title: 'App-first learning',
-    body: 'Download lectures, join live classes, submit assignments, and track grades — all from one mobile app.',
+    body: 'Download lectures, join live classes, submit assignments, and track grades - all from one mobile app.',
   },
 ]
 
@@ -55,11 +55,11 @@ export default function WhyVGU() {
         <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
           Why choose us
         </p>
-        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
+        <h2 className="font-heading text-[32px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[40px]">
           Everything you need to succeed online
         </h2>
-        <p className="mt-3 text-[17px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed">
-          25 years of academic excellence, now accessible from wherever you are.
+        <p className="mt-3 text-[15px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed lg:text-[17px]">
+          {new Date().getFullYear() - 1998} years of academic excellence, now accessible from wherever you are.
         </p>
       </div>
 

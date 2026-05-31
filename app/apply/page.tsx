@@ -1,9 +1,10 @@
 import LeadForm from '@/components/forms/LeadForm'
 import BrochureForm from '@/components/forms/BrochureForm'
 import SectionWrapper from '@/components/layout/SectionWrapper'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata = {
-  title: 'Apply Online — VGU',
+  title: 'Apply Online - VGU',
   description:
     'Apply for an online degree at Vivekananda Global University. No entrance exam. Enrol in under 30 minutes.',
 }
@@ -11,15 +12,16 @@ export const metadata = {
 export default function ApplyPage() {
   return (
     <>
-      <div className="bg-gradient-to-b from-[#FBF1E6] to-white pt-[72px]">
+      <Breadcrumb items={[{ label: 'Apply' }]} />
+      <div className="bg-gradient-to-b from-[#FBF1E6] to-white">
         <div className="mx-auto max-w-content px-12 py-16 md:px-5 md:py-12">
           <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
             Admissions open
           </p>
-          <h1 className="font-heading text-[52px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[36px]">
+          <h1 className="font-heading text-[36px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[52px]">
             Apply now
           </h1>
-          <p className="mt-3 text-[18px] text-neutral-600 max-w-[480px] leading-relaxed">
+          <p className="mt-3 text-[16px] text-neutral-600 max-w-[480px] leading-relaxed lg:text-[18px]">
             No entrance exam. No campus visit. Enrol 100% online in under 30 minutes.
           </p>
         </div>
@@ -33,7 +35,7 @@ export default function ApplyPage() {
               Talk to a counsellor
             </h2>
             <p className="text-[15px] text-neutral-600 mb-6">
-              Fill in your details and we&apos;ll call you within 2 hours — free, no obligation.
+              Fill in your details and we&apos;ll call you within 2 hours - free, no obligation.
             </p>
             <div className="rounded-2xl border border-neutral-200 p-8 bg-white shadow-sm md:p-5">
               <LeadForm source="apply-page" />

@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import SectionWrapper from '@/components/layout/SectionWrapper'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata = {
-  title: 'Blog — VGU Online',
+  title: 'Blog - VGU Online',
   description: 'Career advice, online education tips, and program guides from VGU.',
 }
 
@@ -17,7 +18,7 @@ const POSTS = [
   },
   {
     slug: 'ugc-entitled-vs-distance-degree',
-    title: 'UGC-entitled vs distance degree — what\'s the difference?',
+    title: 'UGC-entitled vs distance degree - what\'s the difference?',
     excerpt: 'Many people confuse the two. The distinction matters enormously for government jobs, further studies, and overseas recognition.',
     category: 'Education',
     date: 'April 2025',
@@ -25,7 +26,7 @@ const POSTS = [
   },
   {
     slug: 'mba-vs-mca-after-btech',
-    title: 'MBA or MCA after B.Tech — which path is right for you?',
+    title: 'MBA or MCA after B.Tech - which path is right for you?',
     excerpt: 'If you have a technical background and want to grow beyond coding, here\'s how to think about the MBA vs MCA decision.',
     category: 'Career',
     date: 'March 2025',
@@ -34,7 +35,7 @@ const POSTS = [
   {
     slug: 'online-degree-government-jobs',
     title: 'Are online degrees valid for government jobs and UPSC?',
-    excerpt: 'The short answer is yes — if the university is UGC-recognised and the program is UGC-DEB entitled. Here\'s exactly what to look for.',
+    excerpt: 'The short answer is yes - if the university is UGC-recognised and the program is UGC-DEB entitled. Here\'s exactly what to look for.',
     category: 'Education',
     date: 'February 2025',
     readTime: '5 min read',
@@ -44,12 +45,13 @@ const POSTS = [
 export default function BlogPage() {
   return (
     <>
-      <div className="bg-gradient-to-b from-[#FBF1E6] to-white pt-[72px]">
+      <Breadcrumb items={[{ label: 'Blog' }]} />
+      <div className="bg-gradient-to-b from-[#FBF1E6] to-white">
         <div className="mx-auto max-w-content px-12 py-16 md:px-5 md:py-12">
-          <h1 className="font-heading text-[52px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[36px]">
+          <h1 className="font-heading text-[36px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[52px]">
             Blog
           </h1>
-          <p className="mt-3 text-[18px] text-neutral-600 max-w-[440px] leading-relaxed">
+          <p className="mt-3 text-[16px] text-neutral-600 max-w-[440px] leading-relaxed lg:text-[18px]">
             Career insights, education guides, and program deep-dives.
           </p>
         </div>

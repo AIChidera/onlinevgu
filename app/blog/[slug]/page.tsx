@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const POSTS: Record<string, {
   title: string
@@ -31,9 +32,9 @@ Our 2024 alumni survey tracked outcomes 12 months after graduation:
 
 ## When an online MBA makes sense
 
-1. **You're already employed** — the ROI is clearest when you keep earning while studying
-2. **You want a management role** — recruiters at senior levels still use the MBA as a filter
-3. **You need the credential, not the campus** — networking happens online now
+1. **You're already employed** - the ROI is clearest when you keep earning while studying
+2. **You want a management role** - recruiters at senior levels still use the MBA as a filter
+3. **You need the credential, not the campus** - networking happens online now
 
 ## When it might not
 
@@ -41,13 +42,13 @@ If your goal is a top-10 IIM or an Ivy League brand, you'll need the on-campus r
     `,
   },
   'ugc-entitled-vs-distance-degree': {
-    title: 'UGC-entitled vs distance degree — what\'s the difference?',
+    title: 'UGC-entitled vs distance degree - what\'s the difference?',
     excerpt: 'Many people confuse the two. The distinction matters enormously for government jobs, further studies, and overseas recognition.',
     category: 'Education',
     date: 'April 2025',
     readTime: '4 min read',
     body: `
-The terms "online degree," "distance degree," and "UGC-entitled degree" are often used interchangeably — but they're not the same thing, and the difference can affect your career.
+The terms "online degree," "distance degree," and "UGC-entitled degree" are often used interchangeably - but they're not the same thing, and the difference can affect your career.
 
 ## UGC-entitled online degrees
 
@@ -85,7 +86,7 @@ export async function generateMetadata({ params }: Props) {
   const post = POSTS[params.slug]
   if (!post) return { title: 'Post not found' }
   return {
-    title: `${post.title} — VGU Blog`,
+    title: `${post.title} - VGU Blog`,
     description: post.excerpt,
   }
 }
@@ -97,7 +98,8 @@ export default function BlogPostPage({ params }: Props) {
   const paragraphs = post.body.trim().split('\n\n')
 
   return (
-    <div className="pt-[72px]">
+    <div>
+      <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
       <div className="bg-gradient-to-b from-[#FBF1E6] to-white">
         <div className="mx-auto max-w-[720px] px-12 py-14 md:px-5 md:py-10">
           <Link
@@ -112,7 +114,7 @@ export default function BlogPostPage({ params }: Props) {
             </span>
             <span className="text-[12px] text-neutral-400">{post.date} · {post.readTime}</span>
           </div>
-          <h1 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[28px]">
+          <h1 className="font-heading text-[28px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[40px]">
             {post.title}
           </h1>
         </div>
@@ -148,7 +150,7 @@ export default function BlogPostPage({ params }: Props) {
             Ready to explore VGU programs?
           </h3>
           <p className="text-[15px] text-neutral-600 mb-5">
-            Talk to a free counsellor — they&apos;ll help you find the right program.
+            Talk to a free counsellor - they&apos;ll help you find the right program.
           </p>
           <Link
             href="/apply"

@@ -68,7 +68,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
         </div>
         <h3 className="font-heading text-[18px] font-bold text-neutral-900">Brochure sent!</h3>
         <p className="text-[14px] text-neutral-600 max-w-[260px]">
-          Check your inbox — the brochure is on its way. Also check your spam folder.
+          Check your inbox - the brochure is on its way. Also check your spam folder.
         </p>
       </div>
     )

@@ -79,6 +79,27 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%':       { transform: 'translateY(-14px)' },
         },
+        tickerScroll: {
+          '0%':   { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        // ── Entrance animations (triggered by IntersectionObserver) ──
+        'enter-up': {
+          '0%':   { opacity: '0', transform: 'translateY(48px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'enter-materialize': {
+          '0%':   { opacity: '0', transform: 'scale(0.88)', filter: 'blur(6px)' },
+          '100%': { opacity: '1', transform: 'scale(1)',    filter: 'blur(0px)' },
+        },
+        'enter-left': {
+          '0%':   { opacity: '0', transform: 'translateX(-64px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'enter-right': {
+          '0%':   { opacity: '0', transform: 'translateX(64px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         'fade-in':       'fadeIn 360ms cubic-bezier(0.22, 1, 0.36, 1)',
@@ -88,6 +109,12 @@ const config: Config = {
         'float-up-slow': 'floatUpSlow 5.5s ease-in-out infinite',
         'pulse-ring':    'pulseRing 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite',
         'hero-spin':     'heroSpin 60s linear infinite',
+        'ticker-scroll': 'tickerScroll 38s linear infinite',
+        // Entrance animations
+        'enter-up':          'enter-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'enter-materialize': 'enter-materialize 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        'enter-left':        'enter-left 650ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'enter-right':       'enter-right 650ms cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },

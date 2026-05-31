@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import Button from '@/components/ui/Button'
 
-// Next intake: July 2025
-const INTAKE_DATE = new Date('2025-07-01T00:00:00')
+// Next intake: July 2026
+const INTAKE_DATE = new Date('2026-07-01T00:00:00')
 
 function pad(n: number) {
   return String(n).padStart(2, '0')
@@ -37,7 +37,7 @@ export default function IntakeCountdown() {
   ]
 
   return (
-    <section className="relative overflow-hidden bg-vgu-red py-16 md:py-12">
+    <section className="relative overflow-hidden bg-vgu-red py-12 md:py-16">
       {/* Subtle background texture */}
       <div
         aria-hidden="true"
@@ -55,12 +55,12 @@ export default function IntakeCountdown() {
             <p className="text-sm font-heading font-semibold uppercase tracking-widest text-white/70 mb-3">
               Next intake closes soon
             </p>
-            <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-white md:text-[30px]">
-              July 2025 admissions<br />
+            <h2 className="font-heading text-[30px] font-extrabold leading-tight tracking-tight text-white md:text-[40px]">
+              July 2026 admissions<br />
               are now open.
             </h2>
-            <p className="mt-4 text-[17px] text-white/75 leading-relaxed max-w-[400px]">
-              Seats fill fast. Secure your spot before the deadline — no entrance exam required.
+            <p className="mt-4 text-[15px] text-white/75 leading-relaxed max-w-[400px] lg:text-[17px]">
+              Seats fill fast. Secure your spot before the deadline - no entrance exam required.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button variant="yellow" size="lg" as="a" href="/apply">
@@ -99,9 +99,9 @@ export default function IntakeCountdown() {
             </div>
 
             <div className="mt-8 rounded-2xl bg-white/10 border border-white/20 px-6 py-4 text-[14px] text-white/80 leading-relaxed">
-              <div className="font-heading font-bold text-white mb-1">July 2025 intake</div>
-              Classes begin · 1 July 2025<br />
-              Application deadline · 25 June 2025
+              <div className="font-heading font-bold text-white mb-1">July 2026 intake</div>
+              Classes begin · 1 July 2026<br />
+              Application deadline · 25 June 2026
             </div>
           </div>
         </div>

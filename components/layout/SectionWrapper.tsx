@@ -23,9 +23,9 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={[bgMap[bg], 'py-24 md:py-16', className].join(' ')}
+      className={[bgMap[bg], 'py-16 lg:py-24', className].join(' ')}
     >
-      <div className="mx-auto w-full max-w-content px-12 md:px-5">
+      <div className="mx-auto w-full max-w-content px-5 md:px-8 lg:px-12">
         {children}
       </div>
     </section>

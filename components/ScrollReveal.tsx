@@ -2,41 +2,47 @@
 
 import { useEffect } from 'react'
 
-/**
- * Global scroll-reveal observer.
- * Targets every `section[id]` except #hero (which is above the fold).
- * Sections already in viewport on load are made visible instantly.
- * Sections below the fold start hidden (sr-ready) and animate in (sr-visible).
- */
+const VARIANT_CLASS: Record<string, string> = {
+  'fade-up':          'anim-fade-up',
+  'materialize':      'anim-materialize',
+  'slide-from-left':  'anim-slide-left',
+  'slide-from-right': 'anim-slide-right',
+}
+
+function triggerAnim(el: HTMLElement) {
+  el.classList.remove('sr-ready')
+  const animClass = VARIANT_CLASS[el.dataset.animate ?? ''] ?? 'anim-fade-up'
+  el.classList.add(animClass)
+  // Remove after completion so fill-mode doesn't block subsequent opacity changes
+  // (e.g. Testimonials story-switch uses opacity-0/opacity-100 classes directly).
+  el.addEventListener('animationend', () => el.classList.remove(animClass), { once: true })
+}
+
 export default function ScrollReveal() {
   useEffect(() => {
-    const sections = Array.from(
-      document.querySelectorAll<HTMLElement>('section[id]:not(#hero), [data-reveal]')
-    )
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('sr-visible')
-            observer.unobserve(entry.target)
-          }
+          if (!entry.isIntersecting) return
+          triggerAnim(entry.target as HTMLElement)
+          observer.unobserve(entry.target)
         })
       },
-      { threshold: 0.06, rootMargin: '-20px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     )
 
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect()
-      const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
-
-      if (alreadyVisible) {
-        // Already in view on load — no animation needed
-        section.classList.add('sr-visible')
+    document.querySelectorAll<HTMLElement>('[data-animate]').forEach((el) => {
+      el.classList.add('sr-ready')
+      const { top, bottom } = el.getBoundingClientRect()
+      if (top < window.innerHeight && bottom > 0) {
+        // Element is in the initial viewport — animate after one rAF so the
+        // browser paints the sr-ready (opacity:0) state before we trigger.
+        // fill-mode:both keeps the element invisible during any animationDelay.
+        requestAnimationFrame(() => triggerAnim(el))
       } else {
-        // Below fold — start hidden, animate in on scroll
-        section.classList.add('sr-ready')
-        observer.observe(section)
+        observer.observe(el)
       }
     })
 

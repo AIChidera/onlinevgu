@@ -1,10 +1,13 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Nunito, Lato } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import ScrollReveal from '@/components/ScrollReveal'
+import CounsellorModal from '@/components/ui/CounsellorModal'
+import ApplyModal from '@/components/ui/ApplyModal'
+import BrochureModal from '@/components/ui/BrochureModal'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -19,6 +22,12 @@ const lato = Lato({
   variable: '--font-lato',
   display: 'swap',
 })
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   title: {
@@ -58,11 +67,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${nunito.variable} ${lato.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${lato.variable}`}>
       <body className="font-body antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <CounsellorModal />
+        <ApplyModal />
+        <BrochureModal />
         <WhatsAppButton />
         <ScrollReveal />
       </body>

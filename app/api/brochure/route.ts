@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
             <h2>Hi ${data.name},</h2>
             <p>Thank you for your interest in <strong>${data.programInterest}</strong> at Vivekananda Global University.</p>
             <p>Your program brochure is attached to this email. It contains the full curriculum, fee structure, admission process, and placement statistics.</p>
-            <p>A counsellor may reach out to answer any questions. You can also call us at <strong>1800 123 456</strong> (toll-free, Mon–Sat 9am–7pm IST).</p>
+            <p>A counsellor may reach out to answer any questions. You can also call us at <strong>1800 123 456</strong> (toll-free, Mon-Sat 9am-7pm IST).</p>
             <p style="margin-top:32px;color:#666;font-size:13px">
               Vivekananda Global University · admissions@onlinevgu.in · 1800 123 456
             </p>
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM_ADDRESS,
         to: ADMISSIONS_EMAIL,
-        subject: `Brochure request: ${data.name} — ${data.programInterest}`,
+        subject: `Brochure request: ${data.name} - ${data.programInterest}`,
         html: `
           <p><strong>Name:</strong> ${data.name}</p>
           <p><strong>Email:</strong> ${data.email}</p>
