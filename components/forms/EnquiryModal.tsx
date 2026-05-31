@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import LeadForm from './LeadForm'
 
 interface EnquiryModalProps {
@@ -9,12 +9,18 @@ interface EnquiryModalProps {
 }
 
 export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
-  const overlayRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     if (!isOpen) return
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = '' }
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.documentElement.scrollTop = scrollY
+    }
   }, [isOpen])
 
   useEffect(() => {
@@ -29,20 +35,22 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
 
   return (
     <div
-      ref={overlayRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      onClick={(e) => { if (e.target === overlayRef.current) onClose() }}
+      className="fixed inset-0 z-[100] flex items-end sm:items-center sm:justify-center p-0 sm:p-4"
+      onClick={onClose}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm animate-fade-in" />
+      <div className="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm animate-fade-in" aria-hidden="true" />
 
-      {/* Panel */}
-      <div className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-2xl bg-white shadow-2xl overflow-hidden">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-vgu-red to-vgu-red-dark px-6 py-5">
+      {/* Panel — flex column: header pinned, form scrolls */}
+      <div
+        className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90vh] sm:h-auto sm:max-h-[90vh]"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header — pinned, never scrolls */}
+        <div className="flex-none bg-gradient-to-r from-vgu-red to-vgu-red-dark px-6 py-5">
           <button
             onClick={onClose}
-            className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+            className="absolute right-4 top-4 z-[30] flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
             aria-label="Close"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
@@ -66,8 +74,11 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
           </p>
         </div>
 
-        {/* Form */}
-        <div className="p-6">
+        {/* Form — this section scrolls */}
+        <div
+          className="flex-1 min-h-0 overflow-y-auto bg-white p-6"
+          style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
+        >
           <LeadForm onSuccess={onClose} source="modal" />
         </div>
       </div>

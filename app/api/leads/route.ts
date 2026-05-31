@@ -3,7 +3,7 @@ import { LeadSchema } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL, leadConfirmationHtml, leadNotificationHtml } from '@/lib/resend'
 
-// Rate limiting — only active when Upstash env vars are set
+// Rate limiting - only active when Upstash env vars are set
 async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
   const url = process.env.UPSTASH_REDIS_REST_URL
   const token = process.env.UPSTASH_REDIS_REST_TOKEN
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
       })
     }
   } catch {
-    // Non-fatal — still send emails
+    // Non-fatal - still send emails
   }
 
   // Send emails (non-blocking failures)
@@ -78,13 +78,13 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM_ADDRESS,
         to: data.email,
-        subject: 'We received your enquiry — VGU Online',
+        subject: 'We received your enquiry - VGU Online',
         html: leadConfirmationHtml(data.name, data.programInterest ?? 'your chosen program'),
       }),
       resend.emails.send({
         from: FROM_ADDRESS,
         to: ADMISSIONS_EMAIL,
-        subject: `New lead: ${data.name} — ${data.programInterest ?? 'Not specified'}`,
+        subject: `New lead: ${data.name} - ${data.programInterest ?? 'Not specified'}`,
         html: leadNotificationHtml({
           name: data.name,
           email: data.email,

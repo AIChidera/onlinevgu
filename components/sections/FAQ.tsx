@@ -14,7 +14,7 @@ const FAQS = [
   },
   {
     q: 'Can I pursue a VGU online degree while working full-time?',
-    a: 'Absolutely — the programs are designed for working professionals. Live sessions are scheduled on evenings and weekends, and all classes are recorded. Many of our students hold demanding jobs while studying.',
+    a: 'Absolutely - the programs are designed for working professionals. Live sessions are scheduled on evenings and weekends, and all classes are recorded. Many of our students hold demanding jobs while studying.',
   },
   {
     q: 'What is the minimum eligibility for online programs?',
@@ -47,7 +47,7 @@ export default function FAQ() {
         <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
           FAQs
         </p>
-        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
+        <h2 className="font-heading text-[32px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[40px]">
           Everything you need to know
         </h2>
         <p className="mt-3 text-[16px] text-neutral-600 max-w-[480px] mx-auto">

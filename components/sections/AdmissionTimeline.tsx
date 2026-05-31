@@ -1,6 +1,7 @@
 'use client'
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { NEXT_BATCH } from '@/lib/constants'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
 
@@ -36,10 +37,10 @@ export default function AdmissionTimeline() {
         <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
           Simple admissions
         </p>
-        <h2 className="font-heading text-[40px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[32px]">
+        <h2 className="font-heading text-[32px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[40px]">
           Join in 4 simple steps
         </h2>
-        <p className="mt-3 text-[17px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed">
+        <p className="mt-3 text-[15px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed lg:text-[17px]">
           No entrance exams. No campus visits. Enrol 100% online in under 30 minutes.
         </p>
       </div>
@@ -82,7 +83,7 @@ export default function AdmissionTimeline() {
         </Button>
         <div className="flex flex-wrap justify-center gap-6 text-[13px] text-neutral-500">
           {[
-            { label: 'Next intake', value: 'July 2025' },
+            { label: 'Next intake', value: NEXT_BATCH },
             { label: 'Min. qualification', value: '10+2 / Graduation' },
             { label: 'Entrance exam', value: 'Not required' },
           ].map((item) => (

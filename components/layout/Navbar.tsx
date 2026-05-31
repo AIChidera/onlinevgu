@@ -5,12 +5,11 @@ import { useState, useEffect } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
 const NAV_LINKS = [
-  { label: 'Programmes', href: '#programs'     },
-  { label: 'Campus Life', href: '#campus'       },
-  { label: 'Stories',     href: '#testimonials' },
-  { label: 'Blog',        href: '/blog'         },
-  { label: 'Results',     href: '#'             },
-  { label: 'FAQs',        href: '#faq'          },
+  { label: 'Programs',   href: '/#programs'     },
+  { label: 'Admissions', href: '/#how-to-apply' },
+  { label: 'Placements', href: '/#impact'       },
+  { label: 'About',      href: '/about'         },
+  { label: 'Blog',       href: '/blog'          },
 ]
 
 export default function Navbar() {
@@ -35,13 +34,13 @@ export default function Navbar() {
     <>
       <header
         className={[
-          'fixed inset-x-0 top-0 z-50 transition-all duration-200',
+          'sticky top-0 z-[100] transition-all duration-200',
           scrolled
             ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-neutral-200'
             : 'bg-white border-b border-neutral-200',
         ].join(' ')}
       >
-        <div className="mx-auto flex h-[72px] max-w-[1280px] items-center px-12 lg:px-8 md:px-5">
+        <div className="mx-auto flex h-[64px] lg:h-[72px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
           {/* Logo */}
           <Link
             href="/"
@@ -56,7 +55,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="font-body font-semibold text-[15px] text-gray-700 hover:text-vgu-red transition-colors duration-150"
+                className="relative font-body font-medium text-[15px] text-neutral-900 hover:text-vgu-red transition-colors duration-150 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:rounded-full after:bg-vgu-red after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -67,7 +66,8 @@ export default function Navbar() {
           <div className="hidden lg:flex ml-auto">
             <a
               href="#counsellor"
-              className="border-2 border-vgu-red text-vgu-red bg-transparent hover:bg-vgu-red hover:text-white rounded-full px-7 py-3 text-[15px] font-semibold transition-colors duration-150"
+              data-apply-trigger
+              className="border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red rounded-full px-8 py-3.5 text-[15px] font-semibold transition-all duration-200"
             >
               Apply Now
             </a>
@@ -75,7 +75,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="ml-auto flex lg:hidden h-10 w-10 items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
+            className="ml-auto flex lg:hidden h-11 w-11 items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
@@ -84,7 +84,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile drawer — slides from right */}
+      {/* Mobile drawer - slides from right */}
       <div
         className={[
           'fixed inset-0 z-40 lg:hidden transition-all duration-300',
@@ -108,10 +108,10 @@ export default function Navbar() {
           ].join(' ')}
         >
           {/* Drawer header */}
-          <div className="flex h-[72px] items-center justify-between px-6 border-b border-neutral-200">
+          <div className="flex h-[64px] items-center justify-between px-6 border-b border-neutral-200">
             <span className="font-heading font-bold text-[20px] text-vgu-red">Online VGU</span>
             <button
-              className="h-9 w-9 flex items-center justify-center rounded-md text-gray-500 hover:bg-gray-100"
+              className="h-11 w-11 flex items-center justify-center rounded-md text-gray-500 hover:bg-gray-100"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu"
             >
@@ -140,7 +140,8 @@ export default function Navbar() {
           <div className="p-5 border-t border-gray-100">
             <a
               href="#counsellor"
-              className="block w-full border-2 border-vgu-red text-vgu-red bg-transparent hover:bg-vgu-red hover:text-white text-center rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors duration-150"
+              data-apply-trigger
+              className="block w-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red text-center rounded-full px-8 py-3.5 text-[15px] font-semibold transition-all duration-200"
               onClick={() => setMobileOpen(false)}
             >
               Apply Now

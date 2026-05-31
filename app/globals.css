@@ -3,16 +3,101 @@
 @tailwind utilities;
 
 /* ============================================================
-   Scroll-reveal — applied by ScrollReveal.tsx
+   Scroll-reveal entrance animations — applied by ScrollReveal.tsx
+   Defined here (not as Tailwind utilities) so they are never purged.
    ============================================================ */
-.sr-ready {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 700ms ease, transform 700ms ease;
+
+/* Desktop keyframes — hardcoded distances (CSS variables inside @keyframes break Safari) */
+@keyframes vguEnterUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.sr-ready.sr-visible {
-  opacity: 1;
-  transform: none;
+@keyframes vguEnterMaterialize {
+  from { opacity: 0; transform: scale(0.90); filter: blur(4px); }
+  to   { opacity: 1; transform: scale(1);    filter: blur(0);   }
+}
+@keyframes vguEnterLeft {
+  from { opacity: 0; transform: translateX(-64px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes vguEnterRight {
+  from { opacity: 0; transform: translateX(64px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Mobile keyframes — shorter distances, no blur */
+@keyframes vguEnterUpMob {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes vguEnterLeftMob {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes vguEnterRightMob {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes vguFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Hidden pre-reveal state: added to below-fold elements on page load */
+.sr-ready { opacity: 0; }
+
+/* Active animation classes: added by IntersectionObserver in ScrollReveal.tsx.
+   fill-mode: both → element stays at from-state during delay, to-state after end. */
+.anim-fade-up {
+  animation: vguEnterUp 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-materialize {
+  animation: vguEnterMaterialize 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.anim-slide-left {
+  animation: vguEnterLeft 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-slide-right {
+  animation: vguEnterRight 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Mobile: switch to shorter-distance keyframes, drop blur on materialize */
+@media (max-width: 767px) {
+  .anim-fade-up {
+    animation-name: vguEnterUpMob;
+    animation-duration: 500ms;
+  }
+  .anim-materialize {
+    animation-name: vguEnterUpMob;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-duration: 500ms;
+  }
+  .anim-slide-left {
+    animation-name: vguEnterLeftMob;
+    animation-duration: 500ms;
+  }
+  .anim-slide-right {
+    animation-name: vguEnterRightMob;
+    animation-duration: 500ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .anim-materialize,
+  .anim-slide-left,
+  .anim-slide-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Tab-switch fade (used by CurriculumPreview, etc.) */
+.animate-fade-in {
+  animation: vguFadeIn 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* ============================================================
@@ -83,3 +168,43 @@ a:hover {
 [id] {
   scroll-margin-top: 80px;
 }
+
+/* ============================================================
+   Scrollbar — hidden globally, content still scrollable
+   Matches mobile's overlay-scrollbar UX on all devices
+   ============================================================ */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* ============================================================
+   Hide scrollbars cross-browser
+   ============================================================ */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   Hero page-load entry — fire on mount, not on scroll.
+   Applied directly via className in Hero.tsx.
+   Below xl (1280px) the hero collapses to single column so
+   horizontal slides are overridden to a plain fade-up.
+   ============================================================ */
+.anim-load-left {
+  animation: vguEnterLeft 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (max-width: 1279px) {
+  .anim-load-left { animation-name: vguEnterUp; }
+}
+@media (max-width: 767px) {
+  .anim-load-left { animation-name: vguEnterUpMob; animation-duration: 350ms; }
+}
+

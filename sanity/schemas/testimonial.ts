@@ -8,7 +8,7 @@ export default {
     { name: 'company', title: 'Current company', type: 'string' },
     { name: 'avatar', title: 'Avatar photo', type: 'image', options: { hotspot: true } },
     { name: 'quote', title: 'Testimonial quote', type: 'text', rows: 4, validation: (r: any) => r.required() },
-    { name: 'rating', title: 'Rating (1–5)', type: 'number', validation: (r: any) => r.required().min(1).max(5) },
+    { name: 'rating', title: 'Rating (1-5)', type: 'number', validation: (r: any) => r.required().min(1).max(5) },
     {
       name: 'program',
       title: 'Program',
