@@ -1,5 +1,5 @@
 'use client'
-import { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { IconDownload, IconLock, IconX, IconMail, IconCheck } from '@tabler/icons-react'
 
 const PROGRAMMES = [

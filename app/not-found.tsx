@@ -77,14 +77,14 @@ export default function NotFound() {
             style={{ animationDelay: '70ms' }}
           >
             Oops. This page<br />
-            <span className="text-vgu-yellow">doesn't exist.</span>
+            <span className="text-vgu-yellow">doesn&apos;t exist.</span>
           </h1>
           <p
             className="anim-load-left mt-5 text-[16px] font-body leading-[1.75] text-white/65 max-w-[440px] mx-auto"
             style={{ animationDelay: '140ms' }}
           >
             The link may be broken, the page may have moved, or it was never here.
-            Either way - let's get you somewhere useful.
+            Either way - let&apos;s get you somewhere useful.
           </p>
 
           <div

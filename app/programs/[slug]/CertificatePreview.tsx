@@ -49,7 +49,7 @@ export default function CertificatePreview({ programName, programFullName }: Pro
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-6">
                 Your {programName} certificate is identical to the one given to on-campus graduates.
-                Same design, same university seal - with no mention of "online" anywhere on the document.
+                Same design, same university seal - with no mention of &quot;online&quot; anywhere on the document.
               </p>
               <ul className="flex flex-col gap-4 mb-8">
                 {[

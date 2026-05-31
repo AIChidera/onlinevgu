@@ -23,9 +23,8 @@ import {
   IconSpeakerphone,
 } from '@tabler/icons-react'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ProgramMeta {
-  Icon:   React.ComponentType<any>
+  Icon:   React.ComponentType<any> // eslint-disable-line @typescript-eslint/no-explicit-any
   iconBg: string
   badge?: string
 }

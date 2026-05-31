@@ -129,7 +129,7 @@ export default function Error({
             <Link href="/contact" className="font-semibold text-vgu-red hover:text-vgu-red-dark transition-colors">
               Reach our support team
             </Link>
-            {' '}and we'll get you sorted quickly.
+            {' '}and we&apos;ll get you sorted quickly.
           </p>
         </div>
       </section>

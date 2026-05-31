@@ -23,7 +23,7 @@ const lato = Lato({
   display: 'swap',
 })
 
-export const viewport = {
+export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
