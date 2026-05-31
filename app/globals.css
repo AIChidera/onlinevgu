@@ -74,11 +74,11 @@
     animation-duration: 500ms;
   }
   .anim-slide-left {
-    animation-name: vguEnterLeftMob;
+    animation-name: vguEnterUpMob;
     animation-duration: 500ms;
   }
   .anim-slide-right {
-    animation-name: vguEnterRightMob;
+    animation-name: vguEnterUpMob;
     animation-duration: 500ms;
   }
 }
@@ -130,6 +130,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
