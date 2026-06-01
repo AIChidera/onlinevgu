@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import {
   IconVideo,
   IconUserHeart,
@@ -99,6 +99,12 @@ export default function CourseExperienceSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const { ref: copyRef, isVisible: copyVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
 
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.playbackRate = 0.6
+  }, [])
+
   const togglePlay = useCallback(() => {
     const v = videoRef.current
     if (!v) return
@@ -119,7 +125,7 @@ export default function CourseExperienceSection() {
       {/* ══════════════════════════════════════════════════════
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
-      <div className="relative overflow-hidden lg:min-h-[560px] group">
+      <div className="relative overflow-hidden lg:h-[calc(100dvh-72px)] group">
         {/* Gradient fallback — always rendered; shows while video loads or if it fails */}
         <div
           className="absolute inset-0"
@@ -138,7 +144,7 @@ export default function CourseExperienceSection() {
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
-          <source src="https://videos.pexels.com/video-files/3196063/3196063-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src="/videos/platform-bg.mp4" type="video/mp4" />
         </video>
 
         {/* Dot texture */}
