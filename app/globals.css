@@ -99,13 +99,31 @@
   animation: vguFadeIn 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Platform video section — slow rightward pan (Ken Burns) */
+/* Platform video — desktop Ken Burns pan */
 @keyframes videoPanRight {
   0%   { transform: scale(1.08) translateX(-5%); }
   100% { transform: scale(1.08) translateX(5%);  }
 }
+/* Platform video — mobile object-position sweep (reveals full landscape width) */
+@keyframes videoPanMobile {
+  0%   { object-position: 5% 50%; }
+  100% { object-position: 95% 50%; }
+}
+/* Default: desktop pan */
 .video-pan {
   animation: videoPanRight 28s ease-in-out infinite alternate;
+}
+/* Mobile: sweep object-position instead (translateX alone is too small) */
+@media (max-width: 767px) {
+  .video-pan {
+    animation: videoPanMobile 18s ease-in-out infinite alternate;
+  }
+}
+/* Platform video banner — exact viewport fill on desktop */
+@media (min-width: 1024px) {
+  .platform-video-banner {
+    height: calc(100vh - 72px);
+  }
 }
 
 /* ============================================================

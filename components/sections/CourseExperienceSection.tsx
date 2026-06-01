@@ -97,23 +97,11 @@ export default function CourseExperienceSection() {
   const [activePanel, setActivePanel] = useState(0)
   const [fading, setFading]     = useState(false)
   const videoRef    = useRef<HTMLVideoElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
   const { ref: copyRef, isVisible: copyVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
 
   useEffect(() => {
     const v = videoRef.current
     if (v) v.playbackRate = 0.6
-  }, [])
-
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const setHeight = () => {
-      el.style.height = window.innerWidth >= 1024 ? `${window.innerHeight - 72}px` : ''
-    }
-    setHeight()
-    window.addEventListener('resize', setHeight)
-    return () => window.removeEventListener('resize', setHeight)
   }, [])
 
   const togglePlay = useCallback(() => {
@@ -137,8 +125,7 @@ export default function CourseExperienceSection() {
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
       <div
-        ref={containerRef}
-        className="relative overflow-hidden group cursor-pointer"
+        className="relative overflow-hidden group cursor-pointer platform-video-banner"
         onClick={togglePlay}
         aria-label={playing ? 'Pause video' : 'Play video'}
       >
@@ -158,7 +145,6 @@ export default function CourseExperienceSection() {
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           className="absolute inset-0 w-full h-full object-cover video-pan"
-          style={{ animationPlayState: playing ? 'running' : 'paused' }}
           aria-hidden="true"
         >
           <source src="https://videos.pexels.com/video-files/7683478/7683478-hd_1920_1080_30fps.mp4" type="video/mp4" />
