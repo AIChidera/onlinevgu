@@ -30,7 +30,7 @@ const CARDS: Card[] = [
     tags:     [{ label: 'Day 1', color: 'gold' }, { label: 'Leadership', color: 'red' }, { label: 'Campus', color: 'green' }],
     gradient: 'from-[#C04036] via-[#9b2f26] to-[#821a12]',
     Icon:     IconStar,
-    image:    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=640&q=80&auto=format&fit=crop',
+    image:    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=640&q=80&auto=format&fit=crop',
   },
   {
     title:    'Industry Bootcamp & Case Studies',

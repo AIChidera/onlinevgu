@@ -1,46 +1,40 @@
-import Button from '@/components/ui/Button'
+import { IconArrowRight } from '@tabler/icons-react'
+import StrokeArt from '@/components/ui/StrokeArt'
+import { NEXT_BATCH } from '@/lib/constants'
 
-interface FooterCTAProps {
-  onApply?: () => void
-}
-
-export default function FooterCTA({ onApply }: FooterCTAProps) {
+export default function FooterCTA() {
   return (
-    <section className="relative overflow-hidden bg-vgu-red-dark py-14 md:py-20">
-      {/* Background blobs */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-[5%] -top-[30%] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(255,164,18,0.18)_0%,transparent_70%)] blur-[80px]" />
-        <div className="absolute -bottom-[20%] -left-[5%] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(192,64,54,0.35)_0%,transparent_70%)] blur-[80px]" />
-      </div>
+    <section className="relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
+      <StrokeArt variant="dark" />
 
-      <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[680px] px-12 text-center md:px-5">
-        <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-yellow mb-4">
-          Applications open
+      <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[1280px] flex flex-col items-center text-center gap-6">
+        <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-white/55">
+          Start Today
         </p>
-        <h2 className="font-heading text-[32px] font-extrabold leading-tight tracking-tight text-white md:text-[44px]">
-          Ready to begin<br />your journey?
+        <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-white md:text-[32px] lg:text-[48px]">
+          Your Degree is<br />One Click Away.
         </h2>
-        <p className="mt-5 text-[16px] text-white/75 leading-relaxed max-w-[460px] mx-auto lg:text-[18px]">
-          Join 50,000+ learners who chose flexibility without sacrificing quality. Enrol in under 30 minutes.
+        <p className="text-[17px] font-body leading-[1.7] text-white/70 max-w-[460px]">
+          No entrance exam. No campus visit. Enrol 100% online and start learning in {NEXT_BATCH}.
         </p>
-
-        <div className="mt-8 flex justify-center gap-3 flex-wrap">
-          <Button variant="yellow" size="lg" onClick={onApply}>
-            Apply now →
-          </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            as="a"
-            href="tel:+911800123456"
-            className="text-white border-white/30 hover:bg-white/10"
+        <div className="flex items-center gap-3 flex-wrap justify-center">
+          <a
+            href="#counsellor"
+            data-apply-trigger
+            className="inline-flex items-center gap-2 rounded-full bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] transition-all duration-150 shadow-lg"
           >
-            Call 1800 123 456
-          </Button>
+            Apply Now
+            <IconArrowRight size={16} />
+          </a>
+          <a
+            href="#counsellor"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 text-white hover:text-white hover:bg-white/15 hover:border-white/60 font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] transition-all duration-150"
+          >
+            Talk to a Counsellor
+          </a>
         </div>
-
-        <p className="mt-6 text-[13px] text-white/45">
-          No entrance exam · Flexible EMIs from ₹2,999/month · Enrol online, 24/7
+        <p className="text-[13px] font-body text-white/45">
+          Free consultation · No obligation · Reply within 2 minutes
         </p>
       </div>
     </section>
