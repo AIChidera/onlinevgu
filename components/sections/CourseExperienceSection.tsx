@@ -138,7 +138,7 @@ export default function CourseExperienceSection() {
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
-          <source src="https://assets.mixkit.co/videos/preview/4763/4763-720.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4" type="video/mp4" />
         </video>
 
         {/* Dot texture */}

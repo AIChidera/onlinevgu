@@ -113,7 +113,7 @@ const Hero = ({ openLeadModal, navigate }) => (
             </div>
             <div className="hero-meta-item">
               <Icon name="award" size={16} />
-              <span>Est. <b>1998</b> · NAAC A+</span>
+              <span>Est. <b>2012</b> · NAAC A+</span>
             </div>
           </div>
         </div>

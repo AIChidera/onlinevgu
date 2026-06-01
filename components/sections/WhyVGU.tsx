@@ -2,6 +2,7 @@
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import SectionWrapper from '@/components/layout/SectionWrapper'
+import { FOUNDING_YEAR } from '@/lib/constants'
 
 const REASONS = [
   {
@@ -59,7 +60,7 @@ export default function WhyVGU() {
           Everything you need to succeed online
         </h2>
         <p className="mt-3 text-[15px] text-neutral-600 max-w-[480px] mx-auto leading-relaxed lg:text-[17px]">
-          {new Date().getFullYear() - 1998} years of academic excellence, now accessible from wherever you are.
+          {new Date().getFullYear() - FOUNDING_YEAR} years of academic excellence, now accessible from wherever you are.
         </p>
       </div>
 

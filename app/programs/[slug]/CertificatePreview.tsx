@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { IconX, IconZoomIn, IconShieldCheck } from '@tabler/icons-react'
+import { FOUNDING_YEAR } from '@/lib/constants'
 
 interface Props {
   programName: string
@@ -154,7 +155,7 @@ function Certificate({ programName, programFullName }: { programName: string; pr
           </div>
           <div className="text-left">
             <p className="font-heading font-black text-[11px] leading-tight text-vgu-red-dark tracking-tight">Vivekananda Global University</p>
-            <p className="font-body text-[8.5px] text-neutral-500 mt-0.5">NAAC A+ Accredited · Established 1998 · Jaipur, Rajasthan</p>
+            <p className="font-body text-[8.5px] text-neutral-500 mt-0.5">NAAC A+ Accredited · Established {FOUNDING_YEAR} · Jaipur, Rajasthan</p>
           </div>
         </div>
 

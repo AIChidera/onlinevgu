@@ -129,6 +129,9 @@ export default function CampusImmersionsSection() {
         </div>
       </div>
 
+      {/* Animated wrapper: fades in carousel + controls together */}
+      <div data-animate="fade-up" className="relative z-10">
+
       {/* ── MOBILE: native CSS snap scroll (identical mechanism to Programs cards) ── */}
       <div className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
         {CARDS.map((card) => (
@@ -287,6 +290,8 @@ export default function CampusImmersionsSection() {
           {active + 1} of {total} experiences
         </p>
       </div>
+
+      </div>{/* end animated wrapper */}
     </section>
   )
 }

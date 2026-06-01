@@ -450,7 +450,7 @@ Key stats (use only these):
   95%       Placement rate (2023 batch)
   30+       Programs offered
   4.8/5     Student rating
-  1998      Year established
+  2012      Year established
   500+      Hiring partners
   7,000+    Coursera courses available
 

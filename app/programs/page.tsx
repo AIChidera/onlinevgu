@@ -3,8 +3,7 @@ import Image from 'next/image'
 import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
 
-// Placeholder — replace with '/images/programs-hero-bg.jpg' when ready.
-const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1481026469463-66327c86e544?w=1400&q=80&auto=format&fit=crop'
+const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ProgramsGrid from './ProgramsGrid'
 import { PROGRAMMES } from './data'
@@ -34,11 +33,11 @@ export default function ProgramsPage() {
         {HERO_IMAGE_SRC && (
           <>
             <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-            <div className="absolute inset-0 bg-black/75" />
+            <div className="absolute inset-0 bg-black/55" />
           </>
         )}
 
-        <StrokeArt variant="light" />
+        <StrokeArt variant="dark" />
 
         <div aria-hidden="true" className={`pointer-events-none absolute inset-0 ${HERO_IMAGE_SRC ? 'opacity-0' : ''}`}>
           <div className="absolute top-0 right-0 w-[55%] h-full bg-gradient-to-l from-vgu-beige/25 to-transparent" />

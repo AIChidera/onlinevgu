@@ -15,21 +15,22 @@ import {
 } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import { FOUNDING_YEAR } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'About VGU - Vivekananda Global University Online',
   description:
-    'Learn about Vivekananda Global University - NAAC A+, UGC-entitled, and committed to accessible quality education since 1998.',
+    'Learn about Vivekananda Global University - NAAC A+, UGC-entitled, and committed to accessible quality education since 2012.',
   alternates: { canonical: 'https://onlinevgu.in/about' },
   openGraph: {
     title: 'About VGU - Vivekananda Global University Online',
-    description: 'NAAC A+ university, founded 1998 in Jaipur. 50,000+ learners across 40+ countries.',
+    description: 'NAAC A+ university, founded 2012 in Jaipur. 50,000+ learners across 40+ countries.',
     url: 'https://onlinevgu.in/about',
   },
 }
 
 const STATS = [
-  { value: '1998',    label: 'Year established',   Icon: IconBuildingBank },
+  { value: String(FOUNDING_YEAR), label: 'Year established', Icon: IconBuildingBank },
   { value: 'NAAC A+', label: 'Accreditation grade', Icon: IconAward        },
   { value: '50,000+', label: 'Online learners',     Icon: IconUsers        },
   { value: '40+',     label: 'Countries',            Icon: IconGlobe        },
@@ -75,10 +76,10 @@ const ACCREDITATIONS = [
 ]
 
 const MILESTONES = [
-  { year: '1998', event: 'University established in Jaipur, Rajasthan' },
-  { year: '2008', event: 'NAAC first accreditation' },
-  { year: '2015', event: 'Online division launched under UGC-DEB mandate' },
-  { year: '2018', event: 'NAAC A grade - first reaccreditation cycle' },
+  { year: '2012', event: 'University established in Jaipur, Rajasthan' },
+  { year: '2015', event: 'First UGC-DEB approved online programs launched' },
+  { year: '2018', event: 'NAAC accreditation - A grade achieved' },
+  { year: '2019', event: 'Online division scaled - programs open to learners nationwide' },
   { year: '2021', event: 'NAAC A+ reaccreditation - highest grade achieved' },
   { year: '2022', event: 'Coursera institutional partnership - 7,000+ courses added free for all students' },
   { year: '2023', event: '50,000+ online learners milestone crossed' },
@@ -143,11 +144,11 @@ export default function AboutPage() {
             About Vivekananda Global University
           </p>
           <h1 className="font-heading font-black text-[36px] md:text-[48px] lg:text-[64px] tracking-[-2px] leading-[0.95] text-white">
-            {new Date().getFullYear() - 1998} years of<br />
+            {new Date().getFullYear() - FOUNDING_YEAR} years of<br />
             <span className="text-vgu-yellow">academic excellence.</span>
           </h1>
           <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/75 max-w-[580px] lg:text-[17px]">
-            Founded in 1998 in Jaipur, VGU has grown into one of India&apos;s most respected
+            Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
             NAAC A+ universities - now bringing that same quality education online to
             learners across 40+ countries.
           </p>
@@ -293,7 +294,7 @@ export default function AboutPage() {
                 Our history
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[40px]">
-                {new Date().getFullYear() - 1998}+ Years of Impact
+                {new Date().getFullYear() - FOUNDING_YEAR}+ Years of Impact
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
                 From a single campus in Jaipur to a globally accessible online university -

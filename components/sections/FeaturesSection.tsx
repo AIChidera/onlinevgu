@@ -12,6 +12,7 @@ import {
   IconArrowRight,
 } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
+import { FOUNDING_YEAR } from '@/lib/constants'
 
 interface Feature {
   title: string
@@ -97,7 +98,7 @@ export default function FeaturesSection() {
             Everything You Need to Succeed
           </h2>
           <p className="mt-4 text-[15px] font-body leading-[1.7] text-white/60 max-w-[600px] mx-auto lg:text-[17px]">
-            {new Date().getFullYear() - 1998} years of academic excellence, now accessible from wherever you are.
+            {new Date().getFullYear() - FOUNDING_YEAR} years of academic excellence, now accessible from wherever you are.
           </p>
         </div>
 

@@ -13,6 +13,7 @@ import {
 } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { FOUNDING_YEAR } from '@/lib/constants'
 
 // ── Data ───────────────────────────────────────────────────────────
 
@@ -67,7 +68,7 @@ const EXTRA_STATS: ExtraStat[] = [
   { target: 500,  suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
   { target: 30,   suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
   { target: 7000, suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
-  { target: new Date().getFullYear() - 1998, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
+  { target: new Date().getFullYear() - FOUNDING_YEAR, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
 ]
 
 // ── Count-up ───────────────────────────────────────────────────────
