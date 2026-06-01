@@ -96,13 +96,24 @@ export default function CourseExperienceSection() {
   const [playing, setPlaying]   = useState(false)
   const [activePanel, setActivePanel] = useState(0)
   const [fading, setFading]     = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const videoRef    = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const { ref: copyRef, isVisible: copyVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
 
   useEffect(() => {
     const v = videoRef.current
-    if (!v) return
-    v.playbackRate = 0.6
+    if (v) v.playbackRate = 0.6
+  }, [])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const setHeight = () => {
+      el.style.height = window.innerWidth >= 1024 ? `${window.innerHeight - 72}px` : ''
+    }
+    setHeight()
+    window.addEventListener('resize', setHeight)
+    return () => window.removeEventListener('resize', setHeight)
   }, [])
 
   const togglePlay = useCallback(() => {
@@ -126,7 +137,8 @@ export default function CourseExperienceSection() {
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
       <div
-        className="relative overflow-hidden lg:h-[calc(100dvh_-_72px)] group cursor-pointer"
+        ref={containerRef}
+        className="relative overflow-hidden group cursor-pointer"
         onClick={togglePlay}
         aria-label={playing ? 'Pause video' : 'Play video'}
       >
@@ -145,7 +157,8 @@ export default function CourseExperienceSection() {
           playsInline
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-cover object-[30%_50%]"
+          className="absolute inset-0 w-full h-full object-cover video-pan"
+          style={{ animationPlayState: playing ? 'running' : 'paused' }}
           aria-hidden="true"
         >
           <source src="https://videos.pexels.com/video-files/7683478/7683478-hd_1920_1080_30fps.mp4" type="video/mp4" />
@@ -167,9 +180,9 @@ export default function CourseExperienceSection() {
           style={{ background: 'linear-gradient(105deg, rgba(17,8,5,0.88) 0%, rgba(17,8,5,0.52) 60%, rgba(17,8,5,0.35) 100%)' }}
         />
 
-        {/* Play / Pause badge — always visible on mobile, shows on hover on desktop */}
+        {/* Play / Pause badge — stop propagation so it doesn't double-fire with the outer onClick */}
         <button
-          onClick={togglePlay}
+          onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={playing ? 'Pause video' : 'Play video'}
           className="absolute top-5 right-5 z-20 flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-body font-semibold text-white backdrop-blur-md bg-black/40 border border-white/20 hover:bg-black/60 transition-all duration-200 shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 md:pointer-events-none md:group-hover:pointer-events-auto"
         >
@@ -177,11 +190,8 @@ export default function CourseExperienceSection() {
           <span>{playing ? 'Pause' : 'Play'}</span>
         </button>
 
-        {/* Content grid — stop propagation so text/button clicks don't bubble to video toggle */}
-        <div
-          className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 h-full flex items-center py-12 md:py-16 lg:py-20"
-          onClick={(e) => e.stopPropagation()}
-        >
+        {/* Content grid */}
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 h-full flex items-center py-12 md:py-16 lg:py-20">
           <div className="grid grid-cols-1 items-center w-full lg:grid-cols-[1fr_400px] lg:gap-16 xl:grid-cols-[1fr_340px]">
 
             {/* Left: copy */}
@@ -204,6 +214,7 @@ export default function CourseExperienceSection() {
               </p>
               <a
                 href="#counsellor"
+                onClick={(e) => e.stopPropagation()}
                 className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
               >
                 Explore the Platform

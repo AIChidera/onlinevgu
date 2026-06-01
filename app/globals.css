@@ -99,6 +99,15 @@
   animation: vguFadeIn 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Platform video section — slow rightward pan (Ken Burns) */
+@keyframes videoPanRight {
+  0%   { transform: scale(1.08) translateX(-5%); }
+  100% { transform: scale(1.08) translateX(5%);  }
+}
+.video-pan {
+  animation: videoPanRight 28s ease-in-out infinite alternate;
+}
+
 /* ============================================================
    VGU Brand CSS Variables (for use outside Tailwind classes)
    ============================================================ */
