@@ -73,16 +73,33 @@ export async function POST(req: NextRequest) {
         to: data.email,
         subject: `Your VGU brochure for ${data.programInterest}`,
         html: `
-          <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-            <h2>Hi ${data.name},</h2>
-            <p>Thank you for your interest in <strong>${data.programInterest}</strong> at Vivekananda Global University.</p>
-            <p>Your program brochure is attached to this email. It contains the full curriculum, fee structure, admission process, and placement statistics.</p>
-            <p>A counsellor may reach out to answer any questions. You can also call us at <strong>1800 123 456</strong> (toll-free, Mon-Sat 9am-7pm IST).</p>
-            <p style="margin-top:32px;color:#666;font-size:13px">
-              Vivekananda Global University · admissions@onlinevgu.in · 1800 123 456
-            </p>
+          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+            <div style="background:#C04036;padding:24px 32px">
+              <h1 style="color:#fff;margin:0;font-size:22px">Online VGU</h1>
+            </div>
+            <div style="padding:32px;background:#fff">
+              <h2 style="color:#111827">Hi ${data.name},</h2>
+              <p style="color:#4B5563;line-height:1.7">
+                Thank you for your interest in <strong>${data.programInterest}</strong> at
+                Vivekananda Global University.
+              </p>
+              <p style="color:#4B5563;line-height:1.7">
+                Our admissions team will send your program brochure to this email shortly.
+                It covers the full curriculum, fee structure, and placement statistics.
+              </p>
+              <p style="color:#4B5563;line-height:1.7">
+                In the meantime, a counsellor may reach out to answer any questions.
+                You can also call us at
+                <a href="tel:+911800123456" style="color:#C04036">1800 123 456</a>
+                (Mon-Sat, 9am-7pm IST).
+              </p>
+            </div>
+            <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
+              © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
+            </div>
           </div>
         `,
+        // TODO: add attachments: [{ filename, content }] when admin provides brochure PDFs
       }),
       resend.emails.send({
         from: FROM_ADDRESS,

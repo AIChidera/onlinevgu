@@ -25,6 +25,7 @@ export default function ApplyModal() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted]   = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const triggerRef = useRef<HTMLElement | null>(null)
 
   // Intercept all [data-apply-trigger] clicks
@@ -84,8 +85,9 @@ export default function ApplyModal() {
     e.preventDefault()
     if (!form.level || !form.programme || !form.intake) return
     setSubmitting(true)
+    setSubmitError('')
     try {
-      await fetch('/api/leads', {
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -97,9 +99,13 @@ export default function ApplyModal() {
           source:          'modal-apply',
         }),
       })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body?.error || 'Something went wrong. Please try again.')
+      }
       setSubmitted(true)
-    } catch {
-      // fail silently
+    } catch (err: unknown) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
       setSubmitting(false)
     }
@@ -360,6 +366,13 @@ export default function ApplyModal() {
                   I authorise VGU to contact me via call, SMS, email, and WhatsApp regarding my application. This consent overrides any DNC/NDNC registration.
                 </span>
               </label>
+
+              {/* ── Error ── */}
+              {submitError && (
+                <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
+                  {submitError}
+                </p>
+              )}
 
               {/* ── Submit ── */}
               <button

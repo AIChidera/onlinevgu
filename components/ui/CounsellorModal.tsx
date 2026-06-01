@@ -25,8 +25,9 @@ const TRUST_PILLS = [
 export default function CounsellorModal() {
   const [open, setOpen]           = useState(false)
   const [form, setForm]           = useState({ name: '', mobile: '', email: '', programme: '' })
-  const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted]   = useState(false)
+  const [submitting, setSubmitting]   = useState(false)
+  const [submitted, setSubmitted]     = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const triggerRef = useRef<HTMLElement | null>(null)
 
   // Intercept all href="#counsellor" clicks anywhere on the page
@@ -92,8 +93,9 @@ export default function CounsellorModal() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSubmitting(true)
+    setSubmitError('')
     try {
-      await fetch('/api/leads', {
+      const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -104,9 +106,13 @@ export default function CounsellorModal() {
           source:          'modal-counsellor',
         }),
       })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body?.error || 'Something went wrong. Please try again.')
+      }
       setSubmitted(true)
-    } catch {
-      // fail silently
+    } catch (err: unknown) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {
       setSubmitting(false)
     }
@@ -240,6 +246,12 @@ export default function CounsellorModal() {
                   <option value="" disabled>Select a program</option>
                   {PROGRAMMES.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
+
+                {submitError && (
+                  <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
+                    {submitError}
+                  </p>
+                )}
 
                 <button
                   type="submit" disabled={submitting}

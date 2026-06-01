@@ -21,7 +21,8 @@ export const LeadSchema = z.object({
     .string()
     .min(1, 'Please select a programme')
     .max(100),
-  source: z.string().optional(),
+  source:      z.string().optional(),
+  intake:      z.string().optional(),
   utmSource:   z.string().optional(),
   utmMedium:   z.string().optional(),
   utmCampaign: z.string().optional(),

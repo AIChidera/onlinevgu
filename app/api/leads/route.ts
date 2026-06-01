@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
         phone: data.phone,
         program_interest: data.programInterest,
         source: data.source ?? 'website',
+        intake: data.intake,
         utm_source: data.utmSource,
         utm_medium: data.utmMedium,
         utm_campaign: data.utmCampaign,

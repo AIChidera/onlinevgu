@@ -14,6 +14,7 @@ export default function BrochureModal() {
   const [submitting, setSubmitting]   = useState(false)
   const [submitted, setSubmitted]     = useState(false)
   const [submitEmail, setSubmitEmail] = useState('')
+  const [submitError, setSubmitError] = useState('')
 
   // Intercept any click on an element carrying data-brochure-trigger
   useEffect(() => {
@@ -62,8 +63,9 @@ export default function BrochureModal() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSubmitting(true)
+    setSubmitError('')
     try {
-      await fetch('/api/brochure', {
+      const res = await fetch('/api/brochure', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,10 +75,16 @@ export default function BrochureModal() {
           programInterest: program || 'Not specified',
         }),
       })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body?.error || 'Something went wrong. Please try again.')
+      }
       setSubmitEmail(form.email)
       setSubmitted(true)
-    } catch { /* fail silently */ }
-    finally { setSubmitting(false) }
+    } catch (err: unknown) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false) }
   }
 
   if (!open) return null
@@ -183,6 +191,12 @@ export default function BrochureModal() {
                   <option value="" disabled>Select a program</option>
                   {PROGRAMMES.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
+              )}
+
+              {submitError && (
+                <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
+                  {submitError}
+                </p>
               )}
 
               <button
