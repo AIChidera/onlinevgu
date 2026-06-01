@@ -10,7 +10,6 @@ import Testimonials from '@/components/sections/Testimonials'
 import FeaturesSection from '@/components/sections/FeaturesSection'
 import StepsSection from '@/components/sections/StepsSection'
 import FaqSection from '@/components/sections/FaqSection'
-import AccreditationStrip from '@/components/sections/AccreditationStrip'
 
 const CourseExperienceSection = dynamic(
   () => import('@/components/sections/CourseExperienceSection'),
@@ -30,7 +29,6 @@ export default function HomePage() {
       <FeaturesSection />
       <StepsSection />
       <FaqSection />
-      <AccreditationStrip />
     </>
   )
 }
