@@ -125,7 +125,7 @@ export default function CourseExperienceSection() {
       {/* ══════════════════════════════════════════════════════
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
-      <div className="relative overflow-hidden lg:h-[calc(100dvh-72px)] group">
+      <div className="relative overflow-hidden lg:h-[calc(100dvh_-_72px)] group">
         {/* Gradient fallback — always rendered; shows while video loads or if it fails */}
         <div
           className="absolute inset-0"
@@ -141,7 +141,7 @@ export default function CourseExperienceSection() {
           playsInline
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-[30%_50%]"
           aria-hidden="true"
         >
           <source src="https://videos.pexels.com/video-files/7683478/7683478-hd_1920_1080_30fps.mp4" type="video/mp4" />
