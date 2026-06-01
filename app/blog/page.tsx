@@ -49,7 +49,7 @@ export default function BlogPage() {
 
           {/* Body */}
           <p className="text-[16px] font-body leading-[1.7] text-white/70 mb-8 max-w-[460px] mx-auto md:text-[18px]">
-            Career guides, alumni outcomes, and program breakdowns written by VGU's faculty and placement team. We're finishing the details.
+            Career guides, alumni outcomes, and program breakdowns written by VGU&apos;s faculty and placement team. We&apos;re finishing the details.
           </p>
 
           {/* Pulse badge */}

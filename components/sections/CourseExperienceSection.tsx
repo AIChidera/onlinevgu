@@ -144,7 +144,7 @@ export default function CourseExperienceSection() {
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
-          <source src="/videos/platform-bg.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/7683478/7683478-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
 
         {/* Dot texture */}
