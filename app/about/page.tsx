@@ -9,7 +9,6 @@ import {
   IconUsers,
   IconGlobe,
   IconBuildingBank,
-  IconArrowRight,
   IconCheck,
   IconShieldCheck,
 } from '@tabler/icons-react'
@@ -344,41 +343,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══ CTA band ══ */}
-      <section className="bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20 relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[1280px] text-center">
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-white mb-4 md:text-[40px]">
-            Ready to be part of the VGU story?
-          </h2>
-          <p className="text-[15px] font-body leading-[1.7] text-white/70 max-w-[500px] mx-auto mb-8 lg:text-[17px]">
-            No entrance exam. No campus visit. Enrol online in 30 minutes and join 50,000+ learners.
-          </p>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <a
-              href="#counsellor"
-              data-apply-trigger
-              className="inline-flex items-center gap-2 rounded-full bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-lg"
-            >
-              Apply Now
-              <IconArrowRight size={16} />
-            </a>
-            <Link
-              href="/programs"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 hover:border-white text-white hover:bg-white/10 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
-            >
-              Browse Programs
-            </Link>
-          </div>
-        </div>
-      </section>
 
     </div>
   )
