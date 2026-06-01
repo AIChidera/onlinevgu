@@ -125,7 +125,11 @@ export default function CourseExperienceSection() {
       {/* ══════════════════════════════════════════════════════
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
-      <div className="relative overflow-hidden lg:h-[calc(100dvh_-_72px)] group">
+      <div
+        className="relative overflow-hidden lg:h-[calc(100dvh_-_72px)] group cursor-pointer"
+        onClick={togglePlay}
+        aria-label={playing ? 'Pause video' : 'Play video'}
+      >
         {/* Gradient fallback — always rendered; shows while video loads or if it fails */}
         <div
           className="absolute inset-0"
@@ -173,8 +177,11 @@ export default function CourseExperienceSection() {
           <span>{playing ? 'Pause' : 'Play'}</span>
         </button>
 
-        {/* Content grid */}
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 h-full flex items-center py-12 md:py-16 lg:py-20">
+        {/* Content grid — stop propagation so text/button clicks don't bubble to video toggle */}
+        <div
+          className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 h-full flex items-center py-12 md:py-16 lg:py-20"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="grid grid-cols-1 items-center w-full lg:grid-cols-[1fr_400px] lg:gap-16 xl:grid-cols-[1fr_340px]">
 
             {/* Left: copy */}
@@ -203,8 +210,8 @@ export default function CourseExperienceSection() {
               </a>
             </div>
 
-            {/* Right: device mockup */}
-            <div className="hidden lg:flex relative justify-center">
+            {/* Right: decorative accents + notification card */}
+            <div className="hidden lg:flex relative justify-center min-h-[200px] items-end">
               {/* Gold deco accents */}
               <svg className="absolute -top-6 -right-4 opacity-60" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
                 <line x1="20" y1="0" x2="20" y2="40" stroke="#FFA412" strokeWidth="2"/>
@@ -213,46 +220,6 @@ export default function CourseExperienceSection() {
               <svg className="absolute -bottom-4 -left-4 opacity-40" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
                 <polygon points="14,0 28,28 0,28" fill="none" stroke="#eecf63" strokeWidth="1.5"/>
               </svg>
-
-              {/* Laptop frame */}
-              <div className="animate-float-up-slow w-full max-w-[340px]">
-                {/* Screen */}
-                <div className="rounded-t-xl overflow-hidden border-[6px] border-white/20 shadow-[0_24px_48px_rgba(0,0,0,0.5)]">
-                  <div
-                    className="aspect-[16/10] flex flex-col"
-                    style={{ background: 'linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%)' }}
-                  >
-                    {/* Fake LMS top bar */}
-                    <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10">
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-                      </div>
-                      <div className="flex-1 h-4 rounded bg-white/10 mx-4" />
-                    </div>
-                    {/* LMS content skeleton */}
-                    <div className="flex flex-1 gap-3 p-3">
-                      <div className="w-24 flex flex-col gap-2">
-                        {[60,80,70,90,65].map((w,i) => (
-                          <div key={i} className="h-3 rounded-full bg-white/10" style={{ width: `${w}%` }}/>
-                        ))}
-                      </div>
-                      <div className="flex-1 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-10 h-10 rounded-full bg-vgu-red/40 mx-auto mb-2 flex items-center justify-center">
-                            <IconVideo size={18} className="text-white/70" />
-                          </div>
-                          <div className="h-2 w-20 bg-white/15 rounded mx-auto" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Laptop base */}
-                <div className="h-3 rounded-b-sm bg-white/10 mx-2" />
-                <div className="h-1.5 rounded-b-lg bg-white/5 mx-6" />
-              </div>
 
               {/* Floating notification card */}
               <div

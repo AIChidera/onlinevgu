@@ -130,13 +130,13 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   color: var(--n-900);
   background: #ffffff;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
