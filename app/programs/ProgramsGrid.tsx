@@ -120,7 +120,7 @@ function DisciplineGroup({
       {/* Mobile: horizontal scroll */}
       <div
         className="flex sm:hidden gap-4 overflow-x-auto pb-3 -mx-5 px-5 snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none' }}
+        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {programs.map((p, pi) => (
           <div

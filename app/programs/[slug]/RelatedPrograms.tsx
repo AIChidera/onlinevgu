@@ -99,7 +99,7 @@ export default function RelatedPrograms({ programs }: { programs: ProgCard[] }) 
         {/* Mobile: horizontal snap scroll */}
         <div
           className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
-          style={{ scrollbarWidth: 'none' }}
+          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           {programs.map((p, i) => (
             <div key={p.slug} className="flex-none w-[260px] snap-start">

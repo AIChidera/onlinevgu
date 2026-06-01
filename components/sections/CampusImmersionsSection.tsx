@@ -130,7 +130,7 @@ export default function CampusImmersionsSection() {
       </div>
 
       {/* ── MOBILE: native CSS snap scroll (identical mechanism to Programs cards) ── */}
-      <div className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4">
+      <div className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
         {CARDS.map((card) => (
           <div
             key={card.title}

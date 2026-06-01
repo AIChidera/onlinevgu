@@ -184,7 +184,7 @@ export default function ProgramTestimonials({ slug }: { slug: string }) {
           {/* Mobile: horizontal snap scroll */}
           <div
             className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
-            style={{ scrollbarWidth: 'none' }}
+            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {items.map((t, i) => (
               <div key={t.name} className="flex-none w-[280px] snap-start">

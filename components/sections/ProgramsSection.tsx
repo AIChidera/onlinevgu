@@ -61,7 +61,7 @@ export default function ProgramsSection() {
         </div>
 
         {/* ── MOBILE: Manipal-style snap scroll ── */}
-        <div className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4">
+        <div className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
           {visible.map((p, i) => (
             <div key={p.slug} className="snap-start flex-none w-[75vw] max-w-[285px]">
               <MobileProgramCard programme={p} meta={PROGRAM_META[p.slug]} delay={i * 80} />

@@ -31,6 +31,7 @@ export default function GlobalError({
           html { -webkit-font-smoothing: antialiased; }
           body {
             font-family: 'Lato', system-ui, sans-serif;
+            min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             align-items: center;

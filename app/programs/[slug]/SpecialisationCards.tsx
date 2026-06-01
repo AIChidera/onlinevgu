@@ -70,7 +70,7 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
       {/* Mobile: horizontal snap scroll */}
       <div
         className="flex sm:hidden gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
-        style={{ scrollbarWidth: 'none' }}
+        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {specialisations.map((s, si) => (
           <div
