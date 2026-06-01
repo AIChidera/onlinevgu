@@ -80,8 +80,8 @@ const config: Config = {
           '50%':       { transform: 'translateY(-14px)' },
         },
         tickerScroll: {
-          '0%':   { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '0%':   { transform: 'translate3d(0, 0, 0)' },
+          '100%': { transform: 'translate3d(-50%, 0, 0)' },
         },
         // ── Entrance animations (triggered by IntersectionObserver) ──
         'enter-up': {
@@ -89,8 +89,8 @@ const config: Config = {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'enter-materialize': {
-          '0%':   { opacity: '0', transform: 'scale(0.88)', filter: 'blur(6px)' },
-          '100%': { opacity: '1', transform: 'scale(1)',    filter: 'blur(0px)' },
+          '0%':   { opacity: '0', transform: 'scale(0.88)' },
+          '100%': { opacity: '1', transform: 'scale(1)'    },
         },
         'enter-left': {
           '0%':   { opacity: '0', transform: 'translateX(-64px)' },

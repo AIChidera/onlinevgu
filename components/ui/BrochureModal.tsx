@@ -154,17 +154,17 @@ export default function BrochureModal() {
               <input
                 name="name" type="text" placeholder="Your full name" required
                 value={form.name} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
               <input
                 name="mobile" type="tel" placeholder="Mobile number" required
                 value={form.mobile} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
               <input
                 name="email" type="email" placeholder="Email address" required
                 value={form.email} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
 
               {/* Program - locked if pre-filled from trigger, dropdown otherwise */}
@@ -178,7 +178,7 @@ export default function BrochureModal() {
                   value={program}
                   onChange={e => setProgram(e.target.value)}
                   required
-                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none"
+                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none"
                 >
                   <option value="" disabled>Select a program</option>
                   {PROGRAMMES.map(p => <option key={p} value={p}>{p}</option>)}

@@ -290,12 +290,12 @@ export default function ApplyModal() {
                     <input
                       name="name" type="text" placeholder="Full name" required
                       value={form.name} onChange={handleChange}
-                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[14px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
                     />
                     <input
                       name="email" type="email" placeholder="Email address" required
                       value={form.email} onChange={handleChange}
-                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-[14px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
                     />
                   </div>
                   <div className="flex rounded-xl border border-neutral-200 bg-neutral-50 overflow-hidden focus-within:border-vgu-red focus-within:ring-2 focus-within:ring-vgu-red/10 focus-within:bg-white transition-all">
@@ -305,7 +305,7 @@ export default function ApplyModal() {
                     <input
                       name="mobile" type="tel" placeholder="Mobile number" required
                       value={form.mobile} onChange={handleChange}
-                      className="flex-1 px-3 py-3 text-[14px] font-body text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none"
+                      className="flex-1 px-3 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none"
                     />
                   </div>
                 </div>

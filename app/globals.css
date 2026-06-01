@@ -153,6 +153,18 @@ a:hover {
   color: var(--vgu-red-dark);
 }
 
+/* Mobile Safari: eliminate 300ms tap delay and blue tap flash on all interactive elements */
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+label {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ============================================================
    Focus ring
    ============================================================ */

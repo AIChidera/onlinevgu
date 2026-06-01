@@ -109,7 +109,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
         <select
           {...register('programInterest')}
           className={[
-            'w-full rounded-lg border px-4 py-3 text-[15px] text-neutral-900',
+            'w-full rounded-lg border px-4 py-3 text-base text-neutral-900',
             'bg-white outline-none transition-colors duration-150',
             'focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/15',
             errors.programInterest

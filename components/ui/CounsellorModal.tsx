@@ -221,21 +221,21 @@ export default function CounsellorModal() {
                 <input
                   name="name" type="text" placeholder="Your full name" required
                   value={form.name} onChange={handleChange}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <input
                   name="mobile" type="tel" placeholder="Mobile number" required
                   value={form.mobile} onChange={handleChange}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <input
                   name="email" type="email" placeholder="Email address" required
                   value={form.email} onChange={handleChange}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <select
                   name="programme" required value={form.programme} onChange={handleChange}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none"
                 >
                   <option value="" disabled>Select a program</option>
                   {PROGRAMMES.map(p => <option key={p} value={p}>{p}</option>)}

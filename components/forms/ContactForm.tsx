@@ -55,7 +55,7 @@ export default function ContactForm() {
 
   const inputClass = (hasError?: boolean) =>
     [
-      'w-full rounded-xl border px-4 py-3 text-[15px] font-body text-neutral-900 placeholder-neutral-400',
+      'w-full rounded-xl border px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400',
       'bg-white outline-none transition-colors duration-150',
       'focus:bg-white focus:ring-2',
       hasError
