@@ -4,6 +4,28 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { IconX, IconPlayerPlay } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
+import type { SanityTestimonial } from '@/lib/sanity'
+
+const COLOR_TO_GRADIENT: Record<string, string> = {
+  red:    'from-[#821a12] to-[#3b0d09]',
+  blue:   'from-[#1e3a8a] to-[#0f172a]',
+  green:  'from-[#065f46] to-[#022c22]',
+  purple: 'from-[#4c1d95] to-[#1e0a3c]',
+}
+
+function fromSanity(t: SanityTestimonial): Story {
+  return {
+    name:       t.name,
+    role:       t.role,
+    program:    t.program,
+    quote:      t.quote,
+    outcomes:   t.outcomes ?? [],
+    avatar:     t.avatarUrl ?? '',
+    videoBg:    COLOR_TO_GRADIENT[t.colorTheme] ?? COLOR_TO_GRADIENT.red,
+    videoLabel: t.videoLabel ?? '',
+    videoUrl:   t.videoUrl,
+  }
+}
 
 interface Story {
   name:       string
@@ -61,11 +83,12 @@ const STORIES: Story[] = [
   },
 ]
 
-export default function Testimonials() {
+export default function Testimonials({ stories: sanityStories = [] }: { stories?: SanityTestimonial[] }) {
+  const activeStories = sanityStories.length > 0 ? sanityStories.map(fromSanity) : STORIES
   const [active, setActive]       = useState(0)
   const [fading, setFading]       = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
-  const story = STORIES[active]
+  const story = activeStories[active]
 
   // Close modal on ESC
   useEffect(() => {
@@ -97,11 +120,11 @@ export default function Testimonials() {
     const dy = touchStartY.current - e.changedTouches[0].clientY
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
       const next = dx > 0
-        ? (active + 1) % STORIES.length
-        : (active - 1 + STORIES.length) % STORIES.length
+        ? (active + 1) % activeStories.length
+        : (active - 1 + activeStories.length) % activeStories.length
       selectStory(next)
     }
-  }, [active, selectStory])
+  }, [active, selectStory, activeStories.length])
 
   return (
     <>
@@ -219,7 +242,7 @@ export default function Testimonials() {
 
           {/* Thumbnail strip - 2 col mobile, 4 col desktop */}
           <div data-animate="fade-up" className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {STORIES.map((s, i) => (
+            {activeStories.map((s, i) => (
               <button
                 key={s.name}
                 onClick={() => selectStory(i)}

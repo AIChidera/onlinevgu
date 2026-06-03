@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getMilestones } from '@/lib/sanity'
 
 // Placeholder — replace with '/images/about-hero-bg.jpg' when ready.
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80&auto=format&fit=crop'
@@ -104,7 +105,12 @@ const VALUES = [
   },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const sanityMilestones = await getMilestones()
+  const activeMilestones = sanityMilestones.length > 0
+    ? sanityMilestones.map(m => ({ year: String(m.year), event: m.event }))
+    : MILESTONES
+
   return (
     <div>
       <Breadcrumb items={[{ label: 'About VGU' }]} />
@@ -314,7 +320,7 @@ export default function AboutPage() {
               <div className="absolute left-[18px] top-2 bottom-2 w-px bg-neutral-200" aria-hidden="true" />
 
               <div className="flex flex-col gap-0">
-                {MILESTONES.map((m, i) => (
+                {activeMilestones.map((m, i) => (
                   <div
                     key={m.year}
                     data-animate="fade-up"
@@ -324,7 +330,7 @@ export default function AboutPage() {
                     {/* Dot */}
                     <div className={[
                       'relative z-10 flex-none w-9 h-9 rounded-full border-2 flex items-center justify-center font-heading font-black text-[10px] transition-all',
-                      i === MILESTONES.length - 1
+                      i === activeMilestones.length - 1
                         ? 'border-vgu-red bg-vgu-red text-white shadow-[0_0_0_4px_rgba(192,64,54,0.15)]'
                         : 'border-neutral-200 bg-white text-neutral-400',
                     ].join(' ')}>

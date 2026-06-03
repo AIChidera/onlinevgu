@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { IconHeadset, IconPlus } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
+import type { SanityFaq } from '@/lib/sanity'
 
 const FAQS = [
   {
@@ -41,7 +42,10 @@ const FAQS = [
 
 const FAQ_STRIP = ['No entrance exam', 'UGC recognised', '100% online']
 
-export default function FaqSection() {
+export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq[] }) {
+  const activeFaqs = sanityFaqs.length > 0
+    ? sanityFaqs.map(f => ({ q: f.question, a: f.answer }))
+    : FAQS
   const [openIndex, setOpenIndex] = useState<number>(0)
 
   return (
@@ -76,7 +80,7 @@ export default function FaqSection() {
 
         {/* Accordion */}
         <div data-animate="fade-up" style={{ animationDelay: '150ms' }} className="flex flex-col divide-y divide-neutral-200 rounded-2xl overflow-hidden border border-neutral-200 bg-white shadow-sm">
-          {FAQS.map((faq, i) => (
+          {activeFaqs.map((faq, i) => (
             <div
               key={i}
               className={[

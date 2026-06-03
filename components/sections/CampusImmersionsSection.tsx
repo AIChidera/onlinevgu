@@ -12,6 +12,30 @@ import {
   IconChevronRight,
 } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
+import type { SanityCampusEvent } from '@/lib/sanity'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyIcon = React.ComponentType<any>
+
+const THEME_MAP: Record<string, { gradient: string; Icon: AnyIcon }> = {
+  blue:   { gradient: 'from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a]', Icon: IconBriefcase  },
+  orange: { gradient: 'from-[#b45309] via-[#92400e] to-[#78350f]', Icon: IconCertificate },
+  green:  { gradient: 'from-[#059669] via-[#047857] to-[#065f46]', Icon: IconUsers       },
+  purple: { gradient: 'from-[#7c3aed] via-[#6d28d9] to-[#4c1d95]', Icon: IconFlask       },
+  red:    { gradient: 'from-[#C04036] via-[#9b2f26] to-[#821a12]', Icon: IconStar        },
+}
+
+function fromSanityEvent(e: SanityCampusEvent): Card {
+  const theme = THEME_MAP[e.colorTheme] ?? THEME_MAP.blue
+  return {
+    title:    e.title,
+    subtitle: e.subtitle ?? '',
+    tags:     e.tags ?? [],
+    gradient: theme.gradient,
+    Icon:     theme.Icon,
+    image:    e.photoUrl ?? undefined,
+  }
+}
 
 interface Card {
   title:    string
@@ -83,11 +107,12 @@ function getTransform(offset: number) {
   }
 }
 
-export default function CampusImmersionsSection() {
+export default function CampusImmersionsSection({ events: sanityEvents = [] }: { events?: SanityCampusEvent[] }) {
+  const activeCards = sanityEvents.length > 0 ? sanityEvents.map(fromSanityEvent) : CARDS
   const [active, setActive]         = useState(0)
   const [paused, setPaused]         = useState(false)
   const [advanceKey, setAdvanceKey] = useState(0)
-  const total = CARDS.length
+  const total = activeCards.length
 
   // Auto-advance on desktop (pauses on hover)
   useEffect(() => {
@@ -134,7 +159,7 @@ export default function CampusImmersionsSection() {
 
       {/* ── MOBILE: native CSS snap scroll (identical mechanism to Programs cards) ── */}
       <div className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
-        {CARDS.map((card) => (
+        {activeCards.map((card) => (
           <div
             key={card.title}
             className="snap-start flex-none w-[78vw] max-w-[300px] rounded-2xl overflow-hidden relative select-none"
@@ -183,7 +208,7 @@ export default function CampusImmersionsSection() {
         style={{ perspective: '1200px', perspectiveOrigin: 'center center' }}
       >
         <div className="relative" style={{ width: '320px', height: '420px' }}>
-          {CARDS.map((card, i) => {
+          {activeCards.map((card, i) => {
             const offset    = (i - active + total) % total
             const pos       = getTransform(offset)
             const clickable = offset === 1 || offset === 4
@@ -260,7 +285,7 @@ export default function CampusImmersionsSection() {
           </button>
 
           <div className="flex items-center gap-1">
-            {CARDS.map((_, i) => (
+            {activeCards.map((_, i) => (
               <button
                 key={i}
                 onClick={() => { setActive(i); setAdvanceKey((k) => k + 1) }}

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
+import { getSiteSettings } from '@/lib/sanity'
 
 const PROGRAM_LINKS = [
   { label: 'BBA',            href: '/programs/bba'            },
@@ -81,7 +82,19 @@ const SOCIALS = [
   },
 ]
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await getSiteSettings()
+
+  const phone        = settings?.phoneDisplay    || '1800 123 456'
+  const email        = settings?.admissionsEmail || 'admissions@onlinevgu.in'
+  const socialHrefs: Record<string, string> = {
+    LinkedIn:    settings?.socialLinkedIn  || '#',
+    Instagram:   settings?.socialInstagram || '#',
+    YouTube:     settings?.socialYouTube   || '#',
+    'Twitter / X': settings?.socialX      || '#',
+    Facebook:    settings?.socialFacebook  || '#',
+  }
+
   return (
     <footer className="bg-vgu-dark text-white/80 pt-16 pb-6 font-body">
         <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
@@ -104,7 +117,7 @@ export default function Footer() {
                 {SOCIALS.map((s) => (
                   <a
                     key={s.label}
-                    href={s.href}
+                    href={socialHrefs[s.label] ?? s.href}
                     aria-label={s.label}
                     className={[
                       'flex h-9 w-9 items-center justify-center rounded-full border border-white/15',
@@ -122,11 +135,11 @@ export default function Footer() {
               <div className="mt-6 flex flex-col gap-2.5 text-[13px] text-white/55">
                 <span className="flex items-center gap-2.5">
                   <IconPhone size={14} className="flex-none text-white/40" />
-                  1800 123 456 · Mon-Sat 9am-7pm IST
+                  {phone} · Mon-Sat 9am-7pm IST
                 </span>
                 <span className="flex items-center gap-2.5">
                   <IconMail size={14} className="flex-none text-white/40" />
-                  admissions@onlinevgu.in
+                  {email}
                 </span>
                 <a
                   href="https://maps.google.com/?q=Vivekananda+Global+University,+Jaipur,+Rajasthan+303012"
@@ -154,8 +167,13 @@ export default function Footer() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[12px] text-white/40">
             <span>© {new Date().getFullYear()} Vivekananda Global University. All rights reserved.</span>
             <div className="flex flex-wrap gap-5">
-              {['Privacy Policy', 'Terms of Use', 'Refund Policy', 'Disclaimer'].map((t) => (
-                <a key={t} href="#" className="hover:text-white/70 transition-colors">{t}</a>
+              {[
+                { label: 'Privacy Policy', href: '/privacy' },
+                { label: 'Terms of Use',   href: '#'        },
+                { label: 'Refund Policy',  href: '#'        },
+                { label: 'Disclaimer',     href: '#'        },
+              ].map((t) => (
+                <a key={t.label} href={t.href} className="hover:text-white/70 transition-colors">{t.label}</a>
               ))}
             </div>
           </div>

@@ -1,5 +1,26 @@
 import FacultyCarousel from './FacultyCarousel'
 import type { FacultyMember } from './FacultyCarousel'
+import { getFacultyByProgram, type SanityFaculty } from '@/lib/sanity'
+
+const GRAD: Record<string, string> = {
+  red:    'linear-gradient(160deg,#C04036 0%,#821a12 100%)',
+  blue:   'linear-gradient(160deg,#2563eb 0%,#1d4ed8 100%)',
+  purple: 'linear-gradient(160deg,#7c3aed 0%,#4c1d95 100%)',
+  amber:  'linear-gradient(160deg,#d97706 0%,#92400e 100%)',
+  green:  'linear-gradient(160deg,#059669 0%,#065f46 100%)',
+}
+
+function fromSanity(f: SanityFaculty): FacultyMember {
+  return {
+    initials:   f.initials || f.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(),
+    photoGrad:  GRAD[f.avatarColor] ?? GRAD.red,
+    photo:      f.photoUrl ?? undefined,
+    name:       f.name,
+    title:      f.title,
+    credential: f.credential,
+    slug:       f.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+  }
+}
 
 const R = 'linear-gradient(160deg,#C04036 0%,#821a12 100%)'
 const B = 'linear-gradient(160deg,#2563eb 0%,#1d4ed8 100%)'
@@ -149,8 +170,11 @@ const FACULTY_DATA: Record<string, FacultyMember[]> = {
   ],
 }
 
-export default function FacultySection({ slug }: { slug: string }) {
-  const faculty = FACULTY_DATA[slug]
+export default async function FacultySection({ slug }: { slug: string }) {
+  const sanityFaculty = await getFacultyByProgram(slug)
+  const faculty = sanityFaculty.length > 0
+    ? sanityFaculty.map(fromSanity)
+    : (FACULTY_DATA[slug] ?? [])
   if (!faculty || faculty.length === 0) return null
 
   return (
