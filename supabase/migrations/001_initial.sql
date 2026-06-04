@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS leads (
   utm_source      TEXT,
   utm_medium      TEXT,
   utm_campaign    TEXT,
+  intake          TEXT,
   ip_address      INET,
   status          TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'qualified', 'enrolled', 'lost'))
 );
@@ -21,6 +22,9 @@ CREATE TABLE IF NOT EXISTS leads (
 -- Backfill: if the table existed before the status column was added,
 -- CREATE TABLE IF NOT EXISTS above was a no-op and status is missing.
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'new';
+
+-- Backfill: intake was added after initial table creation.
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS intake TEXT;
 
 -- Index for common queries
 CREATE INDEX IF NOT EXISTS leads_created_at_idx ON leads (created_at DESC);

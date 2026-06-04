@@ -71,8 +71,8 @@ export default defineType({
     defineField({
       name: 'videoUrl',
       title: 'Video URL (optional)',
-      type: 'url',
-      description: 'YouTube or Vimeo link. If blank, the play button is decorative.',
+      type: 'string',
+      description: 'Full URL to YouTube or Vimeo video. E.g. "https://youtu.be/abc123". If blank, the play button is decorative.',
     }),
     defineField({
       name: 'showOnHomePage',

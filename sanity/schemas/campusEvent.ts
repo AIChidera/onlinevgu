@@ -26,7 +26,6 @@ export default defineType({
       of: [
         defineArrayMember({
           type: 'object',
-          name: 'tag',
           title: 'Tag',
           fields: [
             defineField({ name: 'label', title: 'Tag Text', type: 'string', description: 'E.g. "3 Days".' }),
