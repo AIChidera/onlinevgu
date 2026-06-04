@@ -1,3 +1,8 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
 /** @type {import('next').NextConfig} */
 const config = {
   compiler: {
@@ -6,7 +11,24 @@ const config = {
   images: {
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
-  webpack: (cfg) => {
+  webpack: (cfg, { isServer }) => {
+    if (!isServer) {
+      // Next.js 14 ships React 18.3-canary at next/dist/compiled/react and
+      // webpack resolves node_modules packages (like Sanity) to that copy.
+      // React 18 canary does not have useEffectEvent, so Sanity's compiled
+      // form components crash. Force all client-side modules to the project's
+      // React 19 to ensure a single consistent React instance with useEffectEvent.
+      cfg.resolve.alias = {
+        ...cfg.resolve.alias,
+        react: path.resolve(__dirname, 'node_modules/react'),
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+        // Redirect react/compiler-runtime to the third-party package so the
+        // Sanity studio initialises correctly (native react/compiler-runtime
+        // alone causes a load-time crash in the studio).
+        'react/compiler-runtime': path.resolve(__dirname, 'node_modules/react-compiler-runtime'),
+      }
+    }
+
     // Sanity v5 ESM chunks do `import { useEffectEvent } from 'react'`.
     // Webpack 5 cannot statically verify this named export because React 19
     // uses a conditional `module.exports = require(cjs/...)` pattern that
