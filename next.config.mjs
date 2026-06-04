@@ -7,11 +7,6 @@ const config = {
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
   webpack: (cfg) => {
-    cfg.resolve.alias = {
-      ...cfg.resolve.alias,
-      'react/compiler-runtime': 'react-compiler-runtime',
-    }
-
     // Sanity v5 ESM chunks do `import { useEffectEvent } from 'react'`.
     // Webpack 5 cannot statically verify this named export because React 19
     // uses a conditional `module.exports = require(cjs/...)` pattern that
