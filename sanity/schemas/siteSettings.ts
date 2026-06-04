@@ -4,8 +4,6 @@ export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
-  // No field groups — flat layout works better for non-technical staff
-  // and avoids a Sanity v5 crash when the singleton has no document yet.
   fields: [
     // ── Admissions ────────────────────────────────────────────────
     defineField({
@@ -34,7 +32,7 @@ export const siteSettings = defineType({
       name: 'whatsappNumber',
       title: 'WhatsApp Number (digits only, no spaces)',
       type: 'string',
-      description: 'Digits only — no + or spaces. E.g. "919876543210". Powers the WhatsApp chat button.',
+      description: 'Digits only, no + or spaces. E.g. "919876543210". Powers the WhatsApp chat button.',
     }),
     defineField({
       name: 'admissionsEmail',
@@ -106,35 +104,42 @@ export const siteSettings = defineType({
       initialValue: '2012',
     }),
 
-    // ── Social Media ──────────────────────────────────────────────
+    // ── Social Media (stored as plain strings, not url type) ───────
+    // The Sanity v5 url field validator crashes when opened in a direct
+    // editor with no pre-existing value. Using string type is equivalent
+    // for storage and avoids the issue.
     defineField({
       name: 'socialInstagram',
       title: 'Instagram URL',
-      type: 'url',
+      type: 'string',
+      description: 'Full URL including https://. E.g. "https://instagram.com/onlinevgu".',
     }),
     defineField({
       name: 'socialLinkedIn',
       title: 'LinkedIn URL',
-      type: 'url',
+      type: 'string',
+      description: 'Full URL including https://.',
     }),
     defineField({
       name: 'socialFacebook',
       title: 'Facebook URL',
-      type: 'url',
+      type: 'string',
+      description: 'Full URL including https://.',
     }),
     defineField({
       name: 'socialYouTube',
       title: 'YouTube URL',
-      type: 'url',
+      type: 'string',
+      description: 'Full URL including https://.',
     }),
     defineField({
       name: 'socialX',
       title: 'X (Twitter) URL',
-      type: 'url',
+      type: 'string',
+      description: 'Full URL including https://.',
     }),
   ],
   preview: {
-    select: { title: 'nextBatch' },
-    prepare: ({ title }) => ({ title: 'Site Settings', subtitle: `Next batch: ${title ?? 'not set'}` }),
+    prepare: () => ({ title: 'Site Settings', subtitle: 'Global site configuration' }),
   },
 })
