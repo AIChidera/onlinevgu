@@ -18,6 +18,10 @@ CREATE TABLE IF NOT EXISTS leads (
   status          TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'qualified', 'enrolled', 'lost'))
 );
 
+-- Backfill: if the table existed before the status column was added,
+-- CREATE TABLE IF NOT EXISTS above was a no-op and status is missing.
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'new';
+
 -- Index for common queries
 CREATE INDEX IF NOT EXISTS leads_created_at_idx ON leads (created_at DESC);
 CREATE INDEX IF NOT EXISTS leads_email_idx ON leads (email);
