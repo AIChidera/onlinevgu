@@ -1,14 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Nunito, Lato } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import FooterCTA from '@/components/sections/FooterCTA'
-import WhatsAppButton from '@/components/WhatsAppButton'
-import ScrollReveal from '@/components/ScrollReveal'
-import CounsellorModal from '@/components/ui/CounsellorModal'
-import ApplyModal from '@/components/ui/ApplyModal'
-import BrochureModal from '@/components/ui/BrochureModal'
+import SiteNav from '@/components/layout/SiteNav'
+import SiteFooter from '@/components/layout/SiteFooter'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -71,15 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${lato.variable}`}>
       <body className="font-body antialiased">
-        <Navbar />
+        <SiteNav />
         <main>{children}</main>
-        <FooterCTA />
-        <Footer />
-        <CounsellorModal />
-        <ApplyModal />
-        <BrochureModal />
-        <WhatsAppButton />
-        <ScrollReveal />
+        <SiteFooter />
       </body>
     </html>
   )

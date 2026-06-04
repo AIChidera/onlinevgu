@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const config = {
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
