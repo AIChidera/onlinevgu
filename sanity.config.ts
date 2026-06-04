@@ -26,6 +26,9 @@ export default defineConfig({
                 S.document()
                   .schemaType('siteSettings')
                   .documentId('siteSettings')
+                  // Explicit form view prevents a Sanity v5 crash when
+                  // the singleton document doesn't exist yet.
+                  .views([S.view.form()])
               ),
 
             S.divider(),
@@ -53,11 +56,6 @@ export default defineConfig({
 
             // ── About Page ────────────────────────────────────────
             S.documentTypeListItem('milestone').title('Milestones (About Page)'),
-
-            S.divider(),
-
-            // ── Blog ─────────────────────────────────────────────
-            S.documentTypeListItem('blogPost').title('Blog Posts'),
           ]),
     }),
 
