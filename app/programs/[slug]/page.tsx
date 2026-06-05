@@ -57,18 +57,15 @@ interface ProgramDetail {
 }
 
 const SEATS_FILLED: Record<string, number> = {
-  'mba':            89,
-  'mba-healthcare': 84,
-  'bca':            83,
-  'mca':            81,
-  'bba':            77,
-  'bcom':           74,
-  'mcom':           72,
-  'ba':             68,
-  'bsc':            66,
-  'ma':             64,
-  'mlib':           62,
-  'blib':           58,
+  'mba':    89,
+  'mba-if': 86,
+  'mca':    81,
+  'bca':    78,
+  'bba':    74,
+  'majmc':  70,
+  'ma':     67,
+  'msc':    64,
+  'ba':     61,
 }
 
 function getSeatsFilled(slug: string): number {
@@ -78,18 +75,15 @@ function getSeatsFilled(slug: string): number {
 // Placeholder hero images per program — replace with real assets when ready.
 // Programs without an entry fall back to DEFAULT_HERO_IMAGE.
 const HERO_IMAGES: Record<string, string> = {
-  'mba':            'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1400&q=80&auto=format&fit=crop',
-  'mba-healthcare': 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1400&q=80&auto=format&fit=crop',
-  'bca':            'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1400&q=80&auto=format&fit=crop',
-  'mca':            'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1400&q=80&auto=format&fit=crop',
-  'bba':            'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&q=80&auto=format&fit=crop',
-  'bcom':           'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1400&q=80&auto=format&fit=crop',
-  'mcom':           'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80&auto=format&fit=crop',
-  'ba':             'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop',
-  'ma':             'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&q=80&auto=format&fit=crop',
-  'bsc':            'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=1400&q=80&auto=format&fit=crop',
-  'mlib':           'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop',
-  'blib':           'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1400&q=80&auto=format&fit=crop',
+  'mba':    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1400&q=80&auto=format&fit=crop',
+  'mba-if': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80&auto=format&fit=crop',
+  'bca':    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1400&q=80&auto=format&fit=crop',
+  'mca':    'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1400&q=80&auto=format&fit=crop',
+  'bba':    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&q=80&auto=format&fit=crop',
+  'ba':     'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop',
+  'ma':     'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&q=80&auto=format&fit=crop',
+  'msc':    'https://images.unsplash.com/photo-1532094349884-543559c03d7f?w=1400&q=80&auto=format&fit=crop',
+  'majmc':  'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1400&q=80&auto=format&fit=crop',
 }
 const DEFAULT_HERO_IMAGE = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1400&q=80&auto=format&fit=crop'
 
@@ -97,9 +91,9 @@ const PROGRAMS: ProgramDetail[] = [
   {
     slug: 'mba', name: 'MBA', fullName: 'Master of Business Administration',
     level: 'pg', duration: '2 Years', semesters: 4,
-    feePerYear: '₹85,000/yr', totalFee: '₹1,70,000', emi: '₹7,084/month',
+    feePerYear: '₹75,000/yr', totalFee: '₹1,50,000', emi: '₹6,250/month',
     nextBatch: 'July 2026', popular: true,
-    description: "VGU's most sought-after postgraduate degree - designed for working professionals who want to lead, not just manage. You'll build strategic, financial, and leadership expertise through live weekend sessions, real-world case studies, and mentorship from senior industry executives.",
+    description: "VGU's most sought-after postgraduate degree - designed for working professionals who want to lead, not just manage. Build strategic, financial, and leadership expertise through live weekend sessions, real-world case studies, and mentorship from senior industry executives.",
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -108,164 +102,137 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       'Live weekend classes - attend from anywhere in India',
-      '6 specialisations: Finance, Marketing, HR, Operations, Analytics, International Business',
-      'Full Coursera licence - 7,000+ courses at zero extra cost',
+      '8 specialisations: Marketing, HR, Finance, Operations, Healthcare, Agri-Business, IT Management, International Business',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
       'Dedicated placement cell with 500+ hiring partners',
       'AI-proctored exams - appear from home, no exam centre needed',
       'Merit scholarships up to 50% available',
       'UGC-entitled degree - identical to an on-campus MBA certificate',
     ],
-    specialisations: ['Finance', 'Marketing', 'Human Resources', 'Operations Management', 'Business Analytics', 'International Business'],
-    careerRoles: ['Business Manager', 'Marketing Manager', 'Finance Analyst', 'HR Manager', 'Operations Head', 'Business Analyst', 'Product Manager', 'Entrepreneur'],
+    specialisations: ['Marketing', 'Human Resources', 'Finance', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
+    careerRoles: ['Business Manager', 'Finance Director', 'Marketing Manager', 'HR Manager', 'Operations Manager', 'Healthcare Administrator', 'IT Manager', 'International Business Manager'],
     avgSalaryAfter: '₹10-18 LPA',
-    topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'Grant Thornton', 'TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Bajaj Finserv', 'Kotak Mahindra Bank', 'Reliance Industries', 'Tata Group', 'Mahindra', 'Hindustan Unilever', 'ITC'],
+    topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Accenture', 'Amazon', 'HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Tata Group', 'Hindustan Unilever'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Principles of Management', 'Business Economics', 'Financial Accounting', 'Organisational Behaviour', 'Business Communication'] },
-        { label: 'Semester 2', subjects: ['Marketing Management', 'Human Resource Management', 'Business Statistics', 'Operations Management', 'Corporate Law'] },
+        { label: 'Semester 1', subjects: ['Managerial Economics', 'Quantitative Methods for Management', 'Accounting for Managers', 'Legal Aspects of Business', 'Management Concepts and Organizational Behaviour', 'Business Environment', 'Business Communication'] },
+        { label: 'Semester 2', subjects: ['Human Resource Management', 'Financial Management', 'Marketing Management', 'Research Methodology', 'Management Information System', 'International Business Management', 'Total Quality Management', 'Digital Marketing', 'Innovation & Design Thinking'] },
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Strategic Management', 'Specialisation Core I', 'Specialisation Core II', 'Business Research Methods', 'Entrepreneurship & Innovation'] },
-        { label: 'Semester 4', subjects: ['Specialisation Elective I', 'Specialisation Elective II', 'Capstone Project', 'Industry Internship'] },
+        { label: 'Semester 3', subjects: ['Project Management', 'Supply Chain Management', 'Strategic Management', 'Entrepreneurship & Innovation Management', 'Specialisation Electives'] },
+        { label: 'Semester 4', subjects: ['Research Project', 'Corporate Readiness', 'Indian Knowledge System', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
       ]},
     ],
   },
   {
     slug: 'mca', name: 'MCA', fullName: 'Master of Computer Applications',
     level: 'pg', duration: '2 Years', semesters: 4,
-    feePerYear: '₹75,000/yr', totalFee: '₹1,50,000',
+    feePerYear: '₹75,000/yr', totalFee: '₹1,50,000', emi: '₹6,250/month',
     nextBatch: 'July 2026',
-    description: 'A rigorous, industry-aligned MCA built for the modern tech landscape. Cover full-stack development, cloud computing, AI/ML, and cybersecurity - all while building real projects, competing in hackathons, and preparing for AWS certification.',
+    description: 'A rigorous, industry-aligned MCA built for the modern tech landscape. Cover programming fundamentals, machine learning, cloud computing, AI, and cybersecurity - all while building real projects, competing in hackathons, and preparing for cloud certifications.',
     eligibility: [
       "BCA, B.Sc (IT/CS/Mathematics), or any bachelor's with Mathematics at 10+2",
       'Minimum 50% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      'Industry-aligned curriculum: Python, Java, React, Node.js, AWS',
-      '4 specialisations: Data Science, Cloud Computing, AI/ML, Cybersecurity',
-      'Hackathons every semester with industry judges',
-      'AWS and cloud certification prep tracks',
+      'Industry-aligned curriculum: C, Java, Python, Machine Learning, Cloud, IoT, Blockchain',
+      '3 specialisations: AI & Data Science, Cloud Tech & Cybersecurity, Cloud Computing & Full Stack',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Hackathons and semester projects with industry judges',
+      'Cloud and cybersecurity certification prep tracks',
       'Dedicated tech placement cell',
-      'Full Coursera licence with Google, IBM, and Meta courses',
     ],
-    specialisations: ['Data Science', 'Cloud Computing', 'AI & Machine Learning', 'Cybersecurity'],
-    careerRoles: ['Software Engineer', 'Full-Stack Developer', 'Data Scientist', 'Cloud Architect', 'DevOps Engineer', 'Cybersecurity Analyst', 'AI/ML Engineer'],
+    specialisations: ['AI & Data Science', 'Cloud Tech & Cybersecurity', 'Cloud Computing & Full Stack'],
+    careerRoles: ['Software Developer', 'Data Scientist', 'Machine Learning Engineer', 'Cybersecurity Analyst', 'DevOps Engineer', 'Web Developer', 'Blockchain Developer', 'Database Administrator'],
     avgSalaryAfter: '₹6-14 LPA',
-    topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'Swiggy', 'Zomato', 'Paytm', 'PhonePe', 'LTIMindtree', 'Mphasis', 'Persistent Systems', 'Oracle', "Byju's", 'Reliance Industries', 'HDFC Bank'],
+    topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Oracle'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Python Programming', 'Data Structures & Algorithms', 'Database Management Systems', 'Computer Networks', 'Discrete Mathematics'] },
-        { label: 'Semester 2', subjects: ['Web Technologies (HTML/CSS/JS)', 'Operating Systems', 'Object-Oriented Programming (Java)', 'Software Engineering', 'Linux Fundamentals'] },
+        { label: 'Semester 1', subjects: ['Fundamental of Computer and Programming in C', 'Operating Systems', 'Database Management System', 'Software Engineering & Project Management', 'Virtualization & Cloud Technology', 'Web Technologies Lab', 'Mathematical Foundation for Computer Application'] },
+        { label: 'Semester 2', subjects: ['Object Oriented Programming using Java', 'Data Structures & Algorithms using C', 'Machine Learning with Python', 'Computer Networks', 'Linux & Shell Programming', 'Specialisation Elective I'] },
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Specialisation Core I', 'Specialisation Core II', 'Cloud Computing (AWS/Azure)', 'Machine Learning Fundamentals', 'Cybersecurity Essentials'] },
-        { label: 'Semester 4', subjects: ['Specialisation Elective I', 'Specialisation Elective II', 'Capstone Project', 'Hackathon & Industry Expo'] },
+        { label: 'Semester 3', subjects: ['Artificial Intelligence & Intelligent Agents', 'Big Data Analytics', 'Internet of Things', 'Cloud Security', 'Cryptography', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 4', subjects: ['Cloud Operations', 'Ethical Hacking', 'Blockchain', 'Business Intelligence', 'Major Project'] },
       ]},
     ],
   },
   {
-    slug: 'mcom', name: 'M.Com', fullName: 'Master of Commerce',
+    slug: 'mba-if', name: 'MBA-IF', fullName: 'MBA in International Finance',
     level: 'pg', duration: '2 Years', semesters: 4,
-    feePerYear: '₹55,000/yr', totalFee: '₹1,10,000',
+    feePerYear: '₹1,20,000/yr', totalFee: '₹2,40,000', emi: '₹10,000/month',
     nextBatch: 'July 2026',
-    description: 'A deep-dive into advanced accounting, taxation, financial markets, and corporate law - built for commerce graduates targeting senior finance roles, CA/CMA preparation, or a research career in commerce.',
+    description: 'A specialised 2-year online MBA focused entirely on international finance - with integrated ACCA, CMA, and FM professional certification tracks available at 60% lower cost than standalone certification. Built for finance professionals who want a global edge.',
     eligibility: [
-      'B.Com or equivalent from a UGC-recognised university',
+      "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
+      'Background in Commerce or Finance preferred but not mandatory',
       'No entrance exam required',
     ],
     highlights: [
-      'Advanced accounting and audit standards',
-      'Direct and indirect taxation (GST, income tax)',
-      'Financial markets, derivatives, and investment analysis',
-      'Corporate law and governance modules',
-      'CA/CMA exam prep support',
-      'Industry case studies and live projects',
+      'Integrated ACCA, CMA & FM professional certification tracks',
+      'Save 60% vs standalone ACCA/CMA certification costs',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Faculty with CFA and international banking experience',
+      'AI for Finance module in the final semester',
+      'UGC-entitled MBA with international finance specialisation',
     ],
-    specialisations: ['Finance', 'Accounting & Taxation', 'Business Management'],
-    careerRoles: ['Senior Accountant', 'Tax Consultant', 'Financial Analyst', 'Audit Manager', 'Finance Controller', 'Investment Analyst'],
-    avgSalaryAfter: '₹5-10 LPA',
-    topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'Grant Thornton', 'HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Kotak Mahindra Bank', 'Bajaj Finserv', 'HDFC Life', 'ICICI Prudential', 'TCS', 'Infosys', 'Wipro', 'Reliance Industries', 'Tata Group', 'Hindustan Unilever', 'ITC', 'Amazon', 'Accenture', 'Mahindra', "Byju's"],
+    specialisations: ['ACCA Track', 'CMA Track', 'FM Track'],
+    careerRoles: ['CFO', 'Finance Director', 'Investment Analyst', 'Portfolio Manager', 'Financial Analyst', 'Risk Manager', 'Treasury Analyst', 'Forex Trader'],
+    avgSalaryAfter: '₹12-22 LPA',
+    topHirers: ['HSBC', 'Standard Chartered', 'Citibank', 'JP Morgan', 'ICICI Bank', 'Kotak Mahindra', 'Deloitte', 'KPMG', 'EY', 'PwC'],
+    curriculum: [
+      { year: 'Year 1', semesters: [
+        { label: 'Semester 1', subjects: ['Managerial Economics', 'Managerial Practices and Organizational Behaviour', 'Business & Technology', 'Marketing Management', 'Financial Accounting', 'Strategic Management Accounting', 'Operations and Production Management'] },
+        { label: 'Semester 2', subjects: ['Introduction to Research Method', 'Corporate and Business Law', 'Corporate Management I', 'Specialisation Elective 1', 'Specialisation Elective 2', 'Specialisation Elective 3'] },
+      ]},
+      { year: 'Year 2', semesters: [
+        { label: 'Semester 3', subjects: ['Financial Management for Managers', 'Corporate Management II', 'Human Resource Management', 'Specialisation Elective 4', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
+        { label: 'Semester 4', subjects: ['AI for Finance', 'Taxation', 'Corporate Management III', 'Specialisation Elective 7', 'Specialisation Elective 8', 'Specialisation Elective 9'] },
+      ]},
+    ],
   },
   {
-    slug: 'ma', name: 'MA', fullName: 'Master of Arts',
+    slug: 'ma', name: 'MA', fullName: 'Master of Arts in English',
     level: 'pg', duration: '2 Years', semesters: 4,
-    feePerYear: '₹50,000/yr', totalFee: '₹1,00,000',
+    feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A research-oriented postgraduate arts degree ideal for UGC-NET aspirants, civil services candidates, and academics - with specialisations across English, Economics, Political Science, and Sociology.',
+    description: 'A specialised MA in English Literature from VGU - ideal for UGC-NET aspirants, civil services candidates, and those pursuing teaching or academic careers. Comprehensive coverage of British, American, and Indian writing in English with a full dissertation in the final semester.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      '4 specialisations: English, Economics, Political Science, Sociology',
-      'UGC-NET and SLET exam prep guidance',
-      'Research methodology and academic writing training',
-      'Dissertation and thesis supervision',
-      'Faculty with active research publications',
-      'Strong foundation for civil services and law',
-    ],
-    specialisations: ['English', 'Economics', 'Political Science', 'Sociology'],
-    careerRoles: ['Assistant Professor', 'Research Analyst', 'Civil Services Officer', 'Journalist', 'Policy Analyst', 'Content Strategist'],
-    avgSalaryAfter: '₹4-8 LPA',
-    topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'State PSCs', 'Deloitte', 'KPMG', 'TCS', 'Infosys', 'Amazon', "Byju's", 'Reliance Industries', 'Tata Group', 'Mahindra', 'Hindustan Unilever', 'ITC', 'HDFC Bank', 'ICICI Bank', 'SBI', 'Accenture', 'Wipro', 'NGOs & Think Tanks', 'Flipkart'],
-  },
-  {
-    slug: 'mlib', name: 'M.Lib', fullName: 'Master of Library Science',
-    level: 'pg', duration: '1 Year', semesters: 2,
-    feePerYear: '₹40,000/yr', totalFee: '₹40,000',
-    nextBatch: 'July 2026',
-    description: 'Advanced library and information science for professionals seeking senior positions in academic libraries, public institutions, and digital archives.',
-    eligibility: [
-      'B.Lib or B.Lib.I.Sc from a UGC-recognised university',
-      'Minimum 50% aggregate marks',
-      'No entrance exam required',
-    ],
-    highlights: [
-      'Digital library management and information systems',
-      'Archival science and preservation methods',
-      'Information retrieval and advanced cataloguing',
-      'Research methodology in library science',
-      'Qualifies for senior librarian and director roles',
+      'Specialised MA in English - UGC-NET aligned curriculum',
+      'British, American, and Indian Literature in English covered across all four semesters',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Full dissertation in Semester 4 under faculty supervision',
+      'Language & Linguistics modules in every semester',
+      'Strong preparation for civil services and academic careers',
     ],
     specialisations: [],
-    careerRoles: ['Senior Librarian', 'Digital Archivist', 'Information Specialist', 'Library Director', 'Knowledge Manager'],
-    avgSalaryAfter: '₹4-7 LPA',
-    topHirers: ['University Libraries', 'National Library', 'INFLIBNET', 'DELNET', 'State Archives', 'Government Archives', 'School Libraries', 'College Libraries', 'ISRO', 'ICAR', 'NITI Aayog', 'TCS', 'Infosys', 'Amazon', 'Reliance Industries', 'Tata Group', 'HDFC Bank', 'ICICI Bank', 'KPMG', 'Deloitte', "Byju's", 'Accenture', 'Wipro', 'HCL'],
-  },
-  {
-    slug: 'mba-healthcare', name: 'Healthcare MBA', fullName: 'MBA in Healthcare Management',
-    level: 'pg', duration: '2 Years', semesters: 4,
-    feePerYear: '₹90,000/yr', totalFee: '₹1,80,000',
-    nextBatch: 'July 2026',
-    description: "An MBA purpose-built for healthcare professionals - blending core management with hospital administration, health policy, pharma operations, and medical finance. Designed for MBBS, BDS, nursing, and allied health graduates who want to lead healthcare organisations.",
-    eligibility: [
-      "Any bachelor's degree from a UGC-recognised university",
-      'Minimum 50% aggregate marks',
-      'Preferred: MBBS, BDS, BPT, B.Sc Nursing, BHMS, or allied health background',
-      'No entrance exam required',
+    careerRoles: ['Content Writer', 'Copywriter', 'Editor', 'Proofreader', 'Lecturer', 'UGC-NET Qualified Teacher', 'Civil Services Officer', 'Researcher'],
+    avgSalaryAfter: '₹4-8 LPA',
+    topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'State PSCs', 'Universities', 'Think Tanks', 'NGOs'],
+    curriculum: [
+      { year: 'Year 1', semesters: [
+        { label: 'Semester 1', subjects: ['Language & Communication Skills I', 'Chaucer and Sixteenth Century Literature', 'Eighteenth and Nineteenth Century Literature', 'Nineteenth Century Literature I', 'American Literature I', 'Language & Linguistics I'] },
+        { label: 'Semester 2', subjects: ['Language & Communication Skills II', 'Seventeenth Century Literature', 'Eighteenth Century Literature II', 'Nineteenth Century Literature II', 'American Literature II', 'Language & Linguistics II'] },
+      ]},
+      { year: 'Year 2', semesters: [
+        { label: 'Semester 3', subjects: ['Literary Criticism and Theory I', 'Twentieth Century Literature I', 'Indian Writing in English I', 'Nineteenth Century Literature III', 'American Literature III', 'Language & Linguistics III'] },
+        { label: 'Semester 4', subjects: ['Literary Theory and Criticism II', 'Twentieth Century Literature II', 'Indian Writing in English II', 'Dissertation'] },
+      ]},
     ],
-    highlights: [
-      'Hospital tie-ups for live case studies and projects',
-      'Health policy, economics, and medical finance modules',
-      '4 specialisations: Hospital Administration, Healthcare Operations, Pharma Management, Health Insurance',
-      'CMO and CXO-led live sessions',
-      'Dedicated healthcare placement cell',
-      'Full Coursera access with healthcare leadership tracks',
-    ],
-    specialisations: ['Hospital Administration', 'Healthcare Operations', 'Pharma Management', 'Health Insurance'],
-    careerRoles: ['Hospital Administrator', 'Healthcare Manager', 'Pharma Operations Head', 'Health Insurance Manager', 'Clinical Operations Lead', 'Healthcare Consultant'],
-    avgSalaryAfter: '₹8-14 LPA',
-    topHirers: ['Apollo Hospitals', 'Fortis Healthcare', 'Max Healthcare', 'Cipla', 'Sun Pharma', "Dr. Reddy's", 'Manipal Hospitals', 'Narayana Health', 'Medanta', 'HDFC Life', 'Deloitte', 'KPMG', 'EY', 'Accenture', 'TCS', 'Wipro', 'HCL', 'IBM', 'HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Tata Group', 'Mahindra', 'Bajaj Finserv'],
   },
   {
     slug: 'bba', name: 'BBA', fullName: 'Bachelor of Business Administration',
     level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹55,000/yr', totalFee: '₹1,65,000',
+    feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: 'A comprehensive undergraduate business degree that builds strong management fundamentals alongside practical entrepreneurial skills - ideal for fresh graduates who want to fast-track into a business career or launch their own venture.',
+    description: 'A comprehensive undergraduate business degree that builds strong management fundamentals - ideal for fresh graduates who want to fast-track into a business career or launch their own venture. Choose from General Management, Digital Marketing, Retail Management, or FinTech specialisation tracks.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream - Science, Commerce, or Arts',
@@ -273,38 +240,38 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      'Core business curriculum: Management, Finance, Marketing, Operations',
-      'Live startup simulation projects each year',
+      '4 specialisations: General Management, Digital Marketing, Retail Management, FinTech',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Research Project and Corporate Readiness modules in final year',
       'Industry mentors from Fortune 500 companies and startups',
-      'Full Coursera licence with 7,000+ professional courses',
       'Dedicated placement support from day one',
-      '4 specialisations: Finance, Marketing, HR, International Business',
+      'UGC-entitled BBA - valid for MBA admission at any Indian university',
     ],
-    specialisations: ['Finance', 'Marketing', 'Human Resources', 'International Business'],
-    careerRoles: ['Business Development Executive', 'Marketing Analyst', 'HR Associate', 'Operations Executive', 'Management Trainee', 'Entrepreneur'],
+    specialisations: ['General Management', 'Digital Marketing', 'Retail Management', 'FinTech'],
+    careerRoles: ['Business Analyst', 'Management Trainee', 'Customer Relationship Manager', 'Digital Marketing Executive', 'SEO/SEM Specialist', 'Retail Store Manager', 'FinTech Associate', 'Operations Coordinator'],
     avgSalaryAfter: '₹4-8 LPA',
-    topHirers: ['Reliance Industries', 'Tata Group', 'Mahindra', 'HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Kotak Mahindra Bank', 'Bajaj Finserv', 'Deloitte', 'KPMG', 'EY', 'Accenture', 'Amazon', 'Flipkart', 'Hindustan Unilever', 'ITC', "Byju's", 'TCS', 'Infosys', 'Wipro', 'HDFC Life', 'Mphasis', 'Persistent Systems'],
+    topHirers: ['Reliance Industries', 'Tata Group', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Deloitte', 'KPMG', 'Amazon', 'Flipkart', 'Hindustan Unilever', 'ITC', 'TCS', 'Infosys', 'Wipro'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Principles of Management', 'Business Mathematics', 'Financial Accounting', 'Business Communication', 'Microeconomics'] },
-        { label: 'Semester 2', subjects: ['Marketing Fundamentals', 'Business Law', 'Macroeconomics', 'Organisational Behaviour', 'IT for Business'] },
+        { label: 'Semester 1', subjects: ['Fundamentals of Management', 'Business Accounting', 'Business Law', 'Entrepreneurship Development', 'Business Communication', 'Environmental Science', 'Specialisation Elective 1'] },
+        { label: 'Semester 2', subjects: ['Managerial Economics', 'Statistics for Business Decision', 'Organizational Behavior', 'Human Resource Management', 'Principles of Marketing', 'Business Analytics', 'Specialisation Elective 2'] },
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Financial Management', 'Human Resource Management', 'Operations Management', 'Business Research Methods', 'Specialisation Core I'] },
-        { label: 'Semester 4', subjects: ['Strategic Management', 'Entrepreneurship', 'Specialisation Core II', 'Business Analytics Basics'] },
+        { label: 'Semester 3', subjects: ['Macroeconomics for Managers', 'Business Environment', 'System Analysis and Design', 'Business Ethics and CSR', 'Business Policy and Strategic Management', 'Specialisation Elective 3', 'Specialisation Elective 4'] },
+        { label: 'Semester 4', subjects: ['Business Research Methods', 'Operations Research', 'E-Commerce', 'Cyber Crimes and Law', 'International Business', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
       ]},
       { year: 'Year 3', semesters: [
-        { label: 'Semester 5', subjects: ['Specialisation Elective I', 'Specialisation Elective II', 'International Business', 'Project Management'] },
-        { label: 'Semester 6', subjects: ['Industry Internship', 'Capstone Business Simulation', 'Leadership & Ethics', 'Startup Studio'] },
+        { label: 'Semester 5', subjects: ['Quantitative Techniques', 'Production and Operation Management', 'Enterprise Resource Planning', 'Total Quality Management', 'Project Management', 'Specialisation Elective 7', 'Specialisation Elective 8'] },
+        { label: 'Semester 6', subjects: ['Research Project', 'Corporate Tax Management', 'Corporate Readiness', 'Specialisation Elective 9', 'Specialisation Elective 10'] },
       ]},
     ],
   },
   {
     slug: 'bca', name: 'BCA', fullName: 'Bachelor of Computer Applications',
     level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹60,000/yr', totalFee: '₹1,80,000',
+    feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: "Build a career in software development with hands-on coding, modern frameworks, and real-world projects. VGU's BCA covers the full development stack - from programming fundamentals to cloud and AI - preparing you for immediate employment or higher studies.",
+    description: "Build a career in software development with hands-on coding labs every semester and real-world projects. VGU's BCA offers 6 specialisation tracks including AI, Blockchain, Cloud & Information Security, UX Design, and Data Science.",
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Mathematics or Computer Science preferred',
@@ -312,63 +279,38 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      'Full-stack curriculum: Python, Java, React, Node.js',
-      '4 specialisations: Data Science, Cloud Computing, Cybersecurity, Software Engineering',
-      'Hackathons and a capstone project in the final year',
-      'Open-source contribution programme',
-      'AWS fundamentals and cloud certification prep',
-      'Tech internship placement support',
+      '6 specialisation tracks: General, UX Design, Data Science, Cloud & Information Security, Blockchain, Artificial Intelligence',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Hands-on programming labs every semester - C, C++, Java, Python, DBMS, Graphics',
+      'Major Project in final semester for portfolio and placement',
+      'Indian Knowledge System and Universal Human Values modules',
+      'UGC-entitled BCA - qualifies for MCA admission at any university',
     ],
-    specialisations: ['Data Science', 'Cloud Computing', 'Cybersecurity', 'Software Engineering'],
-    careerRoles: ['Junior Software Developer', 'Frontend Developer', 'Backend Developer', 'Data Analyst', 'Web Developer', 'IT Support Specialist'],
-    avgSalaryAfter: '₹10-15 LPA',
-    topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'Swiggy', 'Zomato', 'Paytm', 'PhonePe', 'LTIMindtree', 'Mphasis', 'Persistent Systems', 'Oracle', "Byju's", 'Reliance Industries', 'HDFC Bank'],
+    specialisations: ['General', 'UX Design', 'Data Science', 'Cloud Technology & Information Security', 'Blockchain Technology', 'Artificial Intelligence'],
+    careerRoles: ['Software Developer', 'AI Developer', 'ML Engineer', 'Data Analyst', 'UX/UI Designer', 'Blockchain Developer', 'Cloud Engineer', 'Cybersecurity Analyst', 'Web Application Developer'],
+    avgSalaryAfter: '₹4-9 LPA',
+    topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Mphasis', 'Oracle'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Programming in C', 'Mathematics I', 'Web Design Basics (HTML/CSS)', 'Digital Fundamentals', 'English Communication'] },
-        { label: 'Semester 2', subjects: ['Python Programming', 'Mathematics II', 'Database Concepts (SQL)', 'Data Structures', 'Operating Systems'] },
+        { label: 'Semester 1', subjects: ['Basic Mathematics', 'Fundamental of C', 'Basic Electronics', 'Principle of Programming Languages', 'Fundamentals of C Lab', 'PC Software and Automation', 'Specialisation Elective 1'] },
+        { label: 'Semester 2', subjects: ['Object Oriented Programming with C++', 'Data Structures and Algorithms', 'Management Information System', 'OOP with C++ Lab', 'Data Structures Lab', 'Soft Skill and Professional Aptitude', 'Specialisation Elective 2'] },
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Java OOP', 'Computer Networks', 'Frontend Development (React)', 'Software Engineering', 'Specialisation Core I'] },
-        { label: 'Semester 4', subjects: ['Backend Development (Node.js)', 'Cloud Computing Basics (AWS)', 'Algorithms', 'Linux & Shell Scripting'] },
+        { label: 'Semester 3', subjects: ['Database Management Systems', 'Computer Networks', 'Internet and Web Application', 'DBMS Lab', 'Internet & Web Programming Lab', 'Specialisation Elective 3', 'Specialisation Elective 4'] },
+        { label: 'Semester 4', subjects: ['Programming in Java', 'Operating Systems', 'Computer Graphics and Visualization', 'Computer Graphics Lab', 'Programming in Java Lab', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
       ]},
       { year: 'Year 3', semesters: [
-        { label: 'Semester 5', subjects: ['Specialisation Elective I', 'Specialisation Elective II', 'DevOps & CI/CD', 'Open-Source Contribution Project'] },
-        { label: 'Semester 6', subjects: ['Capstone Full-Stack Project', 'Hackathon Expo', 'Tech Interview Prep', 'Industry Internship'] },
+        { label: 'Semester 5', subjects: ['Software Engineering', 'Software Engineering Lab', 'Python Programming', 'Python Lab', 'Project Formulation and Appraisal', 'Specialisation Elective 7', 'Specialisation Elective 8'] },
+        { label: 'Semester 6', subjects: ['Major Project', 'Specialisation Elective 9', 'Specialisation Elective 10', 'Indian Knowledge System', 'Universal Human Values', 'Automation Concepts and Techniques'] },
       ]},
     ],
-  },
-  {
-    slug: 'bcom', name: 'B.Com', fullName: 'Bachelor of Commerce',
-    level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹45,000/yr', totalFee: '₹1,35,000',
-    nextBatch: 'July 2026',
-    description: 'A solid foundation in accounting, finance, taxation, and business law - the most popular undergraduate commerce degree in India, now 100% online. Ideal for students preparing for CA articleship, banking careers, or corporate finance roles.',
-    eligibility: [
-      '10+2 or equivalent from any recognised board',
-      'Commerce, Science, or Arts stream accepted',
-      'Minimum 45% aggregate marks',
-      'No entrance exam required',
-    ],
-    highlights: [
-      'Core subjects: Financial Accounting, Business Law, Taxation, Economics',
-      'Tally, ERP, and accounting software hands-on training',
-      'ICAI articleship eligibility upon graduation',
-      '3 specialisations: Accounting & Finance, Business Management, Taxation',
-      'Electives in banking, insurance, and financial markets',
-      'Professional certificates via Coursera included',
-    ],
-    specialisations: ['Accounting & Finance', 'Business Management', 'Taxation'],
-    careerRoles: ['Accountant', 'Tax Consultant', 'Banking Officer', 'Finance Executive', 'CA Articleship', 'Audit Assistant'],
-    avgSalaryAfter: '₹3-7 LPA',
-    topHirers: ['HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Kotak Mahindra Bank', 'Bajaj Finserv', 'HDFC Life', 'ICICI Prudential', 'Deloitte', 'KPMG', 'EY', 'PwC', 'Grant Thornton', 'TCS', 'Infosys', 'Wipro', 'Reliance Industries', 'Tata Group', 'Mahindra', 'Hindustan Unilever', 'ITC', 'Amazon', 'Accenture', "Byju's"],
   },
   {
     slug: 'ba', name: 'BA', fullName: 'Bachelor of Arts',
     level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹40,000/yr', totalFee: '₹1,20,000',
+    feePerYear: '₹24,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A flexible, interdisciplinary undergraduate degree across English, Economics, Political Science, and Sociology - a strong academic foundation for civil services, law, journalism, academia, and the social sector.',
+    description: 'A flexible undergraduate degree with 8 specialisation streams - Economics, Political Science, English Literature, History, Psychology, and more. Strong academic foundation for civil services, law, journalism, and academia.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream accepted',
@@ -376,82 +318,114 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      '4 specialisations: English, Economics, Political Science, Sociology',
-      'Strong foundation for UPSC and state civil services',
-      'Academic writing and critical thinking curriculum',
-      'Electives in History, Public Administration, and Philosophy',
-      'Research project in the final year',
-      'Faculty with active research backgrounds',
+      '8 specialisation streams: Economics, Political Science, English Literature, History, Psychology, Public Policy, International Relations, Computer Applications',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Microsoft Office Practices and Visual Design Tool in Year 1',
+      'Computer Applications module in Year 3',
+      'Indian Knowledge System and Environmental Science curriculum',
+      'Strong foundation for UPSC, state civil services, and UGC-NET',
     ],
-    specialisations: ['English', 'Economics', 'Political Science', 'Sociology'],
-    careerRoles: ['Civil Services Officer (UPSC)', 'Journalist', 'Content Writer', 'Teacher', 'Social Worker', 'Policy Researcher'],
+    specialisations: ['Economics', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications', 'Psychology'],
+    careerRoles: ['Economic Analyst', 'Policy Analyst', 'ESG Analyst', 'Content Writer', 'Social Media Strategist', 'Editor', 'Civil Services Officer', 'UX Researcher', 'Data Analyst', 'Journalist'],
     avgSalaryAfter: '₹3-6 LPA',
-    topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'UPSC', 'State PSCs', 'Deloitte', 'KPMG', 'TCS', 'Infosys', 'Amazon', "Byju's", 'Reliance Industries', 'Tata Group', 'Hindustan Unilever', 'ITC', 'HDFC Bank', 'ICICI Bank', 'Accenture', 'Wipro', 'NGOs & Think Tanks', 'Flipkart', 'Mahindra'],
+    topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'UPSC', 'State PSCs', 'TCS', 'Amazon', 'Hindustan Unilever', 'NGOs & Think Tanks'],
+    curriculum: [
+      { year: 'Year 1', semesters: [
+        { label: 'Semester 1', subjects: ['English I', 'Microsoft Office Practices', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 2', subjects: ['English II', 'Visual Design Tool', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+      ]},
+      { year: 'Year 2', semesters: [
+        { label: 'Semester 3', subjects: ['Communication Skills', 'Entrepreneurship Development', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 4', subjects: ['Foundation of Mathematics', 'Universal Human Values', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+      ]},
+      { year: 'Year 3', semesters: [
+        { label: 'Semester 5', subjects: ['Elementary of Computer Applications', 'Computer Applications Lab', 'Specialisation Elective I', 'Specialisation Elective II'] },
+        { label: 'Semester 6', subjects: ['Environmental Science', 'Indian Knowledge System', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+      ]},
+    ],
   },
   {
-    slug: 'bsc', name: 'B.Sc', fullName: 'Bachelor of Science',
-    level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹50,000/yr', totalFee: '₹1,50,000',
+    slug: 'msc', name: 'M.Sc', fullName: 'Master of Science in Mathematics',
+    level: 'pg', duration: '2 Years', semesters: 4,
+    feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A science degree focused on Mathematics, Statistics, and Computer Science - ideal for students targeting data analytics, actuarial science, research roles, or a seamless pathway into MCA or M.Sc.',
+    description: 'A 2-year online M.Sc in Mathematics from VGU covering advanced pure and applied mathematics - from abstract algebra and topology to fluid mechanics, AI, and operations research. Ideal for UGC-NET, GATE, research careers, and quantitative roles in finance and tech.',
     eligibility: [
-      '10+2 with Science and Mathematics from any recognised board',
-      'Minimum 45% aggregate marks',
+      'B.Sc in Mathematics or related field from a UGC-recognised university',
+      'Minimum 50% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      '3 specialisations: Computer Science, Mathematics, Environmental Science',
-      'Data science and Python programming tracks',
-      'Statistics and probability for analytics careers',
-      'Research project in the final year',
-      'Strong pathway to MCA, M.Sc, or data roles',
-      'Coursera data analytics and science certificates included',
-    ],
-    specialisations: ['Computer Science', 'Mathematics', 'Environmental Science'],
-    careerRoles: ['Data Analyst', 'Research Associate', 'Statistician', 'Lab Technician', 'Environmental Consultant', 'IT Support'],
-    avgSalaryAfter: '₹3-7 LPA',
-    topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Accenture', 'Amazon', 'Cognizant', 'ISRO', 'ICAR', 'Google', 'Microsoft', 'Flipkart', "Byju's", 'Reliance Industries', 'Tata Group', "Dr. Reddy's", 'KPMG', 'Deloitte', 'HDFC Bank', 'ICICI Bank', 'Oracle', 'LTIMindtree', 'Environmental Labs'],
-  },
-  {
-    slug: 'blib', name: 'B.Lib', fullName: 'Bachelor of Library Science',
-    level: 'ug', duration: '1 Year', semesters: 2,
-    feePerYear: '₹35,000/yr', totalFee: '₹35,000',
-    nextBatch: 'July 2026',
-    description: 'A one-year professional qualification in library and information science - the standard entry credential for librarian positions in schools, colleges, public libraries, and government institutions.',
-    eligibility: [
-      "Any bachelor's degree from a recognised university",
-      'Minimum 45% aggregate marks',
-      'No entrance exam required',
-    ],
-    highlights: [
-      'Library management systems and cataloguing techniques',
-      'Digital library and e-resource management',
-      'School and college library administration',
-      'Standard qualification for government librarian recruitment',
-      'Direct pathway to M.Lib for career advancement',
+      'Advanced mathematics: Abstract Algebra, Topology, Integral Transforms, Tensor Analysis, Fluid Mechanics',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Programming modules: MAT-LAB, C++, and Artificial Intelligence in Semester 4',
+      'Research dissertation (Major Project) in Semester 4',
+      'Aligned with UGC-NET Mathematics syllabus',
+      'Preparation for quantitative analyst and data science roles',
     ],
     specialisations: [],
-    careerRoles: ['School Librarian', 'College Librarian', 'Public Library Assistant', 'Digital Archivist', 'Information Assistant'],
-    avgSalaryAfter: '₹2.5-5 LPA',
-    topHirers: ['School Libraries', 'College Libraries', 'University Libraries', 'National Library', 'INFLIBNET', 'DELNET', 'State Archives', 'Government Archives', 'ISRO', 'ICAR', 'NITI Aayog', 'TCS', 'Infosys', 'Amazon', 'Reliance Industries', 'Tata Group', 'HDFC Bank', 'ICICI Bank', "Byju's", 'Accenture', 'Wipro', 'Mahindra', 'KPMG', 'Deloitte'],
+    careerRoles: ['Data Analyst', 'Data Scientist', 'Actuarial Science Professional', 'Operations Research Analyst', 'Quantitative Analyst', 'Lecturer', 'Statistician'],
+    avgSalaryAfter: '₹5-10 LPA',
+    topHirers: ['Universities', 'RBI', 'ISRO', 'Insurance Companies', 'Financial Firms', 'NITI Aayog'],
+    curriculum: [
+      { year: 'Year 1', semesters: [
+        { label: 'Semester 1', subjects: ['Advanced Abstract Algebra', 'Topology', 'Integral Transforms', 'Special Functions', 'MAT-LAB', 'Object Oriented Programming with C++'] },
+        { label: 'Semester 2', subjects: ['Mathematical Programming', 'Advanced Numerical Analysis', 'Integral Equations and Calculus of Variations', 'Discrete Mathematical Structures', 'Numerical Analysis Lab', 'Computer System Organization'] },
+      ]},
+      { year: 'Year 2', semesters: [
+        { label: 'Semester 3', subjects: ['Advanced Linear Algebra', 'Advanced Differential Equations', 'Tensor Analysis', 'Fluid Mechanics', 'Mathematics in Multimedia', 'Mathematical Programming Lab'] },
+        { label: 'Semester 4', subjects: ['Major Project', 'Artificial Intelligence', 'Mathematical Statistics', 'Operation Research', 'Partial Differential Equations'] },
+      ]},
+    ],
+  },
+  {
+    slug: 'majmc', name: 'MAJMC', fullName: 'Master of Arts in Journalism & Mass Communication',
+    level: 'pg', duration: '2 Years', semesters: 4,
+    feePerYear: '₹36,000/yr', totalFee: '₹72,000',
+    nextBatch: 'July 2026',
+    description: 'A 2-year online MA in Journalism and Mass Communication from VGU - combining communication theory with hands-on production skills across print, radio, TV, digital journalism, advertising, and PR for the modern media industry.',
+    eligibility: [
+      "Any bachelor's degree from a UGC-recognised university",
+      'Minimum 50% aggregate marks',
+      'No entrance exam required',
+    ],
+    highlights: [
+      'Full-spectrum media training: print, radio, TV, digital, advertising, and PR',
+      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Photography and Video Production Techniques in Semester 3',
+      'Digital Journalism, Rural Journalism, and Environment Journalism in Semester 4',
+      'Research Project under faculty supervision in the final semester',
+      'UGC-entitled degree - recognised for journalism and media roles',
+    ],
+    specialisations: ['Digital Journalism', 'Broadcast Media', 'Public Relations & Corporate Communication', 'Multimedia Journalism'],
+    careerRoles: ['Reporter', 'Anchor', 'Podcast Creator', 'Video Producer', 'Advertising Copywriter', 'PR Manager', 'Digital Marketing Executive', 'Media Analyst'],
+    avgSalaryAfter: '₹4-9 LPA',
+    topHirers: ['Times Group', 'NDTV', 'Hindustan Times', 'Ogilvy', 'Weber Shandwick', 'Edelman', 'Republic TV', 'News18'],
+    curriculum: [
+      { year: 'Year 1', semesters: [
+        { label: 'Semester 1', subjects: ['Communication Theory', 'Journalism: Concepts & Principles', 'Print Media: Production Tools & Techniques', 'Media Laws & Ethics', 'Media Management', 'Writing For Media'] },
+        { label: 'Semester 2', subjects: ['Radio: Concepts & Principles', 'Advertising: Concepts & Principles', 'New Media', 'Media & Communication Research', 'TV & Film Appreciation', 'Business Journalism'] },
+      ]},
+      { year: 'Year 2', semesters: [
+        { label: 'Semester 3', subjects: ['Photography', 'Video Production Techniques & Programme Formats', 'Global Media', 'Development Communication', 'Public Relations & Corporate Communication', 'Multimedia Journalism'] },
+        { label: 'Semester 4', subjects: ['Digital Journalism', 'Media and Society', 'Research Project', 'Rural Journalism', 'Environment Journalism', 'Marketing Management'] },
+      ]},
+    ],
   },
 ]
 
 const PROGRAM_MAP = new Map(PROGRAMS.map(p => [p.slug, p]))
 
 const RELATED: Record<string, string[]> = {
-  'mba':            ['mca', 'bba', 'mcom'],
-  'mca':            ['bca', 'mba', 'bsc'],
-  'mba-healthcare': ['mba', 'mca', 'bca'],
-  'bca':            ['mca', 'bsc', 'bba'],
-  'bba':            ['bca', 'mba', 'bcom'],
-  'bcom':           ['bba', 'ba', 'mcom'],
-  'mcom':           ['bcom', 'mba', 'ma'],
-  'ma':             ['ba', 'mcom', 'mba'],
-  'ba':             ['bba', 'bcom', 'bsc'],
-  'bsc':            ['bca', 'ba', 'mca'],
-  'mlib':           ['blib', 'ma', 'ba'],
-  'blib':           ['mlib', 'ba', 'ma'],
+  'mba':    ['mba-if', 'mca', 'bba'],
+  'mba-if': ['mba', 'mca', 'bba'],
+  'mca':    ['bca', 'mba', 'msc'],
+  'bca':    ['mca', 'bba', 'msc'],
+  'bba':    ['mba', 'bca', 'ba'],
+  'ma':     ['ba', 'majmc', 'msc'],
+  'ba':     ['bba', 'bca', 'ma'],
+  'msc':    ['mca', 'bca', 'ma'],
+  'majmc':  ['ma', 'mba', 'bba'],
 }
 
 interface Props {
@@ -765,6 +739,38 @@ export default async function ProgramPage({ params }: Props) {
       </section>
 
       <ActivityTicker />
+
+      {/* ══ Coursera Premium Banner ══ */}
+      <section className="bg-[#0056D2] py-4 px-5 overflow-hidden">
+        <div className="mx-auto max-w-[1280px] flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-3.5">
+            <div className="flex-none w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+              <Image
+                src="/assets/trust/coursera.svg"
+                alt="Coursera"
+                width={28}
+                height={28}
+                className="rounded-md"
+              />
+            </div>
+            <div>
+              <p className="font-heading font-bold text-[14px] text-white leading-tight">
+                Coursera Premium — Included Free
+              </p>
+              <p className="text-[12px] font-body text-white/75 leading-snug">
+                7,000+ courses from Google, IBM, Meta &amp; top universities for the full duration of your program
+              </p>
+            </div>
+          </div>
+          <div className="hidden sm:block h-8 w-px bg-white/20 flex-none" />
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] font-body text-white/80">
+            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Stackable certifications</span>
+            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Learn at your pace</span>
+            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Zero extra cost</span>
+          </div>
+        </div>
+      </section>
+
       <PlacementStatsStrip slug={prog.slug} />
 
       {/* ══ Main content ══ */}
@@ -977,6 +983,17 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
 
       {/* Body */}
       <div className="p-6">
+
+        {/* Coursera Premium callout */}
+        <div className="flex items-center gap-3 rounded-xl bg-[#0056D2]/8 border border-[#0056D2]/20 px-4 py-3 mb-3">
+          <div className="w-8 h-8 rounded-lg bg-[#0056D2] flex items-center justify-center flex-none shadow-sm">
+            <Image src="/assets/trust/coursera.svg" alt="Coursera" width={22} height={22} className="rounded-md" />
+          </div>
+          <div>
+            <p className="font-heading font-bold text-[13px] text-neutral-900">Coursera Premium — Included Free</p>
+            <p className="text-[11px] font-body text-neutral-500">7,000+ courses for the full course duration</p>
+          </div>
+        </div>
 
         {/* Scholarship callout */}
         <div className="flex items-center gap-3 rounded-xl bg-vgu-yellow/10 border border-vgu-yellow/25 px-4 py-3 mb-4">

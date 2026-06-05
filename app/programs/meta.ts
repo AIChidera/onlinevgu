@@ -3,11 +3,9 @@ import {
   IconCode,
   IconBook2,
   IconFlask,
-  IconBooks,
   IconTrendingUp,
   IconDeviceLaptop,
   IconBuildingBank,
-  IconHeartRateMonitor,
   IconStar,
   IconPackage,
   IconUsers,
@@ -31,9 +29,9 @@ export interface ProgramMeta {
 
 export const PROGRAM_META: Record<string, ProgramMeta> = {
   // Management
-  bba:              { Icon: IconBriefcase,        iconBg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)'  },
-  mba:              { Icon: IconTrendingUp,       iconBg: 'linear-gradient(135deg,#C04036,#821a12)', badge: 'Most popular' },
-  'mba-healthcare': { Icon: IconHeartRateMonitor, iconBg: 'linear-gradient(135deg,#059669,#065f46)'  },
+  bba:      { Icon: IconBriefcase,    iconBg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)'  },
+  mba:      { Icon: IconTrendingUp,   iconBg: 'linear-gradient(135deg,#C04036,#821a12)', badge: 'Most popular' },
+  'mba-if': { Icon: IconBuildingBank, iconBg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)'  },
 
   // Information Technology
   bca:              { Icon: IconCode,             iconBg: 'linear-gradient(135deg,#7c3aed,#4c1d95)', badge: 'High demand' },
@@ -48,9 +46,10 @@ export const PROGRAM_META: Record<string, ProgramMeta> = {
   ma:               { Icon: IconBook2,            iconBg: 'linear-gradient(135deg,#7c3aed,#4c1d95)'  },
 
   // Science
-  bsc:              { Icon: IconFlask,            iconBg: 'linear-gradient(135deg,#059669,#065f46)'  },
-  blib:             { Icon: IconBooks,            iconBg: 'linear-gradient(135deg,#d97706,#92400e)'  },
-  mlib:             { Icon: IconBooks,            iconBg: 'linear-gradient(135deg,#d97706,#92400e)'  },
+  msc: { Icon: IconFlask, iconBg: 'linear-gradient(135deg,#059669,#065f46)' },
+
+  // Media & Journalism
+  majmc: { Icon: IconNews, iconBg: 'linear-gradient(135deg,#be185d,#9d174d)' },
 
   // Management - Certificates
   'pg-cert-digital-marketing': { Icon: IconStar,          iconBg: 'linear-gradient(135deg,#d97706,#b45309)', badge: 'Hot' },

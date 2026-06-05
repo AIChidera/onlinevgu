@@ -140,9 +140,9 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
           className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
           style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 100%)' }}
         />
-        {meta.badge && (
+        {meta?.badge && (
           <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
-            {meta.badge}
+            {meta?.badge}
           </span>
         )}
         <span
@@ -250,9 +250,9 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
         />
 
         {/* Top-left: badge */}
-        {meta.badge && (
+        {meta?.badge && (
           <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
-            {meta.badge}
+            {meta?.badge}
           </span>
         )}
 
