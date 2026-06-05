@@ -13,37 +13,9 @@ const config = {
   },
   webpack: (cfg, { isServer }) => {
     if (!isServer) {
-      // Next.js 14 does NOT use cfg.resolve.alias for React — it uses a
-      // NormalModuleReplacementPlugin that runs after webpack's alias phase
-      // and replaces all 'react' imports with 'next/dist/compiled/react'
-      // (React 18 canary).  Any change we make to cfg.resolve.alias is
-      // therefore overridden before the module is loaded.
-      //
-      // Solution: push our own NormalModuleReplacementPlugin after Next.js's
-      // plugins.  It intercepts the already-replaced 'next/dist/compiled/react'
-      // path and redirects it to our shim, which re-exports that same React 18
-      // module but with useEffectEvent polyfilled.  We skip the replacement
-      // when the issuer IS the shim itself to avoid a circular import loop.
-      const shimPath = path.resolve(__dirname, 'lib/react-18-shim.js')
-      const compiledReactRe = /next[\\/]dist[\\/]compiled[\\/]react[\\/]?index\.js$|next[\\/]dist[\\/]compiled[\\/]react$/
-
-      cfg.plugins.push({
-        apply(compiler) {
-          compiler.hooks.normalModuleFactory.tap('ReactShimPlugin', (factory) => {
-            factory.hooks.afterResolve.tap('ReactShimPlugin', (resolveData) => {
-              const res = resolveData.createData?.resource || ''
-              const issuer = resolveData.contextInfo?.issuer || ''
-              // Only redirect the bare React 18 canary entry-point, and
-              // never when the shim itself is the importer (avoids circular).
-              if (compiledReactRe.test(res) && !issuer.includes('react-18-shim')) {
-                resolveData.createData.resource = shimPath
-              }
-            })
-          })
-        },
-      })
-
-      // Keep compiler-runtime redirect so Sanity studio initialises correctly.
+      // Redirect react/compiler-runtime to the third-party package so the
+      // Sanity studio initialises correctly (native react/compiler-runtime
+      // alone causes a load-time crash in the studio).
       cfg.resolve.alias = {
         ...cfg.resolve.alias,
         'react/compiler-runtime': path.resolve(__dirname, 'node_modules/react-compiler-runtime'),
