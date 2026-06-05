@@ -27,8 +27,8 @@ export const resend = {
   },
 }
 
-export const FROM_ADDRESS   = 'Online VGU <noreply@onlinevgu.in>'
-export const ADMISSIONS_EMAIL = 'admissions@onlinevgu.in'
+export const FROM_ADDRESS   = 'Online VGU <onboarding@resend.dev>'
+export const ADMISSIONS_EMAIL = 'aachidera41@gmail.com'
 
 // ── Templates ──────────────────────────────────────────────────
 
