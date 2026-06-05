@@ -20,8 +20,11 @@ const config = {
       // React 19 to ensure a single consistent React instance with useEffectEvent.
       cfg.resolve.alias = {
         ...cfg.resolve.alias,
+        // Force all client-side modules (including Sanity) to use the project's
+        // React 19. Without this, webpack resolves node_modules imports to
+        // Next.js's bundled React 18 canary (next/dist/compiled/react) which
+        // lacks useEffectEvent, crashing Sanity's compiled form components.
         react: path.resolve(__dirname, 'node_modules/react'),
-        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
         // Redirect react/compiler-runtime to the third-party package so the
         // Sanity studio initialises correctly (native react/compiler-runtime
         // alone causes a load-time crash in the studio).
