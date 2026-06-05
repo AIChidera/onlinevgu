@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: 'Admissions', href: '/#how-to-apply' },
   { label: 'Placements', href: '/#impact'       },
   { label: 'About',      href: '/about'         },
-  { label: 'Blog',       href: '/blog'          },
+  { label: 'Blog',       href: 'https://blog.vgu.ac.in' },
 ]
 
 export default function Navbar() {

@@ -15,7 +15,7 @@ const COMPANY_LINKS = [
   { label: 'About VGU',      href: '/about'          },
   { label: 'Accreditations', href: '/#accreditation' },
   { label: 'Campus Life',    href: '/#campus'        },
-  { label: 'Blog',           href: '/blog'           },
+  { label: 'Blog',           href: 'https://blog.vgu.ac.in' },
   { label: 'Careers',        href: '/about#careers'  },
 ]
 

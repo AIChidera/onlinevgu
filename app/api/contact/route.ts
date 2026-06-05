@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ContactSchema } from '@/lib/validations'
+import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
 
 async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
@@ -49,6 +50,17 @@ export async function POST(req: NextRequest) {
   }
 
   const data = parsed.data
+
+  const supabase = createAdminClient()
+  if (supabase) {
+    await supabase.from('contacts').insert({
+      name:       data.name,
+      email:      data.email,
+      subject:    data.subject,
+      message:    data.message,
+      created_at: new Date().toISOString(),
+    })
+  }
 
   try {
     await Promise.allSettled([

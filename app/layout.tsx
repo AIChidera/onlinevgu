@@ -3,6 +3,7 @@ import { Nunito, Lato } from 'next/font/google'
 import './globals.css'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
+import Analytics from '@/components/Analytics'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -65,6 +66,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${lato.variable}`}>
       <body className="font-body antialiased">
+        {/* GTM noscript fallback — must be the first element inside body */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
+        <Analytics />
         <SiteNav />
         <main>{children}</main>
         <SiteFooter />

@@ -508,11 +508,25 @@ export default async function ProgramPage({ params }: Props) {
     },
   }
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',     item: 'https://onlinevgu.in' },
+      { '@type': 'ListItem', position: 2, name: 'Programs', item: 'https://onlinevgu.in/programs' },
+      { '@type': 'ListItem', position: 3, name: prog.name,  item: `https://onlinevgu.in/programs/${prog.slug}` },
+    ],
+  }
+
   return (
     <div className="pb-16 lg:pb-0">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <Breadcrumb items={[{ label: 'All Courses', href: '/programs' }, { label: prog.name }]} />

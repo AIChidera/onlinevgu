@@ -11,6 +11,20 @@ const config = {
   images: {
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/blog',
+        destination: 'https://blog.vgu.ac.in',
+        permanent: false,
+      },
+      {
+        source: '/blog/:path*',
+        destination: 'https://blog.vgu.ac.in/:path*',
+        permanent: false,
+      },
+    ]
+  },
   webpack: (cfg, { isServer }) => {
     if (!isServer) {
       // Redirect react/compiler-runtime to the third-party package so the
