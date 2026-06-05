@@ -13,7 +13,9 @@ import {
   getTestimonials,
   getHomeFaqs,
   getCampusEvents,
+  getAllPrograms,
 } from '@/lib/sanity'
+import { PROGRAMMES } from './programs/data'
 
 const CourseExperienceSection = dynamic(
   () => import('@/components/sections/CourseExperienceSection'),
@@ -59,11 +61,13 @@ function buildFaqJsonLd(faqs: SanityFaq[]) {
 }
 
 export default async function HomePage() {
-  const [testimonials, faqs, campusEvents] = await Promise.all([
+  const [testimonials, faqs, campusEvents, sanityPrograms] = await Promise.all([
     getTestimonials(),
     getHomeFaqs(),
     getCampusEvents(),
+    getAllPrograms(),
   ])
+  const programCount = sanityPrograms.length > 0 ? sanityPrograms.length : PROGRAMMES.length
 
   const faqJsonLd = buildFaqJsonLd(faqs)
 
@@ -82,7 +86,7 @@ export default async function HomePage() {
       <Hero />
       <TrustBar />
       <ProgramsSection />
-      <ImpactSection />
+      <ImpactSection programCount={programCount} />
       <CampusImmersionsSection events={campusEvents} />
       <Testimonials stories={testimonials} />
       <CourseExperienceSection />

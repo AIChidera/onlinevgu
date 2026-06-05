@@ -141,8 +141,8 @@ function AccordionItem({ faq, index }: { faq: FAQ; index: number }) {
   )
 }
 
-export default function ProgramFAQ({ slug }: { slug: string }) {
-  const faqs = FAQ_DATA[slug] ?? GENERIC
+export default function ProgramFAQ({ slug, faqs: propFaqs }: { slug: string; faqs?: { q: string; a: string }[] }) {
+  const faqs = (propFaqs && propFaqs.length > 0) ? propFaqs : (FAQ_DATA[slug] ?? GENERIC)
 
   return (
     <section className="bg-neutral-50 border-t border-neutral-200 py-16 px-5 md:px-8 lg:px-12">

@@ -153,8 +153,8 @@ function CompactCard({ t, index, visible }: { t: Testimonial; index: number; vis
   )
 }
 
-export default function ProgramTestimonials({ slug }: { slug: string }) {
-  const items = TESTIMONIALS[slug] ?? GENERIC
+export default function ProgramTestimonials({ slug, testimonials: propTestimonials }: { slug: string; testimonials?: Testimonial[] }) {
+  const items = (propTestimonials && propTestimonials.length > 0) ? propTestimonials : (TESTIMONIALS[slug] ?? GENERIC)
   const ref   = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 

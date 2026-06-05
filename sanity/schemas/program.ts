@@ -34,10 +34,30 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Undergraduate (UG - 10+2 entry)', value: 'ug' },
-          { title: 'Postgraduate (PG - degree entry)', value: 'pg' },
+          { title: 'Undergraduate (UG - 10+2 entry)', value: 'ug'   },
+          { title: 'Postgraduate (PG - degree entry)', value: 'pg'  },
+          { title: 'PG Certificate (Short course)',    value: 'cert' },
         ],
         layout: 'radio',
+      },
+      validation: R => R.required(),
+    }),
+    defineField({
+      name: 'discipline',
+      title: 'Discipline / Subject Area',
+      type: 'string',
+      description: 'Used to group programs in the programs grid.',
+      options: {
+        list: [
+          { title: 'Management',             value: 'Management'             },
+          { title: 'Information Technology', value: 'Information Technology' },
+          { title: 'Commerce',               value: 'Commerce'               },
+          { title: 'Arts',                   value: 'Arts'                   },
+          { title: 'Science',                value: 'Science'                },
+          { title: 'Data Science',           value: 'Data Science'           },
+          { title: 'Media & Journalism',     value: 'Media & Journalism'     },
+        ],
+        layout: 'dropdown',
       },
       validation: R => R.required(),
     }),

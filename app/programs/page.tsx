@@ -2,34 +2,49 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
-
-const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ProgramsGrid from './ProgramsGrid'
+import { getAllPrograms, getSiteSettings } from '@/lib/sanity'
 import { PROGRAMMES } from './data'
+import { NEXT_BATCH } from '@/lib/constants'
+
+const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
 
 export const metadata: Metadata = {
   title: 'All Programs',
   description:
-    'Browse 25 UGC-recognised online programs from Vivekananda Global University - degrees and certificates across Management, IT, Commerce, Arts, Science, Data Science, and Media. No entrance exam. 100% online.',
-  alternates: {
-    canonical: 'https://onlinevgu.in/programs',
-  },
+    'Browse UGC-recognised online programs from Vivekananda Global University - degrees and certificates across Management, IT, Commerce, Arts, Science, Data Science, and Media. No entrance exam. 100% online.',
+  alternates: { canonical: 'https://onlinevgu.in/programs' },
   openGraph: {
     title: 'All Programs | Online VGU',
-    description: 'Browse 25 UGC-recognised online programs. No entrance exam. 100% online.',
+    description: 'Browse UGC-recognised online programs. No entrance exam. 100% online.',
     url: 'https://onlinevgu.in/programs',
   },
 }
 
-export default function ProgramsPage() {
+export default async function ProgramsPage() {
+  const [sanityPrograms, settings] = await Promise.all([
+    getAllPrograms(),
+    getSiteSettings(),
+  ])
+
+  // Sanity is primary; fall back to static data until CMS is populated
+  const programmes = sanityPrograms.length > 0
+    ? sanityPrograms
+    : PROGRAMMES.map(p => ({ _id: p.slug, slug: p.slug, name: p.name, fullName: p.fullName, level: p.level, discipline: p.discipline, duration: p.duration, fee: p.fee, popular: p.popular, specialisations: p.specialisations, image: p.image }))
+
+  const nextBatch = settings?.nextBatch ?? NEXT_BATCH
+  const count = programmes.length
+  const ugCount   = programmes.filter(p => p.level === 'ug').length
+  const pgCount   = programmes.filter(p => p.level === 'pg').length
+  const certCount = programmes.filter(p => p.level === 'cert').length
+
   return (
     <>
       <Breadcrumb items={[{ label: 'All Courses' }]} />
 
       {/* ══ Hero ══ */}
       <section className="relative overflow-hidden bg-white py-14 px-5 md:px-8 lg:px-12 lg:py-20">
-        {/* Background image provision — set HERO_IMAGE_SRC above to activate */}
         {HERO_IMAGE_SRC && (
           <>
             <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
@@ -73,17 +88,17 @@ export default function ProgramsPage() {
               className={`anim-load-left mt-5 text-[15px] font-body leading-[1.7] max-w-[480px] lg:text-[17px] ${HERO_IMAGE_SRC ? 'text-white/75' : 'text-neutral-600'}`}
               style={{ animationDelay: '140ms' }}
             >
-              {PROGRAMMES.length} online programs across degrees and certificates. Management, IT, Data Science, Commerce, Arts, Science, and Media.
+              {count} online programs across degrees and certificates. Management, IT, Data Science, Commerce, Arts, Science, and Media.
               Earn a real, employer-recognised qualification from wherever you are.
             </p>
 
             {/* Stats */}
             <div className="anim-load-left mt-8 flex flex-wrap gap-8 md:gap-6" style={{ animationDelay: '210ms' }}>
               {[
-                { value: `${PROGRAMMES.filter(p => p.level === 'ug').length}`,   label: 'UG Degrees'    },
-                { value: `${PROGRAMMES.filter(p => p.level === 'pg').length}`,   label: 'PG Degrees'    },
-                { value: `${PROGRAMMES.filter(p => p.level === 'cert').length}`, label: 'Certificates'  },
-                { value: 'July 2026', label: 'Next batch'  },
+                { value: String(ugCount),   label: 'UG Degrees'   },
+                { value: String(pgCount),   label: 'PG Degrees'   },
+                { value: String(certCount), label: 'Certificates' },
+                { value: nextBatch,         label: 'Next batch'   },
               ].map(s => (
                 <div key={s.label}>
                   <div className={`font-heading font-black text-[30px] leading-none ${HERO_IMAGE_SRC ? 'text-vgu-yellow' : 'text-vgu-red'}`}>
@@ -113,25 +128,17 @@ export default function ProgramsPage() {
             </div>
           </div>
 
-          {/* ── Right: image placeholder + floating badges ── */}
+          {/* ── Right: floating badges ── */}
           <div className="hidden xl:flex items-center justify-center">
             <div className="relative w-full py-8">
               <div className="relative w-full aspect-[4/3]">
 
-                {/* Badge 1 - top-left: program count */}
-                <div
-                  className="absolute -top-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200"
-                  style={{ animationDelay: '0s' }}
-                >
-                  <div className="font-heading font-black text-[22px] leading-none text-vgu-red">{PROGRAMMES.length}</div>
+                <div className="absolute -top-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200" style={{ animationDelay: '0s' }}>
+                  <div className="font-heading font-black text-[22px] leading-none text-vgu-red">{count}</div>
                   <div className="mt-1 text-[11px] font-body text-neutral-600">Programs offered</div>
                 </div>
 
-                {/* Badge 2 - top-right: admissions open */}
-                <div
-                  className="absolute -top-3 right-5 z-10 animate-float-up flex items-center gap-2.5 rounded-2xl bg-white px-3.5 py-2.5 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200"
-                  style={{ animationDelay: '2s' }}
-                >
+                <div className="absolute -top-3 right-5 z-10 animate-float-up flex items-center gap-2.5 rounded-2xl bg-white px-3.5 py-2.5 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200" style={{ animationDelay: '2s' }}>
                   <span className="relative flex h-2.5 w-2.5 flex-none">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
@@ -142,20 +149,12 @@ export default function ProgramsPage() {
                   </div>
                 </div>
 
-                {/* Badge 3 - bottom-left: next batch */}
-                <div
-                  className="absolute -bottom-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200"
-                  style={{ animationDelay: '0.7s' }}
-                >
-                  <div className="font-heading font-black text-[17px] leading-none text-vgu-red">July 2026</div>
+                <div className="absolute -bottom-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.13)] border border-neutral-200" style={{ animationDelay: '0.7s' }}>
+                  <div className="font-heading font-black text-[17px] leading-none text-vgu-red">{nextBatch}</div>
                   <div className="mt-1 text-[11px] font-body text-neutral-600">Next batch starts</div>
                 </div>
 
-                {/* Badge 4 - bottom-right: MBA most popular */}
-                <div
-                  className="absolute -bottom-3 right-5 z-10 animate-float-up rounded-2xl bg-vgu-yellow px-4 py-3 shadow-[0_8px_28px_rgba(255,164,18,0.35)] border border-vgu-yellow"
-                  style={{ animationDelay: '1.3s' }}
-                >
+                <div className="absolute -bottom-3 right-5 z-10 animate-float-up rounded-2xl bg-vgu-yellow px-4 py-3 shadow-[0_8px_28px_rgba(255,164,18,0.35)] border border-vgu-yellow" style={{ animationDelay: '1.3s' }}>
                   <div className="font-heading font-black text-[17px] leading-none text-neutral-900">MBA ★</div>
                   <div className="mt-0.5 text-[11px] font-body font-semibold text-neutral-700">Most Popular</div>
                 </div>
@@ -168,7 +167,7 @@ export default function ProgramsPage() {
       </section>
 
       {/* ══ Grid ══ */}
-      <ProgramsGrid />
+      <ProgramsGrid programmes={programmes} nextBatch={nextBatch} />
     </>
   )
 }

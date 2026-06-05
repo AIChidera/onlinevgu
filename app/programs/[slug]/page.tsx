@@ -2,7 +2,12 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { PROGRAMMES } from '../data'
+import {
+  getAllPrograms,
+  getProgramBySlug,
+  getProgramFaqs,
+  getTestimonialsByProgram,
+} from '@/lib/sanity'
 import {
   IconChevronRight,
   IconClock,
@@ -433,7 +438,6 @@ const PROGRAMS: ProgramDetail[] = [
 ]
 
 const PROGRAM_MAP = new Map(PROGRAMS.map(p => [p.slug, p]))
-const PROG_IMAGE  = new Map(PROGRAMMES.map(p => [p.slug, p.image]))
 
 const RELATED: Record<string, string[]> = {
   'mba':            ['mca', 'bba', 'mcom'],
@@ -456,13 +460,20 @@ interface Props {
 
 export const dynamicParams = false
 
-export function generateStaticParams() {
-  return PROGRAMS.map(p => ({ slug: p.slug }))
+export async function generateStaticParams() {
+  const sanity = await getAllPrograms()
+  // Only degree programs have detail pages (certs open a counsellor modal)
+  const sanitySlug  = sanity.filter(p => p.level !== 'cert').map(p => ({ slug: p.slug }))
+  const fallback    = PROGRAMS.map(p => ({ slug: p.slug }))
+  // Union — Sanity takes priority; fallback fills gaps when CMS is empty
+  const seen = new Set<string>()
+  return [...sanitySlug, ...fallback].filter(s => seen.has(s.slug) ? false : (seen.add(s.slug), true))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const prog = PROGRAM_MAP.get(slug)
+  const sanityProg = await getProgramBySlug(slug)
+  const prog = sanityProg ?? PROGRAM_MAP.get(slug)
   if (!prog) return { title: 'Program not found' }
   return {
     title: `${prog.name} Online - ${prog.fullName} | VGU`,
@@ -476,17 +487,57 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+const COLOR_GRAD: Record<string, string> = {
+  red:    'linear-gradient(135deg,#C04036,#821a12)',
+  blue:   'linear-gradient(135deg,#2563eb,#1d4ed8)',
+  purple: 'linear-gradient(135deg,#7c3aed,#4c1d95)',
+  green:  'linear-gradient(135deg,#059669,#065f46)',
+  amber:  'linear-gradient(135deg,#d97706,#92400e)',
+}
+
 export default async function ProgramPage({ params }: Props) {
   const { slug } = await params
-  const prog = PROGRAM_MAP.get(slug)
+
+  const [sanityProg, sanityFaqs, sanityTestimonials, allSanityProgs] = await Promise.all([
+    getProgramBySlug(slug),
+    getProgramFaqs(slug),
+    getTestimonialsByProgram(slug),
+    getAllPrograms(),
+  ])
+
+  // Sanity is primary; fall back to hardcoded when CMS is not yet populated
+  const prog = sanityProg ?? PROGRAM_MAP.get(slug)
   if (!prog) notFound()
 
-  const seatsFilled = getSeatsFilled(prog.slug)
-  const heroImage   = prog.heroImage ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
+  const seatsFilled     = getSeatsFilled(prog.slug)
+  const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
 
-  const relatedPrograms = (RELATED[prog.slug] ?? [])
-    .flatMap(s => { const p = PROGRAM_MAP.get(s); return p ? [{ slug: p.slug, name: p.name, fullName: p.fullName, level: p.level, duration: p.duration, feePerYear: p.feePerYear, image: PROG_IMAGE.get(s) }] : [] })
+  // Related programs — try Sanity data first, fall back to hardcoded map
+  const relatedPrograms = (RELATED[prog.slug] ?? []).flatMap(s => {
+    const sp = allSanityProgs.find(p => p.slug === s)
+    if (sp) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level as 'ug' | 'pg', duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? undefined }]
+    const hp = PROGRAM_MAP.get(s)
+    if (hp) return [{ slug: hp.slug, name: hp.name, fullName: hp.fullName, level: hp.level, duration: hp.duration, feePerYear: hp.feePerYear, image: HERO_IMAGES[s] }]
+    return []
+  })
+
+  // Map Sanity FAQs → {q, a} expected by ProgramFAQ; undefined = use fallback
+  const mappedFaqs = sanityFaqs.length > 0
+    ? sanityFaqs.map(f => ({ q: f.question, a: f.answer }))
+    : undefined
+
+  // Map Sanity testimonials → shape expected by ProgramTestimonials; undefined = use fallback
+  const mappedTestimonials = sanityTestimonials.length > 0
+    ? sanityTestimonials.map(t => ({
+        name:      t.name,
+        batch:     t.role,
+        initials:  t.name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2),
+        photoGrad: COLOR_GRAD[t.colorTheme] ?? COLOR_GRAD.red,
+        quote:     t.quote,
+        photo:     t.avatarUrl ?? undefined,
+      }))
+    : undefined
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -842,8 +893,8 @@ export default async function ProgramPage({ params }: Props) {
       <AdmissionSteps />
       <CertificatePreview programName={prog.name} programFullName={prog.fullName} />
       <FacultySection slug={prog.slug} />
-      <ProgramTestimonials slug={prog.slug} />
-      <ProgramFAQ slug={prog.slug} />
+      <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
+      <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
       <RelatedPrograms programs={relatedPrograms} />
 
       {/* ══ All Programs CTA ══ */}
@@ -890,7 +941,8 @@ export default async function ProgramPage({ params }: Props) {
   )
 }
 
-function EnrollmentCard({ prog, seatsFilled }: { prog: ProgramDetail; seatsFilled: number }) {
+interface EnrollmentProg { feePerYear: string; totalFee: string; emi?: string; nextBatch?: string; name: string }
+function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFilled: number }) {
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white shadow-[0_4px_24px_rgba(17,24,39,0.08)] overflow-hidden">
 

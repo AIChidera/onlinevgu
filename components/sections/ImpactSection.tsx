@@ -63,13 +63,6 @@ const MAIN_STATS: MainStat[] = [
   },
 ]
 
-// All values sourced from verified spec stats
-const EXTRA_STATS: ExtraStat[] = [
-  { target: 500,  suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
-  { target: 30,   suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
-  { target: 7000, suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
-  { target: new Date().getFullYear() - FOUNDING_YEAR, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
-]
 
 // ── Count-up ───────────────────────────────────────────────────────
 
@@ -114,8 +107,15 @@ function CountUp({
 
 // ── Section ────────────────────────────────────────────────────────
 
-export default function ImpactSection() {
+export default function ImpactSection({ programCount = 25 }: { programCount?: number }) {
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
+
+  const EXTRA_STATS: ExtraStat[] = [
+    { target: 500,         suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
+    { target: programCount, suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
+    { target: 7000,        suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
+    { target: new Date().getFullYear() - FOUNDING_YEAR, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
+  ]
 
   return (
     <section id="impact" className="group relative overflow-hidden bg-vgu-dark py-16 px-5 md:px-8 lg:px-12 lg:py-24">

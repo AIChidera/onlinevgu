@@ -106,12 +106,31 @@ export interface SanityMilestone {
   event: string
 }
 
+// Lightweight shape used for program listing, sitemap, and related-program cards.
+// Fields are aliased in the GROQ query so that consumers get `fee` and `image`
+// without field-name mismatch.
+export interface SanityProgramSummary {
+  _id:            string
+  slug:           string
+  name:           string
+  fullName:       string
+  level:          'ug' | 'pg' | 'cert'
+  discipline:     string
+  duration:       string
+  fee:            string   // aliased from feePerYear
+  popular?:       boolean
+  specialisations: string[]
+  image?:         string | null  // aliased from heroImage.asset->url
+  displayOrder?:  number
+}
+
 export interface SanityProgram {
   _id:            string
   slug:           string
   name:           string
   fullName:       string
-  level:          'ug' | 'pg'
+  level:          'ug' | 'pg' | 'cert'
+  discipline?:    string
   duration:       string
   semesters:      number
   feePerYear:     string
@@ -198,6 +217,31 @@ export async function getMilestones(): Promise<SanityMilestone[]> {
     _id, year, event
   }`
   return sanityFetch<SanityMilestone[]>({ query, tags: ['milestone'] })
+}
+
+export async function getAllPrograms(): Promise<SanityProgramSummary[]> {
+  const query = `*[_type == "program"] | order(coalesce(displayOrder, 999) asc) {
+    _id,
+    "slug": slug.current,
+    name, fullName, level, discipline, duration,
+    "fee": feePerYear,
+    popular,
+    specialisations,
+    "image": heroImage.${IMAGE_URL},
+    displayOrder
+  }`
+  return sanityFetch<SanityProgramSummary[]>({ query, tags: ['program'] })
+}
+
+export async function getTestimonialsByProgram(program: string): Promise<SanityTestimonial[]> {
+  const query = `*[_type == "testimonial" && program == $program] | order(displayOrder asc) {
+    _id, name, role, program, quote,
+    outcomes,
+    "avatarUrl": avatar.${IMAGE_URL},
+    colorTheme, videoLabel, videoUrl,
+    displayOrder
+  }`
+  return sanityFetch<SanityTestimonial[]>({ query, params: { program }, tags: ['testimonial'] })
 }
 
 export async function getProgramBySlug(slug: string): Promise<SanityProgram | null> {

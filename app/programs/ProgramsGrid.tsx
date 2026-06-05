@@ -4,18 +4,23 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { IconArrowRight, IconClock, IconTrendingUp } from '@tabler/icons-react'
-import { PROGRAMMES, DISCIPLINE_ORDER, type Programme, type Discipline } from './data'
+import { DISCIPLINE_ORDER, type Discipline } from './data'
 import { PROGRAM_META, type ProgramMeta } from './meta'
-import { NEXT_BATCH } from '@/lib/constants'
+
+export interface ProgramGridItem {
+  slug:            string
+  name:            string
+  fullName:        string
+  level:           'ug' | 'pg' | 'cert'
+  discipline:      string
+  duration:        string
+  fee:             string
+  popular?:        boolean
+  specialisations: string[]
+  image?:          string | null
+}
 
 type Filter = 'all' | 'ug' | 'pg' | 'cert'
-
-const FILTERS: { value: Filter; label: string; count: number }[] = [
-  { value: 'all',  label: 'All Programs', count: PROGRAMMES.length },
-  { value: 'ug',   label: 'Bachelors',    count: PROGRAMMES.filter(p => p.level === 'ug').length },
-  { value: 'pg',   label: 'Masters',      count: PROGRAMMES.filter(p => p.level === 'pg').length },
-  { value: 'cert', label: 'Certificates', count: PROGRAMMES.filter(p => p.level === 'cert').length },
-]
 
 const DISC_COLOR: Record<string, string> = {
   'Management':             '#C04036',
@@ -27,9 +32,22 @@ const DISC_COLOR: Record<string, string> = {
   'Media & Journalism':     '#be185d',
 }
 
-export default function ProgramsGrid() {
+export default function ProgramsGrid({
+  programmes,
+  nextBatch,
+}: {
+  programmes: ProgramGridItem[]
+  nextBatch:  string
+}) {
   const [filter, setFilter] = useState<Filter>('all')
-  const visible = filter === 'all' ? PROGRAMMES : PROGRAMMES.filter(p => p.level === filter)
+  const visible = filter === 'all' ? programmes : programmes.filter(p => p.level === filter)
+
+  const FILTERS: { value: Filter; label: string; count: number }[] = [
+    { value: 'all',  label: 'All Programs', count: programmes.length },
+    { value: 'ug',   label: 'Bachelors',    count: programmes.filter(p => p.level === 'ug').length   },
+    { value: 'pg',   label: 'Masters',      count: programmes.filter(p => p.level === 'pg').length   },
+    { value: 'cert', label: 'Certificates', count: programmes.filter(p => p.level === 'cert').length },
+  ]
 
   return (
     <section id="programs-grid" className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
@@ -45,7 +63,7 @@ export default function ProgramsGrid() {
               {FILTERS.find(f => f.value === filter)?.label}
             </h2>
             <p className="mt-1 text-[14px] font-body text-neutral-500">
-              {visible.length} program{visible.length !== 1 ? 's' : ''} · Next batch {NEXT_BATCH}
+              {visible.length} program{visible.length !== 1 ? 's' : ''} · Next batch {nextBatch}
             </p>
           </div>
 
@@ -99,18 +117,15 @@ function DisciplineGroup({
   discipline, programs,
 }: {
   discipline: Discipline
-  programs: Programme[]
+  programs:   ProgramGridItem[]
 }) {
   const accent = DISC_COLOR[discipline] ?? '#C04036'
 
   return (
     <div>
-      {/* Discipline heading */}
       <div className="flex items-center gap-3 mb-6">
         <span className="w-1 h-6 rounded-full flex-none" style={{ background: accent }} />
-        <h3 className="font-heading font-bold text-[20px] text-neutral-800">
-          {discipline}
-        </h3>
+        <h3 className="font-heading font-bold text-[20px] text-neutral-800">{discipline}</h3>
         <span className="text-[12px] font-body text-neutral-400">
           {programs.length} program{programs.length !== 1 ? 's' : ''}
         </span>
@@ -123,12 +138,7 @@ function DisciplineGroup({
         style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {programs.map((p, pi) => (
-          <div
-            key={p.slug}
-            data-animate="materialize"
-            style={{ animationDelay: `${pi * 70}ms` }}
-            className="flex-none w-[260px] snap-start"
-          >
+          <div key={p.slug} data-animate="materialize" style={{ animationDelay: `${pi * 70}ms` }} className="flex-none w-[260px] snap-start">
             <ProgramCard programme={p} meta={PROGRAM_META[p.slug]} />
           </div>
         ))}
@@ -137,12 +147,7 @@ function DisciplineGroup({
       {/* Tablet + Desktop: grid */}
       <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
         {programs.map((p, pi) => (
-          <div
-            key={p.slug}
-            data-animate="materialize"
-            style={{ animationDelay: `${pi * 70}ms` }}
-            className="h-full"
-          >
+          <div key={p.slug} data-animate="materialize" style={{ animationDelay: `${pi * 70}ms` }} className="h-full">
             <ProgramCard programme={p} meta={PROGRAM_META[p.slug]} />
           </div>
         ))}
@@ -151,23 +156,22 @@ function DisciplineGroup({
   )
 }
 
-function ProgramCard({ programme: p, meta }: { programme: Programme; meta: ProgramMeta }) {
+function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta: ProgramMeta | undefined }) {
   const levelLabel = p.level === 'ug' ? 'Bachelor' : p.level === 'pg' ? 'Master' : 'Certificate'
   const shown = p.specialisations.slice(0, 2)
   const extra = p.specialisations.length - shown.length
+  const iconBg = meta?.iconBg ?? 'linear-gradient(135deg,#C04036,#821a12)'
 
   return (
     <article className="group relative flex flex-col h-full bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] hover:border-transparent">
 
-      {/* Stretched link for degree programs */}
       {p.level !== 'cert' && (
         <Link href={`/programs/${p.slug}`} className="absolute inset-0 z-[1]" aria-label={`View ${p.name} details`} tabIndex={-1} />
       )}
 
-      {/* ── Image / gradient header ── */}
-      <div className="relative h-[148px] flex-none overflow-hidden" style={{ background: meta.iconBg }}>
+      {/* Image / gradient header */}
+      <div className="relative h-[148px] flex-none overflow-hidden" style={{ background: iconBg }}>
 
-        {/* Real photo when available */}
         {p.image && (
           <Image
             src={p.image}
@@ -178,15 +182,11 @@ function ProgramCard({ programme: p, meta }: { programme: Programme; meta: Progr
           />
         )}
 
-        {/* Dot-grid + ghost icon — shown when no photo */}
-        {!p.image && (
+        {!p.image && meta && (
           <>
             <div
               className="absolute inset-0 opacity-[0.07]"
-              style={{
-                backgroundImage: 'radial-gradient(circle,rgba(255,255,255,0.9) 1px,transparent 1px)',
-                backgroundSize: '18px 18px',
-              }}
+              style={{ backgroundImage: 'radial-gradient(circle,rgba(255,255,255,0.9) 1px,transparent 1px)', backgroundSize: '18px 18px' }}
             />
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <meta.Icon size={110} stroke={0.7} className="text-white opacity-[0.10]" />
@@ -194,19 +194,16 @@ function ProgramCard({ programme: p, meta }: { programme: Programme; meta: Progr
           </>
         )}
 
-        {/* Popular / badge — top left */}
-        {(meta.badge || p.popular) && (
+        {(meta?.badge || p.popular) && (
           <span className="absolute top-3 left-3 z-10 inline-flex items-center gap-1 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold text-neutral-900 shadow-sm">
-            {meta.badge ?? '★ Most Popular'}
+            {meta?.badge ?? '★ Most Popular'}
           </span>
         )}
 
-        {/* Level — top right */}
         <span className="absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-heading font-bold text-white uppercase tracking-wide border border-white/25 bg-black/20 backdrop-blur-sm">
           {levelLabel}
         </span>
 
-        {/* Duration + fee — bottom bar */}
         <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/55 to-transparent px-4 pb-3 pt-10">
           <div className="flex items-center justify-between">
             <span className="text-white/75 text-[11px] font-body inline-flex items-center gap-1">
@@ -218,17 +215,15 @@ function ProgramCard({ programme: p, meta }: { programme: Programme; meta: Progr
         </div>
       </div>
 
-      {/* ── Body ── */}
+      {/* Body */}
       <div className="flex-1 p-4 lg:p-5">
 
-        {/* Icon + name */}
         <div className="flex items-start gap-3 mb-3">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center flex-none shadow-sm mt-0.5"
-            style={{ background: meta.iconBg }}
-          >
-            <meta.Icon size={15} stroke={1.5} className="text-white" />
-          </div>
+          {meta && (
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-none shadow-sm mt-0.5" style={{ background: iconBg }}>
+              <meta.Icon size={15} stroke={1.5} className="text-white" />
+            </div>
+          )}
           <div>
             <h3 className="font-heading font-bold text-[17px] leading-[1.25] text-neutral-900 group-hover:text-vgu-red transition-colors duration-200">
               {p.name}
@@ -237,33 +232,24 @@ function ProgramCard({ programme: p, meta }: { programme: Programme; meta: Progr
           </div>
         </div>
 
-        {/* Placement indicator */}
         <div className="flex items-center gap-1 mb-3">
           <IconTrendingUp size={11} className="text-green-600 flex-none" stroke={2} />
           <span className="text-[11px] font-body text-neutral-500">95% placement rate</span>
         </div>
 
-        {/* Specialisations */}
         {shown.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {shown.map(s => (
-              <span
-                key={s}
-                className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-body text-neutral-600"
-              >
-                {s}
-              </span>
+              <span key={s} className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-body text-neutral-600">{s}</span>
             ))}
             {extra > 0 && (
-              <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-body text-neutral-400">
-                +{extra} more
-              </span>
+              <span className="rounded-full bg-neutral-100 px-2.5 py-0.5 text-[11px] font-body text-neutral-400">+{extra} more</span>
             )}
           </div>
         )}
       </div>
 
-      {/* ── Footer CTAs ── */}
+      {/* Footer CTAs */}
       <div className="relative z-[2] px-4 lg:px-5 pb-4 lg:pb-5 pt-0 flex gap-2">
         <a
           href="#counsellor"
