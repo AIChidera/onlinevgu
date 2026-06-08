@@ -147,7 +147,11 @@ export interface SanityProgram {
   topHirers:      string[]
   curriculum?:    {
     year: string
-    semesters: { label: string; subjects: string[] }[]
+    semesters: {
+      label:        string
+      totalCredits: number
+      courses:      { name: string; credits: number; type: 'Core' | 'Elective' }[]
+    }[]
   }[]
   heroImageUrl?:  string
 }

@@ -315,6 +315,445 @@ const PROGRAMS = [
   },
 ]
 
+// ─── Curriculum data (official PDF — credits + Core/Elective) ────────────────
+
+interface CourseItem { name: string; credits: number; type: 'Core' | 'Elective' }
+interface SemData    { label: string; totalCredits: number; courses: CourseItem[] }
+interface YearData   { year: string; semesters: SemData[] }
+
+const CURRICULUM_DATA: Record<string, YearData[]> = {
+
+  'ba': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 22, courses: [
+        { name: 'English-I', credits: 6, type: 'Core' },
+        { name: 'Microsoft Office Practices', credits: 4, type: 'Core' },
+        { name: 'Elective I - Subject 1', credits: 4, type: 'Elective' },
+        { name: 'Elective II - Subject 2', credits: 4, type: 'Elective' },
+        { name: 'Elective III - Subject 3', credits: 4, type: 'Elective' },
+      ]},
+      { label: 'Semester 2', totalCredits: 22, courses: [
+        { name: 'English-II', credits: 6, type: 'Core' },
+        { name: 'Visual Design Tool', credits: 4, type: 'Core' },
+        { name: 'Elective I', credits: 4, type: 'Elective' },
+        { name: 'Elective II', credits: 4, type: 'Elective' },
+        { name: 'Elective III', credits: 4, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 22, courses: [
+        { name: 'Communication Skills', credits: 6, type: 'Core' },
+        { name: 'Entrepreneurship Development', credits: 4, type: 'Core' },
+        { name: 'Elective I', credits: 4, type: 'Elective' },
+        { name: 'Elective II', credits: 4, type: 'Elective' },
+        { name: 'Elective III', credits: 4, type: 'Elective' },
+      ]},
+      { label: 'Semester 4', totalCredits: 21, courses: [
+        { name: 'Foundation of Mathematics', credits: 6, type: 'Core' },
+        { name: 'Universal Human Values', credits: 3, type: 'Core' },
+        { name: 'Elective I', credits: 4, type: 'Elective' },
+        { name: 'Elective II', credits: 4, type: 'Elective' },
+        { name: 'Elective III', credits: 4, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 3', semesters: [
+      { label: 'Semester 5', totalCredits: 20, courses: [
+        { name: 'Elementary of Computer Applications', credits: 6, type: 'Core' },
+        { name: 'Computer Applications Lab', credits: 2, type: 'Core' },
+        { name: 'Elective I', credits: 4, type: 'Elective' },
+        { name: 'Elective II', credits: 4, type: 'Elective' },
+        { name: 'Elective III', credits: 4, type: 'Elective' },
+      ]},
+      { label: 'Semester 6', totalCredits: 22, courses: [
+        { name: 'Environmental Science', credits: 6, type: 'Core' },
+        { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
+        { name: 'Elective I', credits: 4, type: 'Elective' },
+        { name: 'Elective II', credits: 4, type: 'Elective' },
+        { name: 'Elective III', credits: 4, type: 'Elective' },
+      ]},
+    ]},
+  ],
+
+  'bba': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 21, courses: [
+        { name: 'Fundamentals of Management', credits: 3, type: 'Core' },
+        { name: 'Business Accounting', credits: 4, type: 'Core' },
+        { name: 'Business Law', credits: 3, type: 'Core' },
+        { name: 'Entrepreneurship Development', credits: 3, type: 'Core' },
+        { name: 'Business Communication', credits: 3, type: 'Core' },
+        { name: 'Environmental Science', credits: 3, type: 'Core' },
+        { name: 'Elective 1', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 2', totalCredits: 22, courses: [
+        { name: 'Managerial Economics', credits: 3, type: 'Core' },
+        { name: 'Statistics for Business Decision', credits: 4, type: 'Core' },
+        { name: 'Organizational Behavior', credits: 3, type: 'Core' },
+        { name: 'Human Resource Management', credits: 3, type: 'Core' },
+        { name: 'Principles of Marketing', credits: 3, type: 'Core' },
+        { name: 'Business Analytics', credits: 4, type: 'Core' },
+        { name: 'Elective 2', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 19, courses: [
+        { name: 'Macroeconomics for Managers', credits: 3, type: 'Core' },
+        { name: 'Business Environment', credits: 3, type: 'Core' },
+        { name: 'System Analysis and Design', credits: 3, type: 'Core' },
+        { name: 'Business Ethics and CSR', credits: 3, type: 'Core' },
+        { name: 'Business Policy and Strategic Management', credits: 3, type: 'Core' },
+        { name: 'Elective 3', credits: 2, type: 'Elective' },
+        { name: 'Elective 4', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 4', totalCredits: 21, courses: [
+        { name: 'Business Research Methods', credits: 4, type: 'Core' },
+        { name: 'Operations Research', credits: 4, type: 'Core' },
+        { name: 'E-Commerce', credits: 3, type: 'Core' },
+        { name: 'Cyber Crimes and Law', credits: 3, type: 'Core' },
+        { name: 'International Business', credits: 3, type: 'Core' },
+        { name: 'Elective 5', credits: 2, type: 'Elective' },
+        { name: 'Elective 6', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 3', semesters: [
+      { label: 'Semester 5', totalCredits: 22, courses: [
+        { name: 'Quantitative Techniques', credits: 4, type: 'Core' },
+        { name: 'Production and Operation Management', credits: 4, type: 'Core' },
+        { name: 'Enterprise Resource Planning', credits: 3, type: 'Core' },
+        { name: 'Total Quality Management', credits: 3, type: 'Core' },
+        { name: 'Project Management', credits: 4, type: 'Core' },
+        { name: 'Elective 7', credits: 2, type: 'Elective' },
+        { name: 'Elective 8', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 6', totalCredits: 19, courses: [
+        { name: 'Research Project', credits: 8, type: 'Core' },
+        { name: 'Corporate Tax Management', credits: 4, type: 'Core' },
+        { name: 'Corporate Readiness', credits: 3, type: 'Core' },
+        { name: 'Elective 9', credits: 2, type: 'Elective' },
+        { name: 'Elective 10', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+  ],
+
+  'bca': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 22, courses: [
+        { name: 'Basic Mathematics', credits: 4, type: 'Core' },
+        { name: 'Fundamental of C', credits: 2, type: 'Core' },
+        { name: 'Basic Electronics', credits: 4, type: 'Core' },
+        { name: 'Principle of Programming Languages', credits: 4, type: 'Core' },
+        { name: 'Fundamentals of C Lab', credits: 4, type: 'Core' },
+        { name: 'PC Software and Automation', credits: 2, type: 'Core' },
+        { name: 'Elective 1', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 2', totalCredits: 20, courses: [
+        { name: 'Object Oriented Programming with C++', credits: 4, type: 'Core' },
+        { name: 'Data Structures and Algorithms', credits: 4, type: 'Core' },
+        { name: 'Management Information System', credits: 4, type: 'Core' },
+        { name: 'OOP with C++ Lab', credits: 2, type: 'Core' },
+        { name: 'Data Structures Lab', credits: 2, type: 'Core' },
+        { name: 'Soft Skill and Professional Aptitude', credits: 2, type: 'Core' },
+        { name: 'Elective 2', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 20, courses: [
+        { name: 'Database Management Systems', credits: 4, type: 'Core' },
+        { name: 'Computer Networks', credits: 4, type: 'Core' },
+        { name: 'Internet and Web Application', credits: 4, type: 'Core' },
+        { name: 'DBMS Lab', credits: 2, type: 'Core' },
+        { name: 'Internet & Web Programming Lab', credits: 2, type: 'Core' },
+        { name: 'Elective 3', credits: 2, type: 'Elective' },
+        { name: 'Elective 4', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 4', totalCredits: 20, courses: [
+        { name: 'Programming in Java', credits: 4, type: 'Core' },
+        { name: 'Operating Systems', credits: 4, type: 'Core' },
+        { name: 'Computer Graphics and Visualization', credits: 4, type: 'Core' },
+        { name: 'Computer Graphics Lab', credits: 2, type: 'Core' },
+        { name: 'Programming in Java Lab', credits: 2, type: 'Core' },
+        { name: 'Elective 5', credits: 2, type: 'Elective' },
+        { name: 'Elective 6', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 3', semesters: [
+      { label: 'Semester 5', totalCredits: 20, courses: [
+        { name: 'Software Engineering', credits: 4, type: 'Core' },
+        { name: 'Software Engineering Lab', credits: 2, type: 'Core' },
+        { name: 'Python Programming', credits: 4, type: 'Core' },
+        { name: 'Python Lab', credits: 2, type: 'Core' },
+        { name: 'Project Formulation and Appraisal', credits: 4, type: 'Core' },
+        { name: 'Elective 7', credits: 2, type: 'Elective' },
+        { name: 'Elective 8', credits: 2, type: 'Elective' },
+      ]},
+      { label: 'Semester 6', totalCredits: 22, courses: [
+        { name: 'Major Project', credits: 8, type: 'Core' },
+        { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
+        { name: 'Universal Human Values', credits: 4, type: 'Core' },
+        { name: 'Automation Concepts and Techniques', credits: 2, type: 'Core' },
+        { name: 'Elective 9', credits: 2, type: 'Elective' },
+        { name: 'Elective 10', credits: 2, type: 'Elective' },
+      ]},
+    ]},
+  ],
+
+  'ma': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 22, courses: [
+        { name: 'Language & Communication Skills I', credits: 4, type: 'Core' },
+        { name: 'Chaucer and Sixteenth Century Literature', credits: 4, type: 'Core' },
+        { name: 'Eighteenth and Nineteenth Century Literature', credits: 4, type: 'Core' },
+        { name: 'Nineteenth Century Literature I', credits: 3, type: 'Core' },
+        { name: 'American Literature I', credits: 4, type: 'Core' },
+        { name: 'Language & Linguistics I', credits: 3, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 22, courses: [
+        { name: 'Language & Communication Skills II', credits: 4, type: 'Core' },
+        { name: 'Seventeenth Century Literature', credits: 4, type: 'Core' },
+        { name: 'Eighteenth Century Literature II', credits: 4, type: 'Core' },
+        { name: 'Nineteenth Century Literature II', credits: 3, type: 'Core' },
+        { name: 'American Literature II', credits: 4, type: 'Core' },
+        { name: 'Language & Linguistics II', credits: 3, type: 'Core' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 22, courses: [
+        { name: 'Literary Criticism and Theory I', credits: 4, type: 'Core' },
+        { name: 'Twentieth Century Literature I', credits: 4, type: 'Core' },
+        { name: 'Indian Writing in English I', credits: 4, type: 'Core' },
+        { name: 'Nineteenth Century Literature III', credits: 3, type: 'Core' },
+        { name: 'American Literature III', credits: 4, type: 'Core' },
+        { name: 'Language & Linguistics III', credits: 3, type: 'Core' },
+      ]},
+      { label: 'Semester 4', totalCredits: 20, courses: [
+        { name: 'Literary Theory and Criticism II', credits: 4, type: 'Core' },
+        { name: 'Twentieth Century Literature II', credits: 4, type: 'Core' },
+        { name: 'Indian Writing in English II', credits: 4, type: 'Core' },
+        { name: 'Dissertation', credits: 8, type: 'Core' },
+      ]},
+    ]},
+  ],
+
+  'mba': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 24, courses: [
+        { name: 'Managerial Economics', credits: 4, type: 'Core' },
+        { name: 'Quantitative Methods for Management', credits: 4, type: 'Core' },
+        { name: 'Accounting for Managers', credits: 4, type: 'Core' },
+        { name: 'Legal Aspects of Business', credits: 4, type: 'Core' },
+        { name: 'Management Concepts and Organizational Behaviour', credits: 3, type: 'Core' },
+        { name: 'Business Environment', credits: 3, type: 'Core' },
+        { name: 'Business Communication', credits: 2, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 25, courses: [
+        { name: 'Human Resource Management', credits: 3, type: 'Core' },
+        { name: 'Financial Management', credits: 4, type: 'Core' },
+        { name: 'Marketing Management', credits: 3, type: 'Core' },
+        { name: 'Research Methodology', credits: 4, type: 'Core' },
+        { name: 'Management Information System', credits: 3, type: 'Core' },
+        { name: 'International Business Management', credits: 3, type: 'Core' },
+        { name: 'Total Quality Management', credits: 3, type: 'Core' },
+        { name: 'Digital Marketing', credits: 2, type: 'Core' },
+        { name: 'Innovation & Design Thinking', credits: 2, type: 'Core' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 23, courses: [
+        { name: 'Project Management', credits: 3, type: 'Core' },
+        { name: 'Supply Chain Management', credits: 3, type: 'Core' },
+        { name: 'Strategic Management', credits: 3, type: 'Core' },
+        { name: 'Entrepreneurship & Innovation Management', credits: 2, type: 'Core' },
+        { name: 'Elective 1', credits: 3, type: 'Elective' },
+        { name: 'Elective 2', credits: 3, type: 'Elective' },
+        { name: 'Elective 3', credits: 3, type: 'Elective' },
+        { name: 'Elective 4', credits: 3, type: 'Elective' },
+      ]},
+      { label: 'Semester 4', totalCredits: 20, courses: [
+        { name: 'Research Project', credits: 8, type: 'Core' },
+        { name: 'Corporate Readiness', credits: 3, type: 'Core' },
+        { name: 'Indian Knowledge System', credits: 3, type: 'Core' },
+        { name: 'Elective 5', credits: 3, type: 'Elective' },
+        { name: 'Elective 6', credits: 3, type: 'Elective' },
+      ]},
+    ]},
+  ],
+
+  'mba-if': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 23, courses: [
+        { name: 'Managerial Economics', credits: 3, type: 'Core' },
+        { name: 'Managerial Practices and Organizational Behaviour', credits: 3, type: 'Core' },
+        { name: 'Business & Technology', credits: 3, type: 'Core' },
+        { name: 'Marketing Management', credits: 3, type: 'Core' },
+        { name: 'Financial Accounting', credits: 4, type: 'Core' },
+        { name: 'Strategic Management Accounting', credits: 4, type: 'Core' },
+        { name: 'Operations and Production Management', credits: 3, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 22, courses: [
+        { name: 'Introduction to Research Method', credits: 3, type: 'Core' },
+        { name: 'Corporate and Business Law', credits: 4, type: 'Core' },
+        { name: 'Corporate Management - I', credits: 3, type: 'Core' },
+        { name: 'Elective 1 (ACCA/CMA/FM Track)', credits: 4, type: 'Elective' },
+        { name: 'Elective 2', credits: 4, type: 'Elective' },
+        { name: 'Elective 3', credits: 4, type: 'Elective' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 23, courses: [
+        { name: 'Financial Management for Managers', credits: 4, type: 'Core' },
+        { name: 'Corporate Management - II', credits: 4, type: 'Core' },
+        { name: 'Human Resource Management', credits: 3, type: 'Core' },
+        { name: 'Elective 4', credits: 4, type: 'Elective' },
+        { name: 'Elective 5', credits: 4, type: 'Elective' },
+        { name: 'Elective 6', credits: 4, type: 'Elective' },
+      ]},
+      { label: 'Semester 4', totalCredits: 24, courses: [
+        { name: 'AI for Finance', credits: 4, type: 'Core' },
+        { name: 'Taxation', credits: 4, type: 'Core' },
+        { name: 'Corporate Management - III', credits: 4, type: 'Core' },
+        { name: 'Elective 7', credits: 4, type: 'Elective' },
+        { name: 'Elective 8', credits: 4, type: 'Elective' },
+        { name: 'Elective 9', credits: 4, type: 'Elective' },
+      ]},
+    ]},
+  ],
+
+  'mca': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 23, courses: [
+        { name: 'Mathematical Foundation for Computer Application', credits: 3, type: 'Core' },
+        { name: 'Fundamental of Computer and Programming in C Lab', credits: 4, type: 'Core' },
+        { name: 'Operating Systems', credits: 4, type: 'Core' },
+        { name: 'Database Management System', credits: 4, type: 'Core' },
+        { name: 'Software Engineering and Project Management', credits: 3, type: 'Core' },
+        { name: 'Virtualization & Cloud Technology', credits: 3, type: 'Core' },
+        { name: 'Web Technology Lab', credits: 2, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 23, courses: [
+        { name: 'Object Oriented Programming using Java', credits: 4, type: 'Core' },
+        { name: 'Data Structures and Algorithms Using C', credits: 4, type: 'Core' },
+        { name: 'Machine Learning with Python', credits: 4, type: 'Core' },
+        { name: 'Computer Networks', credits: 4, type: 'Core' },
+        { name: 'Introduction to Data Science', credits: 3, type: 'Core' },
+        { name: 'Linux and Shell Programming', credits: 4, type: 'Core' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 25, courses: [
+        { name: 'Deep Learning', credits: 4, type: 'Core' },
+        { name: 'Natural Language Processing', credits: 4, type: 'Core' },
+        { name: 'Artificial Intelligence & Intelligent Agents', credits: 3, type: 'Core' },
+        { name: 'Big Data Analytics', credits: 4, type: 'Core' },
+        { name: 'Internet of Things', credits: 4, type: 'Core' },
+        { name: 'Cloud Security', credits: 3, type: 'Core' },
+        { name: 'Cryptography', credits: 3, type: 'Core' },
+      ]},
+      { label: 'Semester 4', totalCredits: 21, courses: [
+        { name: 'Cloud Operations', credits: 4, type: 'Core' },
+        { name: 'Ethical Hacking', credits: 3, type: 'Core' },
+        { name: 'Blockchain', credits: 3, type: 'Core' },
+        { name: 'Business Intelligence', credits: 3, type: 'Core' },
+        { name: 'Project', credits: 8, type: 'Core' },
+      ]},
+    ]},
+  ],
+
+  'majmc': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 22, courses: [
+        { name: 'Communication Theory', credits: 4, type: 'Core' },
+        { name: 'Journalism: Concepts & Principles', credits: 4, type: 'Core' },
+        { name: 'Print Media: Production Tools & Techniques', credits: 4, type: 'Core' },
+        { name: 'Media Laws & Ethics', credits: 4, type: 'Core' },
+        { name: 'Media Management', credits: 4, type: 'Core' },
+        { name: 'Writing For Media', credits: 2, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 19, courses: [
+        { name: 'Radio: Concepts & Principles', credits: 4, type: 'Core' },
+        { name: 'Advertising: Concepts & Principles', credits: 4, type: 'Core' },
+        { name: 'New Media', credits: 3, type: 'Core' },
+        { name: 'Media & Communication Research', credits: 3, type: 'Core' },
+        { name: 'TV & Film Appreciation', credits: 3, type: 'Core' },
+        { name: 'Business Journalism', credits: 2, type: 'Core' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 22, courses: [
+        { name: 'Photography', credits: 4, type: 'Core' },
+        { name: 'Video Production Techniques & Programme Formats', credits: 4, type: 'Core' },
+        { name: 'Global Media', credits: 4, type: 'Core' },
+        { name: 'Development Communication', credits: 4, type: 'Core' },
+        { name: 'Public Relations & Corporate Communication', credits: 3, type: 'Core' },
+        { name: 'Multimedia Journalism', credits: 3, type: 'Core' },
+      ]},
+      { label: 'Semester 4', totalCredits: 24, courses: [
+        { name: 'Digital Journalism', credits: 4, type: 'Core' },
+        { name: 'Media and Society', credits: 3, type: 'Core' },
+        { name: 'Research Project', credits: 8, type: 'Core' },
+        { name: 'Rural Journalism', credits: 3, type: 'Core' },
+        { name: 'Environment Journalism', credits: 3, type: 'Core' },
+        { name: 'Marketing Management', credits: 3, type: 'Core' },
+      ]},
+    ]},
+  ],
+
+  'msc': [
+    { year: 'Year 1', semesters: [
+      { label: 'Semester 1', totalCredits: 22, courses: [
+        { name: 'Advanced Abstract Algebra', credits: 4, type: 'Core' },
+        { name: 'Topology', credits: 4, type: 'Core' },
+        { name: 'Integral Transforms', credits: 4, type: 'Core' },
+        { name: 'Special Functions', credits: 4, type: 'Core' },
+        { name: 'MAT-LAB', credits: 2, type: 'Core' },
+        { name: 'Object Oriented Programming with C++ Theory & Lab', credits: 4, type: 'Core' },
+      ]},
+      { label: 'Semester 2', totalCredits: 22, courses: [
+        { name: 'Mathematical Programming', credits: 4, type: 'Core' },
+        { name: 'Advanced Numerical Analysis', credits: 4, type: 'Core' },
+        { name: 'Integral Equations and Calculus of Variations', credits: 4, type: 'Core' },
+        { name: 'Discrete Mathematical Structures', credits: 4, type: 'Core' },
+        { name: 'Numerical Analysis Lab', credits: 2, type: 'Core' },
+        { name: 'Computer System Organization', credits: 4, type: 'Core' },
+      ]},
+    ]},
+    { year: 'Year 2', semesters: [
+      { label: 'Semester 3', totalCredits: 22, courses: [
+        { name: 'Advanced Linear Algebra', credits: 4, type: 'Core' },
+        { name: 'Advanced Differential Equations', credits: 4, type: 'Core' },
+        { name: 'Tensor Analysis', credits: 4, type: 'Core' },
+        { name: 'Fluid Mechanics', credits: 4, type: 'Core' },
+        { name: 'Mathematics in Multimedia', credits: 4, type: 'Core' },
+        { name: 'Mathematical Programming Lab', credits: 2, type: 'Core' },
+      ]},
+      { label: 'Semester 4', totalCredits: 22, courses: [
+        { name: 'Project', credits: 8, type: 'Core' },
+        { name: 'Artificial Intelligence', credits: 2, type: 'Core' },
+        { name: 'Mathematical Statistics', credits: 4, type: 'Core' },
+        { name: 'Operation Research', credits: 4, type: 'Core' },
+        { name: 'Partial Differential Equations', credits: 4, type: 'Core' },
+      ]},
+    ]},
+  ],
+}
+
+function toCurriculumDoc(data: YearData[]) {
+  return data.map((year, yi) => ({
+    _key: `y${yi}`,
+    year: year.year,
+    semesters: year.semesters.map((sem, si) => ({
+      _key:         `s${yi}${si}`,
+      label:        sem.label,
+      totalCredits: sem.totalCredits,
+      courses: sem.courses.map((c, ci) => ({
+        _key:    `c${yi}${si}${ci}`,
+        name:    c.name,
+        credits: c.credits,
+        type:    c.type,
+      })),
+    })),
+  }))
+}
+
 // ─── Seed ─────────────────────────────────────────────────────────────────────
 
 async function seed() {
@@ -344,6 +783,7 @@ async function seed() {
       careerRoles: prog.careerRoles,
       ...(prog.avgSalaryAfter ? { avgSalaryAfter: prog.avgSalaryAfter } : {}),
       topHirers:   prog.topHirers,
+      ...(CURRICULUM_DATA[prog.slug] ? { curriculum: toCurriculumDoc(CURRICULUM_DATA[prog.slug]!) } : {}),
     }
 
     await client.createOrReplace(doc)

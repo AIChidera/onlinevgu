@@ -117,6 +117,7 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
             gridTemplateRows: 'repeat(3, auto)',
             gridAutoFlow: 'column',
             gridAutoColumns: '186px',
+            width: 'max-content',
           }}
         >
         {hirers.map((h) => {

@@ -195,8 +195,31 @@ export default defineType({
                   type: 'object',
                   title: 'Semester',
                   fields: [
-                    defineField({ name: 'label',    title: 'Semester Label', type: 'string', description: 'E.g. "Semester 1".' }),
-                    defineField({ name: 'subjects', title: 'Subjects',       type: 'array', of: [{ type: 'string' }] }),
+                    defineField({ name: 'label',        title: 'Semester Label',  type: 'string', description: 'E.g. "Semester 1".' }),
+                    defineField({ name: 'totalCredits', title: 'Total Credits',   type: 'number', description: 'Sum of all course credits in this semester.' }),
+                    defineField({
+                      name: 'courses',
+                      title: 'Courses',
+                      type: 'array',
+                      of: [
+                        defineArrayMember({
+                          type: 'object',
+                          title: 'Course',
+                          fields: [
+                            defineField({ name: 'name',    title: 'Course Name', type: 'string', validation: R => R.required() }),
+                            defineField({ name: 'credits', title: 'Credits',     type: 'number', validation: R => R.required().integer().positive() }),
+                            defineField({
+                              name: 'type',
+                              title: 'Type',
+                              type: 'string',
+                              options: { list: [{ title: 'Core', value: 'Core' }, { title: 'Elective', value: 'Elective' }], layout: 'radio' },
+                              initialValue: 'Core',
+                            }),
+                          ],
+                          preview: { select: { title: 'name', subtitle: 'type' } },
+                        }),
+                      ],
+                    }),
                   ],
                   preview: { select: { title: 'label' } },
                 }),

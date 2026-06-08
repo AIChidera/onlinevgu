@@ -115,12 +115,45 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Accenture', 'Amazon', 'HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Tata Group', 'Hindustan Unilever'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Managerial Economics', 'Quantitative Methods for Management', 'Accounting for Managers', 'Legal Aspects of Business', 'Management Concepts and Organizational Behaviour', 'Business Environment', 'Business Communication'] },
-        { label: 'Semester 2', subjects: ['Human Resource Management', 'Financial Management', 'Marketing Management', 'Research Methodology', 'Management Information System', 'International Business Management', 'Total Quality Management', 'Digital Marketing', 'Innovation & Design Thinking'] },
+        { label: 'Semester 1', totalCredits: 24, courses: [
+          { name: 'Managerial Economics', credits: 4, type: 'Core' },
+          { name: 'Quantitative Methods for Management', credits: 4, type: 'Core' },
+          { name: 'Accounting for Managers', credits: 4, type: 'Core' },
+          { name: 'Legal Aspects of Business', credits: 4, type: 'Core' },
+          { name: 'Management Concepts and Organizational Behaviour', credits: 3, type: 'Core' },
+          { name: 'Business Environment', credits: 3, type: 'Core' },
+          { name: 'Business Communication', credits: 2, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 25, courses: [
+          { name: 'Human Resource Management', credits: 3, type: 'Core' },
+          { name: 'Financial Management', credits: 4, type: 'Core' },
+          { name: 'Marketing Management', credits: 3, type: 'Core' },
+          { name: 'Research Methodology', credits: 4, type: 'Core' },
+          { name: 'Management Information System', credits: 3, type: 'Core' },
+          { name: 'International Business Management', credits: 3, type: 'Core' },
+          { name: 'Total Quality Management', credits: 3, type: 'Core' },
+          { name: 'Digital Marketing', credits: 2, type: 'Core' },
+          { name: 'Innovation & Design Thinking', credits: 2, type: 'Core' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Project Management', 'Supply Chain Management', 'Strategic Management', 'Entrepreneurship & Innovation Management', 'Specialisation Electives'] },
-        { label: 'Semester 4', subjects: ['Research Project', 'Corporate Readiness', 'Indian Knowledge System', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
+        { label: 'Semester 3', totalCredits: 23, courses: [
+          { name: 'Project Management', credits: 3, type: 'Core' },
+          { name: 'Supply Chain Management', credits: 3, type: 'Core' },
+          { name: 'Strategic Management', credits: 3, type: 'Core' },
+          { name: 'Entrepreneurship & Innovation Management', credits: 2, type: 'Core' },
+          { name: 'Elective 1', credits: 3, type: 'Elective' },
+          { name: 'Elective 2', credits: 3, type: 'Elective' },
+          { name: 'Elective 3', credits: 3, type: 'Elective' },
+          { name: 'Elective 4', credits: 3, type: 'Elective' },
+        ]},
+        { label: 'Semester 4', totalCredits: 20, courses: [
+          { name: 'Research Project', credits: 8, type: 'Core' },
+          { name: 'Corporate Readiness', credits: 3, type: 'Core' },
+          { name: 'Indian Knowledge System', credits: 3, type: 'Core' },
+          { name: 'Elective 5', credits: 3, type: 'Elective' },
+          { name: 'Elective 6', credits: 3, type: 'Elective' },
+        ]},
       ]},
     ],
   },
@@ -149,12 +182,41 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Oracle'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Fundamental of Computer and Programming in C', 'Operating Systems', 'Database Management System', 'Software Engineering & Project Management', 'Virtualization & Cloud Technology', 'Web Technologies Lab', 'Mathematical Foundation for Computer Application'] },
-        { label: 'Semester 2', subjects: ['Object Oriented Programming using Java', 'Data Structures & Algorithms using C', 'Machine Learning with Python', 'Computer Networks', 'Linux & Shell Programming', 'Specialisation Elective I'] },
+        { label: 'Semester 1', totalCredits: 23, courses: [
+          { name: 'Mathematical Foundation for Computer Application', credits: 3, type: 'Core' },
+          { name: 'Fundamental of Computer and Programming in C Lab', credits: 4, type: 'Core' },
+          { name: 'Operating Systems', credits: 4, type: 'Core' },
+          { name: 'Database Management System', credits: 4, type: 'Core' },
+          { name: 'Software Engineering and Project Management', credits: 3, type: 'Core' },
+          { name: 'Virtualization & Cloud Technology', credits: 3, type: 'Core' },
+          { name: 'Web Technology Lab', credits: 2, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 23, courses: [
+          { name: 'Object Oriented Programming using Java', credits: 4, type: 'Core' },
+          { name: 'Data Structures and Algorithms Using C', credits: 4, type: 'Core' },
+          { name: 'Machine Learning with Python', credits: 4, type: 'Core' },
+          { name: 'Computer Networks', credits: 4, type: 'Core' },
+          { name: 'Introduction to Data Science', credits: 3, type: 'Core' },
+          { name: 'Linux and Shell Programming', credits: 4, type: 'Core' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Artificial Intelligence & Intelligent Agents', 'Big Data Analytics', 'Internet of Things', 'Cloud Security', 'Cryptography', 'Specialisation Elective II', 'Specialisation Elective III'] },
-        { label: 'Semester 4', subjects: ['Cloud Operations', 'Ethical Hacking', 'Blockchain', 'Business Intelligence', 'Major Project'] },
+        { label: 'Semester 3', totalCredits: 25, courses: [
+          { name: 'Deep Learning', credits: 4, type: 'Core' },
+          { name: 'Natural Language Processing', credits: 4, type: 'Core' },
+          { name: 'Artificial Intelligence & Intelligent Agents', credits: 3, type: 'Core' },
+          { name: 'Big Data Analytics', credits: 4, type: 'Core' },
+          { name: 'Internet of Things', credits: 4, type: 'Core' },
+          { name: 'Cloud Security', credits: 3, type: 'Core' },
+          { name: 'Cryptography', credits: 3, type: 'Core' },
+        ]},
+        { label: 'Semester 4', totalCredits: 21, courses: [
+          { name: 'Cloud Operations', credits: 4, type: 'Core' },
+          { name: 'Ethical Hacking', credits: 3, type: 'Core' },
+          { name: 'Blockchain', credits: 3, type: 'Core' },
+          { name: 'Business Intelligence', credits: 3, type: 'Core' },
+          { name: 'Project', credits: 8, type: 'Core' },
+        ]},
       ]},
     ],
   },
@@ -184,12 +246,41 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['HSBC', 'Standard Chartered', 'Citibank', 'JP Morgan', 'ICICI Bank', 'Kotak Mahindra', 'Deloitte', 'KPMG', 'EY', 'PwC'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Managerial Economics', 'Managerial Practices and Organizational Behaviour', 'Business & Technology', 'Marketing Management', 'Financial Accounting', 'Strategic Management Accounting', 'Operations and Production Management'] },
-        { label: 'Semester 2', subjects: ['Introduction to Research Method', 'Corporate and Business Law', 'Corporate Management I', 'Specialisation Elective 1', 'Specialisation Elective 2', 'Specialisation Elective 3'] },
+        { label: 'Semester 1', totalCredits: 23, courses: [
+          { name: 'Managerial Economics', credits: 3, type: 'Core' },
+          { name: 'Managerial Practices and Organizational Behaviour', credits: 3, type: 'Core' },
+          { name: 'Business & Technology', credits: 3, type: 'Core' },
+          { name: 'Marketing Management', credits: 3, type: 'Core' },
+          { name: 'Financial Accounting', credits: 4, type: 'Core' },
+          { name: 'Strategic Management Accounting', credits: 4, type: 'Core' },
+          { name: 'Operations and Production Management', credits: 3, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 22, courses: [
+          { name: 'Introduction to Research Method', credits: 3, type: 'Core' },
+          { name: 'Corporate and Business Law', credits: 4, type: 'Core' },
+          { name: 'Corporate Management - I', credits: 3, type: 'Core' },
+          { name: 'Elective 1 (ACCA/CMA/FM Track)', credits: 4, type: 'Elective' },
+          { name: 'Elective 2', credits: 4, type: 'Elective' },
+          { name: 'Elective 3', credits: 4, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Financial Management for Managers', 'Corporate Management II', 'Human Resource Management', 'Specialisation Elective 4', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
-        { label: 'Semester 4', subjects: ['AI for Finance', 'Taxation', 'Corporate Management III', 'Specialisation Elective 7', 'Specialisation Elective 8', 'Specialisation Elective 9'] },
+        { label: 'Semester 3', totalCredits: 23, courses: [
+          { name: 'Financial Management for Managers', credits: 4, type: 'Core' },
+          { name: 'Corporate Management - II', credits: 4, type: 'Core' },
+          { name: 'Human Resource Management', credits: 3, type: 'Core' },
+          { name: 'Elective 4', credits: 4, type: 'Elective' },
+          { name: 'Elective 5', credits: 4, type: 'Elective' },
+          { name: 'Elective 6', credits: 4, type: 'Elective' },
+        ]},
+        { label: 'Semester 4', totalCredits: 24, courses: [
+          { name: 'AI for Finance', credits: 4, type: 'Core' },
+          { name: 'Taxation', credits: 4, type: 'Core' },
+          { name: 'Corporate Management - III', credits: 4, type: 'Core' },
+          { name: 'Elective 7', credits: 4, type: 'Elective' },
+          { name: 'Elective 8', credits: 4, type: 'Elective' },
+          { name: 'Elective 9', credits: 4, type: 'Elective' },
+        ]},
       ]},
     ],
   },
@@ -218,12 +309,38 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'State PSCs', 'Universities', 'Think Tanks', 'NGOs'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Language & Communication Skills I', 'Chaucer and Sixteenth Century Literature', 'Eighteenth and Nineteenth Century Literature', 'Nineteenth Century Literature I', 'American Literature I', 'Language & Linguistics I'] },
-        { label: 'Semester 2', subjects: ['Language & Communication Skills II', 'Seventeenth Century Literature', 'Eighteenth Century Literature II', 'Nineteenth Century Literature II', 'American Literature II', 'Language & Linguistics II'] },
+        { label: 'Semester 1', totalCredits: 22, courses: [
+          { name: 'Language & Communication Skills I', credits: 4, type: 'Core' },
+          { name: 'Chaucer and Sixteenth Century Literature', credits: 4, type: 'Core' },
+          { name: 'Eighteenth and Nineteenth Century Literature', credits: 4, type: 'Core' },
+          { name: 'Nineteenth Century Literature I', credits: 3, type: 'Core' },
+          { name: 'American Literature I', credits: 4, type: 'Core' },
+          { name: 'Language & Linguistics I', credits: 3, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 22, courses: [
+          { name: 'Language & Communication Skills II', credits: 4, type: 'Core' },
+          { name: 'Seventeenth Century Literature', credits: 4, type: 'Core' },
+          { name: 'Eighteenth Century Literature II', credits: 4, type: 'Core' },
+          { name: 'Nineteenth Century Literature II', credits: 3, type: 'Core' },
+          { name: 'American Literature II', credits: 4, type: 'Core' },
+          { name: 'Language & Linguistics II', credits: 3, type: 'Core' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Literary Criticism and Theory I', 'Twentieth Century Literature I', 'Indian Writing in English I', 'Nineteenth Century Literature III', 'American Literature III', 'Language & Linguistics III'] },
-        { label: 'Semester 4', subjects: ['Literary Theory and Criticism II', 'Twentieth Century Literature II', 'Indian Writing in English II', 'Dissertation'] },
+        { label: 'Semester 3', totalCredits: 22, courses: [
+          { name: 'Literary Criticism and Theory I', credits: 4, type: 'Core' },
+          { name: 'Twentieth Century Literature I', credits: 4, type: 'Core' },
+          { name: 'Indian Writing in English I', credits: 4, type: 'Core' },
+          { name: 'Nineteenth Century Literature III', credits: 3, type: 'Core' },
+          { name: 'American Literature III', credits: 4, type: 'Core' },
+          { name: 'Language & Linguistics III', credits: 3, type: 'Core' },
+        ]},
+        { label: 'Semester 4', totalCredits: 20, courses: [
+          { name: 'Literary Theory and Criticism II', credits: 4, type: 'Core' },
+          { name: 'Twentieth Century Literature II', credits: 4, type: 'Core' },
+          { name: 'Indian Writing in English II', credits: 4, type: 'Core' },
+          { name: 'Dissertation', credits: 8, type: 'Core' },
+        ]},
       ]},
     ],
   },
@@ -253,16 +370,62 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['Reliance Industries', 'Tata Group', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Deloitte', 'KPMG', 'Amazon', 'Flipkart', 'Hindustan Unilever', 'ITC', 'TCS', 'Infosys', 'Wipro'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Fundamentals of Management', 'Business Accounting', 'Business Law', 'Entrepreneurship Development', 'Business Communication', 'Environmental Science', 'Specialisation Elective 1'] },
-        { label: 'Semester 2', subjects: ['Managerial Economics', 'Statistics for Business Decision', 'Organizational Behavior', 'Human Resource Management', 'Principles of Marketing', 'Business Analytics', 'Specialisation Elective 2'] },
+        { label: 'Semester 1', totalCredits: 21, courses: [
+          { name: 'Fundamentals of Management', credits: 3, type: 'Core' },
+          { name: 'Business Accounting', credits: 4, type: 'Core' },
+          { name: 'Business Law', credits: 3, type: 'Core' },
+          { name: 'Entrepreneurship Development', credits: 3, type: 'Core' },
+          { name: 'Business Communication', credits: 3, type: 'Core' },
+          { name: 'Environmental Science', credits: 3, type: 'Core' },
+          { name: 'Elective 1', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 2', totalCredits: 22, courses: [
+          { name: 'Managerial Economics', credits: 3, type: 'Core' },
+          { name: 'Statistics for Business Decision', credits: 4, type: 'Core' },
+          { name: 'Organizational Behavior', credits: 3, type: 'Core' },
+          { name: 'Human Resource Management', credits: 3, type: 'Core' },
+          { name: 'Principles of Marketing', credits: 3, type: 'Core' },
+          { name: 'Business Analytics', credits: 4, type: 'Core' },
+          { name: 'Elective 2', credits: 2, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Macroeconomics for Managers', 'Business Environment', 'System Analysis and Design', 'Business Ethics and CSR', 'Business Policy and Strategic Management', 'Specialisation Elective 3', 'Specialisation Elective 4'] },
-        { label: 'Semester 4', subjects: ['Business Research Methods', 'Operations Research', 'E-Commerce', 'Cyber Crimes and Law', 'International Business', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
+        { label: 'Semester 3', totalCredits: 19, courses: [
+          { name: 'Macroeconomics for Managers', credits: 3, type: 'Core' },
+          { name: 'Business Environment', credits: 3, type: 'Core' },
+          { name: 'System Analysis and Design', credits: 3, type: 'Core' },
+          { name: 'Business Ethics and CSR', credits: 3, type: 'Core' },
+          { name: 'Business Policy and Strategic Management', credits: 3, type: 'Core' },
+          { name: 'Elective 3', credits: 2, type: 'Elective' },
+          { name: 'Elective 4', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 4', totalCredits: 21, courses: [
+          { name: 'Business Research Methods', credits: 4, type: 'Core' },
+          { name: 'Operations Research', credits: 4, type: 'Core' },
+          { name: 'E-Commerce', credits: 3, type: 'Core' },
+          { name: 'Cyber Crimes and Law', credits: 3, type: 'Core' },
+          { name: 'International Business', credits: 3, type: 'Core' },
+          { name: 'Elective 5', credits: 2, type: 'Elective' },
+          { name: 'Elective 6', credits: 2, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 3', semesters: [
-        { label: 'Semester 5', subjects: ['Quantitative Techniques', 'Production and Operation Management', 'Enterprise Resource Planning', 'Total Quality Management', 'Project Management', 'Specialisation Elective 7', 'Specialisation Elective 8'] },
-        { label: 'Semester 6', subjects: ['Research Project', 'Corporate Tax Management', 'Corporate Readiness', 'Specialisation Elective 9', 'Specialisation Elective 10'] },
+        { label: 'Semester 5', totalCredits: 22, courses: [
+          { name: 'Quantitative Techniques', credits: 4, type: 'Core' },
+          { name: 'Production and Operation Management', credits: 4, type: 'Core' },
+          { name: 'Enterprise Resource Planning', credits: 3, type: 'Core' },
+          { name: 'Total Quality Management', credits: 3, type: 'Core' },
+          { name: 'Project Management', credits: 4, type: 'Core' },
+          { name: 'Elective 7', credits: 2, type: 'Elective' },
+          { name: 'Elective 8', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 6', totalCredits: 19, courses: [
+          { name: 'Research Project', credits: 8, type: 'Core' },
+          { name: 'Corporate Tax Management', credits: 4, type: 'Core' },
+          { name: 'Corporate Readiness', credits: 3, type: 'Core' },
+          { name: 'Elective 9', credits: 2, type: 'Elective' },
+          { name: 'Elective 10', credits: 2, type: 'Elective' },
+        ]},
       ]},
     ],
   },
@@ -292,16 +455,63 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Mphasis', 'Oracle'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Basic Mathematics', 'Fundamental of C', 'Basic Electronics', 'Principle of Programming Languages', 'Fundamentals of C Lab', 'PC Software and Automation', 'Specialisation Elective 1'] },
-        { label: 'Semester 2', subjects: ['Object Oriented Programming with C++', 'Data Structures and Algorithms', 'Management Information System', 'OOP with C++ Lab', 'Data Structures Lab', 'Soft Skill and Professional Aptitude', 'Specialisation Elective 2'] },
+        { label: 'Semester 1', totalCredits: 22, courses: [
+          { name: 'Basic Mathematics', credits: 4, type: 'Core' },
+          { name: 'Fundamental of C', credits: 2, type: 'Core' },
+          { name: 'Basic Electronics', credits: 4, type: 'Core' },
+          { name: 'Principle of Programming Languages', credits: 4, type: 'Core' },
+          { name: 'Fundamentals of C Lab', credits: 4, type: 'Core' },
+          { name: 'PC Software and Automation', credits: 2, type: 'Core' },
+          { name: 'Elective 1', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 2', totalCredits: 20, courses: [
+          { name: 'Object Oriented Programming with C++', credits: 4, type: 'Core' },
+          { name: 'Data Structures and Algorithms', credits: 4, type: 'Core' },
+          { name: 'Management Information System', credits: 4, type: 'Core' },
+          { name: 'OOP with C++ Lab', credits: 2, type: 'Core' },
+          { name: 'Data Structures Lab', credits: 2, type: 'Core' },
+          { name: 'Soft Skill and Professional Aptitude', credits: 2, type: 'Core' },
+          { name: 'Elective 2', credits: 2, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Database Management Systems', 'Computer Networks', 'Internet and Web Application', 'DBMS Lab', 'Internet & Web Programming Lab', 'Specialisation Elective 3', 'Specialisation Elective 4'] },
-        { label: 'Semester 4', subjects: ['Programming in Java', 'Operating Systems', 'Computer Graphics and Visualization', 'Computer Graphics Lab', 'Programming in Java Lab', 'Specialisation Elective 5', 'Specialisation Elective 6'] },
+        { label: 'Semester 3', totalCredits: 20, courses: [
+          { name: 'Database Management Systems', credits: 4, type: 'Core' },
+          { name: 'Computer Networks', credits: 4, type: 'Core' },
+          { name: 'Internet and Web Application', credits: 4, type: 'Core' },
+          { name: 'DBMS Lab', credits: 2, type: 'Core' },
+          { name: 'Internet & Web Programming Lab', credits: 2, type: 'Core' },
+          { name: 'Elective 3', credits: 2, type: 'Elective' },
+          { name: 'Elective 4', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 4', totalCredits: 20, courses: [
+          { name: 'Programming in Java', credits: 4, type: 'Core' },
+          { name: 'Operating Systems', credits: 4, type: 'Core' },
+          { name: 'Computer Graphics and Visualization', credits: 4, type: 'Core' },
+          { name: 'Computer Graphics Lab', credits: 2, type: 'Core' },
+          { name: 'Programming in Java Lab', credits: 2, type: 'Core' },
+          { name: 'Elective 5', credits: 2, type: 'Elective' },
+          { name: 'Elective 6', credits: 2, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 3', semesters: [
-        { label: 'Semester 5', subjects: ['Software Engineering', 'Software Engineering Lab', 'Python Programming', 'Python Lab', 'Project Formulation and Appraisal', 'Specialisation Elective 7', 'Specialisation Elective 8'] },
-        { label: 'Semester 6', subjects: ['Major Project', 'Specialisation Elective 9', 'Specialisation Elective 10', 'Indian Knowledge System', 'Universal Human Values', 'Automation Concepts and Techniques'] },
+        { label: 'Semester 5', totalCredits: 20, courses: [
+          { name: 'Software Engineering', credits: 4, type: 'Core' },
+          { name: 'Software Engineering Lab', credits: 2, type: 'Core' },
+          { name: 'Python Programming', credits: 4, type: 'Core' },
+          { name: 'Python Lab', credits: 2, type: 'Core' },
+          { name: 'Project Formulation and Appraisal', credits: 4, type: 'Core' },
+          { name: 'Elective 7', credits: 2, type: 'Elective' },
+          { name: 'Elective 8', credits: 2, type: 'Elective' },
+        ]},
+        { label: 'Semester 6', totalCredits: 22, courses: [
+          { name: 'Major Project', credits: 8, type: 'Core' },
+          { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
+          { name: 'Universal Human Values', credits: 4, type: 'Core' },
+          { name: 'Automation Concepts and Techniques', credits: 2, type: 'Core' },
+          { name: 'Elective 9', credits: 2, type: 'Elective' },
+          { name: 'Elective 10', credits: 2, type: 'Elective' },
+        ]},
       ]},
     ],
   },
@@ -331,16 +541,52 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'UPSC', 'State PSCs', 'TCS', 'Amazon', 'Hindustan Unilever', 'NGOs & Think Tanks'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['English I', 'Microsoft Office Practices', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
-        { label: 'Semester 2', subjects: ['English II', 'Visual Design Tool', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 1', totalCredits: 22, courses: [
+          { name: 'English-I', credits: 6, type: 'Core' },
+          { name: 'Microsoft Office Practices', credits: 4, type: 'Core' },
+          { name: 'Elective I - Subject 1', credits: 4, type: 'Elective' },
+          { name: 'Elective II - Subject 2', credits: 4, type: 'Elective' },
+          { name: 'Elective III - Subject 3', credits: 4, type: 'Elective' },
+        ]},
+        { label: 'Semester 2', totalCredits: 22, courses: [
+          { name: 'English-II', credits: 6, type: 'Core' },
+          { name: 'Visual Design Tool', credits: 4, type: 'Core' },
+          { name: 'Elective I', credits: 4, type: 'Elective' },
+          { name: 'Elective II', credits: 4, type: 'Elective' },
+          { name: 'Elective III', credits: 4, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Communication Skills', 'Entrepreneurship Development', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
-        { label: 'Semester 4', subjects: ['Foundation of Mathematics', 'Universal Human Values', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 3', totalCredits: 22, courses: [
+          { name: 'Communication Skills', credits: 6, type: 'Core' },
+          { name: 'Entrepreneurship Development', credits: 4, type: 'Core' },
+          { name: 'Elective I', credits: 4, type: 'Elective' },
+          { name: 'Elective II', credits: 4, type: 'Elective' },
+          { name: 'Elective III', credits: 4, type: 'Elective' },
+        ]},
+        { label: 'Semester 4', totalCredits: 21, courses: [
+          { name: 'Foundation of Mathematics', credits: 6, type: 'Core' },
+          { name: 'Universal Human Values', credits: 3, type: 'Core' },
+          { name: 'Elective I', credits: 4, type: 'Elective' },
+          { name: 'Elective II', credits: 4, type: 'Elective' },
+          { name: 'Elective III', credits: 4, type: 'Elective' },
+        ]},
       ]},
       { year: 'Year 3', semesters: [
-        { label: 'Semester 5', subjects: ['Elementary of Computer Applications', 'Computer Applications Lab', 'Specialisation Elective I', 'Specialisation Elective II'] },
-        { label: 'Semester 6', subjects: ['Environmental Science', 'Indian Knowledge System', 'Specialisation Elective I', 'Specialisation Elective II', 'Specialisation Elective III'] },
+        { label: 'Semester 5', totalCredits: 20, courses: [
+          { name: 'Elementary of Computer Applications', credits: 6, type: 'Core' },
+          { name: 'Computer Applications Lab', credits: 2, type: 'Core' },
+          { name: 'Elective I', credits: 4, type: 'Elective' },
+          { name: 'Elective II', credits: 4, type: 'Elective' },
+          { name: 'Elective III', credits: 4, type: 'Elective' },
+        ]},
+        { label: 'Semester 6', totalCredits: 22, courses: [
+          { name: 'Environmental Science', credits: 6, type: 'Core' },
+          { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
+          { name: 'Elective I', credits: 4, type: 'Elective' },
+          { name: 'Elective II', credits: 4, type: 'Elective' },
+          { name: 'Elective III', credits: 4, type: 'Elective' },
+        ]},
       ]},
     ],
   },
@@ -369,12 +615,39 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['Universities', 'RBI', 'ISRO', 'Insurance Companies', 'Financial Firms', 'NITI Aayog'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Advanced Abstract Algebra', 'Topology', 'Integral Transforms', 'Special Functions', 'MAT-LAB', 'Object Oriented Programming with C++'] },
-        { label: 'Semester 2', subjects: ['Mathematical Programming', 'Advanced Numerical Analysis', 'Integral Equations and Calculus of Variations', 'Discrete Mathematical Structures', 'Numerical Analysis Lab', 'Computer System Organization'] },
+        { label: 'Semester 1', totalCredits: 22, courses: [
+          { name: 'Advanced Abstract Algebra', credits: 4, type: 'Core' },
+          { name: 'Topology', credits: 4, type: 'Core' },
+          { name: 'Integral Transforms', credits: 4, type: 'Core' },
+          { name: 'Special Functions', credits: 4, type: 'Core' },
+          { name: 'MAT-LAB', credits: 2, type: 'Core' },
+          { name: 'Object Oriented Programming with C++ Theory & Lab', credits: 4, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 22, courses: [
+          { name: 'Mathematical Programming', credits: 4, type: 'Core' },
+          { name: 'Advanced Numerical Analysis', credits: 4, type: 'Core' },
+          { name: 'Integral Equations and Calculus of Variations', credits: 4, type: 'Core' },
+          { name: 'Discrete Mathematical Structures', credits: 4, type: 'Core' },
+          { name: 'Numerical Analysis Lab', credits: 2, type: 'Core' },
+          { name: 'Computer System Organization', credits: 4, type: 'Core' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Advanced Linear Algebra', 'Advanced Differential Equations', 'Tensor Analysis', 'Fluid Mechanics', 'Mathematics in Multimedia', 'Mathematical Programming Lab'] },
-        { label: 'Semester 4', subjects: ['Major Project', 'Artificial Intelligence', 'Mathematical Statistics', 'Operation Research', 'Partial Differential Equations'] },
+        { label: 'Semester 3', totalCredits: 22, courses: [
+          { name: 'Advanced Linear Algebra', credits: 4, type: 'Core' },
+          { name: 'Advanced Differential Equations', credits: 4, type: 'Core' },
+          { name: 'Tensor Analysis', credits: 4, type: 'Core' },
+          { name: 'Fluid Mechanics', credits: 4, type: 'Core' },
+          { name: 'Mathematics in Multimedia', credits: 4, type: 'Core' },
+          { name: 'Mathematical Programming Lab', credits: 2, type: 'Core' },
+        ]},
+        { label: 'Semester 4', totalCredits: 22, courses: [
+          { name: 'Project', credits: 8, type: 'Core' },
+          { name: 'Artificial Intelligence', credits: 2, type: 'Core' },
+          { name: 'Mathematical Statistics', credits: 4, type: 'Core' },
+          { name: 'Operation Research', credits: 4, type: 'Core' },
+          { name: 'Partial Differential Equations', credits: 4, type: 'Core' },
+        ]},
       ]},
     ],
   },
@@ -403,12 +676,40 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['Times Group', 'NDTV', 'Hindustan Times', 'Ogilvy', 'Weber Shandwick', 'Edelman', 'Republic TV', 'News18'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', subjects: ['Communication Theory', 'Journalism: Concepts & Principles', 'Print Media: Production Tools & Techniques', 'Media Laws & Ethics', 'Media Management', 'Writing For Media'] },
-        { label: 'Semester 2', subjects: ['Radio: Concepts & Principles', 'Advertising: Concepts & Principles', 'New Media', 'Media & Communication Research', 'TV & Film Appreciation', 'Business Journalism'] },
+        { label: 'Semester 1', totalCredits: 22, courses: [
+          { name: 'Communication Theory', credits: 4, type: 'Core' },
+          { name: 'Journalism: Concepts & Principles', credits: 4, type: 'Core' },
+          { name: 'Print Media: Production Tools & Techniques', credits: 4, type: 'Core' },
+          { name: 'Media Laws & Ethics', credits: 4, type: 'Core' },
+          { name: 'Media Management', credits: 4, type: 'Core' },
+          { name: 'Writing For Media', credits: 2, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 19, courses: [
+          { name: 'Radio: Concepts & Principles', credits: 4, type: 'Core' },
+          { name: 'Advertising: Concepts & Principles', credits: 4, type: 'Core' },
+          { name: 'New Media', credits: 3, type: 'Core' },
+          { name: 'Media & Communication Research', credits: 3, type: 'Core' },
+          { name: 'TV & Film Appreciation', credits: 3, type: 'Core' },
+          { name: 'Business Journalism', credits: 2, type: 'Core' },
+        ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', subjects: ['Photography', 'Video Production Techniques & Programme Formats', 'Global Media', 'Development Communication', 'Public Relations & Corporate Communication', 'Multimedia Journalism'] },
-        { label: 'Semester 4', subjects: ['Digital Journalism', 'Media and Society', 'Research Project', 'Rural Journalism', 'Environment Journalism', 'Marketing Management'] },
+        { label: 'Semester 3', totalCredits: 22, courses: [
+          { name: 'Photography', credits: 4, type: 'Core' },
+          { name: 'Video Production Techniques & Programme Formats', credits: 4, type: 'Core' },
+          { name: 'Global Media', credits: 4, type: 'Core' },
+          { name: 'Development Communication', credits: 4, type: 'Core' },
+          { name: 'Public Relations & Corporate Communication', credits: 3, type: 'Core' },
+          { name: 'Multimedia Journalism', credits: 3, type: 'Core' },
+        ]},
+        { label: 'Semester 4', totalCredits: 24, courses: [
+          { name: 'Digital Journalism', credits: 4, type: 'Core' },
+          { name: 'Media and Society', credits: 3, type: 'Core' },
+          { name: 'Research Project', credits: 8, type: 'Core' },
+          { name: 'Rural Journalism', credits: 3, type: 'Core' },
+          { name: 'Environment Journalism', credits: 3, type: 'Core' },
+          { name: 'Marketing Management', credits: 3, type: 'Core' },
+        ]},
       ]},
     ],
   },
@@ -490,7 +791,7 @@ export default async function ProgramPage({ params }: Props) {
   // Related programs — try Sanity data first, fall back to hardcoded map
   const relatedPrograms = (RELATED[prog.slug] ?? []).flatMap(s => {
     const sp = allSanityProgs.find(p => p.slug === s)
-    if (sp) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level as 'ug' | 'pg', duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? undefined }]
+    if (sp) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level as 'ug' | 'pg', duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? HERO_IMAGES[s] ?? undefined }]
     const hp = PROGRAM_MAP.get(s)
     if (hp) return [{ slug: hp.slug, name: hp.name, fullName: hp.fullName, level: hp.level, duration: hp.duration, feePerYear: hp.feePerYear, image: HERO_IMAGES[s] }]
     return []
@@ -743,37 +1044,6 @@ export default async function ProgramPage({ params }: Props) {
 
       <ActivityTicker />
 
-      {/* ══ Coursera Premium Banner ══ */}
-      <section className="bg-[#0056D2] py-4 px-5 overflow-hidden">
-        <div className="mx-auto max-w-[1280px] flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <div className="flex items-center gap-3.5">
-            <div className="flex-none w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
-              <Image
-                src="/assets/trust/coursera.svg"
-                alt="Coursera"
-                width={28}
-                height={28}
-                className="rounded-md"
-              />
-            </div>
-            <div>
-              <p className="font-heading font-bold text-[14px] text-white leading-tight">
-                Coursera Premium — Included Free
-              </p>
-              <p className="text-[12px] font-body text-white/75 leading-snug">
-                7,000+ courses from Google, IBM, Meta &amp; top universities for the full duration of your program
-              </p>
-            </div>
-          </div>
-          <div className="hidden sm:block h-8 w-px bg-white/20 flex-none" />
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[12px] font-body text-white/80">
-            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Stackable certifications</span>
-            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Learn at your pace</span>
-            <span className="flex items-center gap-1.5"><span className="text-white font-bold">✓</span> Zero extra cost</span>
-          </div>
-        </div>
-      </section>
-
       <PlacementStatsStrip slug={prog.slug} />
 
       {/* ══ Main content ══ */}
@@ -819,6 +1089,36 @@ export default async function ProgramPage({ params }: Props) {
                   <CurriculumPreview curriculum={curriculum} />
                 </div>
               )}
+
+              {/* Coursera Premium Banner */}
+              <div className="rounded-2xl overflow-hidden">
+                <div className="bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                  <div className="flex items-center gap-3.5 flex-1 min-w-0">
+                    <div className="flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                      <Image
+                        src="/assets/trust/coursera.svg"
+                        alt="Coursera"
+                        width={30}
+                        height={30}
+                        className="rounded-md"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-heading font-bold text-[15px] text-white leading-tight">
+                        Coursera Premium - Included Free
+                      </p>
+                      <p className="text-[12px] font-body text-white/75 leading-snug mt-0.5">
+                        7,000+ courses from Google, IBM, Meta &amp; top universities - free for the full duration of your program
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] font-body text-white/85 flex-none">
+                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Stackable certifications</span>
+                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Learn at your pace</span>
+                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Zero extra cost</span>
+                  </div>
+                </div>
+              </div>
 
               {/* Specialisations */}
               {prog.specialisations.length > 0 && (

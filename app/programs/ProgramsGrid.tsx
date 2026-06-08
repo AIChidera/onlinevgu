@@ -254,7 +254,7 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
         <a
           href="#counsellor"
           data-apply-trigger
-          className="flex-1 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-vgu-red-dark text-white py-2.5 text-[13px] font-semibold font-heading text-center transition-all duration-150"
+          className="flex-1 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red py-2.5 text-[13px] font-semibold font-heading text-center transition-all duration-150"
         >
           Apply Now
         </a>
