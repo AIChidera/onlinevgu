@@ -3,27 +3,6 @@ import { ApplicationSchema } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
 
-// ──────────────────────────────────────────────────────────────
-// Supabase: create the applications table with this SQL before deploying
-//
-// create table applications (
-//   id          bigint generated always as identity primary key,
-//   created_at  timestamptz default now() not null,
-//   name        text not null,
-//   email       text not null,
-//   phone       text not null,
-//   level       text not null,
-//   programme   text not null,
-//   intake      text not null,
-//   consent     boolean not null default false,
-//   source      text,
-//   ip_address  text
-// );
-// alter table applications enable row level security;
-// create policy "insert_public" on applications for insert to anon with check (true);
-// create policy "select_authenticated" on applications for select to authenticated using (true);
-// ──────────────────────────────────────────────────────────────
-
 async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
   const url = process.env.UPSTASH_REDIS_REST_URL
   const token = process.env.UPSTASH_REDIS_REST_TOKEN
