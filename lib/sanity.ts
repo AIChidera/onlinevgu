@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity'
 import { createImageUrlBuilder } from '@sanity/image-url'
+import { unstable_cache } from 'next/cache'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SanityImageSource = any
 
@@ -15,20 +16,6 @@ const builder = createImageUrlBuilder(sanityClient)
 
 export function urlFor(source: SanityImageSource) {
   return builder.image(source)
-}
-
-export async function sanityFetch<T>({
-  query,
-  params = {},
-  tags = [],
-}: {
-  query: string
-  params?: Record<string, unknown>
-  tags?: string[]
-}): Promise<T> {
-  return sanityClient.fetch<T>(query, params, {
-    next: { tags, revalidate: 3600 },
-  })
 }
 
 // ────────────────────────────────────────────────────────────
@@ -107,8 +94,6 @@ export interface SanityMilestone {
 }
 
 // Lightweight shape used for program listing, sitemap, and related-program cards.
-// Fields are aliased in the GROQ query so that consumers get `fee` and `image`
-// without field-name mismatch.
 export interface SanityProgramSummary {
   _id:            string
   slug:           string
@@ -158,109 +143,169 @@ export interface SanityProgram {
 }
 
 // ────────────────────────────────────────────────────────────
-// Queries
+// Queries — all wrapped with unstable_cache for guaranteed
+// function-level caching that is independent of how the
+// Sanity client makes HTTP requests internally.
 // ────────────────────────────────────────────────────────────
 
-const IMAGE_URL = `asset->url`
+export const getTestimonials = unstable_cache(
+  async (): Promise<SanityTestimonial[]> => {
+    return sanityClient.fetch<SanityTestimonial[]>(
+      `*[_type == "testimonial" && showOnHomePage == true] | order(displayOrder asc) {
+        _id, name, role, program, quote,
+        outcomes,
+        "avatarUrl": avatar.asset->url,
+        colorTheme, videoLabel, videoUrl,
+        displayOrder
+      }`,
+      {}
+    )
+  },
+  ['testimonials'],
+  { revalidate: 3600, tags: ['testimonial'] }
+)
 
-export async function getTestimonials(): Promise<SanityTestimonial[]> {
-  const query = `*[_type == "testimonial" && showOnHomePage == true] | order(displayOrder asc) {
-    _id, name, role, program, quote,
-    outcomes,
-    "avatarUrl": avatar.${IMAGE_URL},
-    colorTheme, videoLabel, videoUrl,
-    displayOrder
-  }`
-  return sanityFetch<SanityTestimonial[]>({ query, tags: ['testimonial'] })
-}
+export const getHomeFaqs = unstable_cache(
+  async (): Promise<SanityFaq[]> => {
+    return sanityClient.fetch<SanityFaq[]>(
+      `*[_type == "faq" && (programSlug == "" || !defined(programSlug))] | order(displayOrder asc) {
+        _id, question, answer, programSlug, displayOrder
+      }`,
+      {}
+    )
+  },
+  ['home-faqs'],
+  { revalidate: 3600, tags: ['faq'] }
+)
 
-export async function getHomeFaqs(): Promise<SanityFaq[]> {
-  const query = `*[_type == "faq" && (programSlug == "" || !defined(programSlug))] | order(displayOrder asc) {
-    _id, question, answer, programSlug, displayOrder
-  }`
-  return sanityFetch<SanityFaq[]>({ query, tags: ['faq'] })
-}
+export const getProgramFaqs = unstable_cache(
+  async (slug: string): Promise<SanityFaq[]> => {
+    return sanityClient.fetch<SanityFaq[]>(
+      `*[_type == "faq" && programSlug == $slug] | order(displayOrder asc) {
+        _id, question, answer, programSlug, displayOrder
+      }`,
+      { slug }
+    )
+  },
+  ['program-faqs'],
+  { revalidate: 3600, tags: ['faq'] }
+)
 
-export async function getProgramFaqs(slug: string): Promise<SanityFaq[]> {
-  const query = `*[_type == "faq" && programSlug == $slug] | order(displayOrder asc) {
-    _id, question, answer, programSlug, displayOrder
-  }`
-  return sanityFetch<SanityFaq[]>({ query, params: { slug }, tags: ['faq'] })
-}
+export const getCampusEvents = unstable_cache(
+  async (): Promise<SanityCampusEvent[]> => {
+    return sanityClient.fetch<SanityCampusEvent[]>(
+      `*[_type == "campusEvent"] | order(displayOrder asc) {
+        _id, title, subtitle, tags,
+        "photoUrl": photo.asset->url,
+        colorTheme, displayOrder
+      }`,
+      {}
+    )
+  },
+  ['campus-events'],
+  { revalidate: 3600, tags: ['campusEvent'] }
+)
 
-export async function getCampusEvents(): Promise<SanityCampusEvent[]> {
-  const query = `*[_type == "campusEvent"] | order(displayOrder asc) {
-    _id, title, subtitle, tags,
-    "photoUrl": photo.${IMAGE_URL},
-    colorTheme, displayOrder
-  }`
-  return sanityFetch<SanityCampusEvent[]>({ query, tags: ['campusEvent'] })
-}
+export const getSiteSettings = unstable_cache(
+  async (): Promise<SanitySiteSettings | null> => {
+    return sanityClient.fetch<SanitySiteSettings | null>(
+      `*[_type == "siteSettings"][0] {
+        nextBatch, admissionsOpen,
+        phoneDisplay, whatsappNumber, admissionsEmail, address,
+        statLearners, statCountries, statPlacement, statRating,
+        statPrograms, statHiringPartners, statCourseraCount, statYearEstablished,
+        socialInstagram, socialLinkedIn, socialFacebook, socialYouTube, socialX
+      }`,
+      {}
+    )
+  },
+  ['site-settings'],
+  { revalidate: 3600, tags: ['siteSettings'] }
+)
 
-export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
-  const query = `*[_type == "siteSettings"][0] {
-    nextBatch, admissionsOpen,
-    phoneDisplay, whatsappNumber, admissionsEmail, address,
-    statLearners, statCountries, statPlacement, statRating,
-    statPrograms, statHiringPartners, statCourseraCount, statYearEstablished,
-    socialInstagram, socialLinkedIn, socialFacebook, socialYouTube, socialX
-  }`
-  return sanityFetch<SanitySiteSettings | null>({ query, tags: ['siteSettings'] })
-}
+export const getFacultyByProgram = unstable_cache(
+  async (slug: string): Promise<SanityFaculty[]> => {
+    return sanityClient.fetch<SanityFaculty[]>(
+      `*[_type == "faculty" && $slug in programs] | order(displayOrder asc) {
+        _id, name, title, credential,
+        "photoUrl": photo.asset->url,
+        initials, avatarColor, displayOrder
+      }`,
+      { slug }
+    )
+  },
+  ['faculty-by-program'],
+  { revalidate: 3600, tags: ['faculty'] }
+)
 
-export async function getFacultyByProgram(slug: string): Promise<SanityFaculty[]> {
-  const query = `*[_type == "faculty" && $slug in programs] | order(displayOrder asc) {
-    _id, name, title, credential,
-    "photoUrl": photo.${IMAGE_URL},
-    initials, avatarColor, displayOrder
-  }`
-  return sanityFetch<SanityFaculty[]>({ query, params: { slug }, tags: ['faculty'] })
-}
+export const getMilestones = unstable_cache(
+  async (): Promise<SanityMilestone[]> => {
+    return sanityClient.fetch<SanityMilestone[]>(
+      `*[_type == "milestone"] | order(year asc) {
+        _id, year, event
+      }`,
+      {}
+    )
+  },
+  ['milestones'],
+  { revalidate: 3600, tags: ['milestone'] }
+)
 
-export async function getMilestones(): Promise<SanityMilestone[]> {
-  const query = `*[_type == "milestone"] | order(year asc) {
-    _id, year, event
-  }`
-  return sanityFetch<SanityMilestone[]>({ query, tags: ['milestone'] })
-}
+export const getAllPrograms = unstable_cache(
+  async (): Promise<SanityProgramSummary[]> => {
+    return sanityClient.fetch<SanityProgramSummary[]>(
+      `*[_type == "program"] | order(coalesce(displayOrder, 999) asc) {
+        _id,
+        "slug": slug.current,
+        name, fullName, level, discipline, duration,
+        "fee": feePerYear,
+        popular,
+        specialisations,
+        "image": heroImage.asset->url,
+        displayOrder
+      }`,
+      {}
+    )
+  },
+  ['all-programs'],
+  { revalidate: 3600, tags: ['program'] }
+)
 
-export async function getAllPrograms(): Promise<SanityProgramSummary[]> {
-  const query = `*[_type == "program"] | order(coalesce(displayOrder, 999) asc) {
-    _id,
-    "slug": slug.current,
-    name, fullName, level, discipline, duration,
-    "fee": feePerYear,
-    popular,
-    specialisations,
-    "image": heroImage.${IMAGE_URL},
-    displayOrder
-  }`
-  return sanityFetch<SanityProgramSummary[]>({ query, tags: ['program'] })
-}
+export const getTestimonialsByProgram = unstable_cache(
+  async (program: string): Promise<SanityTestimonial[]> => {
+    return sanityClient.fetch<SanityTestimonial[]>(
+      `*[_type == "testimonial" && program == $program] | order(displayOrder asc) {
+        _id, name, role, program, quote,
+        outcomes,
+        "avatarUrl": avatar.asset->url,
+        colorTheme, videoLabel, videoUrl,
+        displayOrder
+      }`,
+      { program }
+    )
+  },
+  ['testimonials-by-program'],
+  { revalidate: 3600, tags: ['testimonial'] }
+)
 
-export async function getTestimonialsByProgram(program: string): Promise<SanityTestimonial[]> {
-  const query = `*[_type == "testimonial" && program == $program] | order(displayOrder asc) {
-    _id, name, role, program, quote,
-    outcomes,
-    "avatarUrl": avatar.${IMAGE_URL},
-    colorTheme, videoLabel, videoUrl,
-    displayOrder
-  }`
-  return sanityFetch<SanityTestimonial[]>({ query, params: { program }, tags: ['testimonial'] })
-}
-
-export async function getProgramBySlug(slug: string): Promise<SanityProgram | null> {
-  const query = `*[_type == "program" && slug.current == $slug][0] {
-    _id,
-    "slug": slug.current,
-    name, fullName, level, duration, semesters,
-    feePerYear, totalFee, emi, nextBatch,
-    popular, description,
-    eligibility, highlights, specialisations,
-    careerRoles, avgSalaryAfter, topHirers,
-    curriculum,
-    "heroImageUrl":          heroImage.${IMAGE_URL},
-    "certificateSampleUrl": certificateSample.${IMAGE_URL}
-  }`
-  return sanityFetch<SanityProgram | null>({ query, params: { slug }, tags: ['program'] })
-}
+export const getProgramBySlug = unstable_cache(
+  async (slug: string): Promise<SanityProgram | null> => {
+    return sanityClient.fetch<SanityProgram | null>(
+      `*[_type == "program" && slug.current == $slug][0] {
+        _id,
+        "slug": slug.current,
+        name, fullName, level, duration, semesters,
+        feePerYear, totalFee, emi, nextBatch,
+        popular, description,
+        eligibility, highlights, specialisations,
+        careerRoles, avgSalaryAfter, topHirers,
+        curriculum,
+        "heroImageUrl":          heroImage.asset->url,
+        "certificateSampleUrl": certificateSample.asset->url
+      }`,
+      { slug }
+    )
+  },
+  ['program-by-slug'],
+  { revalidate: 3600, tags: ['program'] }
+)
