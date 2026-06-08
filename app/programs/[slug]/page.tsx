@@ -496,6 +496,9 @@ export default async function ProgramPage({ params }: Props) {
     return []
   })
 
+  // Curriculum never stored in Sanity seed — always fall back to hardcoded map
+  const curriculum = (prog as ProgramDetail).curriculum ?? PROGRAM_MAP.get(slug)?.curriculum
+
   // Map Sanity FAQs → {q, a} expected by ProgramFAQ; undefined = use fallback
   const mappedFaqs = sanityFaqs.length > 0
     ? sanityFaqs.map(f => ({ q: f.question, a: f.answer }))
@@ -805,7 +808,7 @@ export default async function ProgramPage({ params }: Props) {
               </div>
 
               {/* Curriculum */}
-              {prog.curriculum && (
+              {curriculum && (
                 <div>
                   <div data-animate="fade-up">
                     <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
@@ -813,7 +816,7 @@ export default async function ProgramPage({ params }: Props) {
                       What You&apos;ll Study
                     </h2>
                   </div>
-                  <CurriculumPreview curriculum={prog.curriculum} />
+                  <CurriculumPreview curriculum={curriculum} />
                 </div>
               )}
 
