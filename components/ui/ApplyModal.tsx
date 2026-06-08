@@ -10,9 +10,6 @@ function sanitizePhone(v: string) {
   return v.replace(/[^\d\s+\-().]/g, '')
 }
 
-const UG_PROGRAMMES = ['B.Com', 'BBA', 'BCA', 'BA', 'B.Sc', 'B.Lib']
-const PG_PROGRAMMES = ['MBA', 'MCA', 'M.Com', 'MA', 'M.Lib', 'Healthcare MBA']
-
 const INTAKE_OPTIONS = [
   { value: 'July 2026',     label: 'July 2026',    sub: 'Next batch',        popular: true  },
   { value: 'January 2027', label: 'January 2027', sub: 'Winter intake',     popular: false },
@@ -30,10 +27,19 @@ export default function ApplyModal() {
     programme: '', intake: '',
     consent: false,
   })
-  const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted]   = useState(false)
+  const [submitting, setSubmitting]   = useState(false)
+  const [submitted, setSubmitted]     = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [programList, setProgramList] = useState<{ name: string; level: string }[]>([])
   const triggerRef = useRef<HTMLElement | null>(null)
+
+  // Fetch real program list from Sanity once on mount
+  useEffect(() => {
+    fetch('/api/programs')
+      .then(r => r.ok ? r.json() : [])
+      .then((data: { name: string; level: string }[]) => setProgramList(data))
+      .catch(() => {})
+  }, [])
 
   const INITIAL_FORM = { name: '', email: '', mobile: '', level: '' as '' | 'ug' | 'pg', programme: '', intake: '', consent: false }
 
@@ -134,7 +140,9 @@ export default function ApplyModal() {
 
   if (!open) return null
 
-  const programmes = form.level === 'ug' ? UG_PROGRAMMES : form.level === 'pg' ? PG_PROGRAMMES : []
+  const programmes = form.level
+    ? programList.filter(p => p.level === form.level).map(p => p.name)
+    : []
   const canSubmit  = !!form.level && !!form.programme && !!form.intake
 
   return (
@@ -269,7 +277,7 @@ export default function ApplyModal() {
                         'font-heading font-bold text-[14px] transition-colors duration-150',
                         form.level === lvl ? 'text-vgu-red' : 'text-neutral-700 group-hover:text-neutral-900',
                       ].join(' ')}>
-                        {lvl === 'ug' ? 'B.Com, BBA, BCA…' : 'MBA, MCA, M.Com…'}
+                        {lvl === 'ug' ? 'Undergraduate degrees' : 'Postgraduate degrees'}
                       </p>
                     </button>
                   ))}
@@ -299,10 +307,8 @@ export default function ApplyModal() {
                       </button>
                     ))}
                   </div>
-                  {form.level === 'pg' && (
-                    <p className="mt-2 text-[11px] font-body text-neutral-400">
-                      ★ MBA is our most popular program · Next batch: July 2026
-                    </p>
+                  {programmes.length === 0 && form.level && (
+                    <p className="mt-2 text-[11px] font-body text-neutral-400">Loading programs...</p>
                   )}
                 </div>
               )}

@@ -12,11 +12,6 @@ import {
   IconBrandWhatsapp,
 } from '@tabler/icons-react'
 
-const PROGRAMMES = [
-  'B.Com', 'BBA', 'BCA', 'BA', 'B.Sc', 'B.Lib',
-  'MBA', 'MCA', 'M.Com', 'MA', 'M.Lib', 'Healthcare MBA',
-]
-
 const TRUST_PILLS = [
   { Icon: IconThumbUp,     label: 'Free consultation' },
   { Icon: IconShieldCheck, label: 'No obligation'     },
@@ -47,7 +42,16 @@ export default function CounsellorModal() {
   const [submitting, setSubmitting]   = useState(false)
   const [submitted, setSubmitted]     = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [programmes, setProgrammes]   = useState<string[]>([])
   const triggerRef = useRef<HTMLElement | null>(null)
+
+  // Fetch real program list from Sanity once on mount
+  useEffect(() => {
+    fetch('/api/programs')
+      .then(r => r.ok ? r.json() : [])
+      .then((data: { name: string }[]) => setProgrammes(data.map(p => p.name)))
+      .catch(() => {})
+  }, [])
 
   // Reset to initial state only when closed after a successful submission
   const closeModal = useCallback(() => {
@@ -290,10 +294,13 @@ export default function CounsellorModal() {
                 />
                 <select
                   name="programme" required value={form.programme} onChange={handleChange}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none"
+                  disabled={programmes.length === 0}
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none disabled:opacity-50"
                 >
-                  <option value="" disabled>Select a program</option>
-                  {PROGRAMMES.map(p => <option key={p} value={p}>{p}</option>)}
+                  <option value="" disabled>
+                    {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
+                  </option>
+                  {programmes.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
 
                 {submitError && (
