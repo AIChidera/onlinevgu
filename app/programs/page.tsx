@@ -30,10 +30,19 @@ export default async function ProgramsPage() {
     getSiteSettings(),
   ])
 
+  // Build a slug→image map from the hardcoded fallback so we can fill gaps
+  // when Sanity programmes don't yet have a hero image uploaded in the CMS.
+  const fallbackImages: Record<string, string> = Object.fromEntries(
+    PROGRAMMES.filter(p => p.image).map(p => [p.slug, p.image as string])
+  )
+
   // Sanity is primary; fall back to static data until CMS is populated
   const programmes = sanityPrograms.length > 0
-    ? sanityPrograms
-    : PROGRAMMES.map(p => ({ _id: p.slug, slug: p.slug, name: p.name, fullName: p.fullName, level: p.level, discipline: p.discipline, duration: p.duration, fee: p.fee, popular: p.popular, specialisations: p.specialisations, image: p.image }))
+    ? sanityPrograms.map(sp => ({
+        ...sp,
+        image: sp.image ?? fallbackImages[sp.slug] ?? null,
+      }))
+    : PROGRAMMES.map(p => ({ _id: p.slug, slug: p.slug, name: p.name, fullName: p.fullName, level: p.level, discipline: p.discipline, duration: p.duration, fee: p.fee, popular: p.popular, specialisations: p.specialisations, image: p.image ?? null }))
 
   const nextBatch = settings?.nextBatch ?? NEXT_BATCH
   const count = programmes.length

@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import dynamic from 'next/dynamic'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'

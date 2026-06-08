@@ -17,6 +17,11 @@ const FILTERS: { label: string; value: Filter }[] = [
   { label: 'Postgraduate',  value: 'pg'  },
 ]
 
+// Keyed fallback images — used when Sanity hasn't had a hero uploaded yet
+const FALLBACK_IMAGES: Record<string, string> = Object.fromEntries(
+  PROGRAMMES.filter(p => p.image).map(p => [p.slug, p.image as string])
+)
+
 // Map SanityProgramSummary → the Programme shape this component uses
 function toProgram(p: SanityProgramSummary): Programme {
   return {
@@ -29,7 +34,7 @@ function toProgram(p: SanityProgramSummary): Programme {
     fee:             p.fee,
     popular:         p.popular,
     specialisations: p.specialisations ?? [],
-    image:           p.image ?? undefined,
+    image:           p.image ?? FALLBACK_IMAGES[p.slug],
   }
 }
 
