@@ -1,16 +1,26 @@
 import { z } from 'zod'
 
-const phoneRegex = /^[+]?[\d\s\-().]{10,15}$/
+// Only digits, spaces, +, -, (, ) — no letters or special chars
+const phoneRegex = /^[+]?\d[\d\s\-().]{8,14}$/
+
+// Block HTML tags, script injection, and common XSS vectors
+const UNSAFE_RE = /<[^>]*>|javascript\s*:|data\s*:|on\w+\s*=/i
+
+function noScript(msg: string) {
+  return (v: string) => !UNSAFE_RE.test(v) || msg
+}
 
 export const LeadSchema = z.object({
   name: z
     .string()
     .min(2, 'Name must be at least 2 characters')
     .max(100, 'Name too long')
-    .trim(),
+    .trim()
+    .refine(noScript('Name contains invalid content')),
   email: z
     .string()
     .email('Enter a valid email address')
+    .max(254)
     .trim()
     .toLowerCase(),
   phone: z
@@ -20,7 +30,9 @@ export const LeadSchema = z.object({
   programInterest: z
     .string()
     .min(1, 'Please select a programme')
-    .max(100),
+    .max(100)
+    .trim()
+    .refine(noScript('Invalid programme value')),
   source:      z.string().optional(),
   intake:      z.string().optional(),
   utmSource:   z.string().optional(),

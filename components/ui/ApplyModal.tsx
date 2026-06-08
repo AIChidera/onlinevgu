@@ -1,7 +1,14 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { IconX, IconLock, IconRocket, IconCheck } from '@tabler/icons-react'
+
+function sanitizeText(v: string) {
+  return v.replace(/<[^>]*>/g, '').replace(/javascript\s*:/gi, '').replace(/on\w+\s*=\s*/gi, '').replace(/[<>]/g, '')
+}
+function sanitizePhone(v: string) {
+  return v.replace(/[^\d\s+\-().]/g, '')
+}
 
 const UG_PROGRAMMES = ['B.Com', 'BBA', 'BCA', 'BA', 'B.Sc', 'B.Lib']
 const PG_PROGRAMMES = ['MBA', 'MCA', 'M.Com', 'MA', 'M.Lib', 'Healthcare MBA']
@@ -28,6 +35,18 @@ export default function ApplyModal() {
   const [submitError, setSubmitError] = useState('')
   const triggerRef = useRef<HTMLElement | null>(null)
 
+  const INITIAL_FORM = { name: '', email: '', mobile: '', level: '' as '' | 'ug' | 'pg', programme: '', intake: '', consent: false }
+
+  const closeModal = useCallback(() => {
+    setOpen(false)
+    if (submitted) {
+      setForm(INITIAL_FORM)
+      setSubmitted(false)
+      setSubmitError('')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitted])
+
   // Intercept all [data-apply-trigger] clicks
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -53,10 +72,10 @@ export default function ApplyModal() {
   // ESC to close
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal() }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [open])
+  }, [open, closeModal])
 
   // Lock body scroll while open (position:fixed is required for iOS Safari)
   useEffect(() => {
@@ -75,10 +94,12 @@ export default function ApplyModal() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, type } = e.target
-    setForm(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }))
+    if (type === 'checkbox') {
+      setForm(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }))
+    } else {
+      const clean = name === 'mobile' ? sanitizePhone(value) : sanitizeText(value)
+      setForm(prev => ({ ...prev, [name]: clean }))
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -119,7 +140,7 @@ export default function ApplyModal() {
   return (
     <div
       className="fixed inset-0 z-[200] flex items-end sm:items-center sm:justify-center p-0 sm:p-6"
-      onClick={() => setOpen(false)}
+      onClick={closeModal}
     >
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
@@ -149,7 +170,7 @@ export default function ApplyModal() {
 
           {/* Close */}
           <button
-            onClick={() => setOpen(false)}
+            onClick={closeModal}
             aria-label="Close"
             className="absolute top-4 right-4 z-[30] w-8 h-8 rounded-full bg-white/15 hover:bg-white/28 flex items-center justify-center transition-colors duration-150"
           >
@@ -209,7 +230,7 @@ export default function ApplyModal() {
                 A VGU counsellor will call you within 2 hours to walk you through the next steps.
               </p>
               <button
-                onClick={() => setOpen(false)}
+                onClick={closeModal}
                 className="mt-6 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white px-10 py-3 text-[14px] font-semibold font-heading transition-colors duration-150"
               >
                 Done
@@ -295,11 +316,13 @@ export default function ApplyModal() {
                   <div className="grid grid-cols-2 gap-3">
                     <input
                       name="name" type="text" placeholder="Full name" required
+                      maxLength={100} autoComplete="name"
                       value={form.name} onChange={handleChange}
                       className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
                     />
                     <input
                       name="email" type="email" placeholder="Email address" required
+                      maxLength={254} autoComplete="email"
                       value={form.email} onChange={handleChange}
                       className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
                     />
@@ -310,6 +333,7 @@ export default function ApplyModal() {
                     </span>
                     <input
                       name="mobile" type="tel" placeholder="Mobile number" required
+                      maxLength={15} inputMode="tel" autoComplete="tel"
                       value={form.mobile} onChange={handleChange}
                       className="flex-1 px-3 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none"
                     />

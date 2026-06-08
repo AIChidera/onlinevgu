@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import {
   IconHeadset,
@@ -9,6 +9,7 @@ import {
   IconClock,
   IconThumbUp,
   IconX,
+  IconBrandWhatsapp,
 } from '@tabler/icons-react'
 
 const PROGRAMMES = [
@@ -22,13 +23,41 @@ const TRUST_PILLS = [
   { Icon: IconClock,       label: 'Reply in 2 min'    },
 ]
 
+const INITIAL_FORM = { name: '', mobile: '', email: '', programme: '' }
+
+const WHATSAPP_URL = "https://wa.me/911800123456?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees"
+
+// Strip HTML tags, script injection, and event-handler patterns client-side
+function sanitizeText(v: string) {
+  return v
+    .replace(/<[^>]*>/g, '')
+    .replace(/javascript\s*:/gi, '')
+    .replace(/on\w+\s*=\s*/gi, '')
+    .replace(/[<>]/g, '')
+}
+
+// Strip anything that isn't a valid phone character
+function sanitizePhone(v: string) {
+  return v.replace(/[^\d\s+\-().]/g, '')
+}
+
 export default function CounsellorModal() {
-  const [open, setOpen]           = useState(false)
-  const [form, setForm]           = useState({ name: '', mobile: '', email: '', programme: '' })
+  const [open, setOpen]               = useState(false)
+  const [form, setForm]               = useState(INITIAL_FORM)
   const [submitting, setSubmitting]   = useState(false)
   const [submitted, setSubmitted]     = useState(false)
   const [submitError, setSubmitError] = useState('')
   const triggerRef = useRef<HTMLElement | null>(null)
+
+  // Reset to initial state only when closed after a successful submission
+  const closeModal = useCallback(() => {
+    setOpen(false)
+    if (submitted) {
+      setForm(INITIAL_FORM)
+      setSubmitted(false)
+      setSubmitError('')
+    }
+  }, [submitted])
 
   // Intercept all href="#counsellor" clicks anywhere on the page
   useEffect(() => {
@@ -36,8 +65,6 @@ export default function CounsellorModal() {
 
     const handleClick = (e: MouseEvent) => {
       const el = e.target as HTMLElement
-      // Match any <a href="#counsellor"> or any element with data-counsellor-trigger
-      // but NOT elements that also carry data-apply-trigger (those open ApplyModal instead)
       const anchor = el.closest('a[href="#counsellor"], [data-counsellor-trigger]')
       if (anchor && !anchor.hasAttribute('data-apply-trigger')) {
         e.preventDefault()
@@ -54,7 +81,6 @@ export default function CounsellorModal() {
     }
   }, [])
 
-  // Blur the trigger on close so the browser doesn't restore focus and show a ring
   useEffect(() => {
     if (!open) {
       triggerRef.current?.blur()
@@ -65,12 +91,12 @@ export default function CounsellorModal() {
   // ESC key closes
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal() }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [open])
+  }, [open, closeModal])
 
-  // Lock body scroll while open (position:fixed is required for iOS Safari)
+  // Lock body scroll while open
   useEffect(() => {
     if (!open) return
     const scrollY = window.scrollY
@@ -87,7 +113,8 @@ export default function CounsellorModal() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
+    const clean = name === 'mobile' ? sanitizePhone(value) : sanitizeText(value)
+    setForm(prev => ({ ...prev, [name]: clean }))
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -123,12 +150,12 @@ export default function CounsellorModal() {
   return (
     <div
       className="fixed inset-0 z-[200] flex items-end sm:items-center sm:justify-center p-0 sm:p-6"
-      onClick={() => setOpen(false)}
+      onClick={closeModal}
     >
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card — card itself scrolls, not the outer wrapper */}
+      {/* Modal card */}
       <div
         role="dialog"
         aria-modal="true"
@@ -139,7 +166,7 @@ export default function CounsellorModal() {
       >
         {/* Close button */}
         <button
-          onClick={() => setOpen(false)}
+          onClick={closeModal}
           aria-label="Close"
           className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center transition-colors duration-150"
         >
@@ -147,14 +174,12 @@ export default function CounsellorModal() {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          {/* ── Left: counsellor image ── */}
+          {/* Left: counsellor image */}
           <div className="relative hidden lg:block min-h-[520px]">
-            {/* Warm fallback gradient — shows if image fails to load */}
             <div
               className="absolute inset-0"
               style={{ background: 'linear-gradient(160deg, #d4a574 0%, #a0603a 40%, #6b3520 100%)' }}
             />
-
             <Image
               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=85&auto=format&fit=crop&crop=top"
               fill
@@ -162,14 +187,10 @@ export default function CounsellorModal() {
               className="object-cover object-top"
               sizes="(max-width: 1024px) 0vw, 450px"
             />
-
-            {/* Bottom scrim so the floating trust card stays readable */}
             <div
               className="absolute inset-0"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.10) 40%, transparent 100%)' }}
             />
-
-            {/* Floating trust card */}
             <div className="absolute bottom-10 right-6 bg-white rounded-2xl p-4 shadow-xl animate-float-up min-w-[200px] z-10 [animation-delay:300ms]">
               <div className="flex items-center gap-3 mb-2">
                 <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-vgu-red flex-none bg-vgu-beige">
@@ -186,7 +207,7 @@ export default function CounsellorModal() {
                 </div>
                 <div>
                   <p className="font-heading font-bold text-[13px] text-neutral-900">Ananya Gupta</p>
-                  <p className="text-[11px] font-body text-neutral-500">Admissions Counsellor · VGU</p>
+                  <p className="text-[11px] font-body text-neutral-500">Admissions Counsellor - VGU</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-[12px] font-body font-semibold text-neutral-800">
@@ -194,12 +215,12 @@ export default function CounsellorModal() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
                 </span>
-                Available now · Avg. response 2 min
+                Available now - Avg. response 2 min
               </div>
             </div>
           </div>
 
-          {/* ── Right: form ── */}
+          {/* Right: form */}
           <div className="flex flex-col justify-center px-10 py-12 md:px-6 md:py-8">
             <span className="inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5 text-[12px] font-body font-bold uppercase tracking-[0.08em] mb-5 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
               <IconHeadset size={14} />
@@ -219,24 +240,52 @@ export default function CounsellorModal() {
                 <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
                   <IconThumbUp size={22} className="text-green-600" />
                 </div>
-                <p className="font-heading font-bold text-[18px] text-neutral-900 mb-1">We&apos;ve got your details!</p>
-                <p className="text-[14px] font-body text-neutral-500">Ananya will call you within 2 hours.</p>
+                <p className="font-heading font-bold text-[18px] text-neutral-900 mb-1">
+                  We&apos;ve got your details!
+                </p>
+                <p className="text-[14px] font-body text-neutral-500 mb-5">
+                  Ananya will call you within 2 hours.
+                </p>
+
+                <p className="text-[12px] font-body font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-3">
+                  Need a quicker answer?
+                </p>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeModal}
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold text-white transition-colors duration-150"
+                  style={{ backgroundColor: '#25D366' }}
+                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1da851')}
+                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#25D366')}
+                >
+                  <IconBrandWhatsapp size={18} />
+                  Chat on WhatsApp
+                </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3" noValidate>
                 <input
                   name="name" type="text" placeholder="Your full name" required
+                  maxLength={100}
                   value={form.name} onChange={handleChange}
+                  autoComplete="name"
                   className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <input
                   name="mobile" type="tel" placeholder="Mobile number" required
+                  maxLength={15}
                   value={form.mobile} onChange={handleChange}
+                  autoComplete="tel"
+                  inputMode="tel"
                   className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <input
                   name="email" type="email" placeholder="Email address" required
+                  maxLength={254}
                   value={form.email} onChange={handleChange}
+                  autoComplete="email"
                   className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <select
@@ -257,7 +306,7 @@ export default function CounsellorModal() {
                   type="submit" disabled={submitting}
                   className="mt-1 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3.5 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60"
                 >
-                  {submitting ? 'Sending…' : 'Talk to a Counsellor →'}
+                  {submitting ? 'Sending...' : 'Talk to a Counsellor'}
                 </button>
 
                 <p className="flex items-center gap-1.5 text-[12px] font-body text-neutral-400 mt-1">
