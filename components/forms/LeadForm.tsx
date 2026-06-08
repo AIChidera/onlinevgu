@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { LeadSchema, type LeadInput } from '@/lib/validations'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
+import PhoneField from '@/components/ui/PhoneField'
 
 const PROGRAMS = [
   'Online MBA',
@@ -31,6 +32,7 @@ interface LeadFormProps {
 export default function LeadForm({ onSuccess, source = 'website', compact = false }: LeadFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState('')
+  const [dialCode, setDialCode] = useState('+91')
 
   const {
     register,
@@ -47,7 +49,7 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, phone: dialCode + data.phone }),
       })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))
@@ -97,14 +99,22 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
         {...register('email')}
       />
 
-      <Input
-        label="Mobile number"
-        type="tel"
-        placeholder="+91 98765 43210"
-        error={errors.phone?.message}
-        required
-        {...register('phone')}
-      />
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[14px] font-heading font-semibold text-neutral-700">
+          Mobile number <span className="text-red-500">*</span>
+        </label>
+        <PhoneField
+          placeholder="98765 43210"
+          error={errors.phone?.message}
+          required
+          dialCode={dialCode}
+          onDialChange={setDialCode}
+          {...register('phone')}
+        />
+        {errors.phone && (
+          <p className="text-[13px] text-red-500">{errors.phone.message}</p>
+        )}
+      </div>
 
       {!compact && (
         <div className="flex flex-col gap-1.5">

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { BrochureSchema, type BrochureInput } from '@/lib/validations'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
+import PhoneField from '@/components/ui/PhoneField'
 
 const PROGRAMS = [
   'Online MBA',
@@ -29,6 +30,7 @@ interface BrochureFormProps {
 export default function BrochureForm({ onSuccess, program }: BrochureFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState('')
+  const [dialCode, setDialCode] = useState('+91')
 
   const {
     register,
@@ -45,7 +47,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
       const res = await fetch('/api/brochure', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, phone: dialCode + data.phone }),
       })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))
@@ -93,14 +95,22 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
         {...register('email')}
       />
 
-      <Input
-        label="Mobile number"
-        type="tel"
-        placeholder="+91 98765 43210"
-        error={errors.phone?.message}
-        required
-        {...register('phone')}
-      />
+      <div className="flex flex-col gap-1.5">
+        <label className="text-[14px] font-heading font-semibold text-neutral-700">
+          Mobile number <span className="text-red-500">*</span>
+        </label>
+        <PhoneField
+          placeholder="98765 43210"
+          error={errors.phone?.message}
+          required
+          dialCode={dialCode}
+          onDialChange={setDialCode}
+          {...register('phone')}
+        />
+        {errors.phone && (
+          <p className="text-[13px] text-red-500">{errors.phone.message}</p>
+        )}
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <label className="text-[14px] font-heading font-semibold text-neutral-700">

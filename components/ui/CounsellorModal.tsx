@@ -11,6 +11,7 @@ import {
   IconX,
   IconBrandWhatsapp,
 } from '@tabler/icons-react'
+import PhoneField from '@/components/ui/PhoneField'
 
 const TRUST_PILLS = [
   { Icon: IconThumbUp,     label: 'Free consultation' },
@@ -19,6 +20,7 @@ const TRUST_PILLS = [
 ]
 
 const INITIAL_FORM = { name: '', mobile: '', email: '', programme: '' }
+const DEFAULT_DIAL = '+91'
 
 const WHATSAPP_URL = "https://wa.me/911800123456?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees"
 
@@ -39,6 +41,7 @@ function sanitizePhone(v: string) {
 export default function CounsellorModal() {
   const [open, setOpen]               = useState(false)
   const [form, setForm]               = useState(INITIAL_FORM)
+  const [dialCode, setDialCode]       = useState(DEFAULT_DIAL)
   const [submitting, setSubmitting]   = useState(false)
   const [submitted, setSubmitted]     = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -58,6 +61,7 @@ export default function CounsellorModal() {
     setOpen(false)
     if (submitted) {
       setForm(INITIAL_FORM)
+      setDialCode(DEFAULT_DIAL)
       setSubmitted(false)
       setSubmitError('')
     }
@@ -132,7 +136,7 @@ export default function CounsellorModal() {
         body: JSON.stringify({
           name:            form.name,
           email:           form.email,
-          phone:           form.mobile,
+          phone:           dialCode + form.mobile,
           programInterest: form.programme,
           source:          'modal-counsellor',
         }),
@@ -277,13 +281,15 @@ export default function CounsellorModal() {
                   autoComplete="name"
                   className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
-                <input
-                  name="mobile" type="tel" placeholder="Mobile number" required
+                <PhoneField
+                  name="mobile"
+                  placeholder="Mobile number"
+                  required
                   maxLength={15}
-                  value={form.mobile} onChange={handleChange}
-                  autoComplete="tel"
-                  inputMode="tel"
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  value={form.mobile}
+                  onChange={handleChange}
+                  dialCode={dialCode}
+                  onDialChange={setDialCode}
                 />
                 <input
                   name="email" type="email" placeholder="Email address" required

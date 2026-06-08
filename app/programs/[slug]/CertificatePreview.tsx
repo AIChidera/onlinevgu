@@ -46,7 +46,7 @@ export default function CertificatePreview({ programName, programFullName }: Pro
             <div data-animate="slide-from-left">
               <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Your credential</p>
               <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[36px]">
-                A Degree Certificate That Speaks for Itself
+                Take a Look at Your Future Degree
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-6">
                 Your {programName} certificate is identical to the one given to on-campus graduates.

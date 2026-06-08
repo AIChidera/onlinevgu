@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { IconDownload, IconLock, IconX, IconMail, IconCheck } from '@tabler/icons-react'
+import PhoneField from '@/components/ui/PhoneField'
 
 function sanitizeText(v: string) {
   return v.replace(/<[^>]*>/g, '').replace(/javascript\s*:/gi, '').replace(/on\w+\s*=\s*/gi, '').replace(/[<>]/g, '')
@@ -10,11 +11,13 @@ function sanitizePhone(v: string) {
 }
 
 const INITIAL_FORM = { name: '', mobile: '', email: '' }
+const DEFAULT_DIAL = '+91'
 
 export default function BrochureModal() {
   const [open, setOpen]               = useState(false)
   const [program, setProgram]         = useState('')
   const [form, setForm]               = useState({ name: '', mobile: '', email: '' })
+  const [dialCode, setDialCode]       = useState(DEFAULT_DIAL)
   const [programmes, setProgrammes]   = useState<string[]>([])
   const [submitting, setSubmitting]   = useState(false)
   const [submitted, setSubmitted]     = useState(false)
@@ -25,6 +28,7 @@ export default function BrochureModal() {
     setOpen(false)
     if (submitted) {
       setForm(INITIAL_FORM)
+      setDialCode(DEFAULT_DIAL)
       setSubmitted(false)
       setSubmitError('')
       setSubmitEmail('')
@@ -98,7 +102,7 @@ export default function BrochureModal() {
         body: JSON.stringify({
           name:            form.name,
           email:           form.email,
-          phone:           form.mobile,
+          phone:           dialCode + form.mobile,
           programInterest: program || 'Not specified',
         }),
       })
@@ -192,11 +196,15 @@ export default function BrochureModal() {
                 value={form.name} onChange={handleChange}
                 className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
-              <input
-                name="mobile" type="tel" placeholder="Mobile number" required
-                maxLength={15} inputMode="tel" autoComplete="tel"
-                value={form.mobile} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+              <PhoneField
+                name="mobile"
+                placeholder="Mobile number"
+                required
+                maxLength={15}
+                value={form.mobile}
+                onChange={handleChange}
+                dialCode={dialCode}
+                onDialChange={setDialCode}
               />
               <input
                 name="email" type="email" placeholder="Email address" required
