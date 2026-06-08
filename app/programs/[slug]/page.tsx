@@ -289,7 +289,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A specialised MA in English Literature from VGU - ideal for UGC-NET aspirants, civil services candidates, and those pursuing teaching or academic careers. Comprehensive coverage of British, American, and Indian writing in English with a full dissertation in the final semester.',
+    description: 'A specialised MA in English Literature from VGU - ideal for UGC-NET aspirants, civil services candidates, and those pursuing teaching or academic careers. Covers British, American, and Indian writing in English across four semesters, with a full dissertation in the final semester.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -349,7 +349,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: 'A comprehensive undergraduate business degree that builds strong management fundamentals - ideal for fresh graduates who want to fast-track into a business career or launch their own venture. Choose from General Management, Digital Marketing, Retail Management, or FinTech specialisation tracks.',
+    description: 'An undergraduate business degree that builds strong management fundamentals - ideal for fresh graduates who want to fast-track into a business career or launch their own venture. Choose from General Management, Digital Marketing, Retail Management, or FinTech specialisation tracks.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream - Science, Commerce, or Arts',
@@ -1293,7 +1293,7 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
             <Image src="/assets/trust/coursera.svg" alt="Coursera" width={22} height={22} className="rounded-md" />
           </div>
           <div>
-            <p className="font-heading font-bold text-[13px] text-neutral-900">Coursera Premium — Included Free</p>
+            <p className="font-heading font-bold text-[13px] text-neutral-900">Coursera Premium - Included Free</p>
             <p className="text-[11px] font-body text-neutral-500">7,000+ courses for the full course duration</p>
           </div>
         </div>

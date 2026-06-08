@@ -114,7 +114,7 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         <div
           className="grid gap-px bg-neutral-200"
           style={{
-            gridTemplateRows: 'repeat(3, auto)',
+            gridTemplateRows: `repeat(${hirers.length <= 3 ? 1 : hirers.length <= 6 ? 2 : 3}, auto)`,
             gridAutoFlow: 'column',
             gridAutoColumns: '186px',
             width: 'max-content',
