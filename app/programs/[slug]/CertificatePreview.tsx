@@ -1,14 +1,16 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { IconX, IconZoomIn, IconShieldCheck } from '@tabler/icons-react'
 import { FOUNDING_YEAR } from '@/lib/constants'
 
 interface Props {
-  programName: string
-  programFullName: string
+  programName:      string
+  programFullName:  string
+  sampleImageUrl?:  string  // When set, shows the uploaded Sanity image instead of the generated design
 }
 
-export default function CertificatePreview({ programName, programFullName }: Props) {
+export default function CertificatePreview({ programName, programFullName, sampleImageUrl }: Props) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function CertificatePreview({ programName, programFullName }: Pro
       document.body.style.position = ''
       document.body.style.top = ''
       document.body.style.width = ''
-      window.scrollTo(0, scrollY)
+      document.documentElement.scrollTop = scrollY
     }
   }, [open])
 
@@ -81,7 +83,19 @@ export default function CertificatePreview({ programName, programFullName }: Pro
                 className="group relative w-full max-w-[480px] cursor-zoom-in rounded-2xl"
                 aria-label="View sample certificate"
               >
-                <Certificate programName={programName} programFullName={programFullName} />
+                {sampleImageUrl ? (
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.22)] border border-neutral-200">
+                    <Image
+                      src={sampleImageUrl}
+                      fill
+                      alt={`${programName} sample certificate`}
+                      className="object-contain"
+                      sizes="(max-width: 1024px) 100vw, 480px"
+                    />
+                  </div>
+                ) : (
+                  <Certificate programName={programName} programFullName={programFullName} />
+                )}
                 <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/15 transition-all duration-200 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white rounded-full p-3.5 shadow-xl">
                     <IconZoomIn size={22} className="text-neutral-800" />
@@ -110,7 +124,19 @@ export default function CertificatePreview({ programName, programFullName }: Pro
             >
               <IconX size={18} className="text-neutral-700" />
             </button>
-            <Certificate programName={programName} programFullName={programFullName} />
+            {sampleImageUrl ? (
+              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.35)]">
+                <Image
+                  src={sampleImageUrl}
+                  fill
+                  alt={`${programName} sample certificate`}
+                  className="object-contain"
+                  sizes="760px"
+                />
+              </div>
+            ) : (
+              <Certificate programName={programName} programFullName={programFullName} />
+            )}
           </div>
         </div>
       )}

@@ -153,7 +153,8 @@ export interface SanityProgram {
       courses:      { name: string; credits: number; type: 'Core' | 'Elective' }[]
     }[]
   }[]
-  heroImageUrl?:  string
+  heroImageUrl?:           string
+  certificateSampleUrl?:  string
 }
 
 // ────────────────────────────────────────────────────────────
@@ -258,7 +259,8 @@ export async function getProgramBySlug(slug: string): Promise<SanityProgram | nu
     eligibility, highlights, specialisations,
     careerRoles, avgSalaryAfter, topHirers,
     curriculum,
-    "heroImageUrl": heroImage.${IMAGE_URL}
+    "heroImageUrl":          heroImage.${IMAGE_URL},
+    "certificateSampleUrl": certificateSample.${IMAGE_URL}
   }`
   return sanityFetch<SanityProgram | null>({ query, params: { slug }, tags: ['program'] })
 }

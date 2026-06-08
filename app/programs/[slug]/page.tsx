@@ -1200,7 +1200,11 @@ export default async function ProgramPage({ params }: Props) {
       </section>
 
       <AdmissionSteps />
-      <CertificatePreview programName={prog.name} programFullName={prog.fullName} />
+      <CertificatePreview
+        programName={prog.name}
+        programFullName={prog.fullName}
+        sampleImageUrl={sanityProg?.certificateSampleUrl}
+      />
       <FacultySection slug={prog.slug} />
       <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />

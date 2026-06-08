@@ -113,20 +113,22 @@ export default function ApplyModal() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!form.level || !form.programme || !form.intake) return
+    if (!canSubmit) return
     setSubmitting(true)
     setSubmitError('')
     try {
-      const res = await fetch('/api/leads', {
+      const res = await fetch('/api/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:            form.name,
-          email:           form.email,
-          phone:           dialCode + form.mobile,
-          programInterest: `${form.level === 'ug' ? 'UG' : 'PG'} - ${form.programme}`,
-          intake:          form.intake,
-          source:          'modal-apply',
+          name:      form.name,
+          email:     form.email,
+          phone:     dialCode + form.mobile,
+          level:     form.level,
+          programme: form.programme,
+          intake:    form.intake,
+          consent:   form.consent,
+          source:    'modal-apply',
         }),
       })
       if (!res.ok) {
@@ -146,7 +148,7 @@ export default function ApplyModal() {
   const programmes = form.level
     ? programList.filter(p => p.level === form.level).map(p => p.name)
     : []
-  const canSubmit  = !!form.level && !!form.programme && !!form.intake
+  const canSubmit  = !!form.level && !!form.programme && !!form.intake && form.consent
 
   return (
     <div

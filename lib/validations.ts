@@ -64,18 +64,19 @@ export const ContactSchema = z.object({
 
 export type ContactInput = z.infer<typeof ContactSchema>
 
-// ── Multi-step application form ───────────────────────────────
+// ── Apply Now modal ───────────────────────────────────────────
+// Separate from leads — Apply Now captures formal application intent
+// with programme level, intake timing, and explicit consent.
 
-export const ApplicationStep1Schema = LeadSchema
-
-export const ApplicationStep2Schema = z.object({
-  qualification: z.enum(['12th', 'diploma', 'ug', 'pg']),
-  workExp:       z.enum(['fresher', '0-2', '3-5', '6+']),
+export const ApplicationSchema = z.object({
+  name:      z.string().min(2, 'Name must be at least 2 characters').max(100).trim().refine(noScript('Name contains invalid content')),
+  email:     z.string().email('Enter a valid email address').max(254).trim().toLowerCase(),
+  phone:     z.string().regex(phoneRegex, 'Enter a valid mobile number').trim(),
+  level:     z.enum(['ug', 'pg']),
+  programme: z.string().min(1, 'Please select a programme').max(100).trim().refine(noScript('Invalid programme value')),
+  intake:    z.string().min(1, 'Please select an intake').max(50).trim(),
+  consent:   z.boolean().refine(v => v === true, { message: 'You must agree to be contacted' }),
+  source:    z.string().optional(),
 })
 
-export const ApplicationStep3Schema = z.object({
-  state:    z.string().min(1, 'Please select your state'),
-  timeline: z.enum(['immediately', '3months', '6months', 'exploring']),
-  notes:    z.string().max(500).optional(),
-  consent:  z.literal(true, 'You must agree to be contacted'),
-})
+export type ApplicationInput = z.infer<typeof ApplicationSchema>

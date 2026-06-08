@@ -239,6 +239,13 @@ export default defineType({
       options: { hotspot: true },
       description: 'Shown behind the dark-red gradient in the hero. 1400x900px recommended.',
     }),
+    defineField({
+      name: 'certificateSample',
+      title: 'Certificate Sample Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload a scan of the actual degree certificate for this program. When uploaded, it replaces the generated preview on the program page. Landscape orientation works best (4:3 ratio).',
+    }),
   ],
 
   orderings: [
