@@ -1,3 +1,5 @@
+'use client'
+
 import { IconTrendingUp, IconUsers, IconBriefcase, IconBook2 } from '@tabler/icons-react'
 
 interface PlacementStats { rate: string; avgPkg: string; hirers: string; coursera: string }
