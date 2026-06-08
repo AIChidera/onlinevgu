@@ -7,6 +7,7 @@ import { IconClock, IconArrowRight } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
 import { PROGRAMMES, type Programme } from '@/app/programs/data'
 import { PROGRAM_META, type ProgramMeta } from '@/app/programs/meta'
+import type { SanityProgramSummary } from '@/lib/sanity'
 
 type Filter = 'all' | 'ug' | 'pg'
 
@@ -16,10 +17,31 @@ const FILTERS: { label: string; value: Filter }[] = [
   { label: 'Postgraduate',  value: 'pg'  },
 ]
 
-export default function ProgramsSection() {
+// Map SanityProgramSummary → the Programme shape this component uses
+function toProgram(p: SanityProgramSummary): Programme {
+  return {
+    slug:            p.slug,
+    name:            p.name,
+    fullName:        p.fullName,
+    level:           p.level as Programme['level'],
+    discipline:      p.discipline as Programme['discipline'],
+    duration:        p.duration,
+    fee:             p.fee,
+    popular:         p.popular,
+    specialisations: p.specialisations ?? [],
+    image:           p.image ?? undefined,
+  }
+}
+
+export default function ProgramsSection({ programmes: sanityProgrammes }: { programmes?: SanityProgramSummary[] }) {
   const [filter, setFilter] = useState<Filter>('all')
 
-  const degrees = PROGRAMMES.filter(p => p.level !== 'cert')
+  // Sanity data takes priority; fall back to hardcoded when CMS is empty
+  const allProgrammes = sanityProgrammes && sanityProgrammes.length > 0
+    ? sanityProgrammes.map(toProgram)
+    : PROGRAMMES
+
+  const degrees = allProgrammes.filter(p => p.level !== 'cert')
   const visible = (filter === 'all' ? degrees : degrees.filter(p => p.level === filter)).slice(0, 8)
 
   return (
@@ -82,7 +104,7 @@ export default function ProgramsSection() {
             href="/programs"
             className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
           >
-            Explore All {PROGRAMMES.length} Programs
+            Explore All {allProgrammes.filter(p => p.level !== 'cert').length} Programs
             <IconArrowRight size={16} />
           </Link>
         </div>

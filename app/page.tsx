@@ -14,6 +14,7 @@ import {
   getHomeFaqs,
   getCampusEvents,
   getAllPrograms,
+  getSiteSettings,
 } from '@/lib/sanity'
 import { PROGRAMMES } from './programs/data'
 
@@ -60,12 +61,21 @@ function buildFaqJsonLd(faqs: SanityFaq[]) {
   }
 }
 
+// Parse a stat string like "50,000+" → 50000, "4.8/5" → 4.8, "95%" → 95
+function parseStat(s: string | undefined | null, fallback: number): number {
+  if (!s) return fallback
+  const match = s.match(/[\d,]+(\.\d+)?/)
+  if (!match) return fallback
+  return parseFloat(match[0].replace(/,/g, ''))
+}
+
 export default async function HomePage() {
-  const [testimonials, faqs, campusEvents, sanityPrograms] = await Promise.all([
+  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings] = await Promise.all([
     getTestimonials(),
     getHomeFaqs(),
     getCampusEvents(),
     getAllPrograms(),
+    getSiteSettings(),
   ])
   const programCount = sanityPrograms.length > 0 ? sanityPrograms.length : PROGRAMMES.length
 
@@ -85,8 +95,16 @@ export default async function HomePage() {
       )}
       <Hero />
       <TrustBar />
-      <ProgramsSection />
-      <ImpactSection programCount={programCount} />
+      <ProgramsSection programmes={sanityPrograms.length > 0 ? sanityPrograms : undefined} />
+      <ImpactSection
+        programCount={programCount}
+        statLearners={parseStat(siteSettings?.statLearners,    50000)}
+        statCountries={parseStat(siteSettings?.statCountries,  40)}
+        statPlacement={parseStat(siteSettings?.statPlacement,  95)}
+        statRating={parseStat(siteSettings?.statRating,        4.8)}
+        statHirers={parseStat(siteSettings?.statHiringPartners, 500)}
+        statCoursera={parseStat(siteSettings?.statCourseraCount, 7000)}
+      />
       <CampusImmersionsSection events={campusEvents} />
       <Testimonials stories={testimonials} />
       <CourseExperienceSection />

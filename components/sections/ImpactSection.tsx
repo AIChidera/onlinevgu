@@ -36,34 +36,6 @@ interface ExtraStat {
   Icon:     React.ComponentType<any>
 }
 
-const MAIN_STATS: MainStat[] = [
-  {
-    target: 50000, suffix: '+', decimals: 0,
-    label: 'Learners Enrolled',
-    sub:   'Across India & beyond',
-    Icon:  IconUsers,
-  },
-  {
-    target: 40, suffix: '+', decimals: 0,
-    label: 'Countries Represented',
-    sub:   'Global learner community',
-    Icon:  IconWorld,
-  },
-  {
-    target: 95, suffix: '%', decimals: 0,
-    label: 'Placement Rate',
-    sub:   'Within 6 months of graduation',
-    Icon:  IconTrendingUp,
-  },
-  {
-    target: 4.8, suffix: '/5', decimals: 1,
-    label: 'Student Rating',
-    sub:   'From 12,400+ reviews',
-    Icon:  IconStar,
-  },
-]
-
-
 // ── Count-up ───────────────────────────────────────────────────────
 
 function formatNum(n: number, decimals: number): string {
@@ -107,13 +79,38 @@ function CountUp({
 
 // ── Section ────────────────────────────────────────────────────────
 
-export default function ImpactSection({ programCount = 25 }: { programCount?: number }) {
+interface ImpactProps {
+  programCount?:  number
+  statLearners?:  number   // fallback 50000
+  statCountries?: number   // fallback 40
+  statPlacement?: number   // fallback 95
+  statRating?:    number   // fallback 4.8
+  statHirers?:    number   // fallback 500
+  statCoursera?:  number   // fallback 7000
+}
+
+export default function ImpactSection({
+  programCount  = 25,
+  statLearners  = 50000,
+  statCountries = 40,
+  statPlacement = 95,
+  statRating    = 4.8,
+  statHirers    = 500,
+  statCoursera  = 7000,
+}: ImpactProps) {
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
 
+  const MAIN_STATS_LIVE: MainStat[] = [
+    { target: statLearners,  suffix: '+',  decimals: 0, label: 'Learners Enrolled',    sub: 'Across India & beyond',           Icon: IconUsers     },
+    { target: statCountries, suffix: '+',  decimals: 0, label: 'Countries Represented', sub: 'Global learner community',       Icon: IconWorld     },
+    { target: statPlacement, suffix: '%',  decimals: 0, label: 'Placement Rate',        sub: 'Within 6 months of graduation',  Icon: IconTrendingUp },
+    { target: statRating,    suffix: '/5', decimals: 1, label: 'Student Rating',        sub: 'From 12,400+ reviews',           Icon: IconStar      },
+  ]
+
   const EXTRA_STATS: ExtraStat[] = [
-    { target: 500,         suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
-    { target: programCount, suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
-    { target: 7000,        suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
+    { target: statHirers,    suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
+    { target: programCount,  suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
+    { target: statCoursera,  suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
     { target: new Date().getFullYear() - FOUNDING_YEAR, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
   ]
 
@@ -143,7 +140,7 @@ export default function ImpactSection({ programCount = 25 }: { programCount?: nu
 
         {/* 4 main stat tiles */}
         <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-          {MAIN_STATS.map((s, i) => (
+          {MAIN_STATS_LIVE.map((s, i) => (
             <div
               key={s.label}
               className={[

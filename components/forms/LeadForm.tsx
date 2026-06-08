@@ -2,24 +2,16 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { LeadSchema, type LeadInput } from '@/lib/validations'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import PhoneField from '@/components/ui/PhoneField'
 
-const PROGRAMS = [
-  'Online MBA',
-  'MBA in Healthcare',
-  'Online MCA',
-  'Online M.Com',
-  'Online MA',
-  'Online M.Lib',
-  'Online BBA',
-  'Online BCA',
-  'Online B.Com',
-  'Online B.Sc',
-  'Online B.Lib',
+// Hardcoded fallback — mirrors Sanity programs; used while API loads or if it fails
+const PROGRAMS_FALLBACK = [
+  'MBA', 'MBA in Healthcare Management', 'MCA', 'M.Com', 'MA',
+  'M.Lib', 'BBA', 'BCA', 'B.Com', 'B.Sc', 'B.Lib',
   "I'm not sure yet",
 ]
 
@@ -33,6 +25,18 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState('')
   const [dialCode, setDialCode] = useState('+91')
+  const [programs, setPrograms] = useState<string[]>(PROGRAMS_FALLBACK)
+
+  useEffect(() => {
+    fetch('/api/programs')
+      .then(r => r.ok ? r.json() : null)
+      .then((data: { name: string }[] | null) => {
+        if (data && data.length > 0) {
+          setPrograms([...data.map(p => p.name), "I'm not sure yet"])
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   const {
     register,
@@ -133,7 +137,7 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
             ].join(' ')}
           >
             <option value="">Select a program</option>
-            {PROGRAMS.map((p) => (
+            {programs.map((p) => (
               <option key={p} value={p}>{p}</option>
             ))}
           </select>
