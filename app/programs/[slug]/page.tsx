@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -18,20 +19,24 @@ import {
 } from '@tabler/icons-react'
 import StrokeArt from '@/components/ui/StrokeArt'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import ActivityTicker from './ActivityTicker'
+import type { CurriculumYear } from './CurriculumPreview'
 import ProgramHighlights from './ProgramHighlights'
-import CurriculumPreview, { type CurriculumYear } from './CurriculumPreview'
-import FacultySection from './FacultySection'
+import CurriculumPreview from './CurriculumPreview'
 import HirerStrip from './HirerStrip'
 import SpecialisationCards from './SpecialisationCards'
-import PlacementStatsStrip from './PlacementStatsStrip'
-import AdmissionSteps from './AdmissionSteps'
-import CertificatePreview from './CertificatePreview'
-import ProgramTestimonials from './ProgramTestimonials'
-import ProgramFAQ from './ProgramFAQ'
-import RelatedPrograms from './RelatedPrograms'
-import ScrollToTop from './ScrollToTop'
 import CareerOutcomes from './CareerOutcomes'
+
+import FacultySection from './FacultySection'
+
+// Below-fold client components — lazy loaded to reduce initial JS bundle
+const ActivityTicker      = dynamic(() => import('./ActivityTicker'),      { ssr: false })
+const PlacementStatsStrip = dynamic(() => import('./PlacementStatsStrip'), { ssr: false })
+const AdmissionSteps      = dynamic(() => import('./AdmissionSteps'),      { ssr: false })
+const CertificatePreview  = dynamic(() => import('./CertificatePreview'),  { ssr: false })
+const ProgramTestimonials = dynamic(() => import('./ProgramTestimonials'), { ssr: false })
+const ProgramFAQ          = dynamic(() => import('./ProgramFAQ'),          { ssr: false })
+const RelatedPrograms     = dynamic(() => import('./RelatedPrograms'),     { ssr: false })
+const ScrollToTop         = dynamic(() => import('./ScrollToTop'),         { ssr: false })
 
 interface ProgramDetail {
   slug:            string

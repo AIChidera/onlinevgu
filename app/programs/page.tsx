@@ -10,6 +10,8 @@ import { NEXT_BATCH } from '@/lib/constants'
 
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'All Programs',
   description:
