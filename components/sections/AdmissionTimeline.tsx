@@ -1,6 +1,3 @@
-'use client'
-
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { NEXT_BATCH } from '@/lib/constants'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
@@ -29,8 +26,6 @@ const STEPS = [
 ]
 
 export default function AdmissionTimeline() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 })
-
   return (
     <SectionWrapper id="admissions" bg="white">
       <div className="text-center mb-12">
@@ -46,7 +41,7 @@ export default function AdmissionTimeline() {
       </div>
 
       {/* Horizontal steps */}
-      <div ref={ref} className="relative">
+      <div className="relative">
         {/* Connector line */}
         <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-neutral-200 lg:hidden" />
 
@@ -54,11 +49,9 @@ export default function AdmissionTimeline() {
           {STEPS.map((step, i) => (
             <div
               key={step.number}
-              className={[
-                'flex flex-col items-center text-center transition-all duration-500',
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
-              ].join(' ')}
-              style={{ transitionDelay: `${i * 100}ms` }}
+              data-animate="fade-up"
+              className="flex flex-col items-center text-center"
+              style={{ animationDelay: `${i * 100}ms` }}
             >
               {/* Number circle */}
               <div className="relative z-10 mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-vgu-red shadow-[0_8px_24px_rgba(192,64,54,0.30)]">

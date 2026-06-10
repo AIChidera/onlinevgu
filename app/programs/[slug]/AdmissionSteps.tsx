@@ -51,7 +51,7 @@ const STEPS = [
 ]
 
 export default function AdmissionSteps() {
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
+  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.08 })
   const [activeStep, setActiveStep] = useState(-1)
   const [isPaused, setIsPaused]     = useState(false)
 
@@ -105,11 +105,9 @@ export default function AdmissionSteps() {
           {STEPS.map((s, i) => (
             <div
               key={s.num}
-              className={[
-                'relative z-10 flex flex-col items-center text-center group transition-all duration-500',
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-              ].join(' ')}
-              style={{ transitionDelay: `${i * 110}ms` }}
+              data-animate="fade-up"
+              className="relative z-10 flex flex-col items-center text-center group"
+              style={{ animationDelay: `${i * 110}ms` }}
             >
               {/* Icon circle */}
               <div

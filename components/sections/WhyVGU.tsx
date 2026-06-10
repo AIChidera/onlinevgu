@@ -1,6 +1,3 @@
-'use client'
-
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import { FOUNDING_YEAR } from '@/lib/constants'
 
@@ -48,8 +45,6 @@ const REASONS = [
 ]
 
 export default function WhyVGU() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 })
-
   return (
     <SectionWrapper id="why-vgu" bg="light">
       <div className="text-center mb-12">
@@ -64,19 +59,13 @@ export default function WhyVGU() {
         </p>
       </div>
 
-      <div
-        ref={ref}
-        className="grid grid-cols-4 gap-6 xl:grid-cols-2 md:grid-cols-1"
-      >
+      <div className="grid grid-cols-4 gap-6 xl:grid-cols-2 md:grid-cols-1">
         {REASONS.map((r, i) => (
           <div
             key={r.title}
-            className={[
-              'group rounded-2xl p-6 border border-neutral-200 bg-white',
-              'transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-vgu-red/30',
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
-            ].join(' ')}
-            style={{ transitionDelay: `${Math.floor(i / 4) * 100 + (i % 4) * 60}ms` }}
+            data-animate="fade-up"
+            className="group rounded-2xl p-6 border border-neutral-200 bg-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-md hover:border-vgu-red/30"
+            style={{ animationDelay: `${Math.floor(i / 4) * 100 + (i % 4) * 60}ms` }}
           >
             <div className="mb-3 text-[32px] leading-none">{r.icon}</div>
             <h3 className="font-heading text-[16px] font-bold text-neutral-900 mb-2">{r.title}</h3>

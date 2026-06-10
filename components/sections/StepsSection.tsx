@@ -44,7 +44,7 @@ const MICROCOPY = [
 ]
 
 export default function StepsSection() {
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.15 })
+  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.08 })
   const [activeStep, setActiveStep] = useState(-1)
   const [isPaused, setIsPaused]     = useState(false)
 
@@ -123,11 +123,9 @@ export default function StepsSection() {
             {STEPS.map((step, i) => (
               <div
                 key={step.badge}
-                className={[
-                  'flex flex-col items-center text-center transition-all duration-500',
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-                ].join(' ')}
-                style={{ transitionDelay: `${i * 110}ms` }}
+                data-animate="fade-up"
+                className="flex flex-col items-center text-center"
+                style={{ animationDelay: `${i * 110}ms` }}
               >
                 {/* Step badge + circle wrapper */}
                 <div className="relative mb-6 pt-3">

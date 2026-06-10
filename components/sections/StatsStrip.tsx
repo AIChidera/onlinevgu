@@ -1,7 +1,3 @@
-'use client'
-
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
-
 const STATS = [
   { value: '50,000+', label: 'Learners enrolled'      },
   { value: '40+',     label: 'Countries represented'  },
@@ -10,8 +6,6 @@ const STATS = [
 ]
 
 export default function StatsStrip() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 })
-
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
@@ -20,20 +14,13 @@ export default function StatsStrip() {
           Numbers that speak for themselves
         </h2>
 
-        <div
-          ref={ref}
-          className="grid grid-cols-2 gap-6 md:grid-cols-4"
-        >
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {STATS.map((s, i) => (
             <div
               key={s.label}
-              className={[
-                'flex flex-col items-center text-center rounded-[16px] bg-white p-6',
-                'shadow-[0_2px_12px_rgba(0,0,0,0.06)]',
-                'transition-all duration-500',
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
-              ].join(' ')}
-              style={{ transitionDelay: `${i * 80}ms` }}
+              data-animate="materialize"
+              className="flex flex-col items-center text-center rounded-[16px] bg-white p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)]"
+              style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="font-heading text-[40px] md:text-[48px] font-bold leading-none text-vgu-gold">
                 {s.value}
