@@ -53,9 +53,10 @@ export default function ScrollReveal() {
       el.classList.add('sr-ready')
       const { top, bottom } = el.getBoundingClientRect()
       if (top < window.innerHeight && bottom > 0) {
-        // Already visible on load — fire after one rAF so the browser
-        // paints the sr-ready (opacity:0) state first.
-        requestAnimationFrame(() => triggerAnim(el))
+        // Two rAFs: the first lets the browser commit the .sr-ready (opacity:0)
+        // paint; the second fires after that paint so the CSS transition has a
+        // genuine "from" state to animate from.
+        requestAnimationFrame(() => requestAnimationFrame(() => triggerAnim(el)))
       } else {
         observer.observe(el)
       }
