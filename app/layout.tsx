@@ -3,6 +3,8 @@ import { Nunito, Lato } from 'next/font/google'
 import './globals.css'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
+import Footer from '@/components/layout/Footer'
+import FooterCTA from '@/components/sections/FooterCTA'
 import Analytics from '@/components/Analytics'
 
 const nunito = Nunito({
@@ -80,7 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SiteNav />
         <main>{children}</main>
-        <SiteFooter />
+        <SiteFooter>
+          <FooterCTA />
+          <Footer />
+        </SiteFooter>
       </body>
     </html>
   )
