@@ -3,95 +3,52 @@
 @tailwind utilities;
 
 /* ============================================================
-   Scroll-reveal entrance animations — applied by ScrollReveal.tsx
-   Defined here (not as Tailwind utilities) so they are never purged.
+   Scroll-reveal entrance animations — driven by ScrollReveal.tsx
+   Strategy: CSS transitions (not keyframe animations).
+   ScrollReveal adds .sr-ready (hidden state) to below-fold
+   elements. On intersection it removes .sr-ready after the
+   element's animation-delay (read from inline style), which
+   triggers the CSS transition. No fill-mode, no animationend.
    ============================================================ */
 
-/* Desktop keyframes — hardcoded distances (CSS variables inside @keyframes break Safari) */
+/* Transition defined on ALL data-animate elements so it is
+   present when .sr-ready is removed and the transition fires. */
+[data-animate] {
+  transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hidden state — defines both opacity AND the variant transform */
+.sr-ready                                  { opacity: 0; }
+.sr-ready[data-animate="fade-up"]          { transform: translateY(28px); }
+.sr-ready[data-animate="materialize"]      { transform: scale(0.92); }
+.sr-ready[data-animate="slide-from-left"]  { transform: translateX(-36px); }
+.sr-ready[data-animate="slide-from-right"] { transform: translateX(36px); }
+
+/* After transition ends ScrollReveal removes data-animate so
+   normal Tailwind hover transitions restore at their native timing. */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] { transition: none !important; }
+  .sr-ready       { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Keep keyframe definitions used by anim-load-left and animate-fade-in ── */
 @keyframes vguEnterUp {
   from { opacity: 0; transform: translateY(48px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes vguEnterMaterialize {
-  from { opacity: 0; transform: scale(0.88); }
-  to   { opacity: 1; transform: scale(1);    }
+@keyframes vguEnterUpMob {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes vguEnterLeft {
   from { opacity: 0; transform: translateX(-64px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-@keyframes vguEnterRight {
-  from { opacity: 0; transform: translateX(64px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* Mobile keyframes — shorter distances, no blur */
-@keyframes vguEnterUpMob {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes vguEnterLeftMob {
-  from { opacity: 0; transform: translateX(-24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes vguEnterRightMob {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes vguFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
-}
-
-/* Hidden pre-reveal state: added to below-fold elements on page load */
-.sr-ready { opacity: 0; }
-
-/* Active animation classes: added by IntersectionObserver in ScrollReveal.tsx.
-   fill-mode: both → element stays at from-state during delay, to-state after end. */
-.anim-fade-up {
-  animation: vguEnterUp 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.anim-materialize {
-  animation: vguEnterMaterialize 700ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-.anim-slide-left {
-  animation: vguEnterLeft 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.anim-slide-right {
-  animation: vguEnterRight 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Mobile: switch to shorter-distance keyframes, drop blur on materialize */
-@media (max-width: 767px) {
-  .anim-fade-up {
-    animation-name: vguEnterUpMob;
-    animation-duration: 500ms;
-  }
-  .anim-materialize {
-    animation-name: vguEnterUpMob;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    animation-duration: 500ms;
-  }
-  .anim-slide-left {
-    animation-name: vguEnterUpMob;
-    animation-duration: 500ms;
-  }
-  .anim-slide-right {
-    animation-name: vguEnterUpMob;
-    animation-duration: 500ms;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .anim-fade-up,
-  .anim-materialize,
-  .anim-slide-left,
-  .anim-slide-right {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
 
 /* Tab-switch fade (used by CurriculumPreview, etc.) */

@@ -2,26 +2,38 @@
 
 import { useEffect } from 'react'
 
-const VARIANT_CLASS: Record<string, string> = {
-  'fade-up':          'anim-fade-up',
-  'materialize':      'anim-materialize',
-  'slide-from-left':  'anim-slide-left',
-  'slide-from-right': 'anim-slide-right',
+// Reads the animationDelay inline style value so stagger delays set on
+// individual elements via style={{ animationDelay: '80ms' }} still work —
+// no need to rename them to transitionDelay across dozens of files.
+function readDelayMs(el: HTMLElement): number {
+  const raw = el.style.animationDelay || '0'
+  if (raw.endsWith('ms')) return parseFloat(raw)
+  if (raw.endsWith('s'))  return parseFloat(raw) * 1000
+  return 0
 }
 
 function triggerAnim(el: HTMLElement) {
-  el.classList.remove('sr-ready')
-  const animClass = VARIANT_CLASS[el.dataset.animate ?? ''] ?? 'anim-fade-up'
-  el.classList.add(animClass)
-  // Remove after completion so fill-mode doesn't block subsequent opacity changes.
-  el.addEventListener('animationend', () => el.classList.remove(animClass), { once: true })
+  const reveal = () => {
+    el.classList.remove('sr-ready')
+    // After the CSS transition completes, remove data-animate so the
+    // element's hover transitions revert to their Tailwind defaults.
+    function done(e: Event) {
+      if ((e as TransitionEvent).propertyName !== 'opacity') return
+      el.removeEventListener('transitionend', done)
+      el.removeAttribute('data-animate')
+    }
+    el.addEventListener('transitionend', done)
+  }
+
+  const delay = readDelayMs(el)
+  if (delay > 0) setTimeout(reveal, delay)
+  else reveal()
 }
 
 export default function ScrollReveal() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    // Track processed elements so MutationObserver never double-processes.
     const processed = new Set<HTMLElement>()
 
     const observer = new IntersectionObserver(
@@ -41,18 +53,17 @@ export default function ScrollReveal() {
       el.classList.add('sr-ready')
       const { top, bottom } = el.getBoundingClientRect()
       if (top < window.innerHeight && bottom > 0) {
-        // Already in the initial viewport — fire after one rAF so the browser
-        // paints the sr-ready (opacity:0) state before we trigger the animation.
+        // Already visible on load — fire after one rAF so the browser
+        // paints the sr-ready (opacity:0) state first.
         requestAnimationFrame(() => triggerAnim(el))
       } else {
         observer.observe(el)
       }
     }
 
-    // Initial scan for all elements present at mount time.
     document.querySelectorAll<HTMLElement>('[data-animate]').forEach(processEl)
 
-    // Watch for elements added later by dynamic (ssr:false) imports.
+    // Pick up elements added later (dynamic imports, client-side navigation).
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
