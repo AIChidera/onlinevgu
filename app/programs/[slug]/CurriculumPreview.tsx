@@ -37,6 +37,8 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
   let semOffset = 0
   for (let y = 0; y < activeYear; y++) semOffset += curriculum[y].semesters.length
 
+  if (!current) return null
+
   return (
     <div>
       {/* Year tabs */}
@@ -44,6 +46,7 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
         {curriculum.map((cy, i) => (
           <button
             key={cy.year}
+            type="button"
             onClick={() => setActiveYear(i)}
             aria-pressed={activeYear === i}
             className={[
@@ -58,8 +61,8 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
         ))}
       </div>
 
-      {/* Semester grid */}
-      <div key={activeYear} className="grid grid-cols-1 sm:grid-cols-2 gap-5 animate-fade-in">
+      {/* Semester grid — plain render, no key-based remount or fill-mode animation */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {current.semesters.map((sem, si) => {
           const gi = (semOffset + si) % SEM_GRADS.length
           const color = SEM_COLORS[gi]
