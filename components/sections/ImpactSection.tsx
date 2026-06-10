@@ -98,7 +98,7 @@ export default function ImpactSection({
   statHirers    = 500,
   statCoursera  = 7000,
 }: ImpactProps) {
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.08 })
+  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.05 })
 
   const MAIN_STATS_LIVE: MainStat[] = [
     { target: statLearners,  suffix: '+',  decimals: 0, label: 'Learners Enrolled',    sub: 'Across India & beyond',           Icon: IconUsers     },
@@ -143,12 +143,14 @@ export default function ImpactSection({
           {MAIN_STATS_LIVE.map((s, i) => (
             <div
               key={s.label}
-              data-animate="materialize"
-              className="relative rounded-2xl border p-4 md:p-6 text-center transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_0_2px_#FFA412,0_8px_32px_rgba(0,0,0,0.28)]"
+              className={[
+                'relative rounded-2xl border p-4 md:p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_0_2px_#FFA412,0_8px_32px_rgba(0,0,0,0.28)]',
+                isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95',
+              ].join(' ')}
               style={{
                 background: 'rgba(255,255,255,0.06)',
                 borderColor: 'rgba(255,255,255,0.12)',
-                animationDelay: `${i * 80}ms`,
+                transitionDelay: `${i * 80}ms`,
               }}
             >
               {/* Icon */}
