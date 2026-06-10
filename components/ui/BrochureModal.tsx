@@ -128,46 +128,48 @@ export default function BrochureModal() {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card — flex column: header pinned, body scrolls */}
+      {/* Modal card — compressed so it fits without scrolling on phones too */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Download Brochure"
-        className="relative z-10 w-full max-w-[460px] rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90vh] sm:h-auto sm:max-h-[90vh]"
+        className="relative z-10 w-full max-w-[460px] rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[95dvh] sm:max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* Close — floats over the red header */}
         <button
           onClick={closeModal}
           aria-label="Close"
-          className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/20 hover:bg-white/35 flex items-center justify-center transition-colors duration-150"
+          className="absolute top-3 right-3 z-20 w-7 h-7 rounded-full bg-white/20 hover:bg-white/35 flex items-center justify-center transition-colors duration-150"
         >
-          <IconX size={16} className="text-white" />
+          <IconX size={14} className="text-white" />
         </button>
 
-        {/* Red header band — pinned, never scrolls */}
+        {/* Red header band — compact */}
         <div
-          className="flex-none px-8 pt-8 pb-6"
+          className="flex-none px-6 pt-5 pb-4"
           style={{ background: 'linear-gradient(135deg,#C04036 0%,#821a12 100%)' }}
         >
-          <div className="w-11 h-11 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center mb-4">
-            <IconDownload size={20} className="text-white" />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-8 h-8 rounded-lg bg-white/15 border border-white/25 flex items-center justify-center flex-none">
+              <IconDownload size={15} className="text-white" />
+            </div>
+            <span className="text-[10px] font-body font-bold uppercase tracking-[0.12em] text-white/60">
+              Online VGU · Brochure
+            </span>
           </div>
-          <h2 className="font-heading font-bold text-[26px] text-white leading-snug tracking-[-0.3px]">
+          <h2 className="font-heading font-bold text-[20px] text-white leading-tight tracking-[-0.3px]">
             Get Your Free Brochure
           </h2>
-          <p className="mt-1.5 text-[14px] font-body text-white/65 leading-[1.6]">
-            Curriculum, fee structure, and placement data - sent to your inbox in under 60 seconds.
-          </p>
           {program && (
-            <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/25 px-3.5 py-1.5 text-[12px] font-body font-semibold text-white">
-              {program} Brochure
+            <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/25 px-3 py-0.5 text-[11px] font-body font-semibold text-white">
+              {program}
             </div>
           )}
         </div>
 
-        {/* Form / success — this div scrolls */}
-        <div className="flex-1 min-h-0 overflow-y-auto bg-white px-8 py-7" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}>
+        {/* Form / success — safety-net scroll only */}
+        <div className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-5" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}>
           {submitted ? (
             <div className="text-center py-4">
               <div className="w-14 h-14 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mx-auto mb-4">
@@ -189,12 +191,12 @@ export default function BrochureModal() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
               <input
                 name="name" type="text" placeholder="Your full name" required
                 maxLength={100} autoComplete="name"
                 value={form.name} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
               <PhoneField
                 name="mobile"
@@ -210,22 +212,17 @@ export default function BrochureModal() {
                 name="email" type="email" placeholder="Email address" required
                 maxLength={254} autoComplete="email"
                 value={form.email} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
 
-              {/* Program - locked if pre-filled from trigger, dropdown otherwise */}
-              {program ? (
-                <div className="w-full rounded-xl border border-neutral-100 bg-neutral-50 px-4 py-3 text-[15px] font-body text-neutral-500 flex items-center justify-between">
-                  <span>{program}</span>
-                  <IconCheck size={15} className="text-vgu-red flex-none" />
-                </div>
-              ) : (
+              {/* Program — dropdown only when not pre-filled (saves a row when it is) */}
+              {!program && (
                 <select
                   value={program}
                   onChange={e => setProgram(e.target.value)}
                   required
                   disabled={programmes.length === 0}
-                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none disabled:opacity-50"
+                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none disabled:opacity-50"
                 >
                   <option value="" disabled>
                     {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
@@ -235,38 +232,24 @@ export default function BrochureModal() {
               )}
 
               {submitError && (
-                <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
+                <p className="rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
                   {submitError}
                 </p>
               )}
 
               <button
                 type="submit" disabled={submitting}
-                className="mt-1 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white py-3.5 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60 flex items-center justify-center gap-2"
+                className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white py-3 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60 flex items-center justify-center gap-2"
               >
-                <IconMail size={16} />
+                <IconMail size={15} />
                 {submitting ? 'Sending…' : 'Send My Brochure'}
               </button>
 
-              <p className="flex items-center justify-center gap-1.5 text-[12px] font-body text-neutral-400">
-                <IconLock size={12} />
-                No spam. We never share your details.
+              <p className="flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400">
+                <IconLock size={11} />
+                Free · Instant email · No spam.
               </p>
             </form>
-          )}
-
-          {!submitted && (
-            <div className="mt-5 pt-5 border-t border-neutral-100 flex flex-wrap gap-2 justify-center">
-              {['Free download', 'Instant email', 'No spam ever'].map(label => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-neutral-50 border border-neutral-200 px-3 py-1.5 text-[11px] font-body font-semibold text-neutral-600"
-                >
-                  <IconCheck size={11} className="text-vgu-red flex-none" />
-                  {label}
-                </span>
-              ))}
-            </div>
           )}
         </div>
       </div>

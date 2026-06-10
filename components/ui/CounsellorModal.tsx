@@ -5,19 +5,11 @@ import Image from 'next/image'
 import {
   IconHeadset,
   IconLock,
-  IconShieldCheck,
-  IconClock,
   IconThumbUp,
   IconX,
   IconBrandWhatsapp,
 } from '@tabler/icons-react'
 import PhoneField from '@/components/ui/PhoneField'
-
-const TRUST_PILLS = [
-  { Icon: IconThumbUp,     label: 'Free consultation' },
-  { Icon: IconShieldCheck, label: 'No obligation'     },
-  { Icon: IconClock,       label: 'Reply in 2 min'    },
-]
 
 const INITIAL_FORM = { name: '', mobile: '', email: '', programme: '' }
 const DEFAULT_DIAL = '+91'
@@ -163,12 +155,13 @@ export default function CounsellorModal() {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card */}
+      {/* Modal card — max-h-95dvh on mobile, max-h-90vh on desktop, so the
+            counsellor form never triggers an inner scroll on standard phones. */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Talk to a Counsellor"
-        className="relative z-10 w-full max-w-[900px] rounded-t-2xl sm:rounded-2xl shadow-2xl bg-vgu-beige h-[90vh] sm:h-auto sm:max-h-[90vh] overflow-y-auto"
+        className="relative z-10 w-full max-w-[900px] rounded-t-2xl sm:rounded-2xl shadow-2xl bg-vgu-beige max-h-[95dvh] sm:max-h-[90vh] overflow-y-auto"
         style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
         onClick={e => e.stopPropagation()}
       >
@@ -228,18 +221,18 @@ export default function CounsellorModal() {
             </div>
           </div>
 
-          {/* Right: form */}
-          <div className="flex flex-col justify-center px-10 py-12 md:px-6 md:py-8">
-            <span className="inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5 text-[12px] font-body font-bold uppercase tracking-[0.08em] mb-5 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
-              <IconHeadset size={14} />
+          {/* Right: form — padding trimmed so the panel fits on a 667-tall phone */}
+          <div className="flex flex-col justify-center px-6 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+            <span className="inline-flex items-center gap-2 self-start rounded-full px-3 py-1 text-[11px] font-body font-bold uppercase tracking-[0.08em] mb-3 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
+              <IconHeadset size={12} />
               Talk to a Counsellor
             </span>
 
-            <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-3 md:text-[34px]">
-              Have Questions?<br />
+            <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-2 sm:text-[28px]">
+              Have Questions?{' '}
               <span className="text-vgu-red">We&apos;re Here to Help.</span>
             </h2>
-            <p className="text-[15px] font-body leading-[1.7] text-neutral-500 mb-6 max-w-[380px]">
+            <p className="text-[13px] font-body leading-[1.55] text-neutral-500 mb-4 max-w-[380px]">
               Free, no-obligation guidance on programs, fees, and eligibility.
             </p>
 
@@ -273,13 +266,13 @@ export default function CounsellorModal() {
                 </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3" noValidate>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-2.5" noValidate>
                 <input
                   name="name" type="text" placeholder="Your full name" required
                   maxLength={100}
                   value={form.name} onChange={handleChange}
                   autoComplete="name"
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <PhoneField
                   name="mobile"
@@ -296,12 +289,12 @@ export default function CounsellorModal() {
                   maxLength={254}
                   value={form.email} onChange={handleChange}
                   autoComplete="email"
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
                 />
                 <select
                   name="programme" required value={form.programme} onChange={handleChange}
                   disabled={programmes.length === 0}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-base font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none disabled:opacity-50"
+                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none disabled:opacity-50"
                 >
                   <option value="" disabled>
                     {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
@@ -317,29 +310,17 @@ export default function CounsellorModal() {
 
                 <button
                   type="submit" disabled={submitting}
-                  className="mt-1 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3.5 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60"
+                  className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60"
                 >
                   {submitting ? 'Sending...' : 'Talk to a Counsellor'}
                 </button>
 
-                <p className="flex items-center gap-1.5 text-[12px] font-body text-neutral-400 mt-1">
-                  <IconLock size={12} />
-                  Your details are safe. We never spam or share your information.
+                <p className="flex items-center gap-1.5 text-[11px] font-body text-neutral-400">
+                  <IconLock size={11} />
+                  Free consultation · No obligation · Reply in 2 min.
                 </p>
               </form>
             )}
-
-            <div className="mt-5 flex flex-wrap gap-2">
-              {TRUST_PILLS.map(({ Icon, label }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-white px-3 py-1.5 text-[12px] font-body font-semibold text-neutral-700"
-                >
-                  <Icon size={13} className="text-vgu-red" />
-                  {label}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </div>
