@@ -87,7 +87,7 @@ const HERO_IMAGES: Record<string, string> = {
   'bba':    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&q=80&auto=format&fit=crop',
   'ba':     'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop',
   'ma':     'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&q=80&auto=format&fit=crop',
-  'msc':    'https://images.unsplash.com/photo-1532094349884-543559c03d7f?w=1400&q=80&auto=format&fit=crop',
+  'msc':    'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1400&q=80&auto=format&fit=crop',
   'majmc':  'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1400&q=80&auto=format&fit=crop',
 }
 const DEFAULT_HERO_IMAGE = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1400&q=80&auto=format&fit=crop'
@@ -722,6 +722,11 @@ const PROGRAMS: ProgramDetail[] = [
 
 const PROGRAM_MAP = new Map(PROGRAMS.map(p => [p.slug, p]))
 
+// Returns field if it is a non-empty array, otherwise falls back to the hardcoded value.
+function fallback(field: unknown, fb?: string[]): string[] {
+  return Array.isArray(field) && (field as unknown[]).length > 0 ? (field as string[]) : (fb ?? [])
+}
+
 const RELATED: Record<string, string[]> = {
   'mba':    ['mba-if', 'mca', 'bba'],
   'mba-if': ['mba', 'mca', 'bba'],
@@ -790,6 +795,15 @@ export default async function ProgramPage({ params }: Props) {
   const prog = sanityProg ?? PROGRAM_MAP.get(slug)
   if (!prog) notFound()
 
+  // Field-level fallback: Sanity may return null for array fields even when the
+  // document exists. Extract safe arrays here so JSX never calls .map() on null.
+  const hardcoded      = PROGRAM_MAP.get(slug)
+  const highlights      = fallback(prog.highlights,      hardcoded?.highlights)
+  const careerRoles     = fallback(prog.careerRoles,     hardcoded?.careerRoles)
+  const specialisations = fallback(prog.specialisations, hardcoded?.specialisations)
+  const eligibility     = fallback(prog.eligibility,     hardcoded?.eligibility)
+  const topHirers       = fallback(prog.topHirers,       hardcoded?.topHirers)
+
   const seatsFilled     = getSeatsFilled(prog.slug)
   const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
@@ -797,7 +811,7 @@ export default async function ProgramPage({ params }: Props) {
   // Related programs — try Sanity data first, fall back to hardcoded map
   const relatedPrograms = (RELATED[prog.slug] ?? []).flatMap(s => {
     const sp = allSanityProgs.find(p => p.slug === s)
-    if (sp) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level as 'ug' | 'pg', duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? HERO_IMAGES[s] ?? undefined }]
+    if (sp && (sp.level === 'ug' || sp.level === 'pg')) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level, duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? HERO_IMAGES[s] ?? undefined }]
     const hp = PROGRAM_MAP.get(s)
     if (hp) return [{ slug: hp.slug, name: hp.name, fullName: hp.fullName, level: hp.level, duration: hp.duration, feePerYear: hp.feePerYear, image: HERO_IMAGES[s] }]
     return []
@@ -1080,7 +1094,7 @@ export default async function ProgramPage({ params }: Props) {
                     Program Highlights
                   </h2>
                 </div>
-                <ProgramHighlights highlights={prog.highlights} />
+                <ProgramHighlights highlights={highlights} />
               </div>
 
               {/* Curriculum */}
@@ -1127,7 +1141,7 @@ export default async function ProgramPage({ params }: Props) {
               </div>
 
               {/* Specialisations */}
-              {prog.specialisations.length > 0 && (
+              {specialisations.length > 0 && (
                 <div>
                   <div data-animate="fade-up">
                     <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
@@ -1135,7 +1149,7 @@ export default async function ProgramPage({ params }: Props) {
                       Specialisations
                     </h2>
                   </div>
-                  <SpecialisationCards specialisations={prog.specialisations} />
+                  <SpecialisationCards specialisations={specialisations} />
                 </div>
               )}
 
@@ -1147,11 +1161,11 @@ export default async function ProgramPage({ params }: Props) {
                     Career Outcomes
                   </h2>
                 </div>
-                <CareerOutcomes roles={prog.careerRoles} />
-                {prog.topHirers && prog.topHirers.length > 0 && (
+                <CareerOutcomes roles={careerRoles} />
+                {topHirers.length > 0 && (
                   <div className="mt-6">
                     <p className="text-[12px] font-body font-bold uppercase tracking-[0.06em] text-neutral-400 mb-4">Top hirers</p>
-                    <HirerStrip hirers={prog.topHirers} />
+                    <HirerStrip hirers={topHirers} />
                   </div>
                 )}
               </div>
@@ -1165,7 +1179,7 @@ export default async function ProgramPage({ params }: Props) {
                   </h2>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  {prog.eligibility.map((e, ei) => {
+                  {eligibility.map((e, ei) => {
                     const GRADS = [
                       'linear-gradient(135deg,#C04036,#821a12)',
                       'linear-gradient(135deg,#2563eb,#1d4ed8)',

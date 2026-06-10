@@ -81,6 +81,7 @@ function getFallback(name: string): BrandMeta {
 }
 
 export default function HirerStrip({ hirers }: { hirers: string[] }) {
+  const safe = Array.isArray(hirers) ? hirers : []
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canLeft, setCanLeft]   = useState(false)
   const [canRight, setCanRight] = useState(true)
@@ -102,6 +103,12 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
     scrollRef.current?.scrollBy({ left: dir === 'left' ? -744 : 744, behavior: 'smooth' })
   }
 
+  if (!safe.length) return null
+
+  const rows    = safe.length <= 3 ? 1 : safe.length <= 6 ? 2 : 3
+  const cols    = Math.ceil(safe.length / rows)
+  const spacers = cols * rows - safe.length
+
   return (
     <div data-animate="fade-up" className="relative rounded-2xl border border-neutral-200 overflow-hidden">
 
@@ -114,13 +121,13 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         <div
           className="grid gap-px bg-neutral-200"
           style={{
-            gridTemplateRows: `repeat(${hirers.length <= 3 ? 1 : hirers.length <= 6 ? 2 : 3}, auto)`,
+            gridTemplateRows: `repeat(${rows}, auto)`,
             gridAutoFlow: 'column',
             gridAutoColumns: '186px',
             width: 'max-content',
           }}
         >
-        {hirers.map((h) => {
+        {safe.map((h) => {
           const meta = BRAND_META[h] ?? getFallback(h)
           return (
             <div
@@ -145,6 +152,9 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
             </div>
           )
         })}
+        {Array.from({ length: spacers }).map((_, i) => (
+          <div key={`spacer-${i}`} className="bg-white" />
+        ))}
         </div>
       </div>
 

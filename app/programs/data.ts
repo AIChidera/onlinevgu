@@ -90,7 +90,7 @@ export const PROGRAMMES: Programme[] = [
     slug: 'msc', name: 'M.Sc', fullName: 'Master of Science in Mathematics',
     level: 'pg', discipline: 'Science', duration: '2 Years', fee: '₹36,000/yr',
     specialisations: [],
-    image: 'https://images.unsplash.com/photo-1532094349884-543559c03d7f?w=800&q=80&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80&auto=format&fit=crop',
   },
 
   // ── Media & Journalism ─────────────────────────────────────────

@@ -1,7 +1,6 @@
 'use client'
 
 import { IconCheck } from '@tabler/icons-react'
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 const PALETTE = [
   { grad: 'linear-gradient(135deg,#C04036,#821a12)', hex: '#C04036' },
@@ -11,21 +10,20 @@ const PALETTE = [
 ]
 
 export default function ProgramHighlights({ highlights }: { highlights: string[] }) {
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 })
+  const safe = Array.isArray(highlights) ? highlights : []
+  if (!safe.length) return null
 
   return (
-    <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {highlights.map((h, i) => {
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {safe.map((h, i) => {
         const p = PALETTE[i % PALETTE.length]
         const num = String(i + 1).padStart(2, '0')
         return (
           <div
             key={h}
-            className={[
-              'h-full transition-all duration-500',
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5',
-            ].join(' ')}
-            style={{ transitionDelay: `${i * 60}ms` }}
+            data-animate="materialize"
+            style={{ animationDelay: `${i * 60}ms` }}
+            className="h-full"
           >
             <div
               className="group/card relative flex items-stretch rounded-2xl bg-white border overflow-hidden cursor-default transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_2px_#FFA412,0_10px_40px_rgba(0,0,0,0.10)] h-full"

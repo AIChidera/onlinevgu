@@ -1,5 +1,4 @@
 'use client'
-import { useRef, useState, useEffect } from 'react'
 import {
   IconBriefcase, IconCode, IconChartBar,
   IconUsers, IconBuilding, IconDatabase, IconCloud,
@@ -39,64 +38,48 @@ const PALETTE = [
 ]
 
 export default function CareerOutcomes({ roles }: { roles: string[] }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
-      { threshold: 0.1 }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
+  const safe = Array.isArray(roles) ? roles : []
+  if (!safe.length) return null
 
   return (
-    <div ref={ref}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {roles.map((role, ri) => {
-          const p = PALETTE[ri % PALETTE.length]
-          const Icon = getRoleIcon(role)
-          return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {safe.map((role, ri) => {
+        const p = PALETTE[ri % PALETTE.length]
+        const Icon = getRoleIcon(role)
+        return (
+          <div
+            key={role}
+            data-animate="materialize"
+            style={{ animationDelay: `${ri * 55}ms` }}
+          >
             <div
-              key={role}
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(20px)',
-                transition: `opacity 0.4s ease ${ri * 55}ms, transform 0.4s ease ${ri * 55}ms`,
-              }}
+              className="group/card relative flex items-stretch rounded-2xl bg-white border overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_2px_#FFA412,0_10px_40px_rgba(0,0,0,0.10)]"
+              style={{ borderColor: `${p.hex}28` }}
             >
+              <div className="w-1.5 flex-none" style={{ background: p.grad }} />
               <div
-                className="group/card relative flex items-stretch rounded-2xl bg-white border overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_2px_#FFA412,0_10px_40px_rgba(0,0,0,0.10)]"
-                style={{ borderColor: `${p.hex}28` }}
+                aria-hidden="true"
+                className="absolute bottom-0 right-3 font-heading font-black leading-none select-none pointer-events-none"
+                style={{ fontSize: '72px', color: p.hex, opacity: 0.055 }}
               >
-                <div className="w-1.5 flex-none" style={{ background: p.grad }} />
+                {ri + 1}
+              </div>
+              <div className="flex items-center gap-4 px-4 py-4 flex-1 min-w-0">
                 <div
-                  aria-hidden="true"
-                  className="absolute bottom-0 right-3 font-heading font-black leading-none select-none pointer-events-none"
-                  style={{ fontSize: '72px', color: p.hex, opacity: 0.055 }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-300 group-hover/card:scale-110 group-hover/card:rotate-3"
+                  style={{ background: p.grad }}
                 >
-                  {ri + 1}
+                  <Icon size={20} stroke={1.5} className="text-white" />
                 </div>
-                <div className="flex items-center gap-4 px-4 py-4 flex-1 min-w-0">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-300 group-hover/card:scale-110 group-hover/card:rotate-3"
-                    style={{ background: p.grad }}
-                  >
-                    <Icon size={20} stroke={1.5} className="text-white" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-heading font-bold text-[15px] text-neutral-900 leading-snug truncate">{role}</p>
-                    <p className="text-[11px] font-body text-neutral-400 mt-0.5">Career path</p>
-                  </div>
+                <div className="min-w-0">
+                  <p className="font-heading font-bold text-[15px] text-neutral-900 leading-snug truncate">{role}</p>
+                  <p className="text-[11px] font-body text-neutral-400 mt-0.5">Career path</p>
                 </div>
               </div>
             </div>
-          )
-        })}
-      </div>
+          </div>
+        )
+      })}
     </div>
   )
 }
