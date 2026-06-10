@@ -246,6 +246,13 @@ export default defineType({
       options: { hotspot: true },
       description: 'Upload a scan of the actual degree certificate for this program. When uploaded, it replaces the generated preview on the program page. Landscape orientation works best (4:3 ratio).',
     }),
+    defineField({
+      name: 'brochurePdf',
+      title: 'Program Brochure (PDF)',
+      type: 'file',
+      options: { accept: 'application/pdf' },
+      description: 'PDF emailed to leads who request this program\'s brochure. If empty, the global Default Brochure on Site Settings is used. Max 10MB.',
+    }),
   ],
 
   orderings: [

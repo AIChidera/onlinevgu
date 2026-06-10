@@ -288,6 +288,29 @@ export const getTestimonialsByProgram = unstable_cache(
   { revalidate: 3600, tags: ['testimonial'] }
 )
 
+// Returns the program-specific brochure URL if uploaded, otherwise the global
+// default brochure URL from siteSettings. Either can be null. Cached for an hour
+// so the brochure API doesn't hit Sanity on every form submission.
+export const getBrochureUrlForProgram = unstable_cache(
+  async (programName: string): Promise<{ url: string | null; filename: string }> => {
+    const result = await sanityClient.fetch<{
+      programUrl: string | null
+      defaultUrl: string | null
+    }>(
+      `{
+        "programUrl":  *[_type == "program" && name == $programName][0].brochurePdf.asset->url,
+        "defaultUrl": *[_type == "siteSettings"][0].defaultBrochurePdf.asset->url
+      }`,
+      { programName }
+    )
+    const url = result.programUrl ?? result.defaultUrl ?? null
+    const safeName = programName.replace(/[^a-zA-Z0-9-]+/g, '-').replace(/^-|-$/g, '') || 'program'
+    return { url, filename: `VGU-${safeName}-brochure.pdf` }
+  },
+  ['brochure-url-for-program'],
+  { revalidate: 3600, tags: ['program', 'siteSettings'] }
+)
+
 export const getProgramBySlug = unstable_cache(
   async (slug: string): Promise<SanityProgram | null> => {
     return sanityClient.fetch<SanityProgram | null>(

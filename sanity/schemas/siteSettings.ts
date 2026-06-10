@@ -138,6 +138,15 @@ export const siteSettings = defineType({
       type: 'string',
       description: 'Full URL including https://.',
     }),
+
+    // ── Brochure ──────────────────────────────────────────────────
+    defineField({
+      name: 'defaultBrochurePdf',
+      title: 'Default Brochure (PDF)',
+      type: 'file',
+      options: { accept: 'application/pdf' },
+      description: 'PDF emailed to leads when they request a brochure without selecting a specific program, or when the selected program has no brochure of its own. Max 10MB.',
+    }),
   ],
   preview: {
     prepare: () => ({ title: 'Site Settings', subtitle: 'Global site configuration' }),

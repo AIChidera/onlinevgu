@@ -2,6 +2,29 @@ import { NextRequest, NextResponse } from 'next/server'
 import { BrochureSchema } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
+import { getBrochureUrlForProgram } from '@/lib/sanity'
+
+// Downloads the PDF from Sanity's CDN so it can be attached to the email.
+// Skips silently on failure (request still succeeds without attachment).
+async function fetchBrochureAttachment(programName: string) {
+  try {
+    const { url, filename } = await getBrochureUrlForProgram(programName)
+    if (!url) return null
+    const resp = await fetch(url)
+    if (!resp.ok) return null
+    const buf = Buffer.from(await resp.arrayBuffer())
+    // Resend rejects attachments over ~10MB; skip if oversized to keep the
+    // email sending instead of failing the whole submission.
+    if (buf.byteLength > 10 * 1024 * 1024) {
+      console.warn(`[brochure] PDF for ${programName} exceeds 10MB, skipping attach`)
+      return null
+    }
+    return { filename, content: buf }
+  } catch (e) {
+    console.warn(`[brochure] attachment fetch failed: ${(e as Error).message}`)
+    return null
+  }
+}
 
 async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
   const url = process.env.UPSTASH_REDIS_REST_URL
@@ -66,6 +89,17 @@ export async function POST(req: NextRequest) {
     // Non-fatal
   }
 
+  // Pull the right PDF from Sanity (per-program → defaults to siteSettings).
+  // Runs in parallel with the email composition for minimal added latency.
+  const attachment = await fetchBrochureAttachment(data.programInterest)
+
+  const bodyCopy = attachment
+    ? `Your <strong>${data.programInterest}</strong> brochure is attached to this email.
+       It covers the full curriculum, fee structure, eligibility, and placement statistics.`
+    : `Thank you for your interest in <strong>${data.programInterest}</strong> at
+       Vivekananda Global University. Our admissions team will send your program
+       brochure to this email shortly.`
+
   try {
     await Promise.allSettled([
       resend.emails.send({
@@ -79,16 +113,9 @@ export async function POST(req: NextRequest) {
             </div>
             <div style="padding:32px;background:#fff">
               <h2 style="color:#111827">Hi ${data.name},</h2>
+              <p style="color:#4B5563;line-height:1.7">${bodyCopy}</p>
               <p style="color:#4B5563;line-height:1.7">
-                Thank you for your interest in <strong>${data.programInterest}</strong> at
-                Vivekananda Global University.
-              </p>
-              <p style="color:#4B5563;line-height:1.7">
-                Our admissions team will send your program brochure to this email shortly.
-                It covers the full curriculum, fee structure, and placement statistics.
-              </p>
-              <p style="color:#4B5563;line-height:1.7">
-                In the meantime, a counsellor may reach out to answer any questions.
+                A counsellor may reach out to answer any questions.
                 You can also call us at
                 <a href="tel:+911800123456" style="color:#C04036">1800 123 456</a>
                 (Mon-Sat, 9am-7pm IST).
@@ -99,7 +126,7 @@ export async function POST(req: NextRequest) {
             </div>
           </div>
         `,
-        // TODO: add attachments: [{ filename, content }] when admin provides brochure PDFs
+        ...(attachment ? { attachments: [attachment] } : {}),
       }),
       resend.emails.send({
         from: FROM_ADDRESS,
@@ -110,6 +137,7 @@ export async function POST(req: NextRequest) {
           <p><strong>Email:</strong> ${data.email}</p>
           <p><strong>Phone:</strong> ${data.phone}</p>
           <p><strong>Program:</strong> ${data.programInterest}</p>
+          <p><strong>PDF sent:</strong> ${attachment ? attachment.filename : 'No PDF on file - admin to follow up'}</p>
         `,
       }),
     ])

@@ -3,6 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getMilestones } from '@/lib/sanity'
 
+// Sanity-fetched content is cached at the function level via unstable_cache;
+// this page-level revalidate matches the rest of the site so ISR regenerates
+// at the same cadence as program/home pages.
+export const revalidate = 3600
+
 // Placeholder — replace with '/images/about-hero-bg.jpg' when ready.
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80&auto=format&fit=crop'
 import {
