@@ -1,0 +1,803 @@
+ED-TECH
+WEB DESIGN
+
+BIBLE
+
+The Complete Design System for Online College Programs
+
+Synthesised from Refactoring UI · Modern Industry Standards · Lead-Gen Psychology
+
+Covers: Visual Hierarchy · Color Theory · Typography · Spacing Systems · CTA Psychology · Trust Architecture · Mobile-First
+· Conversion UX · Hero Design · Form Optimization
+   ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    TABLE OF CONTENTS
+
+   What's Inside This Bible
+
+    01 Visual Hierarchy & Information Architecture
+
+                · Priority pyramid
+                · Emphasis tools
+                · Button hierarchy
+                · Label strategy
+
+    02 Color System & Psychology
+
+                · Ed-tech palette
+                · HSL workflow
+                · Shade system
+                · CTA color science
+                · Accessibility
+
+    03 Typography System
+
+                · Type scale
+                · Font selection
+                · Line length & height
+                · Letter spacing
+                · Alignment rules
+
+    04 Layout, Spacing & Grid
+
+                · Spacing system
+                · White space rules
+                · Responsive columns
+                · Max-widths
+                · Ambiguous spacing
+
+    05 Depth, Shadows & Dimension
+
+                · Light source model
+                · Shadow elevation scale
+                · Flat-depth techniques
+                · Overlapping layers
+
+    06 Hero Sections & Above-the-Fold
+
+                · Hero anatomy
+                · Headline formula
+                · Trust signals placement
+                · Image treatment
+
+2  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    07 CTA & Conversion Architecture
+
+                · CTA hierarchy
+                · Button design rules
+                · Lead form optimization
+                · Urgency & social proof
+
+    08 Program & Course Page Design
+
+                · Course card anatomy
+                · Outcomes section
+                · Curriculum accordion
+                · Faculty section
+
+    09 Trust, Proof & Credibility Design
+
+                · Accreditation placement
+                · Testimonial design
+                · Stats & numbers
+                · Media mentions
+
+    10 Finishing Touches & Polish
+
+                · Accent borders
+                · Background decoration
+                · Empty states
+                · Micro-copy
+                · Mobile checklist
+
+3  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+   CHAPTER 01
+
+   Visual Hierarchy & Information Architecture
+
+   Every page element competes for a prospective student's attention. Your design must instantly
+   communicate what matters most -- program value, outcome, and the next action -- before any
+   reading happens.
+
+   The Priority Pyramid
+
+   Visual hierarchy is not decoration -- it is the cognitive roadmap you draw for the user. When hierarchy breaks
+   down, visitors scan frantically, find nothing compelling, and leave. On an ed-tech lead generation page, every
+   element belongs to one of three tiers:
+
+   TIER 1 · PRIMARY            Program headline, outcome promise, primary CTA button. One dominant element
+   TIER 2 · SUPPORTING         per viewport. High contrast, large scale, bold weight. Nothing else competes at this
+   TIER 3 · CONTEXTUAL         level.
+
+                               Key benefits, program duration, key stats (salary uplift, placement rate). Medium
+                               contrast, moderate size. Supports the primary without overpowering.
+
+                               Accreditations, faculty names, fine print, breadcrumbs. Lower contrast, smallest
+                               scale. Necessary but deliberately understated.
+
+   The Seven Emphasis Tools
+
+   Use these tools in combination. Never rely on font size alone -- that leads to headings that are too large and
+   body text too small.
+
+   Font Weight                 600­700 for primary, 400­500 for body. Never use sub-400 weights in UI text.
+   Color Contrast
+   Scale (Size)                Dark/rich colours for primary, lighter tones for secondary. Never grey text on
+   Spatial Breathing Room      coloured backgrounds -- hand-pick a hue-matched de-saturated tone instead.
+   Opacity & Saturation
+   Position                    Only use drastic size jumps (18px  32px) for genuine tier-1 content. Otherwise,
+   Motion (micro-interaction)  weight and colour carry the load.
+
+                               Primary elements get more surrounding whitespace. Secondary elements are
+                               packed closer together.
+
+                               Full opacity for primary, 60­70% for secondary, 40­50% for tertiary.
+
+                               Top-left and centre receive attention first. Tier-1 CTA belongs at the natural end of
+                               the reading flow.
+
+                               Hover states, subtle entrance animations. Primary CTAs animate; secondary
+                               elements remain static.
+
+   De-emphasise to Emphasise
+
+4  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                                 Ed-Tech Web Design Bible
+
+   The most powerful hierarchy technique: instead of making your hero element louder, make everything else
+   quieter. On a program page with a primary CTA that isn't standing out, don't add more colour to the button --
+   reduce the contrast on the supporting nav and body copy. The button will pop without changing a single property
+   on it.
+
+   Button Hierarchy -- Semantics Are Secondary
+
+   Every page has a hierarchy of actions. Design them accordingly -- not purely by their semantic meaning but by
+   their importance to the user journey.
+
+   Tier      Style                          Ed-Tech Example                 Use When
+
+   Primary   Solid, high-contrast fill      Apply Now · Enquire Today · Download Brochure ONE per viewport
+             (Orange or Royal Blue)
+
+   Secondary Outlined or low-contrast fill  Learn More · View Curriculum    2­3 per section
+                                            Read FAQs · See Alumni Stories  Multiple per page
+   Tertiary  Link-style, no border
+
+5  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                                                          Ed-Tech Web Design Bible
+
+   CHAPTER 02
+
+   Color System & Psychology
+
+   Color is trust, urgency, warmth, and authority -- all at once. Ed-tech must feel credible enough
+   for a tuition investment yet energetic enough to inspire action. This chapter defines the full
+   palette system and every rule governing its use.
+
+   The Ed-Tech Color Philosophy
+
+   Work exclusively in HSL (Hue, Saturation, Lightness). Hex codes are opaque -- two blues that look nearly
+   identical have nothing in common in hex. HSL lets you reason about colour: 'I need this 20% lighter' or 'more
+   saturated'. Define your palette up front as a fixed system -- never reach for the colour picker in the moment.
+
+   Primary Palette -- Trust + Action
+
+   Navy 900 Authority       Royal 600 Primary Action  Sky 400 Links / Active  Blue 200 Light Accent  Ice 50 Bg Tint
+   #0F2A4A                  #1A56DB                   #3B82F6                 #93C5FD                #EFF6FF
+
+   CTA Palette -- Energy + Conversion
+
+   Orange 700 Urgency Text  Orange 600 Hover State    Orange 500 Primary CTA  Orange 400 Soft Badge  Orange 50 Bg Tint
+   #C2410C                  #EA580C                   #F97316                 #FB923C                #FFF7ED
+
+   Grey Scale -- Structure & Readability
+
+   Slate 950 Headings       Slate 700 Body Text       Slate 500 Secondary     Slate 300 Dividers     Slate 50 Bg / Cards
+   #0F172A                  #334155                   #64748B                 #CBD5E1                #F8FAFC
+
+   Semantic Palette -- Status & Support
+
+   Teal 600 Success         Purple 600 Premium        Amber 500 Warning       Red 600 Error          Green 600 Positive KPI
+   #0D9488                  #7C3AED                   #F59E0B                 #DC2626                #059669
+
+   The Shade System -- 9 Steps Per Colour
+
+   Never generate shades on-the-fly with CSS lighten/darken functions -- this creates dozens of
+   barely-distinguishable variants. Pre-define 9 shades (100­900) for each primary and accent colour. Rule: no two
+   adjacent shades should differ by less than ~25% in perceived lightness.
+
+6  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                                         Ed-Tech Web Design Bible
+
+   Shade 900­800             Text on coloured backgrounds, heading text within tinted cards
+   Shade 700­600             Primary CTA backgrounds, active navigation indicators
+   Shade 500 (Base)          Brand-defining colour -- the one you'd use on a button by default
+   Shade 400­300             Hover states, icon fills, decorative elements
+   Shade 200­100             Tinted backgrounds, alert boxes, card accents
+
+   CTA Color Science -- Conversion Data
+
+   Color on CTA buttons is not aesthetic -- it is measurable conversion science. Use this data to make decisions,
+   not gut feeling.
+
+   Color                     Psychology Signal          Conversion Impact           Ed-Tech Use
+                                                                                    Primary CTA: Apply Now, Enquire
+   Orange (#F97316)          Energy, enthusiasm, urgency +32­40% CTR vs neutral     Secondary CTA: Learn More, Download
+                                                                                    Confirm, Submit, Enrol
+   Royal Blue (#1A56DB) Trust, professionalism, reliability Strong brand trust      Deadline banners ONLY -- use sparingly
+
+   Teal/Green (#0D9488) Success, progress, positive     Positive action framing
+
+   Red (#DC2626)             Urgency, scarcity, alert   +21­34% for urgency promos
+
+   Accessibility -- WCAG Without Ugly
+
+   Contrast requirements: 4.5:1 for normal text (<18px), 3:1 for large text (18px bold). The secret to meeting these
+   ratios without ugly designs is to flip contrast rather than darken. Instead of white text on a medium-blue card
+   (often fails), use dark-blue text on a light-blue card (passes and looks refined).
+
+      DO                                                $ DON'T
+   · Use dark navy text on light-tinted cards (ICE,     · White text on mid-saturation backgrounds (often fails
+   ORANGE_L, TEAL_L)                                    4.5:1)
+   · Test every text/background combo with a contrast   · Grey text on any coloured background -- hand-pick a
+   checker                                              hue-matched muted tone
+   · Use icons + colour together -- never colour alone  · Rely on colour alone for error states, success states, or
+   · For coloured-on-coloured text, rotate hue toward   graph lines
+   yellow/cyan for brightness                           · Use opacity reduction for de-emphasised text on colour
+                                                        -- pick a new hand-crafted shade
+
+7  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+   CHAPTER 03
+
+   Typography System
+
+   Typography is 95% of ed-tech design. It carries the promise, the proof, and the CTA. A
+   constrained, intentional type system makes your UI faster to build, easier to read, and instantly
+   more credible.
+
+   The Ed-Tech Type Scale
+
+   Pre-define all sizes. Never nudge a font size one pixel at a time. Use px or rem -- never em (em compounds in
+   nested elements, breaking your system). This scale is optimised for a university landing page at 1440px desktop
+   / 390px mobile.
+
+   Hero H1                   48­56px / Bold 700        Program name in hero section
+   Section H2                32­36px / Bold 700        Section headings: Why VGU, Our Programs
+   Card H3                   22­24px / SemiBold 600    Program card titles, feature headings
+   Sub-heading H4            18­20px / SemiBold 600    Module names, FAQ items
+   Large Body                17­18px / Regular 400     Hero description paragraph
+   Body                      15­16px / Regular 400     Standard page copy -- all readable paragraphs
+   Small / Caption           13­14px / Regular 400     Labels, metadata, dates, fine print
+   Overline / Tag            11­12px / SemiBold 600 /  Course tags, badge labels, section pre-labels
+                             UPPERCASE
+   Legal / Footnote          10­11px / Regular 400     Disclaimer, copyright
+
+   Font Selection Rules
+
+   For an ed-tech brand targeting working professionals and Gen-Z learners, the personality should be: confident,
+   modern, approachable, but not childish.
+
+   Primary (Headlines)       Inter, Plus Jakarta Sans, Manrope, or DM Sans. Choose fonts with 5+ weights and
+   Body / UI                 good x-height. Avoid condensed faces for body.
+   Accent / Display
+   Avoid                     Same family as primary at Regular 400 for consistency, or pair with a neutral sans
+                             like Roboto / Open Sans.
+
+                             A single serif (like Playfair Display) used only for testimonial pull-quotes or hero
+                             sub-taglines -- adds warmth and authority.
+
+                             Decorative fonts, fonts with <4 weights, any font that degrades below 14px. Never
+                             mix more than 2 type families on one page.
+
+8  For VGU Online Programs | Lead Generation Design System | 2025­2026
+   ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+   Line Length, Height & Spacing
+
+   Readability is a conversion lever. Hard-to-read pages feel untrustworthy, and students close them. These rules
+   are non-negotiable.
+
+   Line Length               45­75 characters per line. Set paragraph max-width to 65­70ch or 600­680px.
+   Line Height (body)        Wider content = harder to follow the line return. Tighter = feels cramped.
+   Line Height (headings)
+   Letter Spacing            1.6­1.7 for standard body copy at 15­16px. Wider columns need taller line-height.
+   Alignment
+   Baseline Alignment        1.1­1.2 for H1/H2. Large text needs tighter leading -- 1.5 on a 48px heading looks
+                             airy and weak.
+
+                             Tighten headlines: -0.02em to -0.03em. Normal for body. +0.06em to +0.1em for
+                             ALL-CAPS tags and overlines -- caps need breathing room.
+
+                             Left-align body copy always. Centre only for headlines 2 lines, stats numbers, or
+                             standalone pull-quotes. Never centre paragraphs.
+
+                             When mixing font sizes on one line (stat + label), align to the text baseline, not
+                             vertical centre -- centred baselines create awkward optical gaps.
+
+9  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                                                         Ed-Tech Web Design Bible
+
+    CHAPTER 04
+
+    Layout, Spacing & Grid
+
+    Layout and spacing are the invisible architecture of your page. Generous, intentional spacing
+    communicates quality, trust, and clarity -- the exact signals a prospective student needs to feel
+    confident about an investment.
+
+    The 8-Point Spacing System
+
+    All spacing and sizing values must come from a pre-defined scale based on multiples of 4px. The 8-point base
+    means consistent increments that are visually distinguishable. This eliminates decision fatigue and produces
+    natural, harmonious layouts.
+
+    4px                       Tight internal padding -- icon-to-text gaps, badge inner padding
+    8px                       Minimum component padding -- small chips, tight labels
+    12px                      Compact card padding, form field inner padding
+    16px                      Standard component padding -- buttons (vertical), card inner
+    24px                      Section sub-element gaps, list item spacing
+    32px                      Card-to-card spacing, row gaps in grids
+    48px                      Major section internal padding top/bottom
+    64px                      Section-to-section vertical rhythm
+    96px                      Hero top/bottom padding, above-the-fold breathing room
+    128px+                    Full-bleed section separators on desktop
+
+    Start With Too Much Space
+
+    The single most reliable way to clean up any design: start by adding more space than feels necessary, then
+    reduce until it feels right. White space is not empty -- it is breathing room that signals quality. Dense ed-tech
+    pages feel like they are hiding something. Open pages feel like a confident institution.
+
+    Max-Width Strategy
+
+    Don't stretch content to fill the whole screen. Give each element the width it needs, not more.
+
+    Page wrapper              1280px max-width, centred -- prevents ultra-wide uncomfortable line lengths
+    Hero text block           640­720px -- keeps headline readable at all viewport widths
+    Body copy paragraphs      65ch / ~600px -- the sweet spot for reading speed and comfort
+
+10  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    Lead capture form         480­520px -- narrow enough to feel focused, wide enough for usability
+    Program cards             340­380px per card in a 3-column grid
+    Stats row                 Full container width -- stats read better in a wide horizontal band
+
+    Ambiguous Spacing -- The Silent Killer
+
+    When related elements have the same spacing as unrelated ones, the brain works harder to parse the page.
+    This creates friction -- subconscious friction that makes users feel vaguely uncomfortable without knowing why.
+    Fix: spacing within a group must always be smaller than spacing between groups.
+
+       DO                                                        $ DON'T
+    · Form label: 4px above input, 20px above next label         · Equal spacing between label and input as between form
+    group                                                        groups
+    · Program cards: 16px internal padding, 32px between         · Same gap between card title and body as between two
+    cards                                                        separate cards
+    · Section heading: 8px above first paragraph, 48px above     · Section heading that visually floats between two
+    the section itself                                           sections rather than attaching to one
+    · Bullet list: 4­6px between bullets, 20px before/after the  · Navigation items with same gap as hero-to-navigation
+    list block                                                   gap
+
+11  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                                  Ed-Tech Web Design Bible
+
+    CHAPTER 05
+
+    Depth, Shadows & Dimension
+
+    Depth is not decoration -- it is a communication tool. Shadows tell the user what is interactive,
+    what is elevated, and what is background. Used correctly, they make complex pages feel
+    organised and intuitive.
+
+    The Light Source Model
+
+    All shadows in a single design must assume a single, consistent light source: coming from above and slightly in
+    front of the screen. This means shadows are cast downward. Top edges of raised elements are lighter. Bottom
+    edges are slightly darker. Violating this rule -- even subtly -- creates an uncanny, unsettling feeling.
+
+    The Five-Level Shadow Scale
+
+    Level                     CSS Value                                       Use Case
+                                                                              Form inputs, table rows, very subtle card outlines
+    Shadow 1 (flat / barely libftoexd-)shadow: 0 1px 2px rgba(15,42,74,0.08)  Standard cards, program tiles, stat boxes
+                                                                              Sticky navigation on scroll, feature highlight cards
+    Shadow 2 (low elevationb)ox-shadow: 0 2px 8px rgba(15,42,74,0.10)         Dropdowns, tooltips, hover-lifted cards
+                                                                              Modal dialogs, brochure download popups, sticky lead forms
+    Shadow 3 (medium elevbaotixo-ns)hadow: 0 4px 16px rgba(15,42,74,0.12)
+
+    Shadow 4 (high elevatiobno) x-shadow: 0 8px 24px rgba(15,42,74,0.14)
+
+    Shadow 5 (modal / overlbaoyx)-shadow: 0 20px 48px rgba(15,42,74,0.20)
+
+    Depth Without Shadows -- Flat Techniques
+
+    When your design language skews flat or neumorphic, use colour relationships to create the perception of
+    depth.
+
+    Lighter = closer                     Cards that are lighter than the page background feel raised. Use white on a slate-50
+                                         background.
+    Darker = recessed
+    Overlap layers                       Input fields darker than the card background feel inset -- signals 'type here'.
+
+    Solid colour shadow                  A CTA card that crosses the boundary between a dark hero section and a light body
+    Border + background                  section immediately feels three-dimensional.
+
+                                         A 2­3px solid offset below a card (no blur) creates a flat but tangible sense of lift.
+
+                                         A subtle 1px SLATE-3 border on a white card on a SLATE-50 background creates
+                                         crisp, legible separation without any shadow.
+
+12  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    CHAPTER 06
+
+    Hero Sections & Above-the-Fold Design
+
+    The hero is your 5-second window. Research shows 94% of first impressions are design-driven,
+    and prospective students decide whether to stay or leave within the first scroll. Everything in the
+    hero must do a specific conversion job.
+
+    Hero Anatomy -- 7 Required Elements
+
+    1. Pre-headline tag            Small ALL-CAPS overline (e.g. 'ONLINE MBA PROGRAM') above the headline.
+                                   Sets context before the emotional hook. Use brand colour at 11px with +0.1em
+                                   letter-spacing.
+
+    2. Headline -- Outcome         The single most important line on the page. Format: [Action/Transformation] +
+    Promise                        [Outcome]. Example: 'Advance to Senior Management -- In 18 Months.'
+                                   48­56px, Bold 700, NAVY.
+
+    3. Sub-headline                1­2 sentences expanding the promise with specifics. Mode of study, duration,
+                                   key differentiator. 17­18px, Regular 400, SLATE-700.
+
+    4. Trust proof bar             3­4 concise proof points below the sub-headline: '12,000+ Graduates · UGC
+                                   Approved · 100% Online · EMI Available'. 13px SemiBold, icon-prefixed.
+
+    5. Primary CTA                 One high-contrast Orange button: 'Apply Now' or 'Enquire Today'. Minimum
+                                   48×52px. Right of or below the sub-headline.
+
+    6. Secondary CTA               Outlined or ghost button: 'Download Brochure'. Same line as primary. Never
+                                   compete visually.
+
+    7. Hero visual                 Right side: real student photo, video thumbnail, or illustrated outcome scene.
+                                   Always apply a subtle dark overlay or colorize to ensure consistent text contrast
+                                   if text is overlaid. No generic stock photos of people looking at laptops.
+
+    Background Image Treatment
+
+    Text on photos is a contrast trap. The photo is dynamic -- light here, dark there -- and no single text colour will
+    work across the whole image. Use one of these four solutions:
+
+    Semi-transparent overlay       Apply rgba(15,42,74,0.55) dark overlay. Use white text on top. Preserves photo
+                                   emotion while guaranteeing contrast. 4.5:1 required.
+    Colour-tinted overlay
+                                   Desaturate photo + multiply with brand colour. Creates cohesive brand aesthetic.
+    Reduced-contrast image + text  Example: blue-tinted hero = consistent and professional.
+    shadow
+                                   Lower photo contrast to 70%, add text-shadow: 0 2px 12px rgba(0,0,0,0.4) on
+                                   headlines. More dynamic, requires testing across breakpoints.
+
+13  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    Split layout (no overlay needed)  60% text block on solid brand colour, 40% photo panel. Clean, high-contrast, no risk.
+                                      Recommended for mobile-first.
+
+14  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    CHAPTER 07
+
+    CTA & Conversion Architecture
+
+    Every design decision either increases or decreases the probability of a lead form submission.
+    This chapter defines the conversion system: from button design to form psychology to urgency
+    mechanisms that feel genuine, not manipulative.
+
+    The CTA Button -- 8 Non-Negotiables
+
+    1. Contrast ratio              CTA must contrast 4.5:1 against its background. Orange (#F97316) on white =
+                                   3.1:1 -- use darker Orange-600 (#EA580C) for body CTAs.
+
+    2. Size & hit target           Minimum 44×44px (mobile), 48×52px (desktop). Padding: 14­16px vertical, 24­32px
+                                   horizontal. Never make CTAs too small to tap comfortably.
+
+    3. Action verb first           'Apply Now', 'Enquire Today', 'Download Brochure' -- never 'Submit', 'Go', or 'Click
+                                   Here'. The verb must communicate the outcome.
+
+    4. One CTA per decision point  One primary CTA per viewport. Two primary CTAs compete and reduce clicks on
+                                   both.
+
+    5. Border radius               8­12px radius for approachable softness. Full-pill (9999px) for secondary ghost
+                                   buttons. Maintain consistency across page.
+
+    6. Hover state                 On hover: darken background by ~10% OR add upward shadow (2px lift). Never just
+                                   underline. Feedback = confidence = clicks.
+
+    7. Loading/processing state    Spinner or 'Submitting...' text swap. Prevents double submissions and signals
+                                   responsiveness.
+
+    8. Surrounding white space     CTA must have breathing room -- minimum 16px clear space above and below.
+                                   Never crowd a CTA.
+
+    Lead Form Optimisation
+
+    The lead form is the most friction-filled moment in the user journey. Every unnecessary field is a leak in your
+    conversion funnel. Reduce, clarify, and reassure.
+
+    Field count                    3­4 fields maximum for first-touch lead capture: Name, Phone, Email, Program of
+    Field labels                   Interest. Progressive profiling collects more over time.
+    Input styling
+    CTA button                     Always above the input, never inside as placeholder-only. Placeholder text
+    Trust micro-copy               disappears on focus, leaving users confused.
+
+                                   Inset appearance (slightly darker bg or subtle inner shadow). Active/focus state:
+                                   Royal Blue border 2px. Error state: Red-600 border + icon + text.
+
+                                   Inside the form, full-width, Orange-500. Label: 'Get Free Counselling' beats 'Submit'.
+                                   Outcome-framed wins every time.
+
+                                   Beneath the submit button: 's No spam. Your info stays private.' Removes the #1
+                                   objection to form fills.
+
+15  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    Mobile layout             Single-column always on mobile. Inputs minimum 48px height. Font-size 16px
+    Smart defaults            inside inputs (prevents iOS zoom).
+
+                              Pre-select the most popular program. Auto-detect location for state/country fields.
+                              Reduce cognitive load.
+
+    Urgency & Social Proof Patterns
+
+    Urgency must be real or it destroys trust. Use genuine scarcity (intake deadlines, seat limits) and authentic
+    social proof.
+
+    Intake countdown          Real deadline timer: 'Next intake closes in 12 days.' Subtle Amber banner, not
+    Seat scarcity             aggressive red. Only use if actually true.
+    Live activity
+    Cohort social proof       'Only 23 seats remaining in this batch.' Use when accurate. Adds urgency without
+    Alumni outcome proof      pressure-selling.
+
+                              '38 students enquired about this program this week.' Social proof as urgency: FOMO
+                              + validation.
+
+                              'Join 340 professionals already enrolled in 2025 batch.' Normalises the action.
+                              Reduces hesitation.
+
+                              Not just 'our graduates succeed' -- 'Rahul went from s6L to s18L CTC in 14
+                              months. Class of 2023.' Specific = believable.
+
+16  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                                                           Ed-Tech Web Design Bible
+
+    CHAPTER 08
+
+    Program & Course Page Design
+
+    Program pages are where interest converts to enquiry. They must answer every question a
+    prospective student has -- in the right order, at the right depth -- while continuously reinforcing
+    the decision to apply.
+
+    Page Section Sequence (Proven Conversion Order)
+
+    1. Hero (above fold)            Program name, outcome promise, duration/mode, dual CTA
+
+    2. Social proof bar             Stats: graduates, rating, placement rate, industry partners
+
+    3. Program overview             Who it's for, key outcomes, career transformation
+
+    4. Curriculum                   Accordion -- semester/module breakdown. Downloadable PDF link.
+
+    5. Why choose us                3­4 differentiators with icons. Not bullet lists -- visual cards.
+
+    6. Faculty                      Real faces, real credentials. 3­4 featured. Link to full faculty page.
+
+    7. Student testimonials         Video > text. Include name, company, role post-graduation.
+
+    8. Career outcomes              Salary data, company logos (Tier-1 employers), job title transformations
+
+    9. Admission process            3­4 step visual process. Removes fear of 'how complicated is this?'
+
+    10. FAQ                         5­7 top objections answered. Use accordion. Reduces support load.
+
+    11. Sticky CTA / Floating lead  Always visible. 'Apply Now' on scroll. On mobile: fixed bottom bar with CTA.
+    form
+
+    Program Card Anatomy
+
+    Where multiple programs are shown in a grid, every card must communicate the same information consistently.
+    Visual uniformity enables comparison -- and comparison drives decisions.
+
+    Card image/icon                 Program category icon or relevant abstract image. Fixed 200px height, object-fit:
+                                    cover. Apply a 2px Royal Blue top border accent.
+    Program tag                     11px ALL-CAPS badge: 'ONLINE · FULL-TIME' or 'WEEKEND BATCH'. Orange-50
+                                    background, Orange-700 text.
+    Program title                   22­24px Bold. Max 2 lines. Truncate with ellipsis if needed.
+    1-line outcome                  14px italic Slate-700: 'Designed for marketing professionals targeting Director roles'
+    Key specs row                   Duration · Mode · Next Intake -- iconified, 13px, Slate-500
+    Fee / EMI teaser                Optional: 's1,800/month onwards'. Removes fee anxiety early.
+    CTA button                      Full-width 'Explore Program' -- Secondary style. Orange only on featured card.
+
+17  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    CHAPTER 09
+
+    Trust, Proof & Credibility Design
+
+    Online education purchases require more trust than almost any other online transaction.
+    Students are committing months of time and lakhs of rupees. Every trust signal must be visible,
+    specific, and credible.
+
+    The Trust Signal Hierarchy
+
+    Tier 1: Institutional trust  UGC recognition, NAAC grade, AICTE approval -- above the fold or in hero trust bar
+
+    Tier 2: Outcome trust        Placement rates, salary data, employer brand logos -- mid-page after interest is
+                                 established
+
+    Tier 3: Peer trust           Student testimonials, alumni count, cohort diversity -- emotionally reinforces the
+                                 decision
+
+    Tier 4: Process trust        Secure payment badges, privacy policy, refund policy -- near the form/pricing
+
+    Tier 5: Expert trust         Faculty credentials, industry advisors, media mentions -- supporting, not primary
+
+    Testimonial Design Rules
+
+    Testimonials are not marketing copy -- they are proof. Weak testimonials ('Great course! Highly recommend!')
+    hurt more than they help because they feel fabricated. Design for specificity and humanity.
+
+    Format                       Quote  Name  Role (Before  After)  Company logo. Always include the
+    Photo                        'before' role -- transformation requires a starting point.
+    Quote size
+    Quote marks                  Real headshot, not stock. Circular crop, 64­80px diameter. Initials fallback with
+    Carousel vs grid             brand colour bg if no photo.
+
+                                 Display at 20­24px for pull-quote style. Large quotes feel authoritative. Attribution at
+                                 13px, lighter colour.
+
+                                 Oversized decorative quotation marks (60­80px, brand colour, low opacity) behind
+                                 the quote text. Visual anchor without noise.
+
+                                 Grid of 3 (desktop): shows volume and variety simultaneously. Carousel: only if >6
+                                 testimonials. Auto-play carousels are conversion killers -- users never trust them;
+                                 use manual-only navigation.
+
+    Numbers & Statistics Design
+
+    Stats are your most efficient trust tool -- but only if they are visually prominent and specific. '12,000 graduates'
+    beats 'thousands of graduates'. 's14.2L average CTC' beats 'high salary potential'.
+
+    Number size                  48­64px Bold, brand color. The number is tier-1 hierarchy. Huge.
+    Label size                   14­16px Regular, Slate-700. The label is tier-3. Small and understated.
+    Accompanying icon            24­32px icon above or beside the number. Same brand colour, 60% opacity.
+
+18  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                                                                                          Ed-Tech Web Design Bible
+
+      Layout                  4 stats in a horizontal band (full-width section). Soft gradient or light-tinted
+      Specificity             background. Not inside a card -- it shrinks them visually.
+                              Include a source or year: '2024 Placement Report'. Specificity = credibility.
+
+19  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    CHAPTER 10
+
+    Finishing Touches, Polish & Mobile
+    Checklist
+
+    Great designs are distinguished by the details that most people never notice consciously -- but
+    feel. These are the finishing moves that separate a template-looking page from a
+    brand-consistent, conversion-optimised digital campus.
+
+    Accent Borders -- The Cheapest Design Win
+
+    A 3­4px coloured border on any otherwise plain white card instantly makes it feel 'designed'. No illustration
+    budget needed. This technique from Refactoring UI is exceptionally effective in ed-tech for card systems.
+
+    Top of program cards        3px Royal Blue top border. Signals 'this is an official program'.
+    Active navigation item      3px Orange bottom border on the active tab/link.
+    Alert / info banners        4px Royal Blue left border on info callouts. 4px Red left border for warnings.
+    Section heading underline   Short 40px Orange line beneath H2 section headings. Adds anchor.
+    Page header / nav top       4px Royal Blue top strip on the very top of the viewport.
+    Testimonial cards           3px Teal left border. Distinguishes testimonials visually from other cards.
+
+    Background Decoration -- Subtle Life
+
+    Section colour alternation  Alternate white and Slate-50 (#F8FAFC) sections. Creates visual rhythm without
+                                borders. Never alternate two strong colours.
+
+    Gradient hero               linear-gradient(135deg, #0F2A4A 0%, #1A56DB 100%) for hero bands. Keep hue
+                                rotation 30° or it looks garish.
+
+    Geometric shapes            Large, low-opacity (5­8%) circles or polygons in brand colour as background
+                                elements. Adds depth without clutter.
+
+    Subtle dot/grid patterns    CSS dot pattern at 10­12px spacing, 4­6% opacity. Adds texture to otherwise flat
+                                sections.
+
+    Colourised image bands      Desaturated + tinted background images for section dividers. Keep contrast with text
+                                always 4.5:1.
+
+    Micro-Copy & Empty States
+
+    Micro-copy is the small text that lives in the margins: button labels, form hints, error messages, empty state
+    messages. It is the most-read and least-designed copy on any page.
+
+    Form error messages         Specific, not generic. 'Please enter a 10-digit mobile number' not 'Invalid input'.
+                                Red-600 text + icon. Appears inline below the field.
+
+20  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                                    Ed-Tech Web Design Bible
+
+    Input hint text           Below the label, Slate-500, 12px: 'We'll only call during business hours.'
+    Success confirmation
+    Empty program list        After form submit: specific next step. 'Thanks Priya! Our counsellor will call you within
+    Page 404                  2 hours.' Not just 'Thank you for submitting.'
+
+                              If a filter returns no results: illustration + 'No programs match. Try removing a filter or
+                              browse all programs.' Include a CTA.
+
+                              Custom design. Not the server default. 'This page moved. Here are our most popular
+                              programs.' Recover the lead.
+
+    Mobile-First Checklist
+
+    Gen-Z prospective students are mobile-first. Over 70% of ed-tech traffic arrives on mobile. These are the
+    non-negotiable mobile checks before any page goes live.
+
+       s Tap targets 44×44px -- test every button and link
+       s Font size 16px inside all form inputs (prevents iOS auto-zoom)
+       s Hero headline 32px on mobile -- 48px desktop headlines are too large on 390px screens
+       s Single-column layout -- no horizontal scrolling anywhere
+       s Fixed bottom CTA bar: 'Apply Now' always visible on program pages
+       s Images: WebP format, max 200KB hero, lazy-load below-fold images
+       s Page load 3 seconds on 4G -- test with Lighthouse
+       s Navigation: hamburger menu with full-screen overlay. Close button visible.
+       s Forms: single-column, large inputs, dropdown for program selection
+       s Video: poster image while loading, controls visible, captions available
+       s Spacing: 16px horizontal padding minimum on all content. Never flush-to-edge.
+       s Shadow-5 modals: full-screen on mobile. Not the desktop floating-card style.
+       s All hover states also have focus states (keyboard + screen reader accessibility)
+       s Phone numbers: all are tap-to-call links (tel: protocol)
+       s WhatsApp CTA: floating WhatsApp button on all program pages
+
+    The Quality Bar -- Final Audit Pass
+
+    Before any page launches, run this quick audit. If any item fails, fix it.
+
+    Design Element            Pass Criteria
+    Hierarchy                 Can I identify Tier-1, Tier-2, Tier-3 at a glance in 5 seconds?
+    Color                     Primary CTA uses Orange. All text passes 4.5:1 contrast. No solo-colour information.
+    Typography                Max 2 fonts. Type scale is consistent. No font below 10px visible to user.
+    Spacing                   No ambiguous spacing. Related elements are closer than unrelated ones.
+    Shadows                   All cards use the same shadow level. Modals use Shadow-5.
+    CTA                       One primary CTA per viewport. Action verb. Minimum 44px height.
+    Trust                     Accreditation logo above fold. At least 2 specific testimonials. Stats visible mid-page.
+
+21  For VGU Online Programs | Lead Generation Design System | 2025­2026
+    ED-TECH WEB DESIGN BIBLE                                             Ed-Tech Web Design Bible
+
+    Mobile                    Single column. Tap targets 44px. Load time 3s. Fixed bottom CTA bar.
+    Forms                     4 fields. Labels above fields. Privacy assurance below submit button.
+    Images                    No grey placeholder images in production. No scaled-up icons. Alt text on all images.
+
+      This Bible was synthesised from Refactoring UI (Adam Wathan & Steve Schoger), modern industry standards for
+    ed-tech UI/UX (2025­2026), and conversion-rate optimisation research for higher education lead generation. Apply it
+
+                                        as a living system -- test, iterate, and let data refine the rules.
+
+22  For VGU Online Programs | Lead Generation Design System | 2025­2026
+

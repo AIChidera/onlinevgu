@@ -1,0 +1,83 @@
+
+> onlinevgu@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 4.6s
+ ○ Compiling / ...
+ ✓ Compiled / in 38.9s (4964 modules)
+ ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+ ✓ Compiled in 5.7s (1862 modules)
+ GET / 200 in 19682ms
+ GET / 200 in 8340ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /programs in 26.2s (3134 modules)
+ ✓ Compiled in 2.8s (1853 modules)
+ GET /api/programs 200 in 10919ms
+ GET /favicon.ico 200 in 31427ms
+ GET /api/programs 200 in 28ms
+ GET /api/programs 200 in 26ms
+ GET /api/programs 200 in 12ms
+ GET /api/programs 200 in 36ms
+ GET /api/programs 200 in 12ms
+ GET /favicon.ico 200 in 12ms
+ ○ Compiling /programs/[slug] ...
+ ✓ Compiled /programs/[slug] in 3.5s (5093 modules)
+ ✓ Compiled in 4.5s (5052 modules)
+ ✓ Compiled in 9.1s (5052 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\nwang\Desktop\onlinevgu\.next\cache\webpack\client-development\2.pack.gz_' -> 'C:\Users\nwang\Desktop\onlinevgu\.next\cache\webpack\client-development\2.pack.gz'
+ ✓ Compiled in 4.2s (5054 modules)
+ ✓ Compiled in 4.6s (5054 modules)
+ ✓ Compiled in 7.4s (5054 modules)
+ ✓ Compiled in 4.2s (5054 modules)
+ ✓ Compiled in 5.5s (5054 modules)
+ ✓ Compiled in 3.5s (5054 modules)
+ ✓ Compiled in 3.3s (5054 modules)
+ ✓ Compiled in 3.5s (5049 modules)
+ ✓ Compiled in 8.1s (5049 modules)
+ ✓ Compiled in 9.6s (5049 modules)
+ ✓ Compiled in 5.3s (5049 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'C:\Users\nwang\Desktop\onlinevgu\.next\cache\webpack\client-development\3.pack.gz_' -> 'C:\Users\nwang\Desktop\onlinevgu\.next\cache\webpack\client-development\3.pack.gz'
+ ✓ Compiled in 3.8s (1896 modules)
+ ○ Compiling /about ...
+ ✓ Compiled /about in 12.6s (5057 modules)
+ GET /about 200 in 14136ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 4.7s (5112 modules)
+ GET /favicon.ico 200 in 4516ms
+ GET /api/programs 200 in 5047ms
+ GET /api/programs 200 in 174ms
+ GET /api/programs 200 in 397ms
+ GET /api/programs 200 in 43ms
+ GET /api/programs 200 in 81ms
+ GET /api/programs 200 in 14ms
+ ✓ Compiled in 1987ms (1897 modules)
+ ✓ Compiled in 3s (1897 modules)
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 11s (5291 modules)
+ ✓ Compiled in 1115ms (1984 modules)
+ ✓ Compiled in 7.4s (1984 modules)
+ ✓ Compiled in 1683ms (1984 modules)
+ ✓ Compiled in 1507ms (1984 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 6.5s (3297 modules)
+ GET / 200 in 1572ms
+ ○ Compiling /api/programs ...
+ ✓ Compiled /api/programs in 2.2s (3329 modules)
+ ✓ Compiled (3352 modules)
+ GET /favicon.ico 200 in 4950ms
+ GET /about 200 in 1425ms
+ GET / 200 in 3392ms
+ GET /favicon.ico 200 in 443ms
+ GET /api/programs 200 in 110ms
+ GET /api/programs 200 in 33ms
+ GET /api/programs 200 in 21ms
+ GET /api/programs 200 in 58ms
+ GET /api/programs 200 in 33ms
+ GET /api/programs 200 in 59ms
+ GET /favicon.ico 200 in 27ms
+ ○ Compiling /_not-found ...

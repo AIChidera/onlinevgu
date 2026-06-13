@@ -22,34 +22,81 @@ import {
 } from '@tabler/icons-react'
 
 export interface ProgramMeta {
-  Icon:   React.ComponentType<any> // eslint-disable-line @typescript-eslint/no-explicit-any
-  iconBg: string
-  badge?: string
+  Icon:     React.ComponentType<any> // eslint-disable-line @typescript-eslint/no-explicit-any
+  iconBg:   string
+  badge?:   string
+  outcome?: string
 }
 
 export const PROGRAM_META: Record<string, ProgramMeta> = {
   // Management
-  bba:      { Icon: IconBriefcase,    iconBg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)'  },
-  mba:      { Icon: IconTrendingUp,   iconBg: 'linear-gradient(135deg,#C04036,#821a12)', badge: 'Most popular' },
-  'mba-if': { Icon: IconBuildingBank, iconBg: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)'  },
+  bba: {
+    Icon:    IconBriefcase,
+    iconBg:  'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
+    outcome: 'For school-leavers wanting a business career fast.',
+  },
+  mba: {
+    Icon:    IconTrendingUp,
+    iconBg:  'linear-gradient(135deg,#C04036,#821a12)',
+    badge:   'Most popular',
+    outcome: 'For working professionals aiming at senior management.',
+  },
+  'mba-if': {
+    Icon:    IconBuildingBank,
+    iconBg:  'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
+    outcome: 'For finance pros targeting ACCA, CMA, or CFO roles.',
+  },
 
   // Information Technology
-  bca:              { Icon: IconCode,             iconBg: 'linear-gradient(135deg,#7c3aed,#4c1d95)', badge: 'High demand' },
-  mca:              { Icon: IconDeviceLaptop,     iconBg: 'linear-gradient(135deg,#0891b2,#155e75)'  },
+  bca: {
+    Icon:    IconCode,
+    iconBg:  'linear-gradient(135deg,#7c3aed,#4c1d95)',
+    badge:   'High demand',
+    outcome: 'For school-leavers entering software, data, or product roles.',
+  },
+  mca: {
+    Icon:    IconDeviceLaptop,
+    iconBg:  'linear-gradient(135deg,#0891b2,#155e75)',
+    outcome: 'For developers ready to move into lead or architect roles.',
+  },
 
   // Commerce
-  bcom:             { Icon: IconBuildingBank,     iconBg: 'linear-gradient(135deg,#C04036,#821a12)'  },
-  mcom:             { Icon: IconBuildingBank,     iconBg: 'linear-gradient(135deg,#C04036,#821a12)'  },
+  bcom: {
+    Icon:    IconBuildingBank,
+    iconBg:  'linear-gradient(135deg,#C04036,#821a12)',
+    outcome: 'For commerce students building toward CA, banking, or audit careers.',
+  },
+  mcom: {
+    Icon:    IconBuildingBank,
+    iconBg:  'linear-gradient(135deg,#C04036,#821a12)',
+    outcome: 'For finance and accounting pros levelling up to senior commerce roles.',
+  },
 
   // Arts
-  ba:               { Icon: IconBook2,            iconBg: 'linear-gradient(135deg,#0891b2,#155e75)'  },
-  ma:               { Icon: IconBook2,            iconBg: 'linear-gradient(135deg,#7c3aed,#4c1d95)'  },
+  ba: {
+    Icon:    IconBook2,
+    iconBg:  'linear-gradient(135deg,#0891b2,#155e75)',
+    outcome: 'For graduates building toward policy, journalism, or grad school.',
+  },
+  ma: {
+    Icon:    IconBook2,
+    iconBg:  'linear-gradient(135deg,#7c3aed,#4c1d95)',
+    outcome: 'For aspiring teachers, writers, and content professionals.',
+  },
 
   // Science
-  msc: { Icon: IconFlask, iconBg: 'linear-gradient(135deg,#059669,#065f46)' },
+  msc: {
+    Icon:    IconFlask,
+    iconBg:  'linear-gradient(135deg,#059669,#065f46)',
+    outcome: 'For analysts, actuaries, and academic careers in mathematics.',
+  },
 
   // Media & Journalism
-  majmc: { Icon: IconNews, iconBg: 'linear-gradient(135deg,#be185d,#9d174d)' },
+  majmc: {
+    Icon:    IconNews,
+    iconBg:  'linear-gradient(135deg,#be185d,#9d174d)',
+    outcome: 'For storytellers entering newsrooms, PR, and digital media.',
+  },
 
   // Management - Certificates
   'pg-cert-digital-marketing': { Icon: IconStar,          iconBg: 'linear-gradient(135deg,#d97706,#b45309)', badge: 'Hot' },

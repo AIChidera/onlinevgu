@@ -8,53 +8,55 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyIcon = React.ComponentType<any>
 
-const SPEC_MAP: Record<string, { Icon: AnyIcon; grad: string }> = {
-  'Finance':               { Icon: IconTrendingUp,       grad: 'linear-gradient(135deg,#C04036,#821a12)' },
-  'Marketing':             { Icon: IconStar,             grad: 'linear-gradient(135deg,#d97706,#92400e)' },
-  'Human Resources':       { Icon: IconUsers,            grad: 'linear-gradient(135deg,#7c3aed,#4c1d95)' },
-  'Operations Management': { Icon: IconSettings,         grad: 'linear-gradient(135deg,#475569,#1e293b)' },
-  'Business Analytics':    { Icon: IconChartBar,         grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)' },
-  'International Business':{ Icon: IconWorld,            grad: 'linear-gradient(135deg,#0891b2,#155e75)' },
-  'Data Science':          { Icon: IconDatabase,         grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)' },
-  'Cloud Computing':       { Icon: IconCloud,            grad: 'linear-gradient(135deg,#0891b2,#155e75)' },
-  'AI & Machine Learning': { Icon: IconCpu,              grad: 'linear-gradient(135deg,#4f46e5,#3730a3)' },
-  'Cybersecurity':         { Icon: IconShieldCheck,      grad: 'linear-gradient(135deg,#C04036,#821a12)' },
-  'Software Engineering':  { Icon: IconCode,             grad: 'linear-gradient(135deg,#7c3aed,#4c1d95)' },
-  'Accounting & Finance':  { Icon: IconCalculator,       grad: 'linear-gradient(135deg,#C04036,#821a12)' },
-  'Accounting & Taxation': { Icon: IconCalculator,       grad: 'linear-gradient(135deg,#C04036,#821a12)' },
-  'Business Management':   { Icon: IconBriefcase,        grad: 'linear-gradient(135deg,#d97706,#92400e)' },
-  'Taxation':              { Icon: IconCalculator,       grad: 'linear-gradient(135deg,#475569,#1e293b)' },
-  'English':               { Icon: IconBook2,            grad: 'linear-gradient(135deg,#0891b2,#155e75)' },
-  'Economics':             { Icon: IconTrendingUp,       grad: 'linear-gradient(135deg,#059669,#065f46)' },
-  'Political Science':     { Icon: IconBuilding,         grad: 'linear-gradient(135deg,#1d4ed8,#1e3a8a)' },
-  'Sociology':             { Icon: IconUsers,            grad: 'linear-gradient(135deg,#7c3aed,#4c1d95)' },
-  'Computer Science':      { Icon: IconCode,             grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)' },
-  'Mathematics':           { Icon: IconChartBar,         grad: 'linear-gradient(135deg,#C04036,#821a12)' },
-  'Environmental Science': { Icon: IconLeaf,             grad: 'linear-gradient(135deg,#059669,#065f46)' },
-  'Hospital Administration':{ Icon: IconBuilding,        grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)' },
-  'Healthcare Operations': { Icon: IconHeartRateMonitor, grad: 'linear-gradient(135deg,#059669,#065f46)' },
-  'Pharma Management':     { Icon: IconFlask,            grad: 'linear-gradient(135deg,#7c3aed,#4c1d95)' },
-  'Health Insurance':      { Icon: IconShieldCheck,      grad: 'linear-gradient(135deg,#d97706,#92400e)' },
-}
-
-const FALLBACK_GRADS = [
-  'linear-gradient(135deg,#C04036,#821a12)',
-  'linear-gradient(135deg,#2563eb,#1d4ed8)',
-  'linear-gradient(135deg,#7c3aed,#4c1d95)',
-  'linear-gradient(135deg,#d97706,#92400e)',
+// Brand-only 3-gradient cycle. Cards rotate by index, not by specialisation.
+const PALETTE = [
+  'linear-gradient(135deg,#C04036,#821a12)',  // red → dark red
+  'linear-gradient(135deg,#FFA412,#C04036)',  // yellow → red
+  'linear-gradient(135deg,#821a12,#3b0d09)',  // deep red flow
 ]
 
+// Per-specialisation icon mapping (visual variety stays via icons, not palette).
+const SPEC_ICONS: Record<string, AnyIcon> = {
+  'Finance':                IconTrendingUp,
+  'Marketing':              IconStar,
+  'Human Resources':        IconUsers,
+  'Operations Management':  IconSettings,
+  'Business Analytics':     IconChartBar,
+  'International Business': IconWorld,
+  'Data Science':           IconDatabase,
+  'Cloud Computing':        IconCloud,
+  'AI & Machine Learning':  IconCpu,
+  'Cybersecurity':          IconShieldCheck,
+  'Software Engineering':   IconCode,
+  'Accounting & Finance':   IconCalculator,
+  'Accounting & Taxation':  IconCalculator,
+  'Business Management':    IconBriefcase,
+  'Taxation':               IconCalculator,
+  'English':                IconBook2,
+  'Economics':              IconTrendingUp,
+  'Political Science':      IconBuilding,
+  'Sociology':              IconUsers,
+  'Computer Science':       IconCode,
+  'Mathematics':            IconChartBar,
+  'Environmental Science':  IconLeaf,
+  'Hospital Administration':IconBuilding,
+  'Healthcare Operations':  IconHeartRateMonitor,
+  'Pharma Management':      IconFlask,
+  'Health Insurance':       IconShieldCheck,
+}
+
 function SpecCard({ s, si }: { s: string; si: number }) {
-  const specMeta = SPEC_MAP[s] ?? { Icon: IconBriefcase, grad: FALLBACK_GRADS[si % FALLBACK_GRADS.length] }
+  const Icon = SPEC_ICONS[s] ?? IconBriefcase
+  const grad = PALETTE[si % PALETTE.length]
   return (
     <div
       className="group/spec flex items-center gap-4 rounded-2xl bg-white border border-neutral-200 p-5 cursor-default transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_2px_#FFA412,0_10px_40px_rgba(0,0,0,0.10)] h-full"
     >
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-300 group-hover/spec:scale-110 group-hover/spec:rotate-3"
-        style={{ background: specMeta.grad }}
+        style={{ background: grad }}
       >
-        <specMeta.Icon size={22} stroke={1.5} className="text-white" />
+        <Icon size={22} stroke={1.5} className="text-white" />
       </div>
       <div>
         <p className="font-heading font-bold text-[16px] text-neutral-900 leading-snug">{s}</p>

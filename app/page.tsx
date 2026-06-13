@@ -1,6 +1,7 @@
 export const revalidate = 3600
 
 import dynamic from 'next/dynamic'
+import IntakeCountdown from '@/components/sections/IntakeCountdown'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
 import ProgramsSection from '@/components/sections/ProgramsSection'
@@ -18,7 +19,6 @@ import {
   getAllPrograms,
   getSiteSettings,
 } from '@/lib/sanity'
-import { PROGRAMMES } from './programs/data'
 
 const CourseExperienceSection = dynamic(
   () => import('@/components/sections/CourseExperienceSection'),
@@ -79,7 +79,6 @@ export default async function HomePage() {
     getAllPrograms(),
     getSiteSettings(),
   ])
-  const programCount = sanityPrograms.length > 0 ? sanityPrograms.length : PROGRAMMES.length
 
   const faqJsonLd = buildFaqJsonLd(faqs)
 
@@ -95,16 +94,15 @@ export default async function HomePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
+      <IntakeCountdown />
       <Hero />
       <TrustBar />
       <ProgramsSection programmes={sanityPrograms.length > 0 ? sanityPrograms : undefined} />
       <ImpactSection
-        programCount={programCount}
         statLearners={parseStat(siteSettings?.statLearners,    50000)}
         statCountries={parseStat(siteSettings?.statCountries,  40)}
         statPlacement={parseStat(siteSettings?.statPlacement,  95)}
         statRating={parseStat(siteSettings?.statRating,        4.8)}
-        statHirers={parseStat(siteSettings?.statHiringPartners, 500)}
         statCoursera={parseStat(siteSettings?.statCourseraCount, 7000)}
       />
       <CampusImmersionsSection events={campusEvents} />

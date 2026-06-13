@@ -17,7 +17,6 @@ import {
   IconArrowRight,
   IconHeadset,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import type { CurriculumYear } from './CurriculumPreview'
 import ProgramHighlights from './ProgramHighlights'
@@ -28,7 +27,7 @@ import CareerOutcomes from './CareerOutcomes'
 
 import FacultySection from './FacultySection'
 
-// Below-fold client components — lazy loaded to reduce initial JS bundle
+// Below-fold client components - lazy loaded to reduce initial JS bundle
 const ActivityTicker      = dynamic(() => import('./ActivityTicker'),      { ssr: false })
 const PlacementStatsStrip = dynamic(() => import('./PlacementStatsStrip'), { ssr: false })
 const AdmissionSteps      = dynamic(() => import('./AdmissionSteps'),      { ssr: false })
@@ -77,7 +76,7 @@ function getSeatsFilled(slug: string): number {
   return SEATS_FILLED[slug] ?? 65
 }
 
-// Placeholder hero images per program — replace with real assets when ready.
+// Placeholder hero images per program - replace with real assets when ready.
 // Programs without an entry fall back to DEFAULT_HERO_IMAGE.
 const HERO_IMAGES: Record<string, string> = {
   'mba':    'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1400&q=80&auto=format&fit=crop',
@@ -751,7 +750,7 @@ export async function generateStaticParams() {
   // Only degree programs have detail pages (certs open a counsellor modal)
   const sanitySlug  = sanity.filter(p => p.level !== 'cert').map(p => ({ slug: p.slug }))
   const fallback    = PROGRAMS.map(p => ({ slug: p.slug }))
-  // Union — Sanity takes priority; fallback fills gaps when CMS is empty
+  // Union - Sanity takes priority; fallback fills gaps when CMS is empty
   const seen = new Set<string>()
   return [...sanitySlug, ...fallback].filter(s => seen.has(s.slug) ? false : (seen.add(s.slug), true))
 }
@@ -808,7 +807,7 @@ export default async function ProgramPage({ params }: Props) {
   const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
 
-  // Related programs — try Sanity data first, fall back to hardcoded map
+  // Related programs - try Sanity data first, fall back to hardcoded map
   const relatedPrograms = (RELATED[prog.slug] ?? []).flatMap(s => {
     const sp = allSanityProgs.find(p => p.slug === s)
     if (sp && (sp.level === 'ug' || sp.level === 'pg')) return [{ slug: sp.slug, name: sp.name, fullName: sp.fullName, level: sp.level, duration: sp.duration, feePerYear: sp.fee, image: sp.image ?? HERO_IMAGES[s] ?? undefined }]
@@ -817,7 +816,7 @@ export default async function ProgramPage({ params }: Props) {
     return []
   })
 
-  // Curriculum never stored in Sanity seed — always fall back to hardcoded map
+  // Curriculum never stored in Sanity seed - always fall back to hardcoded map
   const curriculum = (prog as ProgramDetail).curriculum ?? PROGRAM_MAP.get(slug)?.curriculum
 
   // Map Sanity FAQs → {q, a} expected by ProgramFAQ; undefined = use fallback
@@ -881,29 +880,15 @@ export default async function ProgramPage({ params }: Props) {
       <Breadcrumb items={[{ label: 'All Courses', href: '/programs' }, { label: prog.name }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative overflow-hidden">
-        {/* Background image — swap heroImage on the program object for a program-specific asset */}
+      <section className="relative flex items-center overflow-hidden">
+        {/* Background image + brand-red overlay (50%) - swap heroImage for a program-specific asset */}
         <Image src={heroImage} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.88) 0%, rgba(130,26,18,0.92) 100%)' }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        <div className="opacity-40 absolute inset-0">
-          <StrokeArt variant="dark" />
-        </div>
+        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-12 md:py-14 lg:py-20 grid grid-cols-1 xl:grid-cols-[55fr_45fr] gap-16 items-center">
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
-          {/* ── Left ── */}
-          <div>
+          {/* Copy column */}
+          <div className="max-w-[680px]">
             {/* Badges */}
             <div className="anim-load-left flex flex-wrap items-center gap-2 mb-5" style={{ animationDelay: '0ms' }}>
               <span className="rounded-full bg-white/20 border border-white/25 px-3.5 py-1 text-[12px] font-heading font-bold uppercase tracking-[0.05em] text-white">
@@ -917,38 +902,29 @@ export default async function ProgramPage({ params }: Props) {
             </div>
 
             {/* Name */}
-            <h1 className="anim-load-left font-heading font-black text-[38px] tracking-[-2px] leading-[0.95] text-white sm:text-[48px] lg:text-[64px]" style={{ animationDelay: '70ms' }}>
+            <h1 className="anim-load-left font-heading font-bold tracking-[-0.5px] leading-[1.05] text-white text-[38px] sm:text-[48px] lg:text-[56px]" style={{ animationDelay: '70ms' }}>
               {prog.name}
             </h1>
-            <p className="anim-load-left mt-2.5 text-[15px] font-body text-white/65 tracking-[-0.2px] lg:text-[17px]" style={{ animationDelay: '100ms' }}>
+            <p className="anim-load-left mt-2.5 text-[15px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-4 text-[14px] font-body leading-[1.7] text-white/80 max-w-[520px] md:text-[15px] lg:text-[16px]" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]" style={{ animationDelay: '140ms' }}>
               {prog.description}
             </p>
 
-            {/* Stat chips */}
+            {/* Stat chips (3 focused proof points, Bible §06) */}
             <div className="anim-load-left mt-7 flex flex-wrap gap-2.5" style={{ animationDelay: '210ms' }}>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-body font-semibold text-white">
-                <IconClock size={14} stroke={1.5} />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-4 py-2 text-[13px] font-body font-semibold text-white">
+                <IconClock size={14} stroke={1.75} />
                 {prog.duration} · {prog.semesters} semesters
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-body font-semibold text-white">
-                {prog.feePerYear} annual
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-body font-semibold text-white">
-                Total {prog.totalFee}
               </span>
               {prog.emi && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/25 border border-vgu-yellow/40 px-4 py-2 text-[13px] font-body font-semibold text-vgu-yellow">
                   EMI from {prog.emi}
                 </span>
               )}
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/25 border border-vgu-yellow/40 px-4 py-2 text-[13px] font-body font-semibold text-vgu-yellow">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-4 py-2 text-[13px] font-body font-semibold text-white">
                 ★ 4.8/5 · 2,400+ reviews
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-body font-semibold text-white">
-                🔥 {seatsFilled}% seats filled
               </span>
             </div>
 
@@ -958,7 +934,7 @@ export default async function ProgramPage({ params }: Props) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
               </span>
-              <span className="text-[13px] font-body font-semibold text-white/70">
+              <span className="text-[13px] font-body font-semibold text-white/80">
                 Next batch: <span className="text-white">{prog.nextBatch}</span> · Admissions open
               </span>
             </div>
@@ -985,84 +961,10 @@ export default async function ProgramPage({ params }: Props) {
             </div>
           </div>
 
-          {/* ── Right: placeholder + floating badges ── */}
-          <div className="hidden xl:flex items-center justify-center">
-            <div className="relative w-full py-8">
-              <div className="relative w-full aspect-[4/3]">
-
-                {/* Badge 1 - top-left */}
-                <div
-                  className="absolute -top-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.22)] border border-neutral-200"
-                  style={{ animationDelay: '0s' }}
-                >
-                  <div className="font-heading font-black text-[20px] leading-none text-vgu-red">UGC</div>
-                  <div className="mt-1 text-[11px] font-body text-neutral-600">Recognised degree</div>
-                </div>
-
-                {/* Badge 2 - top-right */}
-                <div
-                  className="absolute -top-3 right-5 z-10 animate-float-up flex items-center gap-2.5 rounded-2xl bg-white px-3.5 py-2.5 shadow-[0_8px_28px_rgba(17,24,39,0.22)] border border-neutral-200"
-                  style={{ animationDelay: '2s' }}
-                >
-                  <span className="relative flex h-2.5 w-2.5 flex-none">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-                  </span>
-                  <div>
-                    <div className="font-heading text-[12px] font-bold text-neutral-900">Admissions Open</div>
-                    <div className="text-[10px] font-body text-neutral-600">No entrance exam</div>
-                  </div>
-                </div>
-
-                {/* Badge 3 - bottom-left: seats progress */}
-                <div
-                  className="absolute -bottom-5 left-5 z-10 animate-float-up rounded-2xl bg-white px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.22)] border border-neutral-200 min-w-[190px]"
-                  style={{ animationDelay: '0.7s' }}
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-heading font-bold text-[13px] text-neutral-900">{seatsFilled}% seats filled</span>
-                    <span className="text-[11px] font-body text-vgu-red font-semibold">Limited</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-neutral-100 overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-vgu-yellow to-vgu-red"
-                      style={{ width: `${seatsFilled}%` }}
-                    />
-                  </div>
-                  <div className="mt-1 text-[10px] font-body text-neutral-500">for {prog.nextBatch} batch</div>
-                </div>
-
-                {/* Badge 4 - bottom-right */}
-                <div
-                  className={[
-                    'absolute -bottom-3 right-5 z-10 animate-float-up rounded-2xl px-4 py-3 shadow-[0_8px_28px_rgba(17,24,39,0.22)] border',
-                    prog.popular
-                      ? 'bg-vgu-yellow border-vgu-yellow'
-                      : 'bg-white border-neutral-200',
-                  ].join(' ')}
-                  style={{ animationDelay: '1.3s' }}
-                >
-                  {prog.popular ? (
-                    <>
-                      <div className="font-heading font-black text-[17px] leading-none text-neutral-900">★ #1</div>
-                      <div className="mt-0.5 text-[11px] font-body font-semibold text-neutral-700">Most Popular</div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="font-heading font-black text-[17px] leading-none text-vgu-red">{prog.nextBatch}</div>
-                      <div className="mt-0.5 text-[11px] font-body text-neutral-600">Next batch</div>
-                    </>
-                  )}
-                </div>
-
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      <ActivityTicker />
+      <ActivityTicker slug={prog.slug} name={prog.name} />
 
       <PlacementStatsStrip slug={prog.slug} />
 
@@ -1180,12 +1082,11 @@ export default async function ProgramPage({ params }: Props) {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {eligibility.map((e, ei) => {
+                    // Brand-only 3-gradient cycle.
                     const GRADS = [
-                      'linear-gradient(135deg,#C04036,#821a12)',
-                      'linear-gradient(135deg,#2563eb,#1d4ed8)',
-                      'linear-gradient(135deg,#7c3aed,#4c1d95)',
-                      'linear-gradient(135deg,#059669,#065f46)',
-                      'linear-gradient(135deg,#d97706,#92400e)',
+                      'linear-gradient(135deg,#C04036,#821a12)',  // red
+                      'linear-gradient(135deg,#FFA412,#C04036)',  // yellow → red
+                      'linear-gradient(135deg,#821a12,#3b0d09)',  // deep red
                     ]
                     const grad = GRADS[ei % GRADS.length]
                     return (
@@ -1219,14 +1120,15 @@ export default async function ProgramPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Bible §08 order: human-trust signals (Faculty + Testimonials) precede action-asks (Admission + Certificate). */}
+      <FacultySection slug={prog.slug} />
+      <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
       <AdmissionSteps />
       <CertificatePreview
         programName={prog.name}
         programFullName={prog.fullName}
         sampleImageUrl={sanityProg?.certificateSampleUrl}
       />
-      <FacultySection slug={prog.slug} />
-      <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
       <RelatedPrograms programs={relatedPrograms} />
 
@@ -1332,14 +1234,14 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
         </div>
 
         {/* Next batch */}
-        <div className="flex items-center gap-3 rounded-xl bg-green-50 border border-green-100 px-4 py-3 mb-5">
+        <div className="flex items-center gap-3 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-3 mb-5">
           <span className="relative flex h-2.5 w-2.5 flex-none">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
           </span>
           <div>
             <p className="font-heading font-bold text-[13px] text-neutral-900">Next batch: {prog.nextBatch}</p>
-            <p className="text-[11px] font-body text-neutral-500">Limited seats - admissions now open</p>
+            <p className="text-[11px] font-body text-neutral-500">Limited seats, admissions now open</p>
           </div>
         </div>
 

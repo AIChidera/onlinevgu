@@ -11,11 +11,12 @@ interface Testimonial {
   photo?:    string
 }
 
-const R = 'linear-gradient(135deg,#C04036,#821a12)'
-const B = 'linear-gradient(135deg,#2563eb,#1d4ed8)'
-const V = 'linear-gradient(135deg,#7c3aed,#4c1d95)'
-const A = 'linear-gradient(135deg,#d97706,#92400e)'
-const G = 'linear-gradient(135deg,#059669,#065f46)'
+// Brand-only 3-gradient cycle. 5 aliases mapped to red / yellow→red / deep red.
+const R = 'linear-gradient(135deg,#C04036,#821a12)'  // red → dark red
+const B = 'linear-gradient(135deg,#FFA412,#C04036)'  // yellow → red
+const V = 'linear-gradient(135deg,#821a12,#3b0d09)'  // deep red flow
+const A = 'linear-gradient(135deg,#C04036,#821a12)'
+const G = 'linear-gradient(135deg,#FFA412,#C04036)'
 
 const U = 'https://images.unsplash.com/'
 const Q = '?w=200&q=80&auto=format&fit=crop&crop=faces'
@@ -73,7 +74,7 @@ const TESTIMONIALS: Record<string, Testimonial[]> = {
   ],
   mlib: [
     { name: 'Vandana Singh', batch: 'M.Lib · 2024',            initials: 'VS', photoGrad: G, photo: `${U}photo-1529626455594-4ff0802cfb7e${Q}`, quote: "I got promoted to Senior Librarian within 4 months of completing M.Lib. The digital archives and information systems modules were exactly what my institution needed." },
-    { name: 'Suresh Kumar',  batch: 'M.Lib · 2023',            initials: 'SK', photoGrad: B, photo: `${U}photo-1492562080023-ab3db95bfbce${Q}`, quote: "The information retrieval and MARC cataloguing modules were comprehensive. I could apply the learnings from week one at my university library." },
+    { name: 'Suresh Kumar',  batch: 'M.Lib · 2023',            initials: 'SK', photoGrad: B, photo: `${U}photo-1492562080023-ab3db95bfbce${Q}`, quote: "We went deep into information retrieval and MARC cataloguing. I could apply the learnings from week one at my university library." },
     { name: 'Asha Pillai',   batch: 'M.Lib · 2024',            initials: 'AP', photoGrad: R, photo: `${U}photo-1438761681033-6461ffad8d80${Q}`, quote: "VGU's M.Lib is NAAC-accredited and UGC-recognised. That credential opened doors to central university library positions that weren't accessible before." },
   ],
   blib: [

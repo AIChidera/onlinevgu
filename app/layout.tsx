@@ -6,6 +6,7 @@ import SiteFooter from '@/components/layout/SiteFooter'
 import Footer from '@/components/layout/Footer'
 import FooterCTA from '@/components/sections/FooterCTA'
 import Analytics from '@/components/Analytics'
+import { getSiteSettings } from '@/lib/sanity'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -64,11 +65,12 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings()
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${lato.variable}`}>
       <body className="font-body antialiased">
-        {/* GTM noscript fallback — must be the first element inside body */}
+        {/* GTM noscript fallback, must be the first element inside body */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <noscript>
             <iframe
@@ -82,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SiteNav />
         <main>{children}</main>
-        <SiteFooter>
+        <SiteFooter whatsappNumber={settings?.whatsappNumber}>
           <FooterCTA />
           <Footer />
         </SiteFooter>

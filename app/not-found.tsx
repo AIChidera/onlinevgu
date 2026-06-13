@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IconArrowLeft, IconArrowRight, IconHome, IconBook, IconHeadset } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
@@ -40,8 +39,6 @@ export default function NotFound() {
     <div>
       {/* ── Hero band ── */}
       <section className="relative overflow-hidden bg-vgu-red py-24 px-5 md:px-8 lg:px-12 lg:py-36 text-center">
-        <StrokeArt variant="dark" />
-
         {/* Dot grid */}
         <div
           aria-hidden="true"

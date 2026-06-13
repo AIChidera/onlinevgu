@@ -8,7 +8,7 @@ import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import PhoneField from '@/components/ui/PhoneField'
 
-// Hardcoded fallback — mirrors Sanity programs; used while API loads or if it fails
+// Hardcoded fallback - mirrors Sanity programs; used while API loads or if it fails
 const PROGRAMS_FALLBACK = [
   'MBA', 'MBA in Healthcare Management', 'MCA', 'M.Com', 'MA',
   'M.Lib', 'BBA', 'BCA', 'B.Com', 'B.Sc', 'B.Lib',

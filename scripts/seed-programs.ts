@@ -42,12 +42,12 @@ const PROGRAMS = [
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled degree — valid for government jobs, higher studies, and teaching roles',
+      'UGC-entitled degree - valid for government jobs, higher studies, and teaching roles',
       'Choose from English, Political Science, Sociology, Economics, and History specialisations',
-      'Weekend live sessions — study without leaving your job',
+      'Weekend live sessions - study without leaving your job',
       'Dissertation project in Year 3 under faculty supervision',
       'Directly prepares for UPSC, state PCS, and UGC-NET',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['English', 'Political Science', 'Sociology', 'Economics', 'History'],
     careerRoles: ['Civil Services Officer', 'Content Writer', 'Social Worker', 'Researcher', 'Journalist', 'Teacher'],
@@ -66,19 +66,19 @@ const PROGRAMS = [
     totalFee: '₹1,32,000',
     displayOrder: 2,
     popular: false,
-    description: 'A 3-year online BBA from VGU that gives you a full management education — finance, marketing, HR, and operations — without putting your life on hold. Built for fresh graduates who want a business career and working students who need flexibility.',
+    description: 'A 3-year online BBA from VGU that gives you a full management education - finance, marketing, HR, and operations - without putting your life on hold. Built for fresh graduates who want a business career and working students who need flexibility.',
     eligibility: [
       '10+2 from any recognised board (any stream)',
       'Minimum 45% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled BBA — valid for MBA admission at any Indian university',
+      'UGC-entitled BBA - valid for MBA admission at any Indian university',
       'Finance, Marketing, and HR specialisations',
-      'Startup simulation in Year 2 — run a business, not just study one',
+      'Startup simulation in Year 2 - run a business, not just study one',
       'Industry mentor assigned at start of Year 2',
       'Weekend live sessions with recordings available within 48 hours',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['Finance', 'Marketing', 'Human Resource Management'],
     careerRoles: ['Business Analyst', 'Marketing Executive', 'HR Associate', 'Operations Manager', 'Management Trainee'],
@@ -97,7 +97,7 @@ const PROGRAMS = [
     totalFee: '₹1,32,000',
     displayOrder: 3,
     popular: false,
-    description: 'A 3-year online BCA from VGU covering the full software development stack — from C and Python to React, cloud, and cybersecurity. Designed for students who want a tech career but cannot attend a full-time campus programme.',
+    description: 'A 3-year online BCA from VGU covering the full software development stack - from C and Python to React, cloud, and cybersecurity. Designed for students who want a tech career but cannot attend a full-time campus programme.',
     eligibility: [
       '10+2 from any recognised board',
       'Minimum 45% aggregate marks',
@@ -105,11 +105,11 @@ const PROGRAMS = [
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled BCA — qualifies for MCA admission at any university',
+      'UGC-entitled BCA - qualifies for MCA admission at any university',
       'Learn C, Python, Java, JavaScript, React, Node.js, SQL, and AWS',
-      'Capstone project in Year 3 — build a real application for your portfolio',
+      'Capstone project in Year 3 - build a real application for your portfolio',
       'Cloud and Cybersecurity specialisation tracks',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
       '93% placement rate with direct introductions to hiring partners',
     ],
     specialisations: ['Software Engineering', 'Cloud Computing', 'Cybersecurity', 'Data Science'],
@@ -131,19 +131,19 @@ const PROGRAMS = [
     totalFee: '₹72,000',
     displayOrder: 4,
     popular: false,
-    description: 'A 2-year online MA from VGU for graduates who want to go deeper into humanities and social sciences — or prepare for UGC-NET, civil services, or a teaching career. Research-led curriculum with a full dissertation in the final semester.',
+    description: 'A 2-year online MA from VGU for graduates who want to go deeper into humanities and social sciences - or prepare for UGC-NET, civil services, or a teaching career. Research-led curriculum with a full dissertation in the final semester.',
     eligibility: [
       "Bachelor's degree from a UGC-recognised university (any stream)",
       'Minimum 50% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled MA — valid for UGC-NET, lecturership, and government roles',
+      'UGC-entitled MA - valid for UGC-NET, lecturership, and government roles',
       'Specialisations in English, Political Science, Sociology, Economics, and History',
       'Dissertation in Semester 4 under dedicated faculty supervision',
       'Directly aligned with UPSC and state civil services syllabi',
-      'Weekend live sessions — ideal for working graduates',
-      'AI-proctored exams — no campus visit required',
+      'Weekend live sessions - ideal for working graduates',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['English', 'Political Science', 'Sociology', 'Economics', 'History'],
     careerRoles: ['Lecturer', 'Researcher', 'Civil Services Officer', 'Content Strategist', 'Policy Analyst'],
@@ -171,12 +171,12 @@ const PROGRAMS = [
       'Working professionals and fresh graduates both eligible',
     ],
     highlights: [
-      'UGC-entitled MBA — same legal standing as any on-campus MBA',
+      'UGC-entitled MBA - same legal standing as any on-campus MBA',
       'Specialisations: Finance, Marketing, HR, Operations, Business Analytics',
-      'Live sessions on weekends — recordings within 48 hours',
+      'Live sessions on weekends - recordings within 48 hours',
       '500+ hiring partners with dedicated placement support from Semester 1',
       'Annual hiring expo where companies interview students directly',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['Finance', 'Marketing', 'Human Resource Management', 'Operations Management', 'Business Analytics'],
     careerRoles: ['Business Manager', 'Marketing Manager', 'Finance Manager', 'HR Manager', 'Operations Head', 'Product Manager'],
@@ -197,7 +197,7 @@ const PROGRAMS = [
     emi: '₹10,000/month',
     displayOrder: 6,
     popular: false,
-    description: 'A specialised 2-year online MBA focused entirely on international finance — cross-border investments, forex markets, global banking, and financial risk management. Built for finance professionals and graduates who want a global edge in one of the highest-paying career tracks.',
+    description: 'A specialised 2-year online MBA focused entirely on international finance - cross-border investments, forex markets, global banking, and financial risk management. Built for finance professionals and graduates who want a global edge in one of the highest-paying career tracks.',
     eligibility: [
       "Bachelor's degree from a UGC-recognised university (any stream)",
       'Minimum 50% aggregate marks',
@@ -210,7 +210,7 @@ const PROGRAMS = [
       'Faculty with CFA and international banking experience',
       'Live case studies from global financial events',
       'Aligned with CFA Foundation and FRM exam syllabi',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['International Banking', 'Forex & Derivatives', 'Global Investment Management', 'Financial Risk'],
     careerRoles: ['Investment Analyst', 'Forex Trader', 'Risk Manager', 'International Finance Manager', 'Treasury Analyst'],
@@ -231,7 +231,7 @@ const PROGRAMS = [
     emi: '₹6,250/month',
     displayOrder: 7,
     popular: false,
-    description: 'A 2-year online MCA from VGU covering advanced software engineering, cloud architecture, AI/ML, and data science. The natural next step after a BCA or B.Sc — and a direct route into senior tech roles at product companies and MNCs.',
+    description: 'A 2-year online MCA from VGU covering advanced software engineering, cloud architecture, AI/ML, and data science. The natural next step after a BCA or B.Sc - and a direct route into senior tech roles at product companies and MNCs.',
     eligibility: [
       'BCA, B.Sc (IT/CS/Mathematics) or equivalent',
       'Any bachelor\'s degree with Mathematics at 10+2 level',
@@ -239,12 +239,12 @@ const PROGRAMS = [
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled MCA — valid for government and private sector tech roles',
+      'UGC-entitled MCA - valid for government and private sector tech roles',
       'Cloud (AWS), AI/ML, and Cybersecurity specialisation tracks',
-      'Semester hackathons — several students hired directly at expo',
+      'Semester hackathons - several students hired directly at expo',
       'AWS Certified Solutions Architect prep included in cloud track',
       'Faculty with Microsoft, Google, and product company backgrounds',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['Cloud Computing', 'Artificial Intelligence & Machine Learning', 'Cybersecurity', 'Data Science'],
     careerRoles: ['Software Engineer', 'Cloud Architect', 'Data Scientist', 'AI Engineer', 'DevOps Engineer', 'Full Stack Developer'],
@@ -271,12 +271,12 @@ const PROGRAMS = [
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled degree — recognised for journalism and media roles',
+      'UGC-entitled degree - recognised for journalism and media roles',
       'Digital journalism, broadcast, PR, and advertising tracks',
       'Industry faculty from leading newsrooms and media agencies',
-      'Portfolio project — produce real content across mediums',
+      'Portfolio project - produce real content across mediums',
       'Covers print, broadcast, digital, and social media journalism',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['Digital Journalism', 'Broadcast Media', 'Public Relations & Advertising', 'New Media & Social Media'],
     careerRoles: ['Journalist', 'Digital Content Strategist', 'PR Manager', 'Broadcast Producer', 'Media Planner', 'Communications Officer'],
@@ -295,19 +295,19 @@ const PROGRAMS = [
     totalFee: '₹72,000',
     displayOrder: 9,
     popular: false,
-    description: 'A 2-year online M.Sc in Mathematics from VGU for graduates who want to go deep into pure and applied mathematics — from abstract algebra to data modelling and operations research. Ideal preparation for UGC-NET, research, and quantitative roles in finance and tech.',
+    description: 'A 2-year online M.Sc in Mathematics from VGU for graduates who want to go deep into pure and applied mathematics - from abstract algebra to data modelling and operations research. Ideal preparation for UGC-NET, research, and quantitative roles in finance and tech.',
     eligibility: [
       "B.Sc in Mathematics or related field from a UGC-recognised university",
       'Minimum 50% aggregate marks',
       'No entrance exam required',
     ],
     highlights: [
-      'UGC-entitled M.Sc — valid for UGC-NET, GATE, and lecturership',
+      'UGC-entitled M.Sc - valid for UGC-NET, GATE, and lecturership',
       'Pure mathematics, statistics, and applied mathematics tracks',
       'Research dissertation in Semester 4',
       'Aligned with UGC-NET Mathematics syllabus',
       'Prepares for quantitative analyst and data science roles',
-      'AI-proctored exams — no campus visit required',
+      'AI-proctored exams - no campus visit required',
     ],
     specialisations: ['Pure Mathematics', 'Applied Mathematics & Statistics', 'Operations Research'],
     careerRoles: ['Mathematician', 'Data Analyst', 'Quantitative Analyst', 'Actuary', 'Lecturer', 'Statistician'],
@@ -315,7 +315,7 @@ const PROGRAMS = [
   },
 ]
 
-// ─── Curriculum data (official PDF — credits + Core/Elective) ────────────────
+// ─── Curriculum data (official PDF - credits + Core/Elective) ────────────────
 
 interface CourseItem { name: string; credits: number; type: 'Core' | 'Elective' }
 interface SemData    { label: string; totalCredits: number; courses: CourseItem[] }
@@ -787,7 +787,7 @@ async function seed() {
     }
 
     await client.createOrReplace(doc)
-    console.log(`  ✓ ${prog.name} — ${prog.fullName}`)
+    console.log(`  ✓ ${prog.name} - ${prog.fullName}`)
   }
 
   console.log(`\nDone. ${PROGRAMS.length} programs seeded.`)

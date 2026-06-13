@@ -1,7 +1,3 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { NEXT_BATCH } from '@/lib/constants'
 import {
   IconClipboardList,
@@ -9,13 +5,13 @@ import {
   IconCreditCard,
   IconRocket,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 const STEPS = [
   {
     badge:  'Step 1',
     title:  'Register Online',
-    body:   'Fill a quick enquiry form in under 2 minutes. A counsellor calls you within 2 hours.',
+    body:   'Fill the application form in under 2 minutes. A counsellor calls you within 2 hours.',
     Icon:   IconClipboardList,
   },
   {
@@ -33,90 +29,54 @@ const STEPS = [
   {
     badge:  'Step 4',
     title:  'Start Learning',
-    body:   'Get instant access to the learning portal. Live classes begin on day one.',
+    body:   'Get instant portal access. Live classes from July 2026.',
     Icon:   IconRocket,
   },
 ]
 
 const MICROCOPY = [
-  { label: 'Next intake',   value: NEXT_BATCH     },
-  { label: 'Entrance exam', value: 'Not required' },
+  { label: 'Next intake',            value: NEXT_BATCH       },
+  { label: 'Entrance exam',          value: 'Not required'   },
+  { label: 'Counsellor calls within', value: '2 hours'       },
 ]
 
 export default function StepsSection() {
-  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.08 })
-  const [activeStep, setActiveStep] = useState(-1)
-  const [isPaused, setIsPaused]     = useState(false)
-
-  // Auto-cycle animation: each circle fills for 750ms, then 1500ms pause before restart.
-  // Pauses entirely when the user hovers the steps area (CSS hover takes over).
-  useEffect(() => {
-    if (isPaused || !isVisible) return
-
-    let step = 0
-    let timerId: ReturnType<typeof setTimeout>
-
-    function advance() {
-      setActiveStep(step)
-      if (step < STEPS.length - 1) {
-        step++
-        timerId = setTimeout(advance, 1250)
-      } else {
-        // Last step shown — pause 1250ms then reset and wait 2000ms before restarting
-        timerId = setTimeout(() => {
-          setActiveStep(-1)
-          step = 0
-          timerId = setTimeout(advance, 2000)
-        }, 750)
-      }
-    }
-
-    timerId = setTimeout(advance, 800)
-    return () => clearTimeout(timerId)
-  }, [isPaused, isVisible])
-
   return (
     <section
       id="how-to-apply"
-      className="group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24"
+      className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24"
     >
-      {/* Dot-grid texture */}
+      <SketchFlourish shape="wave" color="red" opacity={0.06} strokeWidth={10} />
+      {/* Subtle dot-grid texture - Bible §10 4-6% opacity */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(192,64,54,0.12) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(192,64,54,0.06) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
         }}
       />
 
-      <StrokeArt variant="light" />
-
       <div className="relative z-10 mx-auto max-w-[1280px]">
         {/* Header */}
-        <div data-animate="fade-up" className="text-center mb-16 md:mb-12">
+        <div data-animate="fade-up" className="text-center mb-12 md:mb-14">
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Simple Admissions
           </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-            Join in 4 Simple Steps
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+            From form to first class, in under 30 minutes.
           </h2>
-          <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-600 max-w-[440px] mx-auto lg:text-[17px]">
-            No entrance exam. No campus visit. Enrol 100% online in under 30 minutes.
+          <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-600 max-w-[520px] mx-auto lg:text-[17px]">
+            No entrance exam. No campus visit. Enrol 100% online.
           </p>
         </div>
 
         {/* Steps + dashed connector */}
-        <div
-          ref={ref}
-          className="relative"
-          onMouseEnter={() => { setIsPaused(true); setActiveStep(-1) }}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className="relative">
           {/* Dashed connector - desktop 4-col only */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute hidden lg:block top-[75px] left-[12.5%] right-[12.5%] border-t-2 border-dashed border-vgu-red/[0.65]"
+            className="pointer-events-none absolute hidden lg:block top-[75px] left-[12.5%] right-[12.5%] border-t-2 border-dashed border-vgu-red/[0.45]"
           />
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 gap-y-10 md:gap-8 md:gap-y-12">
@@ -127,43 +87,29 @@ export default function StepsSection() {
                 className="flex flex-col items-center text-center"
                 style={{ animationDelay: `${i * 110}ms` }}
               >
-                {/* Step badge + circle wrapper */}
+                {/* Step badge + circle */}
                 <div className="relative mb-6 pt-3">
-                  {/* Badge pill */}
                   <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10 rounded-full px-3 py-0.5 text-[11px] font-body font-bold text-white whitespace-nowrap bg-vgu-red">
                     {step.badge}
                   </div>
 
-                  {/* Circle — smaller on mobile, full 100px on desktop */}
                   <div
                     className={[
-                      'group/circle relative z-0 flex items-center justify-center rounded-full',
+                      'group/circle relative z-0 flex items-center justify-center rounded-full bg-white',
                       'w-[76px] h-[76px] mt-[10px] md:w-[100px] md:h-[100px] md:mt-[14px] border-2 border-vgu-red',
                       'transition-all duration-300',
-                      'hover:bg-vgu-red hover:-translate-y-1',
-                      'hover:shadow-[0_8px_24px_rgba(192,64,54,0.30)]',
-                      activeStep === i ? 'bg-vgu-red' : 'bg-white',
+                      'hover:bg-vgu-red hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.30)]',
                     ].join(' ')}
                   >
                     <step.Icon
                       size={28}
                       stroke={1.5}
-                      className={[
-                        'transition-colors duration-300 md:hidden',
-                        activeStep === i
-                          ? 'text-white'
-                          : 'text-vgu-red group-hover/circle:text-white',
-                      ].join(' ')}
+                      className="md:hidden transition-colors duration-300 text-vgu-red group-hover/circle:text-white"
                     />
                     <step.Icon
                       size={36}
                       stroke={1.5}
-                      className={[
-                        'transition-colors duration-300 hidden md:block',
-                        activeStep === i
-                          ? 'text-white'
-                          : 'text-vgu-red group-hover/circle:text-white',
-                      ].join(' ')}
+                      className="hidden md:block transition-colors duration-300 text-vgu-red group-hover/circle:text-white"
                     />
                   </div>
                 </div>
@@ -189,7 +135,7 @@ export default function StepsSection() {
             Apply Now
           </a>
 
-          {/* Microcopy row - 3 items separated by dots */}
+          {/* Microcopy row */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             {MICROCOPY.map((item, i) => (
               <span key={item.label} className="flex items-center gap-4">

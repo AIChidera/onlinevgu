@@ -2,11 +2,11 @@
 
 import { IconCheck } from '@tabler/icons-react'
 
+// Brand-only 3-gradient cycle. Visual variety stays inside vgu-red / vgu-yellow / vgu-red-dark.
 const PALETTE = [
-  { grad: 'linear-gradient(135deg,#C04036,#821a12)', hex: '#C04036' },
-  { grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)', hex: '#2563eb' },
-  { grad: 'linear-gradient(135deg,#7c3aed,#4c1d95)', hex: '#7c3aed' },
-  { grad: 'linear-gradient(135deg,#d97706,#92400e)', hex: '#d97706' },
+  { grad: 'linear-gradient(135deg,#C04036,#821a12)', hex: '#C04036' },  // red → dark red
+  { grad: 'linear-gradient(135deg,#FFA412,#C04036)', hex: '#FFA412' },  // yellow → red
+  { grad: 'linear-gradient(135deg,#821a12,#3b0d09)', hex: '#821a12' },  // deep red flow
 ]
 
 export default function ProgramHighlights({ highlights }: { highlights: string[] }) {

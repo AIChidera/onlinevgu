@@ -128,7 +128,7 @@ export default function BrochureModal() {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card — compressed so it fits without scrolling on phones too */}
+      {/* Modal card - compressed so it fits without scrolling on phones too */}
       <div
         role="dialog"
         aria-modal="true"
@@ -136,7 +136,7 @@ export default function BrochureModal() {
         className="relative z-10 w-full max-w-[460px] rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[95dvh] sm:max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
-        {/* Close — floats over the red header */}
+        {/* Close - floats over the red header */}
         <button
           onClick={closeModal}
           aria-label="Close"
@@ -145,7 +145,7 @@ export default function BrochureModal() {
           <IconX size={14} className="text-white" />
         </button>
 
-        {/* Red header band — compact */}
+        {/* Red header band - compact */}
         <div
           className="flex-none px-6 pt-5 pb-4"
           style={{ background: 'linear-gradient(135deg,#C04036 0%,#821a12 100%)' }}
@@ -168,7 +168,7 @@ export default function BrochureModal() {
           )}
         </div>
 
-        {/* Form / success — safety-net scroll only */}
+        {/* Form / success - safety-net scroll only */}
         <div className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-5" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}>
           {submitted ? (
             <div className="text-center py-4">
@@ -215,7 +215,7 @@ export default function BrochureModal() {
                 className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
               />
 
-              {/* Program — dropdown only when not pre-filled (saves a row when it is) */}
+              {/* Program - dropdown only when not pre-filled (saves a row when it is) */}
               {!program && (
                 <select
                   value={program}

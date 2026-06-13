@@ -41,12 +41,12 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm animate-fade-in" aria-hidden="true" />
 
-      {/* Panel — flex column: header pinned, form scrolls */}
+      {/* Panel - flex column: header pinned, form scrolls */}
       <div
         className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90vh] sm:h-auto sm:max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
-        {/* Header — pinned, never scrolls */}
+        {/* Header - pinned, never scrolls */}
         <div className="flex-none bg-gradient-to-r from-vgu-red to-vgu-red-dark px-6 py-5">
           <button
             onClick={onClose}
@@ -74,7 +74,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
           </p>
         </div>
 
-        {/* Form — this section scrolls */}
+        {/* Form - this section scrolls */}
         <div
           className="flex-1 min-h-0 overflow-y-auto bg-white p-6"
           style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}

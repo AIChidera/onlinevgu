@@ -12,7 +12,7 @@ export default function ProgramSlugError({
   reset: () => void
 }) {
   useEffect(() => {
-    // Aborted navigations (user pressed ESC mid-load) aren't real errors — reset silently.
+    // Aborted navigations (user pressed ESC mid-load) aren't real errors - reset silently.
     if (error.name === 'AbortError' || error.message?.toLowerCase().includes('abort')) {
       reset()
       return

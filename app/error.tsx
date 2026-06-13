@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { IconRefresh, IconArrowLeft, IconHeadset } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
 
 export default function Error({
   error,
@@ -22,8 +21,6 @@ export default function Error({
       <section className="relative overflow-hidden py-24 px-5 md:px-8 lg:px-12 lg:py-36 text-center"
         style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #111827 100%)' }}
       >
-        <StrokeArt variant="dark" />
-
         {/* Dot grid */}
         <div
           aria-hidden="true"

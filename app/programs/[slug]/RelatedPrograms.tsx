@@ -14,11 +14,12 @@ interface ProgCard {
   image?:     string
 }
 
+// Brand-only: UG = yellow→red, PG = red→dark red.
 const LEVEL_CONFIG: Record<'ug' | 'pg', { grad: string; label: string; badgeCls: string }> = {
   ug: {
-    grad: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
+    grad: 'linear-gradient(135deg,#FFA412,#C04036)',
     label: 'Undergraduate',
-    badgeCls: 'bg-blue-50 text-blue-600 border border-blue-200',
+    badgeCls: 'bg-vgu-yellow/15 text-vgu-red border border-vgu-yellow/40',
   },
   pg: {
     grad: 'linear-gradient(135deg,#C04036,#821a12)',
@@ -49,11 +50,11 @@ function RelatedCard({ p, delay = 0 }: { p: ProgCard; delay?: number }) {
         )}
         {/* Dark scrim so text overlay is readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        {/* Level badge — bottom left */}
+        {/* Level badge - bottom left */}
         <span className={`absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-body font-semibold uppercase tracking-[0.05em] ${lv.badgeCls} bg-white`}>
           {lv.label}
         </span>
-        {/* Arrow circle — bottom right */}
+        {/* Arrow circle - bottom right */}
         <div className="absolute bottom-3 right-3 w-7 h-7 rounded-full border border-white/30 bg-white/15 backdrop-blur-sm flex items-center justify-center group-hover:bg-vgu-yellow group-hover:border-vgu-yellow transition-all duration-200">
           <IconArrowRight size={12} className="text-white group-hover:text-neutral-900 transition-colors duration-200" />
         </div>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================================
-   Scroll-reveal entrance animations — driven by ScrollReveal.tsx
+   Scroll-reveal entrance animations - driven by ScrollReveal.tsx
    Strategy: CSS transitions (not keyframe animations).
    ScrollReveal adds .sr-ready (hidden state) to below-fold
    elements. On intersection it removes .sr-ready after the
@@ -18,7 +18,7 @@
               transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Hidden state — defines both opacity AND the variant transform */
+/* Hidden state - defines both opacity AND the variant transform */
 .sr-ready                                  { opacity: 0; }
 .sr-ready[data-animate="fade-up"]          { transform: translateY(28px); }
 .sr-ready[data-animate="materialize"]      { transform: scale(0.92); }
@@ -56,12 +56,12 @@
   animation: vguFadeIn 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Platform video — desktop Ken Burns pan */
+/* Platform video - desktop Ken Burns pan */
 @keyframes videoPanRight {
   0%   { transform: scale(1.08) translateX(-5%); }
   100% { transform: scale(1.08) translateX(5%);  }
 }
-/* Platform video — mobile object-position sweep (reveals full landscape width) */
+/* Platform video - mobile object-position sweep (reveals full landscape width) */
 @keyframes videoPanMobile {
   0%   { object-position: 5% 50%; }
   100% { object-position: 95% 50%; }
@@ -76,7 +76,7 @@
     animation: videoPanMobile 18s ease-in-out infinite alternate;
   }
 }
-/* Platform video banner — exact viewport fill on desktop */
+/* Platform video banner - exact viewport fill on desktop */
 @media (min-width: 1024px) {
   .platform-video-banner {
     height: calc(100vh - 72px);
@@ -167,7 +167,7 @@ label {
 }
 
 /* ============================================================
-   Scrollbar — hidden globally, content still scrollable
+   Scrollbar - hidden globally, content still scrollable
    Matches mobile's overlay-scrollbar UX on all devices
    ============================================================ */
 ::-webkit-scrollbar {
@@ -190,7 +190,23 @@ label {
 }
 
 /* ============================================================
-   Hero page-load entry — fire on mount, not on scroll.
+   Sketch annotations — hand-drawn SVG accents that draw on hover.
+   Children render with stroke-dashoffset = full path length (invisible).
+   Parent SketchHoverGroup's .sketch-hover-group class drives the reveal.
+   The transition on each child (set inline) animates the change smoothly.
+   ============================================================ */
+.sketch-hover-group:hover .sketch-draw {
+  stroke-dashoffset: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sketch-draw {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Hero page-load entry - fire on mount, not on scroll.
    Applied directly via className in Hero.tsx.
    Below xl (1280px) the hero collapses to single column so
    horizontal slides are overridden to a plain fade-up.

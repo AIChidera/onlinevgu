@@ -12,7 +12,7 @@ import {
   IconPlayerPlay,
   IconCheck,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 // ── Part B: Explorer panels ───────────────────────────────────────
@@ -27,6 +27,7 @@ interface Panel {
   color: string
 }
 
+// All panels use vgu-red as accent except Coursera (project brand exception).
 const PANELS: Panel[] = [
   {
     label:   'Live Classes',
@@ -44,7 +45,7 @@ const PANELS: Panel[] = [
     desc:    'Book 30-minute slots with 500+ vetted industry mentors, from startup founders to Fortune 500 leaders.',
     bullets: ['500+ mentors across sectors', 'Book slots in 60 seconds', 'Async chat between sessions', 'Recorded for review'],
     Icon:    IconUserHeart,
-    color:   '#9333ea',
+    color:   '#C04036',
   },
   {
     label:   'Assessments',
@@ -53,7 +54,7 @@ const PANELS: Panel[] = [
     desc:    'From weekly quizzes to proctored final exams, all managed on the platform with instant feedback.',
     bullets: ['Auto-graded MCQ quizzes', 'Online proctored exams', 'Assignment submissions', 'Instant feedback & rubrics'],
     Icon:    IconClipboardCheck,
-    color:   '#059669',
+    color:   '#C04036',
   },
   {
     label:   'Library',
@@ -62,7 +63,7 @@ const PANELS: Panel[] = [
     desc:    "Access JSTOR, IEEE Xplore, and VGU's own digital library. All included, no extra subscription needed.",
     bullets: ['JSTOR & IEEE access', '25,000+ e-books & PDFs', 'Research paper database', 'Citation & reference tools'],
     Icon:    IconBooks,
-    color:   '#0891b2',
+    color:   '#C04036',
   },
   {
     label:   'Coursera',
@@ -80,7 +81,7 @@ const PANELS: Panel[] = [
     desc:    'Our placement team works with you from day one: resume reviews, mock interviews, and direct recruiter connections.',
     bullets: ['AI-powered resume builder', '500+ mock interviews/year', 'Live job board integration', 'Dedicated placement coordinator'],
     Icon:    IconBriefcase,
-    color:   '#FFA412',
+    color:   '#C04036',
   },
 ]
 
@@ -88,7 +89,6 @@ const BOTTOM_STATS = [
   { value: '200+',    label: 'Live sessions / month', Icon: IconVideo      },
   { value: '500+',    label: 'Expert mentors',        Icon: IconUserHeart  },
   { value: '25,000+', label: 'E-resources',           Icon: IconBooks      },
-  { value: '95%',     label: 'Placement rate',        Icon: IconBriefcase  },
 ]
 
 // ── Component ─────────────────────────────────────────────────────
@@ -125,11 +125,11 @@ export default function CourseExperienceSection() {
           PART A - VIDEO BANNER
       ══════════════════════════════════════════════════════ */}
       <div
-        className="relative overflow-hidden group cursor-pointer platform-video-banner"
+        className="relative overflow-hidden group cursor-pointer min-h-[480px] md:min-h-[560px] lg:min-h-[640px]"
         onClick={togglePlay}
         aria-label={playing ? 'Pause video' : 'Play video'}
       >
-        {/* Gradient fallback — always rendered; shows while video loads or if it fails */}
+        {/* Gradient fallback - always rendered; shows while video loads or if it fails */}
         <div
           className="absolute inset-0"
           style={{ background: 'linear-gradient(135deg, #110805 0%, #821a12 40%, #2d0f0b 70%, #110805 100%)' }}
@@ -160,13 +160,13 @@ export default function CourseExperienceSection() {
           }}
         />
 
-        {/* Dark cinematic overlay — left heavy so text stays readable */}
+        {/* Dark cinematic overlay - left heavy so text stays readable */}
         <div
           className="absolute inset-0"
           style={{ background: 'linear-gradient(105deg, rgba(17,8,5,0.88) 0%, rgba(17,8,5,0.52) 60%, rgba(17,8,5,0.35) 100%)' }}
         />
 
-        {/* Play / Pause badge — stop propagation so it doesn't double-fire with the outer onClick */}
+        {/* Play / Pause badge - stop propagation so it doesn't double-fire with the outer onClick */}
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={playing ? 'Pause video' : 'Play video'}
@@ -176,62 +176,31 @@ export default function CourseExperienceSection() {
           <span>{playing ? 'Pause' : 'Play'}</span>
         </button>
 
-        {/* Content grid */}
+        {/* Content */}
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 h-full flex items-center py-12 md:py-16 lg:py-20">
-          <div className="grid grid-cols-1 items-center w-full lg:grid-cols-[1fr_400px] lg:gap-16 xl:grid-cols-[1fr_340px]">
-
-            {/* Left: copy */}
-            <div
-              ref={copyRef}
-              className={['transition-all duration-700', copyVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'].join(' ')}
+          <div
+            ref={copyRef}
+            className={['w-full max-w-[680px] transition-all duration-700', copyVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'].join(' ')}
+          >
+            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold mb-4">
+              The VGU Platform
+            </p>
+            <h2 className="font-heading font-bold text-[30px] tracking-[-0.5px] leading-[1.1] text-white sm:text-[36px] md:text-[48px]">
+              Everything you need to
+              learn, right <span className="text-vgu-yellow">in one place.</span>
+            </h2>
+            <p className="mt-5 text-[15px] font-body leading-[1.7] text-white/70 max-w-[520px] md:text-[17px]">
+              Live classes, mentor sessions, a full digital library, Coursera access, and end-to-end
+              career support, all inside the VGU learning platform.
+            </p>
+            <a
+              href="#counsellor"
+              data-counsellor-trigger
+              onClick={(e) => e.stopPropagation()}
+              className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
             >
-              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold mb-4">
-                The VGU Platform
-              </p>
-              <h2
-                className="font-heading font-bold text-[30px] tracking-[-0.5px] leading-[1.1] text-white sm:text-[36px] md:text-[52px]"
-              >
-                Everything you need to
-                learn, right <span className="text-vgu-yellow">in one place.</span>
-              </h2>
-              <p className="mt-5 text-[15px] font-body leading-[1.7] text-white/70 max-w-[480px] md:text-[17px]">
-                Live classes, mentor sessions, a full digital library, Coursera access, and end-to-end
-                career support, all inside the VGU learning platform.
-              </p>
-              <a
-                href="#counsellor"
-                onClick={(e) => e.stopPropagation()}
-                className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
-              >
-                Explore the Platform
-              </a>
-            </div>
-
-            {/* Right: decorative accents + notification card */}
-            <div className="hidden lg:flex relative justify-center min-h-[200px] items-end">
-              {/* Gold deco accents */}
-              <svg className="absolute -top-6 -right-4 opacity-60" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-                <line x1="20" y1="0" x2="20" y2="40" stroke="#FFA412" strokeWidth="2"/>
-                <line x1="0" y1="20" x2="40" y2="20" stroke="#FFA412" strokeWidth="2"/>
-              </svg>
-              <svg className="absolute -bottom-4 -left-4 opacity-40" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
-                <polygon points="14,0 28,28 0,28" fill="none" stroke="#eecf63" strokeWidth="1.5"/>
-              </svg>
-
-              {/* Floating notification card */}
-              <div
-                className="absolute -bottom-4 -left-6 bg-white rounded-xl px-4 py-3 shadow-xl animate-float-up [animation-delay:1500ms] min-w-[180px]"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                  </span>
-                  <span className="font-heading font-bold text-[12px] text-neutral-900">Class starting now</span>
-                </div>
-                <p className="text-[11px] font-body text-neutral-500">Strategic Management · MBA Sem 3</p>
-              </div>
-            </div>
+              Explore the Platform
+            </a>
           </div>
         </div>
       </div>
@@ -239,16 +208,15 @@ export default function CourseExperienceSection() {
       {/* ══════════════════════════════════════════════════════
           PART B - PLATFORM EXPLORER
       ══════════════════════════════════════════════════════ */}
-      <section className="group relative overflow-hidden bg-neutral-50 py-14 px-5 md:px-8 lg:px-12 lg:py-20">
-        <StrokeArt variant="light" />
-
+      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-14 px-5 md:px-8 lg:px-12 lg:py-20">
+        <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={10} />
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
             <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Platform Features
             </p>
             <h3 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 md:text-[32px]">
-              Everything in the VGU Platform
+              Explore the platform, feature by feature.
             </h3>
           </div>
 
@@ -332,8 +300,8 @@ export default function CourseExperienceSection() {
                 <ul className="mt-5 flex flex-col gap-2.5">
                   {panel.bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5 text-[14px] font-body text-neutral-700">
-                      <span className="flex-none w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
-                        <IconCheck size={11} className="text-green-600" stroke={3} />
+                      <span className="flex-none w-5 h-5 rounded-full bg-vgu-red/10 flex items-center justify-center mt-0.5">
+                        <IconCheck size={11} className="text-vgu-red" stroke={3} />
                       </span>
                       {b}
                     </li>
@@ -343,20 +311,25 @@ export default function CourseExperienceSection() {
             </div>
           </div>
 
-          {/* Bottom stat pills */}
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {/* Bottom stat pills:
+              Mobile  → tight horizontal row per card (icon left, value right)
+              Tablet+ → centered 3-col grid (icon on top) */}
+          <div className="mt-6 flex flex-col gap-2.5 sm:grid sm:grid-cols-3 sm:gap-3">
             {BOTTOM_STATS.map((s, i) => (
               <div
                 key={s.label}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
-                className="rounded-xl border border-neutral-200 bg-white px-5 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-vgu-red hover:shadow-[0_4px_16px_rgba(192,64,54,0.12)]"
+                className="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-all duration-200 hover:border-vgu-red hover:shadow-[0_4px_16px_rgba(192,64,54,0.12)]
+                           sm:flex-col sm:items-stretch sm:gap-0 sm:text-center sm:px-5 sm:py-4 sm:hover:-translate-y-0.5"
               >
-                <div className="flex justify-center mb-2">
-                  <s.Icon size={18} stroke={1.5} className="text-vgu-red/60" />
+                <div className="flex-none sm:flex sm:justify-center sm:mb-2">
+                  <s.Icon size={20} stroke={1.5} className="text-vgu-red/60" />
                 </div>
-                <div className="font-heading font-black text-[28px] leading-none text-vgu-red">{s.value}</div>
-                <div className="mt-1 text-[12px] font-body text-neutral-500">{s.label}</div>
+                <div className="flex-1 min-w-0 flex items-baseline gap-2 sm:flex-none sm:flex-col sm:gap-0 sm:items-stretch">
+                  <div className="font-heading font-black text-[24px] leading-none text-vgu-red sm:text-[28px]">{s.value}</div>
+                  <div className="text-[12px] font-body text-neutral-500 leading-tight sm:mt-1">{s.label}</div>
+                </div>
               </div>
             ))}
           </div>

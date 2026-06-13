@@ -6,7 +6,7 @@ import config from '@/sanity.config'
 
 // Sanity v5 compiled form components call useEffectEvent (React 19 API).
 // Next.js 14 vendors React 18 canary which lacks this export. Patch it
-// onto the shared React module here — this file evaluates on the client
+// onto the shared React module here - this file evaluates on the client
 // before the Sanity dynamic import resolves, so the polyfill is in place
 // when Sanity's code first accesses a.useEffectEvent at render time.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

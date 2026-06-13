@@ -10,7 +10,7 @@
  *
  * Uses createOrReplace with deterministic IDs so re-running is safe.
  * Images are downloaded from their source URLs once, uploaded to Sanity,
- * then referenced — admins can replace any of them in Studio later.
+ * then referenced - admins can replace any of them in Studio later.
  *
  * Run: npx tsx scripts/seed-content.ts
  */
@@ -175,41 +175,41 @@ async function seedFaqs() {
 const CAMPUS_EVENTS = [
   {
     id: 'event-welcome-orientation',
-    title: 'Welcome & Leadership Orientation',
-    subtitle: 'Set your goals, meet your cohort, and hear from VGU leaders on day one.',
-    tags: [{ label: 'Day 1', color: 'gold' }, { label: 'Leadership', color: 'red' }, { label: 'Campus', color: 'green' }],
+    title: 'Panache, the annual cultural fest',
+    subtitle: 'Three nights of dance, music, food, and the loudest VGU sing-along of the year.',
+    tags: [{ label: 'Flagship', color: 'gold' }],
     colorTheme: 'red',
-    photoUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=85&auto=format&fit=crop',
+    photoUrl: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 'event-industry-bootcamp',
-    title: 'Industry Bootcamp & Case Studies',
-    subtitle: 'Solve real business problems with industry mentors in intensive 2-day sprints.',
-    tags: [{ label: 'Bootcamp', color: 'red' }, { label: 'Case Studies', color: 'gold' }, { label: 'Industry', color: 'green' }],
+    title: 'Open-air movie nights',
+    subtitle: 'Friday screenings on the quad, with projector, snacks, and a few hundred students under one sky.',
+    tags: [{ label: 'Social', color: 'gold' }],
     colorTheme: 'blue',
-    photoUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=85&auto=format&fit=crop',
+    photoUrl: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 'event-alumni-connect',
-    title: 'Alumni Connect & Career Fair',
-    subtitle: 'Build your network with 500+ alumni and meet top recruiters face to face.',
-    tags: [{ label: 'Networking', color: 'green' }, { label: 'Alumni', color: 'gold' }, { label: 'Placements', color: 'red' }],
-    colorTheme: 'green',
-    photoUrl: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=85&auto=format&fit=crop',
+    title: 'Workshops & guest seminars',
+    subtitle: 'Industry leaders and visiting faculty take you deep on AI, finance, design, and leadership.',
+    tags: [{ label: 'Learn', color: 'gold' }],
+    colorTheme: 'purple',
+    photoUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 'event-tech-innovation-lab',
-    title: 'Tech & Innovation Lab Immersion',
-    subtitle: "Hands-on sessions in AI, robotics, and cloud labs at VGU's innovation centre.",
-    tags: [{ label: 'Tech', color: 'red' }, { label: 'Innovation', color: 'gold' }, { label: 'Hands-on', color: 'green' }],
-    colorTheme: 'purple',
-    photoUrl: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&q=85&auto=format&fit=crop',
+    title: 'Hackathons & bootcamps',
+    subtitle: 'Build real products in 48 hours with industry mentors, then pitch to recruiters on day three.',
+    tags: [{ label: 'Build', color: 'gold' }],
+    colorTheme: 'green',
+    photoUrl: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 'event-convocation',
-    title: 'Convocation Ceremony',
-    subtitle: 'Walk the stage, collect your degree, and celebrate with family and peers.',
-    tags: [{ label: 'Graduation', color: 'gold' }, { label: 'Ceremony', color: 'red' }, { label: 'Milestone', color: 'green' }],
+    title: 'Convocation on campus',
+    subtitle: 'Walk the stage, collect your degree, and celebrate two years of work with family by your side.',
+    tags: [{ label: 'Milestone', color: 'gold' }],
     colorTheme: 'orange',
     photoUrl: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=1200&q=85&auto=format&fit=crop',
   },
@@ -255,7 +255,7 @@ async function seedMilestones() {
 }
 
 // ─── Faculty (96 entries) ───────────────────────────────────────────────────
-// Curated portrait pool — Unsplash IDs verified live before commit, weighted
+// Curated portrait pool - Unsplash IDs verified live before commit, weighted
 // toward Indian/South-Asian academics so faculty headshots feel local rather
 // than generic. uploadImageFromUrl caches by URL so each photo only uploads
 // once even when reused across programs. Admins can replace any face in Studio.
@@ -314,15 +314,15 @@ const FACULTY: Record<string, FacultyEntry[]> = {
     { name: 'Dr. Rohit Kapoor',     title: 'Faculty, Entrepreneurship',                credential: 'PhD, SRCC · Serial entrepreneur',       initials: 'RKp', color: 'blue',   sex: 'm'       },
     { name: 'Prof. Meenakshi Iyer', title: 'Industry Faculty, Operations',             credential: 'Ex-VP Ops, Infosys · 20 yrs exp',       initials: 'MI',  color: 'red',    sex: 'f'       },
   ],
-  'mba-healthcare': [
-    { name: 'Dr. Vinod Patel',        title: 'Professor, Healthcare Management',       credential: 'MD + MBA, AIIMS · 26 yrs exp',          initials: 'VP',  color: 'red',    sex: 'm'       },
-    { name: 'Prof. Rekha Nair',       title: 'Faculty, Health Policy & Economics',     credential: 'MPH, TISS · 14 yrs exp',                initials: 'RN',  color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Arvind Singh',       title: 'Industry Faculty, Hospital Ops',         credential: 'Ex-COO, Fortis Healthcare · 19 yrs',    initials: 'AS',  color: 'green',  sex: 'm'       },
-    { name: 'Dr. Meera Krishnan',     title: 'Associate Professor, Pharma Mgmt',       credential: 'MBA Pharma, NMIMS · 17 yrs exp',        initials: 'MK',  color: 'purple', sex: 'f'       },
-    { name: 'Prof. Saurabh Desai',    title: 'Industry Faculty, Health Insurance',     credential: 'Ex-VP, Star Health Insurance · 15 yrs', initials: 'SD',  color: 'amber',  sex: 'm'       },
-    { name: 'Dr. Lakshmi Sundaram',   title: 'Professor, Medical Finance',             credential: 'MD + MBA, CMC Vellore · 22 yrs',        initials: 'LS',  color: 'red',    sex: 'f'       },
-    { name: 'Prof. Farhan Sheikh',    title: 'Associate Professor, Health Analytics',  credential: 'MS Health Informatics, ISB · 12 yrs',   initials: 'FS',  color: 'blue',   sex: 'm'       },
-    { name: 'Dr. Pooja Iyer',         title: 'Industry Faculty, Clinical Ops',         credential: 'Ex-Director Ops, Apollo · 18 yrs',      initials: 'PI',  color: 'green',  sex: 'f'       },
+  'mba-if': [
+    { name: 'Dr. Vivek Kapoor',          title: 'Professor, International Finance',      credential: 'PhD, LBS London · 20 yrs exp',          initials: 'VK',  color: 'red',    sex: 'm'       },
+    { name: 'Prof. Reena Krishnamurthy', title: 'Associate Professor, Forex Markets',    credential: 'MBA Finance, ISB · 15 yrs exp',         initials: 'RKr', color: 'amber',  sex: 'f'       },
+    { name: 'Dr. Aditya Bhargava',       title: 'Industry Faculty, Global Banking',      credential: 'Ex-MD, Goldman Sachs India · 22 yrs',   initials: 'ABh', color: 'purple', sex: 'm'       },
+    { name: 'Prof. Sneha Malhotra',      title: 'Associate Professor, ACCA Track',       credential: 'FCCA · CA · 14 yrs exp',                initials: 'SnM', color: 'red',    sex: 'f'       },
+    { name: 'Dr. Karan Bhatia',          title: 'Professor, Investment Strategy',        credential: 'PhD, Wharton · 18 yrs exp',             initials: 'KBh', color: 'green',  sex: 'm'       },
+    { name: 'Prof. Lakshmi Venkatesan',  title: 'Industry Faculty, CMA Track',           credential: 'CMA · CPA · 16 yrs exp',                initials: 'LVe', color: 'slate',  sex: 'f'       },
+    { name: 'Dr. Rohan Subramanian',     title: 'Associate Professor, Financial Risk',   credential: 'PhD, IIM Bangalore · 13 yrs exp',       initials: 'RSu', color: 'blue',   sex: 'm'       },
+    { name: 'Prof. Meera Krishnan',      title: 'Assistant Professor, Cross-Border Inv', credential: 'CFA · 12 yrs exp',                      initials: 'MKr', color: 'red',    sex: 'f'       },
   ],
   mca: [
     { name: 'Dr. Sanjay Gupta',     title: 'Professor, Algorithms & Systems',          credential: 'PhD, IIT Delhi · 17 yrs exp',           initials: 'SG',  color: 'red',    sex: 'm'       },
@@ -354,26 +354,6 @@ const FACULTY: Record<string, FacultyEntry[]> = {
     { name: 'Prof. Harsh Vardhan',   title: 'Industry Faculty, Digital Marketing',     credential: 'Ex-Marketing Head, Myntra · 11 yrs',    initials: 'HV',  color: 'blue',   sex: 'm'       },
     { name: 'Dr. Sunita Joshi',      title: 'Associate Professor, Business Ethics',    credential: 'PhD, TISS Mumbai · 15 yrs exp',         initials: 'SJo', color: 'red',    sex: 'f'       },
   ],
-  bcom: [
-    { name: 'Prof. Meena Rawat',    title: 'Assistant Professor, Accounting',          credential: 'M.Com, Delhi Univ · CA Inter · 9 yrs',  initials: 'MR',  color: 'red',    sex: 'f'       },
-    { name: 'Dr. Harish Jain',      title: 'Associate Professor, Taxation',            credential: 'PhD, Rajasthan Univ · CMA Certified',   initials: 'HJ',  color: 'blue',   sex: 'm'       },
-    { name: 'Prof. Ritu Pandey',    title: 'Assistant Professor, Finance',             credential: 'MBA Finance, ICFAI · 8 yrs exp',        initials: 'RP',  color: 'purple', sex: 'f'       },
-    { name: 'Dr. Arun Gupta',       title: 'Associate Professor, Cost Accounting',     credential: 'PhD, Rajasthan Univ · ICAI Fellow',     initials: 'AG',  color: 'amber',  sex: 'm'       },
-    { name: 'Prof. Shalini Mehta',  title: 'Assistant Professor, Banking & Insurance', credential: 'MBA Finance, ICFAI · 12 yrs exp',       initials: 'SM',  color: 'green',  sex: 'f'       },
-    { name: 'Dr. Ramesh Yadav',     title: 'Associate Professor, Business Econ',       credential: 'PhD, DSE Delhi · 14 yrs exp',           initials: 'RY',  color: 'red',    sex: 'm'       },
-    { name: 'Prof. Deepika Singh',  title: 'Faculty, Commercial Law',                  credential: 'LLB + M.Com, Rajasthan Univ · 10 yrs',  initials: 'DS',  color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Prashant Kumar',   title: 'Associate Professor, Corporate Finance',   credential: 'PhD, IIM Lucknow · 16 yrs exp',         initials: 'PKu', color: 'red',    sex: 'm'       },
-  ],
-  mcom: [
-    { name: 'Dr. Anand Yadav',      title: 'Associate Professor, Advanced Acctg',      credential: 'PhD, Lucknow Univ · FCA',               initials: 'AY',  color: 'red',    sex: 'm'       },
-    { name: 'Prof. Sonal Bhatia',   title: 'Assistant Professor, Financial Mktg',      credential: 'MBA, IIM Indore · CFA Level II',        initials: 'SB',  color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Nilesh Kale',      title: 'Associate Professor, Corporate Law',      credential: 'LLB + PhD, Pune Univ · 16 yrs exp',     initials: 'NK',  color: 'amber',  sex: 'm'       },
-    { name: 'Dr. Reema Saxena',     title: 'Associate Professor, Advanced Tax',        credential: 'PhD, Allahabad Univ · FCA · 18 yrs',    initials: 'RS',  color: 'purple', sex: 'f'       },
-    { name: 'Prof. Jayesh Shah',    title: 'Industry Faculty, Capital Markets',        credential: 'MBA Finance, IIM Calcutta · 15 yrs',    initials: 'JS',  color: 'green',  sex: 'm'       },
-    { name: 'Dr. Vandana Mishra',   title: 'Associate Professor, Intl Finance',        credential: 'PhD, JNU Delhi · 13 yrs exp',           initials: 'VM',  color: 'red',    sex: 'f'       },
-    { name: 'Prof. Chirag Patel',   title: 'Faculty, Management Accounting',           credential: 'CMA + M.Com, VGU · 14 yrs exp',         initials: 'CP',  color: 'blue',   sex: 'm'       },
-    { name: 'Dr. Geeta Bhatt',      title: 'Assistant Professor, Financial Reporting', credential: 'PhD, Gujarat Univ · IFRS certified',    initials: 'GB',  color: 'red',    sex: 'f'       },
-  ],
   ba: [
     { name: 'Dr. Indira Mishra',      title: 'Professor, Political Science',           credential: 'PhD, JNU Delhi · 19 yrs exp',           initials: 'IM',  color: 'red',    sex: 'f'       },
     { name: 'Prof. Rohit Tripathi',   title: 'Associate Professor, English Lit',       credential: 'MA, Oxford · 13 yrs exp',               initials: 'RT',  color: 'blue',   sex: 'm'       },
@@ -394,35 +374,25 @@ const FACULTY: Record<string, FacultyEntry[]> = {
     { name: 'Prof. Madhu Krishnan',   title: 'Faculty, Gender Studies & Sociology',    credential: 'PhD, TISS Mumbai · 16 yrs exp',         initials: 'MKr', color: 'blue',   sex: 'f'       },
     { name: 'Dr. Suresh Bose',        title: 'Associate Professor, Applied Linguistics', credential: 'PhD, BHU · TESOL certified',          initials: 'SBo', color: 'red',    sex: 'm'       },
   ],
-  bsc: [
-    { name: 'Dr. Tarun Saxena',        title: 'Associate Professor, Mathematics',      credential: 'PhD, IIT Bombay · 14 yrs exp',          initials: 'TS',  color: 'red',    sex: 'm'       },
-    { name: 'Prof. Pooja Chauhan',     title: 'Assistant Professor, CS & Statistics',  credential: 'M.Sc CS, BITS Pilani · Google ML cert', initials: 'PC',  color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Kartik Nambiar',      title: 'Associate Professor, Env. Science',     credential: 'PhD, IISc Bangalore · 12 yrs exp',      initials: 'KN',  color: 'green',  sex: 'm'       },
-    { name: 'Dr. Sameera Patel',       title: 'Assistant Professor, Applied Maths',    credential: 'PhD, Pune Univ · 13 yrs exp',           initials: 'SPa', color: 'purple', sex: 'f'       },
-    { name: 'Prof. Rahul Desai',       title: 'Industry Faculty, Data Science',        credential: 'Ex-Data Engineer, Zomato · 10 yrs',     initials: 'RDe', color: 'amber',  sex: 'm'       },
-    { name: 'Dr. Anita Krishnamurthy', title: 'Associate Professor, Comp Biology',     credential: 'PhD, IISc Bangalore · 15 yrs exp',      initials: 'AKr', color: 'red',    sex: 'f'       },
-    { name: 'Prof. Sunil Sharma',      title: 'Assistant Professor, Probability & Stats', credential: 'PhD, ISI Kolkata · 14 yrs exp',     initials: 'SSh', color: 'blue',   sex: 'm'       },
-    { name: 'Dr. Neetu Singh',         title: 'Assistant Professor, Env. Policy',      credential: 'PhD, TERI Univ Delhi · 11 yrs exp',     initials: 'NSi', color: 'red',    sex: 'f'       },
+  msc: [
+    { name: 'Dr. Tarun Saxena',         title: 'Professor, Advanced Mathematics',         credential: 'PhD, IIT Bombay · 14 yrs exp',          initials: 'TS',  color: 'red',    sex: 'm'       },
+    { name: 'Prof. Pooja Chauhan',      title: 'Assistant Professor, Math Statistics',    credential: 'M.Sc, BITS Pilani · Google ML cert',    initials: 'PC',  color: 'blue',   sex: 'f'       },
+    { name: 'Dr. Kartik Nambiar',       title: 'Associate Professor, Algebra & Topology', credential: 'PhD, IISc Bangalore · 12 yrs exp',      initials: 'KaN', color: 'green',  sex: 'm'       },
+    { name: 'Dr. Sameera Patel',        title: 'Assistant Professor, Applied Maths',      credential: 'PhD, Pune Univ · 13 yrs exp',           initials: 'SPa', color: 'purple', sex: 'f'       },
+    { name: 'Prof. Rahul Desai',        title: 'Industry Faculty, Quantitative Analysis', credential: 'Ex-Quant Analyst, Edelweiss · 10 yrs',  initials: 'RDe', color: 'amber',  sex: 'm'       },
+    { name: 'Dr. Anita Krishnamurthy',  title: 'Associate Professor, Number Theory',      credential: 'PhD, IISc Bangalore · 15 yrs exp',      initials: 'AKy', color: 'slate',  sex: 'f'       },
+    { name: 'Prof. Sunil Sharma',       title: 'Assistant Professor, Probability',        credential: 'PhD, ISI Kolkata · 14 yrs exp',         initials: 'SSh', color: 'blue',   sex: 'm'       },
+    { name: 'Dr. Neetu Singh',          title: 'Assistant Professor, Operations Research',credential: 'PhD, IIT Madras · 11 yrs exp',          initials: 'NSm', color: 'red',    sex: 'f'       },
   ],
-  mlib: [
-    { name: 'Dr. S.K. Sharma',     title: 'Professor, Library Systems',                credential: 'PhD, Delhi School of LIS · 21 yrs',     initials: 'SKS', color: 'red',    sex: 'm'       },
-    { name: 'Prof. Anita Desai',   title: 'Associate Professor, Digital Archives',     credential: 'MLib · NLAI Fellow · 15 yrs exp',       initials: 'AD',  color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Ramesh Pillai',   title: 'Professor, Information Retrieval',          credential: 'PhD, DRTC Bangalore · 18 yrs exp',      initials: 'RPi', color: 'purple', sex: 'm'       },
-    { name: 'Prof. Suhasini Rao',  title: 'Associate Professor, Knowledge Mgmt',       credential: 'MLibI.Sc, IGNOU · 14 yrs exp',          initials: 'SRa', color: 'amber',  sex: 'f'       },
-    { name: 'Dr. Kiran Malhotra',  title: 'Associate Professor, Archival Science',     credential: 'PhD, AMU Aligarh · 16 yrs exp',         initials: 'KMa', color: 'green',  sex: 'f'       },
-    { name: 'Prof. Venkat Iyer',   title: 'Faculty, Library Networking',               credential: 'MSc LIS, BHU · INFLIBNET certified',    initials: 'VI',  color: 'red',    sex: 'm'       },
-    { name: 'Dr. Priti Singh',     title: 'Assistant Professor, Research Methods',     credential: 'PhD, DU School of LIS · 13 yrs exp',    initials: 'PrSi',color: 'blue',   sex: 'f'       },
-    { name: 'Prof. Suresh Chandra',title: 'Visiting Faculty, Library Management',      credential: 'Ex-Director, National Library · 25 yrs',initials: 'SC',  color: 'red',    sex: 'm'       },
-  ],
-  blib: [
-    { name: 'Prof. M.K. Gupta',      title: 'Assistant Professor, Library Basics',     credential: 'MLib, IGNOU · 12 yrs exp',              initials: 'MKG', color: 'red',    sex: 'm'       },
-    { name: 'Dr. Seema Rao',         title: 'Assistant Professor, Cataloguing',        credential: 'PhD, Rajasthan Univ · 10 yrs exp',      initials: 'SRao',color: 'blue',   sex: 'f'       },
-    { name: 'Prof. Narender Singh',  title: 'Faculty, Digital Libraries',              credential: 'MSc LIS, BHU · 9 yrs exp',              initials: 'NSi', color: 'purple', sex: 'm'       },
-    { name: 'Dr. Priya Verma',       title: 'Assistant Professor, Library Admin',      credential: 'MLib, Baroda Univ · 11 yrs exp',        initials: 'PrVe',color: 'amber',  sex: 'f'       },
-    { name: 'Prof. Anjali Sharma',   title: 'Faculty, Information Science',            credential: 'M.Lib, Lucknow Univ · NET/JRF',         initials: 'AnSh',color: 'green',  sex: 'f'       },
-    { name: 'Dr. Kamal Nair',        title: 'Associate Professor, Archival Methods',   credential: 'PhD, Kerala Univ · 13 yrs exp',         initials: 'KNa', color: 'red',    sex: 'm'       },
-    { name: 'Prof. Shikha Malhotra', title: 'Faculty, School Library Mgmt',            credential: 'MLib, Lucknow Univ · 7 yrs exp',        initials: 'ShMa',color: 'blue',   sex: 'f'       },
-    { name: 'Dr. Santosh Dubey',     title: 'Assistant Professor, Reference Services', credential: 'PhD, Nagpur Univ · 10 yrs exp',         initials: 'SaDu',color: 'red',    sex: 'm'       },
+  majmc: [
+    { name: 'Dr. Vinay Singh',          title: 'Professor, Digital Journalism',            credential: 'PhD, AJK MCRC Jamia · 20 yrs exp',         initials: 'ViS', color: 'red',    sex: 'm'       },
+    { name: 'Prof. Anjali Bose',        title: 'Associate Professor, Broadcast Media',     credential: 'MA, Cardiff Univ · Ex-NDTV · 14 yrs',      initials: 'AnB', color: 'amber',  sex: 'f'       },
+    { name: 'Dr. Rajesh Khanna',        title: 'Industry Faculty, Public Relations',       credential: 'Ex-Chief PR Officer, Tata Group · 22 yrs', initials: 'RKh', color: 'purple', sex: 'm'       },
+    { name: 'Prof. Neha Sharma',        title: 'Associate Professor, Multimedia Journ',    credential: 'MA, IIMC Delhi · 12 yrs exp',              initials: 'NSm', color: 'red',    sex: 'f'       },
+    { name: 'Dr. Aditya Kapoor',        title: 'Professor, Media Studies',                 credential: 'PhD, JNU Delhi · 18 yrs exp',              initials: 'AdK', color: 'green',  sex: 'm'       },
+    { name: 'Prof. Kavitha Iyer',       title: 'Industry Faculty, Corporate Comms',        credential: 'Ex-Communications Head, Wipro · 15 yrs',   initials: 'KaI', color: 'slate',  sex: 'f'       },
+    { name: 'Dr. Sandeep Reddy',        title: 'Associate Professor, Investigative Journ', credential: 'PhD, IIMC Delhi · 13 yrs exp',             initials: 'SaR', color: 'blue',   sex: 'm'       },
+    { name: 'Prof. Tara Menon',         title: 'Industry Faculty, Documentary Film',       credential: 'Filmmaker · National Award · 11 yrs',      initials: 'TaM', color: 'red',    sex: 'f'       },
   ],
 }
 
@@ -444,7 +414,7 @@ async function seedFaculty() {
       const photoUrl = f.sex === 'm' ? M[mIdx++ % M.length] : F[fIdx++ % F.length]
       const assetId = await uploadImageFromUrl(photoUrl, `faculty-${slugify(f.name)}.jpg`)
       // Doc ID is scoped per (program, name) so the same faculty teaching
-      // multiple programs gets one doc per program — matches current display.
+      // multiple programs gets one doc per program - matches current display.
       const id = `faculty-${programSlug}-${slugify(f.name)}`
       await client.createOrReplace({
         _id: id, _type: 'faculty',

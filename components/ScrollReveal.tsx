@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 
 // Reads the animationDelay inline style value so stagger delays set on
-// individual elements via style={{ animationDelay: '80ms' }} still work —
+// individual elements via style={{ animationDelay: '80ms' }} still work -
 // no need to rename them to transitionDelay across dozens of files.
 function readDelayMs(el: HTMLElement): number {
   const raw = el.style.animationDelay || '0'

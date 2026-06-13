@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { IconArrowRight, IconClock, IconTrendingUp } from '@tabler/icons-react'
+import { IconArrowRight, IconClock } from '@tabler/icons-react'
 import { DISCIPLINE_ORDER, type Discipline } from './data'
 import { PROGRAM_META, type ProgramMeta } from './meta'
 
@@ -22,14 +22,17 @@ export interface ProgramGridItem {
 
 type Filter = 'all' | 'ug' | 'pg' | 'cert'
 
-const DISC_COLOR: Record<string, string> = {
-  'Management':             '#C04036',
-  'Information Technology': '#7c3aed',
-  'Commerce':               '#0f766e',
-  'Arts':                   '#0891b2',
-  'Science':                '#059669',
-  'Data Science':           '#1d4ed8',
-  'Media & Journalism':     '#be185d',
+// Brand-palette accent rotation per discipline.
+// vgu-red is the primary; vgu-yellow and vgu-red-dark add visual variety
+// without leaving the brand. Swap to all vgu-red for monochrome.
+const DISC_ACCENT: Record<string, string> = {
+  'Management':             '#C04036', // vgu-red
+  'Information Technology': '#FFA412', // vgu-yellow
+  'Commerce':               '#821a12', // vgu-red-dark
+  'Arts':                   '#C04036', // vgu-red
+  'Science':                '#FFA412', // vgu-yellow
+  'Data Science':           '#821a12', // vgu-red-dark
+  'Media & Journalism':     '#C04036', // vgu-red
 }
 
 export default function ProgramsGrid({
@@ -56,13 +59,10 @@ export default function ProgramsGrid({
         {/* Header + filter row */}
         <div data-animate="fade-up" className="flex flex-wrap items-end justify-between gap-5 mb-10 md:mb-12">
           <div>
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-1.5">
+            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-2">
               Browse Programs
             </p>
-            <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 md:text-[32px]">
-              {FILTERS.find(f => f.value === filter)?.label}
-            </h2>
-            <p className="mt-1 text-[14px] font-body text-neutral-500">
+            <p className="text-[14px] font-body text-neutral-500">
               {visible.length} program{visible.length !== 1 ? 's' : ''} · Next batch {nextBatch}
             </p>
           </div>
@@ -119,7 +119,7 @@ function DisciplineGroup({
   discipline: Discipline
   programs:   ProgramGridItem[]
 }) {
-  const accent = DISC_COLOR[discipline] ?? '#C04036'
+  const accent = DISC_ACCENT[discipline] ?? '#C04036'
 
   return (
     <div>
@@ -161,11 +161,13 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
   const shown = p.specialisations.slice(0, 2)
   const extra = p.specialisations.length - shown.length
   const iconBg = meta?.iconBg ?? 'linear-gradient(135deg,#C04036,#821a12)'
+  const isCert = p.level === 'cert'
 
   return (
     <article className="group relative flex flex-col h-full bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] hover:border-transparent">
 
-      {p.level !== 'cert' && (
+      {/* Whole-card link for ug/pg (Bible §07 one primary action) */}
+      {!isCert && (
         <Link href={`/programs/${p.slug}`} className="absolute inset-0 z-[1]" aria-label={`View ${p.name} details`} tabIndex={-1} />
       )}
 
@@ -232,11 +234,6 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
           </div>
         </div>
 
-        <div className="flex items-center gap-1 mb-3">
-          <IconTrendingUp size={11} className="text-green-600 flex-none" stroke={2} />
-          <span className="text-[11px] font-body text-neutral-500">95% placement rate</span>
-        </div>
-
         {shown.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {shown.map(s => (
@@ -249,32 +246,18 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
         )}
       </div>
 
-      {/* Footer CTAs */}
-      <div className="relative z-[2] px-4 lg:px-5 pb-4 lg:pb-5 pt-0 flex gap-2">
-        <a
-          href="#counsellor"
-          data-apply-trigger
-          className="flex-1 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red py-2.5 text-[13px] font-semibold font-heading text-center transition-all duration-150"
-        >
-          Apply Now
-        </a>
-        {p.level !== 'cert' ? (
-          <Link
-            href={`/programs/${p.slug}`}
-            className="flex-none rounded-full border-2 border-neutral-200 hover:border-vgu-red text-neutral-600 hover:text-vgu-red py-2.5 px-4 text-[13px] font-semibold font-heading transition-all duration-150 flex items-center gap-1"
-          >
-            Info <IconArrowRight size={12} />
-          </Link>
-        ) : (
+      {/* Cert cards: single Enquire CTA (no detail page exists). ug/pg cards: whole-card link, no inner CTA. */}
+      {isCert && (
+        <div className="relative z-[2] px-4 lg:px-5 pb-4 lg:pb-5 pt-0">
           <a
             href="#counsellor"
             data-apply-trigger
-            className="flex-none rounded-full border-2 border-neutral-200 hover:border-vgu-red text-neutral-600 hover:text-vgu-red py-2.5 px-4 text-[13px] font-semibold font-heading transition-all duration-150 flex items-center gap-1"
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white py-2.5 text-[13px] font-semibold font-heading transition-all duration-150"
           >
             Enquire <IconArrowRight size={12} />
           </a>
-        )}
-      </div>
+        </div>
+      )}
 
     </article>
   )

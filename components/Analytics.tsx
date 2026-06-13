@@ -7,7 +7,7 @@ const PIXEL_ID   = process.env.NEXT_PUBLIC_META_PIXEL_ID
 export default function Analytics() {
   return (
     <>
-      {/* Google Tag Manager — loads GA4 + all tags via GTM container */}
+      {/* Google Tag Manager - loads GA4 + all tags via GTM container */}
       {GTM_ID && (
         <Script id="gtm-head" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script>
       )}
 
-      {/* Standalone GA4 — only when GTM is absent (GTM should own GA4 in production) */}
+      {/* Standalone GA4 - only when GTM is absent (GTM should own GA4 in production) */}
       {GA_ID && !GTM_ID && (
         <>
           <Script

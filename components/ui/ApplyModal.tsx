@@ -13,7 +13,7 @@ function sanitizePhone(v: string) {
 
 // Two-step wizard: choosing programme on step 1, personal details + intake on
 // step 2. This is what lets the modal fit without scrolling on every viewport
-// from a 375x667 phone up to a 1440-wide desktop — a single tall form does not.
+// from a 375x667 phone up to a 1440-wide desktop - a single tall form does not.
 const INTAKE_OPTIONS = [
   { value: 'July 2026',    label: 'July 2026',   popular: true  },
   { value: 'January 2027', label: 'Jan 2027',    popular: false },
@@ -203,7 +203,7 @@ export default function ApplyModal() {
           </div>
         </div>
 
-        {/* ══ Form body ══ — flex-1 + overflow-y-auto is a safety net only;
+        {/* ══ Form body ══ - flex-1 + overflow-y-auto is a safety net only;
               steps are sized to fit inside the modal without scrolling. */}
         <div
           className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4"
@@ -228,7 +228,7 @@ export default function ApplyModal() {
               </button>
             </div>
           ) : step === 1 ? (
-            /* ─── STEP 1 — Level + Programme ─── */
+            /* ─── STEP 1 - Level + Programme ─── */
             <div className="flex flex-col gap-4">
               {/* Level */}
               <div>
@@ -295,7 +295,7 @@ export default function ApplyModal() {
                 </div>
               )}
 
-              {/* Continue button — pinned at the bottom of the step */}
+              {/* Continue button - pinned at the bottom of the step */}
               <button
                 type="button"
                 disabled={!canAdvance}
@@ -306,7 +306,7 @@ export default function ApplyModal() {
               </button>
             </div>
           ) : (
-            /* ─── STEP 2 — Details + Intake + Consent + Submit ─── */
+            /* ─── STEP 2 - Details + Intake + Consent + Submit ─── */
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               {/* Personal details */}
               <div>
@@ -339,7 +339,7 @@ export default function ApplyModal() {
                 </div>
               </div>
 
-              {/* Intake — single row on every viewport */}
+              {/* Intake - single row on every viewport */}
               <div>
                 <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
                   When do you plan to start?

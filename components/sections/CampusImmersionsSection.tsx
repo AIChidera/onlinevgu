@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import Image from 'next/image'
 import {
   IconStar,
@@ -11,7 +11,7 @@ import {
   IconChevronLeft,
   IconChevronRight,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import type { SanityCampusEvent } from '@/lib/sanity'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,147 +25,124 @@ const THEME_MAP: Record<string, { gradient: string; Icon: AnyIcon }> = {
   red:    { gradient: 'from-[#C04036] via-[#9b2f26] to-[#821a12]', Icon: IconStar        },
 }
 
+interface Card {
+  title:    string
+  subtitle: string
+  tag:      string
+  gradient: string
+  Icon:     AnyIcon
+  image?:   string
+}
+
 function fromSanityEvent(e: SanityCampusEvent): Card {
   const theme = THEME_MAP[e.colorTheme] ?? THEME_MAP.blue
+  const firstTag = (e.tags ?? [])[0]
   return {
     title:    e.title,
     subtitle: e.subtitle ?? '',
-    tags:     e.tags ?? [],
+    tag:      firstTag?.label?.toUpperCase() ?? 'EVENT',
     gradient: theme.gradient,
     Icon:     theme.Icon,
     image:    e.photoUrl ?? undefined,
   }
 }
 
-interface Card {
-  title:    string
-  subtitle: string
-  tags:     { label: string; color: 'gold' | 'red' | 'green' }[]
-  gradient: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Icon:     React.ComponentType<any>
-  image?:   string
-}
-
+// Fallback CARDS - updated to reflect actual VGU campus events open to online students
 const CARDS: Card[] = [
   {
-    title:    'Welcome & Leadership Orientation',
-    subtitle: 'Set your goals, meet your cohort, and hear from VGU leaders on day one.',
-    tags:     [{ label: 'Day 1', color: 'gold' }, { label: 'Leadership', color: 'red' }, { label: 'Campus', color: 'green' }],
+    title:    'Panache, the annual cultural fest',
+    subtitle: 'Three nights of dance, music, food, and the loudest VGU sing-along of the year.',
+    tag:      'FLAGSHIP',
     gradient: 'from-[#C04036] via-[#9b2f26] to-[#821a12]',
     Icon:     IconStar,
-    image:    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=640&q=80&auto=format&fit=crop',
+    image:    'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=640&q=80&auto=format&fit=crop',
   },
   {
-    title:    'Industry Bootcamp & Case Studies',
-    subtitle: 'Solve real business problems with industry mentors in intensive 2-day sprints.',
-    tags:     [{ label: 'Bootcamp', color: 'red' }, { label: 'Case Studies', color: 'gold' }, { label: 'Industry', color: 'green' }],
+    title:    'Open-air movie nights',
+    subtitle: 'Friday screenings on the quad, with projector, snacks, and a few hundred students under one sky.',
+    tag:      'SOCIAL',
     gradient: 'from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a]',
-    Icon:     IconBriefcase,
-    image:    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=640&q=80&auto=format&fit=crop',
+    Icon:     IconStar,
+    image:    'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=640&q=80&auto=format&fit=crop',
   },
   {
-    title:    'Alumni Connect & Career Fair',
-    subtitle: 'Build your network with 500+ alumni and meet top recruiters face to face.',
-    tags:     [{ label: 'Networking', color: 'green' }, { label: 'Alumni', color: 'gold' }, { label: 'Placements', color: 'red' }],
-    gradient: 'from-[#059669] via-[#047857] to-[#065f46]',
-    Icon:     IconUsers,
-    image:    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=640&q=80&auto=format&fit=crop',
-  },
-  {
-    title:    'Tech & Innovation Lab Immersion',
-    subtitle: 'Hands-on sessions in AI, robotics, and cloud labs at VGU\'s innovation centre.',
-    tags:     [{ label: 'Tech', color: 'red' }, { label: 'Innovation', color: 'gold' }, { label: 'Hands-on', color: 'green' }],
+    title:    'Workshops & guest seminars',
+    subtitle: 'Industry leaders and visiting faculty take you deep on AI, finance, design, and leadership.',
+    tag:      'LEARN',
     gradient: 'from-[#7c3aed] via-[#6d28d9] to-[#4c1d95]',
     Icon:     IconFlask,
-    image:    'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=640&q=80&auto=format&fit=crop',
+    image:    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=640&q=80&auto=format&fit=crop',
   },
   {
-    title:    'Convocation Ceremony',
-    subtitle: 'Walk the stage, collect your degree, and celebrate with family and peers.',
-    tags:     [{ label: 'Graduation', color: 'gold' }, { label: 'Ceremony', color: 'red' }, { label: 'Milestone', color: 'green' }],
+    title:    'Hackathons & bootcamps',
+    subtitle: 'Build real products in 48 hours with industry mentors, then pitch to recruiters on day three.',
+    tag:      'BUILD',
+    gradient: 'from-[#059669] via-[#047857] to-[#065f46]',
+    Icon:     IconBriefcase,
+    image:    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=640&q=80&auto=format&fit=crop',
+  },
+  {
+    title:    'Convocation on campus',
+    subtitle: 'Walk the stage, collect your degree, and celebrate two years of work with family by your side.',
+    tag:      'MILESTONE',
     gradient: 'from-[#b45309] via-[#92400e] to-[#78350f]',
     Icon:     IconCertificate,
     image:    'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=640&q=80&auto=format&fit=crop',
   },
 ]
 
-const TAG_STYLES = {
-  gold:  'bg-vgu-yellow/20 text-vgu-yellow border border-vgu-yellow/30',
-  red:   'bg-white/15 text-white border border-white/25',
-  green: 'bg-emerald-400/20 text-emerald-300 border border-emerald-400/30',
-}
-
+// Softer 3D - Bible §05 light source: subtle depth, not casino rotation
 function getTransform(offset: number) {
   switch (offset) {
-    case 0:  return { transform: 'translateX(0) scale(1) rotateY(0deg)',          zIndex: 10, opacity: 1, filter: 'brightness(1)'    }
-    case 1:  return { transform: 'translateX(290px) scale(0.88) rotateY(-14deg)', zIndex: 7,  opacity: 1, filter: 'brightness(0.82)' }
-    case 2:  return { transform: 'translateX(520px) scale(0.75) rotateY(-22deg)', zIndex: 4,  opacity: 1, filter: 'brightness(0.65)' }
-    case 3:  return { transform: 'translateX(-520px) scale(0.75) rotateY(22deg)', zIndex: 4,  opacity: 1, filter: 'brightness(0.65)' }
-    case 4:  return { transform: 'translateX(-290px) scale(0.88) rotateY(14deg)', zIndex: 7,  opacity: 1, filter: 'brightness(0.82)' }
-    default: return { transform: 'translateX(0) scale(0)',                        zIndex: 0,  opacity: 0, filter: 'brightness(1)'    }
+    case 0:  return { transform: 'translateX(0) scale(1) rotateY(0deg)',           zIndex: 10, opacity: 1,    filter: 'brightness(1)'    }
+    case 1:  return { transform: 'translateX(280px) scale(0.92) rotateY(-7deg)',   zIndex: 7,  opacity: 0.95, filter: 'brightness(0.88)' }
+    case 2:  return { transform: 'translateX(500px) scale(0.82) rotateY(-12deg)',  zIndex: 4,  opacity: 0.85, filter: 'brightness(0.74)' }
+    case 3:  return { transform: 'translateX(-500px) scale(0.82) rotateY(12deg)',  zIndex: 4,  opacity: 0.85, filter: 'brightness(0.74)' }
+    case 4:  return { transform: 'translateX(-280px) scale(0.92) rotateY(7deg)',   zIndex: 7,  opacity: 0.95, filter: 'brightness(0.88)' }
+    default: return { transform: 'translateX(0) scale(0)',                         zIndex: 0,  opacity: 0,    filter: 'brightness(1)'    }
   }
 }
 
 export default function CampusImmersionsSection({ events: sanityEvents = [] }: { events?: SanityCampusEvent[] }) {
   const activeCards = sanityEvents.length > 0 ? sanityEvents.map(fromSanityEvent) : CARDS
-  const [active, setActive]         = useState(0)
-  const [paused, setPaused]         = useState(false)
-  const [advanceKey, setAdvanceKey] = useState(0)
+  const [active, setActive] = useState(0)
   const total = activeCards.length
 
-  // Auto-advance on desktop (pauses on hover)
-  useEffect(() => {
-    if (paused) return
-    const id = setInterval(() => setActive((a) => (a + 1) % total), 4000)
-    return () => clearInterval(id)
-  }, [paused, total, advanceKey])
-
-  const prev = useCallback(() => {
-    setActive((a) => (a - 1 + total) % total)
-    setAdvanceKey((k) => k + 1)
-  }, [total])
-  const next = useCallback(() => {
-    setActive((a) => (a + 1) % total)
-    setAdvanceKey((k) => k + 1)
-  }, [total])
+  const prev = useCallback(() => setActive((a) => (a - 1 + total) % total), [total])
+  const next = useCallback(() => setActive((a) => (a + 1) % total), [total])
 
   return (
-    <section
-      id="campus"
-      className="group relative overflow-hidden bg-neutral-50 py-16 lg:py-24"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <StrokeArt variant="light" />
-
+    <section id="campus" className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 lg:py-24">
+      <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={10} />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-10">
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
             On-Campus Experiences
           </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-            Campus Immersions
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+            More than classes. More than online.
           </h2>
-          <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-600 max-w-[500px] mx-auto lg:text-[17px]">
-            Online learning, real-world moments. Join us on campus for five unforgettable experiences.
+          <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-neutral-600 max-w-[560px] mx-auto">
+            Online students are invited to VGU&apos;s signature campus events: Panache, movie nights,
+            hackathons, workshops, convocation. No extra cost.
           </p>
         </div>
       </div>
 
-      {/* Animated wrapper: fades in carousel + controls together */}
       <div data-animate="fade-up" className="relative z-10">
 
-      {/* ── MOBILE: native CSS snap scroll (identical mechanism to Programs cards) ── */}
-      <div className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+      {/* ── MOBILE: native CSS snap scroll ── */}
+      <div
+        className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         {activeCards.map((card) => (
           <div
             key={card.title}
             className="snap-start flex-none w-[78vw] max-w-[300px] rounded-2xl overflow-hidden relative select-none"
             style={{ height: '360px' }}
           >
-            {/* Background */}
             {card.image ? (
               <Image src={card.image} alt={card.title} fill className="object-cover" sizes="300px" />
             ) : (
@@ -179,22 +156,20 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
               </>
             )}
 
+            {/* Single tag - top-left */}
+            <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
+              {card.tag}
+            </span>
+
             {/* Scrim + content */}
             <div
               className="absolute inset-x-0 bottom-0 p-5 pt-20"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 60%, transparent 100%)' }}
             >
-              <div className="flex flex-wrap gap-1.5 mb-3">
-                {card.tags.map((t) => (
-                  <span key={t.label} className={`text-[10px] font-body font-semibold px-2.5 py-0.5 rounded-full ${TAG_STYLES[t.color]}`}>
-                    {t.label}
-                  </span>
-                ))}
-              </div>
               <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-white">
                 {card.title}
               </h3>
-              <p className="mt-1.5 text-[12px] font-body text-white/65 leading-[1.5]">
+              <p className="mt-1.5 text-[12px] font-body text-white/75 leading-[1.5]">
                 {card.subtitle}
               </p>
             </div>
@@ -202,10 +177,10 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
         ))}
       </div>
 
-      {/* ── DESKTOP: 3D perspective carousel ── */}
+      {/* ── DESKTOP: soft 3D carousel ── */}
       <div
         className="hidden md:flex relative z-10 justify-center mt-6"
-        style={{ perspective: '1200px', perspectiveOrigin: 'center center' }}
+        style={{ perspective: '1400px', perspectiveOrigin: 'center center' }}
       >
         <div className="relative" style={{ width: '320px', height: '420px' }}>
           {activeCards.map((card, i) => {
@@ -216,11 +191,11 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             return (
               <div
                 key={card.title}
-                onClick={clickable ? () => { setActive(i); setAdvanceKey((k) => k + 1) } : undefined}
+                onClick={clickable ? () => setActive(i) : undefined}
                 className={[
                   'absolute inset-0 rounded-2xl overflow-hidden select-none',
                   'transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
-                  clickable ? 'cursor-pointer' : '',
+                  clickable ? 'cursor-pointer hover:scale-[1.02]' : '',
                   offset === 2 || offset === 3 ? 'pointer-events-none' : '',
                 ].join(' ')}
                 style={{ transformStyle: 'preserve-3d', ...pos }}
@@ -238,43 +213,31 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
                   </>
                 )}
 
+                {/* Single tag - top-left */}
+                <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
+                  {card.tag}
+                </span>
+
                 <div
                   className="absolute inset-x-0 bottom-0 p-5 pt-16"
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.40) 55%, transparent 100%)' }}
                 >
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {card.tags.map((t) => (
-                      <span key={t.label} className={`text-[10px] font-body font-semibold px-2.5 py-0.5 rounded-full ${TAG_STYLES[t.color]}`}>
-                        {t.label}
-                      </span>
-                    ))}
-                  </div>
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-white">
                     {card.title}
                   </h3>
-                  <p className={[
-                    'mt-1.5 text-[13px] font-body text-white/70 leading-[1.5] transition-all duration-300',
-                    offset === 0 ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0 overflow-hidden',
-                  ].join(' ')}>
+                  {/* Subtitle now ALWAYS visible - Bible §08 transparency */}
+                  <p className="mt-1.5 text-[13px] font-body text-white/75 leading-[1.5]">
                     {card.subtitle}
                   </p>
                 </div>
-
-                {clickable && (
-                  <div className="group/hint absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/10 transition-colors duration-200">
-                    <div className="opacity-40 group-hover/hint:opacity-100 transition-opacity duration-200 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-[12px] font-body font-semibold text-white">
-                      View
-                    </div>
-                  </div>
-                )}
               </div>
             )
           })}
         </div>
       </div>
 
-      {/* Desktop controls only */}
-      <div className="hidden md:flex relative z-10 mt-14 flex-col items-center gap-5">
+      {/* Desktop controls + lead CTA */}
+      <div className="hidden md:flex relative z-10 mt-14 flex-col items-center gap-6">
         <div className="flex items-center gap-4">
           <button
             onClick={prev}
@@ -288,7 +251,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             {activeCards.map((_, i) => (
               <button
                 key={i}
-                onClick={() => { setActive(i); setAdvanceKey((k) => k + 1) }}
+                onClick={() => setActive(i)}
                 className="flex items-center justify-center h-11 px-1.5"
                 aria-label={`Go to slide ${i + 1}`}
               >
@@ -312,7 +275,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
         </div>
 
         <p className="text-[13px] font-body text-neutral-400">
-          {active + 1} of {total} experiences
+          {active + 1} of {total} experiences · open to every online student
         </p>
       </div>
 

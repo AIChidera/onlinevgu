@@ -63,7 +63,7 @@ export default function HomeLoading() {
               ))}
             </div>
           </div>
-          {/* Card grid — desktop */}
+          {/* Card grid - desktop */}
           <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="rounded-2xl border border-neutral-200 overflow-hidden">
@@ -85,7 +85,7 @@ export default function HomeLoading() {
               </div>
             ))}
           </div>
-          {/* Card row — mobile */}
+          {/* Card row - mobile */}
           <div className="flex sm:hidden gap-3 overflow-hidden -mx-5 px-5">
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex-none w-[75vw] max-w-[285px] rounded-[16px] border border-neutral-200 overflow-hidden">

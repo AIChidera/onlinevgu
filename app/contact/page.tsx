@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { IconPhone, IconBrandWhatsapp, IconMail, IconMapPin, IconClock, IconArrowRight } from '@tabler/icons-react'
 
-// Placeholder — replace with '/images/contact-hero-bg.jpg' when ready.
+// Placeholder - replace with '/images/contact-hero-bg.jpg' when ready.
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1400&q=80&auto=format&fit=crop'
 import ContactForm from '@/components/forms/ContactForm'
-import StrokeArt from '@/components/ui/StrokeArt'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
@@ -20,6 +18,7 @@ export const metadata: Metadata = {
   },
 }
 
+// Brand 3-cycle: red / yellow→red / deep red. All channels rotate within brand.
 const CONTACT_CHANNELS = [
   {
     Icon: IconPhone,
@@ -28,9 +27,9 @@ const CONTACT_CHANNELS = [
     sub: 'Toll-free · Mon-Sat, 9am-7pm IST',
     href: 'tel:+911800123456',
     cta: 'Call now',
-    color: 'bg-blue-50 border-blue-100 text-blue-700',
-    iconBg: 'bg-blue-100',
-    iconColor: 'text-blue-600',
+    color: 'bg-vgu-red/5 border-vgu-red/15',
+    iconBg: 'bg-vgu-red/10',
+    iconColor: 'text-vgu-red',
   },
   {
     Icon: IconBrandWhatsapp,
@@ -39,9 +38,9 @@ const CONTACT_CHANNELS = [
     sub: 'Usually replies in 15 minutes',
     href: 'https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs',
     cta: 'Chat now',
-    color: 'bg-green-50 border-green-100 text-green-700',
-    iconBg: 'bg-green-100',
-    iconColor: 'text-green-600',
+    color: 'bg-vgu-yellow/10 border-vgu-yellow/30',
+    iconBg: 'bg-vgu-yellow/20',
+    iconColor: 'text-vgu-red',
   },
   {
     Icon: IconMail,
@@ -50,9 +49,9 @@ const CONTACT_CHANNELS = [
     sub: 'Replies within 24 hours',
     href: 'mailto:admissions@onlinevgu.in',
     cta: 'Send email',
-    color: 'bg-vgu-red/5 border-vgu-red/15 text-vgu-red',
-    iconBg: 'bg-vgu-red/10',
-    iconColor: 'text-vgu-red',
+    color: 'bg-vgu-red-dark/5 border-vgu-red-dark/15',
+    iconBg: 'bg-vgu-red-dark/10',
+    iconColor: 'text-vgu-red-dark',
   },
 ]
 
@@ -63,53 +62,32 @@ export default function ContactPage() {
 
       {/* ══ Hero ══ */}
       <section className="relative overflow-hidden">
-        {/* Background image behind gradient overlay — set HERO_IMAGE_SRC above to activate */}
         {HERO_IMAGE_SRC && (
           <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         )}
-        <div
-          className="absolute inset-0"
-          style={{ background: HERO_IMAGE_SRC ? 'linear-gradient(135deg, rgba(192,64,54,0.93) 0%, rgba(130,26,18,0.96) 100%)' : 'linear-gradient(135deg, #C04036 0%, #821a12 100%)' }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        <div className="opacity-40 absolute inset-0">
-          <StrokeArt variant="dark" />
-        </div>
+        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 mb-8 text-[13px] font-body text-white/55">
-            <Link href="/" className="hover:text-white transition-colors duration-150">Home</Link>
-            <span className="text-white/30">/</span>
-            <span className="text-white/80">Contact</span>
-          </nav>
-
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
             We&apos;re here to help
           </p>
-          <h1 className="font-heading font-black text-[36px] md:text-[48px] lg:text-[64px] tracking-[-2px] leading-[0.95] text-white">
+          <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
             Talk to a real<br />
             <span className="text-vgu-yellow">counsellor.</span>
           </h1>
-          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/75 max-w-[520px] lg:text-[17px]">
+          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
             No chatbots. No automated hold queues. A trained VGU admissions
-            counsellor will answer your questions - free and no obligation.
+            counsellor will answer your questions, free and no obligation.
           </p>
 
           <div className="mt-8 flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/70">
-              <IconClock size={16} className="text-white/50" stroke={1.5} />
+            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/80">
+              <IconClock size={16} className="text-white/60" stroke={1.5} />
               Mon-Sat, 9am-7pm IST
             </div>
             <div className="w-px h-4 bg-white/20" aria-hidden="true" />
-            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/70">
-              Average response: <strong className="text-white">2 minutes</strong>
+            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/80">
+              Counsellor calls within <strong className="text-white">2 hours</strong>
             </div>
           </div>
         </div>

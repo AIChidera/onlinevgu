@@ -4,25 +4,23 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { IconClock, IconArrowRight } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { PROGRAMMES, type Programme } from '@/app/programs/data'
 import { PROGRAM_META, type ProgramMeta } from '@/app/programs/meta'
 import type { SanityProgramSummary } from '@/lib/sanity'
 
 type Filter = 'all' | 'ug' | 'pg'
 
-const FILTERS: { label: string; value: Filter }[] = [
+const FILTER_DEFS: { label: string; value: Filter }[] = [
   { label: 'All Programs',  value: 'all' },
   { label: 'Undergraduate', value: 'ug'  },
   { label: 'Postgraduate',  value: 'pg'  },
 ]
 
-// Keyed fallback images — used when Sanity hasn't had a hero uploaded yet
 const FALLBACK_IMAGES: Record<string, string> = Object.fromEntries(
   PROGRAMMES.filter(p => p.image).map(p => [p.slug, p.image as string])
 )
 
-// Map SanityProgramSummary → the Programme shape this component uses
 function toProgram(p: SanityProgramSummary): Programme {
   return {
     slug:            p.slug,
@@ -41,54 +39,73 @@ function toProgram(p: SanityProgramSummary): Programme {
 export default function ProgramsSection({ programmes: sanityProgrammes }: { programmes?: SanityProgramSummary[] }) {
   const [filter, setFilter] = useState<Filter>('all')
 
-  // Sanity data takes priority; fall back to hardcoded when CMS is empty
   const allProgrammes = sanityProgrammes && sanityProgrammes.length > 0
     ? sanityProgrammes.map(toProgram)
     : PROGRAMMES
 
   const degrees = allProgrammes.filter(p => p.level !== 'cert')
-  const visible = (filter === 'all' ? degrees : degrees.filter(p => p.level === filter)).slice(0, 8)
+  const counts = {
+    all: degrees.length,
+    ug:  degrees.filter(p => p.level === 'ug').length,
+    pg:  degrees.filter(p => p.level === 'pg').length,
+  }
+  const visible = (filter === 'all' ? degrees : degrees.filter(p => p.level === filter)).slice(0, 6)
 
   return (
-    <section id="programs" className="group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-      <StrokeArt variant="light" />
-
+    <section id="programs" className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={10} />
       <div className="relative z-10 mx-auto max-w-[1280px]">
 
-        {/* Header */}
-        <div data-animate="fade-up" className="text-center mb-12">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
-            UGC-Entitled Degrees
-          </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-            Find Your Perfect Program
-          </h2>
-          <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-600 max-w-[520px] mx-auto lg:text-[17px]">
-            Industry-aligned degrees delivered fully online, recognised by employers across India and beyond.
-          </p>
+        {/* Header - left-aligned, filters right (md+) */}
+        <div className="md:flex md:items-end md:justify-between md:gap-10 mb-10 md:mb-12">
+          <div data-animate="fade-up" className="max-w-[640px]">
+            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              UGC-Entitled Degrees
+            </p>
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+              Choose your path. Build the career you want.
+            </h2>
+            <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-neutral-600">
+              Industry-aligned degrees delivered fully online, recognised by employers across India and beyond.
+            </p>
+          </div>
 
-          {/* Filter tabs */}
-          <div className="mt-8 flex gap-2 overflow-x-auto scrollbar-none -mx-5 px-5 pb-1 sm:justify-center sm:flex-wrap sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
-            {FILTERS.map(f => (
-              <button
-                key={f.value}
-                onClick={() => setFilter(f.value)}
-                aria-pressed={filter === f.value}
-                className={[
-                  'flex-none px-5 py-3 rounded-full text-[14px] font-heading font-semibold transition-all duration-200',
-                  filter === f.value
-                    ? 'bg-vgu-red text-white shadow-sm'
-                    : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red',
-                ].join(' ')}
-              >
-                {f.label}
-              </button>
-            ))}
+          {/* Filter pills */}
+          <div
+            data-animate="fade-up"
+            className="mt-6 md:mt-0 flex gap-2 overflow-x-auto scrollbar-none -mx-5 px-5 pb-1
+                       sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 md:flex-none md:flex-wrap md:justify-end"
+          >
+            {FILTER_DEFS.map(f => {
+              const active = filter === f.value
+              return (
+                <button
+                  key={f.value}
+                  onClick={() => setFilter(f.value)}
+                  aria-pressed={active}
+                  className={[
+                    'flex-none inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[13px] md:text-[14px]',
+                    'font-heading font-semibold transition-all duration-200',
+                    active
+                      ? 'bg-vgu-red text-white shadow-sm'
+                      : 'bg-white border border-neutral-200 text-neutral-700 hover:border-vgu-red hover:text-vgu-red',
+                  ].join(' ')}
+                >
+                  <span>{f.label}</span>
+                  <span className={active ? 'text-white/75' : 'text-neutral-400'}>
+                    ({counts[f.value]})
+                  </span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
-        {/* ── MOBILE: Manipal-style snap scroll ── */}
-        <div className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+        {/* ── MOBILE: snap-scroll ── */}
+        <div
+          className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           {visible.map((p, i) => (
             <div key={p.slug} className="snap-start flex-none w-[75vw] max-w-[285px]">
               <MobileProgramCard programme={p} meta={PROGRAM_META[p.slug]} delay={i * 80} />
@@ -96,8 +113,8 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
           ))}
         </div>
 
-        {/* ── DESKTOP: 4-col grid ── */}
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ── DESKTOP: 3-col grid ── */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visible.map((p, i) => (
             <ProgramCard key={p.slug} programme={p} meta={PROGRAM_META[p.slug]} delay={i * 80} />
           ))}
@@ -109,7 +126,7 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
             href="/programs"
             className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
           >
-            Explore All {allProgrammes.filter(p => p.level !== 'cert').length} Programs
+            Explore All {degrees.length} Programs
             <IconArrowRight size={16} />
           </Link>
         </div>
@@ -119,12 +136,11 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
   )
 }
 
-// ── Desktop grid card (original design, unchanged) ──────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// Desktop card - Bible §08 anatomy
+// ─────────────────────────────────────────────────────────────────────────────
 function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; meta: ProgramMeta; delay?: number }) {
-  const levelLabel =
-    p.level === 'ug'   ? 'Undergraduate' :
-    p.level === 'pg'   ? 'Postgraduate'  :
-                         'Certificate'
+  const levelLabel = p.level === 'ug' ? 'UG' : p.level === 'pg' ? 'PG' : 'Cert'
 
   return (
     <Link
@@ -136,6 +152,9 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
                  transition-all duration-300 hover:-translate-y-1.5
                  hover:shadow-[0_12px_32px_rgba(192,64,54,0.14)]"
     >
+      {/* 3px accent top - yellow for popular, red otherwise */}
+      <div className={`h-[3px] w-full ${p.popular ? 'bg-vgu-yellow' : 'bg-vgu-red'}`} />
+
       {/* Image */}
       <div className="relative h-[200px] w-full flex-none overflow-hidden">
         {p.image ? (
@@ -144,7 +163,7 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
             alt={p.name}
             fill
             className="object-cover object-center transition-transform duration-500 group-hover/card:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
           <>
@@ -162,59 +181,47 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
             </div>
           </>
         )}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 100%)' }}
-        />
+
+        {/* Top-left: Most popular / High demand */}
         {meta?.badge && (
-          <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
-            {meta?.badge}
+          <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
+            {meta.badge}
           </span>
         )}
-        <span
-          className="absolute bottom-3 right-3 z-10 rounded-[4px] px-2 py-0.5 text-[10px] font-heading font-bold text-white uppercase tracking-wide"
-          style={{ background: 'rgba(255,255,255,0.18)', backdropFilter: 'blur(6px)', border: '1px solid rgba(255,255,255,0.28)' }}
-        >
+
+        {/* Top-right: level pill */}
+        <span className="absolute top-3 right-3 z-10 rounded-full bg-white/95 backdrop-blur-sm border border-vgu-red/20 px-2.5 py-1 text-[10px] font-heading font-bold text-vgu-red uppercase tracking-wider">
           {levelLabel}
         </span>
       </div>
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-5">
-        <span className="self-start mb-3 rounded-full bg-neutral-100 px-2.5 py-0.5 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-500">
-          {levelLabel}
-        </span>
-        <div className="flex items-start gap-3 mb-3">
-          <div
-            className="w-9 h-9 rounded-[8px] flex items-center justify-center flex-none shadow-sm mt-0.5"
-            style={{ background: meta.iconBg }}
-          >
-            <meta.Icon size={17} stroke={1.5} className="text-white" />
-          </div>
-          <div>
-            <h3 className="font-heading font-bold text-[18px] leading-[1.2] text-neutral-900">
-              {p.name}
-            </h3>
-            <p className="text-[12px] font-body text-neutral-400 leading-snug mt-0.5">
-              {p.fullName}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 text-[13px] text-neutral-500 mb-4">
-          <IconClock size={12} stroke={1.5} className="flex-none" />
+        <h3 className="font-heading font-bold text-[22px] leading-[1.2] text-neutral-900 mb-1.5">
+          {p.name}
+        </h3>
+
+        {/* Italic outcome line */}
+        <p className="font-body italic text-[14px] text-neutral-600 leading-[1.5] mb-4">
+          {meta?.outcome ?? 'Industry-aligned, UGC-entitled online degree.'}
+        </p>
+
+        {/* Duration */}
+        <div className="flex items-center gap-2 text-[13px] text-neutral-500 mb-2">
+          <IconClock size={13} stroke={1.75} className="flex-none" />
           <span>{p.duration}</span>
-          <span className="w-1 h-1 rounded-full bg-neutral-300 flex-none" />
-          <span className="text-vgu-red font-semibold">{p.fee}</span>
         </div>
-        {p.specialisations.length > 0 && (
-          <span className="self-start rounded-full bg-vgu-red/10 px-3 py-1 text-[11px] font-body font-semibold text-vgu-red mb-4">
-            {p.specialisations.length} specialisation{p.specialisations.length !== 1 ? 's' : ''}
-          </span>
-        )}
-        <div className="mt-auto pt-4 border-t border-neutral-100">
-          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-2 text-[13px] font-heading font-semibold group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
-            View Program
+
+        {/* Fee */}
+        <div className="text-[13px] font-heading font-bold text-vgu-red mb-5">
+          {p.fee}
+        </div>
+
+        {/* Full-width CTA */}
+        <div className="mt-auto">
+          <span className="flex items-center justify-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-2.5 text-[13px] font-heading font-semibold
+                           group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
+            Explore Program
             <IconArrowRight size={13} />
           </span>
         </div>
@@ -223,14 +230,11 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
   )
 }
 
-// ── Mobile snap-scroll card ───────────────────────────────────────────────────
-// Manipal-style photo header (taller, with badges + university name),
-// then full desktop-matching content below.
+// ─────────────────────────────────────────────────────────────────────────────
+// Mobile snap card
+// ─────────────────────────────────────────────────────────────────────────────
 function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; meta: ProgramMeta; delay?: number }) {
-  const levelLabel =
-    p.level === 'ug' ? 'Undergraduate' :
-    p.level === 'pg' ? 'Postgraduate'  :
-                       'Certificate'
+  const levelLabel = p.level === 'ug' ? 'UG' : p.level === 'pg' ? 'PG' : 'Cert'
 
   return (
     <Link
@@ -242,109 +246,62 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
                  transition-all duration-300 hover:-translate-y-1
                  hover:shadow-[0_12px_32px_rgba(192,64,54,0.14)]"
     >
-      {/* ── Photo / gradient banner ── */}
-      <div className="relative h-[200px] w-full flex-none overflow-hidden">
+      <div className={`h-[3px] w-full ${p.popular ? 'bg-vgu-yellow' : 'bg-vgu-red'}`} />
 
+      <div className="relative h-[180px] w-full flex-none overflow-hidden">
         {p.image ? (
           <Image
             src={p.image}
             alt={p.name}
             fill
-            className="object-cover object-top transition-transform duration-500 group-hover/card:scale-105"
+            className="object-cover object-center transition-transform duration-500 group-hover/card:scale-105"
             sizes="285px"
           />
         ) : (
           <>
             <div className="absolute inset-0" style={{ background: meta.iconBg }} />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-[0.10]"
-              style={{
-                backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
-                backgroundSize: '20px 20px',
-              }}
-            />
             <div className="absolute inset-0 flex items-center justify-center">
               <meta.Icon size={80} stroke={1} className="text-white opacity-[0.18]" />
             </div>
           </>
         )}
 
-        {/* Scrim */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.60) 0%, transparent 100%)' }}
-        />
-
-        {/* Top-left: badge */}
         {meta?.badge && (
-          <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
-            {meta?.badge}
+          <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[11px] font-heading font-bold text-neutral-900 shadow-sm">
+            {meta.badge}
           </span>
         )}
 
-        {/* Top-right: specialisation count */}
-        {p.specialisations.length > 0 && (
-          <span className="absolute top-3 right-3 z-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/20 px-2 py-0.5 text-[10px] font-body font-semibold text-white">
-            {p.specialisations.length} specialisations
-          </span>
-        )}
-
-        {/* Bottom of photo: university name */}
-        <div className="absolute bottom-0 inset-x-0 z-10 px-3.5 pb-2.5">
-          <p className="text-[10px] font-body text-white/80">Vivekananda Global University</p>
-        </div>
-      </div>
-
-      {/* ── Content — same structure as desktop card ── */}
-      <div className="flex flex-1 flex-col p-4">
-
-        {/* Level badge */}
-        <span className="self-start mb-3 rounded-full bg-neutral-100 px-2.5 py-0.5 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-500">
+        <span className="absolute top-3 right-3 z-10 rounded-full bg-white/95 backdrop-blur-sm border border-vgu-red/20 px-2.5 py-1 text-[10px] font-heading font-bold text-vgu-red uppercase tracking-wider">
           {levelLabel}
         </span>
+      </div>
 
-        {/* Icon + name + fullName */}
-        <div className="flex items-start gap-3 mb-3">
-          <div
-            className="w-9 h-9 rounded-[8px] flex items-center justify-center flex-none shadow-sm mt-0.5"
-            style={{ background: meta.iconBg }}
-          >
-            <meta.Icon size={17} stroke={1.5} className="text-white" />
-          </div>
-          <div>
-            <h3 className="font-heading font-bold text-[17px] leading-[1.2] text-neutral-900">
-              {p.name}
-            </h3>
-            <p className="text-[12px] font-body text-neutral-400 leading-snug mt-0.5">
-              {p.fullName}
-            </p>
-          </div>
-        </div>
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="font-heading font-bold text-[20px] leading-[1.2] text-neutral-900 mb-1.5">
+          {p.name}
+        </h3>
 
-        {/* Duration + fee */}
-        <div className="flex items-center gap-2 text-[13px] text-neutral-500 mb-4">
-          <IconClock size={12} stroke={1.5} className="flex-none" />
+        <p className="font-body italic text-[13px] text-neutral-600 leading-[1.5] mb-3">
+          {meta?.outcome ?? 'Industry-aligned, UGC-entitled online degree.'}
+        </p>
+
+        <div className="flex items-center gap-2 text-[13px] text-neutral-500 mb-1.5">
+          <IconClock size={13} stroke={1.75} className="flex-none" />
           <span>{p.duration}</span>
-          <span className="w-1 h-1 rounded-full bg-neutral-300 flex-none" />
-          <span className="text-vgu-red font-semibold">{p.fee}</span>
         </div>
 
-        {/* Specialisations chip */}
-        {p.specialisations.length > 0 && (
-          <span className="self-start rounded-full bg-vgu-red/10 px-3 py-1 text-[11px] font-body font-semibold text-vgu-red mb-4">
-            {p.specialisations.length} specialisation{p.specialisations.length !== 1 ? 's' : ''}
-          </span>
-        )}
+        <div className="text-[13px] font-heading font-bold text-vgu-red mb-4">
+          {p.fee}
+        </div>
 
-        {/* CTA */}
-        <div className="mt-auto pt-4 border-t border-neutral-100">
-          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-2 text-[13px] font-heading font-semibold group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
-            View Program
+        <div className="mt-auto">
+          <span className="flex items-center justify-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-2.5 text-[13px] font-heading font-semibold
+                           group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
+            Explore Program
             <IconArrowRight size={13} />
           </span>
         </div>
-
       </div>
     </Link>
   )

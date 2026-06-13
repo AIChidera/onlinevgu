@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 ]
 
 export default function Navbar() {
+  const pathname                      = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
 
@@ -51,15 +53,26 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-8" aria-label="Main">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="relative font-body font-medium text-[15px] text-neutral-900 hover:text-vgu-red transition-colors duration-150 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:rounded-full after:bg-vgu-red after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              // Active only for in-site path links (skip external + hash anchors)
+              const isPath = !link.href.startsWith('http') && !link.href.includes('#')
+              const active = isPath && pathname === link.href
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={[
+                    'relative font-body font-medium text-[15px] transition-colors duration-150',
+                    'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
+                    active
+                      ? 'text-vgu-red after:w-full'
+                      : 'text-neutral-900 hover:text-vgu-red after:w-0 hover:after:w-full',
+                  ].join(' ')}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
           </nav>
 
           {/* Desktop CTA */}
@@ -121,19 +134,23 @@ export default function Navbar() {
 
           {/* Drawer links */}
           <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="flex items-center justify-between border-b border-gray-100 py-4 px-2 font-heading font-semibold text-[17px] text-gray-900 hover:text-vgu-red transition-colors"
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <polyline points="9 18 15 12 9 6"/>
-                </svg>
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isPath = !link.href.startsWith('http') && !link.href.includes('#')
+              const active = isPath && pathname === link.href
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={[
+                    'border-b border-gray-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
+                    active ? 'text-vgu-red' : 'text-gray-900 hover:text-vgu-red',
+                  ].join(' ')}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </a>
+              )
+            })}
           </nav>
 
           {/* Drawer CTA */}

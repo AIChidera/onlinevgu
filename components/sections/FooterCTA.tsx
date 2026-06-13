@@ -1,12 +1,11 @@
 import { IconArrowRight } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { NEXT_BATCH } from '@/lib/constants'
 
 export default function FooterCTA() {
   return (
-    <section className="relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
-      <StrokeArt variant="dark" />
-
+    <section className="sketch-hover-group relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
+      <SketchFlourish shape="monogram" color="yellow" opacity={0.22} strokeWidth={7} />
       <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[1280px] flex flex-col items-center text-center gap-6">
         <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-white/55">
           Start Today
@@ -34,7 +33,7 @@ export default function FooterCTA() {
           </a>
         </div>
         <p className="text-[13px] font-body text-white/45">
-          Free consultation · No obligation · Reply within 2 minutes
+          Free consultation · No obligation · Counsellor calls within 2 hours
         </p>
       </div>
     </section>

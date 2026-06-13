@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-// Only digits, spaces, +, -, (, ) — no letters or special chars
+// Only digits, spaces, +, -, (, ) - no letters or special chars
 const phoneRegex = /^[+]?\d[\d\s\-().]{8,14}$/
 
 // Block HTML tags, script injection, and common XSS vectors
@@ -65,7 +65,7 @@ export const ContactSchema = z.object({
 export type ContactInput = z.infer<typeof ContactSchema>
 
 // ── Apply Now modal ───────────────────────────────────────────
-// Separate from leads — Apply Now captures formal application intent
+// Separate from leads - Apply Now captures formal application intent
 // with programme level, intake timing, and explicit consent.
 
 export const ApplicationSchema = z.object({

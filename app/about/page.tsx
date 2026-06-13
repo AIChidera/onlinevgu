@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { getMilestones } from '@/lib/sanity'
 
 // Sanity-fetched content is cached at the function level via unstable_cache;
@@ -8,7 +7,7 @@ import { getMilestones } from '@/lib/sanity'
 // at the same cadence as program/home pages.
 export const revalidate = 3600
 
-// Placeholder — replace with '/images/about-hero-bg.jpg' when ready.
+// Placeholder - replace with '/images/about-hero-bg.jpg' when ready.
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80&auto=format&fit=crop'
 import {
   IconAward,
@@ -18,7 +17,6 @@ import {
   IconCheck,
   IconShieldCheck,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import { FOUNDING_YEAR } from '@/lib/constants'
 
@@ -41,42 +39,47 @@ const STATS = [
   { value: '40+',     label: 'Countries',            Icon: IconGlobe        },
 ]
 
+// Brand 3-cycle for accreditation badge pills. NAAC A+ keeps the yellow accent (the highlight grade).
+const PILL_RED  = 'bg-vgu-red/5 text-vgu-red border-vgu-red/15'
+const PILL_YEL  = 'bg-vgu-yellow/15 text-neutral-900 border-vgu-yellow/40'
+const PILL_DARK = 'bg-vgu-red-dark/5 text-vgu-red-dark border-vgu-red-dark/20'
+
 const ACCREDITATIONS = [
   {
     name: 'UGC',
     full: 'University Grants Commission',
-    detail: 'Distance Education Bureau entitlement - degrees carry the same legal standing as on-campus qualifications.',
-    color: 'bg-blue-50 text-blue-700 border-blue-100',
+    detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.',
+    color: PILL_RED,
   },
   {
     name: 'NAAC A+',
     full: 'National Assessment and Accreditation Council',
-    detail: 'Highest grade - 3.52 / 4.0 CGPA. Reaccredited in 2021, reflecting sustained academic excellence.',
-    color: 'bg-vgu-red/5 text-vgu-red border-vgu-red/15',
+    detail: 'Highest grade, 3.52 / 4.0 CGPA. Reaccredited in 2021, reflecting sustained academic excellence.',
+    color: PILL_YEL,
   },
   {
     name: 'AICTE',
     full: 'All India Council for Technical Education',
-    detail: 'Approved programs in Technology and Management - ensuring curriculum meets national standards.',
-    color: 'bg-orange-50 text-orange-700 border-orange-100',
+    detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',
+    color: PILL_DARK,
   },
   {
     name: 'NIRF',
     full: 'National Institutional Ranking Framework',
     detail: 'Ranked by the Ministry of Education under the University and Management categories.',
-    color: 'bg-purple-50 text-purple-700 border-purple-100',
+    color: PILL_RED,
   },
   {
     name: 'AIU',
     full: 'Association of Indian Universities',
-    detail: 'Member institution - VGU degrees are recognised for equivalence by all AIU member universities.',
-    color: 'bg-green-50 text-green-700 border-green-100',
+    detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',
+    color: PILL_YEL,
   },
   {
     name: 'WES',
     full: 'World Education Services, Canada',
-    detail: 'International degree recognition - VGU graduates can use their degree for immigration and work abroad.',
-    color: 'bg-teal-50 text-teal-700 border-teal-100',
+    detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',
+    color: PILL_DARK,
   },
 ]
 
@@ -122,44 +125,22 @@ export default async function AboutPage() {
 
       {/* ══ Hero ══ */}
       <section className="relative overflow-hidden">
-        {/* Background image behind gradient overlay — set HERO_IMAGE_SRC above to activate */}
         {HERO_IMAGE_SRC && (
           <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         )}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.93) 0%, rgba(130,26,18,0.96) 100%)' }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        <div className="opacity-40 absolute inset-0">
-          <StrokeArt variant="dark" />
-        </div>
+        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 mb-8 text-[13px] font-body text-white/55">
-            <Link href="/" className="hover:text-white transition-colors duration-150">Home</Link>
-            <span className="text-white/30">/</span>
-            <span className="text-white/80">About</span>
-          </nav>
-
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
             About Vivekananda Global University
           </p>
-          <h1 className="font-heading font-black text-[36px] md:text-[48px] lg:text-[64px] tracking-[-2px] leading-[0.95] text-white">
+          <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
             {new Date().getFullYear() - FOUNDING_YEAR} years of<br />
             <span className="text-vgu-yellow">academic excellence.</span>
           </h1>
-          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/75 max-w-[580px] lg:text-[17px]">
+          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
             Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
-            NAAC A+ universities - now bringing that same quality education online to
+            NAAC A+ universities, now bringing that same quality education online to
             learners across 40+ countries.
           </p>
 
@@ -307,8 +288,8 @@ export default async function AboutPage() {
                 {new Date().getFullYear() - FOUNDING_YEAR}+ Years of Impact
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-                From a single campus in Jaipur to a globally accessible online university -
-                a quarter-century of making quality education reachable for every serious learner.
+                From a single campus in Jaipur to a globally accessible online university,
+                a decade-plus of making quality education reachable for every serious learner.
               </p>
               <div className="mt-8 flex items-center gap-3 rounded-2xl bg-vgu-red/[0.05] border border-vgu-red/15 px-5 py-4">
                 <IconShieldCheck size={22} className="text-vgu-red flex-none" stroke={1.5} />

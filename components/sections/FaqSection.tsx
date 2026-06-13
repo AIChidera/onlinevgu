@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IconHeadset, IconPlus } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import type { SanityFaq } from '@/lib/sanity'
 
 const FAQS = [
@@ -40,8 +40,6 @@ const FAQS = [
   },
 ]
 
-const FAQ_STRIP = ['No entrance exam', 'UGC recognised', '100% online']
-
 export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq[] }) {
   const activeFaqs = sanityFaqs.length > 0
     ? sanityFaqs.map(f => ({ q: f.question, a: f.answer }))
@@ -51,31 +49,18 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
   return (
     <section
       id="faq"
-      className="group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24"
+      className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24"
     >
-      <StrokeArt variant="light" />
-
+      <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={10} />
       <div className="relative z-10 mx-auto max-w-[860px]">
         {/* Header */}
-        <div data-animate="fade-up" className="text-center mb-8">
+        <div data-animate="fade-up" className="text-center mb-10">
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Common Questions
           </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-            Everything You Need to Know
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+            Got questions? Here are the answers.
           </h2>
-        </div>
-
-        {/* Quick-fact strip */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-10">
-          {FAQ_STRIP.map((fact, i, arr) => (
-            <span key={fact} className="flex items-center gap-3">
-              <span className="text-[13px] font-body font-semibold text-neutral-500">{fact}</span>
-              {i < arr.length - 1 && (
-                <span className="flex-none w-1 h-1 rounded-full bg-vgu-red/40" aria-hidden="true" />
-              )}
-            </span>
-          ))}
         </div>
 
         {/* Accordion */}

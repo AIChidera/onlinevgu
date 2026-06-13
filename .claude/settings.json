@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(git commit -m ' *)",
+      "Bash(Start-Sleep -Seconds 30)",
+      "Bash(Get-Content \"C:\\\\Users\\\\nwang\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-nwang-Desktop-onlinevgu\\\\9d4ca827-f6db-4ac6-92ce-8b860c0f7715\\\\tasks\\\\bkfhtz4hi.output\")",
+      "Bash(Select-Object -Last 40)",
+      "Bash(dir \"c:\\\\Users\\\\nwang\\\\Desktop\\\\onlinevgu\\\\app\\\\programs\" /b /s)",
+      "Bash(awk -F'=' '{print \\(length\\($2\\) > 0\\) ? \"SET\" : \"MISSING\"}')",
+      "Bash(npm run *)",
+      "Bash(echo \"Dev server starting \\(PID $!\\)\")",
+      "Bash(curl -s http://localhost:3000/api/leads -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"aachidera41@gmail.com\",\"phone\":\"9999999999\",\"programInterest\":\"MBA\",\"source\":\"test\"}')",
+      "Bash(echo \"PID $!\")",
+      "Bash(curl -s http://localhost:3000/api/leads -X POST -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"aachidera41@gmail.com\",\"phone\":\"9876543210\",\"programInterest\":\"MBA\",\"source\":\"test\"}')",
+      "Bash(npx tsx *)",
+      "WebFetch(domain:onlinevgu.com)",
+      "Bash(curl -I https://onlinevgu.com/course/online-ba/)",
+      "Bash(curl -s https://onlinevgu.com/)",
+      "Bash(ls '/mnt/c/Users/nwang/Desktop/onlinevgu/app/programs/[slug]/')",
+      "Read(//mnt/c/Users/nwang/Desktop/onlinevgu/app/**)",
+      "Read(//c/Users/nwang/Desktop/onlinevgu/app/programs/**)",
+      "Bash(cd /mnt/c/Users/nwang/Desktop/onlinevgu && npx tsc --noEmit 2>&1 | head -60)",
+      "Read(//mnt/c/Users/nwang/Desktop/**)"
+    ]
+  }
+}

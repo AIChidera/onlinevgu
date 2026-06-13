@@ -143,7 +143,7 @@ export interface SanityProgram {
 }
 
 // ────────────────────────────────────────────────────────────
-// Queries — all wrapped with unstable_cache for guaranteed
+// Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
 // Sanity client makes HTTP requests internally.
 // ────────────────────────────────────────────────────────────

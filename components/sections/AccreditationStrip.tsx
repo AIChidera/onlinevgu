@@ -54,7 +54,7 @@ export default function AccreditationStrip() {
           </h2>
         </div>
 
-        {/* Logo grid — 2-col on mobile, horizontal divided row on desktop */}
+        {/* Logo grid - 2-col on mobile, horizontal divided row on desktop */}
         <div className="grid grid-cols-2 gap-3 lg:flex lg:items-stretch lg:divide-x lg:divide-neutral-200 lg:gap-0">
           {ITEMS.map((item, i) => (
             <div

@@ -12,7 +12,12 @@ import ScrollReveal from '@/components/ScrollReveal'
 // Footer's async/unstable_cache code into the client bundle, which crashes
 // hydration and silently kills every client component on the page (modals,
 // ScrollReveal, CountUp, all onClick handlers).
-export default function SiteFooter({ children }: { children: React.ReactNode }) {
+interface Props {
+  children:       React.ReactNode
+  whatsappNumber?: string
+}
+
+export default function SiteFooter({ children, whatsappNumber }: Props) {
   const pathname = usePathname()
   if (pathname?.startsWith('/studio')) return null
   return (
@@ -21,7 +26,7 @@ export default function SiteFooter({ children }: { children: React.ReactNode }) 
       <CounsellorModal />
       <ApplyModal />
       <BrochureModal />
-      <WhatsAppButton />
+      <WhatsAppButton phoneNumber={whatsappNumber} />
       <ScrollReveal />
     </>
   )

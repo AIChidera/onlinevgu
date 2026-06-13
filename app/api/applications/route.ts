@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
       })
     }
   } catch {
-    // Non-fatal — still send emails
+    // Non-fatal - still send emails
   }
 
   try {
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from:    FROM_ADDRESS,
         to:      ADMISSIONS_EMAIL,
-        subject: `New application: ${data.name} — ${data.programme} (${data.level.toUpperCase()})`,
+        subject: `New application: ${data.name} - ${data.programme} (${data.level.toUpperCase()})`,
         html:    notificationHtml(data),
       }),
     ])

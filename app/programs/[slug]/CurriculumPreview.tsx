@@ -19,16 +19,14 @@ export interface CurriculumYear {
   semesters: SemesterDetail[]
 }
 
+// Brand-only 3-gradient cycle for semester headers.
 const SEM_GRADS = [
-  'linear-gradient(135deg,#C04036,#821a12)',
-  'linear-gradient(135deg,#2563eb,#1d4ed8)',
-  'linear-gradient(135deg,#7c3aed,#4c1d95)',
-  'linear-gradient(135deg,#d97706,#92400e)',
-  'linear-gradient(135deg,#059669,#065f46)',
-  'linear-gradient(135deg,#475569,#1e293b)',
+  'linear-gradient(135deg,#C04036,#821a12)',  // red → dark red
+  'linear-gradient(135deg,#FFA412,#C04036)',  // yellow → red
+  'linear-gradient(135deg,#821a12,#3b0d09)',  // deep red flow
 ]
 
-const SEM_COLORS = ['#C04036', '#2563eb', '#7c3aed', '#d97706', '#059669', '#475569']
+const SEM_COLORS = ['#C04036', '#FFA412', '#821a12']
 
 export default function CurriculumPreview({ curriculum }: { curriculum: CurriculumYear[] }) {
   const [activeYear, setActiveYear] = useState(0)
@@ -61,7 +59,7 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
         ))}
       </div>
 
-      {/* Semester grid — plain render, no key-based remount or fill-mode animation */}
+      {/* Semester grid - plain render, no key-based remount or fill-mode animation */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {current.semesters.map((sem, si) => {
           const gi = (semOffset + si) % SEM_GRADS.length
@@ -100,12 +98,12 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
                       >
                         {String(ji + 1).padStart(2, '0')}
                       </span>
-                      <span className={`flex-1 text-[13px] font-body leading-snug ${course.type === 'Elective' ? 'text-neutral-400 italic' : 'text-neutral-700'}`}>
+                      <span className={`flex-1 text-[13px] font-body leading-snug ${course.type === 'Elective' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                         {course.name}
                       </span>
                       <span className={`flex-none self-start mt-0.5 rounded px-1.5 py-0.5 text-[10px] font-heading font-bold tabular-nums ${
                         course.type === 'Elective'
-                          ? 'bg-amber-50 text-amber-600 border border-amber-100'
+                          ? 'bg-vgu-yellow/15 text-vgu-yellow border border-vgu-yellow/30'
                           : 'bg-neutral-100 text-neutral-500'
                       }`}>
                         {course.credits}

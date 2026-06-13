@@ -1,7 +1,13 @@
-export default function WhatsAppButton() {
+interface Props {
+  // Digits only, no + or spaces. e.g. "919876543210". When undefined the FAB does not render.
+  phoneNumber?: string
+}
+
+export default function WhatsAppButton({ phoneNumber }: Props) {
+  if (!phoneNumber) return null
   return (
     <a
-      href="https://wa.me/911800123456?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees"
+      href={`https://wa.me/${phoneNumber}?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

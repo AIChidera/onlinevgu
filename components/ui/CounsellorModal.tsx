@@ -155,7 +155,7 @@ export default function CounsellorModal() {
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card — max-h-95dvh on mobile, max-h-90vh on desktop, so the
+      {/* Modal card - max-h-95dvh on mobile, max-h-90vh on desktop, so the
             counsellor form never triggers an inner scroll on standard phones. */}
       <div
         role="dialog"
@@ -221,7 +221,7 @@ export default function CounsellorModal() {
             </div>
           </div>
 
-          {/* Right: form — padding trimmed so the panel fits on a 667-tall phone */}
+          {/* Right: form - padding trimmed so the panel fits on a 667-tall phone */}
           <div className="flex flex-col justify-center px-6 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
             <span className="inline-flex items-center gap-2 self-start rounded-full px-3 py-1 text-[11px] font-body font-bold uppercase tracking-[0.08em] mb-3 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
               <IconHeadset size={12} />

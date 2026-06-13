@@ -42,7 +42,7 @@ export default function BlogPage() {
           </p>
 
           {/* Heading */}
-          <h1 className="font-heading font-bold text-[38px] tracking-[-1px] leading-[1.15] text-white mb-6 md:text-[52px]">
+          <h1 className="font-heading font-bold text-[38px] tracking-[-0.5px] leading-[1.15] text-white mb-6 md:text-[52px]">
             Real stories.{' '}
             <span className="text-vgu-yellow">Coming soon.</span>
           </h1>

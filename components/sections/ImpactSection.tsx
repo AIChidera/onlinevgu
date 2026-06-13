@@ -3,21 +3,16 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   IconUsers,
-  IconWorld,
   IconTrendingUp,
-  IconStar,
-  IconBriefcase,
-  IconBook2,
   IconCertificate,
-  IconSchool,
+  IconStar,
+  IconArrowRight,
 } from '@tabler/icons-react'
-import StrokeArt from '@/components/ui/StrokeArt'
+import SketchCircle   from '@/components/ui/sketch/SketchCircle'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
-import { FOUNDING_YEAR } from '@/lib/constants'
 
-// ── Data ───────────────────────────────────────────────────────────
-
-interface MainStat {
+interface Stat {
   target:   number
   suffix:   string
   decimals: number
@@ -26,17 +21,6 @@ interface MainStat {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Icon:     React.ComponentType<any>
 }
-
-interface ExtraStat {
-  target:   number
-  suffix:   string
-  decimals: number
-  label:    string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Icon:     React.ComponentType<any>
-}
-
-// ── Count-up ───────────────────────────────────────────────────────
 
 function formatNum(n: number, decimals: number): string {
   if (decimals > 0) return n.toFixed(decimals)
@@ -56,7 +40,7 @@ function CountUp({
     if (!isActive || started.current) return
     started.current = true
 
-    const DURATION = 2133 // 0.75× the original speed
+    const DURATION = 2133
     let rafId: number
     let startTime: number | null = null
 
@@ -64,10 +48,10 @@ function CountUp({
       if (startTime === null) startTime = now
       const elapsed = Math.max(0, now - startTime - delay)
       const progress = Math.min(elapsed / DURATION, 1)
-      const eased = 1 - Math.pow(1 - progress, 3) // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3)
       setDisplayed(target * eased)
       if (progress < 1) rafId = requestAnimationFrame(tick)
-      else setDisplayed(target) // snap to exact final value
+      else setDisplayed(target)
     }
 
     rafId = requestAnimationFrame(tick)
@@ -77,95 +61,99 @@ function CountUp({
   return <>{formatNum(displayed, decimals)}{suffix}</>
 }
 
-// ── Section ────────────────────────────────────────────────────────
-
 interface ImpactProps {
-  programCount?:  number
-  statLearners?:  number   // fallback 50000
+  statLearners?:  number   // fallback 50,000
   statCountries?: number   // fallback 40
   statPlacement?: number   // fallback 95
   statRating?:    number   // fallback 4.8
-  statHirers?:    number   // fallback 500
-  statCoursera?:  number   // fallback 7000
+  statCoursera?:  number   // fallback 7,000
 }
 
 export default function ImpactSection({
-  programCount  = 25,
   statLearners  = 50000,
   statCountries = 40,
   statPlacement = 95,
   statRating    = 4.8,
-  statHirers    = 500,
   statCoursera  = 7000,
 }: ImpactProps) {
-  // Separate observer for CountUp: threshold 0 so it fires as soon as ANY
-  // part of the grid enters the viewport — before ScrollReveal's own 8%
-  // threshold reveals the tiles, giving CountUp a head start.
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0 })
 
-  const MAIN_STATS_LIVE: MainStat[] = [
-    { target: statLearners,  suffix: '+',  decimals: 0, label: 'Learners Enrolled',    sub: 'Across India & beyond',           Icon: IconUsers     },
-    { target: statCountries, suffix: '+',  decimals: 0, label: 'Countries Represented', sub: 'Global learner community',       Icon: IconWorld     },
-    { target: statPlacement, suffix: '%',  decimals: 0, label: 'Placement Rate',        sub: 'Within 6 months of graduation',  Icon: IconTrendingUp },
-    { target: statRating,    suffix: '/5', decimals: 1, label: 'Student Rating',        sub: 'From 12,400+ reviews',           Icon: IconStar      },
-  ]
-
-  const EXTRA_STATS: ExtraStat[] = [
-    { target: statHirers,    suffix: '+', decimals: 0, label: 'Hiring Partners',     Icon: IconBriefcase   },
-    { target: programCount,  suffix: '+', decimals: 0, label: 'Programs Offered',    Icon: IconBook2       },
-    { target: statCoursera,  suffix: '+', decimals: 0, label: 'Coursera Courses',    Icon: IconCertificate },
-    { target: new Date().getFullYear() - FOUNDING_YEAR, suffix: '+', decimals: 0, label: 'Years of Excellence', Icon: IconSchool },
+  const STATS: Stat[] = [
+    {
+      target:   statLearners,
+      suffix:   '+',
+      decimals: 0,
+      label:    'Learners enrolled',
+      sub:      `Across India & ${statCountries}+ countries`,
+      Icon:     IconUsers,
+    },
+    {
+      target:   statPlacement,
+      suffix:   '%',
+      decimals: 0,
+      label:    'Placement rate',
+      sub:      '2023 batch · within 6 months',
+      Icon:     IconTrendingUp,
+    },
+    {
+      target:   statCoursera,
+      suffix:   '+',
+      decimals: 0,
+      label:    'Coursera courses',
+      sub:      'Included with every degree',
+      Icon:     IconCertificate,
+    },
+    {
+      target:   statRating,
+      suffix:   '/5',
+      decimals: 1,
+      label:    'Student rating',
+      sub:      'From 12,400+ reviews',
+      Icon:     IconStar,
+    },
   ]
 
   return (
-    <section id="impact" className="group relative overflow-hidden bg-vgu-dark py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-      <div className="opacity-40">
-        <StrokeArt variant="dark" />
-      </div>
-
-      {/* Ambient glows */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute top-[-20%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,164,18,0.08)_0%,transparent_70%)] blur-[80px]" />
-        <div className="absolute bottom-[-20%] left-[-5%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(192,64,54,0.3)_0%,transparent_70%)] blur-[80px]" />
-      </div>
-
+    <section id="impact" className="sketch-hover-group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <SketchFlourish shape="wave" color="red" opacity={0.05} strokeWidth={10} />
       <div className="relative z-10 mx-auto max-w-[1280px]">
 
         {/* Header */}
-        <div data-animate="fade-up" className="text-center mb-14">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold mb-3">
+        <div data-animate="fade-up" className="text-center mb-12 md:mb-14">
+          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Our Impact
           </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-white md:text-[40px]">
-            Numbers That Speak for Themselves
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+            <span className="relative inline-block">
+              13 years
+              <SketchCircle color="red" delayMs={200} />
+            </span>
+            . 50,000 careers changed.
           </h2>
+          <p className="mt-3 text-[13px] font-body italic text-neutral-500">
+            As of 2026 · 2023 placement report
+          </p>
         </div>
 
-        {/* 4 main stat tiles */}
-        <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-          {MAIN_STATS_LIVE.map((s, i) => (
+        {/* 4 stats - flat band, no cards (Bible §09) */}
+        <div
+          ref={ref}
+          className="grid grid-cols-2 gap-y-12 gap-x-6 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-neutral-200"
+        >
+          {STATS.map((s, i) => (
             <div
               key={s.label}
               data-animate="materialize"
-              className="relative rounded-2xl border p-4 md:p-6 text-center transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_0_2px_#FFA412,0_8px_32px_rgba(0,0,0,0.28)]"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                borderColor: 'rgba(255,255,255,0.12)',
-                animationDelay: `${i * 80}ms`,
-              }}
+              className="text-center lg:px-6"
+              style={{ animationDelay: `${i * 80}ms` }}
             >
-              {/* Icon */}
+              {/* Icon - Bible §09: 24-32px, brand colour, 60% opacity */}
               <div className="flex justify-center mb-3 md:mb-4">
-                <div
-                  className="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center"
-                  style={{ background: 'rgba(255,164,18,0.14)' }}
-                >
-                  <s.Icon size={18} stroke={1.5} className="text-vgu-gold" />
-                </div>
+                <s.Icon size={28} stroke={1.5} className="text-vgu-red opacity-60" />
               </div>
 
-              {/* Animated number */}
-              <div className="font-heading font-black leading-none text-vgu-gold text-[24px] sm:text-[34px] lg:text-[46px]">
+              {/* Number - monumental */}
+              <div className="font-heading font-black tracking-[-0.02em] leading-none text-vgu-red tabular-nums text-[44px] sm:text-[54px] lg:text-[64px]">
                 <CountUp
                   target={s.target}
                   suffix={s.suffix}
@@ -175,65 +163,32 @@ export default function ImpactSection({
                 />
               </div>
 
-              <div className="mt-2 md:mt-3 font-heading font-bold text-[13px] md:text-[15px] text-white leading-tight">
+              {/* Label - Tier 2 */}
+              <div className="mt-3 font-heading font-bold text-[14px] md:text-[15px] text-neutral-900 leading-tight">
                 {s.label}
               </div>
-              <div className="mt-1 md:mt-1.5 text-[11px] md:text-[12px] font-body text-white/50">
+
+              {/* Sub-line - Tier 3 */}
+              <div className="mt-1.5 text-[12px] md:text-[13px] font-body text-neutral-500 leading-tight">
                 {s.sub}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Extra stats strip */}
-        <div
-          className="mt-6 rounded-2xl overflow-hidden"
-          style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          <div
-            className="px-8 py-3.5 border-b"
-            style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.15)' }}
+        {/* Soft CTA → BrochureModal */}
+        <div data-animate="fade-up" className="mt-12 md:mt-14 text-center">
+          <a
+            href="#brochure"
+            data-brochure-trigger
+            className="inline-flex items-center gap-2 text-[15px] font-heading font-semibold text-vgu-red hover:text-vgu-red-dark transition-colors duration-200 underline underline-offset-4 decoration-2 decoration-vgu-red/30 hover:decoration-vgu-red"
           >
-            <p className="text-[11px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold/70 text-center">
-              At a Glance
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {EXTRA_STATS.map((s, i) => (
-              <div
-                key={s.label}
-                className={[
-                  'flex items-center gap-3 py-5 px-6',
-                  i % 2 === 0 ? 'border-r' : '',
-                  i < 2      ? 'border-b lg:border-b-0' : '',
-                  i < 3      ? 'lg:border-r' : '',
-                ].join(' ')}
-                style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-              >
-                <div
-                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-none"
-                  style={{ background: 'rgba(255,255,255,0.06)' }}
-                >
-                  <s.Icon size={17} stroke={1.5} className="text-vgu-gold/70" />
-                </div>
-                <div>
-                  <div className="font-heading font-black text-[22px] leading-none text-vgu-gold">
-                    <CountUp
-                      target={s.target}
-                      suffix={s.suffix}
-                      decimals={s.decimals}
-                      isActive={isVisible}
-                      delay={i * 60 + 400}
-                    />
-                  </div>
-                  <div className="mt-1 text-[12px] font-body text-white/55 leading-tight">
-                    {s.label}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+            Get the full placement &amp; program report
+            <IconArrowRight size={16} stroke={2.25} />
+          </a>
+          <p className="mt-2 text-[12px] font-body text-neutral-500">
+            2026 VGU online brochure · PDF
+          </p>
         </div>
 
       </div>

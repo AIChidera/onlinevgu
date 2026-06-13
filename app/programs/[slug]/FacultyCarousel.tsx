@@ -49,7 +49,7 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
         </button>
       )}
 
-      {/* Scrollable track — swipe-enabled, no scrollbar */}
+      {/* Scrollable track - swipe-enabled, no scrollbar */}
       <div
         ref={scrollRef}
         className="overflow-x-auto scrollbar-none pl-12 lg:pl-8 md:pl-5"

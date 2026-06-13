@@ -1,49 +1,53 @@
 import Image from 'next/image'
 
+
 const LOGOS = [
-  { name: 'NAAC A+',   src: '/assets/trust/naac.svg',     label: 'Accredited'      },
-  { name: 'UGC · DEB', src: '/assets/trust/ugc.svg',      label: 'Entitled'        },
-  { name: 'AICTE',     src: '/assets/trust/aicte.svg',    label: 'Approved'        },
-  { name: 'QS Asia',   src: '/assets/trust/qs.svg',       label: 'Ranked 2024'     },
-  { name: 'Coursera',  src: '/assets/trust/coursera.svg', label: 'Official partner'},
+  { name: 'NAAC A+',          src: '/assets/trust/naac.svg'     },
+  { name: 'UGC · DEB',        src: '/assets/trust/ugc.svg'      },
+  { name: 'AICTE',            src: '/assets/trust/aicte.svg'    },
+  { name: 'QS Asia 2024',     src: '/assets/trust/qs.svg'       },
+  { name: 'Coursera Partner', src: '/assets/trust/coursera.svg' },
 ]
 
 export default function TrustBar() {
   return (
     <div className="bg-white border-b border-neutral-200">
-      <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
-        {/* 2-col grid on mobile, horizontal divided row on desktop */}
-        <div className="grid grid-cols-2 gap-3 py-4 lg:flex lg:items-center lg:justify-center lg:divide-x lg:divide-neutral-200 lg:py-0 lg:gap-0">
+      <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
+
+        {/* Eyebrow - Bible §09 Tier-1 framing */}
+        <p
+          data-animate="fade-up"
+          className="text-center text-[11px] md:text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-4 md:mb-5"
+        >
+          Accredited · Recognised · Ranked
+        </p>
+
+        {/* Logo strip - flex-wrap, single line per item */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-7 sm:gap-y-4 md:gap-x-10 md:gap-y-5 lg:gap-x-14">
           {LOGOS.map((logo, i) => (
             <div
               key={logo.name}
               data-animate="fade-up"
               style={{ animationDelay: `${i * 80}ms` }}
-              className={[
-                'group flex items-center gap-3 rounded-xl border border-neutral-100 p-4 transition-colors duration-150 hover:bg-neutral-50',
-                'lg:rounded-none lg:border-0 lg:flex-none lg:px-8 lg:py-4',
-                i === LOGOS.length - 1 && LOGOS.length % 2 !== 0 ? 'col-span-2 justify-center' : '',
-              ].join(' ')}
+              className="flex items-center gap-2 md:gap-3"
             >
-              <Image
-                src={logo.src}
-                alt={logo.name}
-                width={36}
-                height={36}
-                unoptimized
-                className="flex-none transition-transform duration-200 group-hover:scale-110 lg:w-10 lg:h-10"
-              />
-              <div>
-                <p className="font-heading font-bold text-[13px] lg:text-[14px] text-neutral-900 leading-tight lg:whitespace-nowrap">
-                  {logo.name}
-                </p>
-                <p className="font-body text-[11px] text-neutral-500 lg:whitespace-nowrap">
-                  {logo.label}
-                </p>
+              <div className="flex h-9 w-9 md:h-12 md:w-12 lg:h-14 lg:w-14 items-center justify-center flex-none">
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  width={64}
+                  height={64}
+                  unoptimized
+                  className="max-h-full max-w-full object-contain"
+                />
               </div>
+              <p className="font-heading font-bold text-[12px] sm:text-[13px] md:text-[14px] text-neutral-900 whitespace-nowrap leading-tight">
+                {logo.name}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </div>
   )

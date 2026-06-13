@@ -3,12 +3,15 @@ import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
 import { getSiteSettings } from '@/lib/sanity'
 
 const PROGRAM_LINKS = [
-  { label: 'BBA',            href: '/programs/bba'            },
-  { label: 'BCA',            href: '/programs/bca'            },
-  { label: 'B.Com',          href: '/programs/bcom'           },
-  { label: 'MBA',            href: '/programs/mba'            },
-  { label: 'MCA',            href: '/programs/mca'            },
-  { label: 'MBA Healthcare', href: '/programs/mba-healthcare' },
+  { label: 'BBA',    href: '/programs/bba'    },
+  { label: 'MBA',    href: '/programs/mba'    },
+  { label: 'MBA-IF', href: '/programs/mba-if' },
+  { label: 'BCA',    href: '/programs/bca'    },
+  { label: 'MCA',    href: '/programs/mca'    },
+  { label: 'BA',     href: '/programs/ba'     },
+  { label: 'MA',     href: '/programs/ma'     },
+  { label: 'M.Sc',   href: '/programs/msc'    },
+  { label: 'MAJMC',  href: '/programs/majmc'  },
 ]
 
 const COMPANY_LINKS = [
@@ -167,13 +170,17 @@ export default async function Footer() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[12px] text-white/40">
             <span>© {new Date().getFullYear()} Vivekananda Global University. All rights reserved.</span>
             <div className="flex flex-wrap gap-5">
-              {[
-                { label: 'Privacy Policy', href: '/privacy' },
-                { label: 'Terms of Use',   href: '#'        },
-                { label: 'Refund Policy',  href: '#'        },
-                { label: 'Disclaimer',     href: '#'        },
-              ].map((t) => (
-                <a key={t.label} href={t.href} className="hover:text-white/70 transition-colors">{t.label}</a>
+              {/* Privacy Policy is live; others are disabled until their pages exist */}
+              <a href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</a>
+              {['Terms of Use', 'Refund Policy', 'Disclaimer'].map((label) => (
+                <span
+                  key={label}
+                  className="text-white/25 cursor-not-allowed select-none"
+                  aria-disabled="true"
+                  title="Coming soon"
+                >
+                  {label}
+                </span>
               ))}
             </div>
           </div>
