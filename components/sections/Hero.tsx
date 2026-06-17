@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { IconCheck } from '@tabler/icons-react'
+import { IconCheck, IconArrowRight } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
@@ -18,7 +18,7 @@ const TRUST_POINTS = [
 
 export default function Hero() {
   return (
-    <section className="sketch-hover-group group relative flex items-center overflow-hidden">
+    <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
       {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
       <Image
@@ -31,7 +31,7 @@ export default function Hero() {
       />
       <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
-      {/* Most subtle of all sections — the Hero is already busy. */}
+      {/* Most subtle of all sections - the Hero is already busy. */}
       <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={3.5} />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
@@ -40,7 +40,7 @@ export default function Hero() {
         <div className="relative max-w-[680px]">
 
           <p
-            className="anim-load-left text-[12px] font-body font-bold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
+            className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
             style={{ animationDelay: '0ms' }}
           >
             UGC-Entitled · Online Degrees
@@ -60,7 +60,7 @@ export default function Hero() {
           </h1>
 
           <p
-            className="anim-load-left mt-5 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
+            className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
             style={{ animationDelay: '140ms' }}
           >
             Built for working professionals. Study evenings and weekends. Finish in 2-3 years.
@@ -90,18 +90,19 @@ export default function Hero() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="inline-flex items-center justify-center bg-white hover:bg-vgu-beige
-                         text-vgu-red rounded-full px-8 py-3.5 text-[15px]
+              className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
+                         text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px]
                          font-heading font-semibold transition-all duration-200
                          shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
             >
               Apply Now
+              <IconArrowRight size={16} />
             </a>
             <a
               href="#programs"
-              className="inline-flex items-center justify-center border-2 border-white/40
-                         bg-transparent text-white hover:bg-white/10 hover:border-white/60
-                         rounded-md px-6 py-3 text-[15px]
+              className="inline-flex items-center justify-center border-2 border-white/30
+                         bg-transparent text-white hover:bg-white/10 hover:border-white/50
+                         rounded-md px-6 py-3.5 text-[15px]
                          font-heading font-semibold transition-all duration-200"
             >
               Explore Programs

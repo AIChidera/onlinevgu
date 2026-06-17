@@ -37,7 +37,7 @@ export default function BlogPage() {
         <div className="relative z-10 text-center max-w-[600px] mx-auto py-24">
 
           {/* Eyebrow */}
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-5">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-5">
             Blog
           </p>
 
@@ -58,7 +58,7 @@ export default function BlogPage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-vgu-yellow opacity-75" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-vgu-yellow" />
             </span>
-            <span className="text-[13px] font-body font-semibold text-white/80">Launching soon</span>
+            <span className="text-[13px] font-heading font-semibold text-white/80">Launching soon</span>
           </div>
 
           {/* CTAs */}

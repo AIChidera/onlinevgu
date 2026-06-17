@@ -1,6 +1,7 @@
 'use client'
 
 import { IconTrendingUp, IconCash, IconBriefcase, IconAward } from '@tabler/icons-react'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 interface PlacementStats {
   rate:    string
@@ -34,7 +35,8 @@ export default function PlacementStatsStrip({ slug }: { slug: string }) {
   ]
 
   return (
-    <div className="bg-vgu-red border-b border-vgu-red-dark">
+    <div className="sketch-hover-group relative overflow-hidden bg-vgu-red border-b border-vgu-red-dark">
+      <SketchFlourish shape="arc" color="white" opacity={0.08} trigger="in-view" />
       <div className="mx-auto max-w-[1280px] grid grid-cols-2 lg:grid-cols-4 lg:divide-x divide-white/15">
         {CELLS.map(({ Icon, value, label }, i) => (
           <div
@@ -47,7 +49,7 @@ export default function PlacementStatsStrip({ slug }: { slug: string }) {
               <Icon size={18} stroke={1.5} className="text-vgu-yellow" />
             </div>
             <div className="min-w-0">
-              <p className="font-heading font-black text-[19px] md:text-[22px] leading-tight text-white truncate">{value}</p>
+              <p className="font-heading font-black text-[17px] md:text-[22px] leading-tight text-white">{value}</p>
               <p className="text-[11px] font-body text-white/70 mt-0.5">{label}</p>
             </div>
           </div>

@@ -95,10 +95,10 @@ const CARDS: Card[] = [
 function getTransform(offset: number) {
   switch (offset) {
     case 0:  return { transform: 'translateX(0) scale(1) rotateY(0deg)',           zIndex: 10, opacity: 1,    filter: 'brightness(1)'    }
-    case 1:  return { transform: 'translateX(280px) scale(0.92) rotateY(-7deg)',   zIndex: 7,  opacity: 0.95, filter: 'brightness(0.88)' }
-    case 2:  return { transform: 'translateX(500px) scale(0.82) rotateY(-12deg)',  zIndex: 4,  opacity: 0.85, filter: 'brightness(0.74)' }
-    case 3:  return { transform: 'translateX(-500px) scale(0.82) rotateY(12deg)',  zIndex: 4,  opacity: 0.85, filter: 'brightness(0.74)' }
-    case 4:  return { transform: 'translateX(-280px) scale(0.92) rotateY(7deg)',   zIndex: 7,  opacity: 0.95, filter: 'brightness(0.88)' }
+    case 1:  return { transform: 'translateX(280px) scale(0.92) rotateY(-7deg)',   zIndex: 7,  opacity: 1,    filter: 'brightness(0.92)' }
+    case 2:  return { transform: 'translateX(500px) scale(0.82) rotateY(-12deg)',  zIndex: 4,  opacity: 0.9,  filter: 'brightness(0.80)' }
+    case 3:  return { transform: 'translateX(-500px) scale(0.82) rotateY(12deg)',  zIndex: 4,  opacity: 0.9,  filter: 'brightness(0.80)' }
+    case 4:  return { transform: 'translateX(-280px) scale(0.92) rotateY(7deg)',   zIndex: 7,  opacity: 1,    filter: 'brightness(0.92)' }
     default: return { transform: 'translateX(0) scale(0)',                         zIndex: 0,  opacity: 0,    filter: 'brightness(1)'    }
   }
 }
@@ -112,18 +112,19 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
   const next = useCallback(() => setActive((a) => (a + 1) % total), [total])
 
   return (
-    <section id="campus" className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 lg:py-24">
-      <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={10} />
+    <section id="campus" className="sketch-hover-group group relative overflow-hidden bg-neutral-900 py-16 lg:py-24">
+      <SketchFlourish shape="swoop" color="white" opacity={0.09} strokeWidth={9} />
+      <SketchFlourish shape="wave"  color="white" opacity={0.06} strokeWidth={7} className="translate-y-1/3" />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-10">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             On-Campus Experiences
           </p>
-          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-white md:text-[36px] lg:text-[40px]">
             More than classes. More than online.
           </h2>
-          <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-neutral-600 max-w-[560px] mx-auto">
+          <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/60 max-w-[560px] mx-auto">
             Online students are invited to VGU&apos;s signature campus events: Panache, movie nights,
             hackathons, workshops, convocation. No extra cost.
           </p>
@@ -164,7 +165,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             {/* Scrim + content */}
             <div
               className="absolute inset-x-0 bottom-0 p-5 pt-20"
-              style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 60%, transparent 100%)' }}
+              style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }}
             >
               <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-white">
                 {card.title}
@@ -220,7 +221,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
 
                 <div
                   className="absolute inset-x-0 bottom-0 p-5 pt-16"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.40) 55%, transparent 100%)' }}
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)' }}
                 >
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-white">
                     {card.title}
@@ -241,7 +242,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
         <div className="flex items-center gap-4">
           <button
             onClick={prev}
-            className="h-11 w-11 rounded-full border-2 border-neutral-200 bg-white flex items-center justify-center text-neutral-600 hover:border-vgu-red hover:text-vgu-red hover:shadow-md transition-all duration-150"
+            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 flex items-center justify-center text-white hover:border-vgu-red hover:bg-vgu-red hover:text-white hover:shadow-lg transition-all duration-150"
             aria-label="Previous"
           >
             <IconChevronLeft size={20} />
@@ -259,7 +260,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
                   'block rounded-full transition-all duration-200',
                   active === i
                     ? 'w-6 h-2.5 bg-vgu-red'
-                    : 'w-2.5 h-2.5 bg-neutral-300 hover:bg-vgu-red/50',
+                    : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60',
                 ].join(' ')} />
               </button>
             ))}
@@ -267,15 +268,15 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
 
           <button
             onClick={next}
-            className="h-11 w-11 rounded-full border-2 border-neutral-200 bg-white flex items-center justify-center text-neutral-600 hover:border-vgu-red hover:text-vgu-red hover:shadow-md transition-all duration-150"
+            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 flex items-center justify-center text-white hover:border-vgu-red hover:bg-vgu-red hover:text-white hover:shadow-lg transition-all duration-150"
             aria-label="Next"
           >
             <IconChevronRight size={20} />
           </button>
         </div>
 
-        <p className="text-[13px] font-body text-neutral-400">
-          {active + 1} of {total} experiences · open to every online student
+        <p className="text-[13px] font-body text-white/35">
+          {active + 1} / {total}
         </p>
       </div>
 

@@ -48,18 +48,19 @@ const PARTNER_COLORS: Record<string, string> = {
 export default function FeaturesSection() {
   return (
     <section id="features" className="sketch-hover-group relative overflow-hidden bg-vgu-beige py-16 lg:py-24">
-      <SketchFlourish shape="loop" color="red-dark" opacity={0.14} strokeWidth={8} />
+      <SketchFlourish shape="swoop"    color="red-dark" opacity={0.11} strokeWidth={8} />
+      <SketchFlourish shape="monogram" color="red-dark" opacity={0.08} strokeWidth={6} className="translate-x-1/3 translate-y-1/3" />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-12">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Why Online VGU
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
             What makes Online VGU different.
           </h2>
-          <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-neutral-600 max-w-[600px] mx-auto">
+          <p className="mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-neutral-600 max-w-[600px] mx-auto">
             {new Date().getFullYear() - FOUNDING_YEAR} years of academic excellence, now accessible from wherever you are.
           </p>
         </div>
@@ -96,7 +97,7 @@ export default function FeaturesSection() {
                 <h3 className="font-heading font-bold text-[20px] lg:text-[24px] leading-[1.3] text-white mb-2">
                   7,000+ world-class courses at no extra cost.
                 </h3>
-                <p className="text-[14px] lg:text-[15px] font-body text-white/80 leading-[1.7]">
+                <p className="text-[16px] font-body text-white/80 leading-[1.7]">
                   Every VGU program comes bundled with a full Coursera licence. Earn certificates
                   from Google, IBM, Meta and more, shareable directly to your LinkedIn profile.
                 </p>
@@ -105,7 +106,7 @@ export default function FeaturesSection() {
 
             {/* Right: partner logos */}
             <div className="p-7 lg:p-9 flex flex-col justify-center">
-              <p className="text-[11px] font-body font-bold uppercase tracking-[0.08em] text-white/55 mb-4">
+              <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-white/55 mb-4">
                 Top partners included
               </p>
               <div className="grid grid-cols-3 gap-3">
@@ -150,7 +151,7 @@ function FeatureCard({ feature: f, delay = 0 }: { feature: Feature; delay?: numb
       <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-neutral-900 mb-2">
         {f.title}
       </h3>
-      <p className="text-[14px] font-body leading-[1.6] text-neutral-600">
+      <p className="text-[16px] font-body leading-[1.6] text-neutral-600">
         {f.body}
       </p>
     </div>

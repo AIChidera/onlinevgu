@@ -59,18 +59,18 @@ export default async function ProgramsPage() {
       <Breadcrumb items={[{ label: 'All Programs' }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative flex items-center overflow-hidden">
+      <section className="relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
         {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
         <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
           {/* Copy column */}
           <div className="max-w-[680px]">
             <p
-              className="anim-load-left text-[12px] font-body font-bold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
+              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
               style={{ animationDelay: '0ms' }}
             >
               UGC-Recognised · 100% Online
@@ -86,7 +86,7 @@ export default async function ProgramsPage() {
             </h1>
 
             <p
-              className="anim-load-left mt-5 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
+              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
               style={{ animationDelay: '140ms' }}
             >
               {count} online programs across {disciplineCount} disciplines: Management, IT, Data Science, Commerce, Arts, Science, and Media.
@@ -116,33 +116,27 @@ export default async function ProgramsPage() {
             >
               <a
                 href="#programs-grid"
-                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-vgu-beige
-                           text-vgu-red rounded-full px-8 py-3.5 text-[15px]
+                className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
+                           text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px]
                            font-heading font-semibold transition-all duration-200
                            shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
                 Browse Programs
-                <IconChevronDown size={16} />
+                <IconChevronDown size={17} />
               </a>
               <a
                 href="#brochure"
                 data-brochure-trigger
-                className="inline-flex items-center justify-center gap-2 border-2 border-white/40
-                           bg-transparent text-white hover:bg-white/10 hover:border-white/60
-                           rounded-md px-6 py-3 text-[15px]
+                className="inline-flex items-center justify-center gap-1.5 border-2 border-white/30
+                           bg-transparent text-white hover:bg-white/10 hover:border-white/50
+                           rounded-md px-6 py-3.5 text-[15px]
                            font-heading font-semibold transition-all duration-200"
               >
-                <IconDownload size={16} />
+                <IconDownload size={14} />
                 Download Brochure
               </a>
             </div>
 
-            <p
-              className="anim-load-left mt-4 text-[12px] font-body text-white/65"
-              style={{ animationDelay: '240ms' }}
-            >
-              Next batch · {nextBatch}
-            </p>
           </div>
 
         </div>

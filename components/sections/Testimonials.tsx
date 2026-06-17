@@ -154,8 +154,8 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
         <div className="relative z-10 mx-auto max-w-[1280px]">
 
           {/* Header */}
-          <div className="text-center mb-12">
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <div data-animate="fade-up" className="text-center mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Student Stories
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
@@ -169,7 +169,7 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
             onTouchEnd={handleTouchEnd}
             data-animate="materialize"
             className={[
-              'grid gap-0 rounded-2xl overflow-hidden border border-neutral-200 shadow-sm',
+              'grid gap-0 rounded-2xl overflow-hidden border border-neutral-200 shadow-[0_4px_24px_rgba(0,0,0,0.08)]',
               'grid-cols-1 md:grid-cols-[1.1fr_1fr]',
               'transition-opacity duration-150',
               fading ? 'opacity-0' : 'opacity-100',
@@ -236,12 +236,12 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
               <div className="relative">
                 <div
                   aria-hidden="true"
-                  className="absolute -top-4 -left-2 select-none pointer-events-none font-heading font-extrabold leading-none text-vgu-red/[0.10]"
+                  className="absolute -top-4 -left-2 select-none pointer-events-none font-heading font-extrabold leading-none text-vgu-red/[0.15]"
                   style={{ fontSize: '100px', lineHeight: 1 }}
                 >
                   &ldquo;
                 </div>
-                <blockquote className="relative font-body text-[17px] md:text-[19px] leading-[1.65] text-neutral-700 line-clamp-5 md:line-clamp-none pl-2">
+                <blockquote className="relative font-body text-[17px] md:text-[19px] leading-[1.65] text-neutral-700 pl-2">
                   {story.quote}
                 </blockquote>
               </div>
@@ -273,7 +273,7 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
                 key={s.name}
                 onClick={() => selectStory(i)}
                 className={[
-                  'flex items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 bg-white',
+                  'flex items-center gap-3 rounded-xl p-3 text-left transition-all duration-200 bg-neutral-50',
                   'border border-neutral-200 hover:shadow-md',
                   active === i
                     ? 'shadow-[inset_0_-3px_0_0_#C04036,0_2px_8px_rgba(0,0,0,0.06)]'
@@ -284,7 +284,7 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
                   <Image src={s.avatar} alt={s.name} fill className="object-cover" sizes="40px" />
                 </div>
                 <div className="min-w-0">
-                  <p className={`font-heading font-bold text-[13px] truncate ${active === i ? 'text-vgu-red' : 'text-neutral-900'}`}>
+                  <p className="font-heading font-bold text-[13px] truncate text-neutral-900">
                     {s.name}
                   </p>
                   <p className="text-[11px] font-body text-neutral-500 truncate">{s.program}</p>

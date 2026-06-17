@@ -38,7 +38,7 @@ export default function Navbar() {
         className={[
           'sticky top-0 z-[100] transition-all duration-200',
           scrolled
-            ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-neutral-200'
+            ? 'bg-white/95 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.08)] border-b border-neutral-200'
             : 'bg-white border-b border-neutral-200',
         ].join(' ')}
       >
@@ -62,7 +62,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={[
-                    'relative font-body font-medium text-[15px] transition-colors duration-150',
+                    'relative font-heading font-medium text-[15px] transition-colors duration-150',
                     'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
                     active
                       ? 'text-vgu-red after:w-full'
@@ -80,7 +80,7 @@ export default function Navbar() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red rounded-full px-8 py-3.5 text-[15px] font-semibold transition-all duration-200"
+              className="border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
             >
               Apply Now
             </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="ml-auto flex lg:hidden h-11 w-11 items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
+            className="ml-auto flex lg:hidden h-11 w-11 items-center justify-center rounded-md text-neutral-700 hover:bg-neutral-100 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
@@ -124,7 +124,7 @@ export default function Navbar() {
           <div className="flex h-[64px] items-center justify-between px-6 border-b border-neutral-200">
             <span className="font-heading font-bold text-[20px] text-vgu-red">Online VGU</span>
             <button
-              className="h-11 w-11 flex items-center justify-center rounded-md text-gray-500 hover:bg-gray-100"
+              className="h-11 w-11 flex items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu"
             >
@@ -142,8 +142,8 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={[
-                    'border-b border-gray-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
-                    active ? 'text-vgu-red' : 'text-gray-900 hover:text-vgu-red',
+                    'border-b border-neutral-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
+                    active ? 'text-vgu-red' : 'text-neutral-900 hover:text-vgu-red',
                   ].join(' ')}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -154,11 +154,11 @@ export default function Navbar() {
           </nav>
 
           {/* Drawer CTA */}
-          <div className="p-5 border-t border-gray-100">
+          <div className="p-5 border-t border-neutral-100">
             <a
               href="#counsellor"
               data-apply-trigger
-              className="block w-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red text-center rounded-full px-8 py-3.5 text-[15px] font-semibold transition-all duration-200"
+              className="block w-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red text-center rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
               onClick={() => setMobileOpen(false)}
             >
               Apply Now

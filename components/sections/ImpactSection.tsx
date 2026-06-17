@@ -6,7 +6,7 @@ import {
   IconTrendingUp,
   IconCertificate,
   IconStar,
-  IconArrowRight,
+  IconDownload,
 } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -120,7 +120,7 @@ export default function ImpactSection({
 
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-12 md:mb-14">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Our Impact
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
@@ -130,9 +130,6 @@ export default function ImpactSection({
             </span>
             . 50,000 careers changed.
           </h2>
-          <p className="mt-3 text-[13px] font-body italic text-neutral-500">
-            As of 2026 · 2023 placement report
-          </p>
         </div>
 
         {/* 4 stats - flat band, no cards (Bible §09) */}
@@ -176,19 +173,16 @@ export default function ImpactSection({
           ))}
         </div>
 
-        {/* Soft CTA → BrochureModal */}
+        {/* CTA → BrochureModal */}
         <div data-animate="fade-up" className="mt-12 md:mt-14 text-center">
           <a
             href="#brochure"
             data-brochure-trigger
-            className="inline-flex items-center gap-2 text-[15px] font-heading font-semibold text-vgu-red hover:text-vgu-red-dark transition-colors duration-200 underline underline-offset-4 decoration-2 decoration-vgu-red/30 hover:decoration-vgu-red"
+            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white rounded-md px-[30px] py-3 text-[15px] font-heading font-semibold transition-all duration-200"
           >
-            Get the full placement &amp; program report
-            <IconArrowRight size={16} stroke={2.25} />
+            <IconDownload size={16} />
+            Download Brochure
           </a>
-          <p className="mt-2 text-[12px] font-body text-neutral-500">
-            2026 VGU online brochure · PDF
-          </p>
         </div>
 
       </div>

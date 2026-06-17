@@ -1,6 +1,7 @@
 import FacultyCarousel from './FacultyCarousel'
 import type { FacultyMember } from './FacultyCarousel'
 import { getFacultyByProgram, type SanityFaculty } from '@/lib/sanity'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 // Brand-only 3-gradient cycle. All Sanity colour keys collapse into the brand palette.
 const GRAD_RED   = 'linear-gradient(160deg,#C04036 0%,#821a12 100%)'
@@ -35,23 +36,23 @@ const A = GRAD_RED
 const G = GRAD_AMBER
 const S = GRAD_DEEP
 
-const M1 = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M2 = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M3 = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M4 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M5 = 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M6 = 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M7 = 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M8 = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M1 = 'https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M2 = 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M3 = 'https://images.unsplash.com/photo-1552642986-ccb41e7059e7?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M4 = 'https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M5 = 'https://images.unsplash.com/photo-1616002851413-ebcc9611139d?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M6 = 'https://images.unsplash.com/photo-1607081692251-d689f1b9af84?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M7 = 'https://images.unsplash.com/photo-1542183669-c4c74d629b34?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M8 = 'https://images.unsplash.com/photo-1534339480783-6816b68be29c?w=400&q=80&auto=format&fit=crop&crop=faces'
 
-const F1 = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F2 = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F3 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F4 = 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F5 = 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F6 = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F7 = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F8 = 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F1 = 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F2 = 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F3 = 'https://images.unsplash.com/photo-1573165850883-9b0e18c44bd2?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F4 = 'https://images.unsplash.com/photo-1618245472177-2a74ad3b994a?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F5 = 'https://images.unsplash.com/photo-1646979201225-00e36437d09e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F6 = 'https://images.unsplash.com/photo-1637589267610-6c66fc2a086b?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F7 = 'https://images.unsplash.com/photo-1759840278381-bf7d5e332050?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F8 = 'https://images.unsplash.com/photo-1728053914354-e1e3e09f6239?w=400&q=80&auto=format&fit=crop&crop=faces'
 
 // Fallback faculty per program slug. Sanity overrides at runtime; this list shows
 // until an admin populates the CMS. All 9 real programs are covered.
@@ -156,8 +157,9 @@ export default async function FacultySection({ slug }: { slug: string }) {
   if (!faculty || faculty.length === 0) return null
 
   return (
-    <section className="bg-neutral-900 py-16 overflow-hidden">
-      <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
+    <section className="sketch-hover-group relative bg-neutral-900 py-16 overflow-hidden">
+      <SketchFlourish shape="swoop" color="yellow" opacity={0.06} trigger="hover" />
+      <div className="relative mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
         {/* Header row */}
         <div className="flex items-end justify-between gap-5 mb-10 md:mb-8">

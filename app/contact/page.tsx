@@ -61,21 +61,21 @@ export default function ContactPage() {
       <Breadcrumb items={[{ label: 'Contact Us' }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden flex items-center min-h-[440px] lg:min-h-[520px]">
         {HERO_IMAGE_SRC && (
           <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         )}
-        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
             We&apos;re here to help
           </p>
           <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
             Talk to a real<br />
             <span className="text-vgu-yellow">counsellor.</span>
           </h1>
-          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
+          <p className="mt-6 text-[16px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
             No chatbots. No automated hold queues. A trained VGU admissions
             counsellor will answer your questions, free and no obligation.
           </p>
@@ -131,7 +131,7 @@ export default function ContactPage() {
 
             {/* Left: form */}
             <div data-animate="slide-from-left">
-              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
                 Send a message
               </p>
               <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-2 md:text-[36px]">

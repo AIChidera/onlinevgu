@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import SectionWrapper from '@/components/layout/SectionWrapper'
+import { IconHeadset, IconPlus } from '@tabler/icons-react'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 const FAQS = [
   {
@@ -39,65 +40,83 @@ const FAQS = [
 ]
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number>(0)
 
   return (
-    <SectionWrapper id="faqs" bg="white">
-      <div className="text-center mb-12">
-        <p className="text-sm font-heading font-semibold uppercase tracking-widest text-vgu-red mb-3">
-          FAQs
-        </p>
-        <h2 className="font-heading text-[32px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[40px]">
-          Everything you need to know
-        </h2>
-        <p className="mt-3 text-[16px] text-neutral-600 max-w-[480px] mx-auto">
-          Can&apos;t find your answer?{' '}
-          <a href="https://wa.me/911800123456" className="text-vgu-red font-semibold hover:underline">
-            Chat with a counsellor
-          </a>
-        </p>
-      </div>
+    <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={10} />
+      <div className="relative z-10 mx-auto max-w-[860px]">
 
-      <div className="max-w-[780px] mx-auto flex flex-col gap-1">
-        {FAQS.map((faq, i) => (
-          <div key={i} className="border-b border-neutral-200 last:border-0">
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left"
-            >
-              <span className="font-heading text-[16px] font-semibold text-neutral-900 leading-snug">
-                {faq.q}
-              </span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={[
-                  'flex-none text-neutral-400 transition-transform duration-200',
-                  open === i ? 'rotate-180 text-vgu-red' : '',
-                ].join(' ')}
-                aria-hidden="true"
-              >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
+        <div data-animate="fade-up" className="text-center mb-10">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+            Common Questions
+          </p>
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
+            Got questions? Here are the answers.
+          </h2>
+        </div>
 
+        <div
+          data-animate="fade-up"
+          style={{ animationDelay: '150ms' }}
+          className="flex flex-col divide-y divide-neutral-200 rounded-2xl overflow-hidden border border-neutral-200 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+        >
+          {FAQS.map((faq, i) => (
             <div
+              key={i}
               className={[
-                'overflow-hidden transition-all duration-300 ease-out',
-                open === i ? 'max-h-96 pb-5' : 'max-h-0',
+                'border-l-4 transition-colors duration-200',
+                openIndex === i ? 'border-vgu-red bg-vgu-red/[0.02]' : 'border-transparent',
               ].join(' ')}
             >
-              <p className="text-[15px] text-neutral-600 leading-relaxed">{faq.a}</p>
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
+                aria-expanded={openIndex === i}
+                className="flex w-full items-center gap-4 px-6 py-5 text-left hover:bg-neutral-100 transition-colors duration-150"
+              >
+                <span className={[
+                  'flex-none w-8 font-heading font-bold text-[12px] tabular-nums text-right transition-colors duration-150',
+                  openIndex === i ? 'text-vgu-red' : 'text-neutral-400',
+                ].join(' ')}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className={[
+                  'flex-1 font-heading font-semibold text-[16px] leading-snug transition-colors duration-150',
+                  openIndex === i ? 'text-vgu-red' : 'text-neutral-900',
+                ].join(' ')}>
+                  {faq.q}
+                </span>
+                <span className={[
+                  'flex-none w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200',
+                  openIndex === i ? 'bg-vgu-red text-white rotate-45' : 'bg-neutral-100 text-neutral-500',
+                ].join(' ')}>
+                  <IconPlus size={14} stroke={2.5} />
+                </span>
+              </button>
+              <div className={[
+                'overflow-hidden transition-all duration-300 ease-out',
+                openIndex === i ? 'max-h-[500px]' : 'max-h-0',
+              ].join(' ')}>
+                <p className="pl-12 sm:pl-[72px] pr-6 pb-5 text-[16px] font-body leading-[1.75] text-neutral-600">
+                  {faq.a}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <p className="text-[16px] font-body text-neutral-500 mb-4">Still have questions?</p>
+          <a
+            href="#counsellor"
+            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 rounded-full px-8 py-3 text-[15px] font-heading font-semibold transition-colors duration-150"
+          >
+            <IconHeadset size={18} />
+            Talk to a Counsellor
+          </a>
+        </div>
+
       </div>
-    </SectionWrapper>
+    </section>
   )
 }

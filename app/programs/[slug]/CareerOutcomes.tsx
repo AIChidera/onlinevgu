@@ -4,7 +4,7 @@ import {
   IconUsers, IconBuilding, IconDatabase, IconCloud,
   IconShieldCheck, IconFlask, IconBook2, IconGlobe,
   IconSettings, IconCalculator, IconStar, IconAward,
-  IconTrendingUp,
+  IconTrendingUp, IconArrowRight,
 } from '@tabler/icons-react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,44 +42,54 @@ export default function CareerOutcomes({ roles }: { roles: string[] }) {
   if (!safe.length) return null
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {safe.map((role, ri) => {
-        const p = PALETTE[ri % PALETTE.length]
-        const Icon = getRoleIcon(role)
-        return (
-          <div
-            key={role}
-            data-animate="materialize"
-            style={{ animationDelay: `${ri * 55}ms` }}
-          >
+    <>
+      <style>{`
+        .co-card-0:hover { box-shadow: 0 0 0 2px #C04036, 0 10px 40px rgba(0,0,0,0.10); }
+        .co-card-1:hover { box-shadow: 0 0 0 2px #FFA412, 0 10px 40px rgba(0,0,0,0.10); }
+        .co-card-2:hover { box-shadow: 0 0 0 2px #821a12, 0 10px 40px rgba(0,0,0,0.10); }
+      `}</style>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {safe.map((role, ri) => {
+          const p   = PALETTE[ri % PALETTE.length]
+          const ci  = ri % PALETTE.length
+          const Icon = getRoleIcon(role)
+          return (
             <div
-              className="group/card relative flex items-stretch rounded-2xl bg-white border overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_2px_#FFA412,0_10px_40px_rgba(0,0,0,0.10)]"
-              style={{ borderColor: `${p.hex}28` }}
+              key={role}
+              data-animate="materialize"
+              style={{ animationDelay: `${ri * 55}ms` }}
             >
-              <div className="w-1.5 flex-none" style={{ background: p.grad }} />
               <div
-                aria-hidden="true"
-                className="absolute bottom-0 right-3 font-heading font-black leading-none select-none pointer-events-none"
-                style={{ fontSize: '72px', color: p.hex, opacity: 0.055 }}
+                className={`co-card-${ci} group/card relative flex items-stretch rounded-2xl bg-white border overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:border-transparent`}
+                style={{ borderColor: `${p.hex}28` }}
               >
-                {ri + 1}
-              </div>
-              <div className="flex items-center gap-4 px-4 py-4 flex-1 min-w-0">
+                <div className="w-2 flex-none" style={{ background: p.grad }} />
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-300 group-hover/card:scale-110 group-hover/card:rotate-3"
-                  style={{ background: p.grad }}
+                  aria-hidden="true"
+                  className="absolute bottom-0 right-3 font-heading font-black leading-none select-none pointer-events-none"
+                  style={{ fontSize: '72px', color: p.hex, opacity: 0.07 }}
                 >
-                  <Icon size={20} stroke={1.5} className="text-white" />
+                  {ri + 1}
                 </div>
-                <div className="min-w-0">
-                  <p className="font-heading font-bold text-[15px] text-neutral-900 leading-snug truncate">{role}</p>
-                  <p className="text-[11px] font-body text-neutral-400 mt-0.5">Career path</p>
+                <div className="flex items-center gap-4 px-4 py-4 flex-1 min-w-0">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-300 group-hover/card:scale-110 group-hover/card:rotate-3"
+                    style={{ background: p.grad }}
+                  >
+                    <Icon size={20} stroke={1.5} className="text-white" />
+                  </div>
+                  <p className="font-heading font-bold text-[15px] text-neutral-900 leading-snug truncate flex-1 min-w-0">{role}</p>
+                  <IconArrowRight
+                    size={16}
+                    stroke={2}
+                    className="flex-none text-neutral-300 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 mr-1"
+                  />
                 </div>
               </div>
             </div>
-          </div>
-        )
-      })}
-    </div>
+          )
+        })}
+      </div>
+    </>
   )
 }

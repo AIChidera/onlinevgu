@@ -38,12 +38,17 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
   return (
     <div className="relative">
 
-      {/* Left button */}
+      {/* Left fade + button */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-20 pointer-events-none z-10"
+        style={{ background: 'linear-gradient(to right, #111827 0%, transparent 100%)' }}
+        aria-hidden="true"
+      />
       {canLeft && (
         <button
           onClick={() => scroll('left')}
           aria-label="Scroll faculty left"
-          className="absolute left-3 top-[90px] z-10 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          className="absolute left-3 top-[90px] z-20 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
         >
           <IconChevronLeft size={18} />
         </button>
@@ -93,8 +98,8 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
               {/* Info */}
               <div className="p-5">
                 <h3 className="font-heading font-bold text-[16px] text-white leading-snug">{f.name}</h3>
-                <p className="text-[12px] font-body text-white/50 mt-0.5 mb-3 leading-snug">{f.title}</p>
-                <span className="inline-flex rounded-full bg-vgu-yellow/15 border border-vgu-yellow/25 px-3 py-1 text-[11px] font-body font-semibold text-vgu-yellow leading-snug">
+                <p className="text-[12px] font-body text-white/60 mt-0.5 mb-3 leading-snug">{f.title}</p>
+                <span className="inline-flex rounded-full bg-vgu-yellow/15 border border-vgu-yellow/25 px-3 py-1 text-[12px] font-body font-semibold text-vgu-yellow leading-snug">
                   {f.credential}
                 </span>
               </div>
@@ -103,12 +108,17 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
         </div>
       </div>
 
-      {/* Right button */}
+      {/* Right fade + button */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-20 pointer-events-none z-10"
+        style={{ background: 'linear-gradient(to left, #111827 0%, transparent 100%)' }}
+        aria-hidden="true"
+      />
       {canRight && (
         <button
           onClick={() => scroll('right')}
           aria-label="Scroll faculty right"
-          className="absolute right-3 top-[90px] z-10 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          className="absolute right-3 top-[90px] z-20 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
         >
           <IconChevronRight size={18} />
         </button>

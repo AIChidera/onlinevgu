@@ -59,8 +59,16 @@ export default function ApplyModal() {
       if (trigger) {
         e.preventDefault()
         triggerRef.current = trigger as HTMLElement
-        setStep(1)
-        setOpen(prev => !prev)
+        const programName  = trigger.getAttribute('data-program') ?? ''
+        const programLevel = (trigger.getAttribute('data-program-level') ?? '') as '' | 'ug' | 'pg'
+        if (programName && programLevel) {
+          setForm({ ...INITIAL_FORM, level: programLevel, programme: programName })
+          setStep(2)
+        } else {
+          setForm(INITIAL_FORM)
+          setStep(1)
+        }
+        setOpen(true)
       }
     }
     document.addEventListener('click', handleClick)
@@ -308,6 +316,23 @@ export default function ApplyModal() {
           ) : (
             /* ─── STEP 2 - Details + Intake + Consent + Submit ─── */
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {/* Pre-selected program chip - shown when jumped from a slug page */}
+              {form.programme && (
+                <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-2.5">
+                  <div>
+                    <p className="text-[10px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">Applying for</p>
+                    <p className="text-[13px] font-heading font-bold text-neutral-900">{form.programme}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="text-[12px] font-body font-semibold text-vgu-red hover:underline flex-none"
+                  >
+                    Change
+                  </button>
+                </div>
+              )}
+
               {/* Personal details */}
               <div>
                 <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">

@@ -55,7 +55,7 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
       <div className="relative z-10 mx-auto max-w-[860px]">
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-10">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Common Questions
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
@@ -64,7 +64,7 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
         </div>
 
         {/* Accordion */}
-        <div data-animate="fade-up" style={{ animationDelay: '150ms' }} className="flex flex-col divide-y divide-neutral-200 rounded-2xl overflow-hidden border border-neutral-200 bg-white shadow-sm">
+        <div data-animate="fade-up" style={{ animationDelay: '150ms' }} className="flex flex-col divide-y divide-neutral-200 rounded-2xl overflow-hidden border border-neutral-200 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
           {activeFaqs.map((faq, i) => (
             <div
               key={i}
@@ -80,7 +80,7 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
               >
                 <span className={[
                   'flex-none w-8 font-heading font-bold text-[12px] tabular-nums text-right transition-colors duration-150',
-                  openIndex === i ? 'text-vgu-red' : 'text-neutral-300',
+                  openIndex === i ? 'text-vgu-red' : 'text-neutral-400',
                 ].join(' ')}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -108,7 +108,7 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
                   openIndex === i ? 'max-h-[500px]' : 'max-h-0',
                 ].join(' ')}
               >
-                <p className="pl-12 sm:pl-[72px] pr-6 pb-5 text-[15px] font-body leading-[1.75] text-neutral-600">
+                <p className="pl-12 sm:pl-[72px] pr-6 pb-5 text-[16px] font-body leading-[1.75] text-neutral-600">
                   {faq.a}
                 </p>
               </div>
@@ -118,10 +118,10 @@ export default function FaqSection({ faqs: sanityFaqs = [] }: { faqs?: SanityFaq
 
         {/* Below accordion CTA */}
         <div className="mt-10 text-center">
-          <p className="text-[15px] font-body text-neutral-500 mb-4">Still have questions?</p>
+          <p className="text-[16px] font-body text-neutral-500 mb-4">Still have questions?</p>
           <a
             href="#counsellor"
-            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 rounded-full px-8 py-3 text-[15px] font-semibold transition-colors duration-150"
+            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 rounded-full px-8 py-3 text-[15px] font-heading font-semibold transition-colors duration-150"
           >
             <IconHeadset size={18} />
             Talk to a Counsellor

@@ -19,14 +19,14 @@ const COMPANY_LINKS = [
   { label: 'Accreditations', href: '/#accreditation' },
   { label: 'Campus Life',    href: '/#campus'        },
   { label: 'Blog',           href: 'https://blog.vgu.ac.in' },
-  { label: 'Careers',        href: '/about#careers'  },
+  { label: 'Careers',        href: '/contact'        },
 ]
 
 const SUPPORT_LINKS = [
   { label: 'FAQs',              href: '/#faq'               },
   { label: 'Contact Us',        href: '/contact'            },
   { label: 'Apply Now',         href: '#counsellor',        applyTrigger: true },
-  { label: 'Download Brochure', href: '/apply#brochure'     },
+  { label: 'Download Brochure', href: '/apply#brochure', brochureTrigger: true },
   { label: 'Student Portal',    href: 'https://lms.vgu.ac.in' },
 ]
 
@@ -189,22 +189,31 @@ export default async function Footer() {
   )
 }
 
-function FooterCol({ title, links, delay = 0 }: { title: string; links: { label: string; href: string; applyTrigger?: boolean }[]; delay?: number }) {
+function FooterCol({ title, links, delay = 0 }: { title: string; links: { label: string; href: string; applyTrigger?: boolean; brochureTrigger?: boolean }[]; delay?: number }) {
   return (
     <div data-animate="fade-up" style={{ animationDelay: `${delay}ms` }}>
-      <h5 className="mb-4 font-heading text-[12px] font-bold uppercase tracking-[0.08em] text-white">
+      <h5 className="mb-4 font-heading text-[12px] font-semibold uppercase tracking-[0.08em] text-white">
         {title}
       </h5>
       <ul className="flex flex-col gap-2.5">
         {links.map((l) => (
           <li key={l.label}>
-            <Link
-              href={l.href}
-              {...(l.applyTrigger ? { 'data-apply-trigger': 'true' } : {})}
-              className="text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150"
-            >
-              {l.label}
-            </Link>
+            {l.brochureTrigger ? (
+              <button
+                data-brochure-trigger="true"
+                className="text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150 text-left"
+              >
+                {l.label}
+              </button>
+            ) : (
+              <Link
+                href={l.href}
+                {...(l.applyTrigger ? { 'data-apply-trigger': 'true' } : {})}
+                className="text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150"
+              >
+                {l.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

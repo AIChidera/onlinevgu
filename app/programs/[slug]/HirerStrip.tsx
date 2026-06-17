@@ -110,7 +110,7 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
   const spacers = cols * rows - safe.length
 
   return (
-    <div data-animate="fade-up" className="relative rounded-2xl border border-neutral-200 overflow-hidden">
+    <div data-animate="fade-up" className="relative rounded-2xl border border-neutral-200 shadow-[0_4px_24px_rgba(0,0,0,0.07)] overflow-hidden">
 
       {/* 2-row scrollable grid */}
       <div
@@ -119,12 +119,10 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         style={{ scrollbarWidth: 'none' } as React.CSSProperties}
       >
         <div
-          className="grid gap-px bg-neutral-200"
+          className="grid gap-px bg-neutral-200 w-full"
           style={{
+            gridTemplateColumns: `repeat(${cols}, minmax(186px, 1fr))`,
             gridTemplateRows: `repeat(${rows}, auto)`,
-            gridAutoFlow: 'column',
-            gridAutoColumns: '186px',
-            width: 'max-content',
           }}
         >
         {safe.map((h) => {
@@ -132,10 +130,10 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
           return (
             <div
               key={h}
-              className="group bg-white hover:bg-neutral-50 transition-colors duration-150 px-5 py-4 flex items-center gap-3 cursor-default"
+              className="group bg-white hover:bg-vgu-red/[0.03] transition-colors duration-150 px-5 py-4 flex items-center gap-3 cursor-default"
             >
               <div
-                className="w-11 h-11 rounded-full flex items-center justify-center flex-none shadow-sm transition-transform duration-200 group-hover:scale-110"
+                className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-200 group-hover:scale-110"
                 style={{ background: meta.bg }}
               >
                 <span

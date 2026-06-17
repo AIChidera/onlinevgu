@@ -93,28 +93,28 @@ const TESTIMONIALS = [
     id: 'testimonial-priya-sharma', name: 'Priya Sharma', role: 'MBA · Batch 2023', program: 'MBA',
     quote: 'I completed my MBA while managing a full-time job and two kids. The flexibility was unreal: live sessions on weekends, recorded lectures I could replay at midnight. My salary jumped 40% within six months of graduating.',
     outcomes: ['40% salary hike', 'Placed at Deloitte', 'Promoted in 6 months'],
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop',
+    avatarUrl: 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=200&q=80&auto=format&fit=crop&crop=faces',
     colorTheme: 'red', videoLabel: "Priya's journey · 2 min",
   },
   {
     id: 'testimonial-arjun-mehta', name: 'Arjun Mehta', role: 'BCA · Batch 2024', program: 'BCA',
     quote: "The coding curriculum covered Docker, Kubernetes, and React. By final semester I already had three freelance clients. VGU's placement cell got me into Infosys Digital before the exams were even over.",
     outcomes: ['3 freelance clients', 'Infosys Digital offer', 'Full-stack engineer'],
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop',
+    avatarUrl: 'https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=200&q=80&auto=format&fit=crop&crop=faces',
     colorTheme: 'blue', videoLabel: "Arjun's story · 2 min",
   },
   {
     id: 'testimonial-kavya-nair', name: 'Kavya Nair', role: 'MBA Healthcare · Batch 2023', program: 'MBA Healthcare',
     quote: "Hospital administration is a niche I never thought I could enter without a clinical background. VGU's healthcare MBA opened those doors. Apollo Hospitals called me before convocation.",
     outcomes: ['Apollo Hospitals offer', 'Healthcare manager', 'Zero entrance exam'],
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop',
+    avatarUrl: 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=200&q=80&auto=format&fit=crop&crop=faces',
     colorTheme: 'green', videoLabel: "Kavya's experience · 3 min",
   },
   {
     id: 'testimonial-rahul-verma', name: 'Rahul Verma', role: 'MCA · Batch 2024', program: 'MCA',
     quote: 'The Coursera integration meant I was simultaneously earning IBM and Google certificates while completing my MCA. My cloud architecture project got me hired. The placement cell connected me with Amazon India before I even graduated.',
     outcomes: ['Amazon India offer', 'IBM & Google certs', 'Cloud architect role'],
-    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop',
+    avatarUrl: 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=200&q=80&auto=format&fit=crop&crop=faces',
     colorTheme: 'purple', videoLabel: "Rahul's outcome · 2 min",
   },
 ]
@@ -263,42 +263,42 @@ async function seedMilestones() {
 const u = (id: string) =>
   `https://images.unsplash.com/photo-${id}?w=400&q=80&auto=format&fit=crop&crop=faces`
 
-// Male / male-presenting portraits (15 unique)
+// Male / male-presenting portraits (15 unique — verified Indian/South Asian)
 const M = [
-  u('1568602471122-7832951cc4c5'),  // Asian man, glasses
+  u('1581382575275-97901c2635b7'),  // Indian professional, Bangalore
+  u('1649433658557-54cf58577c68'),  // Indian young man, headshot
+  u('1552642986-ccb41e7059e7'),     // Indian man, Bangalore
+  u('1480429370139-e0132c086e2a'),  // Indian businessman, suit
+  u('1616002851413-ebcc9611139d'),  // Indian man, professional
+  u('1607081692251-d689f1b9af84'),  // South Asian man, professional
+  u('1542183669-c4c74d629b34'),     // Indian man, Visakhapatnam
+  u('1534339480783-6816b68be29c'),  // Indian man, Chandigarh
   u('1531123897727-8f129e1688ce'),  // Indian businessman
   u('1633332755192-727a05c4013d'),  // Older Indian man
   u('1622253692010-333f2da6031d'),  // Older South-Asian man
   u('1542178243-bc20204b769f'),     // Indian man, suit
   u('1614204424926-196a80bf0be8'),  // Indian professional
   u('1599566150163-29194dcaad36'),  // Indian gentleman
-  u('1564564321837-a57b7070ac4f'),  // Man, formal
   u('1581091226825-a6a2a5aee158'),  // Indian man, casual-formal
-  u('1507003211169-0a1dd7228f2d'),  // Man, suit
-  u('1492562080023-ab3db95bfbce'),  // Professional headshot
-  u('1500648767791-00dcc994a43e'),  // Professional man
-  u('1463453091185-61582044d556'),  // Bearded man, glasses
-  u('1519085360753-af0119f7cbe7'),  // Suited professional
-  u('1559548331-f9cb98001426'),     // Asian businessperson
 ]
 
-// Female / female-presenting portraits (15 unique)
+// Female / female-presenting portraits (15 unique — verified Indian/South Asian)
 const F = [
+  u('1463335361701-e90f4c5045d0'),  // Indian woman, bindi portrait
+  u('1607189200597-4d0923ef98c6'),  // Indian woman, Delhi
+  u('1573165850883-9b0e18c44bd2'),  // South Asian woman, professional
+  u('1618245472177-2a74ad3b994a'),  // Indian woman, portrait
+  u('1646979201225-00e36437d09e'),  // Indian woman, red shawl
+  u('1637589267610-6c66fc2a086b'),  // South Asian woman, business suit
+  u('1759840278381-bf7d5e332050'),  // Indian woman, red kurta, West Bengal
+  u('1728053914354-e1e3e09f6239'),  // Indian woman, blue shirt, Jabalpur
   u('1531746020798-e6953c6e8e04'),  // Indian woman, professional
   u('1607746882042-944635dfe10e'),  // Indian woman, teacher
-  u('1573497019940-1c28c88b4f3e'),  // Professional woman
   u('1573497620053-ea5300f94f21'),  // Indian woman, business
   u('1611432579699-484f7990b127'),  // Indian woman, professional
-  u('1567532939604-b6b5b0db2604'),  // Asian woman, academic
   u('1554151228-14d9def656e4'),     // Indian woman, formal
-  u('1573496359142-b8d87734a5a2'),  // Indian woman, medical/academic
-  u('1494790108377-be9c29b29330'),  // Woman with glasses
-  u('1487412720507-e7ab37603c6f'),  // Professional woman
-  u('1438761681033-6461ffad8d80'),  // Woman, casual-professional
-  u('1502685104226-ee32379fefbe'),  // Woman in nature/setting
-  u('1534528741775-53994a69daeb'),  // Professional headshot
-  u('1529626455594-4ff0802cfb7e'),  // Professional woman
-  u('1580489944761-15a19d654956'),  // Professional woman, glasses
+  u('1573496359142-b8d87734a5a2'),  // Indian woman, academic
+  u('1573497019940-1c28c88b4f3e'),  // Indian woman, professional
 ]
 
 type FacultyEntry = { name: string; title: string; credential: string; initials: string; color: 'red'|'blue'|'purple'|'amber'|'green'; sex: 'm' | 'f' }

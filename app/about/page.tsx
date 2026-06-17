@@ -124,21 +124,21 @@ export default async function AboutPage() {
       <Breadcrumb items={[{ label: 'About VGU' }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden flex items-center min-h-[480px] lg:min-h-[560px]">
         {HERO_IMAGE_SRC && (
           <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         )}
-        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
             About Vivekananda Global University
           </p>
           <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
             {new Date().getFullYear() - FOUNDING_YEAR} years of<br />
             <span className="text-vgu-yellow">academic excellence.</span>
           </h1>
-          <p className="mt-6 text-[15px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
+          <p className="mt-6 text-[16px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
             Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
             NAAC A+ universities, now bringing that same quality education online to
             learners across 40+ countries.
@@ -154,7 +154,7 @@ export default async function AboutPage() {
             ].map(fact => (
               <span
                 key={fact}
-                className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-body font-semibold text-white"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-heading font-semibold text-white"
               >
                 <IconCheck size={13} stroke={2.5} />
                 {fact}
@@ -197,18 +197,18 @@ export default async function AboutPage() {
 
             {/* Left */}
             <div data-animate="slide-from-left">
-              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
                 Our mission
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-6 md:text-[40px]">
                 Making great education accessible to every serious learner.
               </h2>
-              <p className="text-[15px] font-body leading-[1.7] text-neutral-600 mb-5 lg:text-[17px]">
+              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-5 lg:text-[17px]">
                 Geography, cost, or life stage should not determine the quality of education
                 someone receives. VGU Online exists to make a NAAC A+ degree available to
                 working professionals, rural students, and career-changers - wherever they are.
               </p>
-              <p className="text-[15px] font-body leading-[1.7] text-neutral-600 lg:text-[17px]">
+              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 lg:text-[17px]">
                 We do not compromise on accreditation, faculty, or outcomes. The degree you
                 earn online is the same degree you would earn on campus - same certificate,
                 same legal standing, same employer recognition.
@@ -229,7 +229,7 @@ export default async function AboutPage() {
                   </span>
                   <div>
                     <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-1">{v.title}</h3>
-                    <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
+                    <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
                   </div>
                 </div>
               ))}
@@ -244,13 +244,13 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-[1280px]">
 
           <div data-animate="fade-up" className="text-center mb-14 md:mb-10">
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Recognised by
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
               Accreditations &amp; Recognition
             </h2>
-            <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
+            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
               Credentials recognised by Indian and international bodies - giving your degree global credibility.
             </p>
           </div>
@@ -267,7 +267,7 @@ export default async function AboutPage() {
                   {a.name}
                 </div>
                 <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">{a.full}</h3>
-                <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
+                <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
               </div>
             ))}
           </div>
@@ -281,7 +281,7 @@ export default async function AboutPage() {
 
             {/* Left */}
             <div data-animate="slide-from-left" className="lg:sticky lg:top-[120px]">
-              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
                 Our history
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[40px]">
@@ -324,7 +324,7 @@ export default async function AboutPage() {
                     </div>
                     <div className="flex-1 pt-1.5">
                       <div className="font-heading font-black text-[14px] text-vgu-red mb-0.5">{m.year}</div>
-                      <p className="text-[15px] font-body text-neutral-700 leading-snug">{m.event}</p>
+                      <p className="text-[16px] font-body text-neutral-700 leading-snug">{m.event}</p>
                     </div>
                   </div>
                 ))}

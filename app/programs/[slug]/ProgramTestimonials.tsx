@@ -21,73 +21,93 @@ const G = 'linear-gradient(135deg,#FFA412,#C04036)'
 const U = 'https://images.unsplash.com/'
 const Q = '?w=200&q=80&auto=format&fit=crop&crop=faces'
 
+// Verified free Unsplash photos of Indian/South Asian people
+// Male pool
+const M1 = `${U}photo-1581382575275-97901c2635b7${Q}` // Indian professional, Bangalore
+const M2 = `${U}photo-1649433658557-54cf58577c68${Q}` // Indian Young Man Headshot
+const M3 = `${U}photo-1552642986-ccb41e7059e7${Q}` // Indian man, Bangalore
+const M4 = `${U}photo-1480429370139-e0132c086e2a${Q}` // Indian businessman, suit
+const M5 = `${U}photo-1616002851413-ebcc9611139d${Q}` // Indian man, plaid shirt
+const M6 = `${U}photo-1607081692251-d689f1b9af84${Q}` // South Asian man, orange shirt
+const M7 = `${U}photo-1542183669-c4c74d629b34${Q}` // Indian man, Visakhapatnam
+const M8 = `${U}photo-1534339480783-6816b68be29c${Q}` // Indian man, Chandigarh
+const M9 = `${U}photo-1598411435746-47bfecc3ea98${Q}` // Indian man
+const M10 = `${U}photo-1606142409343-501b803f04c8${Q}` // Indian man, Mumbai
+const M11 = `${U}flagged/photo-1571367034861-e6729ad9c2d5${Q}` // Indian man, professional
+const M12 = `${U}photo-1729157661483-ed21901ed892${Q}` // Indian man, crossed arms
+// Female pool
+const F1 = `${U}photo-1463335361701-e90f4c5045d0${Q}` // Indian woman with bindi, smiling
+const F2 = `${U}photo-1607189200597-4d0923ef98c6${Q}` // Indian woman, Delhi
+const F3 = `${U}photo-1573165850883-9b0e18c44bd2${Q}` // South Asian woman, professional
+const F4 = `${U}photo-1618245472177-2a74ad3b994a${Q}` // Indian woman, portrait
+
 const TESTIMONIALS: Record<string, Testimonial[]> = {
   mba: [
-    { name: 'Rohan Mehta',   batch: 'MBA · Finance · 2024',    initials: 'RM', photoGrad: R, photo: `${U}photo-1507003211169-0a1dd7228f2d${Q}`, quote: "I was managing a team of 12 while studying. The weekend live sessions never clashed with work. Got promoted to AVP within 6 months of completing the degree." },
-    { name: 'Shriya Kapoor', batch: 'MBA · Marketing · 2023',  initials: 'SK', photoGrad: B, photo: `${U}photo-1580489944761-15a19d654956${Q}`, quote: "I compared five online MBAs. The UGC recognition and the Coursera access tipped it for me. The faculty had actually worked at companies, not just published papers." },
-    { name: 'Aditya Bose',   batch: 'MBA · Analytics · 2024',  initials: 'AB', photoGrad: V, photo: `${U}photo-1560250097-0b93528c311a${Q}`, quote: "The case studies were from real Indian businesses. My manager noticed the change in how I structured problems - that's what an MBA should do." },
+    { name: 'Rohan Mehta',   batch: 'MBA · Finance · 2024',    initials: 'RM', photoGrad: R, photo: M1, quote: "I was managing a team of 12 while studying. The weekend live sessions never clashed with work. Got promoted to AVP within 6 months of completing the degree." },
+    { name: 'Shriya Kapoor', batch: 'MBA · Marketing · 2023',  initials: 'SK', photoGrad: B, photo: F1, quote: "I compared five online MBAs. The UGC recognition and the Coursera access tipped it for me. The faculty had actually worked at companies, not just published papers." },
+    { name: 'Aditya Bose',   batch: 'MBA · Analytics · 2024',  initials: 'AB', photoGrad: V, photo: M2, quote: "The case studies were from real Indian businesses. My manager noticed the change in how I structured problems - that's what an MBA should do." },
   ],
   'mba-healthcare': [
-    { name: 'Dr. Priya Iyer', batch: 'MBA Healthcare · 2024',  initials: 'PI', photoGrad: G, photo: `${U}photo-1438761681033-6461ffad8d80${Q}`, quote: "After 8 years as a physician, I needed the business side. The hospital tie-up case studies were things I was already dealing with - just now I had the framework." },
-    { name: 'Sanjiv Pillai',  batch: 'MBA Healthcare · 2023',  initials: 'SP', photoGrad: B, photo: `${U}photo-1519085360753-af0119f7cbe7${Q}`, quote: "Went from pharma sales to product management at a healthcare startup. The operations and health insurance modules were directly applicable from day one." },
-    { name: 'Anita Rao',      batch: 'MBA Healthcare · 2024',  initials: 'AR', photoGrad: R, photo: `${U}photo-1494790108377-be9c29b29330${Q}`, quote: "The CMO-led sessions were a highlight. No other online programme gets you direct access to healthcare CXOs for live case discussions." },
+    { name: 'Dr. Priya Iyer', batch: 'MBA Healthcare · 2024',  initials: 'PI', photoGrad: G, photo: F3, quote: "After 8 years as a physician, I needed the business side. The hospital tie-up case studies were things I was already dealing with - just now I had the framework." },
+    { name: 'Sanjiv Pillai',  batch: 'MBA Healthcare · 2023',  initials: 'SP', photoGrad: B, photo: M3, quote: "Went from pharma sales to product management at a healthcare startup. The operations and health insurance modules were directly applicable from day one." },
+    { name: 'Anita Rao',      batch: 'MBA Healthcare · 2024',  initials: 'AR', photoGrad: R, photo: F2, quote: "The CMO-led sessions were a highlight. No other online programme gets you direct access to healthcare CXOs for live case discussions." },
   ],
   mca: [
-    { name: 'Karan Desai',   batch: 'MCA · Cloud · 2024',      initials: 'KD', photoGrad: R, photo: `${U}photo-1500648767791-00dcc994a43e${Q}`, quote: "Came in with a BCA and left with an AWS certification and a job at an MNC. The cloud track is genuinely industry-level, not just theory slides." },
-    { name: 'Pooja Nair',    batch: 'MCA · Data Science · 2023',initials: 'PN', photoGrad: B, photo: `${U}photo-1487412720507-e7ab37603c6f${Q}`, quote: "The hackathons were the best part - competing against students from other states kept me sharp. Got hired at the semester 4 hackathon expo itself." },
-    { name: 'Arjun Sharma',  batch: 'MCA · AI/ML · 2024',      initials: 'AS', photoGrad: V, photo: `${U}photo-1506794778202-cad84cf45f1d${Q}`, quote: "The faculty member for AI/ML actually worked at Microsoft before joining VGU. That kind of perspective is hard to find in any classroom, online or off." },
+    { name: 'Karan Desai',   batch: 'MCA · Cloud · 2024',      initials: 'KD', photoGrad: R, photo: M4, quote: "Came in with a BCA and left with an AWS certification and a job at an MNC. The cloud track is genuinely industry-level, not just theory slides." },
+    { name: 'Pooja Nair',    batch: 'MCA · Data Science · 2023',initials: 'PN', photoGrad: B, photo: F4, quote: "The hackathons were the best part - competing against students from other states kept me sharp. Got hired at the semester 4 hackathon expo itself." },
+    { name: 'Arjun Sharma',  batch: 'MCA · AI/ML · 2024',      initials: 'AS', photoGrad: V, photo: M5, quote: "The faculty member for AI/ML actually worked at Microsoft before joining VGU. That kind of perspective is hard to find in any classroom, online or off." },
   ],
   bca: [
-    { name: 'Neha Verma',    batch: 'BCA · Software Eng · 2024',initials: 'NV', photoGrad: R, photo: `${U}photo-1502685104226-ee32379fefbe${Q}`, quote: "Graduated at 21 with a job at Infosys. The capstone project was the deciding factor in my interview - I had something real to show, not just a transcript." },
-    { name: 'Rahul Singh',   batch: 'BCA · Cloud · 2024',      initials: 'RS', photoGrad: B, photo: `${U}photo-1463453091185-61582044d556${Q}`, quote: "I started learning to code with zero experience. By year 2, I was building React apps and contributing to open-source. The pace is fast but supportive." },
-    { name: 'Simran Kaur',   batch: 'BCA · Cybersecurity · 2023',initials: 'SK', photoGrad: G, photo: `${U}photo-1534528741775-53994a69daeb${Q}`, quote: "The cybersecurity track is thorough. I passed my CEH exam while still in my final year. Most of my classmates had jobs lined up before graduation." },
+    { name: 'Neha Verma',    batch: 'BCA · Software Eng · 2024',initials: 'NV', photoGrad: R, photo: F2, quote: "Graduated at 21 with a job at Infosys. The capstone project was the deciding factor in my interview - I had something real to show, not just a transcript." },
+    { name: 'Rahul Singh',   batch: 'BCA · Cloud · 2024',      initials: 'RS', photoGrad: B, photo: M6, quote: "I started learning to code with zero experience. By year 2, I was building React apps and contributing to open-source. The pace is fast but supportive." },
+    { name: 'Simran Kaur',   batch: 'BCA · Cybersecurity · 2023',initials: 'SK', photoGrad: G, photo: F1, quote: "The cybersecurity track is thorough. I passed my CEH exam while still in my final year. Most of my classmates had jobs lined up before graduation." },
   ],
   bba: [
-    { name: 'Dev Malhotra',  batch: 'BBA · Marketing · 2024',  initials: 'DM', photoGrad: R, photo: `${U}photo-1472099645785-5658abf4ff4e${Q}`, quote: "The startup simulation in year 2 was the most practical thing I've done in any classroom. I launched a real side business because of what I learned there." },
-    { name: 'Kavya Reddy',   batch: 'BBA · Finance · 2024',    initials: 'KR', photoGrad: B, photo: `${U}photo-1529626455594-4ff0802cfb7e${Q}`, quote: "I was 19 and not sure what I wanted. BBA gave me the broad base to figure it out. I'm now in a management trainee programme at a bank." },
-    { name: 'Tejas Joshi',   batch: 'BBA · HR · 2023',         initials: 'TJ', photoGrad: A, photo: `${U}photo-1492562080023-ab3db95bfbce${Q}`, quote: "The industry mentors were a genuine differentiator. My mentor had worked at two Fortune 500 companies and shared things that no textbook covers." },
+    { name: 'Dev Malhotra',  batch: 'BBA · Marketing · 2024',  initials: 'DM', photoGrad: R, photo: M7, quote: "The startup simulation in year 2 was the most practical thing I've done in any classroom. I launched a real side business because of what I learned there." },
+    { name: 'Kavya Reddy',   batch: 'BBA · Finance · 2024',    initials: 'KR', photoGrad: B, photo: F3, quote: "I was 19 and not sure what I wanted. BBA gave me the broad base to figure it out. I'm now in a management trainee programme at a bank." },
+    { name: 'Tejas Joshi',   batch: 'BBA · HR · 2023',         initials: 'TJ', photoGrad: A, photo: M8, quote: "The industry mentors were a genuine differentiator. My mentor had worked at two Fortune 500 companies and shared things that no textbook covers." },
   ],
   bcom: [
-    { name: 'Divya Sharma',  batch: 'B.Com · Accounting · 2024',initials: 'DS', photoGrad: R, photo: `${U}photo-1573496359142-b8d87734a5a2${Q}`, quote: "I'm now in my CA articleship. The B.Com at VGU gave me a solid base in IFRS and direct tax that my article supervisor noticed immediately." },
-    { name: 'Mohit Kumar',   batch: 'B.Com · Finance · 2023',  initials: 'MK', photoGrad: B, photo: `${U}photo-1506794778202-cad84cf45f1d${Q}`, quote: "The Tally and ERP practical sessions were more rigorous than what most regular colleges offer. I walked into my job knowing the actual software." },
-    { name: 'Priya Menon',   batch: 'B.Com · Taxation · 2024', initials: 'PM', photoGrad: V, photo: `${U}photo-1580489944761-15a19d654956${Q}`, quote: "GST was a live topic while we studied it. The faculty updated the modules in real time as regulations changed - that's not something you get from textbooks." },
+    { name: 'Divya Sharma',  batch: 'B.Com · Accounting · 2024',initials: 'DS', photoGrad: R, photo: F4, quote: "I'm now in my CA articleship. The B.Com at VGU gave me a solid base in IFRS and direct tax that my article supervisor noticed immediately." },
+    { name: 'Mohit Kumar',   batch: 'B.Com · Finance · 2023',  initials: 'MK', photoGrad: B, photo: M9, quote: "The Tally and ERP practical sessions were more rigorous than what most regular colleges offer. I walked into my job knowing the actual software." },
+    { name: 'Priya Menon',   batch: 'B.Com · Taxation · 2024', initials: 'PM', photoGrad: V, photo: F2, quote: "GST was a live topic while we studied it. The faculty updated the modules in real time as regulations changed - that's not something you get from textbooks." },
   ],
   bsc: [
-    { name: 'Ananya Gupta',  batch: 'B.Sc · 2024',             initials: 'AG', photoGrad: G, photo: `${U}photo-1438761681033-6461ffad8d80${Q}`, quote: "The science curriculum was updated and practical. I studied while working as a lab assistant - the flexible schedule made it possible." },
-    { name: 'Vikram Nair',   batch: 'B.Sc · 2023',             initials: 'VN', photoGrad: B, photo: `${U}photo-1507003211169-0a1dd7228f2d${Q}`, quote: "I completed my B.Sc degree while preparing for competitive exams. The structured curriculum and live sessions kept me on track." },
-    { name: 'Ritu Sharma',   batch: 'B.Sc · 2024',             initials: 'RS', photoGrad: R, photo: `${U}photo-1487412720507-e7ab37603c6f${Q}`, quote: "The faculty were available beyond class hours. I'd message at 10pm with a doubt and get a response before midnight. That responsiveness is rare." },
+    { name: 'Ananya Gupta',  batch: 'B.Sc · 2024',             initials: 'AG', photoGrad: G, photo: F1, quote: "The science curriculum was updated and practical. I studied while working as a lab assistant - the flexible schedule made it possible." },
+    { name: 'Vikram Nair',   batch: 'B.Sc · 2023',             initials: 'VN', photoGrad: B, photo: M10, quote: "I completed my B.Sc degree while preparing for competitive exams. The structured curriculum and live sessions kept me on track." },
+    { name: 'Ritu Sharma',   batch: 'B.Sc · 2024',             initials: 'RS', photoGrad: R, photo: F3, quote: "The faculty were available beyond class hours. I'd message at 10pm with a doubt and get a response before midnight. That responsiveness is rare." },
   ],
   ba: [
-    { name: 'Farhan Ahmed',  batch: 'BA · English · 2024',     initials: 'FA', photoGrad: V, photo: `${U}photo-1519085360753-af0119f7cbe7${Q}`, quote: "I was preparing for the civil services while doing my BA. The political science and economics specialisations aligned perfectly with the UPSC syllabus." },
-    { name: 'Nisha Patel',   batch: 'BA · Sociology · 2023',   initials: 'NP', photoGrad: B, photo: `${U}photo-1502685104226-ee32379fefbe${Q}`, quote: "The research methodology module changed how I approach problems. I got selected for an MPhil programme at a central university based on my dissertation." },
-    { name: 'Deepak Yadav',  batch: 'BA · Economics · 2024',   initials: 'DY', photoGrad: A, photo: `${U}photo-1560250097-0b93528c311a${Q}`, quote: "VGU's BA is taken seriously. I cleared the UGC-NET in my first attempt - the exam prep support and guidance from faculty made the difference." },
+    { name: 'Farhan Ahmed',  batch: 'BA · English · 2024',     initials: 'FA', photoGrad: V, photo: M11, quote: "I was preparing for the civil services while doing my BA. The political science and economics specialisations aligned perfectly with the UPSC syllabus." },
+    { name: 'Nisha Patel',   batch: 'BA · Sociology · 2023',   initials: 'NP', photoGrad: B, photo: F4, quote: "The research methodology module changed how I approach problems. I got selected for an MPhil programme at a central university based on my dissertation." },
+    { name: 'Deepak Yadav',  batch: 'BA · Economics · 2024',   initials: 'DY', photoGrad: A, photo: M1, quote: "VGU's BA is taken seriously. I cleared the UGC-NET in my first attempt - the exam prep support and guidance from faculty made the difference." },
   ],
   mcom: [
-    { name: 'Seema Joshi',   batch: 'M.Com · Finance · 2024',  initials: 'SJ', photoGrad: G, photo: `${U}photo-1534528741775-53994a69daeb${Q}`, quote: "The advanced taxation modules were current and practical. My CA firm noticed the depth of my knowledge in GST and IFRS from day one." },
-    { name: 'Amit Soni',     batch: 'M.Com · Accounting · 2023',initials: 'AS', photoGrad: B, photo: `${U}photo-1463453091185-61582044d556${Q}`, quote: "I cleared the CMA Foundation while doing my M.Com. The finance and cost accounting modules covered the syllabus in a way regular coaching doesn't." },
-    { name: 'Pooja Bansal',  batch: 'M.Com · 2024',            initials: 'PB', photoGrad: R, photo: `${U}photo-1494790108377-be9c29b29330${Q}`, quote: "The investment analysis module was taught by a SEBI-registered advisor. You get real-world perspectives that textbooks simply don't have." },
+    { name: 'Seema Joshi',   batch: 'M.Com · Finance · 2024',  initials: 'SJ', photoGrad: G, photo: F2, quote: "The advanced taxation modules were current and practical. My CA firm noticed the depth of my knowledge in GST and IFRS from day one." },
+    { name: 'Amit Soni',     batch: 'M.Com · Accounting · 2023',initials: 'AS', photoGrad: B, photo: M12, quote: "I cleared the CMA Foundation while doing my M.Com. The finance and cost accounting modules covered the syllabus in a way regular coaching doesn't." },
+    { name: 'Pooja Bansal',  batch: 'M.Com · 2024',            initials: 'PB', photoGrad: R, photo: F1, quote: "The investment analysis module was taught by a SEBI-registered advisor. You get real-world perspectives that textbooks simply don't have." },
   ],
   ma: [
-    { name: 'Harshit Tiwari',batch: 'MA · Political Sc. · 2024',initials: 'HT', photoGrad: V, photo: `${U}photo-1500648767791-00dcc994a43e${Q}`, quote: "I work in a state government department. The public policy and governance modules gave me frameworks I apply every single week at work." },
-    { name: 'Sunita Rao',    batch: 'MA · English · 2023',     initials: 'SR', photoGrad: B, photo: `${U}photo-1573496359142-b8d87734a5a2${Q}`, quote: "I cleared the UGC-NET in English literature on my first attempt. The dissertation supervision was thorough - my guide had published in indexed journals." },
-    { name: 'Rohit Mishra',  batch: 'MA · Economics · 2024',   initials: 'RM', photoGrad: A, photo: `${U}photo-1472099645785-5658abf4ff4e${Q}`, quote: "The quantitative economics and research methods track prepared me better than a full-time programme would have. Got into a policy research role directly." },
+    { name: 'Harshit Tiwari',batch: 'MA · Political Sc. · 2024',initials: 'HT', photoGrad: V, photo: M2, quote: "I work in a state government department. The public policy and governance modules gave me frameworks I apply every single week at work." },
+    { name: 'Sunita Rao',    batch: 'MA · English · 2023',     initials: 'SR', photoGrad: B, photo: F3, quote: "I cleared the UGC-NET in English literature on my first attempt. The dissertation supervision was thorough - my guide had published in indexed journals." },
+    { name: 'Rohit Mishra',  batch: 'MA · Economics · 2024',   initials: 'RM', photoGrad: A, photo: M3, quote: "The quantitative economics and research methods track prepared me better than a full-time programme would have. Got into a policy research role directly." },
   ],
   mlib: [
-    { name: 'Vandana Singh', batch: 'M.Lib · 2024',            initials: 'VS', photoGrad: G, photo: `${U}photo-1529626455594-4ff0802cfb7e${Q}`, quote: "I got promoted to Senior Librarian within 4 months of completing M.Lib. The digital archives and information systems modules were exactly what my institution needed." },
-    { name: 'Suresh Kumar',  batch: 'M.Lib · 2023',            initials: 'SK', photoGrad: B, photo: `${U}photo-1492562080023-ab3db95bfbce${Q}`, quote: "We went deep into information retrieval and MARC cataloguing. I could apply the learnings from week one at my university library." },
-    { name: 'Asha Pillai',   batch: 'M.Lib · 2024',            initials: 'AP', photoGrad: R, photo: `${U}photo-1438761681033-6461ffad8d80${Q}`, quote: "VGU's M.Lib is NAAC-accredited and UGC-recognised. That credential opened doors to central university library positions that weren't accessible before." },
+    { name: 'Vandana Singh', batch: 'M.Lib · 2024',            initials: 'VS', photoGrad: G, photo: F4, quote: "I got promoted to Senior Librarian within 4 months of completing M.Lib. The digital archives and information systems modules were exactly what my institution needed." },
+    { name: 'Suresh Kumar',  batch: 'M.Lib · 2023',            initials: 'SK', photoGrad: B, photo: M4, quote: "We went deep into information retrieval and MARC cataloguing. I could apply the learnings from week one at my university library." },
+    { name: 'Asha Pillai',   batch: 'M.Lib · 2024',            initials: 'AP', photoGrad: R, photo: F2, quote: "VGU's M.Lib is NAAC-accredited and UGC-recognised. That credential opened doors to central university library positions that weren't accessible before." },
   ],
   blib: [
-    { name: 'Raju Verma',    batch: 'B.Lib · 2024',            initials: 'RV', photoGrad: V, photo: `${U}photo-1507003211169-0a1dd7228f2d${Q}`, quote: "The one-year programme was intensive but structured. I got placed as an assistant librarian at a Navodaya Vidyalaya before I even received my degree." },
-    { name: 'Kamla Devi',    batch: 'B.Lib · 2023',            initials: 'KD', photoGrad: B, photo: `${U}photo-1580489944761-15a19d654956${Q}`, quote: "I completed B.Lib alongside my regular teaching job. The flexible online format made it possible. The OPAC and digital library modules were directly applicable." },
-    { name: 'Manish Sharma', batch: 'B.Lib · 2024',            initials: 'MS', photoGrad: G, photo: `${U}photo-1519085360753-af0119f7cbe7${Q}`, quote: "The faculty explained real-world library management scenarios, not just theory. I passed the State Library Exam on my first attempt after completing B.Lib." },
+    { name: 'Raju Verma',    batch: 'B.Lib · 2024',            initials: 'RV', photoGrad: V, photo: M5, quote: "The one-year programme was intensive but structured. I got placed as an assistant librarian at a Navodaya Vidyalaya before I even received my degree." },
+    { name: 'Kamla Devi',    batch: 'B.Lib · 2023',            initials: 'KD', photoGrad: B, photo: F1, quote: "I completed B.Lib alongside my regular teaching job. The flexible online format made it possible. The OPAC and digital library modules were directly applicable." },
+    { name: 'Manish Sharma', batch: 'B.Lib · 2024',            initials: 'MS', photoGrad: G, photo: M6, quote: "The faculty explained real-world library management scenarios, not just theory. I passed the State Library Exam on my first attempt after completing B.Lib." },
   ],
 }
 
 const GENERIC: Testimonial[] = [
-  { name: 'Siddharth Roy',  batch: 'Batch of 2024', initials: 'SR', photoGrad: R, photo: `${U}photo-1560250097-0b93528c311a${Q}`, quote: "The faculty were accessible, the content was current, and I could study around my full-time job. The degree got me where I needed to go." },
-  { name: 'Meenakshi Das',  batch: 'Batch of 2023', initials: 'MD', photoGrad: B, photo: `${U}photo-1494790108377-be9c29b29330${Q}`, quote: "I had doubts about an online degree being taken seriously by employers. Those doubts were gone by the time I walked into my first job interview with VGU on my resume." },
-  { name: 'Akash Tiwari',   batch: 'Batch of 2024', initials: 'AT', photoGrad: G, photo: `${U}photo-1506794778202-cad84cf45f1d${Q}`, quote: "The quality of instruction is on par with any campus programme I've seen. If you're disciplined, this works." },
+  { name: 'Siddharth Roy',  batch: 'Batch of 2024', initials: 'SR', photoGrad: R, photo: M7, quote: "The faculty were accessible, the content was current, and I could study around my full-time job. The degree got me where I needed to go." },
+  { name: 'Meenakshi Das',  batch: 'Batch of 2023', initials: 'MD', photoGrad: B, photo: F4, quote: "I had doubts about an online degree being taken seriously by employers. Those doubts were gone by the time I walked into my first job interview with VGU on my resume." },
+  { name: 'Akash Tiwari',   batch: 'Batch of 2024', initials: 'AT', photoGrad: G, photo: M9, quote: "The quality of instruction is on par with any campus programme I've seen. If you're disciplined, this works." },
 ]
 
 function CompactCard({ t, index, visible }: { t: Testimonial; index: number; visible: boolean }) {
@@ -104,7 +124,7 @@ function CompactCard({ t, index, visible }: { t: Testimonial; index: number; vis
 
         {/* Avatar strip */}
         <div
-          className="relative h-[80px] overflow-hidden flex-none flex items-center px-5 gap-4"
+          className="relative h-[96px] overflow-hidden flex-none flex items-center px-5 gap-4"
           style={{ background: t.photoGrad }}
         >
           <div
@@ -139,13 +159,14 @@ function CompactCard({ t, index, visible }: { t: Testimonial; index: number; vis
 
         {/* Quote body */}
         <div className="flex flex-col flex-1 p-5">
-          <div className="flex gap-0.5 mb-3">
+          <div className="flex gap-0.5 mb-2">
             {[1, 2, 3, 4, 5].map((n) => (
               <span key={n} className="text-vgu-yellow text-[13px] leading-none">★</span>
             ))}
           </div>
-          <p className="text-[13px] font-body leading-[1.8] text-neutral-600 flex-1 italic">
-            &ldquo;{t.quote}&rdquo;
+          <span aria-hidden="true" className="font-heading font-black text-vgu-red block" style={{ fontSize: '56px', lineHeight: 0.8 }}>&ldquo;</span>
+          <p className="text-[14px] font-body leading-[1.8] text-neutral-600 flex-1 italic mt-1">
+            {t.quote}
           </p>
         </div>
 

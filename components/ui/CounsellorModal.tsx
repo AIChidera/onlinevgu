@@ -69,7 +69,9 @@ export default function CounsellorModal() {
       if (anchor && !anchor.hasAttribute('data-apply-trigger')) {
         e.preventDefault()
         triggerRef.current = anchor as HTMLElement
-        setOpen(prev => !prev)
+        const programName = anchor.getAttribute('data-program') ?? ''
+        setForm({ ...INITIAL_FORM, programme: programName })
+        setOpen(true)
       }
     }
 

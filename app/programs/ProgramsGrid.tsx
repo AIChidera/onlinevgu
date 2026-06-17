@@ -53,16 +53,18 @@ export default function ProgramsGrid({
   ]
 
   return (
-    <section id="programs-grid" className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
-      <div className="mx-auto max-w-[1280px]">
+    <section id="programs-grid" className="relative bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(17,24,39,0.055) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[500px]" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(192,64,54,0.07) 0%, transparent 100%)' }} />
+      <div className="relative z-10 mx-auto max-w-[1280px]">
 
         {/* Header + filter row */}
         <div data-animate="fade-up" className="flex flex-wrap items-end justify-between gap-5 mb-10 md:mb-12">
           <div>
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-2">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-2">
               Browse Programs
             </p>
-            <p className="text-[14px] font-body text-neutral-500">
+            <p className="text-[16px] font-body text-neutral-500">
               {visible.length} program{visible.length !== 1 ? 's' : ''} · Next batch {nextBatch}
             </p>
           </div>
@@ -77,7 +79,7 @@ export default function ProgramsGrid({
                 className={[
                   'rounded-full px-4 py-2.5 text-[13px] font-heading font-semibold transition-all duration-150',
                   filter === f.value
-                    ? 'bg-vgu-red text-white shadow-sm'
+                    ? 'bg-vgu-red text-white shadow-[0_2px_8px_rgba(192,64,54,0.35)]'
                     : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red/50 hover:text-vgu-red',
                 ].join(' ')}
               >
@@ -123,13 +125,11 @@ function DisciplineGroup({
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <span className="w-1 h-6 rounded-full flex-none" style={{ background: accent }} />
+      <div data-animate="fade-up" className="flex items-center gap-3 mb-6">
+        <span className="w-[3px] h-8 rounded-full flex-none" style={{ background: accent }} />
         <h3 className="font-heading font-bold text-[20px] text-neutral-800">{discipline}</h3>
-        <span className="text-[12px] font-body text-neutral-400">
-          {programs.length} program{programs.length !== 1 ? 's' : ''}
-        </span>
-        <div className="flex-1 h-px bg-neutral-200 hidden sm:block" />
+        <span className="rounded-full px-2.5 py-0.5 text-[11px] font-heading font-semibold bg-neutral-100 text-neutral-500">{programs.length}</span>
+        <div className="flex-1 h-px bg-gradient-to-r from-neutral-200 to-transparent hidden sm:block" />
       </div>
 
       {/* Mobile: horizontal scroll */}
@@ -161,11 +161,21 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
   const shown = p.specialisations.slice(0, 2)
   const extra = p.specialisations.length - shown.length
   const iconBg = meta?.iconBg ?? 'linear-gradient(135deg,#C04036,#821a12)'
-  const isCert = p.level === 'cert'
+  const isCert       = p.level === 'cert'
+  const accentShadow = p.level === 'ug'
+    ? '0 2px 12px rgba(0,0,0,0.07), inset 0 4px 0 #FFA412'
+    : '0 2px 12px rgba(0,0,0,0.07), inset 0 4px 0 #C04036'
+  const hoverRing    = p.level === 'ug'
+    ? '0 0 0 2px #FFA412, 0 14px 44px rgba(0,0,0,0.12)'
+    : '0 0 0 2px #C04036, 0 14px 44px rgba(0,0,0,0.12)'
 
   return (
-    <article className="group relative flex flex-col h-full bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] hover:border-transparent">
-
+    <article
+      className="group relative flex flex-col h-full bg-white rounded-2xl border border-neutral-200 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent"
+      style={{ boxShadow: accentShadow }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = hoverRing }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = accentShadow }}
+    >
       {/* Whole-card link for ug/pg (Bible §07 one primary action) */}
       {!isCert && (
         <Link href={`/programs/${p.slug}`} className="absolute inset-0 z-[1]" aria-label={`View ${p.name} details`} tabIndex={-1} />

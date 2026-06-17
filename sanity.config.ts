@@ -17,7 +17,7 @@ export default defineConfig({
           .items([
             // ── Site Settings ─────────────────────────────────────
             // Using the same documentTypeListItem pattern as every other
-            // type — the S.document().documentId() singleton pattern crashes
+            // type - the S.document().documentId() singleton pattern crashes
             // in Sanity v5 when the document has not been created yet.
             // First-time setup: click "+" to create the one settings document.
             S.documentTypeListItem('siteSettings').title('Site Settings'),

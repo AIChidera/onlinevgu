@@ -19,11 +19,10 @@ export interface CurriculumYear {
   semesters: SemesterDetail[]
 }
 
-// Brand-only 3-gradient cycle for semester headers.
 const SEM_GRADS = [
-  'linear-gradient(135deg,#C04036,#821a12)',  // red → dark red
-  'linear-gradient(135deg,#FFA412,#C04036)',  // yellow → red
-  'linear-gradient(135deg,#821a12,#3b0d09)',  // deep red flow
+  'linear-gradient(135deg,#C04036,#821a12)',
+  'linear-gradient(135deg,#FFA412,#C04036)',
+  'linear-gradient(135deg,#821a12,#3b0d09)',
 ]
 
 const SEM_COLORS = ['#C04036', '#FFA412', '#821a12']
@@ -39,6 +38,14 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
 
   return (
     <div>
+      <style>{`
+        @keyframes sem-fade-up {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .sem-card { animation: sem-fade-up 280ms cubic-bezier(0.22,1,0.36,1) both; }
+      `}</style>
+
       {/* Year tabs */}
       <div className="flex gap-2 flex-wrap mb-8">
         {curriculum.map((cy, i) => (
@@ -47,10 +54,11 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
             type="button"
             onClick={() => setActiveYear(i)}
             aria-pressed={activeYear === i}
+            style={activeYear === i ? { background: 'linear-gradient(135deg,#C04036,#821a12)' } : undefined}
             className={[
               'rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold transition-all duration-200',
               activeYear === i
-                ? 'bg-vgu-red text-white shadow-md scale-[1.03]'
+                ? 'text-white shadow-[0_4px_16px_rgba(192,64,54,0.35)] scale-[1.05]'
                 : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red',
             ].join(' ')}
           >
@@ -59,20 +67,28 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
         ))}
       </div>
 
-      {/* Semester grid - plain render, no key-based remount or fill-mode animation */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {/* Semester grid — key re-mounts on year switch, triggering entry animation */}
+      <div key={activeYear} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {current.semesters.map((sem, si) => {
-          const gi = (semOffset + si) % SEM_GRADS.length
+          const gi    = (semOffset + si) % SEM_GRADS.length
           const color = SEM_COLORS[gi]
           const coreCount     = sem.courses.filter(c => c.type === 'Core').length
           const electiveCount = sem.courses.filter(c => c.type === 'Elective').length
           return (
             <div
               key={sem.label}
-              className="rounded-2xl overflow-hidden border border-neutral-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-200"
+              className="sem-card rounded-2xl overflow-hidden border border-neutral-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-200"
+              style={{ animationDelay: `${si * 80}ms` }}
             >
               {/* Coloured header */}
-              <div className="px-5 py-4" style={{ background: SEM_GRADS[gi] }}>
+              <div className="relative overflow-hidden px-5 py-4" style={{ background: SEM_GRADS[gi] }}>
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-1 -top-3 font-heading font-black leading-none select-none pointer-events-none text-[80px] text-white"
+                  style={{ opacity: 0.10 }}
+                >
+                  {String(semOffset + si + 1).padStart(2, '0')}
+                </span>
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-heading font-bold text-[15px] text-white tracking-[-0.2px]">{sem.label}</h4>
                   <span className="rounded-full bg-white/20 border border-white/25 px-2.5 py-0.5 text-[11px] font-body font-semibold text-white">
@@ -93,8 +109,8 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
                   {sem.courses.map((course, ji) => (
                     <li key={`${course.name}-${ji}`} className="flex items-start gap-2.5">
                       <span
-                        className="flex-none w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-heading font-black text-white mt-0.5"
-                        style={{ background: course.type === 'Elective' ? 'rgba(0,0,0,0.22)' : color }}
+                        className={`flex-none w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-heading font-black mt-0.5 ${course.type === 'Elective' ? 'bg-neutral-200 text-neutral-500' : 'text-white'}`}
+                        style={course.type === 'Elective' ? undefined : { background: color }}
                       >
                         {String(ji + 1).padStart(2, '0')}
                       </span>

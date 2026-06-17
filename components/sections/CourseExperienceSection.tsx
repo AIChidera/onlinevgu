@@ -182,7 +182,7 @@ export default function CourseExperienceSection() {
             ref={copyRef}
             className={['w-full max-w-[680px] transition-all duration-700', copyVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'].join(' ')}
           >
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-gold mb-4">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-gold mb-4">
               The VGU Platform
             </p>
             <h2 className="font-heading font-bold text-[30px] tracking-[-0.5px] leading-[1.1] text-white sm:text-[36px] md:text-[48px]">
@@ -197,7 +197,7 @@ export default function CourseExperienceSection() {
               href="#counsellor"
               data-counsellor-trigger
               onClick={(e) => e.stopPropagation()}
-              className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
+              className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
             >
               Explore the Platform
             </a>
@@ -212,7 +212,7 @@ export default function CourseExperienceSection() {
         <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={10} />
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Platform Features
             </p>
             <h3 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 md:text-[32px]">
@@ -221,7 +221,7 @@ export default function CourseExperienceSection() {
           </div>
 
           {/* Explorer panel */}
-          <div className="rounded-2xl overflow-hidden border border-neutral-200 shadow-sm grid grid-cols-1 lg:grid-cols-[260px_1fr]">
+          <div data-animate="materialize" className="rounded-2xl overflow-hidden border border-neutral-200 shadow-[0_4px_24px_rgba(0,0,0,0.08)] grid grid-cols-1 lg:grid-cols-[260px_1fr]">
 
             {/* Left nav */}
             <nav className="flex flex-row overflow-x-auto bg-vgu-red-dark lg:flex-col lg:overflow-x-visible">
@@ -257,7 +257,7 @@ export default function CourseExperienceSection() {
               {/* Screen illustration */}
               <div
                 className="flex items-center justify-center p-8 border-b border-neutral-100 md:border-b-0 md:border-r"
-                style={{ background: 'linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #fafaf8 0%, #f4f0ed 100%)' }}
               >
                 <div className="w-full max-w-[260px]">
                   {/* Mini screen */}
@@ -286,7 +286,7 @@ export default function CourseExperienceSection() {
               {/* Detail */}
               <div className="p-5 md:p-8 flex flex-col justify-center">
                 <span
-                  className="inline-flex items-center self-start px-3 py-1 rounded-full text-[11px] font-body font-bold uppercase tracking-wide mb-4"
+                  className="inline-flex items-center self-start px-3 py-1 rounded-full text-[11px] font-heading font-semibold uppercase tracking-wide mb-4"
                   style={{ background: `${panel.color}15`, color: panel.color, border: `1px solid ${panel.color}30` }}
                 >
                   {panel.tag}
@@ -294,12 +294,12 @@ export default function CourseExperienceSection() {
                 <h4 className="font-heading font-bold text-[22px] tracking-[-0.5px] text-neutral-900 leading-[1.2] md:text-[26px]">
                   {panel.title}
                 </h4>
-                <p className="mt-3 text-[15px] font-body leading-[1.7] text-neutral-500">
+                <p className="mt-3 text-[16px] font-body leading-[1.7] text-neutral-500">
                   {panel.desc}
                 </p>
                 <ul className="mt-5 flex flex-col gap-2.5">
                   {panel.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 text-[14px] font-body text-neutral-700">
+                    <li key={b} className="flex items-start gap-2.5 text-[16px] font-body text-neutral-700">
                       <span className="flex-none w-5 h-5 rounded-full bg-vgu-red/10 flex items-center justify-center mt-0.5">
                         <IconCheck size={11} className="text-vgu-red" stroke={3} />
                       </span>

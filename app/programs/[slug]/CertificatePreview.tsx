@@ -40,17 +40,23 @@ export default function CertificatePreview({ programName, programFullName, sampl
 
   return (
     <>
-      <section className="bg-white border-t border-neutral-100 py-16 px-5 md:px-8 lg:px-12">
-        <div className="mx-auto max-w-[1280px]">
+      <section className="relative bg-neutral-900 border-t border-white/[0.06] py-16 px-5 md:px-8 lg:px-12 overflow-hidden">
+        {/* Dot texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none opacity-[0.04]"
+          style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '22px 22px' }}
+        />
+        <div className="relative mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left: copy */}
             <div data-animate="slide-from-left">
-              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Your credential</p>
-              <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[36px]">
+              <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">Your credential</p>
+              <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-white mb-5 md:text-[36px]">
                 Take a Look at Your Future Degree
               </h2>
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-6">
+              <p className="text-[16px] font-body leading-[1.7] text-white/65 mb-6">
                 Your {programName} certificate is identical to the one given to on-campus graduates.
                 Same design, same university seal - with no mention of &quot;online&quot; anywhere on the document.
               </p>
@@ -62,14 +68,16 @@ export default function CertificatePreview({ programName, programFullName, sampl
                   'Valid for higher studies, civil services, and professional licensing',
                 ].map(point => (
                   <li key={point} className="flex items-start gap-3">
-                    <IconShieldCheck size={16} className="text-vgu-red flex-none mt-0.5" />
-                    <span className="text-[14px] font-body text-neutral-700 leading-snug">{point}</span>
+                    <div className="w-6 h-6 rounded-md flex-none flex items-center justify-center bg-vgu-yellow/15 mt-0.5">
+                      <IconShieldCheck size={13} className="text-vgu-yellow" />
+                    </div>
+                    <span className="text-[14px] font-body text-white/75 leading-snug">{point}</span>
                   </li>
                 ))}
               </ul>
               <button
                 onClick={() => setOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
+                className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:brightness-90 text-white font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
               >
                 <IconZoomIn size={17} />
                 View Sample Certificate
@@ -146,7 +154,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
 
 function Certificate({ programName, programFullName }: { programName: string; programFullName: string }) {
   return (
-    <div className="relative w-full aspect-[4/3] bg-[#fdfaf6] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.22)] border-[6px] border-vgu-red-dark">
+    <div className="relative w-full aspect-[4/3] bg-[#fdfaf6] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] border-[6px] border-vgu-red-dark">
 
       {/* Inner decorative borders */}
       <div className="absolute inset-3 border border-vgu-red/25 rounded-xl pointer-events-none" />

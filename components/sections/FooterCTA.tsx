@@ -1,4 +1,4 @@
-import { IconArrowRight } from '@tabler/icons-react'
+import { IconArrowRight, IconHeadset } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { NEXT_BATCH } from '@/lib/constants'
 
@@ -7,7 +7,7 @@ export default function FooterCTA() {
     <section className="sketch-hover-group relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
       <SketchFlourish shape="monogram" color="yellow" opacity={0.22} strokeWidth={7} />
       <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[1280px] flex flex-col items-center text-center gap-6">
-        <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-white/55">
+        <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/55">
           Start Today
         </p>
         <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-white md:text-[32px] lg:text-[48px]">
@@ -29,6 +29,7 @@ export default function FooterCTA() {
             href="#counsellor"
             className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 text-white hover:text-white hover:bg-white/15 hover:border-white/60 font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] transition-all duration-150"
           >
+            <IconHeadset size={16} />
             Talk to a Counsellor
           </a>
         </div>

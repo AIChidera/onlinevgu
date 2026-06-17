@@ -22,7 +22,7 @@ export default function ApplyPage() {
       <Breadcrumb items={[{ label: 'Apply' }]} />
       <div className="bg-gradient-to-b from-vgu-beige/40 to-white">
         <div className="mx-auto max-w-content px-5 py-12 md:px-12 md:py-16">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Admissions Open
           </p>
           <h1 className="font-heading font-bold text-[36px] tracking-[-0.5px] leading-[1.05] text-neutral-900 md:text-[48px] lg:text-[52px]">
@@ -41,10 +41,10 @@ export default function ApplyPage() {
             <h2 className="font-heading text-[26px] font-bold text-neutral-900 mb-2">
               Talk to a counsellor
             </h2>
-            <p className="text-[15px] text-neutral-600 mb-6">
+            <p className="text-[16px] text-neutral-600 mb-6">
               Fill in your details and we&apos;ll call you within 2 hours, free, no obligation.
             </p>
-            <div className="rounded-2xl border border-neutral-200 p-5 md:p-8 bg-white shadow-sm">
+            <div className="rounded-2xl border border-neutral-200 p-5 md:p-8 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.07)]">
               <LeadForm source="apply-page" />
             </div>
           </div>
@@ -54,10 +54,10 @@ export default function ApplyPage() {
             <h2 className="font-heading text-[26px] font-bold text-neutral-900 mb-2">
               Download brochure
             </h2>
-            <p className="text-[15px] text-neutral-600 mb-6">
+            <p className="text-[16px] text-neutral-600 mb-6">
               Get the full program guide with fee structure, curriculum, and placement stats.
             </p>
-            <div className="rounded-2xl border border-neutral-200 p-5 md:p-8 bg-white shadow-sm">
+            <div className="rounded-2xl border border-neutral-200 p-5 md:p-8 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.07)]">
               <BrochureForm />
             </div>
 

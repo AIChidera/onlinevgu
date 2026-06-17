@@ -26,6 +26,8 @@ import SpecialisationCards from './SpecialisationCards'
 import CareerOutcomes from './CareerOutcomes'
 
 import FacultySection from './FacultySection'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import SketchCircle from '@/components/ui/sketch/SketchCircle'
 
 // Below-fold client components - lazy loaded to reduce initial JS bundle
 const ActivityTicker      = dynamic(() => import('./ActivityTicker'),      { ssr: false })
@@ -803,7 +805,8 @@ export default async function ProgramPage({ params }: Props) {
   const eligibility     = fallback(prog.eligibility,     hardcoded?.eligibility)
   const topHirers       = fallback(prog.topHirers,       hardcoded?.topHirers)
 
-  const seatsFilled     = getSeatsFilled(prog.slug)
+  const totalProgramCount = allSanityProgs.length > 0 ? allSanityProgs.length : PROGRAMS.length
+  const seatsFilled       = getSeatsFilled(prog.slug)
   const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
 
@@ -880,10 +883,11 @@ export default async function ProgramPage({ params }: Props) {
       <Breadcrumb items={[{ label: 'All Courses', href: '/programs' }, { label: prog.name }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative flex items-center overflow-hidden">
+      <section className="sketch-hover-group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         {/* Background image + brand-red overlay (50%) - swap heroImage for a program-specific asset */}
         <Image src={heroImage} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+        <SketchFlourish shape="swoop" color="yellow" opacity={0.05} trigger="hover" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
@@ -905,10 +909,10 @@ export default async function ProgramPage({ params }: Props) {
             <h1 className="anim-load-left font-heading font-bold tracking-[-0.5px] leading-[1.05] text-white text-[38px] sm:text-[48px] lg:text-[56px]" style={{ animationDelay: '70ms' }}>
               {prog.name}
             </h1>
-            <p className="anim-load-left mt-2.5 text-[15px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
+            <p className="anim-load-left mt-2.5 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]" style={{ animationDelay: '140ms' }}>
               {prog.description}
             </p>
 
@@ -923,9 +927,6 @@ export default async function ProgramPage({ params }: Props) {
                   EMI from {prog.emi}
                 </span>
               )}
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-4 py-2 text-[13px] font-body font-semibold text-white">
-                ★ 4.8/5 · 2,400+ reviews
-              </span>
             </div>
 
             {/* Next batch chip */}
@@ -944,18 +945,20 @@ export default async function ProgramPage({ params }: Props) {
               <a
                 href="#counsellor"
                 data-apply-trigger
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+                data-program={prog.name}
+                data-program-level={prog.level}
+                className="inline-flex items-center gap-2 rounded-full border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white font-heading font-semibold text-[16px] px-9 py-4 transition-all duration-200 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
               >
                 Apply Now
-                <IconArrowRight size={16} />
+                <IconArrowRight size={17} />
               </a>
               <a
                 href="#"
                 data-brochure-trigger
                 data-program={prog.name}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white bg-transparent hover:bg-white text-white hover:text-vgu-red font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
+                className="inline-flex items-center gap-1.5 rounded-md border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white font-heading font-semibold text-[15px] px-6 py-3.5 transition-all duration-200"
               >
-                <IconDownload size={16} />
+                <IconDownload size={14} />
                 Download Brochure
               </a>
             </div>
@@ -969,7 +972,7 @@ export default async function ProgramPage({ params }: Props) {
       <PlacementStatsStrip slug={prog.slug} />
 
       {/* ══ Main content ══ */}
-      <section className="bg-white py-12 px-5 md:px-8 lg:px-12 md:py-16">
+      <section className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
         <div className="mx-auto max-w-[1280px]">
 
           {/* Back to Programs */}
@@ -986,14 +989,17 @@ export default async function ProgramPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 items-start">
 
             {/* ── Left ── */}
-            <div className="flex flex-col gap-14 min-w-0">
+            <div className="flex flex-col min-w-0 divide-y divide-neutral-100 [&>*]:pt-14 [&>*:first-child]:pt-0">
 
               {/* Highlights */}
               <div>
                 <div data-animate="fade-up">
-                  <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">What you get</p>
-                  <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
-                    Program Highlights
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">What you get</p>
+                  <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+                    <span className="relative inline-block">
+                      Program Highlights
+                      <SketchCircle color="red" trigger="in-view" />
+                    </span>
                   </h2>
                 </div>
                 <ProgramHighlights highlights={highlights} />
@@ -1003,7 +1009,7 @@ export default async function ProgramPage({ params }: Props) {
               {curriculum && (
                 <div>
                   <div data-animate="fade-up">
-                    <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
+                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
                     <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
                       What You&apos;ll Study
                     </h2>
@@ -1013,9 +1019,18 @@ export default async function ProgramPage({ params }: Props) {
               )}
 
               {/* Coursera Premium Banner */}
-              <div className="rounded-2xl overflow-hidden">
-                <div className="bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                  <div className="flex items-center gap-3.5 flex-1 min-w-0">
+              <div data-animate="fade-up" className="rounded-2xl overflow-hidden">
+                <div className="relative bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                  {/* Dot texture */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                    style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                  />
+                  {/* Depth gradient */}
+                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent to-black/20" />
+
+                  <div className="relative flex items-center gap-3.5 flex-1 min-w-0">
                     <div className="flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
                       <Image
                         src="/assets/trust/coursera.svg"
@@ -1026,18 +1041,27 @@ export default async function ProgramPage({ params }: Props) {
                       />
                     </div>
                     <div>
-                      <p className="font-heading font-bold text-[15px] text-white leading-tight">
-                        Coursera Premium - Included Free
-                      </p>
-                      <p className="text-[12px] font-body text-white/75 leading-snug mt-0.5">
-                        7,000+ courses from Google, IBM, Meta &amp; top universities - free for the full duration of your program
+                      <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                        <p className="font-heading font-bold text-[15px] text-white leading-tight">
+                          Coursera Premium
+                        </p>
+                        <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
+                          Included Free
+                        </span>
+                      </div>
+                      <p className="text-[12px] font-body text-white/75 leading-snug">
+                        7,000+ courses from Google, IBM, Meta &amp; top universities - for the full duration of your program
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] font-body text-white/85 flex-none">
-                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Stackable certifications</span>
-                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Learn at your pace</span>
-                    <span className="flex items-center gap-1.5"><span className="text-vgu-yellow font-bold">✓</span> Zero extra cost</span>
+
+                  <div className="relative flex flex-wrap gap-2">
+                    {['Stackable certifications', 'Learn at your pace', 'Zero extra cost'].map(item => (
+                      <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[11px] font-body text-white/90">
+                        <span className="text-vgu-yellow font-bold text-[10px]">✓</span>
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1046,7 +1070,7 @@ export default async function ProgramPage({ params }: Props) {
               {specialisations.length > 0 && (
                 <div>
                   <div data-animate="fade-up">
-                    <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
+                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
                     <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                       Specialisations
                     </h2>
@@ -1058,7 +1082,7 @@ export default async function ProgramPage({ params }: Props) {
               {/* Career outcomes */}
               <div>
                 <div data-animate="fade-up">
-                  <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">After graduation</p>
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">After graduation</p>
                   <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                     Career Outcomes
                   </h2>
@@ -1066,7 +1090,7 @@ export default async function ProgramPage({ params }: Props) {
                 <CareerOutcomes roles={careerRoles} />
                 {topHirers.length > 0 && (
                   <div className="mt-6">
-                    <p className="text-[12px] font-body font-bold uppercase tracking-[0.06em] text-neutral-400 mb-4">Top hirers</p>
+                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-4">Top hirers</p>
                     <HirerStrip hirers={topHirers} />
                   </div>
                 )}
@@ -1075,7 +1099,7 @@ export default async function ProgramPage({ params }: Props) {
               {/* Eligibility */}
               <div>
                 <div data-animate="fade-up">
-                  <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">Entry criteria</p>
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Entry criteria</p>
                   <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                     Eligibility
                   </h2>
@@ -1094,7 +1118,7 @@ export default async function ProgramPage({ params }: Props) {
                         key={e}
                         data-animate="fade-up"
                         style={{ animationDelay: `${ei * 80}ms` }}
-                        className="group/crit flex items-start gap-4 rounded-2xl bg-white border border-neutral-200 p-5 hover:border-neutral-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(17,24,39,0.07)] transition-all duration-200"
+                        className="group/crit flex items-center gap-4 rounded-2xl bg-white border border-neutral-200 p-5 hover:border-vgu-red/25 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(17,24,39,0.07)] transition-all duration-200"
                       >
                         <div
                           className="w-10 h-10 rounded-xl flex-none flex items-center justify-center text-[15px] font-heading font-black text-white shadow-sm transition-transform duration-200 group-hover/crit:scale-110"
@@ -1102,7 +1126,7 @@ export default async function ProgramPage({ params }: Props) {
                         >
                           {String(ei + 1).padStart(2, '0')}
                         </div>
-                        <p className="text-[14px] font-body leading-snug text-neutral-800 pt-2">{e}</p>
+                        <p className="text-[16px] font-body leading-snug text-neutral-800">{e}</p>
                       </div>
                     )
                   })}
@@ -1133,42 +1157,81 @@ export default async function ProgramPage({ params }: Props) {
       <RelatedPrograms programs={relatedPrograms} />
 
       {/* ══ All Programs CTA ══ */}
-      <section className="bg-neutral-50 border-t border-neutral-200 py-16 px-5 md:px-8 lg:px-12">
-        <div data-animate="fade-up" className="mx-auto max-w-[1280px] text-center">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+      <section className="sketch-hover-group relative bg-neutral-50 border-t border-neutral-200 py-20 px-5 md:px-8 lg:px-12 overflow-hidden">
+        {/* Subtle dot grid texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none opacity-[0.035]"
+          style={{ backgroundImage: 'radial-gradient(circle, #111827 1px, transparent 1px)', backgroundSize: '24px 24px' }}
+        />
+        <SketchFlourish shape="wave" color="red" opacity={0.06} trigger="hover" />
+        <div data-animate="fade-up" className="relative mx-auto max-w-[1280px] text-center">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Explore more
           </p>
-          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-3 lg:text-[32px]">
+          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-5 lg:text-[32px]">
             Not sure this is the right program?
           </h2>
+
+          {/* Context chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
+            {[`${totalProgramCount} programs`, '7 disciplines', 'No entrance exam', '100% online'].map(chip => (
+              <span key={chip} className="rounded-full bg-white border border-neutral-200 px-3.5 py-1.5 text-[12px] font-heading font-semibold text-neutral-600 shadow-sm">
+                {chip}
+              </span>
+            ))}
+          </div>
+
           <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[440px] mx-auto mb-8">
-            Browse all {PROGRAMS.length} UG and PG programs and find the one that fits your goals and background.
+            Browse all {totalProgramCount} UG and PG programs and find the one that fits your goals and background.
           </p>
-          <Link
-            href="/programs"
-            className="inline-flex items-center gap-2.5 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_2px_8px_rgba(192,64,54,0.12)]"
-          >
-            <IconArrowRight size={16} className="rotate-180" />
-            All Programs
-          </Link>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/programs"
+              className="inline-flex items-center gap-2.5 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_2px_8px_rgba(192,64,54,0.12)]"
+            >
+              <IconArrowRight size={16} className="rotate-180" />
+              All Programs
+            </Link>
+            <a
+              href="#counsellor"
+              data-counsellor-trigger
+              className="inline-flex items-center gap-2 rounded-full border-2 border-neutral-300 bg-white hover:border-vgu-red hover:text-vgu-red text-neutral-700 px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200"
+            >
+              <IconHeadset size={16} />
+              Talk to a Counsellor
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ══ Mobile sticky CTA ══ */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-neutral-200 px-4 pt-3 flex items-center gap-3" style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
-        <a
-          href="#counsellor"
-          data-apply-trigger
-          className="flex-1 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red py-2.5 text-[14px] font-semibold font-heading text-center transition-all duration-150"
-        >
-          Apply Now
-        </a>
-        <a
-          href="#counsellor"
-          className="flex-1 rounded-full border-2 border-neutral-200 hover:border-vgu-red text-neutral-700 hover:text-vgu-red py-2.5 text-[14px] font-semibold font-heading text-center transition-all duration-150"
-        >
-          Talk to Counsellor
-        </a>
+      <div
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-neutral-200 shadow-[0_-6px_20px_rgba(17,24,39,0.08)] px-4 pt-2.5"
+        style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
+      >
+        <p className="text-[11px] font-body text-neutral-500 text-center mb-2.5">
+          {prog.feePerYear}{prog.emi ? ` · EMI from ${prog.emi}` : ''}
+        </p>
+        <div className="flex items-center gap-3">
+          <a
+            href="#counsellor"
+            data-apply-trigger
+            data-program={prog.name}
+            data-program-level={prog.level}
+            className="flex-1 rounded-full bg-vgu-red hover:brightness-90 text-white py-3 text-[14px] font-semibold font-heading text-center transition-all duration-150 shadow-[0_4px_14px_rgba(192,64,54,0.32)]"
+          >
+            Apply Now
+          </a>
+          <a
+            href="#counsellor"
+            data-program={prog.name}
+            className="flex-1 rounded-full bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/[0.06] py-3 text-[14px] font-semibold font-heading text-center transition-all duration-150"
+          >
+            Talk to Counsellor
+          </a>
+        </div>
       </div>
 
       <ScrollToTop />
@@ -1186,7 +1249,7 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
         className="px-6 pt-6 pb-4"
         style={{ background: 'linear-gradient(135deg, #C04036 0%, #821a12 100%)' }}
       >
-        <p className="text-[11px] font-body font-bold uppercase tracking-[0.08em] text-white/55 mb-1">Annual Fee</p>
+        <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-white/55 mb-1">Annual Fee</p>
         <div className="font-heading font-black text-[40px] leading-none text-white">{prog.feePerYear}</div>
         <p className="text-[13px] font-body text-white/65 mt-2">Total program cost: {prog.totalFee}</p>
         {prog.emi && (
@@ -1249,7 +1312,8 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
         <a
           href="#counsellor"
           data-apply-trigger
-          className="w-full flex items-center justify-center gap-2 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-200 mb-3 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
+          data-program={prog.name}
+          className="w-full flex items-center justify-center gap-2 rounded-full bg-vgu-red hover:brightness-90 text-white py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-200 mb-3 shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_6px_24px_rgba(192,64,54,0.42)]"
         >
           Apply Now
           <IconArrowRight size={16} />
@@ -1260,7 +1324,7 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
           href="#"
           data-brochure-trigger
           data-program={prog.name}
-          className="w-full flex items-center justify-center gap-2 rounded-full border-2 border-vgu-red bg-transparent hover:bg-vgu-red text-vgu-red hover:text-white py-3 text-[14px] font-semibold font-heading text-center transition-all duration-200"
+          className="w-full flex items-center justify-center gap-2 rounded-full bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/[0.06] py-3 text-[14px] font-semibold font-heading text-center transition-all duration-200"
         >
           <IconDownload size={15} />
           Download Brochure
@@ -1269,6 +1333,7 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
         {/* Counsellor link */}
         <a
           href="#counsellor"
+          data-program={prog.name}
           className="w-full flex items-center justify-center gap-1.5 text-[13px] font-body font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150 mt-2 py-1"
         >
           <IconHeadset size={14} />
@@ -1276,13 +1341,12 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
         </a>
 
         {/* Trust signals */}
-        <div className="mt-5 pt-5 border-t border-neutral-100 flex flex-wrap gap-2">
+        <div className="mt-5 pt-5 border-t border-neutral-100 flex gap-2">
           {[
             'UGC Recognised',
             'NAAC A+',
-            'No entrance exam',
           ].map(label => (
-            <span key={label} className="inline-flex items-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1.5 text-[11px] font-body font-semibold text-neutral-600">
+            <span key={label} className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1.5 text-[11px] font-body font-semibold text-neutral-600">
               <IconShieldCheck size={11} className="text-vgu-red flex-none" />
               {label}
             </span>

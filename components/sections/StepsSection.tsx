@@ -4,6 +4,7 @@ import {
   IconSchool,
   IconCreditCard,
   IconRocket,
+  IconArrowRight,
 } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
@@ -35,9 +36,8 @@ const STEPS = [
 ]
 
 const MICROCOPY = [
-  { label: 'Next intake',            value: NEXT_BATCH       },
-  { label: 'Entrance exam',          value: 'Not required'   },
-  { label: 'Counsellor calls within', value: '2 hours'       },
+  { label: 'Next intake',             value: NEXT_BATCH },
+  { label: 'Counsellor calls within', value: '2 hours'  },
 ]
 
 export default function StepsSection() {
@@ -60,13 +60,13 @@ export default function StepsSection() {
       <div className="relative z-10 mx-auto max-w-[1280px]">
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-12 md:mb-14">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-3">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Simple Admissions
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
             From form to first class, in under 30 minutes.
           </h2>
-          <p className="mt-4 text-[15px] font-body leading-[1.7] text-neutral-600 max-w-[520px] mx-auto lg:text-[17px]">
+          <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-600 max-w-[520px] mx-auto lg:text-[17px]">
             No entrance exam. No campus visit. Enrol 100% online.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function StepsSection() {
           {/* Dashed connector - desktop 4-col only */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute hidden lg:block top-[75px] left-[12.5%] right-[12.5%] border-t-2 border-dashed border-vgu-red/[0.45]"
+            className="pointer-events-none absolute hidden lg:block top-[75px] left-[12.5%] right-[12.5%] border-t-2 border-dashed border-vgu-red/60"
           />
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 gap-y-10 md:gap-8 md:gap-y-12">
@@ -89,7 +89,16 @@ export default function StepsSection() {
               >
                 {/* Step badge + circle */}
                 <div className="relative mb-6 pt-3">
-                  <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10 rounded-full px-3 py-0.5 text-[11px] font-body font-bold text-white whitespace-nowrap bg-vgu-red">
+                  {/* Faded watermark number */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none select-none absolute inset-0 flex items-center justify-center font-heading font-black text-vgu-red/[0.10]"
+                    style={{ fontSize: '112px', lineHeight: 1, zIndex: -1 }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+
+                  <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10 rounded-full px-3 py-0.5 text-[11px] font-heading font-semibold text-white whitespace-nowrap bg-vgu-red">
                     {step.badge}
                   </div>
 
@@ -97,7 +106,7 @@ export default function StepsSection() {
                     className={[
                       'group/circle relative z-0 flex items-center justify-center rounded-full bg-white',
                       'w-[76px] h-[76px] mt-[10px] md:w-[100px] md:h-[100px] md:mt-[14px] border-2 border-vgu-red',
-                      'transition-all duration-300',
+                      'shadow-[0_4px_16px_rgba(192,64,54,0.12)] transition-all duration-300',
                       'hover:bg-vgu-red hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.30)]',
                     ].join(' ')}
                   >
@@ -114,10 +123,10 @@ export default function StepsSection() {
                   </div>
                 </div>
 
-                <h3 className="font-heading font-semibold text-[15px] leading-[1.3] text-neutral-900 mb-2 md:font-bold md:text-[18px]">
+                <h3 className="font-heading font-semibold text-[16px] leading-[1.3] text-neutral-900 mb-2 md:font-bold md:text-[18px]">
                   {step.title}
                 </h3>
-                <p className="text-[14px] font-body leading-[1.7] text-neutral-500 max-w-[200px]">
+                <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[200px]">
                   {step.body}
                 </p>
               </div>
@@ -130,9 +139,10 @@ export default function StepsSection() {
           <a
             href="#counsellor"
             data-apply-trigger
-            className="inline-flex items-center gap-2 rounded-full border-2 border-vgu-red text-vgu-red bg-white hover:bg-vgu-red hover:text-white transition-all duration-150 font-heading font-semibold text-[18px] py-[18px] px-[52px] shadow-[0_8px_24px_rgba(192,64,54,0.30)]"
+            className="inline-flex items-center gap-2.5 rounded-full border-2 border-vgu-red text-vgu-red bg-white hover:bg-vgu-red hover:text-white transition-all duration-150 font-heading font-semibold text-[18px] py-[18px] px-[52px] shadow-[0_8px_24px_rgba(192,64,54,0.30)]"
           >
             Apply Now
+            <IconArrowRight size={18} />
           </a>
 
           {/* Microcopy row */}

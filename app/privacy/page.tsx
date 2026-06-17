@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         style={{ background: 'linear-gradient(135deg, #110805 0%, #821a12 50%, #110805 100%)' }}
       >
         <div className="mx-auto max-w-[760px]">
-          <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
+          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
             Legal
           </p>
           <h1 className="font-heading font-bold text-[36px] md:text-[48px] tracking-[-1px] leading-[1.15] text-white mb-3">

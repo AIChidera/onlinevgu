@@ -3,7 +3,7 @@
 /**
  * Large abstract background flourish (Manipal-style). Sits behind a section's
  * content at low opacity. Draws itself in over ~2s on parent hover, erases out
- * on hover leave. The flourish is purely decorative — pointer-events-none.
+ * on hover leave. The flourish is purely decorative (pointer-events-none).
  *
  * The parent section MUST:
  *   1. Have `relative` positioning (so the absolute flourish is contained).
@@ -21,7 +21,7 @@ export type FlourishShape = 'swoop' | 'loop' | 'arc' | 'wave' | 'monogram'
 interface Props {
   shape?:       FlourishShape
   color?:       'red' | 'yellow' | 'red-dark' | 'white'
-  /** 0-1. Default 0.10 — keep it whisper-faint per Manipal's reference. */
+  /** 0-1. Default 0.10, keep it whisper-faint per Manipal's reference. */
   opacity?:     number
   strokeWidth?: number
   durationMs?:  number
