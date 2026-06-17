@@ -37,9 +37,8 @@ function RelatedCard({ p, delay = 0 }: { p: ProgCard; delay?: number }) {
       data-animate="materialize"
       style={{ animationDelay: `${delay}ms` }}
       className="group flex flex-col rounded-2xl bg-white border border-neutral-200 overflow-hidden hover:border-transparent hover:-translate-y-1.5 transition-all duration-300 h-full"
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onMouseEnter={(e) => { (e.currentTarget as any).style.boxShadow = lv.hoverRing }}
-      onMouseLeave={(e) => { (e.currentTarget as any).style.boxShadow = '' }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = lv.hoverRing }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '' }}
     >
       {/* Image / gradient header */}
       <div className="relative h-[148px] flex-none overflow-hidden" style={{ background: lv.grad }}>
