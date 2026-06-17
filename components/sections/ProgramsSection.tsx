@@ -141,20 +141,21 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
 // ─────────────────────────────────────────────────────────────────────────────
 function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; meta: ProgramMeta; delay?: number }) {
   const levelLabel = p.level === 'ug' ? 'UG' : p.level === 'pg' ? 'PG' : 'Cert'
+  const hoverRing  = p.level === 'ug'
+    ? '0 0 0 2px #FFA412, 0 12px 32px rgba(0,0,0,0.12)'
+    : '0 0 0 2px #C04036, 0 12px 32px rgba(192,64,54,0.14)'
 
   return (
     <Link
       href={`/programs/${p.slug}`}
       data-animate="materialize"
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delay}ms`, boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}
       className="group/card flex flex-col rounded-[16px] overflow-hidden bg-white
-                 border border-neutral-200 shadow-[0_2px_12px_rgba(0,0,0,0.07)]
-                 transition-all duration-300 hover:-translate-y-1.5
-                 hover:shadow-[0_12px_32px_rgba(192,64,54,0.14)]"
+                 border border-neutral-200 transition-all duration-300 hover:-translate-y-1.5
+                 hover:border-transparent"
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = hoverRing }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.07)' }}
     >
-      {/* 3px accent top - yellow for popular, red otherwise */}
-      <div className={`h-[4px] w-full ${p.popular ? 'bg-vgu-yellow' : 'bg-vgu-red'}`} />
-
       {/* Image */}
       <div className="relative h-[200px] w-full flex-none overflow-hidden">
         {p.image ? (
@@ -238,19 +239,21 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
 // ─────────────────────────────────────────────────────────────────────────────
 function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; meta: ProgramMeta; delay?: number }) {
   const levelLabel = p.level === 'ug' ? 'UG' : p.level === 'pg' ? 'PG' : 'Cert'
+  const hoverRing  = p.level === 'ug'
+    ? '0 0 0 2px #FFA412, 0 12px 32px rgba(0,0,0,0.12)'
+    : '0 0 0 2px #C04036, 0 12px 32px rgba(192,64,54,0.14)'
 
   return (
     <Link
       href={`/programs/${p.slug}`}
       data-animate="materialize"
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delay}ms`, boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}
       className="group/card flex flex-col rounded-[16px] overflow-hidden bg-white
-                 border border-neutral-200 shadow-[0_2px_12px_rgba(0,0,0,0.07)]
-                 transition-all duration-300 hover:-translate-y-1
-                 hover:shadow-[0_12px_32px_rgba(192,64,54,0.14)]"
+                 border border-neutral-200 transition-all duration-300 hover:-translate-y-1
+                 hover:border-transparent"
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = hoverRing }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.07)' }}
     >
-      <div className={`h-[4px] w-full ${p.popular ? 'bg-vgu-yellow' : 'bg-vgu-red'}`} />
-
       <div className="relative h-[180px] w-full flex-none overflow-hidden">
         {p.image ? (
           <Image
