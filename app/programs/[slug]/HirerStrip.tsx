@@ -1,6 +1,7 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
+import BrandIcon, { BRAND_ICON_NAMES } from '@/components/ui/BrandIcon'
 
 interface BrandMeta { abbr: string; bg: string; abbrSize: string; label: string }
 
@@ -127,21 +128,22 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         >
         {safe.map((h) => {
           const meta = BRAND_META[h] ?? getFallback(h)
+          const hasSvg = BRAND_ICON_NAMES.has(h)
           return (
             <div
               key={h}
               className="group bg-white hover:bg-vgu-red/[0.03] transition-colors duration-150 px-5 py-4 flex items-center gap-3 cursor-default"
             >
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center flex-none shadow-sm transition-transform duration-200 group-hover:scale-110"
-                style={{ background: meta.bg }}
-              >
-                <span
-                  className="font-heading font-black leading-none text-white text-center"
-                  style={{ fontSize: meta.abbrSize }}
-                >
-                  {meta.abbr}
-                </span>
+              <div className="w-11 h-11 rounded-xl flex-none overflow-hidden shadow-sm transition-transform duration-200 group-hover:scale-110">
+                {hasSvg ? (
+                  <BrandIcon name={h} />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center" style={{ background: meta.bg }}>
+                    <span className="font-heading font-black leading-none text-white text-center" style={{ fontSize: meta.abbrSize }}>
+                      {meta.abbr}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="min-w-0">
                 <p className="font-heading font-bold text-[13px] text-neutral-900 leading-tight truncate">{h}</p>

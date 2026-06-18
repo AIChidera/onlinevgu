@@ -6,6 +6,7 @@ import {
   IconDeviceMobile,
   IconCreditCard,
 } from '@tabler/icons-react'
+import BrandIcon from '@/components/ui/BrandIcon'
 import { FOUNDING_YEAR } from '@/lib/constants'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
@@ -40,10 +41,6 @@ const FEATURES: Feature[] = [
 ]
 
 const COURSERA_PARTNERS = ['Google', 'IBM', 'Meta', 'AWS', 'Microsoft', 'DeepLearning.AI']
-const PARTNER_COLORS: Record<string, string> = {
-  Google: '#4285F4', IBM: '#0530AD', Meta: '#0866FF',
-  AWS: '#FF9900', Microsoft: '#00A4EF', 'DeepLearning.AI': '#E84393',
-}
 
 export default function FeaturesSection() {
   return (
@@ -86,8 +83,8 @@ export default function FeaturesSection() {
             <div className="p-7 lg:p-9 flex flex-col justify-between border-b border-white/10 md:border-b-0 md:border-r">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#0056D2] flex items-center justify-center flex-none shadow-lg">
-                    <span className="font-black text-white text-[16px]">C</span>
+                  <div className="w-10 h-10 rounded-xl overflow-hidden flex-none shadow-lg">
+                    <BrandIcon name="Coursera" />
                   </div>
                   <div>
                     <p className="font-heading font-bold text-[16px] text-white">Coursera</p>
@@ -115,11 +112,8 @@ export default function FeaturesSection() {
                     key={name}
                     className="flex flex-col items-center gap-2 rounded-xl py-3 px-2 bg-white/[0.07] border border-white/10 transition-colors duration-150 hover:bg-white/[0.12]"
                   >
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-black text-white"
-                      style={{ background: PARTNER_COLORS[name] }}
-                    >
-                      {name[0]}
+                    <div className="w-8 h-8 rounded-lg overflow-hidden flex-none">
+                      <BrandIcon name={name} />
                     </div>
                     <span className="text-[11px] font-body text-white/75 text-center leading-tight">{name}</span>
                   </div>

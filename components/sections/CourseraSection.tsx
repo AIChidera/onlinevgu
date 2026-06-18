@@ -1,14 +1,8 @@
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
+import BrandIcon from '@/components/ui/BrandIcon'
 
-const PROVIDERS = [
-  { name: 'Google', color: '#4285F4' },
-  { name: 'IBM', color: '#0530AD' },
-  { name: 'Meta', color: '#0866FF' },
-  { name: 'AWS', color: '#FF9900' },
-  { name: 'Microsoft', color: '#00A4EF' },
-  { name: 'DeepLearning.AI', color: '#E84393' },
-]
+const PROVIDERS = ['Google', 'IBM', 'Meta', 'AWS', 'Microsoft', 'DeepLearning.AI']
 
 export default function CourseraSection() {
   return (
@@ -29,13 +23,15 @@ export default function CourseraSection() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-2">
-            {PROVIDERS.map((p) => (
+            {PROVIDERS.map((name) => (
               <div
-                key={p.name}
-                className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2"
+                key={name}
+                className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5"
               >
-                <div className="h-2.5 w-2.5 rounded-full flex-none" style={{ background: p.color }} />
-                <span className="text-[13px] font-heading font-semibold text-neutral-700">{p.name}</span>
+                <div className="w-5 h-5 rounded flex-none overflow-hidden">
+                  <BrandIcon name={name} />
+                </div>
+                <span className="text-[13px] font-heading font-semibold text-neutral-700">{name}</span>
               </div>
             ))}
           </div>
@@ -52,8 +48,8 @@ export default function CourseraSection() {
           <div className="relative w-full max-w-[400px] rounded-2xl bg-white border border-neutral-200 p-8 shadow-xl">
             {/* Coursera logo area */}
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-12 w-12 rounded-xl bg-[#0056D2] flex items-center justify-center flex-none">
-                <span className="font-black text-white text-[20px]">C</span>
+              <div className="h-12 w-12 rounded-xl overflow-hidden flex-none">
+                <BrandIcon name="Coursera" />
               </div>
               <div>
                 <div className="font-heading text-[18px] font-bold text-neutral-900">Coursera</div>
