@@ -260,9 +260,9 @@ export default function CourseExperienceSection() {
                 className="flex items-center justify-center p-8 border-b border-neutral-100 md:border-b-0 md:border-r"
                 style={{ background: 'linear-gradient(135deg, #fafaf8 0%, #f4f0ed 100%)' }}
               >
-                <div className="w-full max-w-[260px]">
+                <div key={activePanel} className="w-full max-w-[260px] mockup-entry">
                   {/* Mini screen */}
-                  <div className="rounded-xl border border-neutral-200 overflow-hidden shadow-md">
+                  <div className="rounded-xl border border-neutral-200 overflow-hidden shadow-md mockup-float">
                     <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-50 border-b border-neutral-100">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 rounded-full bg-red-300" />
@@ -340,6 +340,23 @@ export default function CourseExperienceSection() {
   )
 }
 
+// ── Brand logo with unoptimized fetch + clean grey fallback ──────
+function BrandLogo({ src, alt, w, h }: { src: string; alt: string; w: number; h: number }) {
+  const [err, setErr] = useState(false)
+  if (err) return <div className="w-full h-full rounded-sm bg-neutral-200" />
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={w}
+      height={h}
+      unoptimized
+      className="object-contain w-full h-full"
+      onError={() => setErr(true)}
+    />
+  )
+}
+
 // ── Per-panel contextual mockup sketches ──────────────────────────
 
 function PanelMockup({ index, color }: { index: number; color: string }) {
@@ -363,7 +380,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
             <p className="text-[7px] text-white/50">Dr. Arjun Mehta · Week 4 / 12</p>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
-            <div className="h-full w-[45%]" style={{ background: color }} />
+            <div className="h-full w-[45%] bar-fill" style={{ background: color }} />
           </div>
         </div>
         <div className="space-y-1.5 flex-1">
@@ -374,7 +391,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           ].map((m, i) => (
             <div key={i} className="flex items-start gap-1.5">
               <div className="w-3.5 h-3.5 rounded-full flex-none overflow-hidden flex-shrink-0">
-                <Image src={m.photo} alt={m.name} width={14} height={14} className="object-cover w-full h-full" />
+                <Image src={m.photo} alt={m.name} width={14} height={14} unoptimized className="object-cover w-full h-full" />
               </div>
               <p className="text-[7px] leading-tight">
                 <span className="font-bold text-white/70">{m.name}: </span>
@@ -391,7 +408,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
         <div className="rounded-lg bg-white/[0.06] border border-white/10 p-2.5">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-full flex-none overflow-hidden">
-              <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={32} height={32} className="object-cover w-full h-full" />
+              <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={32} height={32} unoptimized className="object-cover w-full h-full" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[9px] font-bold text-white leading-tight">Rahul Verma</p>
@@ -430,7 +447,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           <span className="text-[8px] font-bold text-vgu-yellow">12:45</span>
         </div>
         <div className="h-0.5 rounded-full bg-white/10 mb-1">
-          <div className="h-full rounded-full w-3/5" style={{ background: color }} />
+          <div className="h-full rounded-full w-3/5 bar-fill" style={{ background: color }} />
         </div>
         <p className="text-[8px] font-semibold text-white/80 leading-tight mb-1">
           Which best describes Porter&apos;s Five Forces?
@@ -480,7 +497,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
         <div className="rounded-lg overflow-hidden border border-white/15">
           <div className="h-8 flex items-center px-2 gap-1.5" style={{ background: '#0056D2' }}>
             <div className="w-4 h-4 rounded overflow-hidden flex-none bg-white">
-              <Image src="https://logo.clearbit.com/coursera.org" alt="Coursera" width={16} height={16} className="object-contain w-full h-full" />
+              <BrandLogo src="https://logo.clearbit.com/coursera.org" alt="Coursera" w={16} h={16} />
             </div>
             <span className="text-[8px] font-bold text-white">Coursera</span>
             <span className="ml-auto text-[6px] text-white/60">Included free</span>
@@ -488,7 +505,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           <div className="p-2 bg-white/[0.04]">
             <div className="flex items-center gap-1.5 mb-0.5">
               <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
-                <Image src="https://logo.clearbit.com/google.com" alt="Google" width={12} height={12} className="object-contain w-full h-full" />
+                <BrandLogo src="https://logo.clearbit.com/google.com" alt="Google" w={12} h={12} />
               </div>
               <p className="text-[8px] font-bold text-white/80 leading-tight">Google Project Management</p>
             </div>
@@ -498,17 +515,17 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
               <span className="text-[7px] font-bold text-vgu-yellow">72%</span>
             </div>
             <div className="h-1 rounded-full bg-white/10">
-              <div className="h-full rounded-full w-[72%]" style={{ background: '#0056D2' }} />
+              <div className="h-full rounded-full w-[72%] bar-fill" style={{ background: '#0056D2' }} />
             </div>
           </div>
         </div>
         {[
-          { label: 'IBM Data Science',   logo: 'https://logo.clearbit.com/ibm.com'  },
-          { label: 'Meta Front-End Dev', logo: 'https://logo.clearbit.com/meta.com' },
+          { label: 'IBM Data Science',   logo: 'https://logo.clearbit.com/ibm.com'       },
+          { label: 'Meta Front-End Dev', logo: 'https://logo.clearbit.com/facebook.com'  },
         ].map((c) => (
           <div key={c.label} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.04] border border-white/10">
             <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
-              <Image src={c.logo} alt={c.label} width={12} height={12} className="object-contain w-full h-full" />
+              <BrandLogo src={c.logo} alt={c.label} w={12} h={12} />
             </div>
             <span className="text-[7px] text-white/60">{c.label}</span>
           </div>
@@ -526,7 +543,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
         ].map((job) => (
           <div key={job.company} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.05] border border-white/10">
             <div className="w-6 h-6 rounded-lg flex-none overflow-hidden bg-white p-0.5">
-              <Image src={job.logo} alt={job.company} width={24} height={24} className="object-contain w-full h-full" />
+              <BrandLogo src={job.logo} alt={job.company} w={24} h={24} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[7px] font-bold text-white/80 leading-tight">{job.role}</p>
