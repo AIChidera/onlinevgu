@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import Image from 'next/image'
 import {
   IconVideo,
   IconUserHeart,
@@ -367,14 +368,13 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
         </div>
         <div className="space-y-1.5 flex-1">
           {[
-            { initials: 'PR', name: 'Priya R.', msg: 'Can we revisit the BCG matrix?' },
-            { initials: 'RK', name: 'Raj K.',   msg: 'Great session, very clear!' },
-            { initials: 'MS', name: 'Meera S.', msg: 'When is the assignment due?' },
+            { name: 'Priya R.', msg: 'Can we revisit the BCG matrix?', photo: 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=28&q=80&auto=format&fit=crop&crop=faces' },
+            { name: 'Raj K.',   msg: 'Great session, very clear!',     photo: 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=28&q=80&auto=format&fit=crop&crop=faces' },
+            { name: 'Meera S.', msg: 'When is the assignment due?',    photo: 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=28&q=80&auto=format&fit=crop&crop=faces' },
           ].map((m, i) => (
             <div key={i} className="flex items-start gap-1.5">
-              <div className="w-3.5 h-3.5 rounded-full flex-none flex items-center justify-center text-[5px] font-bold text-white flex-shrink-0"
-                   style={{ background: i === 0 ? color : i === 1 ? '#FFA412' : '#821a12' }}>
-                {m.initials}
+              <div className="w-3.5 h-3.5 rounded-full flex-none overflow-hidden flex-shrink-0">
+                <Image src={m.photo} alt={m.name} width={14} height={14} className="object-cover w-full h-full" />
               </div>
               <p className="text-[7px] leading-tight">
                 <span className="font-bold text-white/70">{m.name}: </span>
@@ -390,8 +390,9 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
       <div className="flex flex-col gap-2">
         <div className="rounded-lg bg-white/[0.06] border border-white/10 p-2.5">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black text-white flex-none"
-                 style={{ background: 'linear-gradient(135deg,#C04036,#821a12)' }}>RV</div>
+            <div className="w-8 h-8 rounded-full flex-none overflow-hidden">
+              <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={32} height={32} className="object-cover w-full h-full" />
+            </div>
             <div className="flex-1 min-w-0">
               <p className="text-[9px] font-bold text-white leading-tight">Rahul Verma</p>
               <p className="text-[7px] text-white/50">VP Product · Flipkart</p>
@@ -478,12 +479,19 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
       <div className="flex flex-col gap-2">
         <div className="rounded-lg overflow-hidden border border-white/15">
           <div className="h-8 flex items-center px-2 gap-1.5" style={{ background: '#0056D2' }}>
-            <div className="w-4 h-4 rounded bg-white flex items-center justify-center text-[8px] font-black flex-none" style={{ color: '#0056D2' }}>C</div>
+            <div className="w-4 h-4 rounded overflow-hidden flex-none bg-white">
+              <Image src="https://logo.clearbit.com/coursera.org" alt="Coursera" width={16} height={16} className="object-contain w-full h-full" />
+            </div>
             <span className="text-[8px] font-bold text-white">Coursera</span>
             <span className="ml-auto text-[6px] text-white/60">Included free</span>
           </div>
           <div className="p-2 bg-white/[0.04]">
-            <p className="text-[8px] font-bold text-white/80 leading-tight mb-0.5">Google Project Management</p>
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
+                <Image src="https://logo.clearbit.com/google.com" alt="Google" width={12} height={12} className="object-contain w-full h-full" />
+              </div>
+              <p className="text-[8px] font-bold text-white/80 leading-tight">Google Project Management</p>
+            </div>
             <p className="text-[7px] text-white/40 mb-1.5">Certificate · 6 months · Google</p>
             <div className="flex items-center justify-between mb-0.5">
               <span className="text-[7px] text-white/35">Progress</span>
@@ -495,12 +503,13 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           </div>
         </div>
         {[
-          { label: 'IBM Data Science',    bg: '#0530AD', initial: 'I' },
-          { label: 'Meta Front-End Dev',  bg: '#0082FB', initial: 'M' },
+          { label: 'IBM Data Science',   logo: 'https://logo.clearbit.com/ibm.com'  },
+          { label: 'Meta Front-End Dev', logo: 'https://logo.clearbit.com/meta.com' },
         ].map((c) => (
           <div key={c.label} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.04] border border-white/10">
-            <div className="w-3 h-3 rounded-sm flex-none text-[6px] font-black text-white flex items-center justify-center"
-                 style={{ background: c.bg }}>{c.initial}</div>
+            <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
+              <Image src={c.logo} alt={c.label} width={12} height={12} className="object-contain w-full h-full" />
+            </div>
             <span className="text-[7px] text-white/60">{c.label}</span>
           </div>
         ))}
@@ -511,14 +520,13 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
       <div className="flex flex-col gap-1.5">
         <p className="text-[7px] text-white/35 mb-0.5">500+ live openings · Updated today</p>
         {[
-          { role: 'Business Analyst', company: 'TCS',        status: 'Applied',     statusBg: color      },
-          { role: 'Product Manager',  company: 'Razorpay',   status: 'Shortlisted', statusBg: '#22c55e'  },
-          { role: 'Finance Lead',     company: 'HDFC Bank',  status: 'New',         statusBg: '#FFA412'  },
-        ].map((job, i) => (
-          <div key={i} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.05] border border-white/10">
-            <div className="w-6 h-6 rounded-lg flex-none flex items-center justify-center text-[8px] font-black text-white"
-                 style={{ background: i === 0 ? '#C04036' : i === 1 ? '#1a1a2e' : '#003580' }}>
-              {job.company[0]}
+          { role: 'Business Analyst', company: 'TCS',       logo: 'https://logo.clearbit.com/tcs.com',      status: 'Applied',     statusBg: color     },
+          { role: 'Product Manager',  company: 'Razorpay',  logo: 'https://logo.clearbit.com/razorpay.com', status: 'Shortlisted', statusBg: '#22c55e' },
+          { role: 'Finance Lead',     company: 'HDFC Bank', logo: 'https://logo.clearbit.com/hdfcbank.com', status: 'New',         statusBg: '#FFA412' },
+        ].map((job) => (
+          <div key={job.company} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.05] border border-white/10">
+            <div className="w-6 h-6 rounded-lg flex-none overflow-hidden bg-white p-0.5">
+              <Image src={job.logo} alt={job.company} width={24} height={24} className="object-contain w-full h-full" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[7px] font-bold text-white/80 leading-tight">{job.role}</p>
