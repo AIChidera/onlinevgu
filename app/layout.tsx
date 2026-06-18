@@ -6,6 +6,7 @@ import SiteFooter from '@/components/layout/SiteFooter'
 import Footer from '@/components/layout/Footer'
 import FooterCTA from '@/components/sections/FooterCTA'
 import Analytics from '@/components/Analytics'
+import ScrollToTop from '@/components/ui/ScrollToTop'
 import { getSiteSettings } from '@/lib/sanity'
 
 const nunito = Nunito({
@@ -84,6 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Analytics />
         <SiteNav />
         <main>{children}</main>
+        <ScrollToTop />
         <SiteFooter whatsappNumber={settings?.whatsappNumber}>
           <FooterCTA />
           <Footer />
