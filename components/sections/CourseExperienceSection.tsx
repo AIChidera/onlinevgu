@@ -340,21 +340,67 @@ export default function CourseExperienceSection() {
   )
 }
 
-// ── Brand logo with unoptimized fetch + clean grey fallback ──────
-function BrandLogo({ src, alt, w, h }: { src: string; alt: string; w: number; h: number }) {
-  const [err, setErr] = useState(false)
-  if (err) return <div className="w-full h-full rounded-sm bg-neutral-200" />
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={w}
-      height={h}
-      unoptimized
-      className="object-contain w-full h-full"
-      onError={() => setErr(true)}
-    />
-  )
+// ── Inline SVG brand icons — no external fetch, guaranteed render ──
+function BrandIcon({ name }: { name: string }) {
+  switch (name) {
+    case 'Coursera': return (
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" aria-label="Coursera">
+        <rect width="24" height="24" rx="4" fill="#0056D2"/>
+        <path d="M17 16.8A7 7 0 1 1 17 7.2" stroke="white" strokeWidth="2.4" strokeLinecap="round"/>
+      </svg>
+    )
+    case 'Google': return (
+      <svg viewBox="0 0 24 24" className="w-full h-full" aria-label="Google">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+    )
+    case 'IBM': return (
+      /* IBM 8-bar style: alternating full/indented horizontal bars */
+      <svg viewBox="0 0 24 22" fill="none" className="w-full h-full" aria-label="IBM">
+        <rect width="24" height="22" rx="2" fill="white"/>
+        {[1, 4, 7, 10, 13, 16, 19].map((y, i) => (
+          <rect key={y} x={i % 2 === 0 ? 1 : 3} y={y} width={i % 2 === 0 ? 22 : 18} height="2" rx="0.5" fill="#006699"/>
+        ))}
+      </svg>
+    )
+    case 'Meta': return (
+      /* Meta infinity loop — two overlapping ovals */
+      <svg viewBox="0 0 56 24" fill="none" className="w-full h-full" aria-label="Meta">
+        <ellipse cx="15" cy="12" rx="12" ry="8" stroke="#0082FB" strokeWidth="3.5"/>
+        <ellipse cx="41" cy="12" rx="12" ry="8" stroke="#0082FB" strokeWidth="3.5"/>
+      </svg>
+    )
+    case 'TCS': return (
+      /* TCS: blue bg, code-bracket mark (tech identity) */
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" aria-label="TCS">
+        <rect width="24" height="24" rx="4" fill="#00539F"/>
+        <path d="M8 8L4 12L8 16M16 8L20 12L16 16" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M13 6L11 18" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
+      </svg>
+    )
+    case 'Razorpay': return (
+      /* Razorpay: dark navy bg, their lightning-bolt mark */
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" aria-label="Razorpay">
+        <rect width="24" height="24" rx="4" fill="#072654"/>
+        <path d="M14 4L7 13H12L10 20L17 11H12L14 4Z" fill="#2D80F2"/>
+      </svg>
+    )
+    case 'HDFC Bank': return (
+      /* HDFC: navy bg, H-pillar mark referencing their logo shape */
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full" aria-label="HDFC Bank">
+        <rect width="24" height="24" rx="4" fill="#004C8F"/>
+        <path d="M6 7V17M18 7V17M6 12H18" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      </svg>
+    )
+    default: return (
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
+        <rect width="24" height="24" rx="4" fill="#888"/>
+      </svg>
+    )
+  }
 }
 
 // ── Per-panel contextual mockup sketches ──────────────────────────
@@ -496,16 +542,16 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
       <div className="flex flex-col gap-2">
         <div className="rounded-lg overflow-hidden border border-white/15">
           <div className="h-8 flex items-center px-2 gap-1.5" style={{ background: '#0056D2' }}>
-            <div className="w-4 h-4 rounded overflow-hidden flex-none bg-white">
-              <BrandLogo src="https://logo.clearbit.com/coursera.org" alt="Coursera" w={16} h={16} />
+            <div className="w-4 h-4 rounded overflow-hidden flex-none">
+              <BrandIcon name="Coursera" />
             </div>
             <span className="text-[8px] font-bold text-white">Coursera</span>
             <span className="ml-auto text-[6px] text-white/60">Included free</span>
           </div>
           <div className="p-2 bg-white/[0.04]">
             <div className="flex items-center gap-1.5 mb-0.5">
-              <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
-                <BrandLogo src="https://logo.clearbit.com/google.com" alt="Google" w={12} h={12} />
+              <div className="w-3 h-3 rounded-sm overflow-hidden flex-none">
+                <BrandIcon name="Google" />
               </div>
               <p className="text-[8px] font-bold text-white/80 leading-tight">Google Project Management</p>
             </div>
@@ -520,12 +566,12 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           </div>
         </div>
         {[
-          { label: 'IBM Data Science',   logo: 'https://logo.clearbit.com/ibm.com'       },
-          { label: 'Meta Front-End Dev', logo: 'https://logo.clearbit.com/facebook.com'  },
+          { label: 'IBM Data Science',   brand: 'IBM'  },
+          { label: 'Meta Front-End Dev', brand: 'Meta' },
         ].map((c) => (
           <div key={c.label} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.04] border border-white/10">
-            <div className="w-3 h-3 rounded-sm overflow-hidden flex-none bg-white">
-              <BrandLogo src={c.logo} alt={c.label} w={12} h={12} />
+            <div className="w-3 h-3 rounded-sm overflow-hidden flex-none">
+              <BrandIcon name={c.brand} />
             </div>
             <span className="text-[7px] text-white/60">{c.label}</span>
           </div>
@@ -537,13 +583,13 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
       <div className="flex flex-col gap-1.5">
         <p className="text-[7px] text-white/35 mb-0.5">500+ live openings · Updated today</p>
         {[
-          { role: 'Business Analyst', company: 'TCS',       logo: 'https://logo.clearbit.com/tcs.com',      status: 'Applied',     statusBg: color     },
-          { role: 'Product Manager',  company: 'Razorpay',  logo: 'https://logo.clearbit.com/razorpay.com', status: 'Shortlisted', statusBg: '#22c55e' },
-          { role: 'Finance Lead',     company: 'HDFC Bank', logo: 'https://logo.clearbit.com/hdfcbank.com', status: 'New',         statusBg: '#FFA412' },
+          { role: 'Business Analyst', company: 'TCS',       status: 'Applied',     statusBg: color     },
+          { role: 'Product Manager',  company: 'Razorpay',  status: 'Shortlisted', statusBg: '#22c55e' },
+          { role: 'Finance Lead',     company: 'HDFC Bank', status: 'New',         statusBg: '#FFA412' },
         ].map((job) => (
           <div key={job.company} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.05] border border-white/10">
-            <div className="w-6 h-6 rounded-lg flex-none overflow-hidden bg-white p-0.5">
-              <BrandLogo src={job.logo} alt={job.company} w={24} h={24} />
+            <div className="w-6 h-6 rounded-lg flex-none overflow-hidden">
+              <BrandIcon name={job.company} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[7px] font-bold text-white/80 leading-tight">{job.role}</p>

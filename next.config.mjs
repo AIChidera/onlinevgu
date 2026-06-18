@@ -9,7 +9,7 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ['images.unsplash.com', 'cdn.sanity.io', 'logo.clearbit.com'],
+    domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
   async redirects() {
     return [
