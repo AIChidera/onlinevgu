@@ -108,36 +108,20 @@ function SpecCard({ s, si }: { s: string; si: number }) {
 
 export default function SpecialisationCards({ specialisations }: { specialisations: string[] }) {
   return (
-    <>
-      {/* Mobile + tablet: horizontal snap scroll - no vertical stack */}
-      <div
-        className="flex lg:hidden gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
-        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-      >
-        {specialisations.map((s, si) => (
-          <div
-            key={s}
-            data-animate="fade-up"
-            style={{ animationDelay: `${si * 70}ms` }}
-            className="flex-none w-[200px] snap-start"
-          >
-            <SpecCard s={s} si={si} />
-          </div>
-        ))}
-      </div>
-
-      {/* Desktop: 2-column grid */}
-      <div className="hidden lg:grid lg:grid-cols-2 gap-4">
-        {specialisations.map((s, si) => (
-          <div
-            key={s}
-            data-animate="materialize"
-            style={{ animationDelay: `${si * 60}ms` }}
-          >
-            <SpecCard s={s} si={si} />
-          </div>
-        ))}
-      </div>
-    </>
+    <div
+      className="flex gap-3 lg:gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-5 px-5 lg:mx-0 lg:px-0"
+      style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+    >
+      {specialisations.map((s, si) => (
+        <div
+          key={s}
+          data-animate="fade-up"
+          style={{ animationDelay: `${si * 70}ms` }}
+          className="flex-none w-[200px] lg:w-[230px] snap-start"
+        >
+          <SpecCard s={s} si={si} />
+        </div>
+      ))}
+    </div>
   )
 }
