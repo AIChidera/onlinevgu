@@ -255,31 +255,39 @@ export default function CourseExperienceSection() {
             </nav>
 
             {/* Right content */}
-            <div className={['bg-white grid grid-cols-1 md:grid-cols-[1fr_1.1fr] transition-opacity duration-150', fading ? 'opacity-0' : 'opacity-100'].join(' ')}>
+            <div className={['bg-white grid grid-cols-1 md:grid-cols-[1fr_1fr] transition-opacity duration-150', fading ? 'opacity-0' : 'opacity-100'].join(' ')}>
               {/* Screen illustration */}
               <div
-                className="flex items-center justify-center p-8 border-b border-neutral-100 md:border-b-0 md:border-r"
-                style={{ background: 'linear-gradient(135deg, #fafaf8 0%, #f4f0ed 100%)' }}
+                className="flex items-center justify-center p-5 lg:p-6 border-b border-neutral-100 md:border-b-0 md:border-r"
+                style={{ background: 'linear-gradient(135deg, #f8f7f4 0%, #ede7e1 100%)' }}
               >
-                <div key={activePanel} className="w-full max-w-[260px] mockup-entry">
-                  {/* Mini screen */}
-                  <div className="rounded-xl border border-neutral-200 overflow-hidden shadow-md mockup-float">
-                    <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-50 border-b border-neutral-100">
-                      <div className="flex gap-1">
-                        <div className="w-2 h-2 rounded-full bg-red-300" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-300" />
-                        <div className="w-2 h-2 rounded-full bg-green-300" />
+                <div key={activePanel} className="w-full max-w-[300px] md:max-w-[340px] lg:max-w-[380px] mockup-entry">
+                  {/* Browser frame */}
+                  <div className="rounded-xl border border-neutral-300/60 overflow-hidden shadow-[0_10px_36px_rgba(0,0,0,0.16),0_2px_4px_rgba(0,0,0,0.06)] mockup-float">
+                    <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-neutral-300/50" style={{ background: '#e8e8e8' }}>
+                      <div className="flex gap-1.5 flex-none">
+                        <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                        <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                        <div className="w-3 h-3 rounded-full bg-[#28C840]" />
                       </div>
-                      <div className="flex-1 h-3 bg-neutral-200 rounded mx-2" />
+                      <div className="flex-1 mx-2">
+                        <div className="h-[18px] rounded-md border border-neutral-300/50 bg-white flex items-center px-2.5 gap-1.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-neutral-400/60 flex-none" />
+                          <span className="text-[9px] text-neutral-400 truncate">app.onlinevgu.in</span>
+                        </div>
+                      </div>
                     </div>
                     <div
-                      className="aspect-[4/3] p-3 overflow-hidden"
-                      style={{ background: 'linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%)' }}
+                      className="aspect-[4/3] overflow-hidden relative"
+                      style={{ background: 'linear-gradient(140deg, #0f172a 0%, #1a2744 55%, #0f1a2e 100%)' }}
                     >
-                      <PanelMockup index={activePanel} color={panel.color} />
+                      <div className="absolute inset-0 p-3.5">
+                        <PanelMockup index={activePanel} color={panel.color} />
+                      </div>
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%)' }} />
                     </div>
                   </div>
-                  <p className="mt-3 text-center text-[11px] text-neutral-400">
+                  <p className="mt-3 text-center text-[12px] text-neutral-400 font-body">
                     {panel.label} · VGU Platform
                   </p>
                 </div>
@@ -348,39 +356,39 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
   switch (index) {
 
     case 0: return ( // Live Classes
-      <div className="flex flex-col gap-2 h-full">
-        <div className="relative rounded-lg overflow-hidden flex-none" style={{ height: '88px', background: '#0d0d1a' }}>
-          <div className="absolute top-1.5 left-1.5 flex items-center gap-1 rounded px-1.5 py-0.5 bg-red-500">
-            <div className="w-1 h-1 rounded-full bg-white animate-pulse" />
-            <span className="text-[7px] font-bold text-white tracking-wide">LIVE</span>
+      <div className="flex flex-col gap-3 h-full">
+        <div className="relative rounded-lg overflow-hidden flex-none" style={{ height: '112px', background: '#080814' }}>
+          <div className="absolute top-2 left-2 flex items-center gap-1 rounded px-2 py-0.5 bg-red-500">
+            <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span className="text-[8px] font-bold text-white tracking-wide">LIVE</span>
           </div>
-          <div className="absolute top-1.5 right-1.5 text-[7px] text-white/50">48 watching</div>
+          <div className="absolute top-2 right-2 text-[9px] text-white/50">48 watching</div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-7 h-7 rounded-full border border-white/30 bg-white/10 flex items-center justify-center">
-              <IconPlayerPlay size={10} className="text-white ml-0.5" />
+            <div className="w-9 h-9 rounded-full border border-white/25 bg-white/10 flex items-center justify-center">
+              <IconPlayerPlay size={14} className="text-white ml-0.5" />
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 px-2 pb-2 pt-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
-            <p className="text-[8px] font-bold text-white leading-tight">Strategic Management</p>
-            <p className="text-[7px] text-white/50">Dr. Arjun Mehta · Week 4 / 12</p>
+          <div className="absolute bottom-0 left-0 right-0 px-2.5 pb-2.5 pt-6" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)' }}>
+            <p className="text-[10px] font-bold text-white leading-tight">Strategic Management</p>
+            <p className="text-[8px] text-white/50">Dr. Arjun Mehta · Week 4 / 12</p>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10">
             <div className="h-full w-[45%] bar-fill" style={{ background: color }} />
           </div>
         </div>
-        <div className="space-y-1.5 flex-1">
+        <div className="space-y-2 flex-1">
           {[
             { name: 'Priya R.', msg: 'Can we revisit the BCG matrix?', photo: 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=28&q=80&auto=format&fit=crop&crop=faces' },
             { name: 'Raj K.',   msg: 'Great session, very clear!',     photo: 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=28&q=80&auto=format&fit=crop&crop=faces' },
             { name: 'Meera S.', msg: 'When is the assignment due?',    photo: 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=28&q=80&auto=format&fit=crop&crop=faces' },
           ].map((m, i) => (
-            <div key={i} className="flex items-start gap-1.5">
-              <div className="w-3.5 h-3.5 rounded-full flex-none overflow-hidden flex-shrink-0">
-                <Image src={m.photo} alt={m.name} width={14} height={14} unoptimized className="object-cover w-full h-full" />
+            <div key={i} className="flex items-start gap-2">
+              <div className="w-5 h-5 rounded-full flex-none overflow-hidden">
+                <Image src={m.photo} alt={m.name} width={20} height={20} unoptimized className="object-cover w-full h-full" />
               </div>
-              <p className="text-[7px] leading-tight">
-                <span className="font-bold text-white/70">{m.name}: </span>
-                <span className="text-white/45">{m.msg}</span>
+              <p className="text-[9px] leading-snug">
+                <span className="font-bold text-white/75">{m.name}: </span>
+                <span className="text-white/50">{m.msg}</span>
               </p>
             </div>
           ))}
@@ -389,34 +397,34 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 1: return ( // Mentor Access
-      <div className="flex flex-col gap-2">
-        <div className="rounded-lg bg-white/[0.06] border border-white/10 p-2.5">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-full flex-none overflow-hidden">
-              <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={32} height={32} unoptimized className="object-cover w-full h-full" />
+      <div className="flex flex-col gap-2.5">
+        <div className="rounded-xl bg-white/[0.07] border border-white/10 p-3">
+          <div className="flex items-center gap-2.5 mb-3">
+            <div className="w-10 h-10 rounded-full flex-none overflow-hidden ring-2 ring-white/10">
+              <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={40} height={40} unoptimized className="object-cover w-full h-full" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[9px] font-bold text-white leading-tight">Rahul Verma</p>
-              <p className="text-[7px] text-white/50">VP Product · Flipkart</p>
+              <p className="text-[11px] font-bold text-white leading-tight">Rahul Verma</p>
+              <p className="text-[9px] text-white/50">VP Product · Flipkart</p>
             </div>
-            <span className="text-[8px] font-bold text-vgu-yellow flex-none">★ 4.9</span>
+            <span className="text-[10px] font-bold text-vgu-yellow flex-none">★ 4.9</span>
           </div>
-          <div className="flex gap-1 mb-2.5">
+          <div className="flex gap-1.5 mb-3">
             {['Product', 'Strategy', 'MBA'].map(t => (
-              <span key={t} className="px-1.5 py-0.5 rounded-full text-[6px] font-bold text-white/60 bg-white/10">{t}</span>
+              <span key={t} className="px-2 py-0.5 rounded-full text-[8px] font-bold text-white/65 bg-white/10">{t}</span>
             ))}
           </div>
-          <p className="text-[7px] text-white/35 mb-1.5">Available slots</p>
-          <div className="space-y-1">
+          <p className="text-[8px] text-white/35 mb-2">Available slots</p>
+          <div className="space-y-1.5">
             {[
               { slot: 'Today  6:30 PM', active: true  },
               { slot: 'Tomorrow  7:00 PM', active: false },
             ].map(({ slot, active }) => (
-              <div key={slot} className="flex items-center justify-between rounded px-2 py-1 border"
+              <div key={slot} className="flex items-center justify-between rounded-lg px-2.5 py-1.5 border"
                    style={{ borderColor: active ? color + '80' : 'rgba(255,255,255,0.10)', background: active ? color + '20' : 'transparent' }}>
-                <span className="text-[8px] text-white/70">{slot}</span>
+                <span className="text-[9px] text-white/70">{slot}</span>
                 {active && (
-                  <span className="text-[7px] font-bold text-white px-1.5 py-0.5 rounded-full" style={{ background: color }}>Book</span>
+                  <span className="text-[8px] font-bold text-white px-2 py-0.5 rounded-full" style={{ background: color }}>Book</span>
                 )}
               </div>
             ))}
@@ -426,15 +434,15 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 2: return ( // Assessments
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between mb-0.5">
-          <span className="text-[7px] text-white/40">Question 3 of 5</span>
-          <span className="text-[8px] font-bold text-vgu-yellow">12:45</span>
+          <span className="text-[9px] text-white/40">Question 3 of 5</span>
+          <span className="text-[10px] font-bold text-vgu-yellow">12:45</span>
         </div>
-        <div className="h-0.5 rounded-full bg-white/10 mb-1">
+        <div className="h-1 rounded-full bg-white/10 mb-1">
           <div className="h-full rounded-full w-3/5 bar-fill" style={{ background: color }} />
         </div>
-        <p className="text-[8px] font-semibold text-white/80 leading-tight mb-1">
+        <p className="text-[10px] font-semibold text-white/90 leading-snug mb-1.5">
           Which best describes Porter&apos;s Five Forces?
         </p>
         {[
@@ -443,63 +451,63 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           'A financial performance metric',
           'A supply chain framework',
         ].map((opt, i) => (
-          <div key={opt} className="flex items-center gap-1.5 rounded px-1.5 py-1 border"
+          <div key={opt} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 border"
                style={{ borderColor: i === 1 ? color : 'rgba(255,255,255,0.08)', background: i === 1 ? color + '22' : 'transparent' }}>
-            <div className="w-2.5 h-2.5 rounded-full border flex-none"
-                 style={{ borderColor: i === 1 ? color : 'rgba(255,255,255,0.2)', background: i === 1 ? color : 'transparent' }} />
-            <span className="text-[7px] text-white/70 leading-tight">{opt}</span>
+            <div className="w-3 h-3 rounded-full border flex-none"
+                 style={{ borderColor: i === 1 ? color : 'rgba(255,255,255,0.22)', background: i === 1 ? color : 'transparent' }} />
+            <span className="text-[9px] text-white/75 leading-tight">{opt}</span>
           </div>
         ))}
       </div>
     )
 
     case 3: return ( // Library
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-1.5 rounded px-2 py-1.5 bg-white/10 border border-white/15 mb-0.5">
-          <span className="text-[9px] text-white/30">⌕</span>
-          <span className="text-[7px] text-white/60">International Finance</span>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2 rounded-lg px-2.5 py-2 bg-white/10 border border-white/15 mb-0.5">
+          <span className="text-[11px] text-white/35">⌕</span>
+          <span className="text-[9px] text-white/65">International Finance</span>
         </div>
-        <p className="text-[7px] text-white/30">3 results in your library</p>
+        <p className="text-[8px] text-white/30">3 results in your library</p>
         {[
           { title: 'Global Financial Management', author: 'Shapiro, A.C.', bg: '#C04036' },
           { title: 'International Corp. Finance',  author: 'Madura, J.',    bg: '#FFA412' },
-          { title: 'FX Markets and Institutions',  author: 'Pilbeam, K.',   bg: '#821a12' },
+          { title: 'FX Markets & Institutions',    author: 'Pilbeam, K.',   bg: '#821a12' },
         ].map((book, i) => (
-          <div key={i} className="flex items-center gap-2 rounded p-1.5 bg-white/[0.04] border border-white/10">
-            <div className="w-4 h-5 rounded-sm flex-none" style={{ background: book.bg }} />
+          <div key={i} className="flex items-center gap-2.5 rounded-lg p-2 bg-white/[0.04] border border-white/10">
+            <div className="w-5 h-7 rounded flex-none shadow-sm" style={{ background: book.bg }} />
             <div className="flex-1 min-w-0">
-              <p className="text-[7px] font-bold text-white/80 leading-tight truncate">{book.title}</p>
-              <p className="text-[6px] text-white/40">{book.author}</p>
+              <p className="text-[9px] font-bold text-white/85 leading-tight truncate">{book.title}</p>
+              <p className="text-[8px] text-white/40">{book.author}</p>
             </div>
-            <span className="text-[6px] font-bold flex-none" style={{ color }}>PDF</span>
+            <span className="text-[8px] font-bold flex-none" style={{ color }}>PDF</span>
           </div>
         ))}
       </div>
     )
 
     case 4: return ( // Coursera
-      <div className="flex flex-col gap-2">
-        <div className="rounded-lg overflow-hidden border border-white/15">
-          <div className="h-8 flex items-center px-2 gap-1.5" style={{ background: '#0056D2' }}>
-            <div className="w-4 h-4 rounded overflow-hidden flex-none">
+      <div className="flex flex-col gap-2.5">
+        <div className="rounded-xl overflow-hidden border border-white/15">
+          <div className="h-9 flex items-center px-2.5 gap-2" style={{ background: '#0056D2' }}>
+            <div className="w-5 h-5 rounded overflow-hidden flex-none">
               <BrandIcon name="Coursera" />
             </div>
-            <span className="text-[8px] font-bold text-white">Coursera</span>
-            <span className="ml-auto text-[6px] text-white/60">Included free</span>
+            <span className="text-[10px] font-bold text-white">Coursera</span>
+            <span className="ml-auto text-[8px] text-white/65">Included free</span>
           </div>
-          <div className="p-2 bg-white/[0.04]">
-            <div className="flex items-center gap-1.5 mb-0.5">
-              <div className="w-3 h-3 rounded-sm overflow-hidden flex-none">
+          <div className="p-2.5 bg-white/[0.04]">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-4 h-4 rounded-sm overflow-hidden flex-none">
                 <BrandIcon name="Google" />
               </div>
-              <p className="text-[8px] font-bold text-white/80 leading-tight">Google Project Management</p>
+              <p className="text-[10px] font-bold text-white/85 leading-tight">Google Project Management</p>
             </div>
-            <p className="text-[7px] text-white/40 mb-1.5">Certificate · 6 months · Google</p>
-            <div className="flex items-center justify-between mb-0.5">
-              <span className="text-[7px] text-white/35">Progress</span>
-              <span className="text-[7px] font-bold text-vgu-yellow">72%</span>
+            <p className="text-[8px] text-white/40 mb-2">Certificate · 6 months · Google</p>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[8px] text-white/35">Progress</span>
+              <span className="text-[9px] font-bold text-vgu-yellow">72%</span>
             </div>
-            <div className="h-1 rounded-full bg-white/10">
+            <div className="h-1.5 rounded-full bg-white/10">
               <div className="h-full rounded-full w-[72%] bar-fill" style={{ background: '#0056D2' }} />
             </div>
           </div>
@@ -508,33 +516,33 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           { label: 'IBM Data Science',   brand: 'IBM'  },
           { label: 'Meta Front-End Dev', brand: 'Meta' },
         ].map((c) => (
-          <div key={c.label} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.04] border border-white/10">
-            <div className="w-3 h-3 rounded-sm overflow-hidden flex-none">
+          <div key={c.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 bg-white/[0.04] border border-white/10">
+            <div className="w-4 h-4 rounded-sm overflow-hidden flex-none">
               <BrandIcon name={c.brand} />
             </div>
-            <span className="text-[7px] text-white/60">{c.label}</span>
+            <span className="text-[9px] text-white/65">{c.label}</span>
           </div>
         ))}
       </div>
     )
 
     case 5: return ( // Career Centre
-      <div className="flex flex-col gap-1.5">
-        <p className="text-[7px] text-white/35 mb-0.5">500+ live openings · Updated today</p>
+      <div className="flex flex-col gap-2">
+        <p className="text-[8px] text-white/35 mb-0.5">500+ live openings · Updated today</p>
         {[
           { role: 'Business Analyst', company: 'TCS',       status: 'Applied',     statusBg: color     },
           { role: 'Product Manager',  company: 'Razorpay',  status: 'Shortlisted', statusBg: '#22c55e' },
           { role: 'Finance Lead',     company: 'HDFC Bank', status: 'New',         statusBg: '#FFA412' },
         ].map((job) => (
-          <div key={job.company} className="flex items-center gap-2 rounded px-2 py-1.5 bg-white/[0.05] border border-white/10">
-            <div className="w-6 h-6 rounded-lg flex-none overflow-hidden">
+          <div key={job.company} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 bg-white/[0.05] border border-white/10">
+            <div className="w-8 h-8 rounded-xl flex-none overflow-hidden">
               <BrandIcon name={job.company} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[7px] font-bold text-white/80 leading-tight">{job.role}</p>
-              <p className="text-[6px] text-white/40">{job.company}</p>
+              <p className="text-[9px] font-bold text-white/85 leading-tight">{job.role}</p>
+              <p className="text-[8px] text-white/40">{job.company}</p>
             </div>
-            <span className="text-[6px] font-bold px-1.5 py-0.5 rounded-full flex-none text-white"
+            <span className="text-[8px] font-bold px-2 py-0.5 rounded-full flex-none text-white"
                   style={{ background: job.statusBg + 'CC' }}>{job.status}</span>
           </div>
         ))}
