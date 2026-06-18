@@ -109,15 +109,15 @@ function SpecCard({ s, si }: { s: string; si: number }) {
 export default function SpecialisationCards({ specialisations }: { specialisations: string[] }) {
   return (
     <div
-      className="flex gap-3 lg:gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-5 px-5 lg:mx-0 lg:px-0"
-      style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+      className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-3"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
     >
       {specialisations.map((s, si) => (
         <div
           key={s}
           data-animate="fade-up"
           style={{ animationDelay: `${si * 70}ms` }}
-          className="flex-none w-[200px] lg:w-[230px] snap-start"
+          className="flex-none w-[200px] snap-start"
         >
           <SpecCard s={s} si={si} />
         </div>
