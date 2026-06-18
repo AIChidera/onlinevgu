@@ -9,7 +9,7 @@ const PALETTE = [
 ]
 
 export default function ProgramHighlights({ highlights }: { highlights: string[] }) {
-  const safe = Array.isArray(highlights) ? highlights : []
+  const safe = (Array.isArray(highlights) ? highlights : []).map(h => h.replace(/—/g, '-').replace(/–/g, '-'))
   if (!safe.length) return null
 
   return (
