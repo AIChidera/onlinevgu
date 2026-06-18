@@ -279,7 +279,7 @@ export default function CourseExperienceSection() {
                     </div>
                     <div
                       className="aspect-[4/3] overflow-hidden relative"
-                      style={{ background: 'linear-gradient(140deg, #0f172a 0%, #1a2744 55%, #0f1a2e 100%)' }}
+                      style={{ background: 'linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%)' }}
                     >
                       <div className="absolute inset-0 p-3.5">
                         <PanelMockup index={activePanel} color={panel.color} />
