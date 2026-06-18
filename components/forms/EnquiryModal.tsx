@@ -43,7 +43,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
 
       {/* Panel - flex column: header pinned, form scrolls */}
       <div
-        className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90vh] sm:h-auto sm:max-h-[90vh]"
+        className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90dvh] sm:h-auto sm:max-h-[90dvh]"
         onClick={e => e.stopPropagation()}
       >
         {/* Header - pinned, never scrolls */}
