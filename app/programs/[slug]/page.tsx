@@ -1104,7 +1104,7 @@ export default async function ProgramPage({ params }: Props) {
                     Eligibility
                   </h2>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {eligibility.map((e, ei) => {
                     // Brand-only 3-gradient cycle.
                     const GRADS = [
