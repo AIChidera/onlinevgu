@@ -67,7 +67,7 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
         ))}
       </div>
 
-      {/* Semester grid — key re-mounts on year switch, triggering entry animation */}
+      {/* Semester grid - key re-mounts on year switch, triggering entry animation */}
       <div key={activeYear} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {current.semesters.map((sem, si) => {
           const gi    = (semOffset + si) % SEM_GRADS.length

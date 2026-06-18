@@ -263,7 +263,7 @@ async function seedMilestones() {
 const u = (id: string) =>
   `https://images.unsplash.com/photo-${id}?w=400&q=80&auto=format&fit=crop&crop=faces`
 
-// Male / male-presenting portraits (15 unique — verified Indian/South Asian)
+// Male / male-presenting portraits (15 unique - verified Indian/South Asian)
 const M = [
   u('1581382575275-97901c2635b7'),  // Indian professional, Bangalore
   u('1649433658557-54cf58577c68'),  // Indian young man, headshot
@@ -282,7 +282,7 @@ const M = [
   u('1581091226825-a6a2a5aee158'),  // Indian man, casual-formal
 ]
 
-// Female / female-presenting portraits (15 unique — verified Indian/South Asian)
+// Female / female-presenting portraits (15 unique - verified Indian/South Asian)
 const F = [
   u('1463335361701-e90f4c5045d0'),  // Indian woman, bindi portrait
   u('1607189200597-4d0923ef98c6'),  // Indian woman, Delhi
