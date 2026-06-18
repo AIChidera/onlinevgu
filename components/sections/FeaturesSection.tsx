@@ -41,6 +41,7 @@ const FEATURES: Feature[] = [
 ]
 
 const COURSERA_PARTNERS = ['Google', 'IBM', 'Meta', 'AWS', 'Microsoft', 'DeepLearning.AI']
+const PARTNER_LABEL: Record<string, string> = { 'DeepLearning.AI': 'DL.AI' }
 
 export default function FeaturesSection() {
   return (
@@ -115,7 +116,7 @@ export default function FeaturesSection() {
                     <div className="w-8 h-8 rounded-lg overflow-hidden flex-none">
                       <BrandIcon name={name} />
                     </div>
-                    <span className="text-[11px] font-body text-white/75 text-center leading-tight">{name}</span>
+                    <span className="text-[11px] font-body text-white/75 text-center leading-tight">{PARTNER_LABEL[name] ?? name}</span>
                   </div>
                 ))}
               </div>

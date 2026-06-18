@@ -124,7 +124,10 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-white md:text-[36px] lg:text-[40px]">
             More than classes. More than online.
           </h2>
-          <p className="mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/60 max-w-[560px] mx-auto">
+          <p className="md:hidden mt-4 text-[15px] font-body leading-[1.7] text-white/60 max-w-[560px] mx-auto">
+            Online students are invited to VGU&apos;s signature campus event.
+          </p>
+          <p className="hidden md:block mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/60 max-w-[560px] mx-auto">
             Online students are invited to VGU&apos;s signature campus events: Panache, movie nights,
             hackathons, workshops, convocation. No extra cost.
           </p>

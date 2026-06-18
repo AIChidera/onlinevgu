@@ -109,9 +109,9 @@ function SpecCard({ s, si }: { s: string; si: number }) {
 export default function SpecialisationCards({ specialisations }: { specialisations: string[] }) {
   return (
     <>
-      {/* Mobile: horizontal snap scroll */}
+      {/* Mobile + tablet: horizontal snap scroll - no vertical stack */}
       <div
-        className="flex sm:hidden gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
+        className="flex lg:hidden gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
         style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {specialisations.map((s, si) => (
@@ -126,8 +126,8 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
         ))}
       </div>
 
-      {/* Tablet+: always 2-column for even rows and breathing room */}
-      <div className="hidden sm:grid sm:grid-cols-2 gap-4">
+      {/* Desktop: 2-column grid */}
+      <div className="hidden lg:grid lg:grid-cols-2 gap-4">
         {specialisations.map((s, si) => (
           <div
             key={s}
