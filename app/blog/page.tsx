@@ -88,7 +88,7 @@ export default async function BlogPage() {
         <section className="relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-6">
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 0% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 100% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
-          <div className="relative mx-auto max-w-[1280px] flex flex-wrap items-stretch justify-center gap-3 md:gap-4">
+          <div className="relative mx-auto max-w-[1280px] flex flex-wrap items-stretch justify-center gap-4 md:gap-6">
             {/* Each stat is a self-contained lift card */}
             <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
