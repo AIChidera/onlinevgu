@@ -158,7 +158,7 @@ export default async function FacultySection({ slug }: { slug: string }) {
 
   return (
     <section className="sketch-hover-group relative bg-neutral-900 py-16 overflow-hidden">
-      <SketchFlourish shape="swoop" color="yellow" opacity={0.06} trigger="hover" />
+      <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={20} trigger="hover" />
       <div className="relative mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
         {/* Header row */}

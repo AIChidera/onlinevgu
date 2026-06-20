@@ -85,12 +85,12 @@ export default async function BlogPage() {
 
       {/* ══ Stats trust strip ══ */}
       {hasContent && (
-        <section className="relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-6">
+        <section className="group relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-6">
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 0% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 100% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
           <div className="relative mx-auto max-w-[1280px] flex flex-wrap items-stretch justify-center gap-4 md:gap-6">
             {/* Each stat is a self-contained lift card */}
-            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+            <div data-animate="fade-up" style={{ animationDelay: '0ms' }} className="flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
                 <IconNotes size={19} className="text-vgu-red" stroke={2} />
               </div>
@@ -99,7 +99,7 @@ export default async function BlogPage() {
                 <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Stories published</p>
               </div>
             </div>
-            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+            <div data-animate="fade-up" style={{ animationDelay: '80ms' }} className="flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
                 <IconTag size={19} className="text-vgu-red" stroke={2} />
               </div>
@@ -108,7 +108,7 @@ export default async function BlogPage() {
                 <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Topics covered</p>
               </div>
             </div>
-            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+            <div data-animate="fade-up" style={{ animationDelay: '160ms' }} className="flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
                 <IconUsers size={19} className="text-vgu-red" stroke={2} />
               </div>
@@ -117,7 +117,7 @@ export default async function BlogPage() {
                 <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Active readers</p>
               </div>
             </div>
-            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+            <div data-animate="fade-up" style={{ animationDelay: '240ms' }} className="flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
                 <IconCalendarStar size={19} className="text-vgu-red" stroke={2} />
               </div>
@@ -146,7 +146,7 @@ export default async function BlogPage() {
       {/* ══ Closing CTA ══ */}
       {hasContent && (
         <section className="bg-neutral-50 px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <div className="mx-auto max-w-[760px] text-center">
+          <div data-animate="fade-up" className="mx-auto max-w-[760px] text-center">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Ready when you are
             </p>

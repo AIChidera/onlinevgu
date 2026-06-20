@@ -887,7 +887,6 @@ export default async function ProgramPage({ params }: Props) {
         {/* Background image + brand-red overlay (50%) - swap heroImage for a program-specific asset */}
         <Image src={heroImage} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
-        <SketchFlourish shape="swoop" color="yellow" opacity={0.05} trigger="hover" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
@@ -1164,7 +1163,7 @@ export default async function ProgramPage({ params }: Props) {
           className="absolute inset-0 pointer-events-none opacity-[0.035]"
           style={{ backgroundImage: 'radial-gradient(circle, #111827 1px, transparent 1px)', backgroundSize: '24px 24px' }}
         />
-        <SketchFlourish shape="wave" color="red" opacity={0.06} trigger="hover" />
+        <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} trigger="hover" />
         <div data-animate="fade-up" className="relative mx-auto max-w-[1280px] text-center">
           <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Explore more

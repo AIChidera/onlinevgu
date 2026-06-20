@@ -81,7 +81,7 @@ export default function BlogIndex({
     <section id="all-stories" className="bg-neutral-50 px-5 md:px-8 lg:px-12 pt-14 pb-16 lg:pt-20 lg:pb-24">
       <div className="mx-auto max-w-[1280px]">
         {(eyebrow || title) && (
-          <div className="mb-8 lg:mb-10 max-w-[760px]">
+          <div data-animate="fade-up" className="mb-8 lg:mb-10 max-w-[760px]">
             {eyebrow && (
               <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
                 {eyebrow}
@@ -133,14 +133,15 @@ export default function BlogIndex({
             {featuredPost && (
               <>
                 {/* Mobile featured card — full-width, more prominent */}
-                <div className="md:hidden mb-6">
+                <div data-animate="fade-up" className="md:hidden mb-10">
                   <FeaturedCard post={featuredPost} />
                 </div>
 
                 {/* Desktop featured card — 2-col editorial layout */}
                 <Link
                   href={`/blog/${featuredPost.slug}`}
-                  className="hidden md:grid grid-cols-[3fr_2fr] mb-8 rounded-2xl overflow-hidden border border-neutral-200/70 bg-white shadow-[0_4px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_20px_56px_rgba(192,64,54,0.13)] hover:border-vgu-red/20 hover:-translate-y-1 transition-all duration-300 ease-out group/featured"
+                  data-animate="materialize"
+                  className="hidden md:grid grid-cols-[3fr_2fr] mb-12 rounded-2xl overflow-hidden border border-neutral-200/70 bg-white shadow-[0_4px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_20px_56px_rgba(192,64,54,0.13)] hover:border-vgu-red/20 hover:-translate-y-1 transition-all duration-300 ease-out group/featured"
                   style={{ minHeight: 320 }}
                 >
                   {/* Image side */}

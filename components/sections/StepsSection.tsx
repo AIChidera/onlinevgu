@@ -46,7 +46,7 @@ export default function StepsSection() {
       id="how-to-apply"
       className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24"
     >
-      <SketchFlourish shape="wave" color="red" opacity={0.06} strokeWidth={10} />
+      <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
       {/* Subtle dot-grid texture - Bible §10 4-6% opacity */}
       <div
         aria-hidden="true"

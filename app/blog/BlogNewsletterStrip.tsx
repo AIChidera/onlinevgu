@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { IconArrowRight, IconCheck } from '@tabler/icons-react'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 export default function BlogNewsletterStrip() {
   const [email, setEmail] = useState('')
@@ -18,7 +19,9 @@ export default function BlogNewsletterStrip() {
   }
 
   return (
-    <section className="relative bg-vgu-red overflow-hidden px-5 md:px-8 lg:px-12 pb-16 lg:pb-20 pt-20 lg:pt-24">
+    <section className="sketch-hover-group relative bg-vgu-red overflow-hidden px-5 md:px-8 lg:px-12 pb-16 lg:pb-20 pt-20 lg:pt-24">
+      {/* Hover-reveal flourish — draws in slowly on section hover, retraces on leave */}
+      <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={28} durationMs={2400} />
       {/* Wave swoop from the section above (neutral-50 BlogIndex bg) */}
       <div aria-hidden="true" className="absolute top-0 left-0 right-0 pointer-events-none">
         <svg viewBox="0 0 1440 64" className="w-full" preserveAspectRatio="none" style={{ display: 'block' }}>
@@ -28,7 +31,7 @@ export default function BlogNewsletterStrip() {
       {/* Decorative orbs */}
       <div aria-hidden="true" className="absolute -top-8 -right-16 w-72 h-72 rounded-full opacity-[0.12]" style={{ background: 'radial-gradient(circle, #FFA412 0%, transparent 65%)' }} />
       <div aria-hidden="true" className="absolute -bottom-12 -left-20 w-64 h-64 rounded-full opacity-[0.10]" style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 65%)' }} />
-      <div className="relative mx-auto max-w-[680px] text-center">
+      <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[680px] text-center">
         <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/60 mb-3">
           Stay ahead
         </p>

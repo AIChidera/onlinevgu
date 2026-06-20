@@ -211,7 +211,7 @@ export default function CourseExperienceSection() {
           PART B - PLATFORM EXPLORER
       ══════════════════════════════════════════════════════ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-14 px-5 md:px-8 lg:px-12 lg:py-20">
-        <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={10} />
+        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">

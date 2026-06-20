@@ -36,7 +36,7 @@ export default function PlacementStatsStrip({ slug }: { slug: string }) {
 
   return (
     <div className="sketch-hover-group relative overflow-hidden bg-vgu-red border-b border-vgu-red-dark">
-      <SketchFlourish shape="arc" color="white" opacity={0.08} trigger="in-view" />
+      <SketchFlourish shape="arc" color="white" opacity={0.06} strokeWidth={20} trigger="in-view" />
       <div className="mx-auto max-w-[1280px] grid grid-cols-2 lg:grid-cols-4 lg:divide-x divide-white/15">
         {CELLS.map(({ Icon, value, label }, i) => (
           <div

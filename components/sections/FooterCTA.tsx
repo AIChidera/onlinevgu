@@ -5,7 +5,7 @@ import { NEXT_BATCH } from '@/lib/constants'
 export default function FooterCTA() {
   return (
     <section className="sketch-hover-group relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
-      <SketchFlourish shape="monogram" color="yellow" opacity={0.22} strokeWidth={7} />
+      <SketchFlourish shape="swoop" color="yellow" opacity={0.09} strokeWidth={28} durationMs={2400} />
       <div data-animate="fade-up" className="relative z-10 mx-auto max-w-[1280px] flex flex-col items-center text-center gap-6">
         <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/55">
           Start Today

@@ -113,8 +113,8 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
 
   return (
     <section id="campus" className="sketch-hover-group group relative overflow-hidden bg-neutral-900 py-16 lg:py-24">
-      <SketchFlourish shape="swoop" color="white" opacity={0.09} strokeWidth={9} />
-      <SketchFlourish shape="wave"  color="white" opacity={0.06} strokeWidth={7} className="translate-y-1/3" />
+      <SketchFlourish shape="swoop" color="white" opacity={0.07} strokeWidth={28} />
+      <SketchFlourish shape="wave"  color="white" opacity={0.05} strokeWidth={20} className="translate-y-1/3" />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-10">

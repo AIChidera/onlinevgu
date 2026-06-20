@@ -194,7 +194,6 @@ export default async function AboutPage() {
           className="object-cover object-center"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
-        <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={3.5} />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[680px]">
@@ -258,7 +257,7 @@ export default async function AboutPage() {
 
       {/* ══ Stats strip — arc sweeps across the achievement numbers ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
-        <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={9} />
+        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-10 md:py-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -295,7 +294,7 @@ export default async function AboutPage() {
 
       {/* ══ Mission & Values — loop (Q-shape) suits the philosophical section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="loop" color="red" opacity={0.05} strokeWidth={9} />
+        <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
@@ -372,7 +371,7 @@ export default async function AboutPage() {
 
       {/* ══ Accreditations — monogram (VGU-V) in a credibility section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="monogram" color="red-dark" opacity={0.07} strokeWidth={7} />
+        <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
@@ -453,8 +452,8 @@ export default async function AboutPage() {
 
       {/* ══ Campus Experience — arc (digital reach spanning the physical) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={9} />
-        <SketchFlourish shape="arc" color="red" opacity={0.07} strokeWidth={7} className="rotate-180" />
+        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
+        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
@@ -538,7 +537,7 @@ export default async function AboutPage() {
 
       {/* ══ Hiring Partners — loop (employer-graduate connection) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={9} />
+        <SketchFlourish shape="loop" color="red" opacity={0.03} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
@@ -590,7 +589,7 @@ export default async function AboutPage() {
 
       {/* ══ History timeline — wave conveys the flow of time ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="wave" color="red" opacity={0.05} strokeWidth={9} />
+        <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 items-start">
@@ -720,7 +719,7 @@ export default async function AboutPage() {
 
       {/* ══ Alumni Community — swoop (sweeping sense of a large, growing community) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="swoop" color="red" opacity={0.05} strokeWidth={9} />
+        <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">

@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { IconCheck, IconArrowRight } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
-import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 // TODO: swap with a real VGU campus / student photo when the asset is ready
 const HERO_IMAGE_SRC =
@@ -32,7 +31,6 @@ export default function Hero() {
       <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
       {/* Most subtle of all sections - the Hero is already busy. */}
-      <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={3.5} />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 

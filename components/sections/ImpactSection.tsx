@@ -115,7 +115,7 @@ export default function ImpactSection({
 
   return (
     <section id="impact" className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-      <SketchFlourish shape="wave" color="red" opacity={0.05} strokeWidth={10} />
+      <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
       <div className="relative z-10 mx-auto max-w-[1280px]">
 
         {/* Header */}

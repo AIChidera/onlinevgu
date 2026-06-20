@@ -53,7 +53,7 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
 
   return (
     <section id="programs" className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-      <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={10} />
+      <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
       <div className="relative z-10 mx-auto max-w-[1280px]">
 
         {/* Header - left-aligned, filters right (md+) */}

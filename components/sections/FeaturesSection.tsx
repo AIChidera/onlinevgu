@@ -46,8 +46,8 @@ const PARTNER_LABEL: Record<string, string> = { 'DeepLearning.AI': 'DL.AI' }
 export default function FeaturesSection() {
   return (
     <section id="features" className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-16 lg:py-24">
-      <SketchFlourish shape="swoop"    color="red-dark" opacity={0.11} strokeWidth={8} />
-      <SketchFlourish shape="monogram" color="red-dark" opacity={0.08} strokeWidth={6} className="translate-x-1/3 translate-y-1/3" />
+      <SketchFlourish shape="swoop"    color="red-dark" opacity={0.07} strokeWidth={20} />
+      <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} className="translate-x-1/3 translate-y-1/3" />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
         {/* Header */}
