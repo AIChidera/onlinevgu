@@ -126,14 +126,14 @@ export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSum
                 <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                   <Link
                     href={`/blog/${slide.slug}`}
-                    className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-8 py-3.5 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
                   >
                     Read story
                     <IconArrowRight size={16} />
                   </Link>
                   <a
                     href="#all-stories"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-white/40 hover:border-white/70 text-white/80 hover:text-white rounded-full px-7 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-white/40 hover:border-white/70 text-white/80 hover:text-white rounded-full px-7 py-3.5 text-[16px] font-heading font-semibold transition-all duration-200"
                   >
                     All stories
                     <IconArrowRight size={16} />

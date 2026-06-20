@@ -106,7 +106,7 @@ export default function BlogIndex({
                 type="button"
                 onClick={() => setActive(cat)}
                 className={[
-                  'inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-heading font-semibold transition-all duration-150 whitespace-nowrap',
+                  'inline-flex items-center gap-2 rounded-full px-4 py-2 min-h-[44px] text-[13px] font-heading font-semibold transition-all duration-150 whitespace-nowrap',
                   isActive
                     ? 'bg-vgu-red text-white shadow-[0_6px_18px_rgba(192,64,54,0.30)]'
                     : 'bg-white text-neutral-700 border border-neutral-200 hover:border-vgu-red hover:text-vgu-red shadow-sm',
@@ -174,7 +174,7 @@ export default function BlogIndex({
                       <h2 className="font-heading font-bold text-[22px] lg:text-[26px] leading-[1.25] tracking-[-0.5px] text-neutral-900 mb-4 group-hover/featured:text-vgu-red transition-colors duration-200">
                         {featuredPost.title}
                       </h2>
-                      <p className="text-[15px] font-body text-neutral-500 leading-[1.65] line-clamp-4">
+                      <p className="text-[16px] font-body text-neutral-500 leading-[1.65] line-clamp-4">
                         {featuredPost.excerpt}
                       </p>
                     </div>
@@ -266,7 +266,7 @@ export default function BlogIndex({
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={safePage === 1}
                 className={[
-                  'inline-flex items-center gap-1.5 pl-3 pr-4 h-10 rounded-md border-2 font-heading font-semibold text-[13px] transition-all duration-150',
+                  'inline-flex items-center gap-1.5 pl-3 pr-4 h-11 rounded-md border-2 font-heading font-semibold text-[13px] transition-all duration-150',
                   safePage === 1
                     ? 'border-neutral-200 text-neutral-300 cursor-not-allowed'
                     : 'border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red hover:bg-vgu-red/[0.03]',
@@ -288,7 +288,7 @@ export default function BlogIndex({
                       key={p}
                       onClick={() => setPage(p as number)}
                       className={[
-                        'w-10 h-10 rounded-full text-[14px] font-heading font-semibold transition-all duration-200',
+                        'w-11 h-11 rounded-full text-[14px] font-heading font-semibold transition-all duration-200',
                         safePage === p
                           ? 'bg-vgu-red text-white shadow-[0_4px_14px_rgba(192,64,54,0.35)] scale-105'
                           : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red hover:scale-105',
@@ -305,7 +305,7 @@ export default function BlogIndex({
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                 disabled={safePage === totalPages}
                 className={[
-                  'inline-flex items-center gap-1.5 pl-4 pr-3 h-10 rounded-md border-2 font-heading font-semibold text-[13px] transition-all duration-150',
+                  'inline-flex items-center gap-1.5 pl-4 pr-3 h-11 rounded-md border-2 font-heading font-semibold text-[13px] transition-all duration-150',
                   safePage === totalPages
                     ? 'border-neutral-200 text-neutral-300 cursor-not-allowed'
                     : 'border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red hover:bg-vgu-red/[0.03]',
@@ -396,7 +396,7 @@ function FeaturedCard({ post }: { post: SanityBlogPostSummary }) {
         <h2 className="font-heading font-bold text-[20px] leading-[1.3] text-neutral-900 mb-3 line-clamp-2 group-hover/feat:text-vgu-red transition-colors duration-200">
           {post.title}
         </h2>
-        <p className="text-[14px] font-body text-neutral-500 leading-[1.65] line-clamp-3 mb-4">
+        <p className="text-[16px] font-body text-neutral-500 leading-[1.65] line-clamp-3 mb-4">
           {post.excerpt}
         </p>
         <div className="flex-1" />
@@ -473,7 +473,7 @@ function PostCard({ post, delay }: { post: SanityBlogPostSummary; delay: number 
         </h3>
 
         {/* Excerpt */}
-        <p className="text-[14px] font-body text-neutral-500 leading-[1.65] line-clamp-3 mb-5">
+        <p className="text-[16px] font-body text-neutral-500 leading-[1.65] line-clamp-3 mb-5">
           {post.excerpt}
         </p>
 

@@ -255,14 +255,14 @@ export default function PlacementsPage() {
               <a
                 href="#counsellor"
                 data-apply-trigger
-                className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
                 Apply Now
                 <IconArrowRight size={16} />
               </a>
               <a
                 href="/programs"
-                className="inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[16px] font-heading font-semibold transition-all duration-200"
               >
                 Browse Programs
               </a>
@@ -355,7 +355,7 @@ export default function PlacementsPage() {
                 <h3 className="relative font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">
                   {s.title}
                 </h3>
-                <p className="relative text-[14px] font-body text-neutral-500 leading-[1.65]">
+                <p className="relative text-[16px] font-body text-neutral-500 leading-[1.65]">
                   {s.body}
                 </p>
               </div>
@@ -394,7 +394,7 @@ export default function PlacementsPage() {
                 <div className="w-11 h-11 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105">
                   <BrandIcon name={name} />
                 </div>
-                <span className="text-[11px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
+                <span className="text-[13px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
               </div>
             ))}
           </div>
@@ -448,7 +448,7 @@ export default function PlacementsPage() {
                 <h3 className="font-heading font-bold text-[17px] text-neutral-900 mb-2 leading-snug">
                   {ind.title}
                 </h3>
-                <p className="text-[14px] font-body text-neutral-500 leading-[1.65] mb-4">
+                <p className="text-[16px] font-body text-neutral-500 leading-[1.65] mb-4">
                   {ind.body}
                 </p>
 
@@ -547,7 +547,7 @@ export default function PlacementsPage() {
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-neutral-900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-[15px] font-body leading-[1.6] text-neutral-500 max-w-[230px] mb-3">
+                  <p className="text-[16px] font-body leading-[1.6] text-neutral-500 max-w-[230px] mb-3">
                     {step.body}
                   </p>
                   <span className="inline-flex items-center rounded-full border border-vgu-red/20 bg-vgu-red/[0.05] px-3 py-1 text-[11px] font-heading font-semibold text-vgu-red">
@@ -614,7 +614,7 @@ export default function PlacementsPage() {
                   </div>
                   <div className="px-5 pt-5 pb-3">
                     <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-1.5">Career path</p>
-                    <p className="text-[13px] font-heading font-semibold text-neutral-800 leading-snug mb-3">{t.journey}</p>
+                    <p className="text-[14px] font-heading font-semibold text-neutral-800 leading-snug mb-3">{t.journey}</p>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/15 border border-vgu-yellow/35 px-2.5 py-1 text-[11px] font-heading font-bold text-[#7a4d00]">
                       <IconBriefcase size={11} stroke={2} />
                       {t.company}
@@ -622,7 +622,7 @@ export default function PlacementsPage() {
                   </div>
                   <div className="flex-1 px-5 pt-3 pb-6">
                     <div className="font-heading font-bold text-[42px] text-vgu-red leading-[0.75] mb-2 select-none" aria-hidden="true">&ldquo;</div>
-                    <p className="text-[13px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                    <p className="text-[16px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
                   </div>
                 </div>
               </div>
@@ -653,7 +653,7 @@ export default function PlacementsPage() {
                 </div>
                 <div className="px-5 pt-5 pb-3">
                   <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-1.5">Career path</p>
-                  <p className="text-[14px] font-heading font-semibold text-neutral-800 leading-snug mb-3">{t.journey}</p>
+                  <p className="text-[15px] font-heading font-semibold text-neutral-800 leading-snug mb-3">{t.journey}</p>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/15 border border-vgu-yellow/35 px-2.5 py-1 text-[11px] font-heading font-bold text-[#7a4d00]">
                     <IconBriefcase size={11} stroke={2} />
                     {t.company}
@@ -661,7 +661,7 @@ export default function PlacementsPage() {
                 </div>
                 <div className="flex-1 px-5 pt-3 pb-6">
                   <div className="font-heading font-bold text-[42px] text-vgu-red leading-[0.75] mb-2 select-none" aria-hidden="true">&ldquo;</div>
-                  <p className="text-[14px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                  <p className="text-[16px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
                 </div>
               </div>
             ))}
@@ -675,14 +675,14 @@ export default function PlacementsPage() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
               Apply Now
               <IconArrowRight size={16} />
             </a>
             <a
               href="/programs"
-              className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] rounded-md px-[30px] py-3 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
             >
               Browse Programs
             </a>

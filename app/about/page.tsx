@@ -239,14 +239,14 @@ export default async function AboutPage() {
               <a
                 href="#counsellor"
                 data-apply-trigger
-                className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
                 Apply Now
                 <IconArrowRight size={16} />
               </a>
               <a
                 href="/programs"
-                className="inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[16px] font-heading font-semibold transition-all duration-200"
               >
                 Our Programs
               </a>
@@ -359,7 +359,7 @@ export default async function AboutPage() {
                   </span>
                   <div className="relative">
                     <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-1.5">{v.title}</h3>
-                    <p className="text-[15px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
+                    <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
                   </div>
                 </div>
               ))}
@@ -439,10 +439,10 @@ export default async function AboutPage() {
                     </span>
                   </div>
 
-                  <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2 leading-snug">
+                  <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">
                     {a.full}
                   </h3>
-                  <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
+                  <p className="text-[15px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
                 </div>
               </div>
             ))}
@@ -485,8 +485,8 @@ export default async function AboutPage() {
                       <f.Icon size={18} stroke={1.5} className="text-white" />
                     </div>
                     <div>
-                      <div className="font-heading font-semibold text-[15px] text-neutral-900 mb-1.5">{f.title}</div>
-                      <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+                      <div className="font-heading font-semibold text-[16px] text-neutral-900 mb-1.5">{f.title}</div>
+                      <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
                     </div>
                   </div>
                 ))}
@@ -494,7 +494,7 @@ export default async function AboutPage() {
 
               <a
                 href="/programs"
-                className="inline-flex items-center gap-2 mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[15px] rounded-md px-[30px] py-3 transition-all duration-200"
+                className="inline-flex items-center gap-2 mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
               >
                 Explore programs
                 <IconArrowRight size={15} />
@@ -518,15 +518,15 @@ export default async function AboutPage() {
               <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
                 <div className="flex flex-col items-center py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
-                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
+                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
                 </div>
                 <div className="flex flex-col items-center py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">100%</span>
-                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
+                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
                 </div>
                 <div className="flex flex-col items-center py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">50K+</span>
-                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
+                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
                 </div>
               </div>
             </div>
@@ -565,7 +565,7 @@ export default async function AboutPage() {
                 <div className="w-11 h-11 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105">
                   <BrandIcon name={name} />
                 </div>
-                <span className="text-[11px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
+                <span className="text-[13px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
               </div>
             ))}
           </div>
@@ -578,7 +578,7 @@ export default async function AboutPage() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
               Start your career journey
               <IconArrowRight size={16} />
@@ -705,7 +705,7 @@ export default async function AboutPage() {
                             </span>
                           )}
                         </div>
-                        <p className="text-[15px] font-body text-neutral-700 leading-[1.6]">{m.event}</p>
+                        <p className="text-[16px] font-body text-neutral-700 leading-[1.6]">{m.event}</p>
                       </div>
                     </div>
                   )
@@ -760,8 +760,8 @@ export default async function AboutPage() {
                     <f.Icon size={20} stroke={1.5} className="text-white" />
                   </div>
                   <div className="font-heading font-black text-[38px] text-vgu-yellow leading-none mb-1.5">{f.stat}</div>
-                  <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2">{f.label}</h3>
-                  <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+                  <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2">{f.label}</h3>
+                  <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
                 </div>
               </div>
             ))}
@@ -791,8 +791,8 @@ export default async function AboutPage() {
                   <f.Icon size={20} stroke={1.5} className="text-white" />
                 </div>
                 <div className="font-heading font-black text-[38px] text-vgu-yellow leading-none mb-1.5">{f.stat}</div>
-                <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2">{f.label}</h3>
-                <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+                <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2">{f.label}</h3>
+                <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
               </div>
             ))}
           </div>
@@ -822,7 +822,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="flex-1 px-5 pt-5 pb-6">
                     <div className="font-heading font-bold text-[48px] text-vgu-red leading-[0.75] mb-3 select-none" aria-hidden="true">&ldquo;</div>
-                    <p className="text-[14px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                    <p className="text-[16px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
                   </div>
                 </div>
               </div>
@@ -852,7 +852,7 @@ export default async function AboutPage() {
                 </div>
                 <div className="flex-1 px-5 pt-5 pb-6">
                   <div className="font-heading font-bold text-[52px] text-vgu-red leading-[0.75] mb-3 select-none" aria-hidden="true">&ldquo;</div>
-                  <p className="text-[15px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                  <p className="text-[16px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
                 </div>
               </div>
             ))}
@@ -866,14 +866,14 @@ export default async function AboutPage() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
               Apply Now
               <IconArrowRight size={16} />
             </a>
             <a
               href="/programs"
-              className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] rounded-md px-[30px] py-3 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
             >
               Browse programs
             </a>
