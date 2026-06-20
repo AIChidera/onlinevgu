@@ -85,47 +85,45 @@ export default async function BlogPage() {
 
       {/* ══ Stats trust strip ══ */}
       {hasContent && (
-        <section className="relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-7">
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 120% at 0% 50%, rgba(192,64,54,0.05) 0%, transparent 100%)' }} />
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 120% at 100% 50%, rgba(192,64,54,0.05) 0%, transparent 100%)' }} />
-          <div className="relative mx-auto max-w-[1280px] flex flex-wrap items-center justify-center gap-8 md:gap-14">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-none" style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.12), rgba(192,64,54,0.06))' }}>
-                <IconNotes size={18} className="text-vgu-red" stroke={1.75} />
+        <section className="relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-6">
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 0% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 100% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
+          <div className="relative mx-auto max-w-[1280px] flex flex-wrap items-stretch justify-center gap-3 md:gap-4">
+            {/* Each stat is a self-contained lift card */}
+            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
+                <IconNotes size={19} className="text-vgu-red" stroke={2} />
               </div>
               <div>
-                <p className="font-heading font-bold text-[19px] leading-none text-neutral-900 mb-0.5">{allPosts.length}</p>
-                <p className="text-[11px] font-body text-neutral-400 uppercase tracking-[0.07em]">Stories published</p>
+                <p className="font-heading font-bold text-[20px] leading-none text-neutral-900 mb-1">{allPosts.length}</p>
+                <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Stories published</p>
               </div>
             </div>
-            <span aria-hidden="true" className="hidden md:block w-px h-10 bg-neutral-150 rounded-full" style={{ background: 'linear-gradient(to bottom, transparent, #e5e7eb, transparent)' }} />
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-none" style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.12), rgba(192,64,54,0.06))' }}>
-                <IconTag size={18} className="text-vgu-red" stroke={1.75} />
+            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
+                <IconTag size={19} className="text-vgu-red" stroke={2} />
               </div>
               <div>
-                <p className="font-heading font-bold text-[19px] leading-none text-neutral-900 mb-0.5">5</p>
-                <p className="text-[11px] font-body text-neutral-400 uppercase tracking-[0.07em]">Topics covered</p>
+                <p className="font-heading font-bold text-[20px] leading-none text-neutral-900 mb-1">5</p>
+                <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Topics covered</p>
               </div>
             </div>
-            <span aria-hidden="true" className="hidden md:block w-px h-10" style={{ background: 'linear-gradient(to bottom, transparent, #e5e7eb, transparent)' }} />
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-none" style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.12), rgba(192,64,54,0.06))' }}>
-                <IconUsers size={18} className="text-vgu-red" stroke={1.75} />
+            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
+                <IconUsers size={19} className="text-vgu-red" stroke={2} />
               </div>
               <div>
-                <p className="font-heading font-bold text-[19px] leading-none text-neutral-900 mb-0.5">50,000+</p>
-                <p className="text-[11px] font-body text-neutral-400 uppercase tracking-[0.07em]">Active readers</p>
+                <p className="font-heading font-bold text-[20px] leading-none text-neutral-900 mb-1">50,000+</p>
+                <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Active readers</p>
               </div>
             </div>
-            <span aria-hidden="true" className="hidden md:block w-px h-10" style={{ background: 'linear-gradient(to bottom, transparent, #e5e7eb, transparent)' }} />
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-none" style={{ background: 'linear-gradient(135deg, rgba(192,64,54,0.12), rgba(192,64,54,0.06))' }}>
-                <IconCalendarStar size={18} className="text-vgu-red" stroke={1.75} />
+            <div className="group flex items-center gap-3.5 rounded-2xl border border-neutral-200 bg-white px-5 py-4 hover:border-vgu-red/25 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-none bg-vgu-red/10 shadow-[0_4px_14px_rgba(192,64,54,0.22)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
+                <IconCalendarStar size={19} className="text-vgu-red" stroke={2} />
               </div>
               <div>
-                <p className="font-heading font-bold text-[19px] leading-none text-neutral-900 mb-0.5">Weekly</p>
-                <p className="text-[11px] font-body text-neutral-400 uppercase tracking-[0.07em]">Fresh content</p>
+                <p className="font-heading font-bold text-[20px] leading-none text-neutral-900 mb-1">Weekly</p>
+                <p className="text-[11px] font-body text-neutral-500 uppercase tracking-[0.07em]">Fresh content</p>
               </div>
             </div>
           </div>
