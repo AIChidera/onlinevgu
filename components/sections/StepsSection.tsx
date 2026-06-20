@@ -108,6 +108,7 @@ export default function StepsSection() {
                       'w-[76px] h-[76px] mt-[10px] md:w-[100px] md:h-[100px] md:mt-[14px] border-2 border-vgu-red',
                       'shadow-[0_4px_16px_rgba(192,64,54,0.12)] transition-all duration-300',
                       'hover:bg-vgu-red hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.30)]',
+                      'group-hover:scale-110',
                     ].join(' ')}
                   >
                     <step.Icon

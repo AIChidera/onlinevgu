@@ -114,7 +114,7 @@ export default function ImpactSection({
   ]
 
   return (
-    <section id="impact" className="sketch-hover-group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+    <section id="impact" className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
       <SketchFlourish shape="wave" color="red" opacity={0.05} strokeWidth={10} />
       <div className="relative z-10 mx-auto max-w-[1280px]">
 
@@ -146,7 +146,9 @@ export default function ImpactSection({
             >
               {/* Icon - Bible §09: 24-32px, brand colour, 60% opacity */}
               <div className="flex justify-center mb-3 md:mb-4">
-                <s.Icon size={28} stroke={1.5} className="text-vgu-red opacity-60" />
+                <span className="block transition-all duration-200 group-hover:scale-110 group-hover:rotate-3">
+                  <s.Icon size={28} stroke={1.5} className="text-vgu-red opacity-60" />
+                </span>
               </div>
 
               {/* Number - monumental */}

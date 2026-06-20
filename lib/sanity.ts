@@ -93,6 +93,51 @@ export interface SanityMilestone {
   event: string
 }
 
+export interface SanityBlogAuthor {
+  name:      string
+  title:     string
+  avatarUrl: string | null
+}
+
+export interface SanityBlogPostSummary {
+  _id:         string
+  slug:        string
+  title:       string
+  excerpt:     string
+  category:    string
+  publishedAt: string
+  readTime:    string
+  coverUrl:    string | null
+  featured:    boolean
+  author?:     SanityBlogAuthor
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PortableTextBlock = any
+
+export interface SanityBlogPostRelatedProgram {
+  slug:     string
+  name:     string
+  fullName: string
+  duration: string
+  level:    'ug' | 'pg' | 'cert'
+}
+
+export interface SanityBlogPost {
+  _id:         string
+  slug:        string
+  title:       string
+  excerpt:     string
+  category:    string
+  publishedAt: string
+  readTime:    string
+  coverUrl:    string | null
+  featured:    boolean
+  body:        PortableTextBlock[]
+  author?:     SanityBlogAuthor
+  relatedPrograms?: SanityBlogPostRelatedProgram[]
+}
+
 // Lightweight shape used for program listing, sitemap, and related-program cards.
 export interface SanityProgramSummary {
   _id:            string
@@ -309,6 +354,79 @@ export const getBrochureUrlForProgram = unstable_cache(
   },
   ['brochure-url-for-program'],
   { revalidate: 3600, tags: ['program', 'siteSettings'] }
+)
+
+// ────────────────────────────────────────────────────────────
+// Blog queries
+// ────────────────────────────────────────────────────────────
+
+const BLOG_SUMMARY_PROJECTION = `
+  _id,
+  "slug": slug.current,
+  title, excerpt, category, publishedAt, readTime,
+  "coverUrl": coverImage.asset->url,
+  featured,
+  "author": author{ "name": select(name == "_custom" => customName, name), title, "avatarUrl": avatar.asset->url }
+`
+
+export const getAllBlogPosts = unstable_cache(
+  async (): Promise<SanityBlogPostSummary[]> => {
+    return sanityClient.fetch<SanityBlogPostSummary[]>(
+      `*[_type == "blogPost" && defined(slug.current) && defined(publishedAt) && publishedAt <= now()]
+        | order(publishedAt desc) { ${BLOG_SUMMARY_PROJECTION} }`,
+      {}
+    )
+  },
+  ['all-blog-posts'],
+  { revalidate: 3600, tags: ['blogPost'] }
+)
+
+export const getAllBlogPostSlugs = unstable_cache(
+  async (): Promise<string[]> => {
+    return sanityClient.fetch<string[]>(
+      `*[_type == "blogPost" && defined(slug.current)].slug.current`,
+      {}
+    )
+  },
+  ['all-blog-post-slugs'],
+  { revalidate: 3600, tags: ['blogPost'] }
+)
+
+export const getBlogPostBySlug = unstable_cache(
+  async (slug: string): Promise<SanityBlogPost | null> => {
+    return sanityClient.fetch<SanityBlogPost | null>(
+      `*[_type == "blogPost" && slug.current == $slug][0] {
+        _id,
+        "slug": slug.current,
+        title, excerpt, category, publishedAt, readTime,
+        "coverUrl": coverImage.asset->url,
+        featured,
+        body,
+        "author": author{ "name": select(name == "_custom" => customName, name), title, "avatarUrl": avatar.asset->url },
+        "relatedPrograms": relatedPrograms[]->{
+          "slug": slug.current,
+          name, fullName, duration, level
+        }
+      }`,
+      { slug }
+    )
+  },
+  ['blog-post-by-slug'],
+  { revalidate: 3600, tags: ['blogPost'] }
+)
+
+export const getRelatedBlogPosts = unstable_cache(
+  async (excludeSlug: string, category: string | null): Promise<SanityBlogPostSummary[]> => {
+    const filter = category
+      ? `_type == "blogPost" && slug.current != $excludeSlug && category == $category && defined(publishedAt) && publishedAt <= now()`
+      : `_type == "blogPost" && slug.current != $excludeSlug && defined(publishedAt) && publishedAt <= now()`
+    return sanityClient.fetch<SanityBlogPostSummary[]>(
+      `*[${filter}] | order(publishedAt desc)[0...3] { ${BLOG_SUMMARY_PROJECTION} }`,
+      category ? { excludeSlug, category } : { excludeSlug }
+    )
+  },
+  ['related-blog-posts'],
+  { revalidate: 3600, tags: ['blogPost'] }
 )
 
 export const getProgramBySlug = unstable_cache(

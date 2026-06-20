@@ -45,7 +45,7 @@ const PARTNER_LABEL: Record<string, string> = { 'DeepLearning.AI': 'DL.AI' }
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="sketch-hover-group relative overflow-hidden bg-vgu-beige py-16 lg:py-24">
+    <section id="features" className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-16 lg:py-24">
       <SketchFlourish shape="swoop"    color="red-dark" opacity={0.11} strokeWidth={8} />
       <SketchFlourish shape="monogram" color="red-dark" opacity={0.08} strokeWidth={6} className="translate-x-1/3 translate-y-1/3" />
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
@@ -140,7 +140,7 @@ function FeatureCard({ feature: f, delay = 0 }: { feature: Feature; delay?: numb
       style={{ animationDelay: `${delay}ms` }}
       className="group/card flex flex-col rounded-2xl bg-white border border-neutral-200 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(192,64,54,0.12)]"
     >
-      <div className="mb-4 w-12 h-12 rounded-xl bg-vgu-red/10 flex items-center justify-center flex-none">
+      <div className="mb-4 w-12 h-12 rounded-xl bg-vgu-red/10 flex items-center justify-center flex-none transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3">
         <f.Icon size={22} className="text-vgu-red" stroke={1.75} />
       </div>
       <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-neutral-900 mb-2">

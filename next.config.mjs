@@ -9,21 +9,7 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ['images.unsplash.com', 'cdn.sanity.io'],
-  },
-  async redirects() {
-    return [
-      {
-        source: '/blog',
-        destination: 'https://blog.vgu.ac.in',
-        permanent: false,
-      },
-      {
-        source: '/blog/:path*',
-        destination: 'https://blog.vgu.ac.in/:path*',
-        permanent: false,
-      },
-    ]
+    domains: ['images.unsplash.com', 'cdn.sanity.io', 'blog.vgu.ac.in'],
   },
   webpack: (cfg, { isServer }) => {
     if (!isServer) {

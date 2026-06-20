@@ -106,9 +106,9 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
           className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          {visible.map((p, i) => (
+          {visible.map((p) => (
             <div key={p.slug} className="snap-start flex-none w-[75vw] max-w-[285px]">
-              <MobileProgramCard programme={p} meta={PROGRAM_META[p.slug]} delay={i * 80} />
+              <MobileProgramCard programme={p} meta={PROGRAM_META[p.slug]} delay={0} />
             </div>
           ))}
         </div>
@@ -246,7 +246,7 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
   return (
     <Link
       href={`/programs/${p.slug}`}
-      data-animate="materialize"
+      data-animate="fade-up"
       style={{ animationDelay: `${delay}ms`, boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}
       className="group/card flex flex-col rounded-[16px] overflow-hidden bg-white
                  border border-neutral-200 transition-all duration-300 hover:-translate-y-1

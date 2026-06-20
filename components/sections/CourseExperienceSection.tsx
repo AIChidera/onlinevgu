@@ -356,7 +356,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
   switch (index) {
 
     case 0: return ( // Live Classes
-      <div className="flex flex-col gap-3 h-full">
+      <div className="flex flex-col gap-3.5 h-full">
         <div className="relative rounded-lg overflow-hidden flex-none" style={{ height: '112px', background: '#080814' }}>
           <div className="absolute top-2 left-2 flex items-center gap-1 rounded px-2 py-0.5 bg-red-500">
             <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
@@ -376,13 +376,13 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
             <div className="h-full w-[45%] bar-fill" style={{ background: color }} />
           </div>
         </div>
-        <div className="space-y-2 flex-1">
+        <div className="space-y-3 flex-1">
           {[
             { name: 'Priya R.', msg: 'Can we revisit the BCG matrix?', photo: 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=28&q=80&auto=format&fit=crop&crop=faces' },
             { name: 'Raj K.',   msg: 'Great session, very clear!',     photo: 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=28&q=80&auto=format&fit=crop&crop=faces' },
             { name: 'Meera S.', msg: 'When is the assignment due?',    photo: 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=28&q=80&auto=format&fit=crop&crop=faces' },
           ].map((m, i) => (
-            <div key={i} className="flex items-start gap-2">
+            <div key={i} className="flex items-start gap-2.5">
               <div className="w-5 h-5 rounded-full flex-none overflow-hidden">
                 <Image src={m.photo} alt={m.name} width={20} height={20} unoptimized className="object-cover w-full h-full" />
               </div>
@@ -397,9 +397,9 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 1: return ( // Mentor Access
-      <div className="flex flex-col gap-2.5">
-        <div className="rounded-xl bg-white/[0.07] border border-white/10 p-3">
-          <div className="flex items-center gap-2.5 mb-3">
+      <div className="flex flex-col gap-3">
+        <div className="rounded-xl bg-white/[0.07] border border-white/10 p-3.5">
+          <div className="flex items-center gap-2.5 mb-3.5">
             <div className="w-10 h-10 rounded-full flex-none overflow-hidden ring-2 ring-white/10">
               <Image src="https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=80&q=80&auto=format&fit=crop&crop=faces" alt="Rahul Verma" width={40} height={40} unoptimized className="object-cover w-full h-full" />
             </div>
@@ -409,18 +409,18 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
             </div>
             <span className="text-[10px] font-bold text-vgu-yellow flex-none">★ 4.9</span>
           </div>
-          <div className="flex gap-1.5 mb-3">
+          <div className="flex gap-1.5 mb-3.5">
             {['Product', 'Strategy', 'MBA'].map(t => (
               <span key={t} className="px-2 py-0.5 rounded-full text-[8px] font-bold text-white/65 bg-white/10">{t}</span>
             ))}
           </div>
-          <p className="text-[8px] text-white/35 mb-2">Available slots</p>
-          <div className="space-y-1.5">
+          <p className="text-[8px] text-white/35 mb-2.5">Available slots</p>
+          <div className="space-y-2">
             {[
               { slot: 'Today  6:30 PM', active: true  },
               { slot: 'Tomorrow  7:00 PM', active: false },
             ].map(({ slot, active }) => (
-              <div key={slot} className="flex items-center justify-between rounded-lg px-2.5 py-1.5 border"
+              <div key={slot} className="flex items-center justify-between rounded-lg px-2.5 py-2 border"
                    style={{ borderColor: active ? color + '80' : 'rgba(255,255,255,0.10)', background: active ? color + '20' : 'transparent' }}>
                 <span className="text-[9px] text-white/70">{slot}</span>
                 {active && (
@@ -434,15 +434,15 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 2: return ( // Assessments
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between mb-0.5">
+      <div className="flex flex-col gap-2.5">
+        <div className="flex items-center justify-between">
           <span className="text-[9px] text-white/40">Question 3 of 5</span>
           <span className="text-[10px] font-bold text-vgu-yellow">12:45</span>
         </div>
-        <div className="h-1 rounded-full bg-white/10 mb-1">
+        <div className="h-1 rounded-full bg-white/10">
           <div className="h-full rounded-full w-3/5 bar-fill" style={{ background: color }} />
         </div>
-        <p className="text-[10px] font-semibold text-white/90 leading-snug mb-1.5">
+        <p className="text-[10px] font-semibold text-white/90 leading-snug">
           Which best describes Porter&apos;s Five Forces?
         </p>
         {[
@@ -451,7 +451,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           'A financial performance metric',
           'A supply chain framework',
         ].map((opt, i) => (
-          <div key={opt} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 border"
+          <div key={opt} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 border"
                style={{ borderColor: i === 1 ? color : 'rgba(255,255,255,0.08)', background: i === 1 ? color + '22' : 'transparent' }}>
             <div className="w-3 h-3 rounded-full border flex-none"
                  style={{ borderColor: i === 1 ? color : 'rgba(255,255,255,0.22)', background: i === 1 ? color : 'transparent' }} />
@@ -462,8 +462,8 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 3: return ( // Library
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2 rounded-lg px-2.5 py-2 bg-white/10 border border-white/15 mb-0.5">
+      <div className="flex flex-col gap-2.5">
+        <div className="flex items-center gap-2 rounded-lg px-2.5 py-2 bg-white/10 border border-white/15">
           <span className="text-[11px] text-white/35">⌕</span>
           <span className="text-[9px] text-white/65">International Finance</span>
         </div>
@@ -473,7 +473,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           { title: 'International Corp. Finance',  author: 'Madura, J.',    bg: '#FFA412' },
           { title: 'FX Markets & Institutions',    author: 'Pilbeam, K.',   bg: '#821a12' },
         ].map((book, i) => (
-          <div key={i} className="flex items-center gap-2.5 rounded-lg p-2 bg-white/[0.04] border border-white/10">
+          <div key={i} className="flex items-center gap-2.5 rounded-lg p-2.5 bg-white/[0.04] border border-white/10">
             <div className="w-5 h-7 rounded flex-none shadow-sm" style={{ background: book.bg }} />
             <div className="flex-1 min-w-0">
               <p className="text-[9px] font-bold text-white/85 leading-tight truncate">{book.title}</p>
@@ -486,7 +486,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 4: return ( // Coursera
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         <div className="rounded-xl overflow-hidden border border-white/15">
           <div className="h-9 flex items-center px-2.5 gap-2" style={{ background: '#0056D2' }}>
             <div className="w-5 h-5 rounded overflow-hidden flex-none">
@@ -495,15 +495,15 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
             <span className="text-[10px] font-bold text-white">Coursera</span>
             <span className="ml-auto text-[8px] text-white/65">Included free</span>
           </div>
-          <div className="p-2.5 bg-white/[0.04]">
-            <div className="flex items-center gap-2 mb-1">
+          <div className="p-3 bg-white/[0.04]">
+            <div className="flex items-center gap-2 mb-1.5">
               <div className="w-4 h-4 rounded-sm overflow-hidden flex-none">
                 <BrandIcon name="Google" />
               </div>
               <p className="text-[10px] font-bold text-white/85 leading-tight">Google Project Management</p>
             </div>
-            <p className="text-[8px] text-white/40 mb-2">Certificate · 6 months · Google</p>
-            <div className="flex items-center justify-between mb-1">
+            <p className="text-[8px] text-white/40 mb-2.5">Certificate · 6 months · Google</p>
+            <div className="flex items-center justify-between mb-1.5">
               <span className="text-[8px] text-white/35">Progress</span>
               <span className="text-[9px] font-bold text-vgu-yellow">72%</span>
             </div>
@@ -516,7 +516,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           { label: 'IBM Data Science',   brand: 'IBM'  },
           { label: 'Meta Front-End Dev', brand: 'Meta' },
         ].map((c) => (
-          <div key={c.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 bg-white/[0.04] border border-white/10">
+          <div key={c.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 bg-white/[0.04] border border-white/10">
             <div className="w-4 h-4 rounded-sm overflow-hidden flex-none">
               <BrandIcon name={c.brand} />
             </div>
@@ -527,14 +527,14 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     )
 
     case 5: return ( // Career Centre
-      <div className="flex flex-col gap-2">
-        <p className="text-[8px] text-white/35 mb-0.5">500+ live openings · Updated today</p>
+      <div className="flex flex-col gap-2.5">
+        <p className="text-[8px] text-white/35">500+ live openings · Updated today</p>
         {[
           { role: 'Business Analyst', company: 'TCS',       status: 'Applied',     statusBg: color     },
           { role: 'Product Manager',  company: 'Razorpay',  status: 'Shortlisted', statusBg: '#22c55e' },
           { role: 'Finance Lead',     company: 'HDFC Bank', status: 'New',         statusBg: '#FFA412' },
         ].map((job) => (
-          <div key={job.company} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 bg-white/[0.05] border border-white/10">
+          <div key={job.company} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 bg-white/[0.05] border border-white/10">
             <div className="w-8 h-8 rounded-xl flex-none overflow-hidden">
               <BrandIcon name={job.company} />
             </div>

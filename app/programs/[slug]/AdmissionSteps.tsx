@@ -17,7 +17,7 @@ const STEPS = [
 
 export default function AdmissionSteps() {
   return (
-    <section className="relative bg-neutral-900 border-t border-white/[0.06] py-16 px-5 md:px-8 lg:px-12 overflow-hidden">
+    <section className="group relative bg-neutral-900 border-t border-white/[0.06] py-16 px-5 md:px-8 lg:px-12 overflow-hidden">
       {/* Dot texture */}
       <div
         aria-hidden="true"

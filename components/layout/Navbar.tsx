@@ -6,11 +6,11 @@ import { useState, useEffect } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
 const NAV_LINKS = [
-  { label: 'Programs',   href: '/#programs'     },
-  { label: 'Admissions', href: '/#how-to-apply' },
-  { label: 'Placements', href: '/#impact'       },
   { label: 'About',      href: '/about'         },
-  { label: 'Blog',       href: 'https://blog.vgu.ac.in' },
+  { label: 'Programs',   href: '/programs'      },
+  { label: 'Admissions', href: '/#how-to-apply' },
+  { label: 'Placements', href: '/placements'    },
+  { label: 'Blog',       href: '/blog'          },
 ]
 
 export default function Navbar() {

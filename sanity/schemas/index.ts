@@ -5,6 +5,7 @@ import faculty from './faculty'
 import faq from './faq'
 import campusEvent from './campusEvent'
 import milestone from './milestone'
+import blogPost from './blogPost'
 
 export const schemaTypes = [
   siteSettings,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   faq,
   campusEvent,
   milestone,
+  blogPost,
 ]

@@ -1,24 +1,27 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getMilestones } from '@/lib/sanity'
-
-// Sanity-fetched content is cached at the function level via unstable_cache;
-// this page-level revalidate matches the rest of the site so ISR regenerates
-// at the same cadence as program/home pages.
-export const revalidate = 3600
-
-// Placeholder - replace with '/images/about-hero-bg.jpg' when ready.
-const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80&auto=format&fit=crop'
 import {
   IconAward,
   IconUsers,
   IconGlobe,
   IconBuildingBank,
   IconCheck,
-  IconShieldCheck,
+  IconSchool,
+  IconCertificate,
+  IconTrendingUp,
+  IconBrain,
+  IconArrowRight,
 } from '@tabler/icons-react'
+import BrandIcon from '@/components/ui/BrandIcon'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { FOUNDING_YEAR } from '@/lib/constants'
+
+export const revalidate = 3600
+
+const HERO_IMAGE_SRC =
+  'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80&auto=format&fit=crop'
 
 export const metadata: Metadata = {
   title: 'About VGU - Vivekananda Global University Online',
@@ -33,156 +36,256 @@ export const metadata: Metadata = {
 }
 
 const STATS = [
-  { value: String(FOUNDING_YEAR), label: 'Year established', Icon: IconBuildingBank },
-  { value: 'NAAC A+', label: 'Accreditation grade', Icon: IconAward        },
-  { value: '50,000+', label: 'Online learners',     Icon: IconUsers        },
-  { value: '40+',     label: 'Countries',            Icon: IconGlobe        },
+  { value: String(FOUNDING_YEAR), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
+  { value: 'NAAC A+',             label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
+  { value: '50,000+',             label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
+  { value: '40+',                 label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
 ]
 
-// Brand 3-cycle for accreditation badge pills. NAAC A+ keeps the yellow accent (the highlight grade).
-const PILL_RED  = 'bg-vgu-red/5 text-vgu-red border-vgu-red/15'
-const PILL_YEL  = 'bg-vgu-yellow/15 text-neutral-900 border-vgu-yellow/40'
-const PILL_DARK = 'bg-vgu-red-dark/5 text-vgu-red-dark border-vgu-red-dark/20'
-
-const ACCREDITATIONS = [
-  {
-    name: 'UGC',
-    full: 'University Grants Commission',
-    detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.',
-    color: PILL_RED,
-  },
-  {
-    name: 'NAAC A+',
-    full: 'National Assessment and Accreditation Council',
-    detail: 'Highest grade, 3.52 / 4.0 CGPA. Reaccredited in 2021, reflecting sustained academic excellence.',
-    color: PILL_YEL,
-  },
-  {
-    name: 'AICTE',
-    full: 'All India Council for Technical Education',
-    detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',
-    color: PILL_DARK,
-  },
-  {
-    name: 'NIRF',
-    full: 'National Institutional Ranking Framework',
-    detail: 'Ranked by the Ministry of Education under the University and Management categories.',
-    color: PILL_RED,
-  },
-  {
-    name: 'AIU',
-    full: 'Association of Indian Universities',
-    detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',
-    color: PILL_YEL,
-  },
-  {
-    name: 'WES',
-    full: 'World Education Services, Canada',
-    detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',
-    color: PILL_DARK,
-  },
-]
-
-const MILESTONES = [
-  { year: '2012', event: 'University established in Jaipur, Rajasthan' },
-  { year: '2015', event: 'First UGC-DEB approved online programs launched' },
-  { year: '2018', event: 'NAAC accreditation - A grade achieved' },
-  { year: '2019', event: 'Online division scaled - programs open to learners nationwide' },
-  { year: '2021', event: 'NAAC A+ reaccreditation - highest grade achieved' },
-  { year: '2022', event: 'Coursera institutional partnership - 7,000+ courses added free for all students' },
-  { year: '2023', event: '50,000+ online learners milestone crossed' },
-  { year: '2024', event: 'WES Canada recognition extended to online programs' },
+const TRUST_POINTS = [
+  'NAAC A+ Accredited',
+  'UGC Distance Education Bureau',
+  'No entrance exam',
+  'Degrees valid globally',
 ]
 
 const VALUES = [
   {
     title: 'Accessible quality',
     body:  'Every Indian deserves access to a degree from a great university - not just those who can afford to leave home.',
+    Icon:  IconSchool,
   },
   {
     title: 'Employer credibility',
     body:  'UGC-entitled degrees. No asterisks, no footnotes. The same certificate an on-campus student receives.',
+    Icon:  IconCertificate,
   },
   {
     title: 'Real outcomes',
     body:  '95% placement rate - built on 500+ hiring partners and a placement cell that works year-round.',
+    Icon:  IconTrendingUp,
   },
   {
     title: 'Faculty with practice',
     body:  'Professors who consult for Fortune 500 companies and publish active research - not just career academics.',
+    Icon:  IconBrain,
   },
+]
+
+// Accreditation color styles — dynamic data values, inline styles permitted
+const ACC_STYLES = {
+  red:  { bar: '#C04036', bg: 'rgba(192,64,54,0.06)',  text: '#C04036', border: 'rgba(192,64,54,0.20)',  cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.05) 100%)'  },
+  yel:  { bar: '#FFA412', bg: 'rgba(255,164,18,0.10)', text: '#7a4d00', border: 'rgba(255,164,18,0.35)', cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(255,164,18,0.07) 100%)' },
+  dark: { bar: '#821a12', bg: 'rgba(130,26,18,0.06)',  text: '#821a12', border: 'rgba(130,26,18,0.20)',  cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(130,26,18,0.05) 100%)'  },
+}
+
+const ACCREDITATIONS = [
+  { name: 'UGC',     full: 'University Grants Commission',                  detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.', s: ACC_STYLES.red,  logo: '/assets/trust/ugc.svg',  status: 'Entitled',   ghost: 'U' },
+  { name: 'NAAC A+', full: 'National Assessment and Accreditation Council', detail: 'Highest grade, 3.29 / 4.0 CGPA. First cycle accreditation in 2022, valid through 2027.',                  s: ACC_STYLES.yel,  logo: '/assets/trust/naac.svg', status: 'A+ Grade',   ghost: 'N' },
+  { name: 'AICTE',   full: 'All India Council for Technical Education',     detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',               s: ACC_STYLES.dark, logo: '/assets/trust/aicte.svg',status: 'Approved',   ghost: 'A' },
+  { name: 'NIRF',    full: 'National Institutional Ranking Framework',      detail: 'Ranked by the Ministry of Education under the University and Management categories.',                          s: ACC_STYLES.red,  logo: null,                     status: 'Ranked',     ghost: 'N' },
+  { name: 'AIU',     full: 'Association of Indian Universities',            detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',               s: ACC_STYLES.yel,  logo: null,                     status: 'Member',     ghost: 'A' },
+  { name: 'WES',     full: 'World Education Services, Canada',              detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',         s: ACC_STYLES.dark, logo: null,                     status: 'Recognised', ghost: 'W' },
+]
+
+const CAMPUS_IMAGE_SRC =
+  'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80&auto=format&fit=crop'
+
+const CAMPUS_FEATURES = [
+  {
+    title: 'In-person campus immersions',
+    body:  'Step onto campus multiple times a year for workshops, labs, and hands-on sessions with faculty who bring real industry experience.',
+    Icon:  IconSchool,
+  },
+  {
+    title: 'Graduation ceremony on campus',
+    body:  'Cross the same stage as every VGU student and receive your degree in Jaipur. A moment earned - properly celebrated.',
+    Icon:  IconCertificate,
+  },
+  {
+    title: 'Faculty and peer meetups',
+    body:  'Connect face-to-face with classmates and professors. Build relationships that outlast the program.',
+    Icon:  IconUsers,
+  },
+]
+
+const HIRERS = [
+  'TCS', 'Infosys', 'Wipro', 'Accenture', 'HCL',
+  'IBM', 'Deloitte', 'EY', 'KPMG', 'Cognizant',
+  'Amazon', 'Flipkart', 'HDFC Bank', 'ICICI Bank', 'Bajaj Finserv',
+  'Reliance Industries', 'Tata Group', 'Mahindra', 'Zomato', 'PhonePe',
+  'Tech Mahindra', 'Capgemini', 'LTIMindtree', 'Axis Bank', 'Mphasis',
+]
+
+const ALUMNI_TESTIMONIALS = [
+  {
+    quote:   'The MBA from VGU gave me the same degree as an on-campus student. My employer never asked if it was online.',
+    name:    'Rahul Sharma',
+    program: 'MBA · 2023 batch',
+    avatar:  'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=160&q=80&auto=format&fit=crop',
+  },
+  {
+    quote:   'Working full-time in Hyderabad meant I couldn\'t relocate. VGU let me earn my MCA without giving up my job or my family.',
+    name:    'Priya Nair',
+    program: 'MCA · 2023 batch',
+    avatar:  'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=160&q=80&auto=format&fit=crop',
+  },
+  {
+    quote:   'The campus immersion week changed everything. I came back with a co-founder and a completely new career direction.',
+    name:    'Aditya Mehta',
+    program: 'BBA · 2024 batch',
+    avatar:  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=160&q=80&auto=format&fit=crop',
+  },
+]
+
+const ALUMNI_FEATURES = [
+  {
+    stat:  '50,000+',
+    label: 'Learners and counting',
+    body:  'Online learners from across India and 40+ countries. A community that grows every semester.',
+    Icon:  IconGlobe,
+  },
+  {
+    stat:  '500+',
+    label: 'Hiring partners',
+    body:  'AI-powered placement portal, unlimited mock interviews, and a placement cell working year-round.',
+    Icon:  IconTrendingUp,
+  },
+  {
+    stat:  '95%',
+    label: 'Placement rate',
+    body:  'Class of 2023. Built on real employer relationships and a curriculum aligned with what companies hire for.',
+    Icon:  IconAward,
+  },
+]
+
+const MILESTONES = [
+  { year: '2012', tag: 'Foundation',  event: 'VGU established in Jaipur under Rajasthan Private Universities Act (No. 11/2012)' },
+  { year: '2013', tag: 'Foundation',  event: 'First academic session commences - inaugural batch enrolled across flagship programs' },
+  { year: '2022', tag: 'Achievement', event: 'NAAC A+ first cycle accreditation - CGPA 3.29/4.0, valid through 2027' },
+  { year: '2022', tag: 'Digital',     event: 'Online VGU (CDOE) launches - UGC-entitled online degrees open to learners nationwide' },
+  { year: '2022', tag: 'Partnership', event: 'Coursera institutional partnership - 7,000+ courses free for all enrolled students' },
+  { year: '2024', tag: 'Partnership', event: "Google Cloud partnership - Rajasthan's first Generative AI Campus launched at VGU" },
+  { year: '2025', tag: 'Rankings',    event: 'QS World Rankings: 95th in India, 666th in Asia; NIRF ranked 151-200 (University category)' },
+  { year: '2026', tag: 'Rankings',    event: 'IIRF ranked 37th Private University in India' },
 ]
 
 export default async function AboutPage() {
   const sanityMilestones = await getMilestones()
-  const activeMilestones = sanityMilestones.length > 0
-    ? sanityMilestones.map(m => ({ year: String(m.year), event: m.event }))
-    : MILESTONES
+  const activeMilestones =
+    sanityMilestones.length > 0
+      ? sanityMilestones.map(m => ({ year: String(m.year), tag: (m as { tag?: string }).tag ?? '', event: m.event }))
+      : MILESTONES
+
+  const yearsOld = new Date().getFullYear() - FOUNDING_YEAR
 
   return (
     <div>
       <Breadcrumb items={[{ label: 'About VGU' }]} />
 
-      {/* ══ Hero ══ */}
-      <section className="relative overflow-hidden flex items-center min-h-[480px] lg:min-h-[560px]">
-        {HERO_IMAGE_SRC && (
-          <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        )}
+      {/* ══ Hero — swoop yellow (whisper-faint on the photo) ══ */}
+      <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
+        <Image
+          src={HERO_IMAGE_SRC}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
         <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+        <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={3.5} />
 
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
-            About Vivekananda Global University
-          </p>
-          <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
-            {new Date().getFullYear() - FOUNDING_YEAR} years of<br />
-            <span className="text-vgu-yellow">academic excellence.</span>
-          </h1>
-          <p className="mt-6 text-[16px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
-            Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
-            NAAC A+ universities, now bringing that same quality education online to
-            learners across 40+ countries.
-          </p>
+        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
+          <div className="max-w-[680px]">
+            <p
+              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-5"
+              style={{ animationDelay: '0ms' }}
+            >
+              About Vivekananda Global University
+            </p>
 
-          {/* Quick facts */}
-          <div className="mt-8 flex flex-wrap gap-3">
-            {[
-              'NAAC A+ Accredited',
-              'UGC Distance Education Bureau',
-              'No entrance exam',
-              'Degrees valid globally',
-            ].map(fact => (
-              <span
-                key={fact}
-                className="inline-flex items-center gap-1.5 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-[13px] font-heading font-semibold text-white"
+            <h1
+              className="anim-load-left font-heading font-bold tracking-tight leading-[1.05] text-white text-[36px] md:text-[48px] lg:text-[56px]"
+              style={{ animationDelay: '70ms' }}
+            >
+              {yearsOld} years of<br />
+              <span className="text-vgu-yellow">academic excellence.</span>
+            </h1>
+
+            <p
+              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[580px]"
+              style={{ animationDelay: '140ms' }}
+            >
+              Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
+              NAAC A+ universities - now bringing that same quality online to learners across 40+ countries.
+            </p>
+
+            <div
+              className="anim-load-left mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6"
+              style={{ animationDelay: '175ms' }}
+            >
+              {TRUST_POINTS.map(item => (
+                <div key={item} className="flex items-center gap-1.5">
+                  <IconCheck size={14} stroke={3} className="flex-none text-vgu-yellow" />
+                  <span className="text-[13px] font-heading font-semibold text-white/90">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <div
+              className="anim-load-left mt-8 flex flex-col sm:flex-row gap-3"
+              style={{ animationDelay: '210ms' }}
+            >
+              <a
+                href="#counsellor"
+                data-apply-trigger
+                className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
-                <IconCheck size={13} stroke={2.5} />
-                {fact}
-              </span>
-            ))}
+                Apply Now
+                <IconArrowRight size={16} />
+              </a>
+              <a
+                href="/programs"
+                className="inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+              >
+                Our Programs
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ══ Stats strip ══ */}
-      <section className="bg-white border-b border-neutral-200">
-        <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-8 md:py-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
-            {STATS.map(({ value, label, Icon }, i) => (
+      {/* ══ Stats strip — arc sweeps across the achievement numbers ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
+        <SketchFlourish shape="arc" color="red" opacity={0.05} strokeWidth={9} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-10 md:py-14">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {STATS.map(({ value, label, detail, Icon }, i) => (
               <div
                 key={label}
                 data-animate="fade-up"
-                style={{ animationDelay: `${i * 80}ms` }}
-                className="flex items-center gap-4 md:flex-col md:items-center md:text-center md:gap-2"
+                style={{
+                  animationDelay: `${i * 80}ms`,
+                  background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
+                }}
+                className="group flex flex-col items-center text-center rounded-2xl p-5 md:p-6 border border-transparent shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:border-vgu-red/20 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default"
               >
-                <div className="flex-none w-10 h-10 rounded-xl bg-vgu-red/10 flex items-center justify-center md:w-12 md:h-12">
-                  <Icon size={20} className="text-vgu-red" stroke={1.5} />
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-200 group-hover:scale-110 group-hover:rotate-3"
+                  style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                >
+                  <Icon size={24} className="text-white" stroke={1.5} />
                 </div>
-                <div>
-                  <div className="font-heading font-black text-[26px] leading-none text-neutral-900 md:text-[32px]">
-                    {value}
-                  </div>
-                  <div className="mt-1 text-[13px] font-body text-neutral-500">{label}</div>
+                <div className="font-heading font-black text-[34px] md:text-[48px] leading-none text-vgu-yellow">
+                  {value}
+                </div>
+                <div className="mt-2 text-[14px] font-heading font-semibold text-neutral-800 leading-snug">
+                  {label}
+                </div>
+                <div className="mt-1 text-[12px] font-body text-neutral-400 leading-snug">
+                  {detail}
                 </div>
               </div>
             ))}
@@ -190,10 +293,12 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Mission & Values ══ */}
-      <section className="bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 items-center">
+      {/* ══ Mission & Values — loop (Q-shape) suits the philosophical section ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="loop" color="red" opacity={0.05} strokeWidth={9} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
 
             {/* Left */}
             <div data-animate="slide-from-left">
@@ -203,15 +308,26 @@ export default async function AboutPage() {
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-6 md:text-[40px]">
                 Making great education accessible to every serious learner.
               </h2>
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-5 lg:text-[17px]">
-                Geography, cost, or life stage should not determine the quality of education
-                someone receives. VGU Online exists to make a NAAC A+ degree available to
-                working professionals, rural students, and career-changers - wherever they are.
-              </p>
+
+              {/* Pull-quote — typographic treatment per Design Bible testimonial card spec */}
+              <div className="bg-white rounded-2xl px-6 pt-4 pb-5 mb-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+                <div
+                  className="font-heading font-bold text-[64px] text-vgu-red leading-[0.8] mb-2 select-none"
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </div>
+                <p className="text-[17px] font-body leading-[1.7] text-neutral-700 italic">
+                  Geography, cost, or life stage should not determine the quality of
+                  education someone receives.
+                </p>
+              </div>
+
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 lg:text-[17px]">
-                We do not compromise on accreditation, faculty, or outcomes. The degree you
-                earn online is the same degree you would earn on campus - same certificate,
-                same legal standing, same employer recognition.
+                VGU Online exists to make a NAAC A+ degree available to working professionals,
+                rural students, and career-changers - wherever they are. The degree you earn
+                online is the same degree you would earn on campus: same certificate, same
+                legal standing, same employer recognition.
               </p>
             </div>
 
@@ -221,15 +337,30 @@ export default async function AboutPage() {
                 <div
                   key={v.title}
                   data-animate="fade-up"
-                  style={{ animationDelay: `${i * 80}ms` }}
-                  className="flex items-start gap-4 rounded-2xl bg-white border border-neutral-200 p-5 hover:border-vgu-red/20 hover:shadow-[0_4px_20px_rgba(192,64,54,0.08)] transition-all duration-200"
+                  style={{
+                    animationDelay: `${i * 80}ms`,
+                    background: 'linear-gradient(135deg, #ffffff 60%, rgba(192,64,54,0.04) 100%)',
+                  }}
+                  className="group/card relative overflow-hidden flex items-start gap-4 rounded-2xl border border-neutral-200 p-6 hover:border-vgu-red/30 hover:shadow-[0_8px_24px_rgba(192,64,54,0.10)] hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-vgu-red/10 mt-0.5">
-                    <IconCheck size={15} stroke={2.5} className="text-vgu-red" />
+                  {/* Ghost number watermark — established site pattern */}
+                  <span
+                    className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
+                    style={{ opacity: 0.06 }}
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                  <div>
-                    <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-1">{v.title}</h3>
-                    <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
+
+                  <span
+                    className="flex h-11 w-11 flex-none items-center justify-center rounded-xl mt-0.5 shadow-[0_4px_14px_rgba(192,64,54,0.28)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3"
+                    style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                  >
+                    <v.Icon size={18} stroke={1.5} className="text-white" />
+                  </span>
+                  <div className="relative">
+                    <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-1.5">{v.title}</h3>
+                    <p className="text-[15px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
                   </div>
                 </div>
               ))}
@@ -239,11 +370,12 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Accreditations ══ */}
-      <section className="bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1280px]">
+      {/* ══ Accreditations — monogram (VGU-V) in a credibility section ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="monogram" color="red-dark" opacity={0.07} strokeWidth={7} />
 
-          <div data-animate="fade-up" className="text-center mb-14 md:mb-10">
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="text-center mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Recognised by
             </p>
@@ -260,74 +392,143 @@ export default async function AboutPage() {
               <div
                 key={a.name}
                 data-animate="materialize"
-                style={{ animationDelay: `${i * 70}ms` }}
-                className="group rounded-2xl border border-neutral-200 bg-white p-6 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.12)] transition-all duration-200"
+                style={{
+                  animationDelay: `${i * 70}ms`,
+                  background: a.s.cardBg,
+                }}
+                className="group/card relative rounded-2xl border border-neutral-200 overflow-hidden hover:-translate-y-1 hover:border-vgu-red/20 hover:shadow-[0_8px_24px_rgba(192,64,54,0.12)] transition-all duration-200"
               >
-                <div className={['inline-flex items-center rounded-full border px-3.5 py-1.5 text-[13px] font-heading font-black mb-4', a.color].join(' ')}>
-                  {a.name}
+                {/* Ghost letter watermark */}
+                <span
+                  className="absolute -bottom-4 right-2 font-heading font-black leading-none select-none pointer-events-none text-[96px]"
+                  style={{ color: a.s.bar, opacity: 0.07 }}
+                  aria-hidden="true"
+                >
+                  {a.ghost}
+                </span>
+
+                <div className="relative p-6">
+                  {/* Logo row: real logo or styled badge + status pill */}
+                  <div className="flex items-start justify-between mb-5">
+                    {a.logo ? (
+                      <div className="w-14 h-14 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105">
+                        <Image
+                          src={a.logo}
+                          alt={a.name}
+                          width={56}
+                          height={56}
+                          unoptimized
+                          className="object-contain w-full h-full"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className="w-14 h-14 rounded-xl flex-none flex items-center justify-center shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105"
+                        style={{ background: a.s.bar }}
+                      >
+                        <span className="font-heading font-black text-white text-[13px] leading-none tracking-tight">
+                          {a.name}
+                        </span>
+                      </div>
+                    )}
+
+                    <span
+                      className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-heading font-bold"
+                      style={{ background: a.s.bg, color: a.s.text, borderColor: a.s.border }}
+                    >
+                      {a.status}
+                    </span>
+                  </div>
+
+                  <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2 leading-snug">
+                    {a.full}
+                  </h3>
+                  <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
                 </div>
-                <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">{a.full}</h3>
-                <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ History timeline ══ */}
-      <section className="bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-16 items-start">
+      {/* ══ Campus Experience — arc (digital reach spanning the physical) ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={9} />
+        <SketchFlourish shape="arc" color="red" opacity={0.07} strokeWidth={7} className="rotate-180" />
 
-            {/* Left */}
-            <div data-animate="slide-from-left" className="lg:sticky lg:top-[120px]">
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+
+            {/* Left: copy + features */}
+            <div data-animate="slide-from-left">
               <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-                Our history
+                Campus experience
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[40px]">
-                {new Date().getFullYear() - FOUNDING_YEAR}+ Years of Impact
+                Your degree is online.<br />Your university is real.
               </h2>
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-                From a single campus in Jaipur to a globally accessible online university,
-                a decade-plus of making quality education reachable for every serious learner.
+              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-8 lg:text-[17px]">
+                Online doesn&apos;t mean isolated. VGU brings you to campus for immersions, connects you with faculty in person, and celebrates your graduation on the same stage as every other VGU student.
               </p>
-              <div className="mt-8 flex items-center gap-3 rounded-2xl bg-vgu-red/[0.05] border border-vgu-red/15 px-5 py-4">
-                <IconShieldCheck size={22} className="text-vgu-red flex-none" stroke={1.5} />
-                <div>
-                  <div className="font-heading font-bold text-[14px] text-neutral-900">NAAC A+</div>
-                  <div className="text-[12px] font-body text-neutral-500">Reaccredited 2021 · 3.52 / 4.0 CGPA</div>
-                </div>
-              </div>
-            </div>
 
-            {/* Right: timeline */}
-            <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-[18px] top-2 bottom-2 w-px bg-neutral-200" aria-hidden="true" />
-
-              <div className="flex flex-col gap-0">
-                {activeMilestones.map((m, i) => (
+              <div className="flex flex-col gap-3">
+                {CAMPUS_FEATURES.map((f, i) => (
                   <div
-                    key={m.year}
+                    key={f.title}
                     data-animate="fade-up"
-                    style={{ animationDelay: `${i * 60}ms` }}
-                    className="relative flex items-start gap-6 pb-8 last:pb-0"
+                    style={{ animationDelay: `${i * 80}ms` }}
+                    className="group/feat flex items-start gap-4 rounded-2xl border border-neutral-200/80 bg-white/80 p-5 hover:border-vgu-red/20 hover:bg-white hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] hover:-translate-y-0.5 transition-all duration-200"
                   >
-                    {/* Dot */}
-                    <div className={[
-                      'relative z-10 flex-none w-9 h-9 rounded-full border-2 flex items-center justify-center font-heading font-black text-[10px] transition-all',
-                      i === activeMilestones.length - 1
-                        ? 'border-vgu-red bg-vgu-red text-white shadow-[0_0_0_4px_rgba(192,64,54,0.15)]'
-                        : 'border-neutral-200 bg-white text-neutral-400',
-                    ].join(' ')}>
-                      {i + 1}
+                    <div
+                      className="flex-none w-10 h-10 rounded-xl flex items-center justify-center mt-0.5 shadow-[0_4px_14px_rgba(192,64,54,0.25)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/feat:scale-110 group-hover/feat:rotate-3"
+                      style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                    >
+                      <f.Icon size={18} stroke={1.5} className="text-white" />
                     </div>
-                    <div className="flex-1 pt-1.5">
-                      <div className="font-heading font-black text-[14px] text-vgu-red mb-0.5">{m.year}</div>
-                      <p className="text-[16px] font-body text-neutral-700 leading-snug">{m.event}</p>
+                    <div>
+                      <div className="font-heading font-semibold text-[15px] text-neutral-900 mb-1.5">{f.title}</div>
+                      <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <a
+                href="/programs"
+                className="inline-flex items-center gap-2 mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[15px] rounded-md px-[30px] py-3 transition-all duration-200"
+              >
+                Explore programs
+                <IconArrowRight size={15} />
+              </a>
+            </div>
+
+            {/* Right: clean image + proof strip */}
+            <div data-animate="slide-from-right" className="flex flex-col gap-4">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_20px_56px_rgba(0,0,0,0.14)]">
+                <Image
+                  src={CAMPUS_IMAGE_SRC}
+                  alt="VGU students at campus graduation ceremony"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+
+              {/* Proof strip — sits below the image, breathes naturally */}
+              <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
+                <div className="flex flex-col items-center py-7 px-4">
+                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
+                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
+                </div>
+                <div className="flex flex-col items-center py-7 px-4">
+                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">100%</span>
+                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
+                </div>
+                <div className="flex flex-col items-center py-7 px-4">
+                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">50K+</span>
+                  <span className="mt-2 text-[10px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
+                </div>
               </div>
             </div>
 
@@ -335,7 +536,351 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* ══ Hiring Partners — loop (employer-graduate connection) ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={9} />
 
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="text-center mb-10">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Hiring partners
+            </p>
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
+              500+ companies hire VGU graduates
+            </h2>
+            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[540px] mx-auto lg:text-[17px]">
+              From India&apos;s biggest conglomerates to global tech firms - a VGU degree opens real doors.
+            </p>
+          </div>
+
+          <div
+            data-animate="fade-up"
+            style={{ animationDelay: '100ms' }}
+            className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3 lg:gap-4"
+          >
+            {HIRERS.map((name) => (
+              <div
+                key={name}
+                className="group flex flex-col items-center gap-2.5 rounded-xl border border-neutral-200 bg-white p-3 md:p-4 hover:border-vgu-red/20 hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+              >
+                <div className="w-11 h-11 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105">
+                  <BrandIcon name={name} />
+                </div>
+                <span className="text-[11px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
+              </div>
+            ))}
+          </div>
+
+          <div
+            data-animate="fade-up"
+            style={{ animationDelay: '180ms' }}
+            className="mt-10 text-center"
+          >
+            <a
+              href="#counsellor"
+              data-apply-trigger
+              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+            >
+              Start your career journey
+              <IconArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ History timeline — wave conveys the flow of time ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="wave" color="red" opacity={0.05} strokeWidth={9} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 items-start">
+
+            {/* Left sticky panel */}
+            <div data-animate="slide-from-left" className="lg:sticky lg:top-[120px]">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
+                Our history
+              </p>
+
+              {/* Big display year counter */}
+              <div className="font-heading font-black leading-[0.85] text-vgu-yellow text-[56px] md:text-[80px] mb-2">
+                {yearsOld}+
+              </div>
+              <h2 className="font-heading font-bold text-[24px] md:text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-4">
+                Years of steady impact
+              </h2>
+
+              {/* Red rule */}
+              <div className="w-10 h-0.5 rounded-full bg-vgu-red/30 mb-5" />
+
+              <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
+                From a single campus in Jaipur to a globally accessible online university -
+                a decade-plus of making quality education reachable for every serious learner.
+              </p>
+
+              {/* NAAC card — real logo */}
+              <div
+                className="mt-8 flex items-center gap-4 rounded-2xl border border-vgu-red/15 px-4 py-4"
+                style={{ background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)' }}
+              >
+                <div className="flex-none w-11 h-11 rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.10)]">
+                  <Image src="/assets/trust/naac.svg" width={44} height={44} alt="NAAC" unoptimized className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <div className="font-heading font-bold text-[14px] text-neutral-900">NAAC A+ Accredited</div>
+                  <div className="text-[12px] font-body text-neutral-500">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
+                </div>
+              </div>
+
+              {/* Recent achievement chips */}
+              <div className="mt-5 flex flex-wrap gap-2">
+                {[
+                  { label: 'QS 95th in India', year: '2025' },
+                  { label: 'Google AI Campus', year: '2024' },
+                  { label: 'IIRF 37th Pvt Uni', year: '2026' },
+                ].map((chip) => (
+                  <span
+                    key={chip.label}
+                    className="inline-flex items-center gap-1 rounded-full border border-vgu-red/20 bg-vgu-red/[0.04] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red"
+                  >
+                    {chip.label}
+                    <span className="mx-0.5 font-normal text-neutral-400">·</span>
+                    <span className="font-normal text-neutral-400">{chip.year}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: timeline */}
+            <div className="relative">
+              {/* Gradient vertical line */}
+              <div
+                className="absolute left-[17px] top-[18px] bottom-4 w-0.5 rounded-full"
+                aria-hidden="true"
+                style={{ background: 'linear-gradient(to bottom, #E5E7EB 0%, #C04036 100%)' }}
+              />
+
+              <div className="flex flex-col gap-4">
+                {activeMilestones.map((m, i) => {
+                  const isLatest = i === activeMilestones.length - 1
+                  return (
+                    <div
+                      key={i}
+                      data-animate="fade-up"
+                      style={{ animationDelay: `${i * 55}ms` }}
+                      className="relative flex items-start gap-5"
+                    >
+                      {/* Dot */}
+                      <div
+                        className={[
+                          'relative z-10 flex-none w-9 h-9 rounded-full border-2 flex items-center justify-center font-heading font-black text-[10px] transition-all duration-200',
+                          isLatest
+                            ? 'border-vgu-red bg-vgu-red text-white shadow-[0_0_0_4px_rgba(192,64,54,0.15)]'
+                            : 'border-neutral-200 bg-white text-neutral-400',
+                        ].join(' ')}
+                      >
+                        {isLatest && (
+                          <span
+                            className="absolute inline-flex h-full w-full rounded-full bg-vgu-red opacity-30 animate-ping"
+                            aria-hidden="true"
+                          />
+                        )}
+                        {i + 1}
+                      </div>
+
+                      {/* Card */}
+                      <div
+                        className={[
+                          'flex-1 rounded-2xl border p-4 md:p-5 transition-all duration-200',
+                          isLatest
+                            ? 'border-vgu-red/25 hover:shadow-[0_4px_20px_rgba(192,64,54,0.12)] hover:-translate-y-0.5'
+                            : 'border-neutral-200 bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.07)] hover:border-neutral-300 hover:-translate-y-0.5',
+                        ].join(' ')}
+                        style={isLatest ? { background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)' } : undefined}
+                      >
+                        {/* Tag + Year row */}
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="text-[22px] font-heading font-black text-vgu-yellow leading-none">{m.year}</span>
+                          {m.tag && (
+                            <span className="text-[10px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">
+                              {m.tag}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[15px] font-body text-neutral-700 leading-[1.6]">{m.event}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Alumni Community — swoop (sweeping sense of a large, growing community) ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="swoop" color="red" opacity={0.05} strokeWidth={9} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="text-center mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Alumni community
+            </p>
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-neutral-900 md:text-[40px] max-w-[640px] mx-auto">
+              Join 50,000+ learners who didn&apos;t wait.
+            </h2>
+            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto lg:text-[17px]">
+              Working professionals, fresh graduates, and career-changers from across India and 40+ countries - one alumni network.
+            </p>
+          </div>
+
+          {/* Alumni features — Mobile: snap-scroll, Desktop: 3-col grid */}
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {ALUMNI_FEATURES.map((f, i) => (
+              <div key={f.label} className="snap-start flex-none w-[72vw] max-w-[280px]">
+                <div
+                  data-animate="materialize"
+                  style={{
+                    animationDelay: `${i * 80}ms`,
+                    background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
+                  }}
+                  className="group/card relative overflow-hidden rounded-2xl border border-neutral-200 p-6 h-full hover:border-vgu-red/25 hover:shadow-[0_8px_28px_rgba(192,64,54,0.11)] hover:-translate-y-1 transition-all duration-200"
+                >
+                  <span
+                    className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
+                    style={{ opacity: 0.06 }}
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-[0_4px_14px_rgba(192,64,54,0.28)] transition-all duration-200 group-hover/card:scale-110 group-hover/card:rotate-3"
+                    style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                  >
+                    <f.Icon size={20} stroke={1.5} className="text-white" />
+                  </div>
+                  <div className="font-heading font-black text-[38px] text-vgu-yellow leading-none mb-1.5">{f.stat}</div>
+                  <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2">{f.label}</h3>
+                  <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 gap-5 mb-12">
+            {ALUMNI_FEATURES.map((f, i) => (
+              <div
+                key={f.label}
+                data-animate="materialize"
+                style={{
+                  animationDelay: `${i * 80}ms`,
+                  background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
+                }}
+                className="group/card relative overflow-hidden rounded-2xl border border-neutral-200 p-6 hover:border-vgu-red/25 hover:shadow-[0_8px_28px_rgba(192,64,54,0.11)] hover:-translate-y-1 transition-all duration-200"
+              >
+                <span
+                  className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
+                  style={{ opacity: 0.06 }}
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shadow-[0_4px_14px_rgba(192,64,54,0.28)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3"
+                  style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                >
+                  <f.Icon size={20} stroke={1.5} className="text-white" />
+                </div>
+                <div className="font-heading font-black text-[38px] text-vgu-yellow leading-none mb-1.5">{f.stat}</div>
+                <h3 className="font-heading font-bold text-[15px] text-neutral-900 mb-2">{f.label}</h3>
+                <p className="text-[14px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Testimonial cards — Mobile: snap-scroll, Desktop: 3-col grid */}
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {ALUMNI_TESTIMONIALS.map((t, i) => (
+              <div key={t.name} className="snap-start flex-none w-[82vw] max-w-[320px]">
+                <div
+                  data-animate="fade-up"
+                  style={{ animationDelay: `${i * 90}ms` }}
+                  className="flex flex-col h-full rounded-2xl border border-neutral-200 bg-white overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200"
+                >
+                  <div
+                    className="flex items-center gap-4 px-5 py-5 border-b border-neutral-100"
+                    style={{ background: 'linear-gradient(135deg, #ffffff 0%, rgba(244,215,193,0.35) 100%)' }}
+                  >
+                    <div className="w-16 h-16 rounded-full overflow-hidden flex-none ring-[3px] ring-white shadow-[0_6px_20px_rgba(0,0,0,0.14)]">
+                      <Image src={t.avatar} alt={t.name} width={64} height={64} className="w-full h-full object-cover" sizes="64px" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-heading font-bold text-[16px] text-neutral-900 leading-tight">{t.name}</div>
+                      <span className="mt-2 inline-flex items-center rounded-full border border-vgu-red/20 bg-vgu-red/[0.05] px-2.5 py-0.5 text-[10px] font-heading font-semibold text-vgu-red">
+                        {t.program}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex-1 px-5 pt-5 pb-6">
+                    <div className="font-heading font-bold text-[48px] text-vgu-red leading-[0.75] mb-3 select-none" aria-hidden="true">&ldquo;</div>
+                    <p className="text-[14px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 gap-5 mb-12">
+            {ALUMNI_TESTIMONIALS.map((t, i) => (
+              <div
+                key={t.name}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 90}ms` }}
+                className="flex flex-col rounded-2xl border border-neutral-200 bg-white overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200"
+              >
+                <div
+                  className="flex items-center gap-4 px-5 py-5 border-b border-neutral-100"
+                  style={{ background: 'linear-gradient(135deg, #ffffff 0%, rgba(244,215,193,0.35) 100%)' }}
+                >
+                  <div className="w-20 h-20 rounded-full overflow-hidden flex-none ring-[3px] ring-white shadow-[0_6px_20px_rgba(0,0,0,0.14)]">
+                    <Image src={t.avatar} alt={t.name} width={80} height={80} className="w-full h-full object-cover" sizes="80px" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-heading font-bold text-[17px] text-neutral-900 leading-tight">{t.name}</div>
+                    <span className="mt-2 inline-flex items-center rounded-full border border-vgu-red/20 bg-vgu-red/[0.05] px-2.5 py-0.5 text-[11px] font-heading font-semibold text-vgu-red">
+                      {t.program}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex-1 px-5 pt-5 pb-6">
+                  <div className="font-heading font-bold text-[52px] text-vgu-red leading-[0.75] mb-3 select-none" aria-hidden="true">&ldquo;</div>
+                  <p className="text-[15px] font-body text-neutral-600 leading-[1.7] italic">{t.quote}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            data-animate="fade-up"
+            style={{ animationDelay: '280ms' }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a
+              href="#counsellor"
+              data-apply-trigger
+              className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+            >
+              Apply Now
+              <IconArrowRight size={16} />
+            </a>
+            <a
+              href="/programs"
+              className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] rounded-md px-[30px] py-3 transition-all duration-200"
+            >
+              Browse programs
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
