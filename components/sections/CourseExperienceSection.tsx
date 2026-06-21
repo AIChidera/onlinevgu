@@ -214,7 +214,7 @@ export default function CourseExperienceSection() {
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
-            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
               Platform Features
             </p>
             <h3 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 md:text-[32px]">
@@ -294,7 +294,7 @@ export default function CourseExperienceSection() {
               </div>
 
               {/* Detail */}
-              <div className="p-5 md:p-8 flex flex-col justify-center">
+              <div className="p-4 md:p-8 flex flex-col justify-center">
                 <span
                   className="inline-flex items-center self-start px-3 py-1 rounded-full text-[11px] font-heading font-semibold uppercase tracking-wide mb-4"
                   style={{ background: `${panel.color}15`, color: panel.color, border: `1px solid ${panel.color}30` }}
@@ -304,12 +304,12 @@ export default function CourseExperienceSection() {
                 <h4 className="font-heading font-bold text-[22px] tracking-[-0.5px] text-neutral-900 leading-[1.2] md:text-[26px]">
                   {panel.title}
                 </h4>
-                <p className="mt-3 text-[16px] font-body leading-[1.7] text-neutral-500">
+                <p className="hidden md:block mt-4 text-[16px] font-body leading-[1.7] text-neutral-500">
                   {panel.desc}
                 </p>
-                <ul className="mt-5 flex flex-col gap-2.5">
+                <ul className="mt-4 md:mt-6 flex flex-col gap-2">
                   {panel.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 text-[16px] font-body text-neutral-700">
+                    <li key={b} className="flex items-start gap-2 text-[16px] font-body text-neutral-700 leading-snug md:leading-normal">
                       <span className="flex-none w-5 h-5 rounded-full bg-vgu-red/10 flex items-center justify-center mt-0.5">
                         <IconCheck size={11} className="text-vgu-red" stroke={3} />
                       </span>
@@ -324,7 +324,7 @@ export default function CourseExperienceSection() {
           {/* Bottom stat pills:
               Mobile  → tight horizontal row per card (icon left, value right)
               Tablet+ → centered 3-col grid (icon on top) */}
-          <div className="mt-6 flex flex-col gap-2.5 sm:grid sm:grid-cols-3 sm:gap-3">
+          <div className="mt-6 flex flex-col gap-2 sm:grid sm:grid-cols-3 sm:gap-3">
             {BOTTOM_STATS.map((s, i) => (
               <div
                 key={s.label}
