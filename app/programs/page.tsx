@@ -86,7 +86,7 @@ export default async function ProgramsPage() {
             </h1>
 
             <p
-              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
+              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-2 md:line-clamp-none"
               style={{ animationDelay: '140ms' }}
             >
               {count} online programs across {disciplineCount} disciplines: Management, IT, Data Science, Commerce, Arts, Science, and Media.
@@ -116,7 +116,7 @@ export default async function ProgramsPage() {
               <a
                 href="#programs-grid"
                 className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
-                           text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px]
+                           text-vgu-red hover:text-white rounded-full px-6 py-3.5 md:px-9 md:py-4 text-[16px]
                            font-heading font-semibold transition-all duration-200
                            shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
@@ -131,8 +131,8 @@ export default async function ProgramsPage() {
                            rounded-md px-6 py-3.5 text-[15px]
                            font-heading font-semibold transition-all duration-200"
               >
-                <IconDownload size={14} />
                 Download Brochure
+                <IconDownload size={14} />
               </a>
             </div>
 

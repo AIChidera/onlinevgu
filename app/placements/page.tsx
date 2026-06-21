@@ -436,7 +436,7 @@ export default function PlacementsPage() {
 
           {/* Mobile: snap-scroll strip */}
           <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {INDUSTRIES.map((ind, i) => (
+            {INDUSTRIES.map((ind) => (
               <div key={ind.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
                 <div
                   className="group/card relative overflow-hidden flex flex-col rounded-2xl border border-vgu-red/15 p-5 h-full shadow-[0_6px_24px_rgba(192,64,54,0.10)] hover:border-vgu-red/30 hover:shadow-[0_14px_36px_rgba(192,64,54,0.16)] hover:-translate-y-1.5 transition-all duration-200"

@@ -543,7 +543,7 @@ export default async function AboutPage() {
 
               {/* Mobile: snap-scroll strip */}
               <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {CAMPUS_FEATURES.map((f, i) => (
+                {CAMPUS_FEATURES.map((f) => (
                   <div key={f.title} className="snap-start flex-none w-[78vw] max-w-[290px]">
                     <div
                       className="group/feat flex flex-col rounded-2xl border border-neutral-200/80 bg-white/80 p-4 h-full hover:border-vgu-red/20 hover:bg-white hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] transition-all duration-200"
