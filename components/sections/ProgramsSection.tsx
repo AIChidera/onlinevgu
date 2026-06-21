@@ -103,7 +103,7 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
 
         {/* ── MOBILE: snap-scroll ── */}
         <div
-          className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
+          className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-none pb-4"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
           {visible.map((p) => (

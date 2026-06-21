@@ -82,14 +82,14 @@ export default function Hero() {
 
           {/* CTAs: primary inverted (white on dark), secondary ghost. */}
           <div
-            className="anim-load-left relative mt-8 flex flex-wrap gap-3"
+            className="anim-load-left relative mt-8 flex gap-3"
             style={{ animationDelay: '210ms' }}
           >
             <a
               href="#counsellor"
               data-apply-trigger
               className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
-                         text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px]
+                         text-vgu-red hover:text-white rounded-full px-6 py-3.5 md:px-9 md:py-4 text-[16px]
                          font-heading font-semibold transition-all duration-200
                          shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
             >
