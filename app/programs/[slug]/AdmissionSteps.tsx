@@ -66,7 +66,7 @@ export default function AdmissionSteps() {
 
               <h3 className="font-heading font-bold text-[17px] text-white mb-2">{s.title}</h3>
 
-              <p className="text-[14px] font-body text-white/55 leading-relaxed max-w-[200px] flex-1">
+              <p className="hidden md:block text-[14px] font-body text-white/55 leading-relaxed max-w-[200px] flex-1">
                 {s.desc}
               </p>
 

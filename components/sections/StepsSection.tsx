@@ -127,7 +127,7 @@ export default function StepsSection() {
                 <h3 className="font-heading font-semibold text-[16px] leading-[1.3] text-neutral-900 mb-2 md:font-bold md:text-[18px]">
                   {step.title}
                 </h3>
-                <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[200px]">
+                <p className="hidden md:block text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[200px]">
                   {step.body}
                 </p>
               </div>

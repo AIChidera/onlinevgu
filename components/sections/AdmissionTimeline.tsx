@@ -61,7 +61,7 @@ export default function AdmissionTimeline() {
               <h3 className="font-heading text-[17px] font-bold text-neutral-900 mb-2">
                 {step.title}
               </h3>
-              <p className="text-[14px] text-neutral-600 leading-relaxed max-w-[200px]">
+              <p className="hidden md:block text-[14px] text-neutral-600 leading-relaxed max-w-[200px]">
                 {step.body}
               </p>
             </div>
