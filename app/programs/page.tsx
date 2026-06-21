@@ -117,7 +117,7 @@ export default async function ProgramsPage() {
                 href="#programs-grid"
                 className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
                            text-vgu-red hover:text-white rounded-full px-6 py-3.5 md:px-9 md:py-4 text-[16px]
-                           font-heading font-semibold transition-all duration-200
+                           font-heading font-semibold whitespace-nowrap transition-all duration-200
                            shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
                 Browse Programs
@@ -129,7 +129,7 @@ export default async function ProgramsPage() {
                 className="inline-flex items-center justify-center gap-1.5 border-2 border-white/30
                            bg-transparent text-white hover:bg-white/10 hover:border-white/50
                            rounded-md px-6 py-3.5 text-[15px]
-                           font-heading font-semibold transition-all duration-200"
+                           font-heading font-semibold whitespace-nowrap transition-all duration-200"
               >
                 Download Brochure
                 <IconDownload size={14} />

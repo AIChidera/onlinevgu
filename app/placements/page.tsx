@@ -255,14 +255,14 @@ export default function PlacementsPage() {
               <a
                 href="#counsellor"
                 data-apply-trigger
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
               >
                 Apply Now
                 <IconArrowRight size={16} />
               </a>
               <a
                 href="/programs"
-                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[16px] font-heading font-semibold transition-all duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200"
               >
                 Browse Programs
               </a>
@@ -708,14 +708,14 @@ export default function PlacementsPage() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] whitespace-nowrap rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
               Apply Now
               <IconArrowRight size={16} />
             </a>
             <a
               href="/programs"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-[30px] py-3 transition-all duration-200"
             >
               Browse Programs
             </a>
