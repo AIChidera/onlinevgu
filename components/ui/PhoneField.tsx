@@ -23,7 +23,7 @@ const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
           value={dialCode}
           onChange={e => onDialChange(e.target.value)}
           aria-label="Country code"
-          className="flex-none bg-transparent border-r border-neutral-200 pl-3 pr-1 py-3 text-[13px] font-body font-semibold text-neutral-600 focus:outline-none appearance-none cursor-pointer"
+          className="flex-none bg-transparent border-r border-neutral-200 pl-3 pr-1 py-3 text-[16px] font-body font-semibold text-neutral-600 focus:outline-none appearance-none cursor-pointer"
         >
           {COUNTRY_CODES.map(c => (
             <option key={c.code} value={c.dial}>
