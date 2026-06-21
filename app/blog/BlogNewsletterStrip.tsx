@@ -19,7 +19,7 @@ export default function BlogNewsletterStrip() {
   }
 
   return (
-    <section className="sketch-hover-group relative bg-vgu-red overflow-hidden px-5 md:px-8 lg:px-12 pb-16 lg:pb-20 pt-20 lg:pt-24">
+    <section className="sketch-hover-group relative bg-vgu-red overflow-hidden px-5 md:px-8 lg:px-12 pb-16 lg:pb-20 pt-20 lg:pt-24" style={{ boxShadow: 'inset 0 1px 0 0 #F9FAFB' }}>
       {/* Hover-reveal flourish — draws in slowly on section hover, retraces on leave */}
       <SketchFlourish shape="swoop" color="yellow" opacity={0.06} strokeWidth={28} durationMs={2400} className="[transform:scaleX(-1)]" />
       {/* Wave swoop from the section above (neutral-50 BlogIndex bg) */}

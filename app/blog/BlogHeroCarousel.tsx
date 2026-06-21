@@ -74,7 +74,9 @@ export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSum
             className="absolute inset-0"
             style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.58) 35%, rgba(0,0,0,0.34) 65%, rgba(0,0,0,0.20) 100%)' }}
           />
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 md:from-black/40" />
+          {/* Mobile: uniform dark base so full-width text always reads */}
+          <div aria-hidden="true" className="absolute inset-0 bg-black/20 md:hidden" />
         </div>
       ))}
 

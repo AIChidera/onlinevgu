@@ -37,7 +37,6 @@ const CertificatePreview  = dynamic(() => import('./CertificatePreview'),  { ssr
 const ProgramTestimonials = dynamic(() => import('./ProgramTestimonials'), { ssr: false })
 const ProgramFAQ          = dynamic(() => import('./ProgramFAQ'),          { ssr: false })
 const RelatedPrograms     = dynamic(() => import('./RelatedPrograms'),     { ssr: false })
-const ScrollToTop         = dynamic(() => import('@/components/ui/ScrollToTop'), { ssr: false })
 
 interface ProgramDetail {
   slug:            string
@@ -1232,8 +1231,6 @@ export default async function ProgramPage({ params }: Props) {
           </a>
         </div>
       </div>
-
-      <ScrollToTop />
     </div>
   )
 }

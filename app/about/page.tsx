@@ -13,10 +13,10 @@ import {
   IconBrain,
   IconArrowRight,
 } from '@tabler/icons-react'
-import BrandIcon from '@/components/ui/BrandIcon'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { FOUNDING_YEAR } from '@/lib/constants'
+import HirerStrip from '@/app/programs/[slug]/HirerStrip'
 
 export const revalidate = 3600
 
@@ -193,7 +193,7 @@ export default async function AboutPage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[680px]">
@@ -221,7 +221,7 @@ export default async function AboutPage() {
             </p>
 
             <div
-              className="anim-load-left mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6"
+              className="anim-load-left mt-7 flex flex-row flex-wrap gap-x-5 gap-y-2 sm:items-center"
               style={{ animationDelay: '175ms' }}
             >
               {TRUST_POINTS.map(item => (
@@ -259,7 +259,7 @@ export default async function AboutPage() {
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-10 md:py-14">
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-8 md:py-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {STATS.map(({ value, label, detail, Icon }, i) => (
               <div
@@ -269,7 +269,7 @@ export default async function AboutPage() {
                   animationDelay: `${i * 80}ms`,
                   background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
                 }}
-                className="group flex flex-col items-center text-center rounded-2xl p-5 md:p-6 border border-transparent shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:border-vgu-red/20 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default"
+                className="group flex flex-col items-center text-center rounded-2xl p-3 md:p-6 border border-transparent shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:border-vgu-red/20 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default"
               >
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-200 group-hover:scale-110 group-hover:rotate-3"
@@ -331,7 +331,41 @@ export default async function AboutPage() {
             </div>
 
             {/* Right: values */}
-            <div className="flex flex-col gap-4">
+
+            {/* Mobile — horizontal snap-scroll strip (breaks the wall) */}
+            <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {VALUES.map((v, i) => (
+                <div key={v.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
+                  <div
+                    style={{ background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.05) 100%)' }}
+                    className="group/card relative overflow-hidden flex flex-col rounded-2xl border border-vgu-red/15 p-5 h-full shadow-[0_6px_24px_rgba(192,64,54,0.10)]"
+                  >
+                    {/* Ghost number watermark */}
+                    <span
+                      className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
+                      style={{ opacity: 0.07 }}
+                      aria-hidden="true"
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+
+                    <span
+                      className="flex h-11 w-11 flex-none items-center justify-center rounded-xl mt-2 mb-4 shadow-[0_4px_14px_rgba(192,64,54,0.30)]"
+                      style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                    >
+                      <v.Icon size={18} stroke={1.5} className="text-white" />
+                    </span>
+                    <div className="relative">
+                      <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2">{v.title}</h3>
+                      <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{v.body}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop — vertical stack */}
+            <div className="hidden md:flex md:flex-col gap-4">
               {VALUES.map((v, i) => (
                 <div
                   key={v.title}
@@ -342,7 +376,6 @@ export default async function AboutPage() {
                   }}
                   className="group/card relative overflow-hidden flex items-start gap-4 rounded-2xl border border-neutral-200 p-6 hover:border-vgu-red/30 hover:shadow-[0_8px_24px_rgba(192,64,54,0.10)] hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  {/* Ghost number watermark — established site pattern */}
                   <span
                     className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
                     style={{ opacity: 0.06 }}
@@ -350,7 +383,6 @@ export default async function AboutPage() {
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-
                   <span
                     className="flex h-11 w-11 flex-none items-center justify-center rounded-xl mt-0.5 shadow-[0_4px_14px_rgba(192,64,54,0.28)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3"
                     style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
@@ -386,7 +418,62 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Mobile — 2×3 compact trust-badge grid */}
+          <div className="md:hidden grid grid-cols-2 gap-3">
+            {ACCREDITATIONS.map((a, i) => (
+              <div
+                key={a.name}
+                data-animate="materialize"
+                style={{
+                  animationDelay: `${i * 60}ms`,
+                  background: a.s.cardBg,
+                  borderColor: a.s.border,
+                }}
+                className="relative overflow-hidden rounded-2xl border p-4 flex flex-col items-center text-center shadow-[0_6px_20px_rgba(0,0,0,0.09)]"
+              >
+                {/* Ghost letter */}
+                <span
+                  className="absolute -bottom-3 right-1 font-heading font-black leading-none select-none pointer-events-none text-[56px]"
+                  style={{ color: a.s.bar, opacity: 0.08 }}
+                  aria-hidden="true"
+                >
+                  {a.ghost}
+                </span>
+
+                {/* Logo or colour badge */}
+                <div className="relative mt-2 mb-3">
+                  {a.logo ? (
+                    <div className="w-14 h-14 rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.10)]">
+                      <Image src={a.logo} alt={a.name} width={56} height={56} unoptimized className="object-contain w-full h-full" />
+                    </div>
+                  ) : (
+                    <div
+                      className="w-14 h-14 rounded-xl flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.18)]"
+                      style={{ background: a.s.bar }}
+                    >
+                      <span className="font-heading font-black text-white text-[12px] leading-none tracking-tight">{a.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Acronym */}
+                <div className="relative font-heading font-bold text-[16px] text-neutral-900 leading-tight mb-2">
+                  {a.name}
+                </div>
+
+                {/* Status badge */}
+                <span
+                  className="relative inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-heading font-bold"
+                  style={{ background: a.s.bg, color: a.s.text, borderColor: a.s.border }}
+                >
+                  {a.status}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop — full detail 3-col grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {ACCREDITATIONS.map((a, i) => (
               <div
                 key={a.name}
@@ -397,7 +484,6 @@ export default async function AboutPage() {
                 }}
                 className="group/card relative rounded-2xl border border-neutral-200 overflow-hidden hover:-translate-y-1 hover:border-vgu-red/20 hover:shadow-[0_8px_24px_rgba(192,64,54,0.12)] transition-all duration-200"
               >
-                {/* Ghost letter watermark */}
                 <span
                   className="absolute -bottom-4 right-2 font-heading font-black leading-none select-none pointer-events-none text-[96px]"
                   style={{ color: a.s.bar, opacity: 0.07 }}
@@ -405,32 +491,20 @@ export default async function AboutPage() {
                 >
                   {a.ghost}
                 </span>
-
                 <div className="relative p-6">
-                  {/* Logo row: real logo or styled badge + status pill */}
                   <div className="flex items-start justify-between mb-5">
                     {a.logo ? (
                       <div className="w-14 h-14 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105">
-                        <Image
-                          src={a.logo}
-                          alt={a.name}
-                          width={56}
-                          height={56}
-                          unoptimized
-                          className="object-contain w-full h-full"
-                        />
+                        <Image src={a.logo} alt={a.name} width={56} height={56} unoptimized className="object-contain w-full h-full" />
                       </div>
                     ) : (
                       <div
                         className="w-14 h-14 rounded-xl flex-none flex items-center justify-center shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105"
                         style={{ background: a.s.bar }}
                       >
-                        <span className="font-heading font-black text-white text-[13px] leading-none tracking-tight">
-                          {a.name}
-                        </span>
+                        <span className="font-heading font-black text-white text-[13px] leading-none tracking-tight">{a.name}</span>
                       </div>
                     )}
-
                     <span
                       className="inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-heading font-bold"
                       style={{ background: a.s.bg, color: a.s.text, borderColor: a.s.border }}
@@ -438,10 +512,7 @@ export default async function AboutPage() {
                       {a.status}
                     </span>
                   </div>
-
-                  <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">
-                    {a.full}
-                  </h3>
+                  <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-2 leading-snug">{a.full}</h3>
                   <p className="text-[15px] font-body text-neutral-500 leading-[1.65]">{a.detail}</p>
                 </div>
               </div>
@@ -451,7 +522,7 @@ export default async function AboutPage() {
       </section>
 
       {/* ══ Campus Experience — arc (digital reach spanning the physical) ══ */}
-      <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-10 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
 
@@ -466,11 +537,32 @@ export default async function AboutPage() {
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[40px]">
                 Your degree is online.<br />Your university is real.
               </h2>
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-8 lg:text-[17px]">
+              <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-5 lg:mb-8 lg:text-[17px]">
                 Online doesn&apos;t mean isolated. VGU brings you to campus for immersions, connects you with faculty in person, and celebrates your graduation on the same stage as every other VGU student.
               </p>
 
-              <div className="flex flex-col gap-3">
+              {/* Mobile: snap-scroll strip */}
+              <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {CAMPUS_FEATURES.map((f, i) => (
+                  <div key={f.title} className="snap-start flex-none w-[78vw] max-w-[290px]">
+                    <div
+                      className="group/feat flex flex-col rounded-2xl border border-neutral-200/80 bg-white/80 p-4 h-full hover:border-vgu-red/20 hover:bg-white hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] transition-all duration-200"
+                    >
+                      <div
+                        className="flex-none w-9 h-9 rounded-xl flex items-center justify-center mb-3 shadow-[0_4px_14px_rgba(192,64,54,0.25)]"
+                        style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                      >
+                        <f.Icon size={16} stroke={1.5} className="text-white" />
+                      </div>
+                      <div className="font-heading font-semibold text-[16px] text-neutral-900 mb-1.5">{f.title}</div>
+                      <p className="text-[16px] font-body text-neutral-500 leading-[1.65]">{f.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop: stacked list */}
+              <div className="hidden md:flex flex-col gap-3">
                 {CAMPUS_FEATURES.map((f, i) => (
                   <div
                     key={f.title}
@@ -479,7 +571,7 @@ export default async function AboutPage() {
                     className="group/feat flex items-start gap-4 rounded-2xl border border-neutral-200/80 bg-white/80 p-5 hover:border-vgu-red/20 hover:bg-white hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <div
-                      className="flex-none w-10 h-10 rounded-xl flex items-center justify-center mt-0.5 shadow-[0_4px_14px_rgba(192,64,54,0.25)] transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/feat:scale-110 group-hover/feat:rotate-3"
+                      className="flex-none w-10 h-10 rounded-xl flex items-center justify-center mt-0.5 shadow-[0_4px_14px_rgba(192,64,54,0.25)] transition-all duration-200 group-hover/feat:scale-110 group-hover/feat:rotate-3"
                       style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
                     >
                       <f.Icon size={18} stroke={1.5} className="text-white" />
@@ -494,7 +586,7 @@ export default async function AboutPage() {
 
               <a
                 href="/programs"
-                className="inline-flex items-center gap-2 mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
+                className="inline-flex items-center gap-2 mt-6 md:mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
               >
                 Explore programs
                 <IconArrowRight size={15} />
@@ -503,7 +595,7 @@ export default async function AboutPage() {
 
             {/* Right: clean image + proof strip */}
             <div data-animate="slide-from-right" className="flex flex-col gap-4">
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_20px_56px_rgba(0,0,0,0.14)]">
+              <div className="relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] shadow-[0_20px_56px_rgba(0,0,0,0.14)]">
                 <Image
                   src={CAMPUS_IMAGE_SRC}
                   alt="VGU students at campus graduation ceremony"
@@ -514,19 +606,19 @@ export default async function AboutPage() {
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
 
-              {/* Proof strip — sits below the image, breathes naturally */}
+              {/* Proof strip */}
               <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
-                <div className="flex flex-col items-center py-7 px-4">
+                <div className="flex flex-col items-center py-4 md:py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
-                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
+                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
                 </div>
-                <div className="flex flex-col items-center py-7 px-4">
+                <div className="flex flex-col items-center py-4 md:py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">100%</span>
-                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
+                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
                 </div>
-                <div className="flex flex-col items-center py-7 px-4">
+                <div className="flex flex-col items-center py-4 md:py-7 px-4">
                   <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">50K+</span>
-                  <span className="mt-2 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
+                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
                 </div>
               </div>
             </div>
@@ -552,23 +644,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div
-            data-animate="fade-up"
-            style={{ animationDelay: '100ms' }}
-            className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3 lg:gap-4"
-          >
-            {HIRERS.map((name) => (
-              <div
-                key={name}
-                className="group flex flex-col items-center gap-2.5 rounded-xl border border-neutral-200 bg-white p-3 md:p-4 hover:border-vgu-red/20 hover:shadow-[0_6px_20px_rgba(192,64,54,0.09)] hover:-translate-y-0.5 transition-all duration-200 cursor-default"
-              >
-                <div className="w-11 h-11 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105">
-                  <BrandIcon name={name} />
-                </div>
-                <span className="text-[13px] font-heading font-semibold text-neutral-600 text-center leading-tight">{name}</span>
-              </div>
-            ))}
-          </div>
+          <HirerStrip hirers={HIRERS} />
 
           <div
             data-animate="fade-up"
@@ -588,64 +664,69 @@ export default async function AboutPage() {
       </section>
 
       {/* ══ History timeline — wave conveys the flow of time ══ */}
-      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-16 items-start">
 
-            {/* Left sticky panel */}
+            {/* Left sticky panel — mobile: identity card, desktop: dissolves via md:contents */}
             <div data-animate="slide-from-left" className="lg:sticky lg:top-[120px]">
-              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
-                Our history
-              </p>
-
-              {/* Big display year counter */}
-              <div className="font-heading font-black leading-[0.85] text-vgu-yellow text-[56px] md:text-[80px] mb-2">
-                {yearsOld}+
-              </div>
-              <h2 className="font-heading font-bold text-[24px] md:text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-4">
-                Years of steady impact
-              </h2>
-
-              {/* Red rule */}
-              <div className="w-10 h-0.5 rounded-full bg-vgu-red/30 mb-5" />
-
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-                From a single campus in Jaipur to a globally accessible online university -
-                a decade-plus of making quality education reachable for every serious learner.
-              </p>
-
-              {/* NAAC card — real logo */}
               <div
-                className="mt-8 flex items-center gap-4 rounded-2xl border border-vgu-red/15 px-4 py-4"
-                style={{ background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)' }}
+                className="rounded-2xl border border-vgu-red/15 p-6 shadow-[0_8px_32px_rgba(192,64,54,0.10)] md:contents"
+                style={{ background: 'linear-gradient(145deg, #ffffff 50%, rgba(192,64,54,0.06) 100%)' }}
               >
-                <div className="flex-none w-11 h-11 rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.10)]">
-                  <Image src="/assets/trust/naac.svg" width={44} height={44} alt="NAAC" unoptimized className="w-full h-full object-contain" />
-                </div>
-                <div>
-                  <div className="font-heading font-bold text-[14px] text-neutral-900">NAAC A+ Accredited</div>
-                  <div className="text-[12px] font-body text-neutral-500">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
-                </div>
-              </div>
+                <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
+                  Our history
+                </p>
 
-              {/* Recent achievement chips */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  { label: 'QS 95th in India', year: '2025' },
-                  { label: 'Google AI Campus', year: '2024' },
-                  { label: 'IIRF 37th Pvt Uni', year: '2026' },
-                ].map((chip) => (
-                  <span
-                    key={chip.label}
-                    className="inline-flex items-center gap-1 rounded-full border border-vgu-red/20 bg-vgu-red/[0.04] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red"
-                  >
-                    {chip.label}
-                    <span className="mx-0.5 font-normal text-neutral-400">·</span>
-                    <span className="font-normal text-neutral-400">{chip.year}</span>
-                  </span>
-                ))}
+                {/* Big display year counter */}
+                <div className="font-heading font-black leading-[0.85] text-vgu-yellow text-[64px] md:text-[80px] mb-2">
+                  {yearsOld}+
+                </div>
+                <h2 className="font-heading font-bold text-[24px] md:text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-4">
+                  Years of steady impact
+                </h2>
+
+                {/* Red rule */}
+                <div className="w-10 h-[3px] rounded-full mb-5" style={{ background: 'linear-gradient(to right, #C04036, #821a12)' }} />
+
+                <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
+                  From a single campus in Jaipur to a globally accessible online university -
+                  a decade-plus of making quality education reachable for every serious learner.
+                </p>
+
+                {/* NAAC card */}
+                <div
+                  className="mt-6 flex items-center gap-4 rounded-2xl border border-vgu-red/20 px-4 py-4 shadow-[0_4px_16px_rgba(192,64,54,0.12)]"
+                  style={{ background: 'linear-gradient(135deg, #ffffff 45%, rgba(192,64,54,0.07) 100%)' }}
+                >
+                  <div className="flex-none w-12 h-12 rounded-xl overflow-hidden shadow-[0_4px_14px_rgba(192,64,54,0.20)]">
+                    <Image src="/assets/trust/naac.svg" width={48} height={48} alt="NAAC" unoptimized className="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <div className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">NAAC A+ Accredited</div>
+                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
+                  </div>
+                </div>
+
+                {/* Recent achievement chips */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {[
+                    { label: 'QS 95th in India', year: '2025' },
+                    { label: 'Google AI Campus', year: '2024' },
+                    { label: 'IIRF 37th Pvt Uni', year: '2026' },
+                  ].map((chip) => (
+                    <span
+                      key={chip.label}
+                      className="inline-flex items-center gap-1 rounded-full border border-vgu-red/30 bg-vgu-red/[0.06] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red shadow-sm"
+                    >
+                      {chip.label}
+                      <span className="mx-0.5 font-normal text-neutral-400">·</span>
+                      <span className="font-normal text-neutral-400">{chip.year}</span>
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -718,11 +799,11 @@ export default async function AboutPage() {
       </section>
 
       {/* ══ Alumni Community — swoop (sweeping sense of a large, growing community) ══ */}
-      <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
-          <div data-animate="fade-up" className="text-center mb-12">
+          <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Alumni community
             </p>
@@ -735,7 +816,7 @@ export default async function AboutPage() {
           </div>
 
           {/* Alumni features — Mobile: snap-scroll, Desktop: 3-col grid */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_FEATURES.map((f, i) => (
               <div key={f.label} className="snap-start flex-none w-[72vw] max-w-[280px]">
                 <div
@@ -744,7 +825,7 @@ export default async function AboutPage() {
                     animationDelay: `${i * 80}ms`,
                     background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
                   }}
-                  className="group/card relative overflow-hidden rounded-2xl border border-neutral-200 p-6 h-full hover:border-vgu-red/25 hover:shadow-[0_8px_28px_rgba(192,64,54,0.11)] hover:-translate-y-1 transition-all duration-200"
+                  className="group/card relative overflow-hidden rounded-2xl border border-vgu-red/15 p-6 h-full shadow-[0_6px_24px_rgba(192,64,54,0.10)] hover:border-vgu-red/30 hover:shadow-[0_14px_36px_rgba(192,64,54,0.16)] hover:-translate-y-1.5 transition-all duration-200"
                 >
                   <span
                     className="absolute -bottom-3 right-3 font-heading font-black leading-none select-none pointer-events-none text-[72px] text-vgu-red"
@@ -798,13 +879,13 @@ export default async function AboutPage() {
           </div>
 
           {/* Testimonial cards — Mobile: snap-scroll, Desktop: 3-col grid */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_TESTIMONIALS.map((t, i) => (
               <div key={t.name} className="snap-start flex-none w-[82vw] max-w-[320px]">
                 <div
                   data-animate="fade-up"
                   style={{ animationDelay: `${i * 90}ms` }}
-                  className="flex flex-col h-full rounded-2xl border border-neutral-200 bg-white overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200"
+                  className="flex flex-col h-full rounded-2xl border border-vgu-red/15 bg-white overflow-hidden shadow-[0_6px_24px_rgba(192,64,54,0.10)] hover:border-vgu-red/30 hover:shadow-[0_14px_36px_rgba(192,64,54,0.16)] hover:-translate-y-1.5 transition-all duration-200"
                 >
                   <div
                     className="flex items-center gap-4 px-5 py-5 border-b border-neutral-100"

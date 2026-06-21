@@ -213,7 +213,7 @@ export default function BlogIndex({
             )}
 
             {/* Mobile: horizontal snap-scroll strip */}
-            <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {regularPosts.map((post) => (
                 <div key={post._id} className="snap-start flex-none w-[82vw] max-w-[320px]">
                   <PostCard post={post} delay={0} />
