@@ -885,14 +885,14 @@ export default async function ProgramPage({ params }: Props) {
       <section className="sketch-hover-group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         {/* Background image + brand-red overlay (50%) - swap heroImage for a program-specific asset */}
         <Image src={heroImage} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
           {/* Copy column */}
           <div className="max-w-[680px]">
             {/* Badges */}
-            <div className="anim-load-left flex flex-wrap items-center gap-2 mb-5" style={{ animationDelay: '0ms' }}>
+            <div className="anim-load-left flex flex-wrap items-center gap-2 mb-4" style={{ animationDelay: '0ms' }}>
               <span className="rounded-full bg-white/20 border border-white/25 px-3.5 py-1 text-[12px] font-heading font-bold uppercase tracking-[0.05em] text-white">
                 {prog.level === 'ug' ? 'Undergraduate' : 'Postgraduate'}
               </span>
@@ -907,34 +907,30 @@ export default async function ProgramPage({ params }: Props) {
             <h1 className="anim-load-left font-heading font-bold tracking-[-0.5px] leading-[1.05] text-white text-[38px] sm:text-[48px] lg:text-[56px]" style={{ animationDelay: '70ms' }}>
               {prog.name}
             </h1>
-            <p className="anim-load-left mt-2.5 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
+            <p className="anim-load-left mt-2 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3 md:line-clamp-none" style={{ animationDelay: '140ms' }}>
               {prog.description}
             </p>
 
-            {/* Stat chips (3 focused proof points, Bible §06) */}
-            <div className="anim-load-left mt-7 flex flex-wrap gap-2.5" style={{ animationDelay: '210ms' }}>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-4 py-2 text-[13px] font-body font-semibold text-white">
+            {/* Stat chips + next batch — one wrap row on mobile */}
+            <div className="anim-load-left mt-6 flex flex-row flex-wrap items-center gap-x-3 gap-y-2" style={{ animationDelay: '210ms' }}>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-3.5 py-1.5 text-[13px] font-body font-semibold text-white">
                 <IconClock size={14} stroke={1.75} />
                 {prog.duration} · {prog.semesters} semesters
               </span>
               {prog.emi && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/25 border border-vgu-yellow/40 px-4 py-2 text-[13px] font-body font-semibold text-vgu-yellow">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/25 border border-vgu-yellow/40 px-3.5 py-1.5 text-[13px] font-body font-semibold text-vgu-yellow">
                   EMI from {prog.emi}
                 </span>
               )}
-            </div>
-
-            {/* Next batch chip */}
-            <div className="anim-load-left mt-3 inline-flex items-center gap-2.5" style={{ animationDelay: '250ms' }}>
-              <span className="relative flex h-2 w-2 flex-none">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
-              </span>
-              <span className="text-[13px] font-body font-semibold text-white/80">
-                Next batch: <span className="text-white">{prog.nextBatch}</span> · Admissions open
+              <span className="inline-flex items-center gap-2 text-[13px] font-body font-semibold text-white/80">
+                <span className="relative flex h-2 w-2 flex-none">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+                </span>
+                <span><span className="text-white">{prog.nextBatch}</span> · Admissions open</span>
               </span>
             </div>
 

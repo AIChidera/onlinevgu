@@ -63,7 +63,7 @@ export default async function ProgramsPage() {
 
         {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
         <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
@@ -95,8 +95,7 @@ export default async function ProgramsPage() {
 
             {/* Inline trust bar */}
             <div
-              className="anim-load-left mt-7 grid grid-cols-2 gap-x-5 gap-y-2.5
-                         sm:flex sm:flex-wrap sm:items-center sm:gap-x-6"
+              className="anim-load-left mt-7 flex flex-row flex-wrap gap-x-5 gap-y-2 sm:items-center"
               style={{ animationDelay: '175ms' }}
             >
               {TRUST_POINTS.map((item) => (
