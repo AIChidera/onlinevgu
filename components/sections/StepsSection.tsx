@@ -136,7 +136,7 @@ export default function StepsSection() {
         </div>
 
         {/* CTA */}
-        <div className="mt-14 flex flex-col items-center gap-5">
+        <div className="mt-8 md:mt-14 flex flex-col items-center gap-5">
           <a
             href="#counsellor"
             data-apply-trigger
