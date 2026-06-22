@@ -11,8 +11,6 @@ interface PhoneFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElemen
 
 const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
   function PhoneField({ dialCode, onDialChange, error, ...inputProps }, ref) {
-    const currentFlag = COUNTRY_CODES.find(c => c.dial === dialCode)?.flag ?? '🌐'
-
     return (
       <div
         className={[
@@ -22,25 +20,29 @@ const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
         ].join(' ')}
       >
         <div className="relative flex-none flex items-center border-r border-neutral-200">
-          <span
+          {/* Visible trigger: dial code only */}
+          <div
             aria-hidden="true"
-            className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[18px] leading-none"
+            className="pointer-events-none px-3 py-3 text-[15px] font-body font-semibold text-neutral-600"
           >
-            {currentFlag}
-          </span>
+            {dialCode}
+          </div>
+
+          {/* Invisible native select overlaid for interaction */}
           <select
             value={dialCode}
             onChange={e => onDialChange(e.target.value)}
             aria-label="Country code"
-            className="bg-transparent pl-10 pr-2 py-3 text-[16px] font-body font-semibold text-neutral-600 focus:outline-none appearance-none cursor-pointer"
+            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
           >
             {COUNTRY_CODES.map(c => (
               <option key={c.code} value={c.dial}>
-                {c.flag} {c.dial}
+                {c.code} {c.dial}
               </option>
             ))}
           </select>
         </div>
+
         <input
           ref={ref}
           type="tel"

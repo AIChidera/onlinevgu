@@ -270,14 +270,14 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1280px]">
 
           {/* Section header */}
-          <div className="max-w-[680px] mb-8 md:mb-12">
+          <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Send us a message
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
               Tell us how we can help
             </h2>
-            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
               Drop us a message and a counsellor will reach out within 24 hours.
             </p>
           </div>
@@ -413,14 +413,14 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1280px]">
 
           {/* Section header */}
-          <div className="max-w-[680px] mb-8 md:mb-10">
+          <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-10">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Visit our campus
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
               Find us in Jaipur
             </h2>
-            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
               Drop by the VGU campus in Jagatpura for a guided tour, or attend one of our scheduled
               immersion events.
             </p>
@@ -482,7 +482,7 @@ export default function ContactPage() {
             href={MAP_PLACE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="md:hidden mt-4 inline-flex items-center justify-center gap-2 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[14px] px-6 py-3 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] whitespace-nowrap"
+            className="md:hidden mt-4 inline-flex items-center justify-center gap-2 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-6 py-3 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] whitespace-nowrap"
           >
             <IconMapPin size={16} stroke={2} />
             Open in Google Maps
@@ -495,14 +495,14 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1280px]">
 
           {/* Section header */}
-          <div className="max-w-[680px] mb-8 md:mb-12">
+          <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Find the right team
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
               Who would you like to reach?
             </h2>
-            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
               Pick the team that matches your enquiry - we&apos;ll route it to a specialist who can help.
             </p>
           </div>
@@ -515,14 +515,15 @@ export default function ContactPage() {
                 href={d.href}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
-                className="group flex flex-col rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                className="group flex flex-row items-start sm:flex-col rounded-2xl bg-white border border-neutral-200/80 p-4 sm:p-5 md:p-6
                            shadow-[0_8px_28px_rgba(17,24,39,0.08)]
                            hover:-translate-y-1.5 hover:border-vgu-red/30
                            hover:shadow-[0_18px_40px_rgba(192,64,54,0.18)]
                            transition-all duration-300"
               >
+                {/* Icon */}
                 <div
-                  className="flex-none w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  className="flex-none w-12 h-12 rounded-xl flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 transition-transform duration-300 group-hover:scale-110"
                   style={{
                     background: 'linear-gradient(135deg, #C04036, #821a12)',
                     boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
@@ -530,16 +531,20 @@ export default function ContactPage() {
                 >
                   <d.Icon size={22} stroke={1.75} className="text-white" />
                 </div>
-                <h3 className="font-heading font-bold text-[16px] md:text-[17px] text-neutral-900 leading-snug mb-1.5 group-hover:text-vgu-red transition-colors duration-200">
-                  {d.label}
-                </h3>
-                <p className="text-[13px] md:text-[14px] font-body text-neutral-500 leading-[1.6] mb-5">
-                  {d.desc}
-                </p>
-                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
-                  Email this team
-                  <IconArrowRight size={13} stroke={2.25} />
-                </span>
+
+                {/* Content */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  <h3 className="font-heading font-bold text-[16px] md:text-[17px] text-neutral-900 leading-snug mb-1.5 group-hover:text-vgu-red transition-colors duration-200">
+                    {d.label}
+                  </h3>
+                  <p className="text-[13px] md:text-[14px] font-body text-neutral-500 leading-[1.6] mb-3 sm:mb-5">
+                    {d.desc}
+                  </p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
+                    Email this team
+                    <IconArrowRight size={13} stroke={2.25} />
+                  </span>
+                </div>
               </a>
             ))}
           </div>
@@ -551,14 +556,14 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[860px]">
 
           {/* Section header */}
-          <div className="text-center mb-8 md:mb-12">
+          <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Before you contact us
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
               Quick answers
             </h2>
-            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto">
+            <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto">
               We reply quickly - but you might find your answer right here.
             </p>
           </div>
@@ -577,7 +582,7 @@ export default function ContactPage() {
                            transition-all duration-200"
               >
                 <summary className="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 md:px-6 md:py-5 [&::-webkit-details-marker]:hidden">
-                  <span className="font-heading font-semibold text-[15px] md:text-[16px] text-neutral-900 leading-snug group-open:text-vgu-red transition-colors duration-200">
+                  <span className="font-heading font-semibold text-[16px] text-neutral-900 leading-snug group-open:text-vgu-red transition-colors duration-200">
                     {item.q}
                   </span>
                   <span
@@ -592,7 +597,7 @@ export default function ContactPage() {
                   </span>
                 </summary>
                 <div className="px-5 pb-5 md:px-6 md:pb-6">
-                  <p className="text-[14px] md:text-[15px] font-body text-neutral-600 leading-[1.7]">
+                  <p className="text-[15px] md:text-[16px] font-body text-neutral-600 leading-[1.7]">
                     {item.a}
                   </p>
                 </div>
@@ -601,7 +606,7 @@ export default function ContactPage() {
           </div>
 
           {/* Footer link */}
-          <p className="mt-8 md:mt-10 text-center text-[14px] font-body text-neutral-500">
+          <p data-animate="fade-up" className="mt-8 md:mt-10 text-center text-[14px] font-body text-neutral-500">
             Need more details?{' '}
             <Link href="/#faq" className="font-heading font-semibold text-vgu-red hover:underline">
               Read the full FAQ <IconArrowRight size={12} stroke={2.25} className="inline-block ml-0.5 -mt-0.5" />
@@ -616,26 +621,28 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
 
           {/* Section header */}
-          <div className="text-center max-w-[640px] mx-auto mb-10 md:mb-14">
+          <div data-animate="fade-up" className="text-center max-w-[640px] mx-auto mb-10 md:mb-14">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Meet your counsellors
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
-              Real people you&apos;ll actually talk to
+              Real people you&apos;ll{' '}
+              <br className="sm:hidden" />
+              actually talk to
             </h2>
-            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
               Our counsellors are part of VGU&apos;s admissions team. Here&apos;s who picks up when you reach out.
             </p>
           </div>
 
           {/* Counsellor cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             {COUNSELLORS.map((c, i) => (
               <div
                 key={c.name}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 100}ms` }}
-                className="group flex flex-col items-center text-center rounded-2xl bg-white border border-neutral-200/80 p-6 md:p-7
+                className="group flex flex-col items-center text-center rounded-2xl bg-white border border-neutral-200/80 p-5 sm:p-6 md:p-7
                            shadow-[0_8px_28px_rgba(17,24,39,0.08)]
                            hover:-translate-y-1.5 hover:border-vgu-red/25
                            hover:shadow-[0_18px_40px_rgba(192,64,54,0.16)]
@@ -643,13 +650,13 @@ export default function ContactPage() {
               >
                 {/* Avatar photo */}
                 <div
-                  className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-4 transition-transform duration-300 group-hover:scale-105 ring-2 ring-white shadow-[0_12px_32px_rgba(192,64,54,0.28)]"
+                  className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-105 ring-2 ring-white shadow-[0_12px_32px_rgba(192,64,54,0.28)]"
                 >
                   <Image
                     src={c.photo}
                     alt={c.name}
                     fill
-                    sizes="(min-width: 768px) 96px, 80px"
+                    sizes="(min-width: 768px) 96px, (min-width: 640px) 80px, 64px"
                     className="object-cover object-top"
                   />
                 </div>
