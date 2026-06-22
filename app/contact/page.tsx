@@ -228,36 +228,37 @@ export default function ContactPage() {
                 rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
-                className="group flex flex-col rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                className="group flex flex-row items-start sm:flex-col rounded-2xl bg-white border border-neutral-200/80 p-4 sm:p-5 md:p-6
                            shadow-[0_8px_28px_rgba(17,24,39,0.08)]
                            hover:-translate-y-1.5 hover:border-vgu-red/30
                            hover:shadow-[0_18px_40px_rgba(192,64,54,0.18)]
                            transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className="flex-none w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{
-                      background: 'linear-gradient(135deg, #C04036, #821a12)',
-                      boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
-                    }}
-                  >
-                    <c.Icon size={20} stroke={2} className="text-white" />
-                  </div>
-                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">
-                    {c.label}
-                  </p>
+                {/* Icon */}
+                <div
+                  className="flex-none w-11 h-11 rounded-xl flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, #C04036, #821a12)',
+                    boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                  }}
+                >
+                  <c.Icon size={20} stroke={2} className="text-white" />
                 </div>
 
-                <p className="font-heading font-bold text-[16px] md:text-[17px] text-neutral-900 leading-snug break-words mb-1.5 group-hover:text-vgu-red transition-colors duration-200">
-                  {c.primary}
-                </p>
-                <p className="text-[13px] font-body text-neutral-500 mb-5">{c.sub}</p>
-
-                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] md:text-[14px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
-                  {c.cta}
-                  <IconArrowRight size={14} stroke={2.25} />
-                </span>
+                {/* Content */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1.5 sm:mb-3">
+                    {c.label}
+                  </p>
+                  <p className="font-heading font-bold text-[15px] sm:text-[16px] md:text-[17px] text-neutral-900 leading-snug break-words mb-1 group-hover:text-vgu-red transition-colors duration-200">
+                    {c.primary}
+                  </p>
+                  <p className="text-[13px] font-body text-neutral-500 mb-3 sm:mb-5">{c.sub}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] md:text-[14px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
+                    {c.cta}
+                    <IconArrowRight size={14} stroke={2.25} />
+                  </span>
+                </div>
               </a>
             ))}
           </div>
