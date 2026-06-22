@@ -24,7 +24,7 @@ import {
 } from '@tabler/icons-react'
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import SketchCircle from '@/components/ui/sketch/SketchCircle'
+
 
 const TRUST_PILLS = [
   { Icon: IconBolt,        label: 'Response within 2 hours' },
@@ -187,10 +187,7 @@ export default function ContactPage() {
             {/* Headline */}
             <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-5">
               Real people.{' '}
-              <span className="relative inline-block text-vgu-yellow">
-                Honest answers.
-                <SketchCircle color="yellow" delayMs={600} durationMs={1400} />
-              </span>
+              <span className="text-vgu-yellow">Honest answers.</span>
             </h1>
 
             {/* Body */}
@@ -620,11 +617,7 @@ export default function ContactPage() {
               Meet your counsellors
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
-              Real people you&apos;ll{' '}
-              <span className="relative inline-block">
-                actually talk to
-                <SketchCircle color="red" delayMs={300} durationMs={1600} />
-              </span>
+              Real people you&apos;ll actually talk to
             </h2>
             <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
               Our counsellors are part of VGU&apos;s admissions team. Here&apos;s who picks up when you reach out.
