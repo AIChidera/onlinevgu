@@ -1,11 +1,79 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import { IconPhone, IconBrandWhatsapp, IconMail, IconMapPin, IconClock, IconArrowRight } from '@tabler/icons-react'
-
-// Placeholder - replace with '/images/contact-hero-bg.jpg' when ready.
-const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1400&q=80&auto=format&fit=crop'
+import {
+  IconPhone,
+  IconBrandWhatsapp,
+  IconMail,
+  IconMapPin,
+  IconClock,
+  IconArrowRight,
+  IconHeadset,
+  IconBolt,
+  IconCircleCheck,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandX,
+  IconBrandFacebook,
+  IconUsers,
+  IconLifebuoy,
+  IconAward,
+  IconBriefcase,
+} from '@tabler/icons-react'
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+
+const TRUST_PILLS = [
+  { Icon: IconBolt,        label: 'Response within 2 hours' },
+  { Icon: IconCircleCheck, label: 'Free · No obligation'    },
+  { Icon: IconClock,       label: 'Mon-Sat, 9am-7pm IST'    },
+]
+
+const SOCIAL_ITEMS = [
+  { Icon: IconBrandLinkedin,  label: 'LinkedIn',  href: 'https://www.linkedin.com/school/vgu/',         hover: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]' },
+  { Icon: IconBrandInstagram, label: 'Instagram', href: 'https://www.instagram.com/vgujaipur/',         hover: 'hover:bg-[#E1306C] hover:border-[#E1306C]' },
+  { Icon: IconBrandYoutube,   label: 'YouTube',   href: 'https://www.youtube.com/@VGUVITCampusJaipur',  hover: 'hover:bg-[#FF0000] hover:border-[#FF0000]' },
+  { Icon: IconBrandX,         label: 'X',         href: 'https://x.com/JaipurVgu',                      hover: 'hover:bg-[#111827] hover:border-[#111827]' },
+  { Icon: IconBrandFacebook,  label: 'Facebook',  href: 'https://www.facebook.com/vgujpr',              hover: 'hover:bg-[#1877F2] hover:border-[#1877F2]' },
+]
+
+const OFFICE_HOURS = [
+  { d: 'Monday - Friday', h: '9:00 am - 7:00 pm' },
+  { d: 'Saturday',         h: '9:00 am - 5:00 pm' },
+  { d: 'Sunday',           h: 'Closed'            },
+]
+
+const MAP_EMBED_URL =
+  'https://www.google.com/maps?q=Vivekananda+Global+University+Jagatpura+Jaipur&z=15&output=embed'
+
+const MAP_PLACE_URL =
+  'https://www.google.com/maps/search/?api=1&query=Vivekananda+Global+University+VGU+Campus+Jagatpura+Jaipur+Rajasthan+303012'
+
+const DEPARTMENTS = [
+  {
+    Icon:  IconUsers,
+    label: 'Admissions',
+    desc:  'Programme info, eligibility, fees, and the application process.',
+    href:  'mailto:admissions@onlinevgu.in?subject=Admissions%20enquiry',
+  },
+  {
+    Icon:  IconLifebuoy,
+    label: 'Student Support',
+    desc:  'LMS access, exam queries, and technical issues for enrolled students.',
+    href:  'mailto:admissions@onlinevgu.in?subject=Student%20support',
+  },
+  {
+    Icon:  IconAward,
+    label: 'Alumni Relations',
+    desc:  'Reconnect with VGU, share your updates, or join the alumni network.',
+    href:  'mailto:admissions@onlinevgu.in?subject=Alumni',
+  },
+  {
+    Icon:  IconBriefcase,
+    label: 'Press & Partnerships',
+    desc:  'Media enquiries, corporate tie-ups, and content collaborations.',
+    href:  'mailto:admissions@onlinevgu.in?subject=Press%20%2F%20Partnership',
+  },
+]
 
 export const metadata: Metadata = {
   title: 'Contact Us - VGU Online',
@@ -18,40 +86,30 @@ export const metadata: Metadata = {
   },
 }
 
-// Brand 3-cycle: red / yellow→red / deep red. All channels rotate within brand.
 const CONTACT_CHANNELS = [
   {
-    Icon: IconPhone,
-    title: 'Call us',
+    Icon:    IconPhone,
+    label:   'Call us',
     primary: '1800 123 456',
-    sub: 'Toll-free · Mon-Sat, 9am-7pm IST',
-    href: 'tel:+911800123456',
-    cta: 'Call now',
-    color: 'bg-vgu-red/5 border-vgu-red/15',
-    iconBg: 'bg-vgu-red/10',
-    iconColor: 'text-vgu-red',
+    sub:     'Toll-free helpline',
+    href:    'tel:+911800123456',
+    cta:     'Call now',
   },
   {
-    Icon: IconBrandWhatsapp,
-    title: 'WhatsApp',
+    Icon:    IconBrandWhatsapp,
+    label:   'WhatsApp',
     primary: '+91 98765 43210',
-    sub: 'Usually replies in 15 minutes',
-    href: 'https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs',
-    cta: 'Chat now',
-    color: 'bg-vgu-yellow/10 border-vgu-yellow/30',
-    iconBg: 'bg-vgu-yellow/20',
-    iconColor: 'text-vgu-red',
+    sub:     'Usually replies in 15 min',
+    href:    'https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs',
+    cta:     'Chat now',
   },
   {
-    Icon: IconMail,
-    title: 'Email',
+    Icon:    IconMail,
+    label:   'Email',
     primary: 'admissions@onlinevgu.in',
-    sub: 'Replies within 24 hours',
-    href: 'mailto:admissions@onlinevgu.in',
-    cta: 'Send email',
-    color: 'bg-vgu-red-dark/5 border-vgu-red-dark/15',
-    iconBg: 'bg-vgu-red-dark/10',
-    iconColor: 'text-vgu-red-dark',
+    sub:     'Replies within 24 hours',
+    href:    'mailto:admissions@onlinevgu.in',
+    cta:     'Send email',
   },
 ]
 
@@ -61,143 +119,379 @@ export default function ContactPage() {
       <Breadcrumb items={[{ label: 'Contact Us' }]} />
 
       {/* ══ Hero ══ */}
-      <section className="relative overflow-hidden flex items-center min-h-[440px] lg:min-h-[520px]">
-        {HERO_IMAGE_SRC && (
-          <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
-        )}
-        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
+      <section
+        className="relative overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
+      >
+        <div aria-hidden="true" className="absolute -top-32 -right-24 h-[440px] w-[440px] rounded-full bg-vgu-red/30 blur-3xl" />
+        <div aria-hidden="true" className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-vgu-yellow/10 blur-3xl" />
 
-        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 lg:py-24">
-          <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
-            We&apos;re here to help
-          </p>
-          <h1 className="font-heading font-bold text-[36px] md:text-[48px] lg:text-[56px] tracking-[-0.5px] leading-[1.05] text-white">
-            Talk to a real<br />
-            <span className="text-vgu-yellow">counsellor.</span>
-          </h1>
-          <p className="mt-6 text-[16px] font-body leading-[1.7] text-white/85 max-w-[620px] lg:text-[17px]">
-            No chatbots. No automated hold queues. A trained VGU admissions
-            counsellor will answer your questions, free and no obligation.
-          </p>
+        <div className="relative mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
+          <div className="max-w-[760px]">
 
-          <div className="mt-8 flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/80">
-              <IconClock size={16} className="text-white/60" stroke={1.5} />
-              Mon-Sat, 9am-7pm IST
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 mb-5 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
+              <IconHeadset size={14} className="text-vgu-yellow" stroke={2} />
+              <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
+                Talk to a counsellor
+              </span>
             </div>
-            <div className="w-px h-4 bg-white/20" aria-hidden="true" />
-            <div className="flex items-center gap-2.5 text-[14px] font-body text-white/80">
-              Counsellor calls within <strong className="text-white">2 hours</strong>
+
+            {/* Headline */}
+            <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-5">
+              Real people.{' '}
+              <span className="text-vgu-yellow">Honest answers.</span>
+            </h1>
+
+            {/* Body */}
+            <p className="text-[16px] md:text-[18px] font-body leading-[1.7] text-white/75 max-w-[600px]">
+              No chatbots. No hold queues. A trained VGU admissions counsellor
+              will answer your questions, free and with no obligation.
+            </p>
+
+            {/* Trust pill row */}
+            <div className="mt-7 md:mt-8 flex flex-wrap items-center gap-2 md:gap-2.5">
+              {TRUST_PILLS.map((t) => (
+                <div
+                  key={t.label}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] border border-white/15 px-3.5 py-2 backdrop-blur-sm"
+                >
+                  <t.Icon size={14} className="text-vgu-yellow/90 flex-none" stroke={2} />
+                  <span className="text-[12px] md:text-[13px] font-body text-white/85 whitespace-nowrap">
+                    {t.label}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══ Contact channels ══ */}
-      <section className="bg-white py-16 px-5 md:px-8 lg:px-12">
+      {/* ══ Quick channels ══ */}
+      <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
             {CONTACT_CHANNELS.map((c, i) => (
-              <div
-                key={c.title}
-                data-animate="materialize"
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                data-animate="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
-                className={['rounded-2xl border p-6 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(17,24,39,0.08)] transition-all duration-200', c.color].join(' ')}
+                className="group flex flex-col rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1.5 hover:border-vgu-red/30
+                           hover:shadow-[0_18px_40px_rgba(192,64,54,0.18)]
+                           transition-all duration-300"
               >
-                <div className={['w-12 h-12 rounded-xl flex items-center justify-center mb-4', c.iconBg].join(' ')}>
-                  <c.Icon size={22} className={c.iconColor} stroke={1.5} />
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="flex-none w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'linear-gradient(135deg, #C04036, #821a12)',
+                      boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                    }}
+                  >
+                    <c.Icon size={20} stroke={2} className="text-white" />
+                  </div>
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">
+                    {c.label}
+                  </p>
                 </div>
-                <h2 className="font-heading font-bold text-[18px] text-neutral-900 mb-1">{c.title}</h2>
-                <p className="font-heading font-semibold text-[15px] text-neutral-800 mb-1">{c.primary}</p>
+
+                <p className="font-heading font-bold text-[16px] md:text-[17px] text-neutral-900 leading-snug break-words mb-1.5 group-hover:text-vgu-red transition-colors duration-200">
+                  {c.primary}
+                </p>
                 <p className="text-[13px] font-body text-neutral-500 mb-5">{c.sub}</p>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith('http') ? '_blank' : undefined}
-                  rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="inline-flex items-center gap-1.5 text-[14px] font-heading font-semibold text-vgu-red hover:gap-2.5 transition-all duration-150"
-                >
-                  {c.cta} <IconArrowRight size={14} />
-                </a>
-              </div>
+
+                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] md:text-[14px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
+                  {c.cta}
+                  <IconArrowRight size={14} stroke={2.25} />
+                </span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ Form + Address ══ */}
-      <section className="bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+      {/* ══ Form + Reach us ══ */}
+      <section className="bg-neutral-50 pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-16 items-start">
 
-            {/* Left: form */}
-            <div data-animate="slide-from-left">
-              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-                Send a message
-              </p>
-              <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-2 md:text-[36px]">
-                Leave us a message
-              </h2>
-              <p className="text-[16px] font-body leading-[1.7] text-neutral-500 mb-8">
-                Fill in your question and we&apos;ll get back within 24 hours.
-              </p>
-              <div className="rounded-2xl bg-white border border-neutral-200 p-8 shadow-[0_2px_12px_rgba(17,24,39,0.05)] md:p-5">
-                <ContactForm />
-              </div>
+          {/* Section header */}
+          <div className="max-w-[680px] mb-8 md:mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Send us a message
+            </p>
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+              Tell us how we can help
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+              Drop us a message and a counsellor will reach out within 24 hours.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-10 items-start">
+
+            {/* Left: form card */}
+            <div
+              data-animate="fade-up"
+              className="rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-7 lg:p-8
+                         shadow-[0_8px_28px_rgba(17,24,39,0.08)]"
+            >
+              <ContactForm />
             </div>
 
-            {/* Right: address + office hours */}
-            <div data-animate="slide-from-right" className="flex flex-col gap-5 lg:sticky lg:top-[120px]">
+            {/* Right: rich card stack */}
+            <div className="flex flex-col gap-4 md:gap-5 lg:sticky lg:top-[100px]">
 
-              {/* Address */}
-              <div className="rounded-2xl bg-white border border-neutral-200 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-vgu-red/10 flex items-center justify-center flex-none">
-                    <IconMapPin size={18} className="text-vgu-red" stroke={1.5} />
-                  </div>
-                  <h3 className="font-heading font-bold text-[16px] text-neutral-900">Campus Address</h3>
+              {/* Address card (clickable - opens map) */}
+              <a
+                href={MAP_PLACE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-animate="fade-up"
+                style={{ animationDelay: '80ms' }}
+                className="group flex items-start gap-4 rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1 hover:border-vgu-red/30
+                           hover:shadow-[0_18px_40px_rgba(192,64,54,0.18)]
+                           transition-all duration-300"
+              >
+                <div
+                  className="flex-none w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, #C04036, #821a12)',
+                    boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                  }}
+                >
+                  <IconMapPin size={20} stroke={2} className="text-white" />
                 </div>
-                <address className="not-italic text-[14px] font-body text-neutral-600 leading-[1.8]">
-                  Vivekananda Global University<br />
-                  VGU Campus, Jagatpura<br />
-                  Jaipur, Rajasthan - 303 012<br />
-                  India
-                </address>
+                <div className="min-w-0 pt-0.5">
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1.5">
+                    Campus address
+                  </p>
+                  <address className="not-italic text-[14px] md:text-[15px] leading-[1.6] text-neutral-700 font-body group-hover:text-vgu-red transition-colors duration-200">
+                    Vivekananda Global University<br />
+                    VGU Campus, Jagatpura<br />
+                    Jaipur, Rajasthan - 303 012, India
+                  </address>
+                  <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-heading font-semibold text-vgu-red group-hover:gap-2 transition-all duration-200">
+                    Get directions <IconArrowRight size={12} stroke={2.25} />
+                  </span>
+                </div>
+              </a>
+
+              {/* Office hours card */}
+              <div
+                data-animate="fade-up"
+                style={{ animationDelay: '160ms' }}
+                className="flex items-start gap-4 rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(17,24,39,0.14)]
+                           transition-all duration-300"
+              >
+                <div
+                  className="flex-none w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, #C04036, #821a12)',
+                    boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                  }}
+                >
+                  <IconClock size={20} stroke={2} className="text-white" />
+                </div>
+                <div className="min-w-0 flex-1 pt-0.5">
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-2.5">
+                    Office hours (IST)
+                  </p>
+                  <ul className="flex flex-col gap-1.5">
+                    {OFFICE_HOURS.map((row) => (
+                      <li
+                        key={row.d}
+                        className="flex items-center justify-between gap-3 text-[13px] md:text-[14px] font-body"
+                      >
+                        <span className="text-neutral-600">{row.d}</span>
+                        <span className={row.h === 'Closed' ? 'text-neutral-400' : 'font-semibold text-neutral-900'}>
+                          {row.h}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              {/* Office hours */}
-              <div className="rounded-2xl bg-white border border-neutral-200 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-vgu-red/10 flex items-center justify-center flex-none">
-                    <IconClock size={18} className="text-vgu-red" stroke={1.5} />
-                  </div>
-                  <h3 className="font-heading font-bold text-[16px] text-neutral-900">Office Hours</h3>
-                </div>
-                <div className="flex flex-col gap-3">
-                  {[
-                    { days: 'Monday - Friday', hours: '9:00 am - 7:00 pm IST' },
-                    { days: 'Saturday',         hours: '9:00 am - 5:00 pm IST' },
-                    { days: 'Sunday',            hours: 'Closed' },
-                  ].map((row) => (
-                    <div key={row.days} className="flex items-center justify-between gap-4 text-[14px] font-body">
-                      <span className="text-neutral-600">{row.days}</span>
-                      <span className={row.hours === 'Closed' ? 'text-neutral-400' : 'font-semibold text-neutral-900'}>
-                        {row.hours}
-                      </span>
-                    </div>
+              {/* Socials card */}
+              <div
+                data-animate="fade-up"
+                style={{ animationDelay: '240ms' }}
+                className="rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(17,24,39,0.14)]
+                           transition-all duration-300"
+              >
+                <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-3">
+                  Find us on
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {SOCIAL_ITEMS.map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      title={s.label}
+                      className={[
+                        'group inline-flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 bg-white text-neutral-600 hover:text-white hover:-translate-y-0.5 transition-all duration-200',
+                        s.hover,
+                      ].join(' ')}
+                    >
+                      <s.Icon size={18} stroke={1.75} className="transition-transform duration-200 group-hover:scale-110" />
+                    </a>
                   ))}
                 </div>
               </div>
-
-              {/* Quick CTA */}
-              <a
-                href="#counsellor"
-                className="flex items-center justify-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3.5 text-[15px] font-semibold font-heading transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
-              >
-                Talk to a Counsellor
-                <IconArrowRight size={16} />
-              </a>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Visit our campus (Map) ══ */}
+      <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+
+          {/* Section header */}
+          <div className="max-w-[680px] mb-8 md:mb-10">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Visit our campus
+            </p>
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+              Find us in Jaipur
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+              Drop by the VGU campus in Jagatpura for a guided tour, or attend one of our scheduled
+              immersion events.
+            </p>
+          </div>
+
+          {/* Map container */}
+          <div
+            data-animate="fade-up"
+            className="relative rounded-2xl overflow-hidden border border-neutral-200/80 shadow-[0_12px_36px_rgba(17,24,39,0.12)]"
+          >
+            <iframe
+              src={MAP_EMBED_URL}
+              title="VGU Campus location on Google Maps"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              className="block w-full h-[280px] sm:h-[360px] md:h-[440px] lg:h-[480px] border-0"
+            />
+
+            {/* Floating info card - desktop only */}
+            <div className="hidden md:block absolute top-5 left-5 max-w-[300px] rounded-2xl bg-white border border-neutral-200/80 p-5 shadow-[0_16px_40px_rgba(17,24,39,0.22)]">
+              <div className="flex items-start gap-3 mb-3">
+                <div
+                  className="flex-none w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, #C04036, #821a12)',
+                    boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                  }}
+                >
+                  <IconMapPin size={18} stroke={2} className="text-white" />
+                </div>
+                <div className="min-w-0 pt-0.5">
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1">
+                    Campus address
+                  </p>
+                  <p className="font-heading font-bold text-[14px] text-neutral-900 leading-snug">
+                    Vivekananda Global University
+                  </p>
+                </div>
+              </div>
+              <p className="text-[13px] font-body text-neutral-600 mb-4 leading-relaxed">
+                VGU Campus, Jagatpura<br />
+                Jaipur, Rajasthan - 303 012
+              </p>
+              <a
+                href={MAP_PLACE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[13px] px-4 py-2 transition-all duration-200 shadow-[0_4px_12px_rgba(192,64,54,0.28)] whitespace-nowrap"
+              >
+                <IconMapPin size={14} stroke={2.25} />
+                Get directions
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile-only directions CTA below map */}
+          <a
+            href={MAP_PLACE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden mt-4 inline-flex items-center justify-center gap-2 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[14px] px-6 py-3 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] whitespace-nowrap"
+          >
+            <IconMapPin size={16} stroke={2} />
+            Open in Google Maps
+          </a>
+        </div>
+      </section>
+
+      {/* ══ Departments ══ */}
+      <section className="bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+
+          {/* Section header */}
+          <div className="max-w-[680px] mb-8 md:mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Find the right team
+            </p>
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+              Who would you like to reach?
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+              Pick the team that matches your enquiry - we&apos;ll route it to a specialist who can help.
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {DEPARTMENTS.map((d, i) => (
+              <a
+                key={d.label}
+                href={d.href}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 80}ms` }}
+                className="group flex flex-col rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-6
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1.5 hover:border-vgu-red/30
+                           hover:shadow-[0_18px_40px_rgba(192,64,54,0.18)]
+                           transition-all duration-300"
+              >
+                <div
+                  className="flex-none w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, #C04036, #821a12)',
+                    boxShadow: '0 6px 18px rgba(192,64,54,0.32)',
+                  }}
+                >
+                  <d.Icon size={22} stroke={1.75} className="text-white" />
+                </div>
+                <h3 className="font-heading font-bold text-[16px] md:text-[17px] text-neutral-900 leading-snug mb-1.5 group-hover:text-vgu-red transition-colors duration-200">
+                  {d.label}
+                </h3>
+                <p className="text-[13px] md:text-[14px] font-body text-neutral-500 leading-[1.6] mb-5">
+                  {d.desc}
+                </p>
+                <span className="mt-auto inline-flex items-center gap-1.5 text-[13px] font-heading font-semibold text-vgu-red group-hover:gap-2.5 transition-all duration-200">
+                  Email this team
+                  <IconArrowRight size={13} stroke={2.25} />
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>

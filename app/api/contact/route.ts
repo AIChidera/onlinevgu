@@ -88,6 +88,7 @@ export async function POST(req: NextRequest) {
             <h2 style="color:#C04036">Contact Form Submission</h2>
             <p><strong>Name:</strong> ${data.name}</p>
             <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Phone:</strong> ${data.phone}</p>
             <p><strong>Subject:</strong> ${data.subject}</p>
             <p><strong>Message:</strong></p>
             <blockquote style="border-left:3px solid #C04036;margin:0;padding:12px 16px;background:#F9FAFB;color:#374151">

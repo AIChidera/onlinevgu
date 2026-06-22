@@ -56,10 +56,11 @@ export type BrochureInput = z.infer<typeof BrochureSchema>
 // ── Contact form ──────────────────────────────────────────────
 
 export const ContactSchema = z.object({
-  name:    z.string().min(2).max(100).trim(),
-  email:   z.string().email().trim().toLowerCase(),
-  subject: z.string().min(4).max(200).trim(),
-  message: z.string().min(10).max(2000).trim(),
+  name:    z.string().min(2, 'Name must be at least 2 characters').max(100).trim(),
+  email:   z.string().email('Enter a valid email address').max(254).trim().toLowerCase(),
+  phone:   z.string().regex(phoneRegex, 'Enter a valid mobile number').trim(),
+  subject: z.string().min(4, 'Subject must be at least 4 characters').max(200).trim(),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(2000).trim(),
 })
 
 export type ContactInput = z.infer<typeof ContactSchema>

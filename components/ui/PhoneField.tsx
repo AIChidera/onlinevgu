@@ -11,6 +11,8 @@ interface PhoneFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElemen
 
 const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
   function PhoneField({ dialCode, onDialChange, error, ...inputProps }, ref) {
+    const currentFlag = COUNTRY_CODES.find(c => c.dial === dialCode)?.flag ?? '🌐'
+
     return (
       <div
         className={[
@@ -19,25 +21,33 @@ const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(
           error ? 'border-red-400' : 'border-neutral-200',
         ].join(' ')}
       >
-        <select
-          value={dialCode}
-          onChange={e => onDialChange(e.target.value)}
-          aria-label="Country code"
-          className="flex-none bg-transparent border-r border-neutral-200 pl-3 pr-1 py-3 text-[16px] font-body font-semibold text-neutral-600 focus:outline-none appearance-none cursor-pointer"
-        >
-          {COUNTRY_CODES.map(c => (
-            <option key={c.code} value={c.dial}>
-              {c.flag} {c.dial}
-            </option>
-          ))}
-        </select>
+        <div className="relative flex-none flex items-center border-r border-neutral-200">
+          <span
+            aria-hidden="true"
+            className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[18px] leading-none"
+          >
+            {currentFlag}
+          </span>
+          <select
+            value={dialCode}
+            onChange={e => onDialChange(e.target.value)}
+            aria-label="Country code"
+            className="bg-transparent pl-10 pr-2 py-3 text-[16px] font-body font-semibold text-neutral-600 focus:outline-none appearance-none cursor-pointer"
+          >
+            {COUNTRY_CODES.map(c => (
+              <option key={c.code} value={c.dial}>
+                {c.flag} {c.dial}
+              </option>
+            ))}
+          </select>
+        </div>
         <input
           ref={ref}
           type="tel"
           inputMode="tel"
           autoComplete="tel-national"
           {...inputProps}
-          className="flex-1 px-3 py-3 text-base font-body text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none"
+          className="flex-1 px-3 py-3 text-[16px] font-body text-neutral-900 placeholder-neutral-400 bg-transparent focus:outline-none"
         />
       </div>
     )

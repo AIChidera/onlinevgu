@@ -15,11 +15,10 @@ const PROGRAM_LINKS = [
 ]
 
 const COMPANY_LINKS = [
-  { label: 'About VGU',      href: '/about'          },
-  { label: 'Accreditations', href: '/#accreditation' },
-  { label: 'Campus Life',    href: '/#campus'        },
-  { label: 'Blog',           href: 'https://blog.vgu.ac.in' },
-  { label: 'Careers',        href: '/contact'        },
+  { label: 'About VGU',   href: '/about'      },
+  { label: 'Campus Life', href: '/#campus'    },
+  { label: 'Blog',        href: '/blog'       },
+  { label: 'Careers',     href: '/placements' },
 ]
 
 const SUPPORT_LINKS = [
@@ -27,7 +26,7 @@ const SUPPORT_LINKS = [
   { label: 'Contact Us',        href: '/contact'            },
   { label: 'Apply Now',         href: '#counsellor',        applyTrigger: true },
   { label: 'Download Brochure', href: '/apply#brochure', brochureTrigger: true },
-  { label: 'Student Portal',    href: 'https://lms.vgu.ac.in' },
+  { label: 'Student Portal',    href: '/student-portal'       },
 ]
 
 const SOCIALS = [
@@ -91,11 +90,11 @@ export default async function Footer() {
   const phone        = settings?.phoneDisplay    || '1800 123 456'
   const email        = settings?.admissionsEmail || 'admissions@onlinevgu.in'
   const socialHrefs: Record<string, string> = {
-    LinkedIn:    settings?.socialLinkedIn  || '#',
-    Instagram:   settings?.socialInstagram || '#',
-    YouTube:     settings?.socialYouTube   || '#',
-    'Twitter / X': settings?.socialX      || '#',
-    Facebook:    settings?.socialFacebook  || '#',
+    LinkedIn:      settings?.socialLinkedIn  || 'https://www.linkedin.com/school/vgu/',
+    Instagram:     settings?.socialInstagram || 'https://www.instagram.com/vgujaipur/',
+    YouTube:       settings?.socialYouTube   || 'https://www.youtube.com/@VGUVITCampusJaipur',
+    'Twitter / X': settings?.socialX        || 'https://x.com/JaipurVgu',
+    Facebook:      settings?.socialFacebook  || 'https://www.facebook.com/vgujpr',
   }
 
   return (
@@ -170,18 +169,8 @@ export default async function Footer() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[12px] text-white/40">
             <span>© {new Date().getFullYear()} Vivekananda Global University. All rights reserved.</span>
             <div className="flex flex-wrap gap-5">
-              {/* Privacy Policy is live; others are disabled until their pages exist */}
-              <a href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</a>
-              {['Terms of Use', 'Refund Policy', 'Disclaimer'].map((label) => (
-                <span
-                  key={label}
-                  className="text-white/25 cursor-not-allowed select-none"
-                  aria-disabled="true"
-                  title="Coming soon"
-                >
-                  {label}
-                </span>
-              ))}
+              <a href="/terms" className="text-white/60 hover:text-white transition-colors">Terms &amp; Conditions</a>
+              <a href="/privacy" className="text-white/60 hover:text-white transition-colors">Privacy Policy</a>
             </div>
           </div>
         </div>

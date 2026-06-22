@@ -77,11 +77,11 @@ async function seedSiteSettings() {
     statHiringPartners:  '500+',
     statCourseraCount:   '7,000+',
     statYearEstablished: '2012',
-    socialInstagram:     '',
-    socialLinkedIn:      '',
-    socialFacebook:      '',
-    socialYouTube:       '',
-    socialX:             '',
+    socialInstagram:     'https://www.instagram.com/vgujaipur/',
+    socialLinkedIn:      'https://www.linkedin.com/school/vgu/',
+    socialFacebook:      'https://www.facebook.com/vgujpr',
+    socialYouTube:       'https://www.youtube.com/@VGUVITCampusJaipur',
+    socialX:             'https://x.com/JaipurVgu',
   })
   console.log('  ✓ siteSettings document')
 }

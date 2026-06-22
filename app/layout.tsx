@@ -6,6 +6,8 @@ import SiteFooter from '@/components/layout/SiteFooter'
 import Footer from '@/components/layout/Footer'
 import FooterCTA from '@/components/sections/FooterCTA'
 import Analytics from '@/components/Analytics'
+import HashScroller from '@/components/HashScroller'
+import CookieConsent from '@/components/CookieConsent'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import { getSiteSettings } from '@/lib/sanity'
 
@@ -83,6 +85,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </noscript>
         )}
         <Analytics />
+        <HashScroller />
+        <CookieConsent />
         <SiteNav />
         <main>{children}</main>
         <ScrollToTop />
