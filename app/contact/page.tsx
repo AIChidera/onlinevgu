@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import {
   IconPhone,
   IconBrandWhatsapp,
@@ -18,9 +20,11 @@ import {
   IconLifebuoy,
   IconAward,
   IconBriefcase,
+  IconPlus,
 } from '@tabler/icons-react'
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import SketchCircle from '@/components/ui/sketch/SketchCircle'
 
 const TRUST_PILLS = [
   { Icon: IconBolt,        label: 'Response within 2 hours' },
@@ -47,6 +51,49 @@ const MAP_EMBED_URL =
 
 const MAP_PLACE_URL =
   'https://www.google.com/maps/search/?api=1&query=Vivekananda+Global+University+VGU+Campus+Jagatpura+Jaipur+Rajasthan+303012'
+
+const COUNSELLORS = [
+  {
+    photo:     'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop&crop=faces',
+    name:      'Priya Sharma',
+    role:      'MBA & PG Specialist',
+    bio:       "Helps working professionals choose between MBA, MCA, and management programmes. 8 years guiding senior managers and entrepreneurs.",
+    languages: ['English', 'Hindi', 'Marathi'],
+  },
+  {
+    photo:     'https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=400&q=80&auto=format&fit=crop&crop=faces',
+    name:      'Rohan Verma',
+    role:      'UG & Career Counsellor',
+    bio:       'Specialises in undergraduate admissions - BBA, BCA, BA, B.Com - and helping students map their programme choice to their career goals.',
+    languages: ['English', 'Hindi', 'Punjabi'],
+  },
+  {
+    photo:     'https://images.unsplash.com/photo-1618245472177-2a74ad3b994a?w=400&q=80&auto=format&fit=crop&crop=faces',
+    name:      'Anjali Mehta',
+    role:      'Tech & MCA Specialist',
+    bio:       'Computer Applications, BCA, MCA, and tech-track placement guidance for learners targeting product and engineering roles.',
+    languages: ['English', 'Hindi', 'Gujarati'],
+  },
+]
+
+const MINI_FAQS = [
+  {
+    q: 'Are VGU online degrees UGC-recognised?',
+    a: "Yes. VGU's online programmes are UGC-entitled through the Distance Education Bureau (DEB), and the university is NAAC A+ accredited. Your degree is fully recognised by employers, government bodies, and other universities in India.",
+  },
+  {
+    q: 'Can I pay fees in monthly EMIs?',
+    a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
+  },
+  {
+    q: 'How long does the application process take?',
+    a: 'Most applications are reviewed within 2-3 business days. A counsellor will reach out to confirm your details, request any missing documents, and guide you through the next steps.',
+  },
+  {
+    q: 'Can I visit the campus before enrolling?',
+    a: 'Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email admissions@onlinevgu.in or call 1800 123 456 to schedule a guided tour.',
+  },
+]
 
 const DEPARTMENTS = [
   {
@@ -140,13 +187,16 @@ export default function ContactPage() {
             {/* Headline */}
             <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-5">
               Real people.{' '}
-              <span className="text-vgu-yellow">Honest answers.</span>
+              <span className="relative inline-block text-vgu-yellow">
+                Honest answers.
+                <SketchCircle color="yellow" delayMs={600} durationMs={1400} />
+              </span>
             </h1>
 
             {/* Body */}
             <p className="text-[16px] md:text-[18px] font-body leading-[1.7] text-white/75 max-w-[600px]">
               No chatbots. No hold queues. A trained VGU admissions counsellor
-              will answer your questions, free and with no obligation.
+              will answer your questions for free.
             </p>
 
             {/* Trust pill row */}
@@ -491,6 +541,154 @@ export default function ContactPage() {
                   <IconArrowRight size={13} stroke={2.25} />
                 </span>
               </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Mini-FAQ ══ */}
+      <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-[860px]">
+
+          {/* Section header */}
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Before you contact us
+            </p>
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+              Quick answers
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto">
+              We reply quickly - but you might find your answer right here.
+            </p>
+          </div>
+
+          {/* FAQ list */}
+          <div className="flex flex-col gap-3 md:gap-4">
+            {MINI_FAQS.map((item, i) => (
+              <details
+                key={item.q}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 70}ms` }}
+                className="group rounded-2xl bg-white border border-neutral-200/80 overflow-hidden
+                           shadow-[0_4px_16px_rgba(17,24,39,0.05)]
+                           hover:border-vgu-red/25 hover:shadow-[0_8px_24px_rgba(17,24,39,0.09)]
+                           open:border-vgu-red/30 open:shadow-[0_12px_32px_rgba(192,64,54,0.12)]
+                           transition-all duration-200"
+              >
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 md:px-6 md:py-5 [&::-webkit-details-marker]:hidden">
+                  <span className="font-heading font-semibold text-[15px] md:text-[16px] text-neutral-900 leading-snug group-open:text-vgu-red transition-colors duration-200">
+                    {item.q}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="flex-none w-8 h-8 rounded-full bg-neutral-50 border border-neutral-200 flex items-center justify-center transition-all duration-200 group-open:bg-vgu-red group-open:border-vgu-red"
+                  >
+                    <IconPlus
+                      size={16}
+                      stroke={2.25}
+                      className="text-neutral-500 transition-all duration-200 group-open:rotate-45 group-open:text-white"
+                    />
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 md:px-6 md:pb-6">
+                  <p className="text-[14px] md:text-[15px] font-body text-neutral-600 leading-[1.7]">
+                    {item.a}
+                  </p>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          {/* Footer link */}
+          <p className="mt-8 md:mt-10 text-center text-[14px] font-body text-neutral-500">
+            Need more details?{' '}
+            <Link href="/#faq" className="font-heading font-semibold text-vgu-red hover:underline">
+              Read the full FAQ <IconArrowRight size={12} stroke={2.25} className="inline-block ml-0.5 -mt-0.5" />
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ══ Counsellors ══ */}
+      <section className="bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+
+          {/* Section header */}
+          <div className="text-center max-w-[640px] mx-auto mb-10 md:mb-14">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Meet your counsellors
+            </p>
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+              Real people you&apos;ll{' '}
+              <span className="relative inline-block">
+                actually talk to
+                <SketchCircle color="red" delayMs={300} durationMs={1600} />
+              </span>
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-body leading-[1.7] text-neutral-500">
+              Our counsellors are part of VGU&apos;s admissions team. Here&apos;s who picks up when you reach out.
+            </p>
+          </div>
+
+          {/* Counsellor cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {COUNSELLORS.map((c, i) => (
+              <div
+                key={c.name}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 100}ms` }}
+                className="group flex flex-col items-center text-center rounded-2xl bg-white border border-neutral-200/80 p-6 md:p-7
+                           shadow-[0_8px_28px_rgba(17,24,39,0.08)]
+                           hover:-translate-y-1.5 hover:border-vgu-red/25
+                           hover:shadow-[0_18px_40px_rgba(192,64,54,0.16)]
+                           transition-all duration-300"
+              >
+                {/* Avatar photo */}
+                <div
+                  className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-4 transition-transform duration-300 group-hover:scale-105 ring-2 ring-white shadow-[0_12px_32px_rgba(192,64,54,0.28)]"
+                >
+                  <Image
+                    src={c.photo}
+                    alt={c.name}
+                    fill
+                    sizes="(min-width: 768px) 96px, 80px"
+                    className="object-cover object-top"
+                  />
+                </div>
+
+                {/* Name */}
+                <h3 className="font-heading font-bold text-[17px] md:text-[19px] text-neutral-900 mb-1">
+                  {c.name}
+                </h3>
+
+                {/* Role */}
+                <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
+                  {c.role}
+                </p>
+
+                {/* Bio */}
+                <p className="text-[14px] md:text-[14.5px] font-body text-neutral-600 leading-[1.65] mb-5">
+                  {c.bio}
+                </p>
+
+                {/* Languages */}
+                <div className="mt-auto pt-4 w-full border-t border-neutral-100">
+                  <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-2.5">
+                    Speaks
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-1.5">
+                    {c.languages.map((lang) => (
+                      <span
+                        key={lang}
+                        className="inline-flex items-center rounded-full bg-neutral-50 border border-neutral-200 px-2.5 py-1 text-[11px] md:text-[12px] font-body font-medium text-neutral-600"
+                      >
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
