@@ -171,7 +171,7 @@ export default function ContactPage() {
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
       >
-        <SketchFlourish shape="swoop" color="yellow" opacity={0.08} strokeWidth={28} durationMs={2400} trigger="in-view" />
+        <SketchFlourish shape="swoop" color="yellow" opacity={0.04} strokeWidth={28} durationMs={2400} trigger="in-view" />
         <div aria-hidden="true" className="absolute -top-32 -right-24 h-[440px] w-[440px] rounded-full bg-vgu-red/30 blur-3xl" />
         <div aria-hidden="true" className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-vgu-yellow/10 blur-3xl" />
 
