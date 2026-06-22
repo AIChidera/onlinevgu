@@ -333,7 +333,7 @@ export default async function AboutPage() {
             {/* Right: values */}
 
             {/* Mobile — horizontal snap-scroll strip (breaks the wall) */}
-            <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {VALUES.map((v, i) => (
                 <div key={v.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
                   <div
@@ -542,7 +542,7 @@ export default async function AboutPage() {
               </p>
 
               {/* Mobile: snap-scroll strip */}
-              <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {CAMPUS_FEATURES.map((f) => (
                   <div key={f.title} className="snap-start flex-none w-[78vw] max-w-[290px]">
                     <div
@@ -816,7 +816,7 @@ export default async function AboutPage() {
           </div>
 
           {/* Alumni features — Mobile: snap-scroll, Desktop: 3-col grid */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_FEATURES.map((f, i) => (
               <div key={f.label} className="snap-start flex-none w-[72vw] max-w-[280px]">
                 <div
@@ -879,7 +879,7 @@ export default async function AboutPage() {
           </div>
 
           {/* Testimonial cards — Mobile: snap-scroll, Desktop: 3-col grid */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_TESTIMONIALS.map((t, i) => (
               <div key={t.name} className="snap-start flex-none w-[82vw] max-w-[320px]">
                 <div
