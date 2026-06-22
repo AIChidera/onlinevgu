@@ -24,6 +24,7 @@ import {
 } from '@tabler/icons-react'
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
 
 const TRUST_PILLS = [
@@ -170,10 +171,11 @@ export default function ContactPage() {
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
       >
+        <SketchFlourish shape="swoop" color="yellow" opacity={0.08} strokeWidth={28} durationMs={2400} trigger="in-view" />
         <div aria-hidden="true" className="absolute -top-32 -right-24 h-[440px] w-[440px] rounded-full bg-vgu-red/30 blur-3xl" />
         <div aria-hidden="true" className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-vgu-yellow/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
           <div className="max-w-[760px]">
 
             {/* Badge */}
@@ -608,8 +610,9 @@ export default function ContactPage() {
       </section>
 
       {/* ══ Counsellors ══ */}
-      <section className="bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
-        <div className="mx-auto max-w-[1280px]">
+      <section className="sketch-hover-group relative overflow-hidden bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+        <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={24} durationMs={2200} />
+        <div className="relative z-10 mx-auto max-w-[1280px]">
 
           {/* Section header */}
           <div className="text-center max-w-[640px] mx-auto mb-10 md:mb-14">
