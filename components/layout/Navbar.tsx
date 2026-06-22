@@ -76,7 +76,16 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex ml-auto">
+          <div className="hidden lg:flex items-center gap-6 ml-auto">
+            <Link
+              href="/contact"
+              className={[
+                'font-heading font-medium text-[15px] transition-colors duration-150',
+                pathname === '/contact' ? 'text-vgu-red' : 'text-neutral-600 hover:text-vgu-red',
+              ].join(' ')}
+            >
+              Contact
+            </Link>
             <a
               href="#counsellor"
               data-apply-trigger
@@ -151,6 +160,16 @@ export default function Navbar() {
                 </a>
               )
             })}
+            <Link
+              href="/contact"
+              className={[
+                'border-b border-neutral-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
+                pathname === '/contact' ? 'text-vgu-red' : 'text-neutral-900 hover:text-vgu-red',
+              ].join(' ')}
+              onClick={() => setMobileOpen(false)}
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* Drawer CTA */}
