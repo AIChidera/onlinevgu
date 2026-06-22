@@ -45,6 +45,11 @@ export default defineConfig({
 
             S.divider(),
 
+            // ── Blog ──────────────────────────────────────────────
+            S.documentTypeListItem('blogPost').title('Blog Posts'),
+
+            S.divider(),
+
             // ── About Page ────────────────────────────────────────
             S.documentTypeListItem('milestone').title('Milestones (About Page)'),
           ]),
