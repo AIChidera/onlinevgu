@@ -19,7 +19,6 @@ import {
   IconClipboardList,
   IconMessage,
   IconCertificate,
-  IconCheck,
   IconArrowRight,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -48,13 +47,6 @@ const STATS = [
   { value: '500+',    label: 'Hiring partners', detail: 'Across India and abroad',         Icon: IconBuilding   },
   { value: '25+',     label: 'Top recruiters',  detail: 'TCS, Deloitte, Amazon and more',  Icon: IconAward      },
   { value: '50,000+', label: 'Alumni network',  detail: 'Across 40+ countries',            Icon: IconUsers      },
-]
-
-const TRUST_POINTS = [
-  '95% Placement rate',
-  '500+ Hiring partners',
-  'AI-powered portal',
-  'Year-round support',
 ]
 
 const SUPPORT_SERVICES = [
@@ -215,7 +207,7 @@ export default function PlacementsPage() {
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[700px]">
             <p
-              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-5"
+              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-6"
               style={{ animationDelay: '0ms' }}
             >
               Placements &amp; Careers
@@ -230,26 +222,14 @@ export default function PlacementsPage() {
             </h1>
 
             <p
-              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[600px]"
+              className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[600px]"
               style={{ animationDelay: '140ms' }}
             >
               95% of our 2023 batch placed within six months. Every learner gets the same support - no asterisks.
             </p>
 
             <div
-              className="anim-load-left mt-7 flex flex-row flex-wrap gap-x-5 gap-y-2 sm:items-center"
-              style={{ animationDelay: '175ms' }}
-            >
-              {TRUST_POINTS.map(item => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <IconCheck size={14} stroke={3} className="flex-none text-vgu-yellow" />
-                  <span className="text-[13px] font-heading font-semibold text-white/90">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="anim-load-left mt-8 flex flex-col sm:flex-row gap-3"
+              className="anim-load-left mt-12 flex flex-col sm:flex-row gap-3"
               style={{ animationDelay: '210ms' }}
             >
               <a
@@ -617,9 +597,6 @@ export default function PlacementsPage() {
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-neutral-900 md:text-[40px] max-w-[660px] mx-auto">
               Where Online VGU degrees actually go.
             </h2>
-            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[540px] mx-auto lg:text-[17px]">
-              A snapshot of how three recent graduates moved from their starting point to where they are now.
-            </p>
           </div>
 
           {/* Mobile: snap-scroll strip */}

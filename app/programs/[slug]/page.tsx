@@ -892,7 +892,7 @@ export default async function ProgramPage({ params }: Props) {
           {/* Copy column */}
           <div className="max-w-[680px]">
             {/* Badges */}
-            <div className="anim-load-left flex flex-wrap items-center gap-2 mb-4" style={{ animationDelay: '0ms' }}>
+            <div className="anim-load-left flex flex-wrap items-center gap-2 mb-6" style={{ animationDelay: '0ms' }}>
               <span className="rounded-full bg-white/20 border border-white/25 px-3.5 py-1 text-[12px] font-heading font-bold uppercase tracking-[0.05em] text-white">
                 {prog.level === 'ug' ? 'Undergraduate' : 'Postgraduate'}
               </span>
@@ -910,12 +910,12 @@ export default async function ProgramPage({ params }: Props) {
             <p className="anim-load-left mt-2 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3 md:line-clamp-none" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3 md:line-clamp-none" style={{ animationDelay: '140ms' }}>
               {prog.description}
             </p>
 
             {/* Stat chips + next batch — one wrap row on mobile */}
-            <div className="anim-load-left mt-6 flex flex-row flex-wrap items-center gap-x-3 gap-y-2" style={{ animationDelay: '210ms' }}>
+            <div className="anim-load-left mt-8 flex flex-row flex-wrap items-center gap-x-3 gap-y-2" style={{ animationDelay: '210ms' }}>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-3.5 py-1.5 text-[13px] font-body font-semibold text-white">
                 <IconClock size={14} stroke={1.75} />
                 {prog.duration} · {prog.semesters} semesters
@@ -935,7 +935,7 @@ export default async function ProgramPage({ params }: Props) {
             </div>
 
             {/* CTAs */}
-            <div className="anim-load-left mt-8 flex flex-wrap gap-3" style={{ animationDelay: '310ms' }}>
+            <div className="anim-load-left mt-12 flex flex-wrap gap-3" style={{ animationDelay: '310ms' }}>
               <a
                 href="#counsellor"
                 data-apply-trigger

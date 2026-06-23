@@ -144,13 +144,16 @@ img {
   display: block;
 }
 
-a {
+/* :where() keeps specificity at 0 so any Tailwind text-* utility on an
+   anchor wins. Without this, a:hover overrides text-white on button-style
+   anchors and the label vanishes on hover. */
+:where(a) {
   color: var(--vgu-red);
   text-decoration: none;
   transition: color 150ms var(--ease);
 }
 
-a:hover {
+:where(a:hover) {
   color: var(--vgu-red-dark);
 }
 

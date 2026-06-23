@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { IconDownload, IconChevronDown, IconCheck } from '@tabler/icons-react'
+import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ProgramsGrid from './ProgramsGrid'
 import { getAllPrograms, getSiteSettings } from '@/lib/sanity'
@@ -22,13 +22,6 @@ export const metadata: Metadata = {
     url: 'https://onlinevgu.in/programs',
   },
 }
-
-const TRUST_POINTS = [
-  'UGC-Entitled',
-  'NAAC A+',
-  'No entrance exam',
-  '100% online',
-]
 
 export default async function ProgramsPage() {
   const [sanityPrograms, settings] = await Promise.all([
@@ -70,7 +63,7 @@ export default async function ProgramsPage() {
           {/* Copy column */}
           <div className="max-w-[680px]">
             <p
-              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
+              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
               style={{ animationDelay: '0ms' }}
             >
               UGC-Recognised · 100% Online
@@ -86,31 +79,15 @@ export default async function ProgramsPage() {
             </h1>
 
             <p
-              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-2 md:line-clamp-none"
+              className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
               style={{ animationDelay: '140ms' }}
             >
-              {count} online programs across {disciplineCount} disciplines: Management, IT, Data Science, Commerce, Arts, Science, and Media.
-              Earn a real, employer-recognised qualification from wherever you are.
+              {count} online programs across {disciplineCount} disciplines. Earn from wherever you are.
             </p>
-
-            {/* Inline trust bar */}
-            <div
-              className="anim-load-left mt-7 flex flex-row flex-wrap gap-x-5 gap-y-2 sm:items-center"
-              style={{ animationDelay: '175ms' }}
-            >
-              {TRUST_POINTS.map((item) => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <IconCheck size={14} stroke={3} className="flex-none text-vgu-yellow" />
-                  <span className="text-[13px] font-heading font-semibold text-white/90">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
 
             {/* CTAs */}
             <div
-              className="anim-load-left mt-8 flex flex-wrap gap-3"
+              className="anim-load-left mt-12 flex flex-wrap gap-3"
               style={{ animationDelay: '210ms' }}
             >
               <a

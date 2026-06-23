@@ -154,7 +154,7 @@ export default async function BlogPage() {
               Read enough? Let&apos;s help you choose your path.
             </h2>
             <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-8 lg:text-[17px]">
-              Talk to a counsellor. We&apos;ll help you pick the right program, walk you through the placement cell&apos;s support, and answer anything else on your mind.
+              Talk to a counsellor. We&apos;ll help you pick the right program and answer anything else on your mind.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

@@ -1,19 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import { IconCheck, IconArrowRight } from '@tabler/icons-react'
+import { IconArrowRight } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 
 // TODO: swap with a real VGU campus / student photo when the asset is ready
 const HERO_IMAGE_SRC =
   'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80&auto=format&fit=crop'
-
-const TRUST_POINTS = [
-  'UGC-Entitled',
-  'NAAC A+',
-  '50,000+ Learners',
-  '95% Placement',
-]
 
 export default function Hero() {
   return (
@@ -38,7 +31,7 @@ export default function Hero() {
         <div className="relative max-w-[680px]">
 
           <p
-            className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-5 text-vgu-yellow"
+            className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
             style={{ animationDelay: '0ms' }}
           >
             UGC-Entitled · Online Degrees
@@ -58,31 +51,15 @@ export default function Hero() {
           </h1>
 
           <p
-            className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
+            className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/70 md:text-white/85 max-w-[620px]"
             style={{ animationDelay: '140ms' }}
           >
             Built for working professionals. Study evenings and weekends. Finish in 2-3 years.
           </p>
 
-          {/* Inline trust-proof bar */}
-          <div
-            className="anim-load-left mt-7 grid grid-cols-2 gap-x-5 gap-y-2.5
-                       sm:flex sm:flex-wrap sm:items-center sm:gap-x-6"
-            style={{ animationDelay: '175ms' }}
-          >
-            {TRUST_POINTS.map((item) => (
-              <div key={item} className="flex items-center gap-1.5">
-                <IconCheck size={14} stroke={3} className="flex-none text-vgu-yellow" />
-                <span className="text-[13px] font-heading font-semibold text-white/90">
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-
           {/* CTAs: primary inverted (white on dark), secondary ghost. */}
           <div
-            className="anim-load-left relative mt-8 flex gap-2 md:gap-3"
+            className="anim-load-left relative mt-12 flex gap-2 md:gap-3"
             style={{ animationDelay: '210ms' }}
           >
             <a
@@ -100,7 +77,7 @@ export default function Hero() {
               href="#programs"
               className="inline-flex items-center justify-center border-2 border-white/30
                          bg-transparent text-white hover:bg-white/10 hover:border-white/50
-                         rounded-md px-4 py-3 md:px-6 md:py-3.5 text-[15px]
+                         rounded-full px-4 py-3 md:px-7 md:py-3.5 text-[15px]
                          font-heading font-semibold whitespace-nowrap transition-all duration-200"
             >
               Explore Programs

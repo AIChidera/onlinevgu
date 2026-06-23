@@ -128,8 +128,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             Online students are invited to VGU&apos;s signature campus event.
           </p>
           <p className="hidden md:block mt-4 text-[15px] lg:text-[17px] font-body leading-[1.7] text-white/60 max-w-[560px] mx-auto">
-            Online students are invited to VGU&apos;s signature campus events: Panache, movie nights,
-            hackathons, workshops, convocation. No extra cost.
+            Online students are invited to VGU&apos;s signature campus events. No extra cost.
           </p>
         </div>
       </div>
@@ -138,7 +137,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
 
       {/* ── MOBILE: native CSS snap scroll ── */}
       <div
-        className="md:hidden relative z-10 -mx-5 px-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
+        className="md:hidden relative z-10 px-5 scroll-pl-5 flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {activeCards.map((card) => (

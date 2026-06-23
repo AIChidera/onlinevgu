@@ -22,28 +22,24 @@ export default function TrustBar() {
           Accredited · Recognised · Ranked
         </p>
 
-        {/* Logo strip - flex-wrap, single line per item */}
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-7 sm:gap-y-4 md:gap-x-10 md:gap-y-5 lg:gap-x-14">
+        {/* Logo strip - icons only, grayscale until hover */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
           {LOGOS.map((logo, i) => (
             <div
               key={logo.name}
               data-animate="fade-up"
               style={{ animationDelay: `${i * 80}ms` }}
-              className="flex items-center gap-2 md:gap-3"
+              title={logo.name}
+              className="group flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[72px] lg:w-[72px] items-center justify-center flex-none transition-transform duration-300 hover:scale-110"
             >
-              <div className="flex h-9 w-9 md:h-12 md:w-12 lg:h-14 lg:w-14 items-center justify-center flex-none">
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={64}
-                  height={64}
-                  unoptimized
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
-              <p className="font-heading font-bold text-[12px] sm:text-[13px] md:text-[14px] text-neutral-900 whitespace-nowrap leading-tight">
-                {logo.name}
-              </p>
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={80}
+                height={80}
+                unoptimized
+                className="max-h-full max-w-full object-contain"
+              />
             </div>
           ))}
         </div>

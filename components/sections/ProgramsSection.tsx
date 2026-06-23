@@ -60,14 +60,11 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
         <div className="md:flex md:items-end md:justify-between md:gap-10 mb-10 md:mb-12">
           <div data-animate="fade-up" className="max-w-[640px]">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              UGC-Entitled Degrees
+              Our Programmes
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
               Choose your path. Build the career you want.
             </h2>
-            <p className="mt-4 text-[16px] lg:text-[17px] font-body leading-[1.7] text-neutral-600">
-              Industry-aligned degrees delivered fully online, recognised by employers across India and beyond.
-            </p>
           </div>
 
           {/* Filter pills */}
@@ -103,7 +100,7 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
 
         {/* ── MOBILE: snap-scroll ── */}
         <div
-          className="sm:hidden -mx-5 px-5 flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-none pb-4"
+          className="sm:hidden -mx-5 px-5 scroll-pl-5 flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-none pb-4"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >
           {visible.map((p) => (

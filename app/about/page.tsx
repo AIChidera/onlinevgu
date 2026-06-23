@@ -6,7 +6,6 @@ import {
   IconUsers,
   IconGlobe,
   IconBuildingBank,
-  IconCheck,
   IconSchool,
   IconCertificate,
   IconTrendingUp,
@@ -40,13 +39,6 @@ const STATS = [
   { value: 'NAAC A+',             label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
   { value: '50,000+',             label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
   { value: '40+',                 label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
-]
-
-const TRUST_POINTS = [
-  'NAAC A+ Accredited',
-  'UGC Distance Education Bureau',
-  'No entrance exam',
-  'Degrees valid globally',
 ]
 
 const VALUES = [
@@ -198,7 +190,7 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[680px]">
             <p
-              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-5"
+              className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-6"
               style={{ animationDelay: '0ms' }}
             >
               About Vivekananda Global University
@@ -213,7 +205,7 @@ export default async function AboutPage() {
             </h1>
 
             <p
-              className="anim-load-left mt-5 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[580px]"
+              className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[580px]"
               style={{ animationDelay: '140ms' }}
             >
               Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
@@ -221,19 +213,7 @@ export default async function AboutPage() {
             </p>
 
             <div
-              className="anim-load-left mt-7 flex flex-row flex-wrap gap-x-5 gap-y-2 sm:items-center"
-              style={{ animationDelay: '175ms' }}
-            >
-              {TRUST_POINTS.map(item => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <IconCheck size={14} stroke={3} className="flex-none text-vgu-yellow" />
-                  <span className="text-[13px] font-heading font-semibold text-white/90">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="anim-load-left mt-8 flex flex-col sm:flex-row gap-3"
+              className="anim-load-left mt-12 flex flex-col sm:flex-row gap-3"
               style={{ animationDelay: '210ms' }}
             >
               <a
@@ -324,9 +304,8 @@ export default async function AboutPage() {
 
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 lg:text-[17px]">
                 VGU Online exists to make a NAAC A+ degree available to working professionals,
-                rural students, and career-changers - wherever they are. The degree you earn
-                online is the same degree you would earn on campus: same certificate, same
-                legal standing, same employer recognition.
+                rural students, and career-changers - wherever they are. The certificate, legal
+                standing, and employer recognition are identical to the on-campus version.
               </p>
             </div>
 
@@ -413,9 +392,6 @@ export default async function AboutPage() {
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
               Accreditations &amp; Recognition
             </h2>
-            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
-              Credentials recognised by Indian and international bodies - giving your degree global credibility.
-            </p>
           </div>
 
           {/* Mobile — 2×3 compact trust-badge grid */}
