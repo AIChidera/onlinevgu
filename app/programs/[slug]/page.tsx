@@ -910,7 +910,7 @@ export default async function ProgramPage({ params }: Props) {
             <p className="anim-load-left mt-2 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3 md:line-clamp-none" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3" style={{ animationDelay: '140ms' }}>
               {prog.description}
             </p>
 
@@ -968,6 +968,17 @@ export default async function ProgramPage({ params }: Props) {
       {/* ══ Main content ══ */}
       <section className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
         <div className="mx-auto max-w-[1280px]">
+
+          {/* Back to Programs */}
+          <div className="mb-10">
+            <Link
+              href="/programs"
+              className="inline-flex items-center gap-2 text-[14px] font-heading font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150"
+            >
+              <IconChevronRight size={14} className="rotate-180" />
+              All Programs
+            </Link>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 items-start">
 
