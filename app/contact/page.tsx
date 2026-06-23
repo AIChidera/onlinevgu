@@ -274,12 +274,9 @@ export default function ContactPage() {
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Send us a message
             </p>
-            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
               Tell us how we can help
             </h2>
-            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-              Drop us a message and a counsellor will reach out within 24 hours.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 lg:gap-10 items-start">
@@ -499,12 +496,9 @@ export default function ContactPage() {
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Find the right team
             </p>
-            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
               Who would you like to reach?
             </h2>
-            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-              Pick the team that matches your enquiry - we&apos;ll route it to a specialist who can help.
-            </p>
           </div>
 
           {/* Grid */}
@@ -560,12 +554,9 @@ export default function ContactPage() {
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Before you contact us
             </p>
-            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
               Quick answers
             </h2>
-            <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto">
-              We reply quickly - but you might find your answer right here.
-            </p>
           </div>
 
           {/* FAQ list */}
@@ -625,14 +616,11 @@ export default function ContactPage() {
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
               Meet your counsellors
             </p>
-            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
+            <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
               Real people you&apos;ll{' '}
               <br className="sm:hidden" />
               actually talk to
             </h2>
-            <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-              Our counsellors are part of VGU&apos;s admissions team. Here&apos;s who picks up when you reach out.
-            </p>
           </div>
 
           {/* Counsellor cards */}
