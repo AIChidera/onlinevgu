@@ -23,7 +23,7 @@ export default function TrustBar() {
         </p>
 
         {/* Logo strip - icons only, grayscale until hover */}
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
           {LOGOS.map((logo, i) => (
             <div
               key={logo.name}

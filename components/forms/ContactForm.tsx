@@ -78,9 +78,11 @@ export default function ContactForm() {
         : 'border-neutral-200 focus:border-vgu-red focus:ring-vgu-red/10',
     ].join(' ')
 
-  const Label = ({ children, required }: { children: React.ReactNode; required?: boolean }) => (
-    <label className="text-[13px] font-heading font-semibold text-neutral-700">
-      {children}{required && <span className="text-vgu-red"> *</span>}
+  const Label = ({ children, required, htmlFor }: { children: React.ReactNode; required?: boolean; htmlFor: string }) => (
+    <label htmlFor={htmlFor} className="text-[13px] font-heading font-semibold text-neutral-700">
+      {children}
+      {required && <span className="text-vgu-red" aria-hidden="true"> *</span>}
+      {required && <span className="sr-only"> (required)</span>}
     </label>
   )
 
@@ -90,51 +92,67 @@ export default function ContactForm() {
       {/* Name + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <Label required>Full name</Label>
+          <Label required htmlFor="cf-name">Full name</Label>
           <input
+            id="cf-name"
             {...register('name')}
             type="text"
             placeholder="Rahul Sharma"
             autoComplete="name"
+            aria-required="true"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'cf-name-error' : undefined}
             className={inputClass(!!errors.name)}
           />
-          {errors.name && <p className="text-[12px] text-red-500">{errors.name.message}</p>}
+          {errors.name && <p id="cf-name-error" role="alert" className="text-[12px] text-red-500">{errors.name.message}</p>}
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <Label required>Email address</Label>
+          <Label required htmlFor="cf-email">Email address</Label>
           <input
+            id="cf-email"
             {...register('email')}
             type="email"
             placeholder="rahul@example.com"
             autoComplete="email"
+            aria-required="true"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'cf-email-error' : undefined}
             className={inputClass(!!errors.email)}
           />
-          {errors.email && <p className="text-[12px] text-red-500">{errors.email.message}</p>}
+          {errors.email && <p id="cf-email-error" role="alert" className="text-[12px] text-red-500">{errors.email.message}</p>}
         </div>
       </div>
 
       {/* Phone */}
       <div className="flex flex-col gap-1.5">
-        <Label required>Mobile number</Label>
+        <Label required htmlFor="cf-phone">Mobile number</Label>
         <PhoneField
+          id="cf-phone"
           placeholder="98765 43210"
           error={errors.phone?.message}
           required
           dialCode={dialCode}
           onDialChange={setDialCode}
+          aria-required="true"
+          aria-invalid={!!errors.phone}
+          aria-describedby={errors.phone ? 'cf-phone-error' : undefined}
           {...register('phone')}
         />
-        {errors.phone && <p className="text-[12px] text-red-500">{errors.phone.message}</p>}
+        {errors.phone && <p id="cf-phone-error" role="alert" className="text-[12px] text-red-500">{errors.phone.message}</p>}
       </div>
 
       {/* Subject (select) */}
       <div className="flex flex-col gap-1.5">
-        <Label required>What is this about?</Label>
+        <Label required htmlFor="cf-subject">What is this about?</Label>
         <div className="relative">
           <select
+            id="cf-subject"
             {...register('subject')}
             defaultValue=""
+            aria-required="true"
+            aria-invalid={!!errors.subject}
+            aria-describedby={errors.subject ? 'cf-subject-error' : undefined}
             className={[
               inputClass(!!errors.subject),
               'appearance-none pr-10 cursor-pointer',
@@ -148,26 +166,31 @@ export default function ContactForm() {
           <IconChevronDown
             size={18}
             stroke={2}
+            aria-hidden="true"
             className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
           />
         </div>
-        {errors.subject && <p className="text-[12px] text-red-500">{errors.subject.message}</p>}
+        {errors.subject && <p id="cf-subject-error" role="alert" className="text-[12px] text-red-500">{errors.subject.message}</p>}
       </div>
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <Label required>Your message</Label>
+        <Label required htmlFor="cf-message">Your message</Label>
         <textarea
+          id="cf-message"
           {...register('message')}
           rows={5}
           placeholder="Tell us how we can help…"
+          aria-required="true"
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'cf-message-error' : undefined}
           className={[inputClass(!!errors.message), 'resize-none'].join(' ')}
         />
-        {errors.message && <p className="text-[12px] text-red-500">{errors.message.message}</p>}
+        {errors.message && <p id="cf-message-error" role="alert" className="text-[12px] text-red-500">{errors.message.message}</p>}
       </div>
 
       {serverError && (
-        <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[14px] font-body text-red-600">
+        <p role="alert" className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[14px] font-body text-red-600">
           {serverError}
         </p>
       )}

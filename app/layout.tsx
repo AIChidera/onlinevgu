@@ -87,8 +87,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Analytics />
         <HashScroller />
         <CookieConsent />
+        {/* Skip link — visually hidden until focused by keyboard users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-vgu-red focus:px-4 focus:py-2 focus:text-white focus:font-heading focus:font-semibold focus:text-[15px] focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <SiteNav />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <ScrollToTop />
         <SiteFooter whatsappNumber={settings?.whatsappNumber}>
           <FooterCTA />

@@ -33,6 +33,7 @@ export default function ApplyModal() {
   const [submitError, setSubmitError] = useState('')
   const [programList, setProgramList] = useState<{ name: string; level: string }[]>([])
   const triggerRef = useRef<HTMLElement | null>(null)
+  const dialogRef  = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     fetch('/api/programs')
@@ -76,8 +77,13 @@ export default function ApplyModal() {
   }, [])
 
   useEffect(() => {
-    if (!open) {
-      triggerRef.current?.blur()
+    if (open) {
+      // Move focus into the dialog so keyboard/AT users are oriented
+      const id = requestAnimationFrame(() => dialogRef.current?.focus())
+      return () => cancelAnimationFrame(id)
+    } else {
+      // Return focus to the element that opened the modal
+      triggerRef.current?.focus()
       triggerRef.current = null
     }
   }, [open])
@@ -161,10 +167,12 @@ export default function ApplyModal() {
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
 
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Start Your Application"
-        className="relative z-10 w-full max-w-[560px] rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[95dvh] sm:max-h-[90vh]"
+        tabIndex={-1}
+        className="relative z-10 w-full max-w-[560px] rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden max-h-[95dvh] sm:max-h-[90vh] outline-none"
         onClick={e => e.stopPropagation()}
       >
         {/* ══ Compact red header ══ */}

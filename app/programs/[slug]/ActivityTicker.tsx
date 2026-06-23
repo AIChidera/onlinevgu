@@ -87,7 +87,7 @@ export default function ActivityTicker({ slug, name }: { slug: string; name: str
   const track: Msg[] = [...messages, ...messages]
 
   return (
-    <div className="bg-neutral-900 border-b border-white/[0.06] overflow-hidden">
+    <div aria-hidden="true" className="bg-neutral-900 border-b border-white/[0.06] overflow-hidden">
       <style>{`
         @keyframes vgu-ticker {
           from { transform: translateX(0); }

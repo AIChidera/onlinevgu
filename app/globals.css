@@ -33,6 +33,17 @@
   .sr-ready       { opacity: 1 !important; transform: none !important; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  /* Hero page-load entrance animations */
+  .anim-load-left  { animation: none !important; }
+  /* Tab-switch fade */
+  .animate-fade-in { animation: none !important; }
+  /* Platform video Ken Burns pan */
+  .video-pan       { animation: none !important; }
+  /* Activity ticker infinite scroll */
+  .vgu-ticker-track { animation: none !important; }
+}
+
 /* ── Keep keyframe definitions used by anim-load-left and animate-fade-in ── */
 @keyframes vguEnterUp {
   from { opacity: 0; transform: translateY(48px); }
