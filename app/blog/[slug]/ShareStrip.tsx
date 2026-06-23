@@ -6,6 +6,7 @@ import {
   IconBrandLinkedin,
   IconBrandFacebook,
   IconBrandWhatsapp,
+  IconBrandInstagram,
   IconLink,
   IconCheck,
 } from '@tabler/icons-react'
@@ -18,6 +19,7 @@ interface Props {
 
 export default function ShareStrip({ url, title, hasDivider }: Props) {
   const [copied, setCopied] = useState(false)
+  const [igShared, setIgShared] = useState(false)
 
   const encodedUrl   = encodeURIComponent(url)
   const encodedTitle = encodeURIComponent(title)
@@ -79,6 +81,18 @@ export default function ShareStrip({ url, title, hasDivider }: Props) {
     } catch {}
   }, [url])
 
+  const handleInstagram = useCallback(async () => {
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try { await navigator.share({ title, url }); return } catch {}
+    }
+    // Desktop fallback: copy link
+    if (navigator.clipboard?.writeText) {
+      try { await navigator.clipboard.writeText(url) } catch {}
+    }
+    setIgShared(true)
+    setTimeout(() => setIgShared(false), 2000)
+  }, [url, title])
+
   return (
     <div className={hasDivider ? 'mt-8 pt-8 border-t border-neutral-100' : ''}>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -103,6 +117,15 @@ export default function ShareStrip({ url, title, hasDivider }: Props) {
               <Icon size={18} stroke={1.75} className="transition-transform duration-200 group-hover:scale-110" />
             </a>
           ))}
+          <button
+            type="button"
+            onClick={handleInstagram}
+            aria-label={igShared ? 'Link copied - paste in Instagram' : 'Share on Instagram'}
+            title="Share on Instagram"
+            className="group inline-flex items-center justify-center w-11 h-11 rounded-full border border-neutral-200 bg-white text-neutral-600 hover:text-white hover:-translate-y-0.5 hover:bg-[#E1306C] hover:border-[#E1306C] hover:shadow-[0_8px_20px_rgba(225,48,108,0.35)] transition-all duration-200"
+          >
+            <IconBrandInstagram size={18} stroke={1.75} className="transition-transform duration-200 group-hover:scale-110" />
+          </button>
           <button
             type="button"
             onClick={handleCopy}
