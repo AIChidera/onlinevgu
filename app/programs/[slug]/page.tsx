@@ -969,21 +969,10 @@ export default async function ProgramPage({ params }: Props) {
       <section className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
         <div className="mx-auto max-w-[1280px]">
 
-          {/* Back to Programs */}
-          <div className="mb-10">
-            <Link
-              href="/programs"
-              className="inline-flex items-center gap-2 text-[14px] font-heading font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150"
-            >
-              <IconChevronRight size={14} className="rotate-180" />
-              All Programs
-            </Link>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 items-start">
 
             {/* ── Left ── */}
-            <div className="flex flex-col min-w-0 divide-y divide-neutral-100 [&>*]:pt-14 [&>*:first-child]:pt-0">
+            <div className="flex flex-col min-w-0 divide-y divide-neutral-100 [&>*]:pt-12 [&>*:first-child]:pt-0">
 
               {/* Highlights */}
               <div>
@@ -1163,22 +1152,18 @@ export default async function ProgramPage({ params }: Props) {
           <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Explore more
           </p>
-          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-5 lg:text-[32px]">
-            Not sure this is the right program?
+          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+            Find the program that fits you.
           </h2>
 
           {/* Context chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-5">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
             {[`${totalProgramCount} programs`, '7 disciplines', 'No entrance exam', '100% online'].map(chip => (
               <span key={chip} className="rounded-full bg-white border border-neutral-200 px-3.5 py-1.5 text-[12px] font-heading font-semibold text-neutral-600 shadow-sm">
                 {chip}
               </span>
             ))}
           </div>
-
-          <p className="text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[440px] mx-auto mb-8">
-            Browse all {totalProgramCount} UG and PG programs and find the one that fits your goals and background.
-          </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
@@ -1202,10 +1187,10 @@ export default async function ProgramPage({ params }: Props) {
 
       {/* ══ Mobile sticky CTA ══ */}
       <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-neutral-200 shadow-[0_-6px_20px_rgba(17,24,39,0.08)] px-4 pt-2.5"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-neutral-200 shadow-[0_-6px_20px_rgba(17,24,39,0.08)] px-4 pt-3"
         style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
       >
-        <p className="text-[11px] font-body text-neutral-500 text-center mb-2.5">
+        <p className="text-[11px] font-body text-neutral-500 text-center mb-2">
           {prog.feePerYear}{prog.emi ? ` · EMI from ${prog.emi}` : ''}
         </p>
         <div className="flex items-center gap-3">
