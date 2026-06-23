@@ -105,7 +105,7 @@ export default async function ProgramsPage() {
                 data-brochure-trigger
                 className="inline-flex items-center justify-center gap-1.5 border-2 border-white/30
                            bg-transparent text-white hover:bg-white/10 hover:border-white/50
-                           rounded-md px-6 py-3.5 text-[15px]
+                           rounded-full px-6 py-3.5 text-[15px]
                            font-heading font-semibold whitespace-nowrap transition-all duration-200"
               >
                 Download Brochure

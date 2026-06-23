@@ -74,7 +74,7 @@ export default async function BlogPage() {
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-[30px] py-3 transition-all duration-200"
+                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-8 py-3.5 transition-all duration-200"
               >
                 Explore Programs
               </Link>
@@ -167,7 +167,7 @@ export default async function BlogPage() {
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-[30px] py-3 transition-all duration-200"
+                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-8 py-3.5 transition-all duration-200"
               >
                 Browse Programs
               </Link>

@@ -613,7 +613,7 @@ export default async function BlogPostPage({ params }: Props) {
             </a>
             <a
               href="/programs"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] rounded-full px-8 py-3.5 transition-all duration-200"
             >
               Browse Programs
             </a>

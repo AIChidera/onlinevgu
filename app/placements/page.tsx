@@ -242,7 +242,7 @@ export default function PlacementsPage() {
               </a>
               <a
                 href="/programs"
-                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-md px-6 py-3.5 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-full px-6 py-3.5 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200"
               >
                 Browse Programs
               </a>
@@ -692,7 +692,7 @@ export default function PlacementsPage() {
             </a>
             <a
               href="/programs"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-[30px] py-3 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] whitespace-nowrap rounded-full px-8 py-3.5 transition-all duration-200"
             >
               Browse Programs
             </a>

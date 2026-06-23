@@ -950,7 +950,7 @@ export default async function ProgramPage({ params }: Props) {
                 href="#"
                 data-brochure-trigger
                 data-program={prog.name}
-                className="inline-flex items-center gap-1.5 rounded-md border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white font-heading font-semibold text-[15px] px-6 py-3.5 transition-all duration-200"
+                className="inline-flex items-center gap-1.5 rounded-full border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white font-heading font-semibold text-[15px] px-6 py-3.5 transition-all duration-200"
               >
                 <IconDownload size={14} />
                 Download Brochure
