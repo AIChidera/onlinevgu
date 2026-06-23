@@ -179,7 +179,7 @@ export default function ContactPage() {
           <div className="max-w-[760px]">
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 mb-5 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
+            <div className="inline-flex items-center gap-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
               <IconHeadset size={14} className="text-vgu-yellow" stroke={2} />
               <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
                 Talk to a counsellor
@@ -187,7 +187,7 @@ export default function ContactPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-5">
+            <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-6">
               Real people.{' '}
               <span className="text-vgu-yellow">Honest answers.</span>
             </h1>
@@ -199,7 +199,7 @@ export default function ContactPage() {
             </p>
 
             {/* Trust pill row */}
-            <div className="mt-7 md:mt-8 flex flex-wrap items-center gap-2 md:gap-2.5">
+            <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-2 md:gap-2.5">
               {TRUST_PILLS.map((t) => (
                 <div
                   key={t.label}
@@ -597,7 +597,7 @@ export default function ContactPage() {
                   </span>
                 </summary>
                 <div className="px-5 pb-5 md:px-6 md:pb-6">
-                  <p className="text-[15px] md:text-[16px] font-body text-neutral-600 leading-[1.7]">
+                  <p className="text-[16px] font-body text-neutral-600 leading-[1.7]">
                     {item.a}
                   </p>
                 </div>
@@ -672,7 +672,7 @@ export default function ContactPage() {
                 </p>
 
                 {/* Bio */}
-                <p className="text-[14px] md:text-[14.5px] font-body text-neutral-600 leading-[1.65] mb-5">
+                <p className="text-[16px] font-body text-neutral-600 leading-[1.65] mb-5">
                   {c.bio}
                 </p>
 
