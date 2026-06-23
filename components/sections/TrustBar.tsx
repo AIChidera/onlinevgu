@@ -23,14 +23,14 @@ export default function TrustBar() {
         </p>
 
         {/* Logo strip - icons only, grayscale until hover */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-4 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
           {LOGOS.map((logo, i) => (
             <div
               key={logo.name}
               data-animate="fade-up"
               style={{ animationDelay: `${i * 80}ms` }}
               title={logo.name}
-              className="group flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[72px] lg:w-[72px] items-center justify-center flex-none transition-transform duration-300 hover:scale-110"
+              className="group flex h-10 w-10 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[72px] lg:w-[72px] items-center justify-center flex-none transition-transform duration-300 hover:scale-110"
             >
               <Image
                 src={logo.src}
