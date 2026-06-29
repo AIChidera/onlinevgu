@@ -30,7 +30,7 @@ export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] 
   if (!safe.length) return null
 
   return (
-    <div className="divide-y divide-neutral-100">
+    <div className="divide-y divide-neutral-200">
       {safe.map((r, ri) => {
         const Icon = getRoleIcon(r.role)
         return (
@@ -38,20 +38,20 @@ export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] 
             key={r.role}
             data-animate="fade-up"
             style={{ animationDelay: `${ri * 40}ms` }}
-            className="flex gap-4 py-4 first:pt-0 last:pb-0"
+            className="flex gap-4 py-5 first:pt-0 last:pb-0"
           >
-            <div className="flex-none pt-0.5">
-              <Icon size={18} stroke={1.75} className="text-vgu-red" />
+            <div className="flex-none mt-0.5">
+              <Icon size={20} stroke={1.75} className="text-vgu-red" />
             </div>
             <div className="flex-1 min-w-0 flex items-start gap-4">
               <div className="flex-1 min-w-0">
-                <p className="font-heading font-bold text-[16px] text-neutral-900 leading-snug mb-1">{r.role}</p>
+                <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 leading-snug mb-1">{r.role}</p>
                 {r.description && (
-                  <p className="font-body text-[14px] leading-[1.65] text-neutral-500">{r.description}</p>
+                  <p className="font-body text-[14px] leading-[1.65] text-neutral-600">{r.description}</p>
                 )}
               </div>
               {r.range && (
-                <p className="font-heading font-black text-[15px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-snug pt-0.5">{r.range}</p>
+                <p className="font-heading font-black text-[20px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none pt-1">{r.range}</p>
               )}
             </div>
           </div>

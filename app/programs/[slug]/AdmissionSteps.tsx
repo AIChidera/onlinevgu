@@ -15,7 +15,7 @@ const STEPS = [
   { num: '04', Icon: IconDeviceLaptop, title: 'Start Learning',   desc: 'Access the LMS immediately. Your first live session starts within 7 days.', time: '7 days', ...PALETTE[0] },
 ]
 
-export default function AdmissionSteps() {
+export default function AdmissionSteps({ programName }: { programName: string }) {
   return (
     <section className="group relative bg-neutral-900 border-t border-white/[0.06] py-16 px-5 md:px-8 lg:px-12 overflow-hidden">
       {/* Dot texture */}
@@ -31,7 +31,7 @@ export default function AdmissionSteps() {
           <SketchSparkle color="yellow" size={20} trigger="in-view" delayMs={400} rotateDeg={15} className="-top-1 right-0 lg:right-8" />
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">Admissions</p>
           <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-white lg:text-[32px]">
-            From form to first class, in under 30 minutes.
+            {programName} Admission Process
           </h2>
           <p className="mt-3 text-[16px] font-body text-white/55 max-w-[440px] mx-auto">
             No campus visit, no entrance exam. Everything happens online.

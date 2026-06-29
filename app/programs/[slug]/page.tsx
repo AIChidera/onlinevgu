@@ -975,11 +975,11 @@ export default async function ProgramPage({ params }: Props) {
       )}
 
       {/* ══ Main content ══ */}
-      <section className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
+      <section className="bg-neutral-50 pt-8 pb-12 px-5 md:px-8 lg:px-12 md:pt-10 md:pb-16">
         <div className="mx-auto max-w-[1280px]">
 
           {/* Back to Programs */}
-          <div className="mb-10">
+          <div className="mb-6">
             <Link
               href="/programs"
               className="inline-flex items-center gap-2 text-[14px] font-heading font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150"

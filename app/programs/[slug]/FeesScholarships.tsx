@@ -12,7 +12,7 @@ interface Props {
 
 export default function FeesScholarships({ totalFee, duration, feeBreakdown, scholarshipTiers }: Props) {
   return (
-    <section className="bg-white py-16 lg:py-20 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
+    <section className="bg-white py-12 lg:py-16 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
       <div className="mx-auto max-w-[1280px]">
 
         <div data-animate="fade-up" className="mb-10 max-w-[640px]">

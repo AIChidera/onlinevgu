@@ -18,7 +18,7 @@ export default function ProgramOverview({ programName, programFullName, overview
   ]
 
   return (
-    <section className="bg-white py-16 lg:py-20 px-5 md:px-8 lg:px-12 border-b border-neutral-100">
+    <section className="bg-white pt-14 pb-10 lg:pt-16 lg:pb-12 px-5 md:px-8 lg:px-12 border-b border-neutral-100">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-start">
 
@@ -45,18 +45,18 @@ export default function ProgramOverview({ programName, programFullName, overview
                 <p className="font-heading font-bold text-[17px] text-neutral-900 mb-4">
                   Who is this for?
                 </p>
-                <div className="space-y-5">
+                <div className="divide-y divide-neutral-200">
                   {whoItsFor.map((p, i) => (
                     <div
                       key={p.persona}
                       data-animate="fade-up"
                       style={{ animationDelay: `${i * 60}ms` }}
-                      className="flex gap-4"
+                      className="flex gap-4 py-5 first:pt-0 last:pb-0"
                     >
-                      <div className="flex-none w-0.5 bg-vgu-red rounded-full" />
+                      <div className="flex-none w-0.5 bg-vgu-red rounded-full self-stretch" />
                       <div className="min-w-0">
-                        <p className="font-heading font-semibold text-[16px] text-neutral-900 mb-1">{p.persona}</p>
-                        <p className="text-[15px] font-body leading-[1.65] text-neutral-500">{p.description}</p>
+                        <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 mb-1">{p.persona}</p>
+                        <p className="text-[15px] font-body leading-[1.7] text-neutral-600">{p.description}</p>
                       </div>
                     </div>
                   ))}
