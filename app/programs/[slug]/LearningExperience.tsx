@@ -56,10 +56,10 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
               className="md:px-8 md:first:pl-0 md:last:pr-0"
             >
               <p.Icon size={22} stroke={1.75} className="text-vgu-red mb-3" />
-              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-500 mb-1">
                 {p.title}
               </p>
-              <p className="font-heading font-bold text-[19px] tracking-[-0.3px] text-neutral-900 mb-1.5 leading-snug">
+              <p className="font-heading font-bold text-[21px] tracking-[-0.4px] text-neutral-900 mb-1.5 leading-snug">
                 {p.lead}
               </p>
               <p className="text-[15px] font-body leading-[1.65] text-neutral-600">{p.detail}</p>
@@ -83,8 +83,8 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
                   className="grid grid-cols-[110px_1fr_auto] items-center gap-4 px-6 py-4"
                 >
                   <p className="font-heading font-bold text-[13px] text-vgu-red uppercase tracking-[0.06em]">{w.day}</p>
-                  <p className="text-[16px] font-body text-neutral-800 leading-snug">{w.activity}</p>
-                  <p className="font-heading font-semibold text-[14px] text-neutral-500 tabular-nums whitespace-nowrap">{w.hours}</p>
+                  <p className="text-[16px] font-body text-neutral-900 leading-snug">{w.activity}</p>
+                  <p className="font-heading font-bold text-[14px] text-neutral-700 tabular-nums whitespace-nowrap">{w.hours}</p>
                 </div>
               ))}
             </div>
