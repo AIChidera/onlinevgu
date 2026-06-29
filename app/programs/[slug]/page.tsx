@@ -16,21 +16,35 @@ import {
   IconShieldCheck,
   IconArrowRight,
   IconHeadset,
+  IconCheck,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import type { CurriculumYear } from './CurriculumPreview'
-import ProgramHighlights from './ProgramHighlights'
+import ProgramOverview from './ProgramOverview'
+import KeyOutcomes from './KeyOutcomes'
 import CurriculumPreview from './CurriculumPreview'
 import HirerStrip from './HirerStrip'
 import SpecialisationCards from './SpecialisationCards'
 import CareerOutcomes from './CareerOutcomes'
-
+import CareerServices from './CareerServices'
+import LearningExperience from './LearningExperience'
+import FeesScholarships from './FeesScholarships'
+import RequiredDocuments from './RequiredDocuments'
 import FacultySection from './FacultySection'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
-import SketchCircle from '@/components/ui/sketch/SketchCircle'
+import {
+  PROGRAM_EXTRAS,
+  LIVE_SCHEDULE,
+  SAMPLE_WEEK,
+  LMS_PLATFORM,
+  MENTOR_CADENCE,
+  COHORT_SIZE,
+  REQUIRED_DOCUMENTS,
+  SCHOLARSHIP_TIERS,
+  CAREER_SERVICES,
+} from './programExtras'
 
 // Below-fold client components - lazy loaded to reduce initial JS bundle
-const ActivityTicker      = dynamic(() => import('./ActivityTicker'),      { ssr: false })
 const PlacementStatsStrip = dynamic(() => import('./PlacementStatsStrip'), { ssr: false })
 const AdmissionSteps      = dynamic(() => import('./AdmissionSteps'),      { ssr: false })
 const CertificatePreview  = dynamic(() => import('./CertificatePreview'),  { ssr: false })
@@ -59,22 +73,6 @@ interface ProgramDetail {
   topHirers?:      string[]
   curriculum?:     CurriculumYear[]
   heroImage?:      string  // e.g. '/images/programs/mba-hero.jpg'
-}
-
-const SEATS_FILLED: Record<string, number> = {
-  'mba':    89,
-  'mba-if': 86,
-  'mca':    81,
-  'bca':    78,
-  'bba':    74,
-  'majmc':  70,
-  'ma':     67,
-  'msc':    64,
-  'ba':     61,
-}
-
-function getSeatsFilled(slug: string): number {
-  return SEATS_FILLED[slug] ?? 65
 }
 
 // Placeholder hero images per program - replace with real assets when ready.
@@ -805,9 +803,12 @@ export default async function ProgramPage({ params }: Props) {
   const topHirers       = fallback(prog.topHirers,       hardcoded?.topHirers)
 
   const totalProgramCount = allSanityProgs.length > 0 ? allSanityProgs.length : PROGRAMS.length
-  const seatsFilled       = getSeatsFilled(prog.slug)
   const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
+
+  // Rich per-program content (overview, key outcomes, dept stats, fee breakdown).
+  // Missing slug is acceptable - sections that depend on extras are gated below.
+  const extras = PROGRAM_EXTRAS[prog.slug]
 
   // Related programs - try Sanity data first, fall back to hardcoded map
   const relatedPrograms = (RELATED[prog.slug] ?? []).flatMap(s => {
@@ -961,9 +962,17 @@ export default async function ProgramPage({ params }: Props) {
         </div>
       </section>
 
-      <ActivityTicker slug={prog.slug} name={prog.name} />
-
       <PlacementStatsStrip slug={prog.slug} />
+
+      {extras && (
+        <ProgramOverview
+          programName={prog.name}
+          programFullName={prog.fullName}
+          overview={extras.overview}
+          whoItsFor={extras.whoItsFor}
+          deptAtGlance={extras.deptAtGlance}
+        />
+      )}
 
       {/* ══ Main content ══ */}
       <section className="bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 md:py-16">
@@ -985,18 +994,15 @@ export default async function ProgramPage({ params }: Props) {
             {/* ── Left ── */}
             <div className="flex flex-col min-w-0 divide-y divide-neutral-100 [&>*]:pt-12 [&>*:first-child]:pt-0">
 
-              {/* Highlights */}
+              {/* Key Outcomes */}
               <div>
                 <div data-animate="fade-up">
-                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">What you get</p>
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">What you&apos;ll be able to do</p>
                   <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
-                    <span className="relative inline-block">
-                      Program Highlights
-                      <SketchCircle color="red" trigger="in-view" />
-                    </span>
+                    Key Outcomes
                   </h2>
                 </div>
-                <ProgramHighlights highlights={highlights} />
+                <KeyOutcomes outcomes={extras?.keyOutcomes ?? highlights} />
               </div>
 
               {/* Curriculum */}
@@ -1076,54 +1082,21 @@ export default async function ProgramPage({ params }: Props) {
               {/* Career outcomes */}
               <div>
                 <div data-animate="fade-up">
-                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">After graduation</p>
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Placement records</p>
                   <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
-                    Career Outcomes
+                    Career Opportunities after {prog.name}
                   </h2>
                 </div>
-                <CareerOutcomes roles={careerRoles} />
+                <CareerOutcomes roles={extras?.salariesByRole ?? careerRoles} />
                 {topHirers.length > 0 && (
-                  <div className="mt-6">
+                  <div className="mt-8">
                     <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-4">Top hirers</p>
                     <HirerStrip hirers={topHirers} />
                   </div>
                 )}
-              </div>
-
-              {/* Eligibility */}
-              <div>
-                <div data-animate="fade-up">
-                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Entry criteria</p>
-                  <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
-                    Eligibility
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {eligibility.map((e, ei) => {
-                    // Brand-only 3-gradient cycle.
-                    const GRADS = [
-                      'linear-gradient(135deg,#C04036,#821a12)',  // red
-                      'linear-gradient(135deg,#FFA412,#C04036)',  // yellow → red
-                      'linear-gradient(135deg,#821a12,#3b0d09)',  // deep red
-                    ]
-                    const grad = GRADS[ei % GRADS.length]
-                    return (
-                      <div
-                        key={e}
-                        data-animate="fade-up"
-                        style={{ animationDelay: `${ei * 80}ms` }}
-                        className="group/crit flex items-center gap-4 rounded-2xl bg-white border border-neutral-200 p-5 hover:border-vgu-red/25 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(17,24,39,0.07)] transition-all duration-200"
-                      >
-                        <div
-                          className="w-10 h-10 rounded-xl flex-none flex items-center justify-center text-[15px] font-heading font-black text-white shadow-sm transition-transform duration-200 group-hover/crit:scale-110"
-                          style={{ background: grad }}
-                        >
-                          {String(ei + 1).padStart(2, '0')}
-                        </div>
-                        <p className="text-[16px] font-body leading-snug text-neutral-800">{e}</p>
-                      </div>
-                    )
-                  })}
+                <div className="mt-10">
+                  <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-4">Career services included</p>
+                  <CareerServices services={CAREER_SERVICES} />
                 </div>
               </div>
 
@@ -1131,22 +1104,75 @@ export default async function ProgramPage({ params }: Props) {
 
             {/* ── Right: enrollment card (desktop only) ── */}
             <div className="hidden lg:block sticky top-[100px]">
-              <EnrollmentCard prog={prog} seatsFilled={seatsFilled} />
+              <EnrollmentCard prog={prog} />
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* Bible §08 order: human-trust signals (Faculty + Testimonials) precede action-asks (Admission + Certificate). */}
+      {/* ══ How you'll study ══ */}
+      <LearningExperience
+        liveSchedule={LIVE_SCHEDULE}
+        sampleWeek={SAMPLE_WEEK}
+        lmsPlatform={LMS_PLATFORM}
+        mentorCadence={MENTOR_CADENCE}
+        cohortSize={COHORT_SIZE}
+      />
+
+      {/* ══ Faculty ══ */}
       <FacultySection slug={prog.slug} />
+
+      {/* ══ Testimonials ══ */}
       <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
-      <AdmissionSteps />
+
+      {/* ══ Fees & scholarships ══ */}
+      {extras && (
+        <FeesScholarships
+          totalFee={prog.totalFee}
+          duration={prog.duration}
+          feeBreakdown={extras.feeBreakdown}
+          scholarshipTiers={SCHOLARSHIP_TIERS}
+        />
+      )}
+
       <CertificatePreview
         programName={prog.name}
         programFullName={prog.fullName}
         sampleImageUrl={sanityProg?.certificateSampleUrl}
       />
+
+      {/* ══ Eligibility check (compact pill row) ══ */}
+      {eligibility.length > 0 && (
+        <section className="bg-white py-12 lg:py-14 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
+          <div className="mx-auto max-w-[1080px]">
+            <div data-animate="fade-up" className="mb-6 text-center">
+              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+                Eligibility
+              </p>
+              <h2 className="font-heading font-bold text-[24px] lg:text-[28px] tracking-[-0.5px] text-neutral-900">
+                Quick check before you apply
+              </h2>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {eligibility.map((e, ei) => (
+                <div
+                  key={e}
+                  data-animate="fade-up"
+                  style={{ animationDelay: `${ei * 60}ms` }}
+                  className="inline-flex items-center gap-2.5 rounded-full bg-vgu-red/5 border border-vgu-red/20 px-4 py-2.5"
+                >
+                  <IconCheck size={14} stroke={2.5} className="text-vgu-red flex-none" />
+                  <p className="text-[14px] font-body text-neutral-800 leading-snug">{e}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <AdmissionSteps programName={prog.name} />
+      <RequiredDocuments programLevel={prog.level === 'pg' ? 'pg' : 'ug'} documents={REQUIRED_DOCUMENTS} />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
       <RelatedPrograms programs={relatedPrograms} />
 
@@ -1228,13 +1254,13 @@ export default async function ProgramPage({ params }: Props) {
 }
 
 interface EnrollmentProg { feePerYear: string; totalFee: string; emi?: string; nextBatch?: string; name: string }
-function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFilled: number }) {
+function EnrollmentCard({ prog }: { prog: EnrollmentProg }) {
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white shadow-[0_4px_24px_rgba(17,24,39,0.08)] overflow-hidden">
 
       {/* Red header */}
       <div
-        className="px-6 pt-6 pb-4"
+        className="px-6 pt-6 pb-5"
         style={{ background: 'linear-gradient(135deg, #C04036 0%, #821a12 100%)' }}
       >
         <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-white/55 mb-1">Annual Fee</p>
@@ -1245,20 +1271,6 @@ function EnrollmentCard({ prog, seatsFilled }: { prog: EnrollmentProg; seatsFill
             No-cost EMI from {prog.emi}
           </div>
         )}
-
-        {/* Seats progress */}
-        <div className="mt-4">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[12px] font-body font-bold text-white/80">{seatsFilled}% seats filled</span>
-            <span className="text-[11px] font-body text-vgu-yellow font-semibold">Only {100 - seatsFilled} left</span>
-          </div>
-          <div className="h-2 rounded-full bg-white/20 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-vgu-yellow to-white/90"
-              style={{ width: `${seatsFilled}%` }}
-            />
-          </div>
-        </div>
       </div>
 
       {/* Body */}
