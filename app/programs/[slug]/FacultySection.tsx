@@ -36,23 +36,23 @@ const A = GRAD_RED
 const G = GRAD_AMBER
 const S = GRAD_DEEP
 
-const M1 = 'https://images.unsplash.com/photo-1581382575275-97901c2635b7?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M2 = 'https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M3 = 'https://images.unsplash.com/photo-1552642986-ccb41e7059e7?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M4 = 'https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M5 = 'https://images.unsplash.com/photo-1616002851413-ebcc9611139d?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M6 = 'https://images.unsplash.com/photo-1607081692251-d689f1b9af84?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M7 = 'https://images.unsplash.com/photo-1542183669-c4c74d629b34?w=400&q=80&auto=format&fit=crop&crop=faces'
-const M8 = 'https://images.unsplash.com/photo-1534339480783-6816b68be29c?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M1 = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M2 = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M3 = 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M4 = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M5 = 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M6 = 'https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M7 = 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&q=80&auto=format&fit=crop&crop=faces'
+const M8 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop&crop=faces'
 
-const F1 = 'https://images.unsplash.com/photo-1463335361701-e90f4c5045d0?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F2 = 'https://images.unsplash.com/photo-1607189200597-4d0923ef98c6?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F1 = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F2 = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format&fit=crop&crop=faces'
 const F3 = 'https://images.unsplash.com/photo-1573165850883-9b0e18c44bd2?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F4 = 'https://images.unsplash.com/photo-1618245472177-2a74ad3b994a?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F5 = 'https://images.unsplash.com/photo-1646979201225-00e36437d09e?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F4 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F5 = 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&q=80&auto=format&fit=crop&crop=faces'
 const F6 = 'https://images.unsplash.com/photo-1637589267610-6c66fc2a086b?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F7 = 'https://images.unsplash.com/photo-1759840278381-bf7d5e332050?w=400&q=80&auto=format&fit=crop&crop=faces'
-const F8 = 'https://images.unsplash.com/photo-1728053914354-e1e3e09f6239?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F7 = 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80&auto=format&fit=crop&crop=faces'
+const F8 = 'https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=400&q=80&auto=format&fit=crop&crop=faces'
 
 // Fallback faculty per program slug. Sanity overrides at runtime; this list shows
 // until an admin populates the CMS. All 9 real programs are covered.
@@ -164,14 +164,14 @@ export default async function FacultySection({ slug }: { slug: string }) {
         {/* Header row */}
         <div className="flex items-end justify-between gap-5 mb-10 md:mb-8">
           <div>
-            <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">
-              Meet the Faculty
+            <p className="text-[12px] font-heading font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">
+              Your Faculty
             </p>
             <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-white lg:text-[32px]">
-              Learn from Practitioners
+              The people teaching this programme
             </h2>
-            <p className="mt-2 text-[15px] font-body text-white/50 max-w-[440px]">
-              Industry veterans and research academics who bring real context to every session.
+            <p className="mt-2 text-[15px] font-body text-white/65 max-w-[440px]">
+              Working professionals and academics who lead live sessions, mentor students and assess coursework.
             </p>
           </div>
           <p className="text-[13px] font-body text-white/30 flex-none pb-1 hidden sm:block">

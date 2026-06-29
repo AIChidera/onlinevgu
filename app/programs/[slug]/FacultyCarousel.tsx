@@ -98,7 +98,7 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
               {/* Info */}
               <div className="p-5">
                 <h3 className="font-heading font-bold text-[16px] text-white leading-snug">{f.name}</h3>
-                <p className="text-[12px] font-body text-white/60 mt-0.5 mb-3 leading-snug">{f.title}</p>
+                <p className="text-[13px] font-body text-white/60 mt-0.5 mb-3 leading-snug">{f.title}</p>
                 <span className="inline-flex rounded-full bg-vgu-yellow/15 border border-vgu-yellow/25 px-3 py-1 text-[12px] font-body font-semibold text-vgu-yellow leading-snug">
                   {f.credential}
                 </span>
