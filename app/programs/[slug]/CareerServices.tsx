@@ -6,7 +6,7 @@ const ICONS = [IconUserCheck, IconFileText, IconMessages, IconUsersGroup] as con
 
 export default function CareerServices({ services }: { services: Service[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 lg:gap-y-0 lg:divide-x lg:divide-neutral-200">
       {services.map((s, i) => {
         const Icon = ICONS[i % ICONS.length]
         return (
@@ -14,13 +14,11 @@ export default function CareerServices({ services }: { services: Service[] }) {
             key={s.title}
             data-animate="fade-up"
             style={{ animationDelay: `${i * 60}ms` }}
-            className="rounded-xl border border-neutral-200 bg-white p-4 hover:border-vgu-red/30 transition-colors duration-200"
+            className="lg:px-6 first:lg:pl-0 last:lg:pr-0"
           >
-            <div className="w-9 h-9 rounded-lg bg-vgu-red/8 border border-vgu-red/15 flex items-center justify-center mb-3">
-              <Icon size={16} stroke={1.75} className="text-vgu-red" />
-            </div>
-            <p className="font-heading font-semibold text-[14px] text-neutral-900 mb-1 leading-snug">{s.title}</p>
-            <p className="text-[12.5px] font-body text-neutral-500 leading-[1.55]">{s.detail}</p>
+            <Icon size={22} stroke={1.75} className="text-vgu-red mb-3" />
+            <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 mb-1.5 leading-snug">{s.title}</p>
+            <p className="font-body text-[15px] text-neutral-600 leading-[1.65]">{s.detail}</p>
           </div>
         )
       })}
