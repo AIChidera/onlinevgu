@@ -113,7 +113,7 @@ export default async function ProgramsPage() {
       </section>
 
       {/* ══ Grid ══ */}
-      <ProgramsGrid programmes={programmes} nextBatch={nextBatch} />
+      <ProgramsGrid programmes={programmes} />
     </>
   )
 }

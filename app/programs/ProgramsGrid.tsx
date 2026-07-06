@@ -37,10 +37,8 @@ const DISC_ACCENT: Record<string, string> = {
 
 export default function ProgramsGrid({
   programmes,
-  nextBatch,
 }: {
   programmes: ProgramGridItem[]
-  nextBatch:  string
 }) {
   const [filter, setFilter] = useState<Filter>('all')
   const visible = filter === 'all' ? programmes : programmes.filter(p => p.level === filter)

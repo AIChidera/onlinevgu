@@ -88,7 +88,6 @@ const SOCIALS = [
 export default async function Footer() {
   const settings = await getSiteSettings()
 
-  const phone        = settings?.phoneDisplay    || '+91 80350 18677'
   const email        = settings?.admissionsEmail || 'admissions@onlinevgu.in'
   const socialHrefs: Record<string, string> = {
     LinkedIn:      settings?.socialLinkedIn  || 'https://www.linkedin.com/school/vgu/',

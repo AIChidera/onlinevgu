@@ -20,7 +20,6 @@ import {
   IconMessage,
   IconCertificate,
   IconArrowRight,
-  IconCheck,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
