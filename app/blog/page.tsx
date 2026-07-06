@@ -67,14 +67,14 @@ export default async function BlogPage() {
               <Link
                 href="#counsellor"
                 data-apply-trigger
-                className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
               >
                 Apply Now
                 <IconArrowRight size={16} />
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-8 py-3.5 transition-all duration-200"
+                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-8 py-3.5 transition-all duration-200"
               >
                 Explore Programs
               </Link>
@@ -160,14 +160,14 @@ export default async function BlogPage() {
               <Link
                 href="#counsellor"
                 data-apply-trigger
-                className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
               >
                 Talk to a Counsellor
                 <IconArrowRight size={16} />
               </Link>
               <Link
                 href="/programs"
-                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-full px-8 py-3.5 transition-all duration-200"
+                className="inline-flex items-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[15px] whitespace-nowrap rounded-md px-8 py-3.5 transition-all duration-200"
               >
                 Browse Programs
               </Link>

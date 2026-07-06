@@ -198,7 +198,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3.5 px-8 text-[15px] font-semibold font-heading transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_6px_24px_rgba(192,64,54,0.38)] hover:-translate-y-0.5 whitespace-nowrap"
+        className="mt-1 inline-flex items-center justify-center gap-2 rounded-md bg-vgu-red hover:bg-vgu-red-dark text-white py-3.5 px-8 text-[15px] font-semibold font-heading transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_6px_24px_rgba(192,64,54,0.38)] hover:-translate-y-0.5 whitespace-nowrap"
       >
         {isSubmitting ? 'Sending…' : (<>Send Message <IconSend size={16} /></>)}
       </button>

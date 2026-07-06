@@ -90,14 +90,14 @@ export default function NotFound() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-full bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200 shadow-[0_6px_24px_rgba(0,0,0,0.22)]"
+              className="inline-flex items-center gap-2 rounded-md bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200 shadow-[0_6px_24px_rgba(0,0,0,0.22)]"
             >
               <IconArrowLeft size={16} />
               Go to Home
             </Link>
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/35 text-white hover:bg-white/12 hover:border-white/60 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-md border-2 border-white/35 text-white hover:bg-white/12 hover:border-white/60 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
             >
               Browse Programs
               <IconArrowRight size={16} />

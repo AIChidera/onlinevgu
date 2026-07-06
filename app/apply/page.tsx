@@ -66,7 +66,7 @@ export default function ApplyPage() {
               <h3 className="font-heading text-[18px] font-bold text-neutral-900 mb-4">Scholarships available</h3>
               <div className="flex flex-col gap-3">
                 {SCHOLARSHIPS.map((s) => (
-                  <div key={s.name} className="flex items-start justify-between gap-4 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3">
+                  <div key={s.name} className="flex items-start justify-between gap-4 rounded-md border border-neutral-200 bg-neutral-50 px-4 py-3">
                     <div>
                       <div className="font-heading text-[14px] font-bold text-neutral-900">{s.name}</div>
                       <div className="text-[12px] text-neutral-500">{s.criteria}</div>

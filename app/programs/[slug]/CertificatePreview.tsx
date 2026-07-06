@@ -77,7 +77,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
               </ul>
               <button
                 onClick={() => setOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:brightness-90 text-white font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
+                className="inline-flex items-center gap-2 rounded-md bg-vgu-red hover:brightness-90 text-white font-heading font-semibold text-[15px] px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)]"
               >
                 <IconZoomIn size={17} />
                 View Sample Certificate

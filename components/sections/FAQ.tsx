@@ -109,7 +109,7 @@ export default function FAQ() {
           <p className="text-[16px] font-body text-neutral-500 mb-4">Still have questions?</p>
           <a
             href="#counsellor"
-            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 rounded-full px-8 py-3 text-[15px] font-heading font-semibold transition-colors duration-150"
+            className="inline-flex items-center gap-2 bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 rounded-md px-8 py-3 text-[15px] font-heading font-semibold transition-colors duration-150"
           >
             <IconHeadset size={18} />
             Talk to a Counsellor

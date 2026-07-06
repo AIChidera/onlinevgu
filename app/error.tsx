@@ -87,14 +87,14 @@ export default function Error({
           >
             <button
               onClick={reset}
-              className="inline-flex items-center gap-2 rounded-full bg-vgu-yellow text-neutral-900 hover:bg-vgu-yellow/90 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200 shadow-[0_6px_24px_rgba(255,164,18,0.30)]"
+              className="inline-flex items-center gap-2 rounded-md bg-vgu-yellow text-neutral-900 hover:bg-vgu-yellow/90 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200 shadow-[0_6px_24px_rgba(255,164,18,0.30)]"
             >
               <IconRefresh size={16} />
               Try again
             </button>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/25 text-white hover:bg-white/10 hover:border-white/45 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-md border-2 border-white/25 text-white hover:bg-white/10 hover:border-white/45 font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
             >
               <IconArrowLeft size={16} />
               Go to Home

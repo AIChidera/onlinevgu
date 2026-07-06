@@ -123,7 +123,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
         <select
           {...register('programInterest')}
           className={[
-            'w-full rounded-lg border px-4 py-3 text-base text-neutral-900',
+            'w-full rounded-md border px-4 py-3 text-base text-neutral-900',
             'bg-white outline-none transition-colors duration-150',
             'focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/15',
             errors.programInterest
@@ -142,7 +142,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
       </div>
 
       {serverError && (
-        <p className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-[14px] text-red-600">
+        <p className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-[14px] text-red-600">
           {serverError}
         </p>
       )}

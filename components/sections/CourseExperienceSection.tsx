@@ -199,7 +199,7 @@ export default function CourseExperienceSection() {
               href="#counsellor"
               data-counsellor-trigger
               onClick={(e) => e.stopPropagation()}
-              className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
+              className="mt-8 inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white rounded-md px-8 py-3.5 text-[15px] font-heading font-semibold transition-colors duration-150 shadow-[0_4px_20px_rgba(192,64,54,0.4)]"
             >
               Explore the Platform
             </a>

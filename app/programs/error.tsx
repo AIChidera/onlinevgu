@@ -34,14 +34,14 @@ export default function ProgramsError({
       <div className="flex items-center justify-center gap-3 flex-wrap">
         <button
           onClick={reset}
-          className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
+          className="inline-flex items-center gap-2 rounded-md bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
         >
           <IconRefresh size={16} />
           Try again
         </button>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-full border-2 border-neutral-200 hover:border-vgu-red text-neutral-600 hover:text-vgu-red font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
+          className="inline-flex items-center gap-2 rounded-md border-2 border-neutral-200 hover:border-vgu-red text-neutral-600 hover:text-vgu-red font-heading font-semibold text-[15px] px-7 py-3.5 transition-all duration-200"
         >
           <IconArrowLeft size={16} />
           Go home

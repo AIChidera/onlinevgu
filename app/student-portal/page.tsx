@@ -96,7 +96,7 @@ export default function StudentPortalPage() {
           <div className="flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2 rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-7 md:px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.35)] whitespace-nowrap"
+              className="inline-flex items-center gap-2 rounded-md bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-7 md:px-8 py-3.5 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.35)] whitespace-nowrap"
             >
               Explore Programs
             </Link>

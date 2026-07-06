@@ -86,7 +86,7 @@ export default function Navbar() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+              className="border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red rounded-md px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
             >
               Apply Now
             </a>
@@ -176,7 +176,7 @@ export default function Navbar() {
             <a
               href="#counsellor"
               data-apply-trigger
-              className="block w-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red text-center rounded-full px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
+              className="block w-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red text-center rounded-md px-8 py-3.5 text-[15px] font-heading font-semibold transition-all duration-200"
               onClick={() => setMobileOpen(false)}
             >
               Apply Now

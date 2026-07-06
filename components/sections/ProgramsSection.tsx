@@ -81,7 +81,7 @@ export default function ProgramsSection({ programmes: sanityProgrammes }: { prog
                   onClick={() => setFilter(f.value)}
                   aria-pressed={active}
                   className={[
-                    'flex-none inline-flex items-center gap-1.5 px-4 py-3 rounded-full text-[13px] md:text-[14px]',
+                    'flex-none inline-flex items-center gap-1.5 px-4 py-3 rounded-md text-[13px] md:text-[14px]',
                     'font-heading font-semibold transition-all duration-200',
                     active
                       ? 'bg-vgu-red text-white shadow-[0_2px_8px_rgba(192,64,54,0.35)]'
@@ -220,7 +220,7 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
 
         {/* Full-width CTA */}
         <div className="mt-auto">
-          <span className="flex items-center justify-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-3 text-[13px] font-heading font-semibold
+          <span className="flex items-center justify-center gap-1.5 rounded-md border-2 border-vgu-red text-vgu-red px-4 py-3 text-[13px] font-heading font-semibold
                            group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
             Explore Program
             <IconArrowRight size={13} />
@@ -302,7 +302,7 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
         </div>
 
         <div className="mt-auto">
-          <span className="flex items-center justify-center gap-1.5 rounded-full border-2 border-vgu-red text-vgu-red px-4 py-3 text-[13px] font-heading font-semibold
+          <span className="flex items-center justify-center gap-1.5 rounded-md border-2 border-vgu-red text-vgu-red px-4 py-3 text-[13px] font-heading font-semibold
                            group-hover/card:bg-vgu-red group-hover/card:text-white transition-all duration-200">
             Explore Program
             <IconArrowRight size={13} />

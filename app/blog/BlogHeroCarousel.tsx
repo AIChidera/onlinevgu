@@ -128,14 +128,14 @@ export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSum
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   <Link
                     href={`/blog/${slide.slug}`}
-                    className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                    className="group inline-flex items-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                   >
                     Read story
                     <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                   <a
                     href="#all-stories"
-                    className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                    className="group inline-flex items-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                   >
                     All stories
                     <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />

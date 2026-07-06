@@ -20,14 +20,14 @@ export default function FooterCTA() {
           <a
             href="#counsellor"
             data-apply-trigger
-            className="inline-flex items-center gap-2 rounded-full bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] whitespace-nowrap transition-all duration-150 shadow-lg"
+            className="inline-flex items-center gap-2 rounded-md bg-white text-vgu-red hover:bg-vgu-beige font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] whitespace-nowrap transition-all duration-150 shadow-lg"
           >
             Apply Now
             <IconArrowRight size={16} />
           </a>
           <a
             href="#counsellor"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 text-white hover:text-white hover:bg-white/15 hover:border-white/60 font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] whitespace-nowrap transition-all duration-150"
+            className="inline-flex items-center gap-2 rounded-md border-2 border-white/40 text-white hover:text-white hover:bg-white/15 hover:border-white/60 font-heading font-semibold text-[15px] px-5 py-3 md:px-8 md:py-4 md:text-[16px] whitespace-nowrap transition-all duration-150"
           >
             <IconHeadset size={16} />
             Talk to a Counsellor

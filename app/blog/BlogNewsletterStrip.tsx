@@ -43,7 +43,7 @@ export default function BlogNewsletterStrip() {
         </p>
 
         {submitted ? (
-          <div className="inline-flex items-center gap-3 bg-white/15 border border-white/25 text-white font-heading font-semibold text-[15px] rounded-full px-8 py-4">
+          <div className="inline-flex items-center gap-3 bg-white/15 border border-white/25 text-white font-heading font-semibold text-[15px] rounded-md px-8 py-4">
             <IconCheck size={18} stroke={2.5} className="text-vgu-yellow" />
             You&apos;re in. Watch your inbox.
           </div>
@@ -60,7 +60,7 @@ export default function BlogNewsletterStrip() {
             <button
               type="submit"
               disabled={loading}
-              className="flex-none inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-vgu-red font-heading font-semibold text-[15px] rounded-full px-7 py-3.5 transition-all duration-200 shadow-[0_8px_24px_rgba(0,0,0,0.18)] disabled:opacity-70"
+              className="flex-none inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-vgu-red font-heading font-semibold text-[15px] rounded-md px-7 py-3.5 transition-all duration-200 shadow-[0_8px_24px_rgba(0,0,0,0.18)] disabled:opacity-70"
             >
               {loading ? 'Subscribing...' : (
                 <>

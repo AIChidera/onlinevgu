@@ -948,7 +948,7 @@ export default async function ProgramPage({ params }: Props) {
                   data-apply-trigger
                   data-program={prog.name}
                   data-program-level={prog.level}
-                  className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                  className="group inline-flex items-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Apply Now
                   <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -959,7 +959,7 @@ export default async function ProgramPage({ params }: Props) {
                   href="#"
                   data-brochure-trigger
                   data-program={prog.name}
-                  className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                  className="group inline-flex items-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                 >
                   <IconDownload size={15} className="transition-transform duration-200 group-hover:translate-y-0.5" />
                   Download Brochure
@@ -1179,7 +1179,7 @@ export default async function ProgramPage({ params }: Props) {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2.5 rounded-full border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_2px_8px_rgba(192,64,54,0.12)]"
+              className="inline-flex items-center gap-2.5 rounded-md border-2 border-vgu-red bg-vgu-red hover:bg-white text-white hover:text-vgu-red px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] hover:shadow-[0_2px_8px_rgba(192,64,54,0.12)]"
             >
               <IconArrowRight size={16} className="rotate-180" />
               All Programs
@@ -1187,7 +1187,7 @@ export default async function ProgramPage({ params }: Props) {
             <a
               href="#counsellor"
               data-counsellor-trigger
-              className="inline-flex items-center gap-2 rounded-full border-2 border-neutral-300 bg-white hover:border-vgu-red hover:text-vgu-red text-neutral-700 px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-md border-2 border-neutral-300 bg-white hover:border-vgu-red hover:text-vgu-red text-neutral-700 px-8 py-3.5 text-[15px] font-semibold font-heading transition-all duration-200"
             >
               <IconHeadset size={16} />
               Talk to a Counsellor

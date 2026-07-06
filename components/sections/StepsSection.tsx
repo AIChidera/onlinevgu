@@ -140,7 +140,7 @@ export default function StepsSection() {
           <a
             href="#counsellor"
             data-apply-trigger
-            className="inline-flex items-center gap-2.5 rounded-full border-2 border-vgu-red text-vgu-red bg-white hover:bg-vgu-red hover:text-white transition-all duration-150 font-heading font-semibold text-[18px] py-[18px] px-[52px] shadow-[0_8px_24px_rgba(192,64,54,0.30)]"
+            className="inline-flex items-center gap-2.5 rounded-md border-2 border-vgu-red text-vgu-red bg-white hover:bg-vgu-red hover:text-white transition-all duration-150 font-heading font-semibold text-[18px] py-[18px] px-[52px] shadow-[0_8px_24px_rgba(192,64,54,0.30)]"
           >
             Apply Now
             <IconArrowRight size={18} />

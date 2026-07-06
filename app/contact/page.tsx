@@ -487,7 +487,7 @@ export default function ContactPage() {
             href={MAP_PLACE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="md:hidden mt-4 inline-flex items-center justify-center gap-2 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-6 py-3 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] whitespace-nowrap"
+            className="md:hidden mt-4 inline-flex items-center justify-center gap-2 w-full rounded-md bg-vgu-red hover:bg-vgu-red-dark text-white font-heading font-semibold text-[15px] px-6 py-3 transition-all duration-200 shadow-[0_4px_16px_rgba(192,64,54,0.28)] whitespace-nowrap"
           >
             <IconMapPin size={16} stroke={2} />
             Open in Google Maps
