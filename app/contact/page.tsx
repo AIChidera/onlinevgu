@@ -92,7 +92,7 @@ const MINI_FAQS = [
   },
   {
     q: 'Can I visit the campus before enrolling?',
-    a: 'Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email admissions@onlinevgu.in or call 1800 123 456 to schedule a guided tour.',
+    a: 'Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email admissions@onlinevgu.in or call +91 80350 18677 to schedule a guided tour.',
   },
 ]
 
@@ -137,10 +137,18 @@ export const metadata: Metadata = {
 const CONTACT_CHANNELS = [
   {
     Icon:    IconPhone,
-    label:   'Call us',
-    primary: '1800 123 456',
-    sub:     'Toll-free helpline',
-    href:    'tel:+911800123456',
+    label:   'Admission queries',
+    primary: '+91 80350 18677',
+    sub:     'Mon-Sat, 9am-7pm IST',
+    href:    'tel:+918035018677',
+    cta:     'Call now',
+  },
+  {
+    Icon:    IconHeadset,
+    label:   'Student helpline',
+    primary: '+91 95490 86333',
+    sub:     'For enrolled students',
+    href:    'tel:+919549086333',
     cta:     'Call now',
   },
   {
@@ -219,7 +227,7 @@ export default function ContactPage() {
       {/* ══ Quick channels ══ */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {CONTACT_CHANNELS.map((c, i) => (
               <a
                 key={c.label}

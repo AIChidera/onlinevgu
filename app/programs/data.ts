@@ -47,7 +47,7 @@ export const PROGRAMMES: Programme[] = [
     slug: 'mba', name: 'MBA', fullName: 'Master of Business Administration',
     level: 'pg', discipline: 'Management', duration: '2 Years', fee: '₹75,000/yr',
     popular: true,
-    specialisations: ['Marketing', 'Human Resources', 'Finance', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
+    specialisations: ['Marketing', 'Finance', 'Human Resources', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
     image: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format&fit=crop',
   },
   {

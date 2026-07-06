@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
               <p style="color:#4B5563;line-height:1.7">
                 A counsellor may reach out to answer any questions.
                 You can also call us at
-                <a href="tel:+911800123456" style="color:#C04036">1800 123 456</a>
+                <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
                 (Mon-Sat, 9am-7pm IST).
               </p>
             </div>

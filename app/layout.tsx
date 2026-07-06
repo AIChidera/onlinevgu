@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Nunito, Lato } from 'next/font/google'
+import { Plus_Jakarta_Sans, DM_Sans } from 'next/font/google'
 import './globals.css'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
@@ -9,19 +9,20 @@ import Analytics from '@/components/Analytics'
 import HashScroller from '@/components/HashScroller'
 import CookieConsent from '@/components/CookieConsent'
 import ScrollToTop from '@/components/ui/ScrollToTop'
+import IntakeCountdown from '@/components/sections/IntakeCountdown'
 import { getSiteSettings } from '@/lib/sanity'
 
-const nunito = Nunito({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  variable: '--font-nunito',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-heading',
   display: 'swap',
 })
 
-const lato = Lato({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-lato',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
   display: 'swap',
 })
 
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${lato.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${plusJakartaSans.variable} ${dmSans.variable}`}>
       <body className="font-body antialiased">
         {/* GTM noscript fallback, must be the first element inside body */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
@@ -87,13 +88,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Analytics />
         <HashScroller />
         <CookieConsent />
-        {/* Skip link — visually hidden until focused by keyboard users */}
+        {/* Skip link - visually hidden until focused by keyboard users */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-vgu-red focus:px-4 focus:py-2 focus:text-white focus:font-heading focus:font-semibold focus:text-[15px] focus:shadow-lg focus:outline-none"
         >
           Skip to main content
         </a>
+        <IntakeCountdown />
         <SiteNav />
         <main id="main-content">{children}</main>
         <ScrollToTop />

@@ -20,6 +20,7 @@ import {
   IconMessage,
   IconCertificate,
   IconArrowRight,
+  IconCheck,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -192,7 +193,7 @@ export default function PlacementsPage() {
     <div>
       <Breadcrumb items={[{ label: 'Placements' }]} />
 
-      {/* ══ Hero — swoop yellow (whisper-faint on the photo) ══ */}
+      {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
           src={HERO_IMAGE_SRC}
@@ -229,29 +230,32 @@ export default function PlacementsPage() {
             </p>
 
             <div
-              className="anim-load-left mt-12 flex flex-col sm:flex-row gap-3"
+              className="anim-load-left mt-12 flex flex-col gap-4"
               style={{ animationDelay: '210ms' }}
             >
-              <a
-                href="#counsellor"
-                data-apply-trigger
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
-              >
-                Apply Now
-                <IconArrowRight size={16} />
-              </a>
-              <a
-                href="/programs"
-                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-full px-6 py-3.5 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200"
-              >
-                Browse Programs
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="#counsellor"
+                  data-apply-trigger
+                  className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  Apply Now
+                  <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="/programs"
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                >
+                  Browse Programs
+                  <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══ Stats strip — arc sweeps across the achievement numbers ══ */}
+      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -288,7 +292,7 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Career Support — loop (continuous service surrounding the learner) ══ */}
+      {/* ══ Career Support - loop (continuous service surrounding the learner) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -367,7 +371,7 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Hiring Partners — wave (continuous flow of recruiter connections) ══ */}
+      {/* ══ Hiring Partners - wave (continuous flow of recruiter connections) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.03} strokeWidth={20} />
 
@@ -396,7 +400,7 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Industries — monogram + flipped arc (sectors held in a stylised V) ══ */}
+      {/* ══ Industries - monogram + flipped arc (sectors held in a stylised V) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
@@ -479,7 +483,7 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Placement Process — wave (flow of time through the journey) ══ */}
+      {/* ══ Placement Process - wave (flow of time through the journey) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
         {/* Subtle dot-grid texture per Design Bible §10 */}
@@ -585,7 +589,7 @@ export default function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Success Stories — swoop (sweeping arc of careers in motion) ══ */}
+      {/* ══ Success Stories - swoop (sweeping arc of careers in motion) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 

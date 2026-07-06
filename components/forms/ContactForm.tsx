@@ -60,8 +60,8 @@ export default function ContactForm() {
         <h3 className="font-heading font-bold text-[22px] text-neutral-900">Message sent!</h3>
         <p className="text-[15px] font-body text-neutral-500 max-w-[300px] leading-[1.7]">
           We&apos;ll reply within 24 hours. For urgent queries, call{' '}
-          <a href="tel:+911800123456" className="font-semibold text-vgu-red underline underline-offset-2">
-            1800 123 456
+          <a href="tel:+918035018677" className="font-semibold text-vgu-red underline underline-offset-2">
+            +91 80350 18677
           </a>.
         </p>
       </div>
@@ -205,10 +205,9 @@ export default function ContactForm() {
 
       <p className="text-[12px] font-body text-neutral-400 leading-relaxed">
         We&apos;ll reply within 24 hours. For urgent queries, call{' '}
-        <a href="tel:+911800123456" className="font-semibold text-vgu-red hover:underline">
-          1800 123 456
-        </a>{' '}
-        (toll-free).
+        <a href="tel:+918035018677" className="font-semibold text-vgu-red hover:underline">
+          +91 80350 18677
+        </a>.
       </p>
     </form>
   )

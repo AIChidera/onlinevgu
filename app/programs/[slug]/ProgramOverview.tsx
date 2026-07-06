@@ -77,7 +77,7 @@ export default function ProgramOverview({ programName, programFullName, overview
                 <p className="font-heading font-bold text-[17px] text-white">{programName} Online</p>
               </div>
 
-              {/* 2×2 stats grid — gap-px with bg-neutral-100 creates 1px internal dividers */}
+              {/* 2×2 stats grid - gap-px with bg-neutral-100 creates 1px internal dividers */}
               <div className="grid grid-cols-2 gap-px bg-neutral-100">
                 {stats.map(s => (
                   <div key={s.label} className="bg-white px-5 py-5">

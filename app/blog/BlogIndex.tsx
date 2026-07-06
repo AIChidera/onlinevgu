@@ -132,12 +132,12 @@ export default function BlogIndex({
             {/* ── Featured editorial post ── */}
             {featuredPost && (
               <>
-                {/* Mobile featured card — full-width, more prominent */}
+                {/* Mobile featured card - full-width, more prominent */}
                 <div data-animate="fade-up" className="md:hidden mb-10">
                   <FeaturedCard post={featuredPost} />
                 </div>
 
-                {/* Desktop featured card — 2-col editorial layout */}
+                {/* Desktop featured card - 2-col editorial layout */}
                 <Link
                   href={`/blog/${featuredPost.slug}`}
                   data-animate="materialize"

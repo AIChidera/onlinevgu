@@ -26,36 +26,36 @@ const G = 'linear-gradient(135deg,#FFA412,#C04036)'
 const U = 'https://images.unsplash.com/'
 const Q = '?w=800&h=600&q=85&auto=format&fit=crop&crop=faces'
 
-// South Asian male portraits — face-verified
-const AM1 = `${U}photo-1547425260-76bcadfb4f2c${Q}` // South Asian male, beard + glasses — professional
-const AM2 = `${U}photo-1480429370139-e0132c086e2a${Q}` // formal striped suit — analytics/banking
-const AM3 = `${U}photo-1480429370139-e0132c086e2a${Q}` // formal striped suit — banking
-const AM4 = `${U}photo-1547425260-76bcadfb4f2c${Q}`    // beard + glasses — tech/cloud
-const AM5 = `${U}photo-1729157661483-ed21901ed892${Q}` // bearded, white shirt — senior
-const AM6 = `${U}photo-1607081692251-d689f1b9af84${Q}` // warm smile, casual — developer
-const AM7 = `${U}photo-1527980965255-d3b416303d12${Q}` // scarf, youthful — entrepreneur
-const AM8 = `${U}photo-1534339480783-6816b68be29c${Q}` // casual jacket — UG student
+// South Asian male portraits - face-verified
+const AM1 = `${U}photo-1547425260-76bcadfb4f2c${Q}` // South Asian male, beard + glasses - professional
+const AM2 = `${U}photo-1480429370139-e0132c086e2a${Q}` // formal striped suit - analytics/banking
+const AM3 = `${U}photo-1480429370139-e0132c086e2a${Q}` // formal striped suit - banking
+const AM4 = `${U}photo-1547425260-76bcadfb4f2c${Q}`    // beard + glasses - tech/cloud
+const AM5 = `${U}photo-1729157661483-ed21901ed892${Q}` // bearded, white shirt - senior
+const AM6 = `${U}photo-1607081692251-d689f1b9af84${Q}` // warm smile, casual - developer
+const AM7 = `${U}photo-1527980965255-d3b416303d12${Q}` // scarf, youthful - entrepreneur
+const AM8 = `${U}photo-1534339480783-6816b68be29c${Q}` // casual jacket - UG student
 
-// South Asian female portraits — face-verified
+// South Asian female portraits - face-verified
 const AF1 = `${U}photo-1607189200597-4d0923ef98c6${Q}` // dark hair, South Asian woman
 const AF2 = `${U}photo-1607189200597-4d0923ef98c6${Q}` // long dark hair, outdoors
 const AF3 = `${U}photo-1534528741775-53994a69daeb${Q}` // professional, composed
 
-// Professional male portraits (diverse) — face-verified
+// Professional male portraits (diverse) - face-verified
 const PM1 = `${U}photo-1531427186611-ecfd6d936c79${Q}` // smiling, blue shirt
 const PM2 = `${U}photo-1507003211169-0a1dd7228f2d${Q}` // warm confident smile
 const PM3 = `${U}photo-1566753323558-f4e0952af115${Q}` // glasses, smart-casual
 const PM4 = `${U}photo-1566492031773-4f4e44671857${Q}` // beard, glasses, thoughtful
-const PM5 = `${U}photo-1560250097-0b93528c311a${Q}`    // glasses + blazer — academic
-const PM6 = `${U}photo-1519085360753-af0119f7cbe7${Q}` // dark suit — senior/professor
-const PM7 = `${U}photo-1570295999919-56ceb5ecca61${Q}` // clean headshot — professional
+const PM5 = `${U}photo-1560250097-0b93528c311a${Q}`    // glasses + blazer - academic
+const PM6 = `${U}photo-1519085360753-af0119f7cbe7${Q}` // dark suit - senior/professor
+const PM7 = `${U}photo-1570295999919-56ceb5ecca61${Q}` // clean headshot - professional
 
-// Professional female portraits (diverse) — face-verified
-const PF1 = `${U}photo-1551836022-d5d88e9218df${Q}`    // glasses, laptop — audit/finance
+// Professional female portraits (diverse) - face-verified
+const PF1 = `${U}photo-1551836022-d5d88e9218df${Q}`    // glasses, laptop - audit/finance
 const PF2 = `${U}photo-1580489944761-15a19d654956${Q}` // dark hair, warm smile
 const PF3 = `${U}photo-1573496359142-b8d87734a5a2${Q}` // blazer, office window
 const PF4 = `${U}photo-1494790108377-be9c29b29330${Q}` // dark curly hair, confident
-const PF5 = `${U}photo-1516534775068-ba3e7458af70${Q}` // at laptop — research context
+const PF5 = `${U}photo-1516534775068-ba3e7458af70${Q}` // at laptop - research context
 const PF6 = `${U}photo-1531123897727-8f129e1688ce${Q}` // short hair, direct gaze
 const PF7 = `${U}photo-1438761681033-6461ffad8d80${Q}` // natural-light portrait
 const PF8 = `${U}photo-1508214751196-bcfd4ca60f91${Q}` // warm outdoor light
@@ -339,7 +339,7 @@ function StoryCard({ t, index, visible }: { t: Testimonial; index: number; visib
       }}
       className="group/card flex flex-col h-full rounded-2xl border border-neutral-200 bg-white overflow-hidden hover:border-vgu-red/30 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(192,64,54,0.10)] transition-all duration-200"
     >
-      {/* Photo cover — full width, editorial-style */}
+      {/* Photo cover - full width, editorial-style */}
       <div className="relative w-full h-52 flex-none">
         {t.photo ? (
           <Image
@@ -357,7 +357,7 @@ function StoryCard({ t, index, visible }: { t: Testimonial; index: number; visib
             <span className="font-heading font-black text-[40px] text-white/30 select-none">{t.initials}</span>
           </div>
         )}
-        {/* Dark gradient overlay — name + batch sit here */}
+        {/* Dark gradient overlay - name + batch sit here */}
         <div
           className="absolute inset-0 flex flex-col justify-end p-5"
           style={{ background: 'linear-gradient(to top, rgba(17,24,39,0.88) 0%, rgba(17,24,39,0.30) 55%, transparent 100%)' }}

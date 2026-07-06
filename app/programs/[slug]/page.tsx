@@ -16,20 +16,18 @@ import {
   IconShieldCheck,
   IconArrowRight,
   IconHeadset,
-  IconCheck,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import type { CurriculumYear } from './CurriculumPreview'
-import ProgramOverview from './ProgramOverview'
 import KeyOutcomes from './KeyOutcomes'
 import CurriculumPreview from './CurriculumPreview'
 import HirerStrip from './HirerStrip'
 import SpecialisationCards from './SpecialisationCards'
 import CareerOutcomes from './CareerOutcomes'
 import CareerServices from './CareerServices'
+
 import LearningExperience from './LearningExperience'
 import FeesScholarships from './FeesScholarships'
-import RequiredDocuments from './RequiredDocuments'
 import FacultySection from './FacultySection'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import {
@@ -112,7 +110,7 @@ const PROGRAMS: ProgramDetail[] = [
       'Merit scholarships up to 50% available',
       'UGC-entitled degree - identical to an on-campus MBA certificate',
     ],
-    specialisations: ['Marketing', 'Human Resources', 'Finance', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
+    specialisations: ['Marketing', 'Finance', 'Human Resources', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
     careerRoles: ['Business Manager', 'Finance Director', 'Marketing Manager', 'HR Manager', 'Operations Manager', 'Healthcare Administrator', 'IT Manager', 'International Business Manager'],
     avgSalaryAfter: '₹10-18 LPA',
     topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Accenture', 'Amazon', 'HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Tata Group', 'Hindustan Unilever'],
@@ -179,7 +177,7 @@ const PROGRAMS: ProgramDetail[] = [
       'Cloud and cybersecurity certification prep tracks',
       'Dedicated tech placement cell',
     ],
-    specialisations: ['AI & Data Science', 'Cloud Tech & Cybersecurity', 'Cloud Computing & Full Stack'],
+    specialisations: ['Cloud Tech & Cybersecurity', 'AI & Data Science', 'Cloud Computing & Full Stack'],
     careerRoles: ['Software Developer', 'Data Scientist', 'Machine Learning Engineer', 'Cybersecurity Analyst', 'DevOps Engineer', 'Web Developer', 'Blockchain Developer', 'Database Administrator'],
     avgSalaryAfter: '₹6-14 LPA',
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Oracle'],
@@ -243,7 +241,7 @@ const PROGRAMS: ProgramDetail[] = [
       'AI for Finance module in the final semester',
       'UGC-entitled MBA with international finance specialisation',
     ],
-    specialisations: ['ACCA Track', 'CMA Track', 'FM Track'],
+    specialisations: ['CMA Track', 'ACCA Track', 'FM Track'],
     careerRoles: ['CFO', 'Finance Director', 'Investment Analyst', 'Portfolio Manager', 'Financial Analyst', 'Risk Manager', 'Treasury Analyst', 'Forex Trader'],
     avgSalaryAfter: '₹12-22 LPA',
     topHirers: ['HSBC', 'Standard Chartered', 'Citibank', 'JP Morgan', 'ICICI Bank', 'Kotak Mahindra', 'Deloitte', 'KPMG', 'EY', 'PwC'],
@@ -452,7 +450,7 @@ const PROGRAMS: ProgramDetail[] = [
       'Indian Knowledge System and Universal Human Values modules',
       'UGC-entitled BCA - qualifies for MCA admission at any university',
     ],
-    specialisations: ['General', 'UX Design', 'Data Science', 'Cloud Technology & Information Security', 'Blockchain Technology', 'Artificial Intelligence'],
+    specialisations: ['General', 'Artificial Intelligence', 'Data Science', 'UX Design', 'Cloud Technology & Information Security', 'Blockchain Technology'],
     careerRoles: ['Software Developer', 'AI Developer', 'ML Engineer', 'Data Analyst', 'UX/UI Designer', 'Blockchain Developer', 'Cloud Engineer', 'Cybersecurity Analyst', 'Web Application Developer'],
     avgSalaryAfter: '₹4-9 LPA',
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Mphasis', 'Oracle'],
@@ -538,7 +536,7 @@ const PROGRAMS: ProgramDetail[] = [
       'Indian Knowledge System and Environmental Science curriculum',
       'Strong foundation for UPSC, state civil services, and UGC-NET',
     ],
-    specialisations: ['Economics', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications', 'Psychology'],
+    specialisations: ['Economics', 'Psychology', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications'],
     careerRoles: ['Economic Analyst', 'Policy Analyst', 'ESG Analyst', 'Content Writer', 'Social Media Strategist', 'Editor', 'Civil Services Officer', 'UX Researcher', 'Data Analyst', 'Journalist'],
     avgSalaryAfter: '₹3-6 LPA',
     topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'UPSC', 'State PSCs', 'TCS', 'Amazon', 'Hindustan Unilever', 'NGOs & Think Tanks'],
@@ -673,7 +671,7 @@ const PROGRAMS: ProgramDetail[] = [
       'Research Project under faculty supervision in the final semester',
       'UGC-entitled degree - recognised for journalism and media roles',
     ],
-    specialisations: ['Digital Journalism', 'Broadcast Media', 'Public Relations & Corporate Communication', 'Multimedia Journalism'],
+    specialisations: ['Digital Journalism', 'Public Relations & Corporate Communication', 'Broadcast Media', 'Multimedia Journalism'],
     careerRoles: ['Reporter', 'Anchor', 'Podcast Creator', 'Video Producer', 'Advertising Copywriter', 'PR Manager', 'Digital Marketing Executive', 'Media Analyst'],
     avgSalaryAfter: '₹4-9 LPA',
     topHirers: ['Times Group', 'NDTV', 'Hindustan Times', 'Ogilvy', 'Weber Shandwick', 'Edelman', 'Republic TV', 'News18'],
@@ -759,13 +757,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sanityProg = await getProgramBySlug(slug)
   const prog = sanityProg ?? PROGRAM_MAP.get(slug)
   if (!prog) return { title: 'Program not found' }
+  const metaDesc = (prog.description ?? '').replace(/—/g, '-').replace(/–/g, '-')
   return {
     title: `${prog.name} Online - ${prog.fullName} | VGU`,
-    description: prog.description,
+    description: metaDesc,
     alternates: { canonical: `https://onlinevgu.in/programs/${prog.slug}` },
     openGraph: {
       title: `${prog.name} Online - ${prog.fullName} | VGU`,
-      description: prog.description,
+      description: metaDesc,
       url: `https://onlinevgu.in/programs/${prog.slug}`,
     },
   }
@@ -805,6 +804,7 @@ export default async function ProgramPage({ params }: Props) {
   const totalProgramCount = allSanityProgs.length > 0 ? allSanityProgs.length : PROGRAMS.length
   const heroImage       = sanityProg?.heroImageUrl ?? HERO_IMAGES[prog.slug] ?? DEFAULT_HERO_IMAGE
   const totalFeeNumeric = prog.totalFee.replace(/[^0-9]/g, '')
+  const description     = (prog.description ?? '').replace(/—/g, '-').replace(/–/g, '-')
 
   // Rich per-program content (overview, key outcomes, dept stats, fee breakdown).
   // Missing slug is acceptable - sections that depend on extras are gated below.
@@ -843,7 +843,7 @@ export default async function ProgramPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Course',
     name: `${prog.fullName} Online - Vivekananda Global University`,
-    description: prog.description,
+    description: description,
     provider: {
       '@type': 'Organization',
       name: 'Vivekananda Global University',
@@ -912,10 +912,10 @@ export default async function ProgramPage({ params }: Props) {
               {prog.fullName}
             </p>
             <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3" style={{ animationDelay: '140ms' }}>
-              {prog.description}
+              {description}
             </p>
 
-            {/* Stat chips + next batch — one wrap row on mobile */}
+            {/* Stat chips + next batch - one wrap row on mobile */}
             <div className="anim-load-left mt-8 flex flex-row flex-wrap items-center gap-x-3 gap-y-2" style={{ animationDelay: '210ms' }}>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/25 px-3.5 py-1.5 text-[13px] font-body font-semibold text-white">
                 <IconClock size={14} stroke={1.75} />
@@ -931,31 +931,40 @@ export default async function ProgramPage({ params }: Props) {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
                 </span>
-                <span><span className="text-white">{prog.nextBatch}</span> · Admissions open</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="text-white">July 2026 admissions are open</span>
+                  <span className="w-1 h-1 rounded-full bg-white/35 flex-none" />
+                  <span className="text-vgu-yellow">12 seats left</span>
+                </span>
               </span>
             </div>
 
             {/* CTAs */}
-            <div className="anim-load-left mt-12 flex flex-wrap gap-3" style={{ animationDelay: '310ms' }}>
-              <a
-                href="#counsellor"
-                data-apply-trigger
-                data-program={prog.name}
-                data-program-level={prog.level}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white font-heading font-semibold text-[16px] px-9 py-4 transition-all duration-200 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
-              >
-                Apply Now
-                <IconArrowRight size={17} />
-              </a>
-              <a
-                href="#"
-                data-brochure-trigger
-                data-program={prog.name}
-                className="inline-flex items-center gap-1.5 rounded-full border-2 border-white/30 bg-transparent hover:bg-white/10 hover:border-white/50 text-white font-heading font-semibold text-[15px] px-6 py-3.5 transition-all duration-200"
-              >
-                <IconDownload size={14} />
-                Download Brochure
-              </a>
+            <div className="anim-load-left mt-12 flex flex-col gap-4" style={{ animationDelay: '310ms' }}>
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Primary - white inverted, pairs with the red navbar CTA */}
+                <a
+                  href="#counsellor"
+                  data-apply-trigger
+                  data-program={prog.name}
+                  data-program-level={prog.level}
+                  className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  Apply Now
+                  <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+
+                {/* Secondary - ghost */}
+                <a
+                  href="#"
+                  data-brochure-trigger
+                  data-program={prog.name}
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                >
+                  <IconDownload size={15} className="transition-transform duration-200 group-hover:translate-y-0.5" />
+                  Download Brochure
+                </a>
+              </div>
             </div>
           </div>
 
@@ -963,16 +972,6 @@ export default async function ProgramPage({ params }: Props) {
       </section>
 
       <PlacementStatsStrip slug={prog.slug} />
-
-      {extras && (
-        <ProgramOverview
-          programName={prog.name}
-          programFullName={prog.fullName}
-          overview={extras.overview}
-          whoItsFor={extras.whoItsFor}
-          deptAtGlance={extras.deptAtGlance}
-        />
-      )}
 
       {/* ══ Main content ══ */}
       <section className="bg-neutral-50 pt-8 pb-12 px-5 md:px-8 lg:px-12 md:pt-10 md:pb-16">
@@ -1142,37 +1141,12 @@ export default async function ProgramPage({ params }: Props) {
         sampleImageUrl={sanityProg?.certificateSampleUrl}
       />
 
-      {/* ══ Eligibility check (compact pill row) ══ */}
-      {eligibility.length > 0 && (
-        <section className="bg-white py-12 lg:py-14 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
-          <div className="mx-auto max-w-[1080px]">
-            <div data-animate="fade-up" className="mb-6 text-center">
-              <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-                Eligibility
-              </p>
-              <h2 className="font-heading font-bold text-[24px] lg:text-[28px] tracking-[-0.5px] text-neutral-900">
-                Quick check before you apply
-              </h2>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              {eligibility.map((e, ei) => (
-                <div
-                  key={e}
-                  data-animate="fade-up"
-                  style={{ animationDelay: `${ei * 60}ms` }}
-                  className="inline-flex items-center gap-2.5 rounded-full bg-vgu-red/5 border border-vgu-red/20 px-4 py-2.5"
-                >
-                  <IconCheck size={14} stroke={2.5} className="text-vgu-red flex-none" />
-                  <p className="text-[14px] font-body text-neutral-800 leading-snug">{e}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <AdmissionSteps programName={prog.name} />
-      <RequiredDocuments programLevel={prog.level === 'pg' ? 'pg' : 'ug'} documents={REQUIRED_DOCUMENTS} />
+      <AdmissionSteps
+        programName={prog.name}
+        programLevel={prog.level === 'pg' ? 'pg' : 'ug'}
+        eligibility={eligibility}
+        documents={REQUIRED_DOCUMENTS}
+      />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
       <RelatedPrograms programs={relatedPrograms} />
 
@@ -1296,15 +1270,19 @@ function EnrollmentCard({ prog }: { prog: EnrollmentProg }) {
           </div>
         </div>
 
-        {/* Next batch */}
+        {/* Admissions status */}
         <div className="flex items-center gap-3 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-3 mb-5">
           <span className="relative flex h-2.5 w-2.5 flex-none">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
           </span>
           <div>
-            <p className="font-heading font-bold text-[13px] text-neutral-900">Next batch: {prog.nextBatch}</p>
-            <p className="text-[11px] font-body text-neutral-500">Limited seats, admissions now open</p>
+            <p className="inline-flex items-center flex-wrap gap-x-1.5 font-heading font-bold text-[13px] text-neutral-900">
+              July 2026 admissions are open
+              <span className="w-1 h-1 rounded-full bg-neutral-300 flex-none" />
+              <span className="text-vgu-red">12 seats left</span>
+            </p>
+            <p className="text-[11px] font-body text-neutral-500 mt-0.5">Enroll before seats fill up</p>
           </div>
         </div>
 

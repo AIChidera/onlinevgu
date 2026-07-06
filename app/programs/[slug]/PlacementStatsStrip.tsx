@@ -7,22 +7,22 @@ interface PlacementStats {
   rate:    string
   avgPkg:  string
   hirers:  string
-  topRole: string
+  highest: string
 }
 
 const PLACEMENT_DATA: Record<string, PlacementStats> = {
-  mba:      { rate: '97%', avgPkg: '₹10-18 LPA', hirers: '500+', topRole: 'Senior Manager'      },
-  'mba-if': { rate: '95%', avgPkg: '₹12-22 LPA', hirers: '350+', topRole: 'Investment Analyst' },
-  mca:      { rate: '94%', avgPkg: '₹8-16 LPA',  hirers: '400+', topRole: 'Cloud Architect'    },
-  bca:      { rate: '93%', avgPkg: '₹4-9 LPA',   hirers: '350+', topRole: 'Full-stack Engineer'},
-  bba:      { rate: '92%', avgPkg: '₹4-8 LPA',   hirers: '350+', topRole: 'Business Manager'   },
-  ba:       { rate: '88%', avgPkg: '₹3-6 LPA',   hirers: '250+', topRole: 'Policy Analyst'     },
-  ma:       { rate: '89%', avgPkg: '₹4-8 LPA',   hirers: '250+', topRole: 'Content Editor'     },
-  msc:      { rate: '90%', avgPkg: '₹5-10 LPA',  hirers: '280+', topRole: 'Data Analyst'       },
-  majmc:    { rate: '89%', avgPkg: '₹4-9 LPA',   hirers: '220+', topRole: 'Digital Producer'   },
+  mba:      { rate: '94%', avgPkg: '₹10-18 LPA', hirers: '500+', highest: '₹28 LPA' },
+  'mba-if': { rate: '92%', avgPkg: '₹12-22 LPA', hirers: '240+', highest: '₹46 LPA' },
+  mca:      { rate: '93%', avgPkg: '₹8-16 LPA',  hirers: '420+', highest: '₹22 LPA' },
+  bca:      { rate: '91%', avgPkg: '₹4-9 LPA',   hirers: '380+', highest: '₹14 LPA' },
+  bba:      { rate: '90%', avgPkg: '₹4-8 LPA',   hirers: '360+', highest: '₹12 LPA' },
+  ba:       { rate: '86%', avgPkg: '₹3-6 LPA',   hirers: '220+', highest: '₹10 LPA' },
+  ma:       { rate: '87%', avgPkg: '₹4-8 LPA',   hirers: '180+', highest: '₹12 LPA' },
+  msc:      { rate: '89%', avgPkg: '₹5-10 LPA',  hirers: '200+', highest: '₹18 LPA' },
+  majmc:    { rate: '88%', avgPkg: '₹4-9 LPA',   hirers: '220+', highest: '₹14 LPA' },
 }
 
-const DEFAULT_STATS: PlacementStats = { rate: '90%', avgPkg: '₹4-10 LPA', hirers: '300+', topRole: 'Specialist' }
+const DEFAULT_STATS: PlacementStats = { rate: '88%', avgPkg: '₹4-10 LPA', hirers: '300+', highest: '₹14 LPA' }
 
 export default function PlacementStatsStrip({ slug }: { slug: string }) {
   const stats = PLACEMENT_DATA[slug] ?? DEFAULT_STATS
@@ -31,7 +31,7 @@ export default function PlacementStatsStrip({ slug }: { slug: string }) {
     { Icon: IconTrendingUp, value: stats.rate,    label: 'Placement rate'  },
     { Icon: IconCash,       value: stats.avgPkg,  label: 'Average package' },
     { Icon: IconBriefcase,  value: stats.hirers,  label: 'Hiring partners' },
-    { Icon: IconAward,      value: stats.topRole, label: 'Top role'        },
+    { Icon: IconAward,      value: stats.highest, label: 'Highest offer'   },
   ]
 
   return (

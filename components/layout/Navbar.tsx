@@ -44,10 +44,7 @@ export default function Navbar() {
       >
         <div className="mx-auto flex h-[64px] lg:h-[72px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex-none font-heading font-bold text-[22px] text-vgu-red tracking-tight"
-          >
+          <Link href="/" className="flex-none font-heading font-bold text-[22px] text-vgu-red tracking-tight" aria-label="Online VGU - Home">
             Online VGU
           </Link>
 
@@ -131,7 +128,9 @@ export default function Navbar() {
         >
           {/* Drawer header */}
           <div className="flex h-[64px] items-center justify-between px-6 border-b border-neutral-200">
-            <span className="font-heading font-bold text-[20px] text-vgu-red">Online VGU</span>
+            <span className="font-heading font-bold text-[20px] text-vgu-red tracking-tight">
+              Online VGU
+            </span>
             <button
               className="h-11 w-11 flex items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
               onClick={() => setMobileOpen(false)}

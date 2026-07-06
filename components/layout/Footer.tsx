@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
 import { getSiteSettings } from '@/lib/sanity'
 
@@ -87,7 +88,7 @@ const SOCIALS = [
 export default async function Footer() {
   const settings = await getSiteSettings()
 
-  const phone        = settings?.phoneDisplay    || '1800 123 456'
+  const phone        = settings?.phoneDisplay    || '+91 80350 18677'
   const email        = settings?.admissionsEmail || 'admissions@onlinevgu.in'
   const socialHrefs: Record<string, string> = {
     LinkedIn:      settings?.socialLinkedIn  || 'https://www.linkedin.com/school/vgu/',
@@ -106,8 +107,15 @@ export default async function Footer() {
 
             {/* Brand col */}
             <div data-animate="fade-up">
-              <Link href="/" className="font-heading font-bold text-[22px] text-white tracking-tight">
-                Online VGU
+              <Link href="/" className="flex-none" aria-label="Online VGU - Home">
+                <Image
+                  src="/logos/vgu-logo.png"
+                  alt="Online VGU"
+                  width={200}
+                  height={100}
+                  unoptimized
+                  className="h-11 w-auto object-contain"
+                />
               </Link>
               <p className="mt-3 text-[14px] font-body leading-[1.7] text-white/60 max-w-[280px]">
                 UGC-entitled online degrees from Vivekananda Global University - NAAC A+ accredited,
@@ -135,10 +143,14 @@ export default async function Footer() {
 
               {/* Contact */}
               <div className="mt-6 flex flex-col gap-2.5 text-[13px] text-white/55">
-                <span className="flex items-center gap-2.5">
+                <a href="tel:+918035018677" className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
                   <IconPhone size={14} className="flex-none text-white/40" />
-                  {phone} · Mon-Sat 9am-7pm IST
-                </span>
+                  <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Admissions</span>+91 80350 18677</span>
+                </a>
+                <a href="tel:+919549086333" className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
+                  <IconPhone size={14} className="flex-none text-white/40" />
+                  <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Student Helpline</span>+91 95490 86333</span>
+                </a>
                 <span className="flex items-center gap-2.5">
                   <IconMail size={14} className="flex-none text-white/40" />
                   {email}

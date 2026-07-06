@@ -23,8 +23,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-nunito)', 'Nunito', 'sans-serif'],
-        body:    ['var(--font-lato)',   'Lato',   'sans-serif'],
+        heading: ['var(--font-heading)', 'Plus Jakarta Sans', 'sans-serif'],
+        body:    ['var(--font-body)',    'DM Sans',           'sans-serif'],
       },
       borderRadius: {
         sm:   '4px',

@@ -1,7 +1,6 @@
 export const revalidate = 3600
 
 import dynamic from 'next/dynamic'
-import IntakeCountdown from '@/components/sections/IntakeCountdown'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
 import ProgramsSection from '@/components/sections/ProgramsSection'
@@ -43,7 +42,7 @@ const ORG_JSON_LD = {
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+91-1800-123-456',
+    telephone: '+91-8035018677',
     contactType: 'admissions',
     areaServed: 'IN',
     availableLanguage: ['English', 'Hindi'],
@@ -94,7 +93,6 @@ export default async function HomePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
-      <IntakeCountdown />
       <Hero />
       <TrustBar />
       <ProgramsSection programmes={sanityPrograms.length > 0 ? sanityPrograms : undefined} />

@@ -201,7 +201,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      {/* ══ Hero — full-bleed cover image or brand gradient ══ */}
+      {/* ══ Hero - full-bleed cover image or brand gradient ══ */}
       <section className="relative overflow-hidden flex items-end" style={{ minHeight: 'min(62vh, 640px)' }}>
 
         {/* Background layer */}
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }: Props) {
           />
         )}
 
-        {/* Overlay — flat dark to match Placements/About hero */}
+        {/* Overlay - flat dark to match Placements/About hero */}
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         {/* Decorative flourish only on solid-colour hero (lost on photos) */}
@@ -230,7 +230,7 @@ export default async function BlogPostPage({ params }: Props) {
           <SketchFlourish shape="monogram" color="yellow" opacity={0.07} strokeWidth={28} trigger="mount" />
         )}
 
-        {/* Back link — aligned with content via same 1280 container */}
+        {/* Back link - aligned with content via same 1280 container */}
         <div className="absolute top-6 left-0 right-0 z-10 px-5 md:px-8 lg:px-12">
           <div className="mx-auto max-w-[1280px]">
             <Link
@@ -344,7 +344,7 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
       </section>
 
-      {/* ══ End matter — author card + share ══ */}
+      {/* ══ End matter - author card + share ══ */}
       <section className="bg-white border-t border-neutral-100 px-5 md:px-8 lg:px-12 py-10 lg:py-16">
         <div data-animate="fade-up" className="mx-auto max-w-[820px]">
           {post.author && (post.author.name || post.author.title) && (

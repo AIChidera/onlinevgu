@@ -83,7 +83,7 @@ export default function TermsPage() {
       <section className="py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px] grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 lg:gap-16">
 
-          {/* Sticky TOC — desktop only */}
+          {/* Sticky TOC - desktop only */}
           <aside className="hidden lg:block">
             <div className="sticky top-24">
               <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-4">
@@ -453,7 +453,7 @@ function Callout({ tone, children }: { tone: 'muted' | 'emphasis'; children: Rea
 function ContactCard({ email }: { email: string }) {
   return (
     <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {/* Email tile — clickable, red-tinted shadow always visible */}
+      {/* Email tile - clickable, red-tinted shadow always visible */}
       <a
         href={`mailto:${email}`}
         className="group flex items-start gap-4 rounded-2xl bg-white p-5 md:p-6

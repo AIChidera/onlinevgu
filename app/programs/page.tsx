@@ -87,29 +87,23 @@ export default async function ProgramsPage() {
 
             {/* CTAs */}
             <div
-              className="anim-load-left mt-12 flex flex-wrap gap-3"
+              className="anim-load-left mt-12 flex flex-wrap items-center gap-3"
               style={{ animationDelay: '210ms' }}
             >
               <a
                 href="#programs-grid"
-                className="inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent
-                           text-vgu-red hover:text-white rounded-full px-6 py-3.5 md:px-9 md:py-4 text-[16px]
-                           font-heading font-semibold whitespace-nowrap transition-all duration-200
-                           shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
               >
                 Browse Programs
-                <IconChevronDown size={17} />
+                <IconChevronDown size={18} className="transition-transform duration-200 group-hover:translate-y-0.5" />
               </a>
               <a
                 href="#brochure"
                 data-brochure-trigger
-                className="inline-flex items-center justify-center gap-1.5 border-2 border-white/30
-                           bg-transparent text-white hover:bg-white/10 hover:border-white/50
-                           rounded-full px-6 py-3.5 text-[15px]
-                           font-heading font-semibold whitespace-nowrap transition-all duration-200"
+                className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
               >
+                <IconDownload size={15} className="transition-transform duration-200 group-hover:translate-y-0.5" />
                 Download Brochure
-                <IconDownload size={14} />
               </a>
             </div>
 

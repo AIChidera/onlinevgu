@@ -11,6 +11,7 @@ import {
   IconTrendingUp,
   IconBrain,
   IconArrowRight,
+  IconCheck,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -64,7 +65,7 @@ const VALUES = [
   },
 ]
 
-// Accreditation color styles — dynamic data values, inline styles permitted
+// Accreditation color styles - dynamic data values, inline styles permitted
 const ACC_STYLES = {
   red:  { bar: '#C04036', bg: 'rgba(192,64,54,0.06)',  text: '#C04036', border: 'rgba(192,64,54,0.20)',  cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.05) 100%)'  },
   yel:  { bar: '#FFA412', bg: 'rgba(255,164,18,0.10)', text: '#7a4d00', border: 'rgba(255,164,18,0.35)', cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(255,164,18,0.07) 100%)' },
@@ -72,9 +73,9 @@ const ACC_STYLES = {
 }
 
 const ACCREDITATIONS = [
-  { name: 'UGC',     full: 'University Grants Commission',                  detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.', s: ACC_STYLES.red,  logo: '/assets/trust/ugc.svg',  status: 'Entitled',   ghost: 'U' },
-  { name: 'NAAC A+', full: 'National Assessment and Accreditation Council', detail: 'Highest grade, 3.29 / 4.0 CGPA. First cycle accreditation in 2022, valid through 2027.',                  s: ACC_STYLES.yel,  logo: '/assets/trust/naac.svg', status: 'A+ Grade',   ghost: 'N' },
-  { name: 'AICTE',   full: 'All India Council for Technical Education',     detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',               s: ACC_STYLES.dark, logo: '/assets/trust/aicte.svg',status: 'Approved',   ghost: 'A' },
+  { name: 'UGC',     full: 'University Grants Commission',                  detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.', s: ACC_STYLES.red,  logo: '/logos/ugc-entitled.png',      status: 'Entitled',   ghost: 'U' },
+  { name: 'NAAC A+', full: 'National Assessment and Accreditation Council', detail: 'Highest grade, 3.29 / 4.0 CGPA. First cycle accreditation in 2022, valid through 2027.',                  s: ACC_STYLES.yel,  logo: '/logos/naac-grade-a-plus.png', status: 'A+ Grade',   ghost: 'N' },
+  { name: 'AICTE',   full: 'All India Council for Technical Education',     detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',               s: ACC_STYLES.dark, logo: '/logos/aicte-approved.png',    status: 'Approved',   ghost: 'A' },
   { name: 'NIRF',    full: 'National Institutional Ranking Framework',      detail: 'Ranked by the Ministry of Education under the University and Management categories.',                          s: ACC_STYLES.red,  logo: null,                     status: 'Ranked',     ghost: 'N' },
   { name: 'AIU',     full: 'Association of Indian Universities',            detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',               s: ACC_STYLES.yel,  logo: null,                     status: 'Member',     ghost: 'A' },
   { name: 'WES',     full: 'World Education Services, Canada',              detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',         s: ACC_STYLES.dark, logo: null,                     status: 'Recognised', ghost: 'W' },
@@ -175,7 +176,7 @@ export default async function AboutPage() {
     <div>
       <Breadcrumb items={[{ label: 'About VGU' }]} />
 
-      {/* ══ Hero — swoop yellow (whisper-faint on the photo) ══ */}
+      {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
           src={HERO_IMAGE_SRC}
@@ -213,29 +214,32 @@ export default async function AboutPage() {
             </p>
 
             <div
-              className="anim-load-left mt-12 flex flex-col sm:flex-row gap-3"
+              className="anim-load-left mt-12 flex flex-col gap-4"
               style={{ animationDelay: '210ms' }}
             >
-              <a
-                href="#counsellor"
-                data-apply-trigger
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-white bg-white hover:bg-transparent text-vgu-red hover:text-white rounded-full px-9 py-4 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200 shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
-              >
-                Apply Now
-                <IconArrowRight size={16} />
-              </a>
-              <a
-                href="/programs"
-                className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50 rounded-full px-6 py-3.5 text-[16px] font-heading font-semibold whitespace-nowrap transition-all duration-200"
-              >
-                Our Programs
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="#counsellor"
+                  data-apply-trigger
+                  className="group inline-flex items-center gap-3 rounded-full bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  Apply Now
+                  <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+                <a
+                  href="/programs"
+                  className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                >
+                  Our Programs
+                  <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══ Stats strip — arc sweeps across the achievement numbers ══ */}
+      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -272,7 +276,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Mission & Values — loop (Q-shape) suits the philosophical section ══ */}
+      {/* ══ Mission & Values - loop (Q-shape) suits the philosophical section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -288,7 +292,7 @@ export default async function AboutPage() {
                 Making great education accessible to every serious learner.
               </h2>
 
-              {/* Pull-quote — typographic treatment per Design Bible testimonial card spec */}
+              {/* Pull-quote - typographic treatment per Design Bible testimonial card spec */}
               <div className="bg-white rounded-2xl px-6 pt-4 pb-5 mb-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
                 <div
                   className="font-heading font-bold text-[64px] text-vgu-red leading-[0.8] mb-2 select-none"
@@ -311,7 +315,7 @@ export default async function AboutPage() {
 
             {/* Right: values */}
 
-            {/* Mobile — horizontal snap-scroll strip (breaks the wall) */}
+            {/* Mobile - horizontal snap-scroll strip (breaks the wall) */}
             <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {VALUES.map((v, i) => (
                 <div key={v.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
@@ -343,7 +347,7 @@ export default async function AboutPage() {
               ))}
             </div>
 
-            {/* Desktop — vertical stack */}
+            {/* Desktop - vertical stack */}
             <div className="hidden md:flex md:flex-col gap-4">
               {VALUES.map((v, i) => (
                 <div
@@ -380,7 +384,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Accreditations — monogram (VGU-V) in a credibility section ══ */}
+      {/* ══ Accreditations - monogram (VGU-V) in a credibility section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
 
@@ -394,7 +398,7 @@ export default async function AboutPage() {
             </h2>
           </div>
 
-          {/* Mobile — 2×3 compact trust-badge grid */}
+          {/* Mobile - 2×3 compact trust-badge grid */}
           <div className="md:hidden grid grid-cols-2 gap-3">
             {ACCREDITATIONS.map((a, i) => (
               <div
@@ -419,8 +423,8 @@ export default async function AboutPage() {
                 {/* Logo or colour badge */}
                 <div className="relative mt-2 mb-3">
                   {a.logo ? (
-                    <div className="w-14 h-14 rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.10)]">
-                      <Image src={a.logo} alt={a.name} width={56} height={56} unoptimized className="object-contain w-full h-full" />
+                    <div className="w-28 h-14 rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.10)]">
+                      <Image src={a.logo} alt={a.name} width={112} height={56} unoptimized className="object-contain w-full h-full" />
                     </div>
                   ) : (
                     <div
@@ -448,7 +452,7 @@ export default async function AboutPage() {
             ))}
           </div>
 
-          {/* Desktop — full detail 3-col grid */}
+          {/* Desktop - full detail 3-col grid */}
           <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {ACCREDITATIONS.map((a, i) => (
               <div
@@ -470,8 +474,8 @@ export default async function AboutPage() {
                 <div className="relative p-6">
                   <div className="flex items-start justify-between mb-5">
                     {a.logo ? (
-                      <div className="w-14 h-14 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105">
-                        <Image src={a.logo} alt={a.name} width={56} height={56} unoptimized className="object-contain w-full h-full" />
+                      <div className="w-28 h-14 rounded-xl overflow-hidden flex-none shadow-sm transition-transform duration-200 group-hover:scale-105 group-hover/card:scale-105">
+                        <Image src={a.logo} alt={a.name} width={112} height={56} unoptimized className="object-contain w-full h-full" />
                       </div>
                     ) : (
                       <div
@@ -497,7 +501,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Campus Experience — arc (digital reach spanning the physical) ══ */}
+      {/* ══ Campus Experience - arc (digital reach spanning the physical) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-10 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
@@ -603,7 +607,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Hiring Partners — loop (employer-graduate connection) ══ */}
+      {/* ══ Hiring Partners - loop (employer-graduate connection) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.03} strokeWidth={20} />
 
@@ -639,14 +643,14 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ History timeline — wave conveys the flow of time ══ */}
+      {/* ══ History timeline - wave conveys the flow of time ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-16 items-start">
 
-            {/* Left sticky panel — mobile: identity card, desktop: dissolves via md:contents */}
+            {/* Left sticky panel - mobile: identity card, desktop: dissolves via md:contents */}
             <div data-animate="slide-from-left" className="lg:sticky lg:top-[120px]">
               <div
                 className="rounded-2xl border border-vgu-red/15 p-6 shadow-[0_8px_32px_rgba(192,64,54,0.10)] md:contents"
@@ -677,8 +681,8 @@ export default async function AboutPage() {
                   className="mt-6 flex items-center gap-4 rounded-2xl border border-vgu-red/20 px-4 py-4 shadow-[0_4px_16px_rgba(192,64,54,0.12)]"
                   style={{ background: 'linear-gradient(135deg, #ffffff 45%, rgba(192,64,54,0.07) 100%)' }}
                 >
-                  <div className="flex-none w-12 h-12 rounded-xl overflow-hidden shadow-[0_4px_14px_rgba(192,64,54,0.20)]">
-                    <Image src="/assets/trust/naac.svg" width={48} height={48} alt="NAAC" unoptimized className="w-full h-full object-contain" />
+                  <div className="flex-none w-24 h-12 rounded-xl overflow-hidden shadow-[0_4px_14px_rgba(192,64,54,0.20)]">
+                    <Image src="/logos/naac-grade-a-plus.png" width={96} height={48} alt="NAAC A+" unoptimized className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <div className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">NAAC A+ Accredited</div>
@@ -774,7 +778,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Alumni Community — swoop (sweeping sense of a large, growing community) ══ */}
+      {/* ══ Alumni Community - swoop (sweeping sense of a large, growing community) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -791,7 +795,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          {/* Alumni features — Mobile: snap-scroll, Desktop: 3-col grid */}
+          {/* Alumni features - Mobile: snap-scroll, Desktop: 3-col grid */}
           <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_FEATURES.map((f, i) => (
               <div key={f.label} className="snap-start flex-none w-[72vw] max-w-[280px]">
@@ -854,7 +858,7 @@ export default async function AboutPage() {
             ))}
           </div>
 
-          {/* Testimonial cards — Mobile: snap-scroll, Desktop: 3-col grid */}
+          {/* Testimonial cards - Mobile: snap-scroll, Desktop: 3-col grid */}
           <div className="md:hidden -mx-5 px-5 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex gap-4 pb-4 mb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ALUMNI_TESTIMONIALS.map((t, i) => (
               <div key={t.name} className="snap-start flex-none w-[82vw] max-w-[320px]">

@@ -64,8 +64,10 @@ export default function ProgramsGrid({
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-2">
               Browse Programs
             </p>
-            <p className="text-[16px] font-body text-neutral-500">
-              {visible.length} program{visible.length !== 1 ? 's' : ''} · Next batch {nextBatch}
+            <p className="inline-flex items-center flex-wrap gap-x-1.5 text-[16px] font-body text-neutral-500">
+              <span>{visible.length} program{visible.length !== 1 ? 's' : ''} · July 2026 admissions open</span>
+              <span className="w-1 h-1 rounded-full bg-neutral-400 flex-none" />
+              <span className="text-vgu-red font-semibold">12 seats left</span>
             </p>
           </div>
 
