@@ -43,7 +43,6 @@ export default async function ProgramsPage() {
       }))
     : PROGRAMMES.map(p => ({ _id: p.slug, slug: p.slug, name: p.name, fullName: p.fullName, level: p.level, discipline: p.discipline, duration: p.duration, fee: p.fee, popular: p.popular, specialisations: p.specialisations, image: p.image ?? null }))
 
-  const nextBatch = settings?.nextBatch ?? NEXT_BATCH
   const count = programmes.length
   const disciplineCount = new Set(programmes.map(p => p.discipline)).size
 
