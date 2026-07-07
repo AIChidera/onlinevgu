@@ -43,8 +43,8 @@ export default function Navbar() {
             : 'bg-white border-b border-neutral-200',
         ].join(' ')}
       >
-        <div className="mx-auto flex h-[76px] lg:h-[88px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
-          {/* Logo lockup - VGU + NAAC paired tightly */}
+        <div className="mx-auto flex h-[80px] lg:h-[96px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
+          {/* Logo lockup - VGU + NAAC paired tightly, matched heights */}
           <Link href="/" className="flex-none flex items-center gap-1.5 md:gap-2" aria-label="Online VGU - NAAC A+ Accredited - Home">
             <Image
               src="/logos/vgu-logo.png"
@@ -53,7 +53,7 @@ export default function Navbar() {
               height={300}
               unoptimized
               priority
-              className="h-[72px] md:h-[88px] lg:h-[104px] w-auto object-contain"
+              className="h-[80px] md:h-[96px] lg:h-[112px] w-auto object-contain"
             />
             <Image
               src="/logos/naac-grade-a-plus.png"
@@ -61,7 +61,7 @@ export default function Navbar() {
               width={400}
               height={200}
               unoptimized
-              className="hidden sm:block h-[56px] md:h-[68px] lg:h-[80px] w-auto object-contain"
+              className="hidden sm:block h-[80px] md:h-[96px] lg:h-[112px] w-auto object-contain"
             />
           </Link>
 
