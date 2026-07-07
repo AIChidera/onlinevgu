@@ -44,8 +44,11 @@ export default function Navbar() {
         ].join(' ')}
       >
         <div className="mx-auto flex h-[80px] lg:h-[96px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
-          {/* Logo lockup - VGU + NAAC paired tightly, matched heights */}
-          <Link href="/" className="flex-none flex items-center gap-1.5 md:gap-2" aria-label="Online VGU - NAAC A+ Accredited - Home">
+          {/* Logo lockup - VGU + NAAC paired tightly.
+              Negative margin on NAAC eats into the transparent padding both
+              PNGs bake in, so the two marks read as touching rather than
+              having a visible gap between them. */}
+          <Link href="/" className="flex-none flex items-center" aria-label="Online VGU - NAAC A+ Accredited - Home">
             <Image
               src="/logos/vgu-logo.png"
               alt="Online VGU - Entitled by UGC"
@@ -61,7 +64,7 @@ export default function Navbar() {
               width={400}
               height={200}
               unoptimized
-              className="hidden sm:block h-[80px] md:h-[96px] lg:h-[112px] w-auto object-contain"
+              className="hidden sm:block h-[92px] md:h-[108px] lg:h-[124px] w-auto object-contain -ml-4 md:-ml-6 lg:-ml-8"
             />
           </Link>
 
