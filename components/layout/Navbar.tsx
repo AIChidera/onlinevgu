@@ -43,29 +43,25 @@ export default function Navbar() {
             : 'bg-white border-b border-neutral-200',
         ].join(' ')}
       >
-        <div className="mx-auto flex h-[64px] lg:h-[72px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
-          {/* Logo lockup - VGU + NAAC paired with a thin divider */}
-          <Link href="/" className="flex-none flex items-center gap-3 md:gap-4" aria-label="Online VGU - NAAC A+ Accredited - Home">
+        <div className="mx-auto flex h-[76px] lg:h-[88px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
+          {/* Logo lockup - VGU + NAAC paired tightly */}
+          <Link href="/" className="flex-none flex items-center gap-1.5 md:gap-2" aria-label="Online VGU - NAAC A+ Accredited - Home">
             <Image
               src="/logos/vgu-logo.png"
               alt="Online VGU - Entitled by UGC"
-              width={220}
-              height={220}
+              width={300}
+              height={300}
               unoptimized
               priority
-              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
-            />
-            <span
-              aria-hidden="true"
-              className="hidden sm:block h-9 md:h-10 lg:h-11 w-px bg-neutral-300"
+              className="h-[72px] md:h-[88px] lg:h-[104px] w-auto object-contain"
             />
             <Image
               src="/logos/naac-grade-a-plus.png"
               alt="NAAC A+ Accredited University"
-              width={300}
-              height={150}
+              width={400}
+              height={200}
               unoptimized
-              className="hidden sm:block h-9 md:h-10 lg:h-12 w-auto object-contain"
+              className="hidden sm:block h-[56px] md:h-[68px] lg:h-[80px] w-auto object-contain"
             />
           </Link>
 
