@@ -64,7 +64,7 @@ export default function Navbar() {
               width={400}
               height={200}
               unoptimized
-              className="hidden sm:block h-[92px] md:h-[108px] lg:h-[124px] w-auto object-contain -ml-4 md:-ml-6 lg:-ml-8"
+              className="hidden sm:block h-[92px] md:h-[108px] lg:h-[124px] w-auto object-contain -ml-8 md:-ml-11 lg:-ml-14"
             />
           </Link>
 
