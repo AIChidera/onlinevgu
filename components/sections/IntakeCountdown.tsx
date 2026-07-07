@@ -15,7 +15,7 @@ function getDaysLeft() {
  * Slim amber strip mounted above the Hero. Bible §07: subtle amber, not aggressive red.
  * Bible §10: real intake countdowns build genuine scarcity without pressure-selling.
  */
-export default function IntakeCountdown() {
+export default function IntakeCountdown({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
   const [days, setDays] = useState<number | null>(null)
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function IntakeCountdown() {
           <IconClock size={16} stroke={2.25} className="flex-none" />
           {days !== null && days > 0 ? (
             <span>
-              July 2026 intake closes in{' '}
+              {nextBatch} intake closes in{' '}
               <strong className="font-bold">{days} days</strong>
               <span className="hidden sm:inline"> · Application deadline 25 June 2026</span>
             </span>
           ) : (
             <span>
-              July 2026 intake, applications open
+              {nextBatch} intake, applications open
               <span className="hidden sm:inline"> · Deadline 25 June 2026</span>
             </span>
           )}

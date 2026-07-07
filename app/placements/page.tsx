@@ -24,6 +24,7 @@ import {
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import HirerStrip from '@/app/programs/[slug]/HirerStrip'
+import { getSiteConfig } from '@/lib/sanity'
 
 export const revalidate = 3600
 
@@ -42,12 +43,14 @@ export const metadata: Metadata = {
   },
 }
 
-const STATS = [
-  { value: '95%',     label: 'Placement rate',  detail: 'Class of 2023, within 6 months', Icon: IconTrendingUp },
-  { value: '500+',    label: 'Hiring partners', detail: 'Across India and abroad',         Icon: IconBuilding   },
-  { value: '25+',     label: 'Top recruiters',  detail: 'TCS, Deloitte, Amazon and more',  Icon: IconAward      },
-  { value: '50,000+', label: 'Alumni network',  detail: 'Across 40+ countries',            Icon: IconUsers      },
-]
+function buildStats(config: { stats: { placement: string; hiringPartners: string; learners: string; countries: string } }) {
+  return [
+    { value: config.stats.placement,      label: 'Placement rate',  detail: 'Class of 2023, within 6 months',              Icon: IconTrendingUp },
+    { value: config.stats.hiringPartners, label: 'Hiring partners', detail: 'Across India and abroad',                     Icon: IconBuilding   },
+    { value: '25+',                       label: 'Top recruiters',  detail: 'TCS, Deloitte, Amazon and more',              Icon: IconAward      },
+    { value: config.stats.learners,       label: 'Alumni network',  detail: `Across ${config.stats.countries} countries`,  Icon: IconUsers      },
+  ]
+}
 
 const SUPPORT_SERVICES = [
   {
@@ -187,7 +190,10 @@ const SUCCESS_STORIES = [
   },
 ]
 
-export default function PlacementsPage() {
+export default async function PlacementsPage() {
+  const config = await getSiteConfig()
+  const STATS = buildStats(config)
+
   return (
     <div>
       <Breadcrumb items={[{ label: 'Placements' }]} />
@@ -225,7 +231,7 @@ export default function PlacementsPage() {
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[600px]"
               style={{ animationDelay: '140ms' }}
             >
-              95% of our 2023 batch placed within six months. Every learner gets the same support - no asterisks.
+              {config.stats.placement} of our 2023 batch placed within six months. Every learner gets the same support - no asterisks.
             </p>
 
             <div
@@ -380,7 +386,7 @@ export default function PlacementsPage() {
               Where you&apos;ll work
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              500+ companies hire VGU graduates
+              {config.stats.hiringPartners} companies hire VGU graduates
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
               From India&apos;s biggest conglomerates to global tech firms across IT, finance, consulting, and more.

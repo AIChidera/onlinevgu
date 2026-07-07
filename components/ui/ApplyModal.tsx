@@ -11,19 +11,19 @@ function sanitizePhone(v: string) {
   return v.replace(/[^\d\s+\-().]/g, '')
 }
 
+const INITIAL_FORM = { name: '', email: '', mobile: '', level: '' as '' | 'ug' | 'pg', programme: '', intake: '', consent: false }
+
 // Two-step wizard: choosing programme on step 1, personal details + intake on
 // step 2. This is what lets the modal fit without scrolling on every viewport
 // from a 375x667 phone up to a 1440-wide desktop - a single tall form does not.
-const INTAKE_OPTIONS = [
-  { value: 'July 2026',    label: 'July 2026',   popular: true  },
-  { value: 'January 2027', label: 'Jan 2027',    popular: false },
-  { value: 'July 2027',    label: 'July 2027',   popular: false },
-  { value: 'Not sure yet', label: 'Not sure',    popular: false },
-]
+export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
+  const INTAKE_OPTIONS = [
+    { value: nextBatch,      label: nextBatch,    popular: true  },
+    { value: 'January 2027', label: 'Jan 2027',   popular: false },
+    { value: 'July 2027',    label: 'July 2027',  popular: false },
+    { value: 'Not sure yet', label: 'Not sure',   popular: false },
+  ]
 
-const INITIAL_FORM = { name: '', email: '', mobile: '', level: '' as '' | 'ug' | 'pg', programme: '', intake: '', consent: false }
-
-export default function ApplyModal() {
   const [open, setOpen]             = useState(false)
   const [step, setStep]             = useState<1 | 2>(1)
   const [form, setForm]             = useState(INITIAL_FORM)

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ProgramsGrid from './ProgramsGrid'
-import { getAllPrograms } from '@/lib/sanity'
+import { getAllPrograms, getSiteConfig } from '@/lib/sanity'
 import { PROGRAMMES } from './data'
 
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ProgramsPage() {
-  const sanityPrograms = await getAllPrograms()
+  const [sanityPrograms, config] = await Promise.all([getAllPrograms(), getSiteConfig()])
 
   // Build a slug→image map from the hardcoded fallback so we can fill gaps
   // when Sanity programmes don't yet have a hero image uploaded in the CMS.
@@ -108,7 +108,7 @@ export default async function ProgramsPage() {
       </section>
 
       {/* ══ Grid ══ */}
-      <ProgramsGrid programmes={programmes} />
+      <ProgramsGrid programmes={programmes} nextBatch={config.nextBatch} />
     </>
   )
 }

@@ -8,6 +8,7 @@ import {
   getProgramBySlug,
   getProgramFaqs,
   getTestimonialsByProgram,
+  getSiteConfig,
 } from '@/lib/sanity'
 import {
   IconChevronRight,
@@ -781,11 +782,12 @@ const COLOR_GRAD: Record<string, string> = {
 export default async function ProgramPage({ params }: Props) {
   const { slug } = await params
 
-  const [sanityProg, sanityFaqs, sanityTestimonials, allSanityProgs] = await Promise.all([
+  const [sanityProg, sanityFaqs, sanityTestimonials, allSanityProgs, config] = await Promise.all([
     getProgramBySlug(slug),
     getProgramFaqs(slug),
     getTestimonialsByProgram(slug),
     getAllPrograms(),
+    getSiteConfig(),
   ])
 
   // Sanity is primary; fall back to hardcoded when CMS is not yet populated
@@ -932,7 +934,7 @@ export default async function ProgramPage({ params }: Props) {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="text-white">July 2026 admissions are open</span>
+                  <span className="text-white">{config.nextBatch} admissions are open</span>
                   <span className="w-1 h-1 rounded-full bg-white/35 flex-none" />
                   <span className="text-vgu-yellow">12 seats left</span>
                 </span>
@@ -1103,7 +1105,7 @@ export default async function ProgramPage({ params }: Props) {
 
             {/* ── Right: enrollment card (desktop only) ── */}
             <div className="hidden lg:block sticky top-[100px]">
-              <EnrollmentCard prog={prog} />
+              <EnrollmentCard prog={{ ...prog, nextBatch: config.nextBatch }} />
             </div>
 
           </div>
@@ -1139,6 +1141,7 @@ export default async function ProgramPage({ params }: Props) {
         programName={prog.name}
         programFullName={prog.fullName}
         sampleImageUrl={sanityProg?.certificateSampleUrl}
+        foundingYear={config.foundingYear}
       />
 
       <AdmissionSteps
@@ -1278,7 +1281,7 @@ function EnrollmentCard({ prog }: { prog: EnrollmentProg }) {
           </span>
           <div>
             <p className="inline-flex items-center flex-wrap gap-x-1.5 font-heading font-bold text-[13px] text-neutral-900">
-              July 2026 admissions are open
+              {prog.nextBatch} admissions are open
               <span className="w-1 h-1 rounded-full bg-neutral-300 flex-none" />
               <span className="text-vgu-red">12 seats left</span>
             </p>

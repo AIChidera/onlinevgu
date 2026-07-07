@@ -1,8 +1,7 @@
 import { IconArrowRight, IconHeadset } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
-import { NEXT_BATCH } from '@/lib/constants'
 
-export default function FooterCTA() {
+export default function FooterCTA({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
   return (
     <section className="sketch-hover-group relative overflow-hidden bg-vgu-red py-14 px-5 md:px-8 lg:px-12 lg:py-20">
       <SketchFlourish shape="swoop" color="yellow" opacity={0.09} strokeWidth={28} durationMs={2400} />
@@ -14,7 +13,7 @@ export default function FooterCTA() {
           Your Degree is<br />One Click Away.
         </h2>
         <p className="text-[17px] font-body leading-[1.7] text-white/70 max-w-[460px]">
-          No entrance exam. No campus visit. Enrol 100% online and start learning in {NEXT_BATCH}.
+          No entrance exam. No campus visit. Enrol 100% online and start learning in {nextBatch}.
         </p>
         <div className="flex items-center gap-3 flex-wrap justify-center">
           <a

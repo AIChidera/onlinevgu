@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getMilestones } from '@/lib/sanity'
+import { getMilestones, getSiteConfig } from '@/lib/sanity'
 import {
   IconAward,
   IconUsers,
@@ -14,7 +14,6 @@ import {
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
-import { FOUNDING_YEAR } from '@/lib/constants'
 import HirerStrip from '@/app/programs/[slug]/HirerStrip'
 
 export const revalidate = 3600
@@ -34,12 +33,14 @@ export const metadata: Metadata = {
   },
 }
 
-const STATS = [
-  { value: String(FOUNDING_YEAR), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
-  { value: 'NAAC A+',             label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
-  { value: '50,000+',             label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
-  { value: '40+',                 label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
-]
+function buildStats(config: { foundingYear: number; stats: { learners: string; countries: string } }) {
+  return [
+    { value: String(config.foundingYear), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
+    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
+    { value: config.stats.learners,       label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
+    { value: config.stats.countries,      label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
+  ]
+}
 
 const VALUES = [
   {
@@ -130,26 +131,28 @@ const ALUMNI_TESTIMONIALS = [
   },
 ]
 
-const ALUMNI_FEATURES = [
-  {
-    stat:  '50,000+',
-    label: 'Learners and counting',
-    body:  'Online learners from across India and 40+ countries. A community that grows every semester.',
-    Icon:  IconGlobe,
-  },
-  {
-    stat:  '500+',
-    label: 'Hiring partners',
-    body:  'AI-powered placement portal, unlimited mock interviews, and a placement cell working year-round.',
-    Icon:  IconTrendingUp,
-  },
-  {
-    stat:  '95%',
-    label: 'Placement rate',
-    body:  'Class of 2023. Built on real employer relationships and a curriculum aligned with what companies hire for.',
-    Icon:  IconAward,
-  },
-]
+function buildAlumniFeatures(config: { stats: { learners: string; hiringPartners: string; placement: string; countries: string } }) {
+  return [
+    {
+      stat:  config.stats.learners,
+      label: 'Learners and counting',
+      body:  `Online learners from across India and ${config.stats.countries} countries. A community that grows every semester.`,
+      Icon:  IconGlobe,
+    },
+    {
+      stat:  config.stats.hiringPartners,
+      label: 'Hiring partners',
+      body:  'AI-powered placement portal, unlimited mock interviews, and a placement cell working year-round.',
+      Icon:  IconTrendingUp,
+    },
+    {
+      stat:  config.stats.placement,
+      label: 'Placement rate',
+      body:  'Class of 2023. Built on real employer relationships and a curriculum aligned with what companies hire for.',
+      Icon:  IconAward,
+    },
+  ]
+}
 
 const MILESTONES = [
   { year: '2012', tag: 'Foundation',  event: 'VGU established in Jaipur under Rajasthan Private Universities Act (No. 11/2012)' },
@@ -163,13 +166,15 @@ const MILESTONES = [
 ]
 
 export default async function AboutPage() {
-  const sanityMilestones = await getMilestones()
+  const [sanityMilestones, config] = await Promise.all([getMilestones(), getSiteConfig()])
   const activeMilestones =
     sanityMilestones.length > 0
       ? sanityMilestones.map(m => ({ year: String(m.year), tag: (m as { tag?: string }).tag ?? '', event: m.event }))
       : MILESTONES
 
-  const yearsOld = new Date().getFullYear() - FOUNDING_YEAR
+  const STATS = buildStats(config)
+  const ALUMNI_FEATURES = buildAlumniFeatures(config)
+  const yearsOld = new Date().getFullYear() - config.foundingYear
 
   return (
     <div>
@@ -208,8 +213,8 @@ export default async function AboutPage() {
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[580px]"
               style={{ animationDelay: '140ms' }}
             >
-              Founded in {FOUNDING_YEAR} in Jaipur, VGU has grown into one of India&apos;s most respected
-              NAAC A+ universities - now bringing that same quality online to learners across 40+ countries.
+              Founded in {config.foundingYear} in Jaipur, VGU has grown into one of India&apos;s most respected
+              NAAC A+ universities - now bringing that same quality online to learners across {config.stats.countries} countries.
             </p>
 
             <div
@@ -616,7 +621,7 @@ export default async function AboutPage() {
               Hiring partners
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              500+ companies hire VGU graduates
+              {config.stats.hiringPartners} companies hire VGU graduates
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[540px] mx-auto lg:text-[17px]">
               From India&apos;s biggest conglomerates to global tech firms - a VGU degree opens real doors.
@@ -787,10 +792,10 @@ export default async function AboutPage() {
               Alumni community
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-neutral-900 md:text-[40px] max-w-[640px] mx-auto">
-              Join 50,000+ learners who didn&apos;t wait.
+              Join {config.stats.learners} learners who didn&apos;t wait.
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto lg:text-[17px]">
-              Working professionals, fresh graduates, and career-changers from across India and 40+ countries - one alumni network.
+              Working professionals, fresh graduates, and career-changers from across India and {config.stats.countries} countries - one alumni network.
             </p>
           </div>
 

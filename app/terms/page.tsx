@@ -9,6 +9,7 @@ import {
   IconCircleCheck,
   IconInfoCircle,
 } from '@tabler/icons-react'
+import { getSiteConfig } from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Online VGU',
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
 }
 
 const LAST_UPDATED = 'June 2026'
-const CONTACT_EMAIL = 'admissions@onlinevgu.in'
 
 const SECTIONS = [
   { id: 'acceptance',       num: '01', title: 'Acceptance of terms' },
@@ -36,7 +36,8 @@ const SECTIONS = [
   { id: 'contact',          num: '13', title: 'Contact us' },
 ]
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const config = await getSiteConfig()
   return (
     <main className="bg-white">
 
@@ -194,7 +195,7 @@ export default function TermsPage() {
                 items={[
                   'Use the platform solely for academic and administrative purposes related to your enrolled programme',
                   'Keep your login credentials confidential and not share them with any other person',
-                  'Notify VGU immediately at admissions@onlinevgu.in if you suspect unauthorised access to your account',
+                  `Notify VGU immediately at ${config.email} if you suspect unauthorised access to your account`,
                   'Not attempt to disrupt, overload, or otherwise interfere with the platform\'s infrastructure or availability',
                   'Not scrape, copy, or harvest content from the platform using automated tools',
                   'Comply with all applicable VGU student regulations, codes of conduct, and examination rules',
@@ -284,7 +285,7 @@ export default function TermsPage() {
               />
               <Callout tone="muted">
                 Fee payments are processed through VGU&apos;s official payment gateway. Never make payments
-                to any account not officially communicated by VGU. Contact admissions@onlinevgu.in to
+                to any account not officially communicated by VGU. Contact {config.email} to
                 verify payment details.
               </Callout>
             </Section>
@@ -364,7 +365,7 @@ export default function TermsPage() {
                 If you have any questions about these Terms, please reach out to us using the details below.
                 We aim to respond to all queries within 5 business days.
               </p>
-              <ContactCard email={CONTACT_EMAIL} />
+              <ContactCard email={config.email} addressLines={config.addressLines} />
             </Section>
 
             {/* Back to home */}
@@ -450,7 +451,7 @@ function Callout({ tone, children }: { tone: 'muted' | 'emphasis'; children: Rea
   )
 }
 
-function ContactCard({ email }: { email: string }) {
+function ContactCard({ email, addressLines }: { email: string; addressLines: string[] }) {
   return (
     <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
       {/* Email tile - clickable, red-tinted shadow always visible */}
@@ -498,8 +499,9 @@ function ContactCard({ email }: { email: string }) {
           </p>
           <address className="not-italic text-[13px] md:text-[14px] leading-[1.6] text-neutral-700 font-body">
             Vivekananda Global University<br />
-            VGU Campus, Jagatpura<br />
-            Jaipur, Rajasthan - 303 012, India
+            {addressLines.map((line, i) => (
+              <span key={i}>{line}{i < addressLines.length - 1 && <br />}</span>
+            ))}
           </address>
         </div>
       </div>

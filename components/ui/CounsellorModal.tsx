@@ -14,7 +14,7 @@ import PhoneField from '@/components/ui/PhoneField'
 const INITIAL_FORM = { name: '', mobile: '', email: '', programme: '' }
 const DEFAULT_DIAL = '+91'
 
-const WHATSAPP_URL = "https://wa.me/911800123456?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees"
+const DEFAULT_WHATSAPP_URL = 'https://wa.me/918035018677?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20VGU%20online%20degrees'
 
 // Strip HTML tags, script injection, and event-handler patterns client-side
 function sanitizeText(v: string) {
@@ -30,7 +30,8 @@ function sanitizePhone(v: string) {
   return v.replace(/[^\d\s+\-().]/g, '')
 }
 
-export default function CounsellorModal() {
+export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string }) {
+  const waHref = whatsappUrl || DEFAULT_WHATSAPP_URL
   const [open, setOpen]               = useState(false)
   const [form, setForm]               = useState(INITIAL_FORM)
   const [dialCode, setDialCode]       = useState(DEFAULT_DIAL)
@@ -254,7 +255,7 @@ export default function CounsellorModal() {
                   Need a quicker answer?
                 </p>
                 <a
-                  href={WHATSAPP_URL}
+                  href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeModal}

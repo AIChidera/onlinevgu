@@ -25,6 +25,7 @@ import {
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import { getSiteConfig, type SiteConfig } from '@/lib/sanity'
 
 
 const TRUST_PILLS = [
@@ -33,13 +34,15 @@ const TRUST_PILLS = [
   { Icon: IconClock,       label: 'Mon-Sat, 9am-7pm IST'    },
 ]
 
-const SOCIAL_ITEMS = [
-  { Icon: IconBrandLinkedin,  label: 'LinkedIn',  href: 'https://www.linkedin.com/school/vgu/',         hover: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]' },
-  { Icon: IconBrandInstagram, label: 'Instagram', href: 'https://www.instagram.com/vgujaipur/',         hover: 'hover:bg-[#E1306C] hover:border-[#E1306C]' },
-  { Icon: IconBrandYoutube,   label: 'YouTube',   href: 'https://www.youtube.com/@VGUVITCampusJaipur',  hover: 'hover:bg-[#FF0000] hover:border-[#FF0000]' },
-  { Icon: IconBrandX,         label: 'X',         href: 'https://x.com/JaipurVgu',                      hover: 'hover:bg-[#111827] hover:border-[#111827]' },
-  { Icon: IconBrandFacebook,  label: 'Facebook',  href: 'https://www.facebook.com/vgujpr',              hover: 'hover:bg-[#1877F2] hover:border-[#1877F2]' },
-]
+function buildSocialItems(config: SiteConfig) {
+  return [
+    { Icon: IconBrandLinkedin,  label: 'LinkedIn',  href: config.socials.linkedin,  hover: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]' },
+    { Icon: IconBrandInstagram, label: 'Instagram', href: config.socials.instagram, hover: 'hover:bg-[#E1306C] hover:border-[#E1306C]' },
+    { Icon: IconBrandYoutube,   label: 'YouTube',   href: config.socials.youtube,   hover: 'hover:bg-[#FF0000] hover:border-[#FF0000]' },
+    { Icon: IconBrandX,         label: 'X',         href: config.socials.x,         hover: 'hover:bg-[#111827] hover:border-[#111827]' },
+    { Icon: IconBrandFacebook,  label: 'Facebook',  href: config.socials.facebook,  hover: 'hover:bg-[#1877F2] hover:border-[#1877F2]' },
+  ]
+}
 
 const OFFICE_HOURS = [
   { d: 'Monday - Friday', h: '9:00 am - 7:00 pm' },
@@ -52,6 +55,74 @@ const MAP_EMBED_URL =
 
 const MAP_PLACE_URL =
   'https://www.google.com/maps/search/?api=1&query=Vivekananda+Global+University+VGU+Campus+Jagatpura+Jaipur+Rajasthan+303012'
+
+function buildMiniFaqs(config: SiteConfig) {
+  return [
+    {
+      q: 'Are VGU online degrees UGC-recognised?',
+      a: "Yes. VGU's online programmes are UGC-entitled through the Distance Education Bureau (DEB), and the university is NAAC A+ accredited. Your degree is fully recognised by employers, government bodies, and other universities in India.",
+    },
+    {
+      q: 'Can I pay fees in monthly EMIs?',
+      a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
+    },
+    {
+      q: 'How long does the application process take?',
+      a: 'Most applications are reviewed within 2-3 business days. A counsellor will reach out to confirm your details, request any missing documents, and guide you through the next steps.',
+    },
+    {
+      q: 'Can I visit the campus before enrolling?',
+      a: `Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email ${config.email} or call ${config.phone} to schedule a guided tour.`,
+    },
+  ]
+}
+
+function buildDepartments(config: SiteConfig) {
+  const mailto = (subject: string) => `mailto:${config.email}?subject=${encodeURIComponent(subject)}`
+  return [
+    { Icon: IconUsers,      label: 'Admissions',           desc: 'Programme info, eligibility, fees, and the application process.',       href: mailto('Admissions enquiry') },
+    { Icon: IconLifebuoy,   label: 'Student Support',      desc: 'LMS access, exam queries, and technical issues for enrolled students.', href: mailto('Student support')    },
+    { Icon: IconAward,      label: 'Alumni Relations',     desc: 'Reconnect with VGU, share your updates, or join the alumni network.',   href: mailto('Alumni')             },
+    { Icon: IconBriefcase,  label: 'Press & Partnerships', desc: 'Media enquiries, corporate tie-ups, and content collaborations.',       href: mailto('Press / Partnership') },
+  ]
+}
+
+function buildContactChannels(config: SiteConfig) {
+  return [
+    {
+      Icon:    IconPhone,
+      label:   'Admission queries',
+      primary: config.phone,
+      sub:     'Mon-Sat, 9am-7pm IST',
+      href:    `tel:${config.phoneTel}`,
+      cta:     'Call now',
+    },
+    {
+      Icon:    IconHeadset,
+      label:   'Student helpline',
+      primary: '+91 95490 86333',
+      sub:     'For enrolled students',
+      href:    'tel:+919549086333',
+      cta:     'Call now',
+    },
+    {
+      Icon:    IconBrandWhatsapp,
+      label:   'WhatsApp',
+      primary: config.phone,
+      sub:     'Usually replies in 15 min',
+      href:    config.whatsappUrl,
+      cta:     'Chat now',
+    },
+    {
+      Icon:    IconMail,
+      label:   'Email',
+      primary: config.email,
+      sub:     'Replies within 24 hours',
+      href:    `mailto:${config.email}`,
+      cta:     'Send email',
+    },
+  ]
+}
 
 const COUNSELLORS = [
   {
@@ -77,52 +148,6 @@ const COUNSELLORS = [
   },
 ]
 
-const MINI_FAQS = [
-  {
-    q: 'Are VGU online degrees UGC-recognised?',
-    a: "Yes. VGU's online programmes are UGC-entitled through the Distance Education Bureau (DEB), and the university is NAAC A+ accredited. Your degree is fully recognised by employers, government bodies, and other universities in India.",
-  },
-  {
-    q: 'Can I pay fees in monthly EMIs?',
-    a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
-  },
-  {
-    q: 'How long does the application process take?',
-    a: 'Most applications are reviewed within 2-3 business days. A counsellor will reach out to confirm your details, request any missing documents, and guide you through the next steps.',
-  },
-  {
-    q: 'Can I visit the campus before enrolling?',
-    a: 'Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email admissions@onlinevgu.in or call +91 80350 18677 to schedule a guided tour.',
-  },
-]
-
-const DEPARTMENTS = [
-  {
-    Icon:  IconUsers,
-    label: 'Admissions',
-    desc:  'Programme info, eligibility, fees, and the application process.',
-    href:  'mailto:admissions@onlinevgu.in?subject=Admissions%20enquiry',
-  },
-  {
-    Icon:  IconLifebuoy,
-    label: 'Student Support',
-    desc:  'LMS access, exam queries, and technical issues for enrolled students.',
-    href:  'mailto:admissions@onlinevgu.in?subject=Student%20support',
-  },
-  {
-    Icon:  IconAward,
-    label: 'Alumni Relations',
-    desc:  'Reconnect with VGU, share your updates, or join the alumni network.',
-    href:  'mailto:admissions@onlinevgu.in?subject=Alumni',
-  },
-  {
-    Icon:  IconBriefcase,
-    label: 'Press & Partnerships',
-    desc:  'Media enquiries, corporate tie-ups, and content collaborations.',
-    href:  'mailto:admissions@onlinevgu.in?subject=Press%20%2F%20Partnership',
-  },
-]
-
 export const metadata: Metadata = {
   title: 'Contact Us - VGU Online',
   description: 'Get in touch with the VGU admissions team. Call, WhatsApp, email, or fill out the form - we respond within 24 hours.',
@@ -134,42 +159,14 @@ export const metadata: Metadata = {
   },
 }
 
-const CONTACT_CHANNELS = [
-  {
-    Icon:    IconPhone,
-    label:   'Admission queries',
-    primary: '+91 80350 18677',
-    sub:     'Mon-Sat, 9am-7pm IST',
-    href:    'tel:+918035018677',
-    cta:     'Call now',
-  },
-  {
-    Icon:    IconHeadset,
-    label:   'Student helpline',
-    primary: '+91 95490 86333',
-    sub:     'For enrolled students',
-    href:    'tel:+919549086333',
-    cta:     'Call now',
-  },
-  {
-    Icon:    IconBrandWhatsapp,
-    label:   'WhatsApp',
-    primary: '+91 98765 43210',
-    sub:     'Usually replies in 15 min',
-    href:    'https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs',
-    cta:     'Chat now',
-  },
-  {
-    Icon:    IconMail,
-    label:   'Email',
-    primary: 'admissions@onlinevgu.in',
-    sub:     'Replies within 24 hours',
-    href:    'mailto:admissions@onlinevgu.in',
-    cta:     'Send email',
-  },
-]
+export default async function ContactPage() {
+  const config = await getSiteConfig()
+  const SOCIAL_ITEMS = buildSocialItems(config)
+  const MINI_FAQS = buildMiniFaqs(config)
+  const DEPARTMENTS = buildDepartments(config)
+  const CONTACT_CHANNELS = buildContactChannels(config)
+  const addressLines = config.addressLines
 
-export default function ContactPage() {
   return (
     <div>
       <Breadcrumb items={[{ label: 'Contact Us' }]} />
@@ -295,7 +292,7 @@ export default function ContactPage() {
               className="rounded-2xl bg-white border border-neutral-200/80 p-5 md:p-7 lg:p-8
                          shadow-[0_8px_28px_rgba(17,24,39,0.08)]"
             >
-              <ContactForm />
+              <ContactForm phone={config.phone} phoneTel={config.phoneTel} />
             </div>
 
             {/* Right: rich card stack */}
@@ -329,8 +326,9 @@ export default function ContactPage() {
                   </p>
                   <address className="not-italic text-[14px] md:text-[15px] leading-[1.6] text-neutral-700 font-body group-hover:text-vgu-red transition-colors duration-200">
                     Vivekananda Global University<br />
-                    VGU Campus, Jagatpura<br />
-                    Jaipur, Rajasthan - 303 012, India
+                    {addressLines.map((line, i) => (
+                      <span key={i}>{line}{i < addressLines.length - 1 && <br />}</span>
+                    ))}
                   </address>
                   <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-heading font-semibold text-vgu-red group-hover:gap-2 transition-all duration-200">
                     Get directions <IconArrowRight size={12} stroke={2.25} />
@@ -467,8 +465,9 @@ export default function ContactPage() {
                 </div>
               </div>
               <p className="text-[13px] font-body text-neutral-600 mb-4 leading-relaxed">
-                VGU Campus, Jagatpura<br />
-                Jaipur, Rajasthan - 303 012
+                {addressLines.map((line, i) => (
+                  <span key={i}>{line}{i < addressLines.length - 1 && <br />}</span>
+                ))}
               </p>
               <a
                 href={MAP_PLACE_URL}

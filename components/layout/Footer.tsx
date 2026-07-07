@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
-import { getSiteSettings } from '@/lib/sanity'
+import { getSiteConfig } from '@/lib/sanity'
 
 const PROGRAM_LINKS = [
   { label: 'BBA',    href: '/programs/bba'    },
@@ -86,16 +86,18 @@ const SOCIALS = [
 ]
 
 export default async function Footer() {
-  const settings = await getSiteSettings()
+  const config = await getSiteConfig()
 
-  const email        = settings?.admissionsEmail || 'admissions@onlinevgu.in'
   const socialHrefs: Record<string, string> = {
-    LinkedIn:      settings?.socialLinkedIn  || 'https://www.linkedin.com/school/vgu/',
-    Instagram:     settings?.socialInstagram || 'https://www.instagram.com/vgujaipur/',
-    YouTube:       settings?.socialYouTube   || 'https://www.youtube.com/@VGUVITCampusJaipur',
-    'Twitter / X': settings?.socialX        || 'https://x.com/JaipurVgu',
-    Facebook:      settings?.socialFacebook  || 'https://www.facebook.com/vgujpr',
+    LinkedIn:      config.socials.linkedin,
+    Instagram:     config.socials.instagram,
+    YouTube:       config.socials.youtube,
+    'Twitter / X': config.socials.x,
+    Facebook:      config.socials.facebook,
   }
+
+  // For the map link URL - collapse address to one line and URL-encode
+  const mapQuery = encodeURIComponent(config.address.replace(/\n/g, ', '))
 
   return (
     <footer className="bg-vgu-dark text-white/80 pt-16 pb-6 font-body">
@@ -142,26 +144,26 @@ export default async function Footer() {
 
               {/* Contact */}
               <div className="mt-6 flex flex-col gap-2.5 text-[13px] text-white/55">
-                <a href="tel:+918035018677" className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
+                <a href={`tel:${config.phoneTel}`} className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
                   <IconPhone size={14} className="flex-none text-white/40" />
-                  <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Admissions</span>+91 80350 18677</span>
+                  <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Admissions</span>{config.phone}</span>
                 </a>
                 <a href="tel:+919549086333" className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
                   <IconPhone size={14} className="flex-none text-white/40" />
                   <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Student Helpline</span>+91 95490 86333</span>
                 </a>
-                <span className="flex items-center gap-2.5">
+                <a href={`mailto:${config.email}`} className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
                   <IconMail size={14} className="flex-none text-white/40" />
-                  {email}
-                </span>
+                  {config.email}
+                </a>
                 <a
-                  href="https://maps.google.com/?q=Vivekananda+Global+University,+Jaipur,+Rajasthan+303012"
+                  href={`https://maps.google.com/?q=${mapQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-2.5 text-white/55 hover:text-white/80 transition-colors duration-150"
                 >
                   <IconMapPin size={14} className="flex-none text-white/40 mt-[2px]" />
-                  Vivekananda Global University, Jaipur, Rajasthan 303012
+                  {config.address.replace(/\n/g, ', ')}
                 </a>
               </div>
             </div>

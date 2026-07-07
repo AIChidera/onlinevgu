@@ -15,16 +15,18 @@ import ScrollReveal from '@/components/ScrollReveal'
 interface Props {
   children:       React.ReactNode
   whatsappNumber?: string
+  whatsappUrl?:   string
+  nextBatch?:     string
 }
 
-export default function SiteFooter({ children, whatsappNumber }: Props) {
+export default function SiteFooter({ children, whatsappNumber, whatsappUrl, nextBatch }: Props) {
   const pathname = usePathname()
   if (pathname?.startsWith('/studio')) return null
   return (
     <>
       {children}
-      <CounsellorModal />
-      <ApplyModal />
+      <CounsellorModal whatsappUrl={whatsappUrl} />
+      <ApplyModal nextBatch={nextBatch} />
       <BrochureModal />
       <WhatsAppButton phoneNumber={whatsappNumber} />
       <ScrollReveal />

@@ -1,4 +1,3 @@
-import { NEXT_BATCH } from '@/lib/constants'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
 
@@ -25,7 +24,7 @@ const STEPS = [
   },
 ]
 
-export default function AdmissionTimeline() {
+export default function AdmissionTimeline({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
   return (
     <SectionWrapper id="admissions" bg="white">
       <div className="text-center mb-12">
@@ -76,7 +75,7 @@ export default function AdmissionTimeline() {
         </Button>
         <div className="flex flex-wrap justify-center gap-6 text-[13px] text-neutral-500">
           {[
-            { label: 'Next intake', value: NEXT_BATCH },
+            { label: 'Next intake', value: nextBatch },
             { label: 'Min. qualification', value: '10+2 / Graduation' },
             { label: 'Entrance exam', value: 'Not required' },
           ].map((item) => (

@@ -10,7 +10,7 @@ import HashScroller from '@/components/HashScroller'
 import CookieConsent from '@/components/CookieConsent'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import IntakeCountdown from '@/components/sections/IntakeCountdown'
-import { getSiteSettings } from '@/lib/sanity'
+import { getSiteConfig } from '@/lib/sanity'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const settings = await getSiteSettings()
+  const config = await getSiteConfig()
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${plusJakartaSans.variable} ${dmSans.variable}`}>
       <body className="font-body antialiased">
@@ -95,12 +95,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           Skip to main content
         </a>
-        <IntakeCountdown />
+        <IntakeCountdown nextBatch={config.nextBatch} />
         <SiteNav />
         <main id="main-content">{children}</main>
         <ScrollToTop />
-        <SiteFooter whatsappNumber={settings?.whatsappNumber}>
-          <FooterCTA />
+        <SiteFooter whatsappNumber={config.whatsappNumber} whatsappUrl={config.whatsappUrl} nextBatch={config.nextBatch}>
+          <FooterCTA nextBatch={config.nextBatch} />
           <Footer />
         </SiteFooter>
       </body>

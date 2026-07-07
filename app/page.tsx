@@ -17,6 +17,7 @@ import {
   getCampusEvents,
   getAllPrograms,
   getSiteSettings,
+  getSiteConfig,
 } from '@/lib/sanity'
 
 const CourseExperienceSection = dynamic(
@@ -24,29 +25,31 @@ const CourseExperienceSection = dynamic(
   { ssr: false }
 )
 
-const ORG_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'EducationalOrganization',
-  name: 'Vivekananda Global University Online',
-  alternateName: 'Online VGU',
-  url: 'https://onlinevgu.in',
-  sameAs: ['https://vgu.ac.in'],
-  description: 'NAAC A+ accredited online UG and PG degree programs from Vivekananda Global University. UGC-entitled degrees trusted by 50,000+ learners across India.',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'VGU Campus, Dadupura',
-    addressLocality: 'Jaipur',
-    addressRegion: 'Rajasthan',
-    postalCode: '303012',
-    addressCountry: 'IN',
-  },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+91-8035018677',
-    contactType: 'admissions',
-    areaServed: 'IN',
-    availableLanguage: ['English', 'Hindi'],
-  },
+function buildOrgJsonLd(phoneTel: string, address: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'Vivekananda Global University Online',
+    alternateName: 'Online VGU',
+    url: 'https://onlinevgu.in',
+    sameAs: ['https://vgu.ac.in'],
+    description: 'NAAC A+ accredited online UG and PG degree programs from Vivekananda Global University. UGC-entitled degrees trusted by 50,000+ learners across India.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: address.split('\n')[0] || 'VGU Campus, Jagatpura',
+      addressLocality: 'Jaipur',
+      addressRegion: 'Rajasthan',
+      postalCode: '303012',
+      addressCountry: 'IN',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: phoneTel,
+      contactType: 'admissions',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi'],
+    },
+  }
 }
 
 function buildFaqJsonLd(faqs: SanityFaq[]) {
@@ -71,21 +74,23 @@ function parseStat(s: string | undefined | null, fallback: number): number {
 }
 
 export default async function HomePage() {
-  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings] = await Promise.all([
+  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings, config] = await Promise.all([
     getTestimonials(),
     getHomeFaqs(),
     getCampusEvents(),
     getAllPrograms(),
     getSiteSettings(),
+    getSiteConfig(),
   ])
 
   const faqJsonLd = buildFaqJsonLd(faqs)
+  const orgJsonLd = buildOrgJsonLd(config.phoneTel, config.address)
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
       {faqJsonLd && (
         <script
@@ -93,7 +98,7 @@ export default async function HomePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
-      <Hero />
+      <Hero nextBatch={config.nextBatch} />
       <TrustBar />
       <ProgramsSection programmes={sanityPrograms.length > 0 ? sanityPrograms : undefined} />
       <ImpactSection
@@ -107,7 +112,7 @@ export default async function HomePage() {
       <Testimonials stories={testimonials} />
       <CourseExperienceSection />
       <FeaturesSection />
-      <StepsSection />
+      <StepsSection nextBatch={config.nextBatch} />
       <FaqSection faqs={faqs} />
     </>
   )

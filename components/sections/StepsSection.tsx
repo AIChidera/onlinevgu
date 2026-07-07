@@ -1,4 +1,3 @@
-import { NEXT_BATCH } from '@/lib/constants'
 import {
   IconClipboardList,
   IconSchool,
@@ -8,39 +7,39 @@ import {
 } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
-const STEPS = [
-  {
-    badge:  'Step 1',
-    title:  'Register Online',
-    body:   'Fill the application form in under 2 minutes. A counsellor calls you within 2 hours.',
-    Icon:   IconClipboardList,
-  },
-  {
-    badge:  'Step 2',
-    title:  'Choose Your Program',
-    body:   'Pick your degree and specialisation. Our advisors help you find the best fit.',
-    Icon:   IconSchool,
-  },
-  {
-    badge:  'Step 3',
-    title:  'Pay Your Fees',
-    body:   'Pay securely online in minutes. No-cost EMI available from ₹2,999/month.',
-    Icon:   IconCreditCard,
-  },
-  {
-    badge:  'Step 4',
-    title:  'Start Learning',
-    body:   'Get instant portal access. Live classes from July 2026.',
-    Icon:   IconRocket,
-  },
-]
+export default function StepsSection({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
+  const STEPS = [
+    {
+      badge:  'Step 1',
+      title:  'Register Online',
+      body:   'Fill the application form in under 2 minutes. A counsellor calls you within 2 hours.',
+      Icon:   IconClipboardList,
+    },
+    {
+      badge:  'Step 2',
+      title:  'Choose Your Program',
+      body:   'Pick your degree and specialisation. Our advisors help you find the best fit.',
+      Icon:   IconSchool,
+    },
+    {
+      badge:  'Step 3',
+      title:  'Pay Your Fees',
+      body:   'Pay securely online in minutes. No-cost EMI available from ₹2,999/month.',
+      Icon:   IconCreditCard,
+    },
+    {
+      badge:  'Step 4',
+      title:  'Start Learning',
+      body:   `Get instant portal access. Live classes from ${nextBatch}.`,
+      Icon:   IconRocket,
+    },
+  ]
 
-const MICROCOPY = [
-  { label: 'Next intake',             value: NEXT_BATCH },
-  { label: 'Counsellor calls within', value: '2 hours'  },
-]
+  const MICROCOPY = [
+    { label: 'Next intake',             value: nextBatch },
+    { label: 'Counsellor calls within', value: '2 hours'  },
+  ]
 
-export default function StepsSection() {
   return (
     <section
       id="how-to-apply"

@@ -38,7 +38,7 @@ function getSeatsLeft(): number {
   return seats
 }
 
-export default function Hero() {
+export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
   return (
     <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
@@ -122,7 +122,7 @@ export default function Hero() {
               </span>
               <span className="inline-flex items-center gap-1.5 text-[12px] font-body text-white/75">
                 <IconCheck size={11} stroke={2.5} className="text-white/55 flex-none" />
-                July 2026 admissions are open
+                {nextBatch} admissions are open
                 <span className="w-1 h-1 rounded-full bg-white/35 flex-none" />
                 <span className="text-vgu-yellow font-semibold">{getSeatsLeft()} seats left</span>
               </span>

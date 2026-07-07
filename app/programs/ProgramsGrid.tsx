@@ -37,8 +37,10 @@ const DISC_ACCENT: Record<string, string> = {
 
 export default function ProgramsGrid({
   programmes,
+  nextBatch = 'July 2026',
 }: {
   programmes: ProgramGridItem[]
+  nextBatch?: string
 }) {
   const [filter, setFilter] = useState<Filter>('all')
   const visible = filter === 'all' ? programmes : programmes.filter(p => p.level === filter)
@@ -63,7 +65,7 @@ export default function ProgramsGrid({
               Browse Programs
             </p>
             <p className="inline-flex items-center flex-wrap gap-x-1.5 text-[16px] font-body text-neutral-500">
-              <span>{visible.length} program{visible.length !== 1 ? 's' : ''} · July 2026 admissions open</span>
+              <span>{visible.length} program{visible.length !== 1 ? 's' : ''} · {nextBatch} admissions open</span>
               <span className="w-1 h-1 rounded-full bg-neutral-400 flex-none" />
               <span className="text-vgu-red font-semibold">12 seats left</span>
             </p>

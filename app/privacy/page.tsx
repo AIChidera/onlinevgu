@@ -9,6 +9,7 @@ import {
   IconCircleCheck,
   IconInfoCircle,
 } from '@tabler/icons-react'
+import { getSiteConfig } from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Online VGU',
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
 }
 
 const LAST_UPDATED = 'June 2026'
-const CONTACT_EMAIL = 'admissions@onlinevgu.in'
 
 const SECTIONS = [
   { id: 'data-collected',  num: '01', title: 'What data we collect' },
@@ -34,7 +34,8 @@ const SECTIONS = [
   { id: 'contact',         num: '11', title: 'Contact us' },
 ]
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const config = await getSiteConfig()
   return (
     <main className="bg-white">
 
@@ -254,7 +255,7 @@ export default function PrivacyPage() {
                   'Contact our Data Protection Officer with any concerns',
                 ]}
               />
-              <RightsCard email={CONTACT_EMAIL} />
+              <RightsCard email={config.email} />
             </Section>
 
             {/* 08 */}
@@ -304,7 +305,7 @@ export default function PrivacyPage() {
                 For privacy-related questions, data requests, or to reach our Data Protection Officer, please
                 use the details below.
               </p>
-              <ContactCard email={CONTACT_EMAIL} />
+              <ContactCard email={config.email} addressLines={config.addressLines} />
             </Section>
 
             {/* Back to home */}
@@ -412,7 +413,7 @@ function RightsCard({ email }: { email: string }) {
   )
 }
 
-function ContactCard({ email }: { email: string }) {
+function ContactCard({ email, addressLines }: { email: string; addressLines: string[] }) {
   return (
     <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
       {/* Email tile - clickable, red-tinted shadow always visible */}
@@ -460,8 +461,9 @@ function ContactCard({ email }: { email: string }) {
           </p>
           <address className="not-italic text-[13px] md:text-[14px] leading-[1.6] text-neutral-700 font-body">
             Vivekananda Global University<br />
-            VGU Campus, Jagatpura<br />
-            Jaipur, Rajasthan - 303 012, India
+            {addressLines.map((line, i) => (
+              <span key={i}>{line}{i < addressLines.length - 1 && <br />}</span>
+            ))}
           </address>
         </div>
       </div>

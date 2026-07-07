@@ -268,6 +268,113 @@ export const getSiteSettings = unstable_cache(
   { revalidate: 3600, tags: ['siteSettings'] }
 )
 
+// Resolved site config - single source of truth for values that Sanity manages.
+// Every value falls back to a sensible default so a missing Sanity doc never
+// breaks the site. Callers should prefer this over reading getSiteSettings()
+// directly and applying `|| 'fallback'` inline.
+export interface SiteConfig {
+  phone:         string     // display form, e.g. "+91 80350 18677"
+  phoneTel:      string     // tel: link form, e.g. "+918035018677"
+  email:         string
+  address:       string     // single-line form
+  addressLines:  string[]   // split on newline for multi-line rendering
+  whatsappNumber: string    // digits only, no + or space
+  whatsappUrl:   string     // full pre-built https://wa.me/... URL
+  nextBatch:     string
+  foundingYear:  number
+  admissionsOpen: boolean
+  stats: {
+    learners:       string
+    countries:      string
+    placement:      string
+    rating:         string
+    programs:       string
+    hiringPartners: string
+    coursera:       string
+    yearEstablished: string
+  }
+  socials: {
+    linkedin:  string
+    instagram: string
+    facebook:  string
+    youtube:   string
+    x:         string
+  }
+}
+
+const WHATSAPP_DEFAULT_MESSAGE = 'Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs'
+
+// Hardcoded fallbacks - only used when Sanity fields are blank. Keeping them
+// close to the resolver so there's one file to grep when auditing what values
+// the site ships with by default.
+const FALLBACKS = {
+  phone:          '+91 80350 18677',
+  email:          'admissions@onlinevgu.in',
+  address:        'VGU Campus, Jagatpura\nJaipur, Rajasthan - 303 012, India',
+  whatsappNumber: '918035018677',
+  nextBatch:      'July 2026',
+  foundingYear:   2012,
+  admissionsOpen: true,
+  stats: {
+    learners:       '50,000+',
+    countries:      '40+',
+    placement:      '95%',
+    rating:         '4.8/5',
+    programs:       '30+',
+    hiringPartners: '500+',
+    coursera:       '7,000+',
+    yearEstablished: '2012',
+  },
+  socials: {
+    linkedin:  'https://www.linkedin.com/school/vgu/',
+    instagram: 'https://www.instagram.com/vgujaipur/',
+    facebook:  'https://www.facebook.com/vgujpr',
+    youtube:   'https://www.youtube.com/@VGUVITCampusJaipur',
+    x:         'https://x.com/JaipurVgu',
+  },
+} as const
+
+export async function getSiteConfig(): Promise<SiteConfig> {
+  const s = await getSiteSettings()
+
+  const phone   = (s?.phoneDisplay || FALLBACKS.phone).trim()
+  const phoneTel = '+' + phone.replace(/\D/g, '')
+  const address = (s?.address || FALLBACKS.address).trim()
+  const whatsappNumber = (s?.whatsappNumber || FALLBACKS.whatsappNumber).replace(/\D/g, '')
+  const foundingYearStr = s?.statYearEstablished || FALLBACKS.stats.yearEstablished
+  const foundingYearNum = parseInt(foundingYearStr, 10) || FALLBACKS.foundingYear
+
+  return {
+    phone,
+    phoneTel,
+    email:          s?.admissionsEmail || FALLBACKS.email,
+    address,
+    addressLines:   address.split('\n').map(l => l.trim()).filter(Boolean),
+    whatsappNumber,
+    whatsappUrl:    `https://wa.me/${whatsappNumber}?text=${WHATSAPP_DEFAULT_MESSAGE}`,
+    nextBatch:      s?.nextBatch || FALLBACKS.nextBatch,
+    foundingYear:   foundingYearNum,
+    admissionsOpen: s?.admissionsOpen ?? FALLBACKS.admissionsOpen,
+    stats: {
+      learners:        s?.statLearners        || FALLBACKS.stats.learners,
+      countries:       s?.statCountries       || FALLBACKS.stats.countries,
+      placement:       s?.statPlacement       || FALLBACKS.stats.placement,
+      rating:          s?.statRating          || FALLBACKS.stats.rating,
+      programs:        s?.statPrograms        || FALLBACKS.stats.programs,
+      hiringPartners:  s?.statHiringPartners  || FALLBACKS.stats.hiringPartners,
+      coursera:        s?.statCourseraCount   || FALLBACKS.stats.coursera,
+      yearEstablished: foundingYearStr,
+    },
+    socials: {
+      linkedin:  s?.socialLinkedIn  || FALLBACKS.socials.linkedin,
+      instagram: s?.socialInstagram || FALLBACKS.socials.instagram,
+      facebook:  s?.socialFacebook  || FALLBACKS.socials.facebook,
+      youtube:   s?.socialYouTube   || FALLBACKS.socials.youtube,
+      x:         s?.socialX         || FALLBACKS.socials.x,
+    },
+  }
+}
+
 export const getFacultyByProgram = unstable_cache(
   async (slug: string): Promise<SanityFaculty[]> => {
     return sanityClient.fetch<SanityFaculty[]>(

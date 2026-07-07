@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { IconX, IconZoomIn, IconShieldCheck } from '@tabler/icons-react'
-import { FOUNDING_YEAR } from '@/lib/constants'
 
 interface Props {
   programName:      string
   programFullName:  string
   sampleImageUrl?:  string  // When set, shows the uploaded Sanity image instead of the generated design
+  foundingYear?:    number
 }
 
-export default function CertificatePreview({ programName, programFullName, sampleImageUrl }: Props) {
+export default function CertificatePreview({ programName, programFullName, sampleImageUrl, foundingYear }: Props) {
+  const foundedIn = foundingYear ?? 2012
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -102,7 +103,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
                     />
                   </div>
                 ) : (
-                  <Certificate programName={programName} programFullName={programFullName} />
+                  <Certificate programName={programName} programFullName={programFullName} foundedIn={foundedIn} />
                 )}
                 <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/15 transition-all duration-200 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white rounded-full p-3.5 shadow-xl">
@@ -143,7 +144,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
                 />
               </div>
             ) : (
-              <Certificate programName={programName} programFullName={programFullName} />
+              <Certificate programName={programName} programFullName={programFullName} foundedIn={foundedIn} />
             )}
           </div>
         </div>
@@ -152,7 +153,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
   )
 }
 
-function Certificate({ programName, programFullName }: { programName: string; programFullName: string }) {
+function Certificate({ programName, programFullName, foundedIn }: { programName: string; programFullName: string; foundedIn: number }) {
   return (
     <div className="relative w-full aspect-[4/3] bg-[#fdfaf6] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.55)] border-[6px] border-vgu-red-dark">
 
@@ -189,7 +190,7 @@ function Certificate({ programName, programFullName }: { programName: string; pr
           </div>
           <div className="text-left">
             <p className="font-heading font-black text-[11px] leading-tight text-vgu-red-dark tracking-tight">Vivekananda Global University</p>
-            <p className="font-body text-[8.5px] text-neutral-500 mt-0.5">NAAC A+ Accredited · Established {FOUNDING_YEAR} · Jaipur, Rajasthan</p>
+            <p className="font-body text-[8.5px] text-neutral-500 mt-0.5">NAAC A+ Accredited · Established {foundedIn} · Jaipur, Rajasthan</p>
           </div>
         </div>
 
