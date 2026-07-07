@@ -10,6 +10,10 @@ export const sanityClient = createClient({
   apiVersion: '2024-01-01',
   useCdn: process.env.NODE_ENV === 'production',
   token: process.env.SANITY_API_TOKEN,
+  // Return only published documents. Without this, the token allows the
+  // client to see drafts, which then leak onto the public site as duplicate
+  // cards next to their published version.
+  perspective: 'published',
 })
 
 const builder = createImageUrlBuilder(sanityClient)
