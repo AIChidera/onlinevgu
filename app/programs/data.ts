@@ -56,6 +56,18 @@ export const PROGRAMMES: Programme[] = [
     specialisations: ['ACCA Track', 'CMA Track', 'FM Track'],
     image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format&fit=crop',
   },
+  {
+    slug: 'mba-dfaa', name: 'MBA-DFAA', fullName: 'MBA in Digital Finance and Accounting Analytics',
+    level: 'pg', discipline: 'Management', duration: '2 Years', fee: '₹1,00,000/yr',
+    specialisations: ['Digital Finance', 'Accounting Analytics', 'FinTech Operations'],
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80&auto=format&fit=crop',
+  },
+  {
+    slug: 'bba-aaft', name: 'BBA-AAFT', fullName: 'BBA in Media & Entertainment Management (AAFT)',
+    level: 'ug', discipline: 'Management', duration: '3 Years', fee: '₹60,000/yr',
+    specialisations: ['Film & Television Business', 'Digital Media Management', 'Event & Live Entertainment', 'Advertising & PR'],
+    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80&auto=format&fit=crop',
+  },
 
   // ── Information Technology ──────────────────────────────────────
   {

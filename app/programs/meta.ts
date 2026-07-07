@@ -19,6 +19,8 @@ import {
   IconBrain,
   IconNews,
   IconSpeakerphone,
+  IconMovie,
+  IconChartHistogram,
 } from '@tabler/icons-react'
 
 export interface ProgramMeta {
@@ -45,6 +47,18 @@ export const PROGRAM_META: Record<string, ProgramMeta> = {
     Icon:    IconBuildingBank,
     iconBg:  'linear-gradient(135deg,#1d4ed8,#1e3a8a)',
     outcome: 'For finance pros targeting ACCA, CMA, or CFO roles.',
+  },
+  'mba-dfaa': {
+    Icon:    IconChartHistogram,
+    iconBg:  'linear-gradient(135deg,#0891b2,#155e75)',
+    badge:   'New',
+    outcome: 'For finance and accounting pros moving into digital and analytics-driven roles.',
+  },
+  'bba-aaft': {
+    Icon:    IconMovie,
+    iconBg:  'linear-gradient(135deg,#be185d,#9d174d)',
+    badge:   'New',
+    outcome: 'For students entering film, television, and digital entertainment careers.',
   },
 
   // Information Technology

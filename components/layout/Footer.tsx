@@ -4,15 +4,17 @@ import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
 import { getSiteConfig } from '@/lib/sanity'
 
 const PROGRAM_LINKS = [
-  { label: 'BBA',    href: '/programs/bba'    },
-  { label: 'MBA',    href: '/programs/mba'    },
-  { label: 'MBA-IF', href: '/programs/mba-if' },
-  { label: 'BCA',    href: '/programs/bca'    },
-  { label: 'MCA',    href: '/programs/mca'    },
-  { label: 'BA',     href: '/programs/ba'     },
-  { label: 'MA',     href: '/programs/ma'     },
-  { label: 'M.Sc',   href: '/programs/msc'    },
-  { label: 'MAJMC',  href: '/programs/majmc'  },
+  { label: 'BBA',      href: '/programs/bba'      },
+  { label: 'BBA-AAFT', href: '/programs/bba-aaft' },
+  { label: 'MBA',      href: '/programs/mba'      },
+  { label: 'MBA-IF',   href: '/programs/mba-if'   },
+  { label: 'MBA-DFAA', href: '/programs/mba-dfaa' },
+  { label: 'BCA',      href: '/programs/bca'      },
+  { label: 'MCA',      href: '/programs/mca'      },
+  { label: 'BA',       href: '/programs/ba'       },
+  { label: 'MA',       href: '/programs/ma'       },
+  { label: 'M.Sc',     href: '/programs/msc'      },
+  { label: 'MAJMC',    href: '/programs/majmc'    },
 ]
 
 const COMPANY_LINKS = [

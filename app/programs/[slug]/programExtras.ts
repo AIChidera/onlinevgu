@@ -131,6 +131,70 @@ export const PROGRAM_EXTRAS: Record<string, ProgramExtras> = {
     feeBreakdown: { tuition: '₹95,000', exam: '₹15,000', tech: '₹10,000', total: '₹1,20,000', oneTime: '₹1,500' },
   },
 
+  // ── MBA-DFAA ─────────────────────────────────────────
+  'mba-dfaa': {
+    overview: [
+      "The MBA in Digital Finance and Accounting Analytics is a two-year online MBA that pairs the standard management core with the modern digital finance and accounting stack. The programme is built for the finance and accounting professional whose day job is being reshaped by digital payments, cloud ERP, and analytics.",
+      "Learners cover Power BI and analytics pipelines from Semester 1, run financial modelling and audit analytics projects in Semester 3, and close with an AI for Finance and Accounting module and a capstone project in the final semester.",
+    ],
+    whoItsFor: [
+      { persona: 'CA articles and finance analysts',        description: 'Early-career finance professionals who want an MBA that keeps pace with digital-first CFO expectations.' },
+      { persona: 'FP&A and management-accounting staff',    description: 'Analysts and controllers looking to add analytics, modelling and audit-tech skills to their profile.' },
+      { persona: 'FinTech and payments professionals',      description: 'Operators inside digital payment, lending or wealth-tech companies stepping into product or finance-lead roles.' },
+    ],
+    deptAtGlance: { alumniPlaced: '400+', faculty: '28', batchesCompleted: '3', hiringPartners: '180+' },
+    keyOutcomes: [
+      'Build accounting analytics pipelines from spreadsheets into Power BI.',
+      'Run a full DCF valuation and defend the assumptions in a stakeholder review.',
+      'Design a monthly close in a cloud ERP - Zoho, NetSuite or SAP S/4HANA.',
+      'Apply AI and machine learning to forecasting, fraud detection and audit sampling.',
+      'Move into digital finance, FP&A analytics, or audit-tech roles at Big Four and product companies.',
+    ],
+    salariesByRole: [
+      { role: 'Finance Analyst',              range: '₹8-14 LPA' },
+      { role: 'FP&A Analyst',                 range: '₹10-18 LPA' },
+      { role: 'Accounting Analytics Lead',    range: '₹12-20 LPA' },
+      { role: 'FinTech Product Analyst',      range: '₹12-22 LPA' },
+      { role: 'Audit Analytics Manager',      range: '₹14-24 LPA' },
+      { role: 'Digital Finance Manager',      range: '₹15-26 LPA' },
+      { role: 'Controller',                   range: '₹16-28 LPA' },
+      { role: 'Risk & Compliance Analyst',    range: '₹10-18 LPA' },
+    ],
+    feeBreakdown: { tuition: '₹80,000', exam: '₹12,000', tech: '₹8,000', total: '₹1,00,000', oneTime: '₹1,500' },
+  },
+
+  // ── BBA-AAFT ─────────────────────────────────────────
+  'bba-aaft': {
+    overview: [
+      "The BBA in Media & Entertainment Management is a three-year online BBA delivered in partnership with the Asian Academy of Film and Television - AAFT, founded in 1993 and one of India's oldest media institutions. It combines a full BBA business core with the operating knowledge of the film, television, streaming, advertising and live entertainment industries.",
+      "Learners cover production management, OTT platform economics, IP and licensing, media analytics and event management alongside the standard BBA subjects. The programme closes with a capstone media business plan - a pitch-ready proposal for a real venture or IP.",
+    ],
+    whoItsFor: [
+      { persona: 'Fresh 10+2 students targeting media',          description: 'Students who want to work in film, TV, streaming or advertising, and need a UGC-recognised business degree that matches the industry.' },
+      { persona: 'Content creators going professional',           description: 'YouTubers, podcasters and independent filmmakers who need business fundamentals to scale their work into a company.' },
+      { persona: 'Family businesses in media and events',         description: 'Successors preparing to take over a family production house, event agency or media property.' },
+    ],
+    deptAtGlance: { alumniPlaced: '600+', faculty: '32', batchesCompleted: '3', hiringPartners: '210+' },
+    keyOutcomes: [
+      'Manage a small production shoot end-to-end - budget, crew, schedule and delivery.',
+      'Read a streaming platform economics deck and evaluate a content acquisition deal.',
+      'Draft a content licensing agreement with correct rights and revenue-share clauses.',
+      'Plan and run a mid-sized live event with sponsorship, ticketing and vendor management.',
+      'Move into MBA admission or entry-level roles at production houses, agencies and platforms.',
+    ],
+    salariesByRole: [
+      { role: 'Production Coordinator',        range: '₹4-7 LPA' },
+      { role: 'Line Producer',                 range: '₹6-12 LPA' },
+      { role: 'Content Strategist',            range: '₹5-10 LPA' },
+      { role: 'OTT Operations Executive',      range: '₹5-9 LPA' },
+      { role: 'Talent Manager',                range: '₹4-8 LPA' },
+      { role: 'Advertising Account Executive', range: '₹4-8 LPA' },
+      { role: 'Event Manager',                 range: '₹4-9 LPA' },
+      { role: 'PR Executive',                  range: '₹4-8 LPA' },
+    ],
+    feeBreakdown: { tuition: '₹48,000', exam: '₹7,000', tech: '₹5,000', total: '₹60,000', oneTime: '₹1,500' },
+  },
+
   // ── MCA ──────────────────────────────────────────────
   mca: {
     overview: [
