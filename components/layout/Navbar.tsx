@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
@@ -43,9 +44,29 @@ export default function Navbar() {
         ].join(' ')}
       >
         <div className="mx-auto flex h-[64px] lg:h-[72px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
-          {/* Logo */}
-          <Link href="/" className="flex-none font-heading font-bold text-[22px] text-vgu-red tracking-tight" aria-label="Online VGU - Home">
-            Online VGU
+          {/* Logo lockup - VGU + NAAC paired with a thin divider */}
+          <Link href="/" className="flex-none flex items-center gap-3 md:gap-4" aria-label="Online VGU - NAAC A+ Accredited - Home">
+            <Image
+              src="/logos/vgu-logo.png"
+              alt="Online VGU - Entitled by UGC"
+              width={220}
+              height={220}
+              unoptimized
+              priority
+              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+            />
+            <span
+              aria-hidden="true"
+              className="hidden sm:block h-9 md:h-10 lg:h-11 w-px bg-neutral-300"
+            />
+            <Image
+              src="/logos/naac-grade-a-plus.png"
+              alt="NAAC A+ Accredited University"
+              width={300}
+              height={150}
+              unoptimized
+              className="hidden sm:block h-9 md:h-10 lg:h-12 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -128,9 +149,14 @@ export default function Navbar() {
         >
           {/* Drawer header */}
           <div className="flex h-[64px] items-center justify-between px-6 border-b border-neutral-200">
-            <span className="font-heading font-bold text-[20px] text-vgu-red tracking-tight">
-              Online VGU
-            </span>
+            <Image
+              src="/logos/vgu-logo.png"
+              alt="Online VGU"
+              width={200}
+              height={200}
+              unoptimized
+              className="h-11 w-auto object-contain"
+            />
             <button
               className="h-11 w-11 flex items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
               onClick={() => setMobileOpen(false)}
