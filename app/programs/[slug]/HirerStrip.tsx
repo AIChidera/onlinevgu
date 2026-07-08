@@ -168,7 +168,7 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         <button
           onClick={() => scroll('left')}
           aria-label="Scroll left"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
         >
           <IconChevronLeft size={16} />
         </button>
@@ -184,7 +184,7 @@ export default function HirerStrip({ hirers }: { hirers: string[] }) {
         <button
           onClick={() => scroll('right')}
           aria-label="Scroll right"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
         >
           <IconChevronRight size={16} />
         </button>

@@ -31,7 +31,7 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
   ]
 
   return (
-    <section className="bg-neutral-50 py-12 lg:py-16 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
+    <section className="bg-neutral-50 pt-10 pb-16 md:py-16 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
       <div className="mx-auto max-w-[1280px]">
 
         <div data-animate="fade-up" className="mb-10 max-w-[640px]">
@@ -62,7 +62,7 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
               <p className="font-heading font-bold text-[21px] tracking-[-0.4px] text-neutral-900 mb-1.5 leading-snug">
                 {p.lead}
               </p>
-              <p className="text-[15px] font-body leading-[1.65] text-neutral-600">{p.detail}</p>
+              <p className="text-[16px] font-body leading-[1.65] text-neutral-600">{p.detail}</p>
             </div>
           ))}
         </div>
@@ -70,7 +70,7 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
         {/* Sample week table */}
         <div data-animate="fade-up">
           <div className="rounded-2xl border border-neutral-200 bg-white overflow-hidden">
-            <div className="px-6 py-4 border-b border-neutral-200 bg-neutral-50/60">
+            <div className="px-4 py-4 md:px-6 border-b border-neutral-200 bg-neutral-50/60">
               <p className="font-heading font-bold text-[16px] text-neutral-900">A typical week</p>
               <p className="text-[14px] font-body text-neutral-500 mt-0.5">
                 Roughly 12-14 hours total - designed to fit around a full-time job
@@ -80,7 +80,7 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
               {sampleWeek.map(w => (
                 <div
                   key={w.day}
-                  className="grid grid-cols-[110px_1fr_auto] items-center gap-4 px-6 py-4"
+                  className="grid grid-cols-[90px_1fr_auto] md:grid-cols-[110px_1fr_auto] items-center gap-3 md:gap-4 px-4 py-4 md:px-6"
                 >
                   <p className="font-heading font-bold text-[13px] text-vgu-red uppercase tracking-[0.06em]">{w.day}</p>
                   <p className="text-[16px] font-body text-neutral-900 leading-snug">{w.activity}</p>

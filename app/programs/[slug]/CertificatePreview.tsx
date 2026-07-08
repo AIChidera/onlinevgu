@@ -49,12 +49,12 @@ export default function CertificatePreview({ programName, programFullName, sampl
           style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '22px 22px' }}
         />
         <div className="relative mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
             {/* Left: copy */}
             <div data-animate="slide-from-left">
               <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">Your credential</p>
-              <h2 className="font-heading font-bold text-[26px] tracking-[-0.5px] leading-[1.2] text-white mb-5 md:text-[36px]">
+              <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-white mb-5 md:text-[36px]">
                 Take a Look at Your Future Degree
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-white/65 mb-6">
@@ -70,9 +70,9 @@ export default function CertificatePreview({ programName, programFullName, sampl
                 ].map(point => (
                   <li key={point} className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-md flex-none flex items-center justify-center bg-vgu-yellow/15 mt-0.5">
-                      <IconShieldCheck size={13} className="text-vgu-yellow" />
+                      <IconShieldCheck size={15} className="text-vgu-yellow" />
                     </div>
-                    <span className="text-[14px] font-body text-white/75 leading-snug">{point}</span>
+                    <span className="text-[16px] font-body text-white/75 leading-snug">{point}</span>
                   </li>
                 ))}
               </ul>

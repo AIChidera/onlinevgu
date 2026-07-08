@@ -97,7 +97,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹75,000/yr', totalFee: '₹1,50,000', emi: '₹6,250/month',
     nextBatch: 'July 2026', popular: true,
-    description: "VGU's most sought-after postgraduate degree - designed for working professionals who want to lead, not just manage. Build strategic, financial, and leadership expertise through live weekend sessions, real-world case studies, and mentorship from senior industry executives.",
+    description: "VGU's flagship MBA for working professionals. Live weekend classes, 8 specialisations, and real-world case studies.",
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -166,7 +166,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹75,000/yr', totalFee: '₹1,50,000', emi: '₹6,250/month',
     nextBatch: 'July 2026',
-    description: 'A rigorous, industry-aligned MCA built for the modern tech landscape. Cover programming fundamentals, machine learning, cloud computing, AI, and cybersecurity - all while building real projects, competing in hackathons, and preparing for cloud certifications.',
+    description: 'An industry-aligned MCA covering programming, machine learning, cloud, AI, and cybersecurity with hackathons and cert prep.',
     eligibility: [
       "BCA, B.Sc (IT/CS/Mathematics), or any bachelor's with Mathematics at 10+2",
       'Minimum 50% aggregate marks',
@@ -229,7 +229,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹1,20,000/yr', totalFee: '₹2,40,000', emi: '₹10,000/month',
     nextBatch: 'July 2026',
-    description: 'A specialised 2-year online MBA focused entirely on international finance - with integrated ACCA, CMA, and FM professional certification tracks available at 60% lower cost than standalone certification. Built for finance professionals who want a global edge.',
+    description: 'A 2-year MBA in international finance with integrated ACCA, CMA, and FM certification tracks. Built for a global edge.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -293,7 +293,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹1,00,000/yr', totalFee: '₹2,00,000', emi: '₹8,333/month',
     nextBatch: 'July 2026',
-    description: "A two-year online MBA built for the finance and accounting professional whose day job is being reshaped by digital tools. Covers the modern finance stack - digital payments, cloud ERP, data analytics for accounting, and AI-driven audit - alongside the standard MBA management core.",
+    description: "An MBA for finance pros in the digital era. Covers UPI, cloud ERP, accounting analytics, and AI-driven audit.",
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -357,7 +357,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹60,000/yr', totalFee: '₹1,80,000', emi: '₹5,000/month',
     nextBatch: 'July 2026',
-    description: "A three-year online BBA delivered with the Asian Academy of Film and Television - India's oldest and most respected media school. Blends business fundamentals with the operating knowledge of the film, television, digital streaming, and live entertainment industries.",
+    description: "A BBA delivered with AAFT, India's leading media school. Business fundamentals meets film, TV, streaming, and entertainment.",
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream - Science, Commerce, or Arts',
@@ -442,7 +442,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A specialised MA in English Literature from VGU - ideal for UGC-NET aspirants, civil services candidates, and those pursuing teaching or academic careers. Covers British, American, and Indian writing in English across four semesters, with a full dissertation in the final semester.',
+    description: 'A specialised MA in English Literature. Built for UGC-NET aspirants, civil services candidates, and future educators.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -502,7 +502,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: 'An undergraduate business degree that builds strong management fundamentals - ideal for fresh graduates who want to fast-track into a business career or launch their own venture. Choose from General Management, Digital Marketing, Retail Management, or FinTech specialisation tracks.',
+    description: 'A business degree for fresh graduates. 4 tracks: General Management, Digital Marketing, Retail Management, FinTech.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream - Science, Commerce, or Arts',
@@ -587,7 +587,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: "Build a career in software development with hands-on coding labs every semester and real-world projects. VGU's BCA offers 6 specialisation tracks including AI, Blockchain, Cloud & Information Security, UX Design, and Data Science.",
+    description: "A career-ready BCA with hands-on coding labs every semester. Tracks in AI, Blockchain, Cloud, UX Design, and Data Science.",
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Mathematics or Computer Science preferred',
@@ -673,7 +673,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹24,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A flexible undergraduate degree with 8 specialisation streams - Economics, Political Science, English Literature, History, Psychology, and more. Strong academic foundation for civil services, law, journalism, and academia.',
+    description: 'A flexible BA with 8 streams including Economics, Political Science, Literature, and Psychology. Strong civil services base.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream accepted',
@@ -748,7 +748,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A 2-year online M.Sc in Mathematics from VGU covering advanced pure and applied mathematics - from abstract algebra and topology to fluid mechanics, AI, and operations research. Ideal for UGC-NET, GATE, research careers, and quantitative roles in finance and tech.',
+    description: 'A 2-year M.Sc in Mathematics covering pure, applied, and computational maths. Aligned with UGC-NET and GATE.',
     eligibility: [
       'B.Sc in Mathematics or related field from a UGC-recognised university',
       'Minimum 50% aggregate marks',
@@ -809,7 +809,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A 2-year online MA in Journalism and Mass Communication from VGU - combining communication theory with hands-on production skills across print, radio, TV, digital journalism, advertising, and PR for the modern media industry.',
+    description: 'An MA in Journalism combining theory with hands-on production across print, radio, TV, digital, and advertising.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -1066,7 +1066,7 @@ export default async function ProgramPage({ params }: Props) {
             <p className="anim-load-left mt-2 text-[16px] font-body text-white/70 lg:text-[17px]" style={{ animationDelay: '100ms' }}>
               {prog.fullName}
             </p>
-            <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-3" style={{ animationDelay: '140ms' }}>
+            <p className="anim-load-left mt-6 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px] line-clamp-4 sm:line-clamp-3" style={{ animationDelay: '140ms' }}>
               {description}
             </p>
 
@@ -1103,7 +1103,7 @@ export default async function ProgramPage({ params }: Props) {
                   data-apply-trigger
                   data-program={prog.name}
                   data-program-level={prog.level}
-                  className="group inline-flex items-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Apply Now
                   <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -1114,7 +1114,7 @@ export default async function ProgramPage({ params }: Props) {
                   href="#"
                   data-brochure-trigger
                   data-program={prog.name}
-                  className="group inline-flex items-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[16px] px-7 py-[15px] transition-all duration-200"
                 >
                   <IconDownload size={15} className="transition-transform duration-200 group-hover:translate-y-0.5" />
                   Download Brochure
@@ -1129,7 +1129,7 @@ export default async function ProgramPage({ params }: Props) {
       <PlacementStatsStrip slug={prog.slug} />
 
       {/* ══ Main content ══ */}
-      <section className="bg-neutral-50 pt-8 pb-12 px-5 md:px-8 lg:px-12 md:pt-10 md:pb-16">
+      <section className="bg-neutral-50 pt-12 pb-10 px-5 md:px-8 lg:px-12 md:pt-12 md:pb-16">
         <div className="mx-auto max-w-[1280px]">
 
           {/* Back to Programs */}
@@ -1152,7 +1152,7 @@ export default async function ProgramPage({ params }: Props) {
               <div>
                 <div data-animate="fade-up">
                   <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">What you&apos;ll be able to do</p>
-                  <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+                  <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                     Key Outcomes
                   </h2>
                 </div>
@@ -1164,7 +1164,7 @@ export default async function ProgramPage({ params }: Props) {
                 <div>
                   <div data-animate="fade-up">
                     <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
-                    <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
+                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
                       What You&apos;ll Study
                     </h2>
                   </div>
@@ -1196,7 +1196,7 @@ export default async function ProgramPage({ params }: Props) {
                     </div>
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                        <p className="font-heading font-bold text-[15px] text-white leading-tight">
+                        <p className="font-heading font-bold text-[16px] text-white leading-tight">
                           Coursera Premium
                         </p>
                         <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
@@ -1225,7 +1225,7 @@ export default async function ProgramPage({ params }: Props) {
                 <div>
                   <div data-animate="fade-up">
                     <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
-                    <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                       Specialisations
                     </h2>
                   </div>
@@ -1237,7 +1237,7 @@ export default async function ProgramPage({ params }: Props) {
               <div>
                 <div data-animate="fade-up">
                   <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Placement records</p>
-                  <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+                  <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
                     Career Opportunities after {prog.name}
                   </h2>
                 </div>
@@ -1307,7 +1307,7 @@ export default async function ProgramPage({ params }: Props) {
       <RelatedPrograms programs={relatedPrograms} />
 
       {/* ══ All Programs CTA ══ */}
-      <section className="sketch-hover-group relative bg-neutral-50 border-t border-neutral-200 py-20 px-5 md:px-8 lg:px-12 overflow-hidden">
+      <section className="sketch-hover-group relative bg-neutral-50 border-t border-neutral-200 py-16 lg:py-20 px-5 md:px-8 lg:px-12 overflow-hidden">
         {/* Subtle dot grid texture */}
         <div
           aria-hidden="true"
@@ -1319,7 +1319,7 @@ export default async function ProgramPage({ params }: Props) {
           <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
             Explore more
           </p>
-          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
             Find the program that fits you.
           </h2>
 
@@ -1366,14 +1366,14 @@ export default async function ProgramPage({ params }: Props) {
             data-apply-trigger
             data-program={prog.name}
             data-program-level={prog.level}
-            className="flex-1 rounded-full bg-vgu-red hover:brightness-90 text-white py-3 text-[14px] font-semibold font-heading text-center transition-all duration-150 shadow-[0_4px_14px_rgba(192,64,54,0.32)]"
+            className="flex-1 rounded-md bg-vgu-red hover:brightness-90 text-white py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-150 shadow-[0_4px_14px_rgba(192,64,54,0.32)]"
           >
             Apply Now
           </a>
           <a
             href="#counsellor"
             data-program={prog.name}
-            className="flex-1 rounded-full bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/[0.06] py-3 text-[14px] font-semibold font-heading text-center transition-all duration-150"
+            className="flex-1 rounded-md bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/[0.06] py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-150"
           >
             Talk to Counsellor
           </a>

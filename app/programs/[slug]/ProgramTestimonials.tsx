@@ -376,13 +376,13 @@ function StoryCard({ t, index, visible }: { t: Testimonial; index: number; visib
             {t.currentRole && (
               <div className="flex items-start gap-3">
                 <span className="flex-none w-[44px] text-[10px] font-heading font-bold uppercase tracking-[0.08em] text-vgu-red pt-0.5">Now</span>
-                <p className="text-[13.5px] font-heading font-semibold text-neutral-900 leading-snug min-w-0">{t.currentRole}</p>
+                <p className="text-[16px] font-heading font-semibold text-neutral-900 leading-snug min-w-0">{t.currentRole}</p>
               </div>
             )}
             {t.previousRole && (
               <div className="flex items-start gap-3">
                 <span className="flex-none w-[44px] text-[10px] font-heading font-bold uppercase tracking-[0.08em] text-neutral-400 pt-0.5">Before</span>
-                <p className="text-[13px] font-body text-neutral-500 leading-snug min-w-0">{t.previousRole}</p>
+                <p className="text-[15px] font-body text-neutral-500 leading-snug min-w-0">{t.previousRole}</p>
               </div>
             )}
           </div>
@@ -396,7 +396,7 @@ function StoryCard({ t, index, visible }: { t: Testimonial; index: number; visib
             className="absolute -top-1 -left-1 text-vgu-red/15"
             aria-hidden="true"
           />
-          <p className="relative text-[14px] font-body leading-[1.7] text-neutral-600 pl-6">
+          <p className="relative text-[16px] font-body leading-[1.7] text-neutral-600 pl-6">
             {t.quote}
           </p>
         </div>
@@ -451,7 +451,7 @@ export default function ProgramTestimonials({ slug, testimonials: propTestimonia
           <h2 className="font-heading font-bold text-[28px] lg:text-[34px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-3">
             What our graduates are doing now.
           </h2>
-          <p className="text-[15px] lg:text-[16px] font-body leading-[1.7] text-neutral-600">
+          <p className="text-[16px] font-body leading-[1.7] text-neutral-600">
             Roles, companies and career trajectories from recent batches.
           </p>
         </div>

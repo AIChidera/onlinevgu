@@ -43,11 +43,11 @@ export default function Navbar() {
             : 'bg-white border-b border-neutral-200',
         ].join(' ')}
       >
-        <div className="mx-auto flex h-[80px] lg:h-[96px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
+        <div className="mx-auto flex h-[64px] lg:h-[72px] max-w-[1280px] items-center px-5 md:px-8 lg:px-12">
           {/* Logo lockup - VGU + NAAC paired tightly.
-              Negative margin on NAAC eats into the transparent padding both
-              PNGs bake in, so the two marks read as touching rather than
-              having a visible gap between them. */}
+              Logo containers are taller than the navbar bar itself; the
+              transparent padding baked into both PNGs absorbs the overflow,
+              so the visible content sits centered within the header height. */}
           <Link href="/" className="flex-none flex items-center" aria-label="Online VGU - NAAC A+ Accredited - Home">
             <Image
               src="/logos/vgu-logo.png"
@@ -56,7 +56,7 @@ export default function Navbar() {
               height={300}
               unoptimized
               priority
-              className="h-[80px] md:h-[96px] lg:h-[112px] w-auto object-contain"
+              className="h-[72px] md:h-[80px] lg:h-[88px] w-auto object-contain"
             />
             <Image
               src="/logos/naac-grade-a-plus.png"
@@ -64,7 +64,7 @@ export default function Navbar() {
               width={400}
               height={200}
               unoptimized
-              className="hidden sm:block h-[92px] md:h-[108px] lg:h-[124px] w-auto object-contain -ml-10 md:-ml-14 lg:-ml-16"
+              className="hidden sm:block h-[80px] md:h-[88px] lg:h-[96px] w-auto object-contain -ml-8 md:-ml-11 lg:-ml-12"
             />
           </Link>
 

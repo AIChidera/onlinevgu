@@ -45,7 +45,7 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
 
               {/* Title */}
               <h3
-                className={`flex-1 font-heading font-semibold text-[15px] md:text-[17px] leading-snug transition-colors duration-300 ${
+                className={`flex-1 font-heading font-semibold text-[16px] md:text-[17px] leading-snug transition-colors duration-300 ${
                   isOpen ? 'text-neutral-900' : 'text-neutral-600 group-hover:text-neutral-800'
                 }`}
               >
@@ -78,7 +78,7 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
 
                   {/* Summary */}
                   {detail?.summary && (
-                    <p className="font-body text-[15px] md:text-[16px] leading-[1.75] text-neutral-500 mb-6 pl-3 border-l-2 border-vgu-red/25 max-w-[560px]">
+                    <p className="font-body text-[16px] leading-[1.75] text-neutral-500 mb-6 pl-3 border-l-2 border-vgu-red/25 max-w-[560px]">
                       {detail.summary}
                     </p>
                   )}
@@ -99,7 +99,7 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
                             key={skill}
                             className="inline-flex items-center gap-1.5 rounded bg-vgu-red/[0.06] border border-vgu-red/[0.14] px-2.5 py-1.5 text-[12px] font-body font-medium text-vgu-red leading-none"
                           >
-                            <IconCheck size={10} stroke={2.5} className="flex-none" />
+                            <IconCheck size={12} stroke={2.5} className="flex-none" />
                             {skill}
                           </span>
                         ))}

@@ -18,7 +18,7 @@ export default function CareerServices({ services }: { services: Service[] }) {
           >
             <Icon size={22} stroke={1.75} className="text-vgu-red mb-3" />
             <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 mb-1.5 leading-snug">{s.title}</p>
-            <p className="font-body text-[15px] text-neutral-600 leading-[1.65]">{s.detail}</p>
+            <p className="font-body text-[16px] text-neutral-600 leading-[1.65]">{s.detail}</p>
           </div>
         )
       })}

@@ -167,10 +167,10 @@ export default async function FacultySection({ slug }: { slug: string }) {
             <p className="text-[12px] font-heading font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">
               Your Faculty
             </p>
-            <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-white lg:text-[32px]">
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-white lg:text-[32px]">
               The people teaching this programme
             </h2>
-            <p className="mt-2 text-[15px] font-body text-white/65 max-w-[440px]">
+            <p className="mt-2 text-[16px] font-body text-white/65 max-w-[440px]">
               Working professionals and academics who lead live sessions, mentor students and assess coursework.
             </p>
           </div>

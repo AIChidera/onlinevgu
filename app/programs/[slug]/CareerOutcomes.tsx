@@ -43,15 +43,15 @@ export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] 
             <div className="flex-none mt-0.5">
               <Icon size={20} stroke={1.75} className="text-vgu-red" />
             </div>
-            <div className="flex-1 min-w-0 flex items-start gap-4">
+            <div className="flex-1 min-w-0 flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
               <div className="flex-1 min-w-0">
                 <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 leading-snug mb-1">{r.role}</p>
                 {r.description && (
-                  <p className="font-body text-[14px] leading-[1.65] text-neutral-600">{r.description}</p>
+                  <p className="font-body text-[16px] leading-[1.65] text-neutral-600">{r.description}</p>
                 )}
               </div>
               {r.range && (
-                <p className="font-heading font-black text-[20px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none pt-1">{r.range}</p>
+                <p className="font-heading font-black text-[20px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none sm:pt-1">{r.range}</p>
               )}
             </div>
           </div>

@@ -43,10 +43,11 @@ export default function PlacementStatsStrip({ slug }: { slug: string }) {
             key={label}
             data-animate="fade-up"
             style={{ animationDelay: `${i * 80}ms` }}
-            className="flex items-center gap-3 px-4 py-4 md:px-6 md:py-5 lg:px-8"
+            className="flex items-center gap-2.5 px-3.5 py-3 md:gap-3 md:px-6 md:py-5 lg:px-8"
           >
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-none bg-white/15 border border-white/20">
-              <Icon size={18} stroke={1.5} className="text-vgu-yellow" />
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center flex-none bg-white/15 border border-white/20">
+              <Icon size={16} stroke={1.5} className="md:hidden text-vgu-yellow" />
+              <Icon size={18} stroke={1.5} className="hidden md:block text-vgu-yellow" />
             </div>
             <div className="min-w-0">
               <p className="font-heading font-black text-[17px] md:text-[22px] leading-tight text-white">{value}</p>

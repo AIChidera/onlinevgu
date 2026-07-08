@@ -48,7 +48,7 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
         <button
           onClick={() => scroll('left')}
           aria-label="Scroll faculty left"
-          className="absolute left-3 top-[90px] z-20 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          className="absolute left-3 top-[90px] z-20 w-11 h-11 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
         >
           <IconChevronLeft size={18} />
         </button>
@@ -57,10 +57,10 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
       {/* Scrollable track - swipe-enabled, no scrollbar */}
       <div
         ref={scrollRef}
-        className="overflow-x-auto scrollbar-none pl-12 lg:pl-8 md:pl-5"
+        className="overflow-x-auto scrollbar-none pl-5 md:pl-8 lg:pl-12"
         style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
       >
-        <div className="flex gap-5 pr-12 lg:pr-8 md:pr-5 snap-x snap-mandatory" style={{ width: 'max-content' }}>
+        <div className="flex gap-5 pr-5 md:pr-8 lg:pr-12 snap-x snap-mandatory" style={{ width: 'max-content' }}>
           {faculty.map((f) => (
             <div
               key={f.name}
@@ -118,7 +118,7 @@ export default function FacultyCarousel({ faculty }: { faculty: FacultyMember[] 
         <button
           onClick={() => scroll('right')}
           aria-label="Scroll faculty right"
-          className="absolute right-3 top-[90px] z-20 w-10 h-10 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
+          className="absolute right-3 top-[90px] z-20 w-11 h-11 rounded-full bg-white/15 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-neutral-900 transition-all duration-150 shadow-[0_2px_16px_rgba(0,0,0,0.35)]"
         >
           <IconChevronRight size={18} />
         </button>

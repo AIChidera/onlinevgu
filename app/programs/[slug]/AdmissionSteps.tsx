@@ -40,7 +40,7 @@ export default function AdmissionSteps({ programName, programLevel, eligibility,
           <SketchSparkle color="yellow" size={28} trigger="in-view" delayMs={0} className="top-1 left-0 lg:left-8" />
           <SketchSparkle color="yellow" size={20} trigger="in-view" delayMs={400} rotateDeg={15} className="-top-1 right-0 lg:right-8" />
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-3">Admissions</p>
-          <h2 className="font-heading font-bold text-[24px] tracking-[-0.5px] text-white lg:text-[32px]">
+          <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-white lg:text-[32px]">
             {programName} Admission Process
           </h2>
           <p className="mt-3 text-[16px] font-body text-white/55 max-w-[440px] mx-auto">
@@ -111,14 +111,14 @@ export default function AdmissionSteps({ programName, programLevel, eligibility,
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                      <p className="font-heading font-semibold text-[13.5px] text-white/90">{d.name}</p>
+                      <p className="font-heading font-semibold text-[16px] text-white/90">{d.name}</p>
                       {d.optional && (
                         <span className="rounded-full bg-white/10 text-white/40 text-[10px] font-heading font-bold uppercase tracking-[0.06em] px-2 py-0.5">
                           Optional
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] font-body text-white/45 leading-[1.5]">{d.note}</p>
+                    <p className="text-[13px] font-body text-white/45 leading-[1.5]">{d.note}</p>
                   </div>
                 </div>
               ))}
