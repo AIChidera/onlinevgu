@@ -11,6 +11,7 @@ import CookieConsent from '@/components/CookieConsent'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import IntakeCountdown from '@/components/sections/IntakeCountdown'
 import { getSiteConfig } from '@/lib/sanity'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -86,6 +87,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </noscript>
         )}
         <Analytics />
+        <VercelAnalytics />
         <HashScroller />
         <CookieConsent />
         {/* Skip link - visually hidden until focused by keyboard users */}
