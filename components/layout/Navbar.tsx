@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 
 const NAV_LINKS = [
@@ -18,6 +18,8 @@ export default function Navbar() {
   const pathname                      = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
+  const drawerRef                     = useRef<HTMLDivElement>(null)
+  const hamburgerRef                  = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -31,6 +33,22 @@ export default function Navbar() {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
+  }, [mobileOpen])
+
+  // Close on any tap outside the drawer - checked against the actual click
+  // target rather than the backdrop's hit-testing, since the sticky header
+  // sits above the backdrop (z-100 vs z-40) and would otherwise swallow taps
+  // in that band without ever reaching the backdrop's own onClick.
+  useEffect(() => {
+    if (!mobileOpen) return
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as Node
+      if (drawerRef.current?.contains(target)) return
+      if (hamburgerRef.current?.contains(target)) return
+      setMobileOpen(false)
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
   }, [mobileOpen])
 
   return (
@@ -114,6 +132,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
+            ref={hamburgerRef}
             className="ml-auto flex lg:hidden h-11 w-11 items-center justify-center rounded-md text-neutral-700 hover:bg-neutral-100 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -139,32 +158,15 @@ export default function Navbar() {
           onClick={() => setMobileOpen(false)}
         />
 
-        {/* Drawer panel */}
+        {/* Drawer panel - sits below the sticky header (z-40 < header's z-100), which
+            stays visible and owns the single hamburger/X toggle. No internal header here. */}
         <div
+          ref={drawerRef}
           className={[
-            'absolute right-0 top-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col transition-transform duration-300',
+            'absolute right-0 top-16 bottom-0 w-72 bg-white shadow-2xl flex flex-col transition-transform duration-300',
             mobileOpen ? 'translate-x-0' : 'translate-x-full',
           ].join(' ')}
         >
-          {/* Drawer header */}
-          <div className="flex h-[64px] items-center justify-between px-6 border-b border-neutral-200">
-            <Image
-              src="/logos/vgu-logo.png"
-              alt="Online VGU"
-              width={200}
-              height={200}
-              unoptimized
-              className="h-11 w-auto object-contain"
-            />
-            <button
-              className="h-11 w-11 flex items-center justify-center rounded-md text-neutral-500 hover:bg-neutral-100"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-            >
-              <IconX size={20} />
-            </button>
-          </div>
-
           {/* Drawer links */}
           <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => {

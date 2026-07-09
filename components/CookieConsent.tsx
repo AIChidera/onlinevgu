@@ -2,12 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { IconCookie } from '@tabler/icons-react'
 
 type Consent = 'accepted' | 'rejected'
 const STORAGE_KEY = 'vgu_cookie_consent'
 
 export default function CookieConsent() {
+  const pathname = usePathname()
+  // Program detail pages show a fixed bottom-0 mobile CTA bar below lg - lift the
+  // banner clear of it there so it doesn't cover the Apply Now / Talk to Counsellor buttons.
+  const hasStickyCTA          = pathname?.startsWith('/programs/') ?? false
   const [mounted, setMounted] = useState(false)
   const [show, setShow]     = useState(false)
 
@@ -32,11 +37,13 @@ export default function CookieConsent() {
   if (!show) return null
 
   return (
-    /* Outer positioner */
+    /* Outer positioner - floating card, docked to the bottom-right corner at every
+       width. Lifted clear of the mobile sticky CTA bar on program detail pages. */
     <div
       className={[
-        'fixed z-[200] inset-x-0 bottom-0',
-        'sm:inset-x-auto sm:right-5 sm:bottom-5 sm:left-auto',
+        'fixed z-[120] left-4 right-4',
+        'sm:left-auto sm:right-5 sm:w-[380px]',
+        hasStickyCTA ? 'bottom-[116px] lg:bottom-5' : 'bottom-5',
         'transition-all duration-350 ease-out',
         mounted ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
       ].join(' ')}
@@ -46,11 +53,10 @@ export default function CookieConsent() {
     >
       {/* Card */}
       <div
-        className="w-full sm:w-[380px]
-                   bg-white rounded-t-2xl sm:rounded-2xl overflow-hidden
+        className="w-full
+                   bg-white rounded-2xl overflow-hidden
                    border border-neutral-200/80
-                   shadow-[0_-4px_24px_rgba(17,24,39,0.10),0_20px_48px_rgba(17,24,39,0.18)]
-                   sm:shadow-[0_16px_48px_rgba(17,24,39,0.20),0_4px_16px_rgba(17,24,39,0.08)]"
+                   shadow-[0_16px_48px_rgba(17,24,39,0.20),0_4px_16px_rgba(17,24,39,0.08)]"
       >
         {/* Gradient accent bar */}
         <div

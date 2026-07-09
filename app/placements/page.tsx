@@ -242,14 +242,14 @@ export default async function PlacementsPage() {
                 <a
                   href="#counsellor"
                   data-apply-trigger
-                  className="group inline-flex items-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Apply Now
                   <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
                 <a
                   href="/programs"
-                  className="group inline-flex items-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                 >
                   Browse Programs
                   <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
@@ -274,22 +274,25 @@ export default async function PlacementsPage() {
                   animationDelay: `${i * 80}ms`,
                   background: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.04) 100%)',
                 }}
-                className="group/card flex flex-col items-center text-center rounded-2xl p-3 md:p-6 border border-transparent shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:border-vgu-red/20 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default"
+                className="group/card flex flex-row md:flex-col items-center text-left md:text-center gap-3 md:gap-0 rounded-2xl p-3 md:p-6 border border-transparent shadow-[0_2px_12px_rgba(0,0,0,0.06)] hover:border-vgu-red/20 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(192,64,54,0.12)] transition-all duration-200 cursor-default"
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3"
+                  className="w-11 h-11 md:w-14 md:h-14 rounded-xl flex flex-none items-center justify-center md:mb-4 transition-all duration-200 group-hover:scale-110 group-hover:rotate-3 group-hover/card:scale-110 group-hover/card:rotate-3"
                   style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
                 >
-                  <Icon size={24} className="text-white" stroke={1.5} />
+                  <Icon size={20} className="text-white md:hidden" stroke={1.5} />
+                  <Icon size={24} className="text-white hidden md:block" stroke={1.5} />
                 </div>
-                <div className="font-heading font-black text-[34px] md:text-[44px] leading-none text-vgu-yellow">
-                  {value}
-                </div>
-                <div className="mt-2 text-[14px] font-heading font-semibold text-neutral-800 leading-snug">
-                  {label}
-                </div>
-                <div className="mt-1 text-[12px] font-body text-neutral-400 leading-snug">
-                  {detail}
+                <div className="min-w-0">
+                  <div className="font-heading font-bold text-[20px] leading-none text-vgu-yellow md:font-black md:text-[44px]">
+                    {value}
+                  </div>
+                  <div className="mt-1 md:mt-2 text-[13px] md:text-[14px] font-heading font-semibold text-neutral-800 leading-snug">
+                    {label}
+                  </div>
+                  <div className="text-[11px] md:text-[12px] font-body text-neutral-400 leading-snug md:mt-1">
+                    {detail}
+                  </div>
                 </div>
               </div>
             ))}
@@ -315,7 +318,7 @@ export default async function PlacementsPage() {
           </div>
 
           {/* Mobile: snap-scroll strip */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 scroll-pl-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {SUPPORT_SERVICES.map((s, i) => (
               <div key={s.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
                 <div
@@ -424,7 +427,7 @@ export default async function PlacementsPage() {
           </div>
 
           {/* Mobile: snap-scroll strip */}
-          <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="md:hidden -mx-5 px-5 scroll-pl-5 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {INDUSTRIES.map((ind) => (
               <div key={ind.title} className="snap-start flex-none w-[80vw] max-w-[300px]">
                 <div

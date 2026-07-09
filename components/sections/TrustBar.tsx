@@ -22,15 +22,40 @@ export default function TrustBar() {
           Accredited · Recognised · Ranked
         </p>
 
-        {/* Fixed-size cards - uniform regardless of PNG vs SVG aspect ratio */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 lg:gap-6">
+        {/* Mobile: single horizontal swipe row - keeps the strip to one compact
+            line instead of an uneven 2-2-1 stack across three rows. */}
+        <div
+          className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none -mx-5 px-5 scroll-pl-5"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+          {LOGOS.map((logo) => (
+            <div
+              key={logo.name}
+              title={logo.name}
+              className="group flex-none snap-start flex items-center justify-center w-36 h-24 rounded-2xl border border-neutral-200 bg-white p-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden"
+            >
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={160}
+                height={80}
+                unoptimized
+                style={{ transform: `scale(${logo.scale})` }}
+                className="w-full h-full object-contain saturate-[1.15] contrast-[1.05]"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* sm+: fixed-size cards, centered and wrapped - uniform regardless of PNG vs SVG aspect ratio */}
+        <div className="hidden sm:flex flex-wrap items-center justify-center gap-5 lg:gap-6">
           {LOGOS.map((logo, i) => (
             <div
               key={logo.name}
               data-animate="fade-up"
               style={{ animationDelay: `${i * 80}ms` }}
               title={logo.name}
-              className="group flex-none flex items-center justify-center w-36 h-24 sm:w-40 sm:h-[104px] lg:w-48 lg:h-[120px] rounded-2xl border border-neutral-200 bg-white p-3 lg:p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.13)] overflow-hidden transition-all duration-300 hover:scale-105"
+              className="group flex-none flex items-center justify-center sm:w-40 sm:h-[104px] lg:w-48 lg:h-[120px] rounded-2xl border border-neutral-200 bg-white p-3 lg:p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.13)] overflow-hidden transition-all duration-300 hover:scale-105"
             >
               <Image
                 src={logo.src}

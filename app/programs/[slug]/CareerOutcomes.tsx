@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import {
   IconBriefcase,
   IconChartBar,
@@ -7,6 +9,7 @@ import {
   IconHeart,
   IconCode,
   IconGlobe,
+  IconChevronDown,
 } from '@tabler/icons-react'
 
 interface RoleRow { role: string; range?: string; description?: string }
@@ -23,40 +26,69 @@ function getRoleIcon(role: string) {
   return IconBriefcase
 }
 
+const INITIAL_VISIBLE = 5
+
 export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] }) {
   const safe: RoleRow[] = (Array.isArray(roles) ? roles : []).map(r =>
     typeof r === 'string' ? { role: r } : r
   )
+  const [showAll, setShowAll] = useState(false)
   if (!safe.length) return null
 
+  const needsToggle = safe.length > INITIAL_VISIBLE
+  const visible = showAll || !needsToggle ? safe : safe.slice(0, INITIAL_VISIBLE)
+
   return (
-    <div className="divide-y divide-neutral-200">
-      {safe.map((r, ri) => {
-        const Icon = getRoleIcon(r.role)
-        return (
-          <div
-            key={r.role}
-            data-animate="fade-up"
-            style={{ animationDelay: `${ri * 40}ms` }}
-            className="flex gap-4 py-5 first:pt-0 last:pb-0"
-          >
-            <div className="flex-none mt-0.5">
-              <Icon size={20} stroke={1.75} className="text-vgu-red" />
-            </div>
-            <div className="flex-1 min-w-0 flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
+    <div>
+      <div className="divide-y divide-neutral-200">
+        {visible.map((r) => {
+          const Icon = getRoleIcon(r.role)
+          return (
+            <div
+              key={r.role}
+              className="flex items-start gap-3 py-3.5 md:py-4 first:pt-0 last:pb-0"
+            >
+              <div className="flex-none pt-0.5">
+                <Icon size={20} stroke={1.75} className="text-vgu-red" />
+              </div>
               <div className="flex-1 min-w-0">
-                <p className="font-heading font-bold text-[17px] tracking-[-0.2px] text-neutral-900 leading-snug mb-1">{r.role}</p>
+                {/* Line 1: role + salary inline */}
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="font-heading font-bold text-[16px] md:text-[17px] tracking-[-0.2px] text-neutral-900 leading-snug min-w-0 truncate">
+                    {r.role}
+                  </p>
+                  {r.range && (
+                    <p className="font-heading font-black text-[17px] md:text-[19px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none">
+                      {r.range}
+                    </p>
+                  )}
+                </div>
+                {/* Line 2: description (single-line truncation) */}
                 {r.description && (
-                  <p className="font-body text-[16px] leading-[1.65] text-neutral-600">{r.description}</p>
+                  <p className="font-body text-[14px] md:text-[15px] text-neutral-500 leading-snug mt-1 line-clamp-1">
+                    {r.description}
+                  </p>
                 )}
               </div>
-              {r.range && (
-                <p className="font-heading font-black text-[20px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none sm:pt-1">{r.range}</p>
-              )}
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
+      {needsToggle && (
+        <button
+          type="button"
+          onClick={() => setShowAll(v => !v)}
+          className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-heading font-semibold text-vgu-red hover:text-vgu-red-dark transition-colors duration-150 cursor-pointer select-none min-h-[44px]"
+          aria-expanded={showAll}
+        >
+          {showAll ? 'Show fewer' : `Show all ${safe.length} roles`}
+          <IconChevronDown
+            size={14}
+            stroke={2.25}
+            className={`transition-transform duration-200 ${showAll ? 'rotate-180' : ''}`}
+          />
+        </button>
+      )}
     </div>
   )
 }

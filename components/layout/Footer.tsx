@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
 import { getSiteConfig } from '@/lib/sanity'
+import FooterLinkGroup from './FooterLinkGroup'
 
 const PROGRAM_LINKS = [
   { label: 'BBA',      href: '/programs/bba'      },
@@ -112,7 +113,7 @@ export default async function Footer() {
             <div data-animate="fade-up">
               <Link href="/" className="flex-none" aria-label="Online VGU - Home">
                 <Image
-                  src="/logos/vgu-logo.png"
+                  src="/logos/vgu-logo-white.png"
                   alt="Online VGU"
                   width={200}
                   height={100}
@@ -126,14 +127,14 @@ export default async function Footer() {
               </p>
 
               {/* Social icons */}
-              <div className="mt-5 flex gap-2">
+              <div className="mt-5 flex gap-2.5">
                 {SOCIALS.map((s) => (
                   <a
                     key={s.label}
                     href={socialHrefs[s.label] ?? s.href}
                     aria-label={s.label}
                     className={[
-                      'flex h-9 w-9 items-center justify-center rounded-full border border-white/15',
+                      'flex h-11 w-11 items-center justify-center rounded-full border border-white/15',
                       'bg-white/10 text-white/70 hover:text-white',
                       'transition-all duration-150 hover:-translate-y-0.5',
                       s.hoverClass,
@@ -145,16 +146,16 @@ export default async function Footer() {
               </div>
 
               {/* Contact */}
-              <div className="mt-6 flex flex-col gap-2.5 text-[13px] text-white/55">
-                <a href={`tel:${config.phoneTel}`} className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
+              <div className="mt-6 flex flex-col divide-y divide-white/[0.06] text-[13px] text-white/55 lg:divide-y-0 lg:gap-2.5">
+                <a href={`tel:${config.phoneTel}`} className="flex min-h-[44px] items-center gap-2.5 py-2.5 hover:text-white/80 transition-colors duration-150 lg:min-h-0 lg:py-0">
                   <IconPhone size={14} className="flex-none text-white/40" />
                   <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Admissions</span>{config.phone}</span>
                 </a>
-                <a href="tel:+919549086333" className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
+                <a href="tel:+919549086333" className="flex min-h-[44px] items-center gap-2.5 py-2.5 hover:text-white/80 transition-colors duration-150 lg:min-h-0 lg:py-0">
                   <IconPhone size={14} className="flex-none text-white/40" />
                   <span><span className="text-white/35 text-[11px] font-heading uppercase tracking-[0.06em] mr-1">Student Helpline</span>+91 95490 86333</span>
                 </a>
-                <a href={`mailto:${config.email}`} className="flex items-center gap-2.5 hover:text-white/80 transition-colors duration-150">
+                <a href={`mailto:${config.email}`} className="flex min-h-[44px] items-center gap-2.5 py-2.5 hover:text-white/80 transition-colors duration-150 lg:min-h-0 lg:py-0">
                   <IconMail size={14} className="flex-none text-white/40" />
                   {config.email}
                 </a>
@@ -162,65 +163,29 @@ export default async function Footer() {
                   href={`https://maps.google.com/?q=${mapQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2.5 text-white/55 hover:text-white/80 transition-colors duration-150"
+                  className="flex min-h-[44px] items-start gap-2.5 py-2.5 text-white/55 hover:text-white/80 transition-colors duration-150 lg:min-h-0 lg:py-0"
                 >
-                  <IconMapPin size={14} className="flex-none text-white/40 mt-[2px]" />
+                  <IconMapPin size={14} className="flex-none text-white/40 mt-[14px] lg:mt-[2px]" />
                   {config.address.replace(/\n/g, ', ')}
                 </a>
               </div>
             </div>
 
-            {/* Programs + Company: 2-col sub-grid on mobile; transparent on desktop so they flow into parent 4-col */}
-            <div className="grid grid-cols-2 gap-6 lg:contents">
-              <FooterCol title="Programs" links={PROGRAM_LINKS} delay={80} />
-              <FooterCol title="Company" links={COMPANY_LINKS} delay={160} />
-            </div>
-
-            {/* Support */}
-            <FooterCol title="Support" links={SUPPORT_LINKS} delay={240} />
+            {/* Programs / Company / Support - stacked accordions on mobile, plain columns on desktop */}
+            <FooterLinkGroup title="Programs" links={PROGRAM_LINKS} delay={80} />
+            <FooterLinkGroup title="Company" links={COMPANY_LINKS} delay={160} />
+            <FooterLinkGroup title="Support" links={SUPPORT_LINKS} delay={240} />
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[12px] text-white/40">
+          <div className="mt-6 flex flex-col gap-3 text-[12px] text-white/40 lg:flex-row lg:items-center lg:justify-between">
             <span>© {new Date().getFullYear()} Vivekananda Global University. All rights reserved.</span>
             <div className="flex flex-wrap gap-5">
-              <a href="/terms" className="text-white/60 hover:text-white transition-colors">Terms &amp; Conditions</a>
-              <a href="/privacy" className="text-white/60 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms" className="flex items-center min-h-[44px] text-white/60 hover:text-white transition-colors">Terms &amp; Conditions</a>
+              <a href="/privacy" className="flex items-center min-h-[44px] text-white/60 hover:text-white transition-colors">Privacy Policy</a>
             </div>
           </div>
         </div>
       </footer>
-  )
-}
-
-function FooterCol({ title, links, delay = 0 }: { title: string; links: { label: string; href: string; applyTrigger?: boolean; brochureTrigger?: boolean }[]; delay?: number }) {
-  return (
-    <div data-animate="fade-up" style={{ animationDelay: `${delay}ms` }}>
-      <h5 className="mb-4 font-heading text-[12px] font-semibold uppercase tracking-[0.08em] text-white">
-        {title}
-      </h5>
-      <ul className="flex flex-col gap-2.5">
-        {links.map((l) => (
-          <li key={l.label}>
-            {l.brochureTrigger ? (
-              <button
-                data-brochure-trigger="true"
-                className="text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150 text-left"
-              >
-                {l.label}
-              </button>
-            ) : (
-              <Link
-                href={l.href}
-                {...(l.applyTrigger ? { 'data-apply-trigger': 'true' } : {})}
-                className="text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150"
-              >
-                {l.label}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
   )
 }

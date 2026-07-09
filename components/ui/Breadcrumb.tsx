@@ -22,12 +22,12 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
               {item.href ? (
                 <Link
                   href={item.href}
-                  className="text-[13px] font-body text-neutral-500 hover:text-vgu-red transition-colors duration-150 whitespace-nowrap"
+                  className="flex items-center min-h-[44px] text-[13px] font-body text-neutral-500 hover:text-vgu-red transition-colors duration-150 whitespace-nowrap"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-[13px] font-body font-semibold text-neutral-800 truncate min-w-0" aria-current="page">
+                <span className="flex items-center min-h-[44px] text-[13px] font-body font-semibold text-neutral-800 truncate min-w-0" aria-current="page">
                   {item.label}
                 </span>
               )}

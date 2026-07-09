@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mx-auto max-w-[1280px]">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 group/back text-[13px] font-heading font-semibold text-white/70 hover:text-white transition-colors duration-150"
+              className="inline-flex items-center min-h-[44px] gap-2 group/back text-[13px] font-heading font-semibold text-white/70 hover:text-white transition-colors duration-150"
             >
               <IconArrowLeft size={14} stroke={2.25} className="transition-transform duration-150 group-hover/back:-translate-x-0.5" />
               All stories
@@ -410,7 +410,7 @@ export default async function BlogPostPage({ params }: Props) {
               </h2>
             </div>
             {/* Mobile: snap-scroll */}
-            <div className="md:hidden -mx-5 px-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="md:hidden -mx-5 px-5 scroll-pl-5 overflow-x-auto snap-x snap-mandatory flex gap-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {post.relatedPrograms.map(p => (
                 <div key={p.slug} className="snap-start flex-none w-[72vw] max-w-[260px]">
                   <Link

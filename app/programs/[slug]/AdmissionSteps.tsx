@@ -1,4 +1,4 @@
-import { IconForms, IconFileCheck, IconCreditCard, IconDeviceLaptop, IconCheck, IconFileText } from '@tabler/icons-react'
+import { IconForms, IconFileCheck, IconCreditCard, IconDeviceLaptop, IconFileText } from '@tabler/icons-react'
 import SketchSparkle from '@/components/ui/sketch/SketchSparkle'
 
 interface Doc { name: string; note: string; level?: 'ug' | 'pg'; optional?: boolean }
@@ -19,11 +19,10 @@ const STEPS = [
 interface Props {
   programName:  string
   programLevel: 'ug' | 'pg'
-  eligibility:  string[]
   documents:    Doc[]
 }
 
-export default function AdmissionSteps({ programName, programLevel, eligibility, documents }: Props) {
+export default function AdmissionSteps({ programName, programLevel, documents }: Props) {
   const visibleDocs = documents.filter(d => !d.level || d.level === programLevel)
 
   return (
@@ -47,23 +46,6 @@ export default function AdmissionSteps({ programName, programLevel, eligibility,
             No campus visit, no entrance exam. Everything happens online.
           </p>
         </div>
-
-        {/* Eligibility check */}
-        {eligibility.length > 0 && (
-          <div data-animate="fade-up" className="mb-12 rounded-2xl bg-white/[0.05] border border-white/[0.09] px-6 py-6 text-center">
-            <p className="text-[11px] font-heading font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-4">
-              Quick eligibility check
-            </p>
-            <div className="flex flex-wrap justify-center gap-2.5">
-              {eligibility.map(e => (
-                <div key={e} className="inline-flex items-center gap-2 rounded-full bg-white/[0.08] border border-white/[0.12] px-4 py-2">
-                  <IconCheck size={12} stroke={2.5} className="text-vgu-yellow flex-none" />
-                  <span className="text-[13px] font-body text-white/80">{e}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Steps */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 relative mb-14">

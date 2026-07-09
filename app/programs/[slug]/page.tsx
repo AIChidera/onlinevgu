@@ -30,6 +30,7 @@ import CareerServices from './CareerServices'
 import LearningExperience from './LearningExperience'
 import FeesScholarships from './FeesScholarships'
 import FacultySection from './FacultySection'
+import MobileStickyCTA from './MobileStickyCTA'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import {
   PROGRAM_EXTRAS,
@@ -953,7 +954,6 @@ export default async function ProgramPage({ params }: Props) {
   const highlights      = fallback(prog.highlights,      hardcoded?.highlights)
   const careerRoles     = fallback(prog.careerRoles,     hardcoded?.careerRoles)
   const specialisations = fallback(prog.specialisations, hardcoded?.specialisations)
-  const eligibility     = fallback(prog.eligibility,     hardcoded?.eligibility)
   const topHirers       = fallback(prog.topHirers,       hardcoded?.topHirers)
 
   const totalProgramCount = allSanityProgs.length > 0 ? allSanityProgs.length : PROGRAMS.length
@@ -1129,14 +1129,14 @@ export default async function ProgramPage({ params }: Props) {
       <PlacementStatsStrip slug={prog.slug} />
 
       {/* ══ Main content ══ */}
-      <section className="bg-neutral-50 pt-12 pb-10 px-5 md:px-8 lg:px-12 md:pt-12 md:pb-16">
+      <section className="bg-neutral-50 pt-12 pb-8 px-5 md:px-8 lg:px-12 md:pt-12 md:pb-16">
         <div className="mx-auto max-w-[1280px]">
 
           {/* Back to Programs */}
           <div className="mb-6">
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2 text-[14px] font-heading font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150"
+              className="inline-flex items-center min-h-[44px] gap-2 text-[14px] font-heading font-semibold text-neutral-500 hover:text-vgu-red transition-colors duration-150"
             >
               <IconChevronRight size={14} className="rotate-180" />
               All Programs
@@ -1159,81 +1159,8 @@ export default async function ProgramPage({ params }: Props) {
                 <KeyOutcomes outcomes={extras?.keyOutcomes ?? highlights} />
               </div>
 
-              {/* Curriculum */}
-              {curriculum && (
-                <div>
-                  <div data-animate="fade-up">
-                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
-                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
-                      What You&apos;ll Study
-                    </h2>
-                  </div>
-                  <CurriculumPreview curriculum={curriculum} />
-                </div>
-              )}
-
-              {/* Coursera Premium Banner */}
-              <div data-animate="fade-up" className="rounded-2xl overflow-hidden">
-                <div className="relative bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                  {/* Dot texture */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none opacity-[0.05]"
-                    style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
-                  />
-                  {/* Depth gradient */}
-                  <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent to-black/20" />
-
-                  <div className="relative flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className="flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                      <Image
-                        src="/assets/trust/coursera.svg"
-                        alt="Coursera"
-                        width={30}
-                        height={30}
-                        className="rounded-md"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                        <p className="font-heading font-bold text-[16px] text-white leading-tight">
-                          Coursera Premium
-                        </p>
-                        <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
-                          Included Free
-                        </span>
-                      </div>
-                      <p className="text-[12px] font-body text-white/75 leading-snug">
-                        7,000+ courses from Google, IBM, Meta &amp; top universities - for the full duration of your program
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="relative flex flex-wrap gap-2">
-                    {['Stackable certifications', 'Learn at your pace', 'Zero extra cost'].map(item => (
-                      <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[11px] font-body text-white/90">
-                        <span className="text-vgu-yellow font-bold text-[10px]">✓</span>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Specialisations */}
-              {specialisations.length > 0 && (
-                <div>
-                  <div data-animate="fade-up">
-                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
-                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
-                      Specialisations
-                    </h2>
-                  </div>
-                  <SpecialisationCards specialisations={specialisations} />
-                </div>
-              )}
-
-              {/* Career outcomes */}
+              {/* Career outcomes - benefits (what you'll gain) lead, before the
+                  curriculum mechanics that substantiate them. */}
               <div>
                 <div data-animate="fade-up">
                   <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Placement records</p>
@@ -1253,6 +1180,32 @@ export default async function ProgramPage({ params }: Props) {
                   <CareerServices services={CAREER_SERVICES} />
                 </div>
               </div>
+
+              {/* Curriculum */}
+              {curriculum && (
+                <div>
+                  <div data-animate="fade-up">
+                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Curriculum</p>
+                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-8 lg:text-[32px]">
+                      What You&apos;ll Study
+                    </h2>
+                  </div>
+                  <CurriculumPreview curriculum={curriculum} />
+                </div>
+              )}
+
+              {/* Specialisations */}
+              {specialisations.length > 0 && (
+                <div>
+                  <div data-animate="fade-up">
+                    <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">Focus areas</p>
+                    <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] text-neutral-900 mb-6 lg:text-[32px]">
+                      Specialisations
+                    </h2>
+                  </div>
+                  <SpecialisationCards specialisations={specialisations} />
+                </div>
+              )}
 
             </div>
 
@@ -1274,11 +1227,65 @@ export default async function ProgramPage({ params }: Props) {
         cohortSize={COHORT_SIZE}
       />
 
-      {/* ══ Faculty ══ */}
+      {/* ══ Testimonials ══ - peer social proof right after the salary/career
+          payoff above, while that outcome-driven momentum is still fresh. */}
+      <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
+
+      {/* ══ Faculty ══ - authority-based trust follows peer proof. */}
       <FacultySection slug={prog.slug} />
 
-      {/* ══ Testimonials ══ */}
-      <ProgramTestimonials slug={prog.slug} testimonials={mappedTestimonials} />
+      {/* ══ Coursera Premium value stack ══ - what's included, positioned right
+          before the price to raise perceived value ahead of the fee reveal. */}
+      <section className="bg-white py-10 lg:py-12 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
+        <div className="mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="rounded-2xl overflow-hidden">
+            <div className="relative bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+              {/* Dot texture */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+              />
+              {/* Depth gradient */}
+              <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent to-black/20" />
+
+              <div className="relative flex items-center gap-3.5 flex-1 min-w-0">
+                <div className="flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                  <Image
+                    src="/assets/trust/coursera.svg"
+                    alt="Coursera"
+                    width={30}
+                    height={30}
+                    className="rounded-md"
+                  />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                    <p className="font-heading font-bold text-[16px] text-white leading-tight">
+                      Coursera Premium
+                    </p>
+                    <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
+                      Included Free
+                    </span>
+                  </div>
+                  <p className="text-[12px] font-body text-white/75 leading-snug">
+                    7,000+ courses from Google, IBM, Meta &amp; top universities - for the full duration of your program
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative flex flex-wrap gap-2">
+                {['Stackable certifications', 'Learn at your pace', 'Zero extra cost'].map(item => (
+                  <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[11px] font-body text-white/90">
+                    <span className="text-vgu-yellow font-bold text-[10px]">✓</span>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ══ Fees & scholarships ══ */}
       {extras && (
@@ -1300,7 +1307,6 @@ export default async function ProgramPage({ params }: Props) {
       <AdmissionSteps
         programName={prog.name}
         programLevel={prog.level === 'pg' ? 'pg' : 'ug'}
-        eligibility={eligibility}
         documents={REQUIRED_DOCUMENTS}
       />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
@@ -1352,33 +1358,12 @@ export default async function ProgramPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ══ Mobile sticky CTA ══ */}
-      <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-neutral-200 shadow-[0_-6px_20px_rgba(17,24,39,0.08)] px-4 pt-3"
-        style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
-      >
-        <p className="text-[11px] font-body text-neutral-500 text-center mb-2">
-          {prog.feePerYear}{prog.emi ? ` · EMI from ${prog.emi}` : ''}
-        </p>
-        <div className="flex items-center gap-3">
-          <a
-            href="#counsellor"
-            data-apply-trigger
-            data-program={prog.name}
-            data-program-level={prog.level}
-            className="flex-1 rounded-md bg-vgu-red hover:brightness-90 text-white py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-150 shadow-[0_4px_14px_rgba(192,64,54,0.32)]"
-          >
-            Apply Now
-          </a>
-          <a
-            href="#counsellor"
-            data-program={prog.name}
-            className="flex-1 rounded-md bg-white border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/[0.06] py-3.5 text-[15px] font-semibold font-heading text-center transition-all duration-150"
-          >
-            Talk to Counsellor
-          </a>
-        </div>
-      </div>
+      <MobileStickyCTA
+        feePerYear={prog.feePerYear}
+        emi={prog.emi}
+        programName={prog.name}
+        programLevel={prog.level === 'pg' ? 'pg' : 'ug'}
+      />
     </div>
   )
 }

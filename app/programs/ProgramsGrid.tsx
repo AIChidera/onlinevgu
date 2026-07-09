@@ -136,8 +136,8 @@ function DisciplineGroup({
 
       {/* Mobile: horizontal scroll */}
       <div
-        className="flex sm:hidden gap-4 overflow-x-auto pb-3 -mx-5 px-5 snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+        className="flex sm:hidden gap-4 overflow-x-auto pb-3 -mx-5 px-5 scroll-pl-5 snap-x snap-mandatory scrollbar-none"
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {programs.map((p, pi) => (
           <div key={p.slug} data-animate="materialize" style={{ animationDelay: `${pi * 70}ms` }} className="flex-none w-[260px] snap-start">

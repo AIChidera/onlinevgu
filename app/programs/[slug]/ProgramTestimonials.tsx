@@ -441,7 +441,7 @@ export default function ProgramTestimonials({ slug, testimonials: propTestimonia
   }, [])
 
   return (
-    <section className="bg-white border-t border-neutral-100 py-16 lg:py-20 px-5 md:px-8 lg:px-12">
+    <section className="bg-white border-t border-neutral-100 pt-8 pb-8 lg:py-20 px-5 md:px-8 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
 
         <div className="mb-10 lg:mb-12 max-w-[640px]">
@@ -459,8 +459,8 @@ export default function ProgramTestimonials({ slug, testimonials: propTestimonia
         <div ref={ref}>
           {/* Mobile: horizontal snap scroll */}
           <div
-            className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 pb-3"
-            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+            className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none -mx-5 px-5 scroll-pl-5 pb-3"
+            style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {items.map((t, i) => (
               <div key={t.name} className="flex-none w-[272px] snap-start">

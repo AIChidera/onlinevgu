@@ -31,7 +31,7 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
   ]
 
   return (
-    <section className="bg-neutral-50 pt-10 pb-16 md:py-16 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
+    <section className="bg-neutral-50 pt-8 pb-8 md:py-16 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
       <div className="mx-auto max-w-[1280px]">
 
         <div data-animate="fade-up" className="mb-10 max-w-[640px]">
@@ -80,11 +80,13 @@ export default function LearningExperience({ liveSchedule, sampleWeek, lmsPlatfo
               {sampleWeek.map(w => (
                 <div
                   key={w.day}
-                  className="grid grid-cols-[90px_1fr_auto] md:grid-cols-[110px_1fr_auto] items-center gap-3 md:gap-4 px-4 py-4 md:px-6"
+                  className="flex flex-col gap-1.5 px-4 py-4 md:grid md:grid-cols-[110px_1fr_auto] md:items-center md:gap-4 md:px-6"
                 >
-                  <p className="font-heading font-bold text-[13px] text-vgu-red uppercase tracking-[0.06em]">{w.day}</p>
-                  <p className="text-[16px] font-body text-neutral-900 leading-snug">{w.activity}</p>
-                  <p className="font-heading font-bold text-[14px] text-neutral-700 tabular-nums whitespace-nowrap">{w.hours}</p>
+                  <div className="flex items-center justify-between gap-3 md:contents">
+                    <p className="font-heading font-bold text-[13px] text-vgu-red uppercase tracking-[0.06em] md:order-1">{w.day}</p>
+                    <p className="font-heading font-bold text-[14px] text-neutral-700 tabular-nums whitespace-nowrap md:order-3">{w.hours}</p>
+                  </div>
+                  <p className="text-[16px] font-body text-neutral-900 leading-snug md:order-2">{w.activity}</p>
                 </div>
               ))}
             </div>

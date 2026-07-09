@@ -1,9 +1,18 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
+
 interface Props {
   // Digits only, no + or spaces. e.g. "919876543210". When undefined the FAB does not render.
   phoneNumber?: string
 }
 
 export default function WhatsAppButton({ phoneNumber }: Props) {
+  const pathname = usePathname()
+  // Program detail pages show a fixed bottom-0 mobile CTA bar below lg - lift the
+  // FAB clear of it there so it doesn't sit on top of the Talk to Counsellor button.
+  const hasStickyCTA = pathname?.startsWith('/programs/') ?? false
+
   if (!phoneNumber) return null
   return (
     <a
@@ -11,12 +20,16 @@ export default function WhatsAppButton({ phoneNumber }: Props) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed right-6 z-50 group flex items-center gap-0 hover:gap-3 overflow-hidden rounded-full transition-all duration-300"
+      className={[
+        'fixed right-6 z-50 group flex items-center gap-0 hover:gap-3 overflow-hidden rounded-full transition-all duration-300',
+        hasStickyCTA
+          ? 'bottom-[max(9rem,calc(env(safe-area-inset-bottom)+7rem))] lg:bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+8px))]'
+          : 'bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+8px))]',
+      ].join(' ')}
       style={{
         background: '#25D366',
         boxShadow: '0 4px 20px rgba(37,211,102,0.40)',
         padding: '14px',
-        bottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 8px))',
       }}
     >
       {/* WhatsApp icon */}
