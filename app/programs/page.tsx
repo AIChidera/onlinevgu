@@ -77,7 +77,7 @@ export default async function ProgramsPage() {
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
               style={{ animationDelay: '140ms' }}
             >
-              {count} online programs across {disciplineCount} disciplines. Earn from wherever you are.
+              {count} online programs across {disciplineCount} disciplines. Learn from wherever you are.
             </p>
 
             {/* CTAs */}

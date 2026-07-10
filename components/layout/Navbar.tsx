@@ -4,15 +4,33 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import { IconMenu2, IconX } from '@tabler/icons-react'
+import {
+  IconMenu2,
+  IconX,
+  IconHome,
+  IconInfoCircle,
+  IconSchool,
+  IconClipboardCheck,
+  IconBriefcase,
+  IconArticle,
+  IconPhone,
+  IconChevronRight,
+} from '@tabler/icons-react'
 
 const NAV_LINKS = [
-  { label: 'About',      href: '/about'         },
-  { label: 'Programs',   href: '/programs'      },
-  { label: 'Admissions', href: '/#how-to-apply' },
-  { label: 'Placements', href: '/placements'    },
-  { label: 'Blog',       href: '/blog'          },
+  { label: 'About',      href: '/about',         Icon: IconInfoCircle      },
+  { label: 'Programs',   href: '/programs',      Icon: IconSchool          },
+  { label: 'Admissions', href: '/#how-to-apply', Icon: IconClipboardCheck  },
+  { label: 'Placements', href: '/placements',    Icon: IconBriefcase       },
+  { label: 'Blog',       href: '/blog',          Icon: IconArticle         },
 ]
+
+// Active for the exact page and any of its sub-routes (e.g. /programs/bba
+// should still highlight "Programs"), never for hash anchors or external links.
+function isNavActive(href: string, pathname: string): boolean {
+  if (href.startsWith('http') || href.includes('#')) return false
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 export default function Navbar() {
   const pathname                      = usePathname()
@@ -89,13 +107,12 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-8" aria-label="Main">
             {NAV_LINKS.map((link) => {
-              // Active only for in-site path links (skip external + hash anchors)
-              const isPath = !link.href.startsWith('http') && !link.href.includes('#')
-              const active = isPath && pathname === link.href
+              const active = isNavActive(link.href, pathname)
               return (
                 <a
                   key={link.label}
                   href={link.href}
+                  aria-current={active ? 'page' : undefined}
                   className={[
                     'relative font-heading font-medium text-[15px] transition-colors duration-150',
                     'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
@@ -159,43 +176,83 @@ export default function Navbar() {
         />
 
         {/* Drawer panel - sits below the sticky header (z-40 < header's z-100), which
-            stays visible and owns the single hamburger/X toggle. No internal header here. */}
+            stays visible and owns the single hamburger/X toggle. No internal header here.
+            Offset is header height (64px) + the IntakeCountdown banner above it (~38px),
+            not just the header alone, or the top of the panel gets clipped under the banner. */}
         <div
           ref={drawerRef}
           className={[
-            'absolute right-0 top-16 bottom-0 w-72 bg-white shadow-2xl flex flex-col transition-transform duration-300',
+            'absolute right-0 top-[103px] bottom-0 w-72 bg-white shadow-2xl flex flex-col transition-transform duration-300',
             mobileOpen ? 'translate-x-0' : 'translate-x-full',
           ].join(' ')}
         >
           {/* Drawer links */}
-          <nav className="flex-1 overflow-y-auto px-4 pt-6 pb-4 flex flex-col gap-1">
-            {NAV_LINKS.map((link) => {
-              const isPath = !link.href.startsWith('http') && !link.href.includes('#')
-              const active = isPath && pathname === link.href
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className={[
-                    'border-b border-neutral-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
-                    active ? 'text-vgu-red' : 'text-neutral-900 hover:text-vgu-red',
-                  ].join(' ')}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </a>
-              )
-            })}
-            <Link
-              href="/contact"
-              className={[
-                'border-b border-neutral-100 py-4 px-2 font-heading font-semibold text-[17px] transition-colors',
-                pathname === '/contact' ? 'text-vgu-red' : 'text-neutral-900 hover:text-vgu-red',
-              ].join(' ')}
-              onClick={() => setMobileOpen(false)}
-            >
-              Contact
-            </Link>
+          <nav className="flex-1 overflow-y-auto px-4 pt-6 pb-4">
+            <p className="px-4 mb-3 text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red">
+              Menu
+            </p>
+            <div className="flex flex-col gap-1.5">
+              <Link
+                href="/"
+                aria-current={pathname === '/' ? 'page' : undefined}
+                className={[
+                  'group flex items-center gap-3.5 rounded-2xl px-4 py-3.5 min-h-[44px] font-heading font-semibold text-[16px] transition-all duration-200',
+                  pathname === '/'
+                    ? 'bg-vgu-red text-white shadow-[0_6px_20px_rgba(192,64,54,0.32)]'
+                    : 'text-neutral-800 hover:bg-neutral-50',
+                ].join(' ')}
+                onClick={() => setMobileOpen(false)}
+              >
+                <IconHome size={20} stroke={1.75} className={pathname === '/' ? 'text-white' : 'text-vgu-red'} />
+                <span className="flex-1">Home</span>
+                <IconChevronRight
+                  size={16}
+                  className={pathname === '/' ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
+                />
+              </Link>
+              {NAV_LINKS.map((link) => {
+                const active = isNavActive(link.href, pathname)
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={[
+                      'group flex items-center gap-3.5 rounded-2xl px-4 py-3.5 min-h-[44px] font-heading font-semibold text-[16px] transition-all duration-200',
+                      active
+                        ? 'bg-vgu-red text-white shadow-[0_6px_20px_rgba(192,64,54,0.32)]'
+                        : 'text-neutral-800 hover:bg-neutral-50',
+                    ].join(' ')}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <link.Icon size={20} stroke={1.75} className={active ? 'text-white' : 'text-vgu-red'} />
+                    <span className="flex-1">{link.label}</span>
+                    <IconChevronRight
+                      size={16}
+                      className={active ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
+                    />
+                  </a>
+                )
+              })}
+              <Link
+                href="/contact"
+                aria-current={pathname === '/contact' ? 'page' : undefined}
+                className={[
+                  'group flex items-center gap-3.5 rounded-2xl px-4 py-3.5 min-h-[44px] font-heading font-semibold text-[16px] transition-all duration-200',
+                  pathname === '/contact'
+                    ? 'bg-vgu-red text-white shadow-[0_6px_20px_rgba(192,64,54,0.32)]'
+                    : 'text-neutral-800 hover:bg-neutral-50',
+                ].join(' ')}
+                onClick={() => setMobileOpen(false)}
+              >
+                <IconPhone size={20} stroke={1.75} className={pathname === '/contact' ? 'text-white' : 'text-vgu-red'} />
+                <span className="flex-1">Contact</span>
+                <IconChevronRight
+                  size={16}
+                  className={pathname === '/contact' ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
+                />
+              </Link>
+            </div>
           </nav>
 
           {/* Drawer CTA */}
