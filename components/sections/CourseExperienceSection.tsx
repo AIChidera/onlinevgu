@@ -172,7 +172,7 @@ export default function CourseExperienceSection() {
         <button
           onClick={(e) => { e.stopPropagation(); togglePlay(); }}
           aria-label={playing ? 'Pause video' : 'Play video'}
-          className="absolute top-5 right-5 z-20 flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-body font-semibold text-white backdrop-blur-md bg-black/40 border border-white/20 hover:bg-black/60 transition-all duration-200 shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 md:pointer-events-none md:group-hover:pointer-events-auto"
+          className="absolute top-5 right-5 z-20 flex items-center min-h-[44px] gap-2 rounded-full px-4 py-2 text-[13px] font-body font-semibold text-white backdrop-blur-md bg-black/40 border border-white/20 hover:bg-black/60 transition-all duration-200 shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 md:pointer-events-none md:group-hover:pointer-events-auto"
         >
           {playing ? <IconPlayerPause size={14} className="flex-none" /> : <IconPlayerPlay size={14} className="flex-none" />}
           <span>{playing ? 'Pause' : 'Play'}</span>

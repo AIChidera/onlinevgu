@@ -168,7 +168,7 @@ export default function Navbar() {
           ].join(' ')}
         >
           {/* Drawer links */}
-          <nav className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-1">
+          <nav className="flex-1 overflow-y-auto px-4 pt-6 pb-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
               const isPath = !link.href.startsWith('http') && !link.href.includes('#')
               const active = isPath && pathname === link.href

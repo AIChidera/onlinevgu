@@ -218,7 +218,7 @@ export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSum
                 key={i}
                 type="button"
                 onClick={() => setActive(i)}
-                className="flex items-center justify-center h-10 px-1.5"
+                className="flex items-center justify-center h-11 px-1.5"
                 aria-label={`Go to slide ${i + 1}`}
               >
                 <span

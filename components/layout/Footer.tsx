@@ -107,7 +107,7 @@ export default async function Footer() {
         <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
           {/* Main grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr_1fr_1fr] gap-8 lg:gap-10 pb-12 border-b border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr_1fr_1fr] gap-8 lg:gap-10 pb-6 lg:pb-12 border-b border-white/10">
 
             {/* Brand col */}
             <div data-animate="fade-up">

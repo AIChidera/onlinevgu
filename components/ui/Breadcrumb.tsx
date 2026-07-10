@@ -10,8 +10,8 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   const all: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, ...items]
 
   return (
-    <nav aria-label="Breadcrumb" className="bg-white border-b border-neutral-100 px-5 md:px-8 lg:px-12">
-      <ol className="mx-auto max-w-[1280px] flex items-center gap-1.5 py-3 min-w-0">
+    <nav aria-label="Breadcrumb" className="bg-neutral-50 border-b border-neutral-200 px-5 md:px-8 lg:px-12">
+      <ol className="mx-auto max-w-[1280px] flex items-center gap-1.5 min-w-0">
         {all.map((item, i) => {
           const isLast = i === all.length - 1
           return (

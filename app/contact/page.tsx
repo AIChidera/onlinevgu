@@ -396,7 +396,7 @@ export default async function ContactPage() {
                       aria-label={s.label}
                       title={s.label}
                       className={[
-                        'group inline-flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 bg-white text-neutral-600 hover:text-white hover:-translate-y-0.5 transition-all duration-200',
+                        'group inline-flex items-center justify-center w-11 h-11 rounded-full border border-neutral-200 bg-white text-neutral-600 hover:text-white hover:-translate-y-0.5 transition-all duration-200',
                         s.hover,
                       ].join(' ')}
                     >

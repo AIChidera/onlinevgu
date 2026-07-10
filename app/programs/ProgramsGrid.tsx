@@ -49,7 +49,6 @@ export default function ProgramsGrid({
     { value: 'all',  label: 'All Programs', count: programmes.length },
     { value: 'ug',   label: 'Bachelors',    count: programmes.filter(p => p.level === 'ug').length   },
     { value: 'pg',   label: 'Masters',      count: programmes.filter(p => p.level === 'pg').length   },
-    { value: 'cert', label: 'Certificates', count: programmes.filter(p => p.level === 'cert').length },
   ]
 
   return (
@@ -79,7 +78,7 @@ export default function ProgramsGrid({
                 onClick={() => setFilter(f.value)}
                 aria-pressed={filter === f.value}
                 className={[
-                  'rounded-full px-4 py-2.5 text-[13px] font-heading font-semibold transition-all duration-150',
+                  'flex items-center min-h-[44px] rounded-full px-4 py-2.5 text-[13px] font-heading font-semibold transition-all duration-150',
                   filter === f.value
                     ? 'bg-vgu-red text-white shadow-[0_2px_8px_rgba(192,64,54,0.35)]'
                     : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red/50 hover:text-vgu-red',

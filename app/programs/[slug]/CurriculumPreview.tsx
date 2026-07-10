@@ -56,7 +56,7 @@ export default function CurriculumPreview({ curriculum }: { curriculum: Curricul
             aria-pressed={activeYear === i}
             style={activeYear === i ? { background: 'linear-gradient(135deg,#C04036,#821a12)' } : undefined}
             className={[
-              'rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold transition-all duration-200',
+              'flex items-center min-h-[44px] rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold transition-all duration-200',
               activeYear === i
                 ? 'text-white shadow-[0_4px_16px_rgba(192,64,54,0.35)] scale-[1.05]'
                 : 'bg-white border border-neutral-200 text-neutral-600 hover:border-vgu-red hover:text-vgu-red',
