@@ -34,7 +34,7 @@ Database:      Supabase (PostgreSQL)
 Email:         Resend
 Rate limiting: Upstash Redis
 Hosting:       Vercel (auto-deploys on push to main)
-Fonts:         Nunito (heading) + Lato (body) via next/font/google
+Fonts:         Plus Jakarta Sans (heading) + DM Sans (body) via next/font/google
 Validation:    Zod + react-hook-form + @hookform/resolvers
 Package mgr:   npm (never suggest yarn or pnpm)
 
@@ -65,8 +65,8 @@ Tailwind config reference:
 # TYPOGRAPHY — EXACT SPECIFICATIONS
 # ------------------------------------------------------------
 
-Heading font:  Nunito (web fallback for licensed Proxima Nova)
-Body font:     Lato (web fallback for licensed Avenir)
+Heading font:  Plus Jakarta Sans
+Body font:     DM Sans
 
 DESKTOP TYPE SCALE:
   H1:      font-heading 56px / 700 / tracking-[-1px] / leading-[1.15]
@@ -85,8 +85,8 @@ MOBILE TYPE SCALE (≤768px):
 RULES:
   - Never use body text below 16px on any screen
   - Eyebrow labels are always uppercase, always #C04036
-  - Headings always use font-heading (Nunito)
-  - Paragraphs always use font-body (Lato)
+  - Headings always use font-heading (Plus Jakarta Sans)
+  - Paragraphs always use font-body (DM Sans)
 
 
 # ------------------------------------------------------------
@@ -176,7 +176,7 @@ Program card — additional rules:
 
 Stat card:
   No border. Box shadow: 0 2px 12px rgba(0,0,0,0.06)
-  Stat number: 48px / 700 / Nunito / color #eecf63
+  Stat number: 48px / 700 / Plus Jakarta Sans / color #eecf63
 
 Testimonial card:
   Large quote mark: 64px / 700 / #C04036 / line-height 0.8
@@ -209,7 +209,7 @@ Border bottom: 1px solid #E5E7EB
 Position: sticky top-0 z-index 100
 
 Desktop layout:
-  Left: Logo "Online VGU" — Nunito 22px/700 #C04036
+  Left: Logo "Online VGU" — Plus Jakarta Sans 22px/700 #C04036
   Center: Nav links — Programs, About, Admissions, Blog
           15px/500 #111827, hover #C04036, transition 150ms
   Right: "Apply Now" primary pill button
