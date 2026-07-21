@@ -33,6 +33,13 @@ const SUPPORT_LINKS = [
   { label: 'Student Portal',    href: '/student-portal'       },
 ]
 
+const RESOURCE_LINKS = [
+  { label: 'AICTE - NOC',   href: '/documents/aicte-noc.pdf',     newTab: true },
+  { label: 'UGC Approval',  href: '/documents/ugc-approval.pdf',  newTab: true },
+  { label: 'Refund Policy', href: '/documents/refund-policy.pdf', newTab: true },
+  { label: 'CIQA',          href: 'https://cdoevgu.com/ciqa.php', newTab: true },
+]
+
 const SOCIALS = [
   {
     label:      'LinkedIn',
@@ -107,7 +114,7 @@ export default async function Footer() {
         <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12">
 
           {/* Main grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr_1fr_1fr] gap-8 lg:gap-10 lg:pb-12 lg:border-b lg:border-white/10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_0.85fr_0.85fr_0.85fr_0.85fr] gap-8 lg:gap-10 lg:pb-12 lg:border-b lg:border-white/10">
 
             {/* Brand col */}
             <div data-animate="fade-up">
@@ -171,10 +178,11 @@ export default async function Footer() {
               </div>
             </div>
 
-            {/* Programs / Company / Support - stacked accordions on mobile, plain columns on desktop */}
+            {/* Programs / Company / Support / Resources - stacked accordions on mobile, plain columns on desktop */}
             <FooterLinkGroup title="Programs" links={PROGRAM_LINKS} delay={80} />
             <FooterLinkGroup title="Company" links={COMPANY_LINKS} delay={160} />
             <FooterLinkGroup title="Support" links={SUPPORT_LINKS} delay={240} />
+            <FooterLinkGroup title="Resources" links={RESOURCE_LINKS} delay={320} />
           </div>
 
           {/* Bottom bar */}

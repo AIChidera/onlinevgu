@@ -1,9 +1,9 @@
-import type { MetadataRoute } from 'next'
+﻿import type { MetadataRoute } from 'next'
 import { PROGRAMMES } from './programs/data'
 import { getAllPrograms } from '@/lib/sanity'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = 'https://onlinevgu.in'
+  const base = 'https://onlinevgu.com'
   const now = new Date()
 
   const statics: MetadataRoute.Sitemap = [

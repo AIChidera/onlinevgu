@@ -67,7 +67,7 @@ async function seedSiteSettings() {
     admissionsOpen:      true,
     phoneDisplay:        '+91 80350 18677',
     whatsappNumber:      '919549086333',
-    admissionsEmail:     'admissions@onlinevgu.in',
+    admissionsEmail:     'admissions@onlinevgu.com',
     address:             'Vivekananda Global University, Jaipur, Rajasthan 303012',
     statLearners:        '50,000+',
     statCountries:       '40+',

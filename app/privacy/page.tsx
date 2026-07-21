@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   IconShieldLock,
@@ -10,12 +10,13 @@ import {
   IconInfoCircle,
 } from '@tabler/icons-react'
 import { getSiteConfig } from '@/lib/sanity'
+import LegalPageTOC from '@/components/ui/LegalPageTOC'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Online VGU',
   description:
     'How Vivekananda Global University collects, uses, and protects the personal data you share through the Online VGU platform.',
-  alternates: { canonical: 'https://onlinevgu.in/privacy' },
+  alternates: { canonical: 'https://onlinevgu.com/privacy' },
 }
 
 const LAST_UPDATED = 'June 2026'
@@ -39,7 +40,7 @@ export default async function PrivacyPage() {
   return (
     <main className="bg-white">
 
-      {/* ─── Hero ─────────────────────────────────────────────── */}
+      {/* â”€â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
@@ -53,7 +54,7 @@ export default async function PrivacyPage() {
             <div className="inline-flex items-center gap-2 mb-5 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
               <IconShieldLock size={14} className="text-vgu-yellow" stroke={2} />
               <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
-                Legal · Privacy
+                Legal Â· Privacy
               </span>
             </div>
 
@@ -71,14 +72,14 @@ export default async function PrivacyPage() {
                 <IconClock size={14} stroke={2} className="text-vgu-yellow/80" />
                 Last updated: {LAST_UPDATED}
               </span>
-              <span className="hidden sm:inline text-white/20">·</span>
-              <span>Governed by the DPDP Act, 2023 (India) · GDPR · CCPA</span>
+              <span className="hidden sm:inline text-white/20">Â·</span>
+              <span>Governed by the DPDP Act, 2023 (India) Â· GDPR Â· CCPA</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Content ──────────────────────────────────────────── */}
+      {/* â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px] grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 lg:gap-16">
 
@@ -88,23 +89,7 @@ export default async function PrivacyPage() {
               <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-4">
                 On this page
               </p>
-              <nav>
-                <ul className="flex flex-col gap-2.5">
-                  {SECTIONS.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="group flex items-baseline gap-2.5 text-[13px] font-body text-neutral-500 hover:text-vgu-red transition-colors duration-150"
-                      >
-                        <span className="font-heading font-semibold text-[11px] text-neutral-300 group-hover:text-vgu-red/70 transition-colors w-5 flex-none">
-                          {s.num}
-                        </span>
-                        <span className="leading-[1.45]">{s.title}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              <LegalPageTOC sections={SECTIONS} />
             </div>
           </aside>
 
@@ -118,7 +103,7 @@ export default async function PrivacyPage() {
                 <span className="font-semibold text-neutral-900">&quot;we&quot;</span>,{' '}
                 <span className="font-semibold text-neutral-900">&quot;us&quot;</span>) provides the{' '}
                 <span className="font-heading font-semibold text-vgu-red">Online VGU</span> LMS platform
-                at <span className="font-heading font-semibold text-vgu-red">onlinevgu.in</span>. We are committed to
+                at <span className="font-heading font-semibold text-vgu-red">onlinevgu.com</span>. We are committed to
                 protecting your personal data and respecting your privacy in accordance with the Digital Personal Data
                 Protection Act, 2023 (India), GDPR, CCPA, and the Google API Services User Data Policy.
               </p>
@@ -325,7 +310,7 @@ export default async function PrivacyPage() {
   )
 }
 
-/* ─── Subcomponents ───────────────────────────────────────── */
+/* â”€â”€â”€ Subcomponents â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function Section({
   id,

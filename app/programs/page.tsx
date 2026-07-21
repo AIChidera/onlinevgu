@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -14,18 +14,18 @@ export const metadata: Metadata = {
   title: 'All Programs',
   description:
     'Browse UGC-recognised online programs from Vivekananda Global University. Degrees and certificates across Management, IT, Commerce, Arts, Science, Data Science, and Media. No entrance exam. 100% online.',
-  alternates: { canonical: 'https://onlinevgu.in/programs' },
+  alternates: { canonical: 'https://onlinevgu.com/programs' },
   openGraph: {
     title: 'All Programs | Online VGU',
     description: 'Browse UGC-recognised online programs. No entrance exam. 100% online.',
-    url: 'https://onlinevgu.in/programs',
+    url: 'https://onlinevgu.com/programs',
   },
 }
 
 export default async function ProgramsPage() {
   const [sanityPrograms, config] = await Promise.all([getAllPrograms(), getSiteConfig()])
 
-  // Build a slug→image map from the hardcoded fallback so we can fill gaps
+  // Build a slugâ†’image map from the hardcoded fallback so we can fill gaps
   // when Sanity programmes don't yet have a hero image uploaded in the CMS.
   const fallbackImages: Record<string, string> = Object.fromEntries(
     PROGRAMMES.filter(p => p.image).map(p => [p.slug, p.image as string])
@@ -44,14 +44,18 @@ export default async function ProgramsPage() {
 
   return (
     <>
-      <Breadcrumb items={[{ label: 'All Programs' }]} />
-
-      {/* ══ Hero ══ */}
+      {/* â•â• Hero â•â• */}
       <section className="relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
-        {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
+        {/* Photo + dark overlay (Bible Â§06 semi-transparent treatment) */}
         <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
+
+        {/* Breadcrumb - pinned to the hero's own top edge, independent of the
+            content column's py-16+ padding */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'All Programs' }]} variant="overlay" />
+        </div>
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 
@@ -61,7 +65,7 @@ export default async function ProgramsPage() {
               className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
               style={{ animationDelay: '0ms' }}
             >
-              UGC-Recognised · 100% Online
+              UGC-Recognised Â· 100% Online
             </p>
 
             <h1
@@ -107,7 +111,7 @@ export default async function ProgramsPage() {
         </div>
       </section>
 
-      {/* ══ Grid ══ */}
+      {/* â•â• Grid â•â• */}
       <ProgramsGrid programmes={programmes} nextBatch={config.nextBatch} />
     </>
   )

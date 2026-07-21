@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
@@ -916,11 +916,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${prog.name} Online - ${prog.fullName} | VGU`,
     description: metaDesc,
-    alternates: { canonical: `https://onlinevgu.in/programs/${prog.slug}` },
+    alternates: { canonical: `https://onlinevgu.com/programs/${prog.slug}` },
     openGraph: {
       title: `${prog.name} Online - ${prog.fullName} | VGU`,
       description: metaDesc,
-      url: `https://onlinevgu.in/programs/${prog.slug}`,
+      url: `https://onlinevgu.com/programs/${prog.slug}`,
     },
   }
 }
@@ -1002,9 +1002,9 @@ export default async function ProgramPage({ params }: Props) {
     provider: {
       '@type': 'Organization',
       name: 'Vivekananda Global University',
-      sameAs: 'https://onlinevgu.in',
+      sameAs: 'https://onlinevgu.com',
     },
-    url: `https://onlinevgu.in/programs/${prog.slug}`,
+    url: `https://onlinevgu.com/programs/${prog.slug}`,
     educationalCredentialAwarded: prog.fullName,
     offers: {
       '@type': 'Offer',
@@ -1018,9 +1018,9 @@ export default async function ProgramPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',     item: 'https://onlinevgu.in' },
-      { '@type': 'ListItem', position: 2, name: 'Programs', item: 'https://onlinevgu.in/programs' },
-      { '@type': 'ListItem', position: 3, name: prog.name,  item: `https://onlinevgu.in/programs/${prog.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home',     item: 'https://onlinevgu.com' },
+      { '@type': 'ListItem', position: 2, name: 'Programs', item: 'https://onlinevgu.com/programs' },
+      { '@type': 'ListItem', position: 3, name: prog.name,  item: `https://onlinevgu.com/programs/${prog.slug}` },
     ],
   }
 
@@ -1035,13 +1035,17 @@ export default async function ProgramPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <Breadcrumb items={[{ label: 'All Courses', href: '/programs' }, { label: prog.name }]} />
-
       {/* ══ Hero ══ */}
       <section className="sketch-hover-group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         {/* Background image + brand-red overlay (50%) - swap heroImage for a program-specific asset */}
         <Image src={heroImage} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
+
+        {/* Breadcrumb - pinned to the hero's own top edge, independent of the
+            content column's py-16+ padding */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'All Courses', href: '/programs' }, { label: prog.name }]} variant="overlay" />
+        </div>
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
 

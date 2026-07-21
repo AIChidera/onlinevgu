@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   IconFileText,
@@ -10,12 +10,13 @@ import {
   IconInfoCircle,
 } from '@tabler/icons-react'
 import { getSiteConfig } from '@/lib/sanity'
+import LegalPageTOC from '@/components/ui/LegalPageTOC'
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Online VGU',
   description:
     'The terms and conditions governing your use of the Online VGU platform and website operated by Vivekananda Global University.',
-  alternates: { canonical: 'https://onlinevgu.in/terms' },
+  alternates: { canonical: 'https://onlinevgu.com/terms' },
 }
 
 const LAST_UPDATED = 'June 2026'
@@ -41,7 +42,7 @@ export default async function TermsPage() {
   return (
     <main className="bg-white">
 
-      {/* ─── Hero ─────────────────────────────────────────────── */}
+      {/* â”€â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
@@ -55,7 +56,7 @@ export default async function TermsPage() {
             <div className="inline-flex items-center gap-2 mb-5 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
               <IconFileText size={14} className="text-vgu-yellow" stroke={2} />
               <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
-                Legal · Terms
+                Legal Â· Terms
               </span>
             </div>
 
@@ -73,14 +74,14 @@ export default async function TermsPage() {
                 <IconClock size={14} stroke={2} className="text-vgu-yellow/80" />
                 Last updated: {LAST_UPDATED}
               </span>
-              <span className="hidden sm:inline text-white/20">·</span>
-              <span>Governed by the laws of India · Jurisdiction: Jaipur, Rajasthan</span>
+              <span className="hidden sm:inline text-white/20">Â·</span>
+              <span>Governed by the laws of India Â· Jurisdiction: Jaipur, Rajasthan</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Content ──────────────────────────────────────────── */}
+      {/* â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px] grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 lg:gap-16">
 
@@ -90,23 +91,7 @@ export default async function TermsPage() {
               <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-4">
                 On this page
               </p>
-              <nav>
-                <ul className="flex flex-col gap-2.5">
-                  {SECTIONS.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="group flex items-baseline gap-2.5 text-[13px] font-body text-neutral-500 hover:text-vgu-red transition-colors duration-150"
-                      >
-                        <span className="font-heading font-semibold text-[11px] text-neutral-300 group-hover:text-vgu-red/70 transition-colors w-5 flex-none">
-                          {s.num}
-                        </span>
-                        <span className="leading-[1.45]">{s.title}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              <LegalPageTOC sections={SECTIONS} />
             </div>
           </aside>
 
@@ -118,7 +103,7 @@ export default async function TermsPage() {
               <p className="text-[17px] md:text-[18px] leading-[1.75] text-neutral-700 text-justify">
                 These Terms &amp; Conditions (&quot;Terms&quot;) govern your access to and use of the{' '}
                 <span className="font-heading font-semibold text-vgu-red">Online VGU</span> website and LMS
-                platform at <span className="font-heading font-semibold text-vgu-red">onlinevgu.in</span>,
+                platform at <span className="font-heading font-semibold text-vgu-red">onlinevgu.com</span>,
                 operated by{' '}
                 <span className="font-semibold text-neutral-900">Vivekananda Global University</span>{' '}
                 (&quot;VGU&quot;, &quot;we&quot;, &quot;us&quot;), a NAAC A+ accredited university based in
@@ -385,7 +370,7 @@ export default async function TermsPage() {
   )
 }
 
-/* ─── Subcomponents ───────────────────────────────────────── */
+/* â”€â”€â”€ Subcomponents â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function Section({
   id,

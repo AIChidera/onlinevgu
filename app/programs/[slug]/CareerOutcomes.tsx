@@ -28,6 +28,13 @@ function getRoleIcon(role: string) {
 
 const INITIAL_VISIBLE = 5
 
+// Role ranges arrive pre-formatted as e.g. "₹4-8 LPA". Stripping the
+// repeated unit off each row and hoisting it into one column header reads
+// far cleaner than reprinting "₹...LPA" five-plus times in a row.
+function stripUnit(range: string): string {
+  return range.replace(/₹\s*/g, '').replace(/\s*LPA\b/gi, '').trim()
+}
+
 export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] }) {
   const safe: RoleRow[] = (Array.isArray(roles) ? roles : []).map(r =>
     typeof r === 'string' ? { role: r } : r
@@ -37,9 +44,23 @@ export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] 
 
   const needsToggle = safe.length > INITIAL_VISIBLE
   const visible = showAll || !needsToggle ? safe : safe.slice(0, INITIAL_VISIBLE)
+  const hasRanges = safe.some(r => r.range)
 
   return (
     <div>
+      {hasRanges && (
+        <div className="flex items-center gap-3 pb-2.5">
+          <div className="flex-none w-5" aria-hidden="true" />
+          <div className="flex-1 flex items-baseline justify-between gap-3">
+            <span className="text-[11px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400">
+              Career role
+            </span>
+            <span className="text-[11px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400 whitespace-nowrap">
+              ₹ LPA
+            </span>
+          </div>
+        </div>
+      )}
       <div className="divide-y divide-neutral-200">
         {visible.map((r) => {
           const Icon = getRoleIcon(r.role)
@@ -59,7 +80,7 @@ export default function CareerOutcomes({ roles }: { roles: (string | RoleRow)[] 
                   </p>
                   {r.range && (
                     <p className="font-heading font-black text-[17px] md:text-[19px] text-vgu-yellow tabular-nums whitespace-nowrap flex-none leading-none">
-                      {r.range}
+                      {stripUnit(r.range)}
                     </p>
                   )}
                 </div>

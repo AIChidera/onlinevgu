@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -30,7 +30,7 @@ import { getSiteConfig, type SiteConfig } from '@/lib/sanity'
 
 const TRUST_PILLS = [
   { Icon: IconBolt,        label: 'Response within 2 hours' },
-  { Icon: IconCircleCheck, label: 'Free · No obligation'    },
+  { Icon: IconCircleCheck, label: 'Free Â· No obligation'    },
   { Icon: IconClock,       label: 'Mon-Sat, 9am-7pm IST'    },
 ]
 
@@ -64,7 +64,7 @@ function buildMiniFaqs(config: SiteConfig) {
     },
     {
       q: 'Can I pay fees in monthly EMIs?',
-      a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
+      a: 'Yes. We offer 0% interest EMI plans starting from â‚¹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
     },
     {
       q: 'How long does the application process take?',
@@ -151,11 +151,11 @@ const COUNSELLORS = [
 export const metadata: Metadata = {
   title: 'Contact Us - VGU Online',
   description: 'Get in touch with the VGU admissions team. Call, WhatsApp, email, or fill out the form - we respond within 24 hours.',
-  alternates: { canonical: 'https://onlinevgu.in/contact' },
+  alternates: { canonical: 'https://onlinevgu.com/contact' },
   openGraph: {
     title: 'Contact Us - VGU Online',
-    description: 'Free counselling · Reply within 2 hours · Mon-Sat 9am-7pm IST.',
-    url: 'https://onlinevgu.in/contact',
+    description: 'Free counselling Â· Reply within 2 hours Â· Mon-Sat 9am-7pm IST.',
+    url: 'https://onlinevgu.com/contact',
   },
 }
 
@@ -169,9 +169,7 @@ export default async function ContactPage() {
 
   return (
     <div>
-      <Breadcrumb items={[{ label: 'Contact Us' }]} />
-
-      {/* ══ Hero ══ */}
+      {/* â•â• Hero â•â• */}
       <section
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
@@ -179,6 +177,12 @@ export default async function ContactPage() {
         <SketchFlourish shape="swoop" color="yellow" opacity={0.04} strokeWidth={28} durationMs={2400} trigger="in-view" />
         <div aria-hidden="true" className="absolute -top-32 -right-24 h-[440px] w-[440px] rounded-full bg-vgu-red/30 blur-3xl" />
         <div aria-hidden="true" className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-vgu-yellow/10 blur-3xl" />
+
+        {/* Breadcrumb - pinned to the hero's own top edge, independent of the
+            content column's py-14+ padding */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'Contact Us' }]} variant="overlay" />
+        </div>
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
           <div className="max-w-[760px]">
@@ -221,7 +225,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Quick channels ══ */}
+      {/* â•â• Quick channels â•â• */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -270,7 +274,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Form + Reach us ══ */}
+      {/* â•â• Form + Reach us â•â• */}
       <section className="bg-neutral-50 pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -411,7 +415,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Visit our campus (Map) ══ */}
+      {/* â•â• Visit our campus (Map) â•â• */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -494,7 +498,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Departments ══ */}
+      {/* â•â• Departments â•â• */}
       <section className="bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -552,7 +556,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Mini-FAQ ══ */}
+      {/* â•â• Mini-FAQ â•â• */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[860px]">
 
@@ -613,7 +617,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ══ Counsellors ══ */}
+      {/* â•â• Counsellors â•â• */}
       <section className="sketch-hover-group relative overflow-hidden bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={24} durationMs={2200} />
         <div className="relative z-10 mx-auto max-w-[1280px]">

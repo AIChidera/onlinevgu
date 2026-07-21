@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getMilestones, getSiteConfig } from '@/lib/sanity'
 import {
@@ -25,18 +25,18 @@ export const metadata: Metadata = {
   title: 'About VGU - Vivekananda Global University Online',
   description:
     'Learn about Vivekananda Global University - NAAC A+, UGC-entitled, and committed to accessible quality education since 2012.',
-  alternates: { canonical: 'https://onlinevgu.in/about' },
+  alternates: { canonical: 'https://onlinevgu.com/about' },
   openGraph: {
     title: 'About VGU - Vivekananda Global University Online',
     description: 'NAAC A+ university, founded 2012 in Jaipur. 50,000+ learners across 40+ countries.',
-    url: 'https://onlinevgu.in/about',
+    url: 'https://onlinevgu.com/about',
   },
 }
 
 function buildStats(config: { foundingYear: number; stats: { learners: string; countries: string } }) {
   return [
     { value: String(config.foundingYear), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
-    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
+    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA Â· Valid 2027', Icon: IconAward     },
     { value: config.stats.learners,       label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
     { value: config.stats.countries,      label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
   ]
@@ -114,19 +114,19 @@ const ALUMNI_TESTIMONIALS = [
   {
     quote:   'The MBA from VGU gave me the same degree as an on-campus student. My employer never asked if it was online.',
     name:    'Rahul Sharma',
-    program: 'MBA · 2023 batch',
+    program: 'MBA Â· 2023 batch',
     avatar:  'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=160&q=80&auto=format&fit=crop',
   },
   {
     quote:   'Working full-time in Hyderabad meant I couldn\'t relocate. VGU let me earn my MCA without giving up my job or my family.',
     name:    'Priya Nair',
-    program: 'MCA · 2023 batch',
+    program: 'MCA Â· 2023 batch',
     avatar:  'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=160&q=80&auto=format&fit=crop',
   },
   {
     quote:   'The campus immersion week changed everything. I came back with a co-founder and a completely new career direction.',
     name:    'Aditya Mehta',
-    program: 'BBA · 2024 batch',
+    program: 'BBA Â· 2024 batch',
     avatar:  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=160&q=80&auto=format&fit=crop',
   },
 ]
@@ -178,9 +178,7 @@ export default async function AboutPage() {
 
   return (
     <div>
-      <Breadcrumb items={[{ label: 'About VGU' }]} />
-
-      {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
+      {/* â•â• Hero - swoop yellow (whisper-faint on the photo) â•â• */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
           src={HERO_IMAGE_SRC}
@@ -191,6 +189,12 @@ export default async function AboutPage() {
           className="object-cover object-center"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
+
+        {/* Breadcrumb - pinned to the hero's own top edge, independent of the
+            content column's py-16+ padding */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'About VGU' }]} variant="overlay" />
+        </div>
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[680px]">
@@ -243,7 +247,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
+      {/* â•â• Stats strip - arc sweeps across the achievement numbers â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -283,7 +287,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Mission & Values - loop (Q-shape) suits the philosophical section ══ */}
+      {/* â•â• Mission & Values - loop (Q-shape) suits the philosophical section â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -391,7 +395,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Accreditations - monogram (VGU-V) in a credibility section ══ */}
+      {/* â•â• Accreditations - monogram (VGU-V) in a credibility section â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
 
@@ -405,7 +409,7 @@ export default async function AboutPage() {
             </h2>
           </div>
 
-          {/* Mobile - 2×3 compact trust-badge grid */}
+          {/* Mobile - 2Ã—3 compact trust-badge grid */}
           <div className="md:hidden grid grid-cols-2 gap-3">
             {ACCREDITATIONS.map((a, i) => (
               <div
@@ -508,7 +512,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Campus Experience - arc (digital reach spanning the physical) ══ */}
+      {/* â•â• Campus Experience - arc (digital reach spanning the physical) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-10 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
@@ -596,7 +600,7 @@ export default async function AboutPage() {
               {/* Proof strip */}
               <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
                 <div className="flex flex-col items-center py-4 md:py-7 px-4">
-                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
+                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3Ã—</span>
                   <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
                 </div>
                 <div className="flex flex-col items-center py-4 md:py-7 px-4">
@@ -614,7 +618,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Hiring Partners - loop (employer-graduate connection) ══ */}
+      {/* â•â• Hiring Partners - loop (employer-graduate connection) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.03} strokeWidth={20} />
 
@@ -650,7 +654,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ History timeline - wave conveys the flow of time ══ */}
+      {/* â•â• History timeline - wave conveys the flow of time â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -693,7 +697,7 @@ export default async function AboutPage() {
                   </div>
                   <div>
                     <div className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">NAAC A+ Accredited</div>
-                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
+                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 Â· 3.29/4.0 CGPA Â· Valid 2027</div>
                   </div>
                 </div>
 
@@ -709,7 +713,7 @@ export default async function AboutPage() {
                       className="inline-flex items-center gap-1 rounded-full border border-vgu-red/30 bg-vgu-red/[0.06] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red shadow-sm"
                     >
                       {chip.label}
-                      <span className="mx-0.5 font-normal text-neutral-400">·</span>
+                      <span className="mx-0.5 font-normal text-neutral-400">Â·</span>
                       <span className="font-normal text-neutral-400">{chip.year}</span>
                     </span>
                   ))}
@@ -785,7 +789,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Alumni Community - swoop (sweeping sense of a large, growing community) ══ */}
+      {/* â•â• Alumni Community - swoop (sweeping sense of a large, growing community) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 

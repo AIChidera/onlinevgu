@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   IconLayoutDashboard,
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   title: 'Student Portal - Coming Soon | Online VGU',
   description:
     'The Online VGU LMS - your dashboard for courses, live classes, assignments, and academic progress. Launching soon for enrolled students.',
-  alternates: { canonical: 'https://onlinevgu.in/student-portal' },
+  alternates: { canonical: 'https://onlinevgu.com/student-portal' },
   openGraph: {
     title: 'Student Portal - Coming Soon | Online VGU',
     description: 'The Online VGU LMS - launching soon for enrolled students.',
-    url: 'https://onlinevgu.in/student-portal',
+    url: 'https://onlinevgu.com/student-portal',
   },
 }
 
@@ -52,7 +52,7 @@ export default function StudentPortalPage() {
 
           {/* Eyebrow */}
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-5">
-            Online VGU · LMS
+            Online VGU Â· LMS
           </p>
 
           {/* Heading */}

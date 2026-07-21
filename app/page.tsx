@@ -1,4 +1,4 @@
-export const revalidate = 3600
+﻿export const revalidate = 3600
 
 import dynamic from 'next/dynamic'
 import Hero from '@/components/sections/Hero'
@@ -31,7 +31,7 @@ function buildOrgJsonLd(phoneTel: string, address: string) {
     '@type': 'EducationalOrganization',
     name: 'Vivekananda Global University Online',
     alternateName: 'Online VGU',
-    url: 'https://onlinevgu.in',
+    url: 'https://onlinevgu.com',
     sameAs: ['https://vgu.ac.in'],
     description: 'NAAC A+ accredited online UG and PG degree programs from Vivekananda Global University. UGC-entitled degrees trusted by 50,000+ learners across India.',
     address: {
@@ -65,7 +65,7 @@ function buildFaqJsonLd(faqs: SanityFaq[]) {
   }
 }
 
-// Parse a stat string like "50,000+" → 50000, "4.8/5" → 4.8, "95%" → 95
+// Parse a stat string like "50,000+" â†’ 50000, "4.8/5" â†’ 4.8, "95%" â†’ 95
 function parseStat(s: string | undefined | null, fallback: number): number {
   if (!s) return fallback
   const match = s.match(/[\d,]+(\.\d+)?/)

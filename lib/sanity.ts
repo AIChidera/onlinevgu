@@ -1,4 +1,4 @@
-import { createClient } from 'next-sanity'
+﻿import { createClient } from 'next-sanity'
 import { createImageUrlBuilder } from '@sanity/image-url'
 import { unstable_cache } from 'next/cache'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,9 +22,9 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // TypeScript Types
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export interface SanityTestimonial {
   _id:           string
@@ -191,11 +191,11 @@ export interface SanityProgram {
   certificateSampleUrl?:  string
 }
 
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
 // Sanity client makes HTTP requests internally.
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const getTestimonials = unstable_cache(
   async (): Promise<SanityTestimonial[]> => {
@@ -313,7 +313,7 @@ const WHATSAPP_DEFAULT_MESSAGE = 'Hi%2C%20I%20want%20to%20know%20more%20about%20
 // the site ships with by default.
 const FALLBACKS = {
   phone:          '+91 80350 18677',
-  email:          'admissions@onlinevgu.in',
+  email:          'admissions@onlinevgu.com',
   address:        'VGU Campus, Jagatpura\nJaipur, Rajasthan - 303 012, India',
   whatsappNumber: '918035018677',
   nextBatch:      'July 2026',
@@ -467,9 +467,9 @@ export const getBrochureUrlForProgram = unstable_cache(
   { revalidate: 3600, tags: ['program', 'siteSettings'] }
 )
 
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Blog queries
-// ────────────────────────────────────────────────────────────
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const BLOG_SUMMARY_PROJECTION = `
   _id,

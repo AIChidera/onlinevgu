@@ -1,4 +1,4 @@
-# Online VGU - Vivekananda Global University Online
+﻿# Online VGU - Vivekananda Global University Online
 
 > NAAC A+ accredited online degree programs for working professionals and fresh graduates in India.
 > UGC-entitled degrees. No entrance exam. 100% online.
@@ -38,8 +38,8 @@ Vivekananda Global University (VGU), Jaipur, Rajasthan. Established 2012.
 - Next batch: July 2026
 
 ## Links
-- Home: https://onlinevgu.in
-- All programs: https://onlinevgu.in/programs
-- Apply: https://onlinevgu.in/apply
-- About: https://onlinevgu.in/about
-- Contact: https://onlinevgu.in/contact
+- Home: https://onlinevgu.com
+- All programs: https://onlinevgu.com/programs
+- Apply: https://onlinevgu.com/apply
+- About: https://onlinevgu.com/about
+- Contact: https://onlinevgu.com/contact

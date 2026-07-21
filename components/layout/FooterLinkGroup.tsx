@@ -4,7 +4,7 @@ import { useId, useState } from 'react'
 import Link from 'next/link'
 import { IconChevronDown } from '@tabler/icons-react'
 
-interface LinkItem { label: string; href: string; applyTrigger?: boolean; brochureTrigger?: boolean }
+interface LinkItem { label: string; href: string; applyTrigger?: boolean; brochureTrigger?: boolean; newTab?: boolean }
 
 export default function FooterLinkGroup({ title, links, delay = 0 }: { title: string; links: LinkItem[]; delay?: number }) {
   const [open, setOpen] = useState(false)
@@ -47,6 +47,7 @@ export default function FooterLinkGroup({ title, links, delay = 0 }: { title: st
                 <Link
                   href={l.href}
                   {...(l.applyTrigger ? { 'data-apply-trigger': 'true' } : {})}
+                  {...(l.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className="flex min-h-[44px] items-center text-[13px] font-body text-white/60 hover:text-white transition-colors duration-150 lg:min-h-0"
                 >
                   {l.label}

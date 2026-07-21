@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { PortableText } from '@portabletext/react'
 import type { PortableTextComponents } from '@portabletext/react'
 import {
-  IconArrowLeft,
   IconArrowRight,
   IconClock,
 } from '@tabler/icons-react'
@@ -44,11 +43,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} - Online VGU Blog`,
     description: post.excerpt,
-    alternates: { canonical: `https://onlinevgu.in/blog/${post.slug}` },
+    alternates: { canonical: `https://onlinevgu.com/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://onlinevgu.in/blog/${post.slug}`,
+      url: `https://onlinevgu.com/blog/${post.slug}`,
       images: post.coverUrl ? [{ url: post.coverUrl }] : undefined,
       type: 'article',
       publishedTime: post.publishedAt,
@@ -184,11 +183,11 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name:    'Vivekananda Global University',
-      url:     'https://onlinevgu.in',
+      url:     'https://onlinevgu.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id':   `https://onlinevgu.in/blog/${post.slug}`,
+      '@id':   `https://onlinevgu.com/blog/${post.slug}`,
     },
   }
 
@@ -198,8 +197,6 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
       {/* ══ Hero - full-bleed cover image or brand gradient ══ */}
       <section className="relative overflow-hidden flex items-end" style={{ minHeight: 'min(62vh, 640px)' }}>
@@ -230,17 +227,10 @@ export default async function BlogPostPage({ params }: Props) {
           <SketchFlourish shape="monogram" color="yellow" opacity={0.07} strokeWidth={28} trigger="mount" />
         )}
 
-        {/* Back link - aligned with content via same 1280 container */}
-        <div className="absolute top-6 left-0 right-0 z-10 px-5 md:px-8 lg:px-12">
-          <div className="mx-auto max-w-[1280px]">
-            <Link
-              href="/blog"
-              className="inline-flex items-center min-h-[44px] gap-2 group/back text-[13px] font-heading font-semibold text-white/70 hover:text-white transition-colors duration-150"
-            >
-              <IconArrowLeft size={14} stroke={2.25} className="transition-transform duration-150 group-hover/back:-translate-x-0.5" />
-              All stories
-            </Link>
-          </div>
+        {/* Breadcrumb - pinned to the hero's own top edge, replaces the old
+            bespoke "All stories" back link with the sitewide overlay pattern */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} variant="overlay" />
         </div>
 
         {/* Content pinned to the bottom of the hero */}
@@ -390,7 +380,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <ShareStrip
-            url={`https://onlinevgu.in/blog/${post.slug}`}
+            url={`https://onlinevgu.com/blog/${post.slug}`}
             title={post.title}
             hasDivider={Boolean(post.author && (post.author.name || post.author.title))}
           />

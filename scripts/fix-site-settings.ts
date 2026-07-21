@@ -22,6 +22,7 @@ const client = createClient({
 const CORRECTIONS = {
   phoneDisplay:     '+91 80350 18677',
   whatsappNumber:   '918035018677',
+  admissionsEmail:  'admissions@onlinevgu.com',
   socialLinkedIn:   'https://www.linkedin.com/school/vgu/',
   socialInstagram:  'https://www.instagram.com/vgujaipur/',
   socialYouTube:    'https://www.youtube.com/@VGUVITCampusJaipur',

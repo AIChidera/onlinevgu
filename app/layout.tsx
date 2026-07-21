@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next'
+﻿import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, DM_Sans } from 'next/font/google'
 import './globals.css'
 import SiteNav from '@/components/layout/SiteNav'
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://onlinevgu.in',
+    url: 'https://onlinevgu.com',
     siteName: 'Online VGU',
     title: 'Online VGU | UGC-Recognised Online Degrees',
     description:

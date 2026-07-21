@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IconArrowRight, IconBook2, IconNotes, IconTag, IconUsers, IconCalendarStar } from '@tabler/icons-react'
 import { getAllBlogPosts } from '@/lib/sanity'
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   title: 'Blog - Online VGU Career Guides & Alumni Stories',
   description:
     'Career guides, alumni outcomes, and program breakdowns from VGU faculty and the placement cell. Practical writing for working professionals and fresh graduates.',
-  alternates: { canonical: 'https://onlinevgu.in/blog' },
+  alternates: { canonical: 'https://onlinevgu.com/blog' },
   openGraph: {
     title: 'Blog - Online VGU',
     description: 'Career guides, alumni outcomes, and program breakdowns from VGU.',
-    url: 'https://onlinevgu.in/blog',
+    url: 'https://onlinevgu.com/blog',
   },
 }
 
@@ -45,12 +45,14 @@ export default async function BlogPage() {
 
   return (
     <div>
-      <Breadcrumb items={[{ label: 'Blog' }]} />
+      {/* Carousel's own overlay breadcrumb only exists when it renders, so
+          the empty state (light background) keeps the standard Breadcrumb */}
+      {!hasContent && <Breadcrumb items={[{ label: 'Blog' }]} />}
 
-      {/* ══ Hero carousel ══ */}
+      {/* â•â• Hero carousel â•â• */}
       {hasContent && <BlogHeroCarousel slides={heroSlides} />}
 
-      {/* ══ Empty state (only when no posts at all) ══ */}
+      {/* â•â• Empty state (only when no posts at all) â•â• */}
       {!hasContent && (
         <section className="bg-neutral-50 px-5 md:px-8 lg:px-12 py-20 lg:py-28">
           <div className="mx-auto max-w-[600px] text-center">
@@ -83,7 +85,7 @@ export default async function BlogPage() {
         </section>
       )}
 
-      {/* ══ Stats trust strip ══ */}
+      {/* â•â• Stats trust strip â•â• */}
       {hasContent && (
         <section className="group relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-4 md:py-6">
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 0% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
@@ -130,7 +132,7 @@ export default async function BlogPage() {
         </section>
       )}
 
-      {/* ══ Filter + grid (with section heading) ══ */}
+      {/* â•â• Filter + grid (with section heading) â•â• */}
       {hasContent && (
         <BlogIndex
           posts={allPosts}
@@ -140,10 +142,10 @@ export default async function BlogPage() {
         />
       )}
 
-      {/* ══ Newsletter strip ══ */}
+      {/* â•â• Newsletter strip â•â• */}
       {hasContent && <BlogNewsletterStrip />}
 
-      {/* ══ Closing CTA ══ */}
+      {/* â•â• Closing CTA â•â• */}
       {hasContent && (
         <section className="bg-neutral-50 px-5 md:px-8 lg:px-12 py-16 lg:py-24">
           <div data-animate="fade-up" className="mx-auto max-w-[760px] text-center">

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Image from 'next/image'
 import {
   IconTrendingUp,
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
   title: 'Placements - Online VGU Career Outcomes',
   description:
     '95% placement rate, 500+ hiring partners, AI-powered placement portal. See where Online VGU graduates land across IT, BFSI, consulting, and more.',
-  alternates: { canonical: 'https://onlinevgu.in/placements' },
+  alternates: { canonical: 'https://onlinevgu.com/placements' },
   openGraph: {
     title: 'Placements - Online VGU',
     description: '95% placement rate across 500+ hiring partners. Real degrees, real careers.',
-    url: 'https://onlinevgu.in/placements',
+    url: 'https://onlinevgu.com/placements',
   },
 }
 
@@ -97,37 +97,37 @@ const INDUSTRIES = [
   {
     title:     'IT Services & Tech',
     body:      'Application development, cloud, DevOps, data engineering, product roles.',
-    companies: 'TCS · Infosys · HCL · Wipro · Cognizant',
+    companies: 'TCS Â· Infosys Â· HCL Â· Wipro Â· Cognizant',
     Icon:      IconDeviceLaptop,
   },
   {
     title:     'BFSI & Fintech',
     body:      'Banking operations, insurance, lending, fintech product, risk and compliance.',
-    companies: 'HDFC Bank · ICICI Bank · Axis Bank · Bajaj Finserv · PhonePe',
+    companies: 'HDFC Bank Â· ICICI Bank Â· Axis Bank Â· Bajaj Finserv Â· PhonePe',
     Icon:      IconBuildingBank,
   },
   {
     title:     'Consulting & Advisory',
     body:      'Strategy, audit, tax, technology consulting, and process advisory.',
-    companies: 'Deloitte · EY · KPMG · Accenture · Capgemini',
+    companies: 'Deloitte Â· EY Â· KPMG Â· Accenture Â· Capgemini',
     Icon:      IconBriefcase,
   },
   {
     title:     'E-commerce & Internet',
     body:      'Product, operations, growth, category management, and partnerships.',
-    companies: 'Amazon · Flipkart · Zomato',
+    companies: 'Amazon Â· Flipkart Â· Zomato',
     Icon:      IconShoppingCart,
   },
   {
     title:     'Conglomerates',
     body:      'Operations, projects, supply chain, and leadership rotation programs.',
-    companies: 'Tata Group · Reliance Industries · Mahindra',
+    companies: 'Tata Group Â· Reliance Industries Â· Mahindra',
     Icon:      IconBuilding,
   },
   {
     title:     'Healthcare & Pharma',
     body:      'Healthcare administration, hospital operations, pharma management.',
-    companies: 'Apollo · Fortis · Cipla · Sun Pharma',
+    companies: 'Apollo Â· Fortis Â· Cipla Â· Sun Pharma',
     Icon:      IconStethoscope,
   },
 ]
@@ -166,24 +166,24 @@ const PROCESS_STEPS = [
 const SUCCESS_STORIES = [
   {
     name:    'Ananya Sharma',
-    program: 'MBA · 2023 batch',
-    journey: 'Sales Executive → Product Manager',
+    program: 'MBA Â· 2023 batch',
+    journey: 'Sales Executive â†’ Product Manager',
     company: 'Razorpay',
     quote:   'The mock interviews felt harder than the real ones. By the time I sat in the Razorpay PM round, the pressure felt familiar.',
     avatar:  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&q=80&auto=format&fit=crop',
   },
   {
     name:    'Vikram Iyer',
-    program: 'MCA · 2023 batch',
-    journey: 'Self-taught coder → Cloud Engineer',
+    program: 'MCA Â· 2023 batch',
+    journey: 'Self-taught coder â†’ Cloud Engineer',
     company: 'Accenture',
     quote:   'The free Coursera bundle let me earn AWS certifications that Accenture explicitly asked for in the interview.',
     avatar:  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&q=80&auto=format&fit=crop',
   },
   {
     name:    'Meera Krishnan',
-    program: 'B.Com · 2024 batch',
-    journey: 'Fresh graduate → Tax Associate',
+    program: 'B.Com Â· 2024 batch',
+    journey: 'Fresh graduate â†’ Tax Associate',
     company: 'EY',
     quote:   'I was the first in my family to apply to a Big Four firm. The placement cell prepped me for every round.',
     avatar:  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&q=80&auto=format&fit=crop',
@@ -196,9 +196,7 @@ export default async function PlacementsPage() {
 
   return (
     <div>
-      <Breadcrumb items={[{ label: 'Placements' }]} />
-
-      {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
+      {/* â•â• Hero - swoop yellow (whisper-faint on the photo) â•â• */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
           src={HERO_IMAGE_SRC}
@@ -209,6 +207,14 @@ export default async function PlacementsPage() {
           className="object-cover object-center"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
+
+        {/* Breadcrumb - pinned to the hero's own top edge, independent of the
+            content column's py-16+ padding, so it sits exactly where the old
+            light-strip breadcrumb used to be rather than drifting down with
+            the headline. */}
+        <div className="absolute top-0 left-0 right-0 z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+          <Breadcrumb items={[{ label: 'Placements' }]} variant="overlay" />
+        </div>
 
         <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-24">
           <div className="max-w-[700px]">
@@ -260,7 +266,7 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
+      {/* â•â• Stats strip - arc sweeps across the achievement numbers â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -300,7 +306,7 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Career Support - loop (continuous service surrounding the learner) ══ */}
+      {/* â•â• Career Support - loop (continuous service surrounding the learner) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -379,7 +385,7 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Hiring Partners - wave (continuous flow of recruiter connections) ══ */}
+      {/* â•â• Hiring Partners - wave (continuous flow of recruiter connections) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.03} strokeWidth={20} />
 
@@ -408,7 +414,7 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Industries - monogram + flipped arc (sectors held in a stylised V) ══ */}
+      {/* â•â• Industries - monogram + flipped arc (sectors held in a stylised V) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
@@ -491,10 +497,10 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Placement Process - wave (flow of time through the journey) ══ */}
+      {/* â•â• Placement Process - wave (flow of time through the journey) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
-        {/* Subtle dot-grid texture per Design Bible §10 */}
+        {/* Subtle dot-grid texture per Design Bible Â§10 */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
@@ -597,7 +603,7 @@ export default async function PlacementsPage() {
         </div>
       </section>
 
-      {/* ══ Success Stories - swoop (sweeping arc of careers in motion) ══ */}
+      {/* â•â• Success Stories - swoop (sweeping arc of careers in motion) â•â• */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 

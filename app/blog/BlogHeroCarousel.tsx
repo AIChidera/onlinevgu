@@ -10,6 +10,7 @@ import {
   IconClock,
 } from '@tabler/icons-react'
 import type { SanityBlogPostSummary } from '@/lib/sanity'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 const AUTO_ROTATE_MS = 6500
 
@@ -21,6 +22,7 @@ function formatDate(iso: string): string {
 }
 
 export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSummary[] }) {
+  const breadcrumbItems = [{ label: 'Blog' }]
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const total = slides.length
@@ -79,6 +81,11 @@ export default function BlogHeroCarousel({ slides }: { slides: SanityBlogPostSum
           <div aria-hidden="true" className="absolute inset-0 bg-black/20 md:hidden" />
         </div>
       ))}
+
+      {/* Breadcrumb - pinned to the hero's own top edge */}
+      <div className="absolute top-0 left-0 right-0 z-20 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12">
+        <Breadcrumb items={breadcrumbItems} variant="overlay" />
+      </div>
 
       {/* Foreground content */}
       <div className="relative z-20 mx-auto w-full max-w-[1280px] px-5 md:px-8 lg:px-12 py-16 md:py-20 lg:py-28 min-h-[540px] lg:min-h-[720px] flex items-center">

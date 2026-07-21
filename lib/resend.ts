@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+﻿import { Resend } from 'resend'
 
 // Returns a Resend client only when the API key is configured.
 // Returns a no-op stub at build time / when env var is missing.
@@ -30,7 +30,7 @@ export const resend = {
 export const FROM_ADDRESS   = 'Online VGU <onboarding@resend.dev>'
 export const ADMISSIONS_EMAIL = 'aachidera41@gmail.com'
 
-// ── Templates ──────────────────────────────────────────────────
+// â”€â”€ Templates â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export function leadConfirmationHtml(name: string, program: string) {
   return `
@@ -49,15 +49,15 @@ export function leadConfirmationHtml(name: string, program: string) {
           <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
           (Mon-Sat, 9am-7pm IST).
         </p>
-        <a href="https://onlinevgu.in/programs"
+        <a href="https://onlinevgu.com/programs"
            style="display:inline-block;margin-top:24px;padding:14px 32px;
                   background:#C04036;color:#fff;border-radius:9999px;
                   text-decoration:none;font-weight:600">
-          Explore programs →
+          Explore programs â†’
         </a>
       </div>
       <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
-        © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
+        Â© ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
       </div>
     </div>
   `

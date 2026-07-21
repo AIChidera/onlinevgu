@@ -1,11 +1,11 @@
-import { defineField, defineType } from 'sanity'
+﻿import { defineField, defineType } from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
   fields: [
-    // ── Admissions ────────────────────────────────────────────────
+    // â”€â”€ Admissions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     defineField({
       name: 'nextBatch',
       title: 'Next Batch Start Date',
@@ -21,7 +21,7 @@ export const siteSettings = defineType({
       initialValue: true,
     }),
 
-    // ── Contact ───────────────────────────────────────────────────
+    // â”€â”€ Contact â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     defineField({
       name: 'phoneDisplay',
       title: 'Phone Number',
@@ -38,7 +38,7 @@ export const siteSettings = defineType({
       name: 'admissionsEmail',
       title: 'Admissions Email',
       type: 'string',
-      description: 'Shown in footer and confirmation emails. E.g. "admissions@onlinevgu.in".',
+      description: 'Shown in footer and confirmation emails. E.g. "admissions@onlinevgu.com".',
     }),
     defineField({
       name: 'address',
@@ -47,7 +47,7 @@ export const siteSettings = defineType({
       description: 'Shown in footer and Privacy page.',
     }),
 
-    // ── Key Stats ─────────────────────────────────────────────────
+    // â”€â”€ Key Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     defineField({
       name: 'statLearners',
       title: 'Learners Enrolled (stat)',
@@ -104,7 +104,7 @@ export const siteSettings = defineType({
       initialValue: '2012',
     }),
 
-    // ── Social Media (stored as plain strings, not url type) ───────
+    // â”€â”€ Social Media (stored as plain strings, not url type) â”€â”€â”€â”€â”€â”€â”€
     // The Sanity v5 url field validator crashes when opened in a direct
     // editor with no pre-existing value. Using string type is equivalent
     // for storage and avoids the issue.
@@ -139,7 +139,7 @@ export const siteSettings = defineType({
       description: 'Full URL including https://.',
     }),
 
-    // ── Brochure ──────────────────────────────────────────────────
+    // â”€â”€ Brochure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     defineField({
       name: 'defaultBrochurePdf',
       title: 'Default Brochure (PDF)',

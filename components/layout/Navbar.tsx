@@ -15,7 +15,10 @@ import {
   IconArticle,
   IconPhone,
   IconChevronRight,
+  IconChevronDown,
+  IconArrowRight,
 } from '@tabler/icons-react'
+import { PROGRAMMES } from '@/app/programs/data'
 
 const NAV_LINKS = [
   { label: 'About',      href: '/about',         Icon: IconInfoCircle      },
@@ -24,6 +27,10 @@ const NAV_LINKS = [
   { label: 'Placements', href: '/placements',    Icon: IconBriefcase       },
   { label: 'Blog',       href: '/blog',          Icon: IconArticle         },
 ]
+
+const UG_PROGRAMMES = PROGRAMMES.filter(p => p.level === 'ug')
+const PG_PROGRAMMES = PROGRAMMES.filter(p => p.level === 'pg')
+const DISCIPLINE_COUNT = new Set(PROGRAMMES.map(p => p.discipline)).size
 
 // Active for the exact page and any of its sub-routes (e.g. /programs/bba
 // should still highlight "Programs"), never for hash anchors or external links.
@@ -36,8 +43,10 @@ export default function Navbar() {
   const pathname                      = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
+  const [programsOpen, setProgramsOpen] = useState(false)
   const drawerRef                     = useRef<HTMLDivElement>(null)
   const hamburgerRef                  = useRef<HTMLButtonElement>(null)
+  const programsRef                   = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -45,13 +54,24 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close drawer on escape
+  // Close drawer / programs menu on escape
   useEffect(() => {
-    if (!mobileOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }
+    if (!mobileOpen && !programsOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setMobileOpen(false)
+      setProgramsOpen(false)
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [mobileOpen])
+  }, [mobileOpen, programsOpen])
+
+  // A client-side route change (clicking a program link) should always
+  // collapse the menu - otherwise it can be left open, hovering over stale
+  // content, on the page that was just navigated to.
+  useEffect(() => {
+    setProgramsOpen(false)
+  }, [pathname])
 
   // Close on any tap outside the drawer - checked against the actual click
   // target rather than the backdrop's hit-testing, since the sticky header
@@ -108,6 +128,136 @@ export default function Navbar() {
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-8" aria-label="Main">
             {NAV_LINKS.map((link) => {
               const active = isNavActive(link.href, pathname)
+
+              if (link.label === 'Programs') {
+                return (
+                  <div
+                    key={link.label}
+                    ref={programsRef}
+                    className="relative"
+                    onMouseEnter={() => setProgramsOpen(true)}
+                    onMouseLeave={() => setProgramsOpen(false)}
+                    onFocus={() => setProgramsOpen(true)}
+                    onBlur={(e) => {
+                      if (!programsRef.current?.contains(e.relatedTarget as Node)) setProgramsOpen(false)
+                    }}
+                  >
+                    <a
+                      href={link.href}
+                      aria-current={active ? 'page' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={programsOpen}
+                      className={[
+                        'relative inline-flex items-center gap-1 font-heading font-medium text-[15px] transition-colors duration-150',
+                        'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
+                        active
+                          ? 'text-vgu-red after:w-full'
+                          : 'text-neutral-900 hover:text-vgu-red after:w-0 hover:after:w-full',
+                      ].join(' ')}
+                    >
+                      {link.label}
+                      <IconChevronDown
+                        size={14}
+                        stroke={2}
+                        className={`transition-transform duration-200 ${programsOpen ? 'rotate-180' : ''}`}
+                      />
+                    </a>
+
+                    {/* Mega menu - the wrapper starts flush at top-full (no margin) and
+                        carries the visual gap as its own top padding instead, so that
+                        gap is still "inside" this hoverable element rather than being
+                        genuinely empty space the mouse can fall through and lose hover
+                        state while crossing from the trigger down to the panel. */}
+                    <div
+                      className={[
+                        'absolute left-1/2 top-full w-[540px] -translate-x-1/2 pt-4 transition-all duration-200',
+                        programsOpen
+                          ? 'visible translate-y-0 opacity-100'
+                          : 'invisible -translate-y-1 opacity-0 pointer-events-none',
+                      ].join(' ')}
+                      onMouseEnter={() => setProgramsOpen(true)}
+                      onMouseLeave={() => setProgramsOpen(false)}
+                    >
+                      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_20px_48px_rgba(17,24,39,0.14)]">
+                        <div className="grid grid-cols-2 gap-8">
+                          {/* Undergraduate - shorter list. The summary/CTA is
+                              absolutely positioned to the bottom of this column so
+                              it fills the remaining space and lines up exactly with
+                              the bottom of the taller Postgraduate list, rather than
+                              being sized into the flow (which would inflate this
+                              column's own height and drift past Postgraduate's end). */}
+                          <div className="relative">
+                            <p className="mb-3 text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red">
+                              Undergraduate
+                            </p>
+                            <ul className="flex flex-col gap-0.5">
+                              {UG_PROGRAMMES.map((p) => (
+                                <li key={p.slug}>
+                                  <Link
+                                    href={`/programs/${p.slug}`}
+                                    className="group -mx-2.5 flex flex-col rounded-lg px-2.5 py-2 transition-colors duration-150 hover:bg-neutral-50"
+                                  >
+                                    <span className="font-heading font-bold text-[14px] text-neutral-900 transition-colors group-hover:text-vgu-red">
+                                      {p.name}
+                                    </span>
+                                    <span className="mt-0.5 text-[12px] text-neutral-500">{p.fullName}</span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+
+                            {/* pb-2 matches the py-2 every program link carries, so
+                                this text's visible baseline lands level with the
+                                Postgraduate list's last item instead of sitting
+                                lower (the program links' own bottom padding pushes
+                                their visible text up from the true bottom edge). */}
+                            <div className="absolute bottom-0 left-0 right-0 border-t border-neutral-100 pt-4 pb-2">
+                              <p className="text-[13px] text-neutral-500">
+                                {PROGRAMMES.length} programs across {DISCIPLINE_COUNT} disciplines
+                              </p>
+                              <Link
+                                href="/programs"
+                                className="group mt-2 inline-flex items-center gap-1.5 text-[14px] font-heading font-semibold text-vgu-red transition-colors duration-150 hover:text-vgu-red-dark"
+                              >
+                                View all programs
+                                <IconArrowRight size={15} className="transition-transform duration-150 group-hover:translate-x-1" />
+                              </Link>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="mb-3 text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red">
+                              Postgraduate
+                            </p>
+                            <ul className="flex flex-col gap-0.5">
+                              {PG_PROGRAMMES.map((p) => (
+                                <li key={p.slug}>
+                                  <Link
+                                    href={`/programs/${p.slug}`}
+                                    className="group -mx-2.5 flex flex-col rounded-lg px-2.5 py-2 transition-colors duration-150 hover:bg-neutral-50"
+                                  >
+                                    <span className="flex items-center gap-1.5">
+                                      <span className="font-heading font-bold text-[14px] text-neutral-900 transition-colors group-hover:text-vgu-red">
+                                        {p.name}
+                                      </span>
+                                      {p.popular && (
+                                        <span className="inline-flex items-center rounded-full bg-vgu-yellow px-1.5 py-0.5 text-[9px] font-heading font-bold uppercase tracking-[0.02em] text-neutral-900">
+                                          Popular
+                                        </span>
+                                      )}
+                                    </span>
+                                    <span className="mt-0.5 text-[12px] text-neutral-500">{p.fullName}</span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+
               return (
                 <a
                   key={link.label}
