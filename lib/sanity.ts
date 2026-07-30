@@ -22,9 +22,9 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 // TypeScript Types
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 
 export interface SanityTestimonial {
   _id:           string
@@ -95,6 +95,18 @@ export interface SanityMilestone {
   _id:   string
   year:  number
   event: string
+}
+
+export type NoticeCategory = 'Academic Calendar' | 'Newsletter' | 'Announcement' | 'Important Notice'
+
+export interface SanityNotice {
+  _id:            string
+  title:          string
+  category:       NoticeCategory
+  date:           string
+  summary?:       string
+  attachmentUrl?: string | null
+  externalUrl?:   string | null
 }
 
 export interface SanityBlogAuthor {
@@ -191,11 +203,11 @@ export interface SanityProgram {
   certificateSampleUrl?:  string
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
 // Sanity client makes HTTP requests internally.
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 
 export const getTestimonials = unstable_cache(
   async (): Promise<SanityTestimonial[]> => {
@@ -326,7 +338,7 @@ const FALLBACKS = {
     rating:         '4.8/5',
     programs:       '30+',
     hiringPartners: '500+',
-    coursera:       '7,000+',
+    coursera:       '10,000+',
     yearEstablished: '2012',
   },
   socials: {
@@ -407,6 +419,21 @@ export const getMilestones = unstable_cache(
   { revalidate: 3600, tags: ['milestone'] }
 )
 
+export const getNotices = unstable_cache(
+  async (): Promise<SanityNotice[]> => {
+    return sanityClient.fetch<SanityNotice[]>(
+      `*[_type == "notice"] | order(date desc) {
+        _id, title, category, date, summary,
+        "attachmentUrl": attachment.asset->url,
+        externalUrl
+      }`,
+      {}
+    )
+  },
+  ['notices'],
+  { revalidate: 3600, tags: ['notice'] }
+)
+
 export const getAllPrograms = unstable_cache(
   async (): Promise<SanityProgramSummary[]> => {
     return sanityClient.fetch<SanityProgramSummary[]>(
@@ -467,9 +494,9 @@ export const getBrochureUrlForProgram = unstable_cache(
   { revalidate: 3600, tags: ['program', 'siteSettings'] }
 )
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 // Blog queries
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ────────────────────────────────────────────────────────────
 
 const BLOG_SUMMARY_PROJECTION = `
   _id,

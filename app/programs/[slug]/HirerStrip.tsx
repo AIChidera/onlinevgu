@@ -1,6 +1,4 @@
 'use client'
-import { useRef, useState, useEffect } from 'react'
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import BrandIcon, { BRAND_ICON_NAMES } from '@/components/ui/BrandIcon'
 
 interface BrandMeta { abbr: string; bg: string; abbrSize: string; label: string }
@@ -81,115 +79,70 @@ function getFallback(name: string): BrandMeta {
   return { abbr: name.slice(0, 2).toUpperCase(), bg: 'linear-gradient(135deg,#374151,#1f2937)', abbrSize: '14px', label: 'Top recruiter' }
 }
 
+function HirerCard({ name }: { name: string }) {
+  const meta = BRAND_META[name] ?? getFallback(name)
+  const hasSvg = BRAND_ICON_NAMES.has(name)
+  return (
+    <div className="group flex-none w-[220px] bg-white hover:bg-vgu-red/[0.03] transition-colors duration-150 px-5 py-4 flex items-center gap-3 border-r border-neutral-100 cursor-default">
+      <div className="w-11 h-11 rounded-xl flex-none overflow-hidden shadow-sm transition-transform duration-200 group-hover:scale-110">
+        {hasSvg ? (
+          <BrandIcon name={name} />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center" style={{ background: meta.bg }}>
+            <span className="font-heading font-black leading-none text-white text-center" style={{ fontSize: meta.abbrSize }}>
+              {meta.abbr}
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="min-w-0">
+        <p className="font-heading font-bold text-[13px] text-neutral-900 leading-tight truncate">{name}</p>
+        <p className="text-[11px] font-body text-neutral-500 mt-0.5 truncate">{meta.label}</p>
+      </div>
+    </div>
+  )
+}
+
 export default function HirerStrip({ hirers }: { hirers: string[] }) {
   const safe = Array.isArray(hirers) ? hirers : []
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canLeft, setCanLeft]   = useState(false)
-  const [canRight, setCanRight] = useState(true)
-
-  useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-    const check = () => {
-      setCanLeft(el.scrollLeft > 4)
-      setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4)
-    }
-    check()
-    el.addEventListener('scroll', check, { passive: true })
-    window.addEventListener('resize', check)
-    return () => { el.removeEventListener('scroll', check); window.removeEventListener('resize', check) }
-  }, [])
-
-  const scroll = (dir: 'left' | 'right') => {
-    scrollRef.current?.scrollBy({ left: dir === 'left' ? -744 : 744, behavior: 'smooth' })
-  }
-
   if (!safe.length) return null
 
-  const rows    = safe.length <= 3 ? 1 : safe.length <= 6 ? 2 : 3
-  const cols    = Math.ceil(safe.length / rows)
-  const spacers = cols * rows - safe.length
+  // Constant per-logo pace regardless of list length - a 6-item program
+  // strip and the 25-item About/Placements strip both feel equally slow.
+  const durationSec = Math.max(20, safe.length * 3.5)
 
   return (
-    <div data-animate="fade-up" className="relative rounded-2xl border border-neutral-200 shadow-[0_4px_24px_rgba(0,0,0,0.07)] overflow-hidden">
-
-      {/* 2-row scrollable grid */}
-      <div
-        ref={scrollRef}
-        className="overflow-x-auto scrollbar-none w-full"
-        style={{ scrollbarWidth: 'none' } as React.CSSProperties}
-      >
+    <div
+      data-animate="fade-up"
+      className="vgu-ticker-pause relative rounded-2xl border border-neutral-200 shadow-[0_4px_24px_rgba(0,0,0,0.07)] overflow-hidden"
+    >
+      <div className="overflow-hidden w-full">
         <div
-          className="grid gap-px bg-neutral-200 w-full"
-          style={{
-            gridTemplateColumns: `repeat(${cols}, minmax(186px, 1fr))`,
-            gridTemplateRows: `repeat(${rows}, auto)`,
-          }}
+          className="vgu-ticker-track flex w-max"
+          style={{ '--vgu-ticker-duration': `${durationSec}s` } as React.CSSProperties}
         >
-        {safe.map((h) => {
-          const meta = BRAND_META[h] ?? getFallback(h)
-          const hasSvg = BRAND_ICON_NAMES.has(h)
-          return (
-            <div
-              key={h}
-              className="group bg-white hover:bg-vgu-red/[0.03] transition-colors duration-150 px-5 py-4 flex items-center gap-3 cursor-default"
-            >
-              <div className="w-11 h-11 rounded-xl flex-none overflow-hidden shadow-sm transition-transform duration-200 group-hover:scale-110">
-                {hasSvg ? (
-                  <BrandIcon name={h} />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center" style={{ background: meta.bg }}>
-                    <span className="font-heading font-black leading-none text-white text-center" style={{ fontSize: meta.abbrSize }}>
-                      {meta.abbr}
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="min-w-0">
-                <p className="font-heading font-bold text-[13px] text-neutral-900 leading-tight truncate">{h}</p>
-                <p className="text-[11px] font-body text-neutral-500 mt-0.5 truncate">{meta.label}</p>
-              </div>
-            </div>
-          )
-        })}
-        {Array.from({ length: spacers }).map((_, i) => (
-          <div key={`spacer-${i}`} className="bg-white" />
-        ))}
+          <div className="flex">
+            {safe.map((h) => <HirerCard key={h} name={h} />)}
+          </div>
+          {/* Duplicate copy for the seamless loop - hidden from assistive tech
+              so the list isn't announced twice. */}
+          <div className="flex" aria-hidden="true">
+            {safe.map((h) => <HirerCard key={`dup-${h}`} name={h} />)}
+          </div>
         </div>
       </div>
 
-      {/* Left fade + button */}
+      {/* Edge fades - permanent now that there's no scroll start/end to track */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-16 pointer-events-none transition-opacity duration-200"
-        style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.95) 0%, transparent 100%)', opacity: canLeft ? 1 : 0 }}
+        className="absolute left-0 top-0 bottom-0 w-16 pointer-events-none"
+        style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.95) 0%, transparent 100%)' }}
         aria-hidden="true"
       />
-      {canLeft && (
-        <button
-          onClick={() => scroll('left')}
-          aria-label="Scroll left"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
-        >
-          <IconChevronLeft size={16} />
-        </button>
-      )}
-
-      {/* Right fade + button */}
       <div
-        className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none transition-opacity duration-200"
-        style={{ background: 'linear-gradient(to left, rgba(255,255,255,0.95) 0%, transparent 100%)', opacity: canRight ? 1 : 0 }}
+        className="absolute right-0 top-0 bottom-0 w-16 pointer-events-none"
+        style={{ background: 'linear-gradient(to left, rgba(255,255,255,0.95) 0%, transparent 100%)' }}
         aria-hidden="true"
       />
-      {canRight && (
-        <button
-          onClick={() => scroll('right')}
-          aria-label="Scroll right"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(17,24,39,0.14)] border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-vgu-red hover:border-vgu-red/30 transition-all duration-150"
-        >
-          <IconChevronRight size={16} />
-        </button>
-      )}
-
     </div>
   )
 }

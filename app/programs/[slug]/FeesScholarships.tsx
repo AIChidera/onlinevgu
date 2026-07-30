@@ -78,6 +78,22 @@ export default function FeesScholarships({ totalFee, duration, feeBreakdown, sch
                 </div>
               ))}
             </div>
+            {/* Application process - "no separate application" reflects VGU's
+                stated policy at vgu.ac.in/admission/scholarship ("automatically
+                assessed at the time of admission - no separate application
+                needed for most categories"). No specific deadline is published
+                anywhere (on-campus or online), so none is claimed here. The
+                tier percentages above are flagged as indicative rather than
+                asserted as confirmed, since no source verifies them for the
+                online program specifically - see conversation for detail. */}
+            <div className="px-4 py-4 md:px-6 border-t border-neutral-100 bg-neutral-50/40">
+              <p className="text-[13px] font-body text-neutral-600 leading-[1.6]">
+                <span className="font-heading font-semibold text-neutral-900">No separate application.</span>{' '}
+                Your scholarship is assessed automatically as part of your admission, based on the documents
+                you submit - no extra forms needed. Percentages shown are indicative; confirm your exact
+                eligibility band with a counsellor.
+              </p>
+            </div>
           </div>
 
         </div>

@@ -11,6 +11,13 @@ import {
   IconTrendingUp,
   IconBrain,
   IconArrowRight,
+  IconRobot,
+  IconBroadcast,
+  IconPlayerPlay,
+  IconClipboardCheck,
+  IconMessages,
+  IconMicrophone2,
+  IconBriefcase,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -36,7 +43,7 @@ export const metadata: Metadata = {
 function buildStats(config: { foundingYear: number; stats: { learners: string; countries: string } }) {
   return [
     { value: String(config.foundingYear), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
-    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA Â· Valid 2027', Icon: IconAward     },
+    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
     { value: config.stats.learners,       label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
     { value: config.stats.countries,      label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
   ]
@@ -81,6 +88,16 @@ const ACCREDITATIONS = [
   { name: 'WES',     full: 'World Education Services, Canada',              detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',         s: ACC_STYLES.dark, logo: null,                     status: 'Recognised', ghost: 'W' },
 ]
 
+const PEDAGOGY = [
+  { title: 'AI-Powered Video Lectures', body: 'Structured video modules with AI-generated summaries and topic breakdowns, so revision takes minutes, not hours.', Icon: IconRobot },
+  { title: 'Live Interactive Classes',  body: 'Weekend live sessions with faculty, with real-time Q&A and doubt-clearing built in.', Icon: IconBroadcast },
+  { title: 'Recorded Sessions',         body: 'Missed a class? Every live session is recorded and stays available to rewatch anytime.', Icon: IconPlayerPlay },
+  { title: 'Smart Assessment Tools',    body: 'Auto-graded quizzes and proctored exams that give instant feedback on where you stand.', Icon: IconClipboardCheck },
+  { title: 'Discussion Forums',         body: 'Peer and faculty discussion boards for every course, open around the clock.', Icon: IconMessages },
+  { title: 'Industry Expert Talk',      body: 'Guest sessions from industry leaders connecting classroom learning to real-world practice.', Icon: IconMicrophone2 },
+  { title: 'Placement Support',         body: 'End-to-end placement assistance, from resume building to interview preparation.', Icon: IconBriefcase },
+]
+
 const CAMPUS_IMAGE_SRC =
   'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80&auto=format&fit=crop'
 
@@ -114,19 +131,19 @@ const ALUMNI_TESTIMONIALS = [
   {
     quote:   'The MBA from VGU gave me the same degree as an on-campus student. My employer never asked if it was online.',
     name:    'Rahul Sharma',
-    program: 'MBA Â· 2023 batch',
+    program: 'MBA · 2023 batch',
     avatar:  'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=160&q=80&auto=format&fit=crop',
   },
   {
     quote:   'Working full-time in Hyderabad meant I couldn\'t relocate. VGU let me earn my MCA without giving up my job or my family.',
     name:    'Priya Nair',
-    program: 'MCA Â· 2023 batch',
+    program: 'MCA · 2023 batch',
     avatar:  'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=160&q=80&auto=format&fit=crop',
   },
   {
     quote:   'The campus immersion week changed everything. I came back with a co-founder and a completely new career direction.',
     name:    'Aditya Mehta',
-    program: 'BBA Â· 2024 batch',
+    program: 'BBA · 2024 batch',
     avatar:  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=160&q=80&auto=format&fit=crop',
   },
 ]
@@ -159,7 +176,7 @@ const MILESTONES = [
   { year: '2013', tag: 'Foundation',  event: 'First academic session commences - inaugural batch enrolled across flagship programs' },
   { year: '2022', tag: 'Achievement', event: 'NAAC A+ first cycle accreditation - CGPA 3.29/4.0, valid through 2027' },
   { year: '2022', tag: 'Digital',     event: 'Online VGU (CDOE) launches - UGC-entitled online degrees open to learners nationwide' },
-  { year: '2022', tag: 'Partnership', event: 'Coursera institutional partnership - 7,000+ courses free for all enrolled students' },
+  { year: '2022', tag: 'Partnership', event: 'Coursera institutional partnership - 10,000+ courses free for all enrolled students' },
   { year: '2024', tag: 'Partnership', event: "Google Cloud partnership - Rajasthan's first Generative AI Campus launched at VGU" },
   { year: '2025', tag: 'Rankings',    event: 'QS World Rankings: 95th in India, 666th in Asia; NIRF ranked 151-200 (University category)' },
   { year: '2026', tag: 'Rankings',    event: 'IIRF ranked 37th Private University in India' },
@@ -178,7 +195,7 @@ export default async function AboutPage() {
 
   return (
     <div>
-      {/* â•â• Hero - swoop yellow (whisper-faint on the photo) â•â• */}
+      {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
           src={HERO_IMAGE_SRC}
@@ -247,7 +264,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Stats strip - arc sweeps across the achievement numbers â•â• */}
+      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -287,7 +304,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Mission & Values - loop (Q-shape) suits the philosophical section â•â• */}
+      {/* ══ Mission & Values - loop (Q-shape) suits the philosophical section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -395,7 +412,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Accreditations - monogram (VGU-V) in a credibility section â•â• */}
+      {/* ══ Accreditations - monogram (VGU-V) in a credibility section ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
 
@@ -409,7 +426,7 @@ export default async function AboutPage() {
             </h2>
           </div>
 
-          {/* Mobile - 2Ã—3 compact trust-badge grid */}
+          {/* Mobile - 2×3 compact trust-badge grid */}
           <div className="md:hidden grid grid-cols-2 gap-3">
             {ACCREDITATIONS.map((a, i) => (
               <div
@@ -512,7 +529,55 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Campus Experience - arc (digital reach spanning the physical) â•â• */}
+      {/* ══ Teaching Methodology - how instruction actually happens, distinct
+          from the homepage's interactive platform explorer (CourseExperienceSection)
+          and each program page's weekly-schedule breakdown (LearningExperience).
+          This is the formal, university-wide "how we teach" overview: a
+          university-level fact, not something worth repeating per program. ══ */}
+      <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
+        <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="text-center mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              How we teach
+            </p>
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
+              Our Pedagogy
+            </h2>
+            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
+              Every VGU program is built on the same instructional foundation - designed for
+              working adults who need flexibility without losing structure.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {PEDAGOGY.map((p, i) => (
+              <div
+                key={p.title}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 60}ms` }}
+                className="group/card flex flex-col rounded-2xl border border-neutral-200 bg-white p-5 hover:border-vgu-red/20 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(192,64,54,0.10)] transition-all duration-200"
+              >
+                <div
+                  className="w-11 h-11 rounded-xl flex-none flex items-center justify-center mb-4 transition-transform duration-200 group-hover/card:scale-110"
+                  style={{ background: 'linear-gradient(135deg, #C04036, #821a12)' }}
+                >
+                  <p.Icon size={20} stroke={1.75} className="text-white" />
+                </div>
+                <h3 className="font-heading font-bold text-[16px] text-neutral-900 mb-1.5 leading-snug">
+                  {p.title}
+                </h3>
+                <p className="text-[14px] font-body text-neutral-500 leading-[1.6]">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Campus Experience - arc (digital reach spanning the physical) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-10 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
@@ -600,7 +665,7 @@ export default async function AboutPage() {
               {/* Proof strip */}
               <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
                 <div className="flex flex-col items-center py-4 md:py-7 px-4">
-                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3Ã—</span>
+                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
                   <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
                 </div>
                 <div className="flex flex-col items-center py-4 md:py-7 px-4">
@@ -618,7 +683,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Hiring Partners - loop (employer-graduate connection) â•â• */}
+      {/* ══ Hiring Partners - loop (employer-graduate connection) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="loop" color="red" opacity={0.03} strokeWidth={20} />
 
@@ -654,7 +719,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• History timeline - wave conveys the flow of time â•â• */}
+      {/* ══ History timeline - wave conveys the flow of time ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
@@ -697,7 +762,7 @@ export default async function AboutPage() {
                   </div>
                   <div>
                     <div className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">NAAC A+ Accredited</div>
-                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 Â· 3.29/4.0 CGPA Â· Valid 2027</div>
+                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
                   </div>
                 </div>
 
@@ -713,7 +778,7 @@ export default async function AboutPage() {
                       className="inline-flex items-center gap-1 rounded-full border border-vgu-red/30 bg-vgu-red/[0.06] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red shadow-sm"
                     >
                       {chip.label}
-                      <span className="mx-0.5 font-normal text-neutral-400">Â·</span>
+                      <span className="mx-0.5 font-normal text-neutral-400">·</span>
                       <span className="font-normal text-neutral-400">{chip.year}</span>
                     </span>
                   ))}
@@ -789,7 +854,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* â•â• Alumni Community - swoop (sweeping sense of a large, growing community) â•â• */}
+      {/* ══ Alumni Community - swoop (sweeping sense of a large, growing community) ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
         <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
 

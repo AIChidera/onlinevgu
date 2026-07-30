@@ -30,7 +30,7 @@ import { getSiteConfig, type SiteConfig } from '@/lib/sanity'
 
 const TRUST_PILLS = [
   { Icon: IconBolt,        label: 'Response within 2 hours' },
-  { Icon: IconCircleCheck, label: 'Free Â· No obligation'    },
+  { Icon: IconCircleCheck, label: 'Free · No obligation'    },
   { Icon: IconClock,       label: 'Mon-Sat, 9am-7pm IST'    },
 ]
 
@@ -64,7 +64,7 @@ function buildMiniFaqs(config: SiteConfig) {
     },
     {
       q: 'Can I pay fees in monthly EMIs?',
-      a: 'Yes. We offer 0% interest EMI plans starting from â‚¹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
+      a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
     },
     {
       q: 'How long does the application process take?',
@@ -154,7 +154,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://onlinevgu.com/contact' },
   openGraph: {
     title: 'Contact Us - VGU Online',
-    description: 'Free counselling Â· Reply within 2 hours Â· Mon-Sat 9am-7pm IST.',
+    description: 'Free counselling · Reply within 2 hours · Mon-Sat 9am-7pm IST.',
     url: 'https://onlinevgu.com/contact',
   },
 }
@@ -169,7 +169,7 @@ export default async function ContactPage() {
 
   return (
     <div>
-      {/* â•â• Hero â•â• */}
+      {/* ══ Hero ══ */}
       <section
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
@@ -225,7 +225,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Quick channels â•â• */}
+      {/* ══ Quick channels ══ */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -274,7 +274,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Form + Reach us â•â• */}
+      {/* ══ Form + Reach us ══ */}
       <section className="bg-neutral-50 pt-4 md:pt-8 lg:pt-10 pb-12 md:pb-16 lg:pb-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -415,7 +415,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Visit our campus (Map) â•â• */}
+      {/* ══ Visit our campus (Map) ══ */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -498,7 +498,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Departments â•â• */}
+      {/* ══ Departments ══ */}
       <section className="bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
 
@@ -556,7 +556,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Mini-FAQ â•â• */}
+      {/* ══ Mini-FAQ ══ */}
       <section className="bg-white py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[860px]">
 
@@ -617,7 +617,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* â•â• Counsellors â•â• */}
+      {/* ══ Counsellors ══ */}
       <section className="sketch-hover-group relative overflow-hidden bg-neutral-50 py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <SketchFlourish shape="arc" color="red" opacity={0.06} strokeWidth={24} durationMs={2200} />
         <div className="relative z-10 mx-auto max-w-[1280px]">

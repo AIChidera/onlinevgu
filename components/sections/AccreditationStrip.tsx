@@ -1,4 +1,4 @@
-import Image from 'next/image'
+﻿import Image from 'next/image'
 import BrandIcon from '@/components/ui/BrandIcon'
 
 const ITEMS = [
@@ -6,7 +6,7 @@ const ITEMS = [
   { logo: '/logos/naac-grade-a-plus.png', icon: null,       name: 'NAAC A+',         sub: 'Accredited University'      },
   { logo: '/logos/aicte-approved.png',    icon: null,       name: 'AICTE Approved',  sub: 'Technical Programs'         },
   { logo: '/logos/qs-ranking.png',        icon: null,       name: 'QS Asia Ranked',  sub: 'World University Rankings'  },
-  { logo: null,                           icon: 'Coursera', name: 'Coursera Partner',sub: '7,000+ courses included'    },
+  { logo: null,                           icon: 'Coursera', name: 'Coursera Partner',sub: '10,000+ courses included'    },
 ]
 
 export default function AccreditationStrip() {

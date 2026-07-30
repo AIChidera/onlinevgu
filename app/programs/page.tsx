@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default async function ProgramsPage() {
   const [sanityPrograms, config] = await Promise.all([getAllPrograms(), getSiteConfig()])
 
-  // Build a slugâ†’image map from the hardcoded fallback so we can fill gaps
+  // Build a slug→image map from the hardcoded fallback so we can fill gaps
   // when Sanity programmes don't yet have a hero image uploaded in the CMS.
   const fallbackImages: Record<string, string> = Object.fromEntries(
     PROGRAMMES.filter(p => p.image).map(p => [p.slug, p.image as string])
@@ -44,10 +44,10 @@ export default async function ProgramsPage() {
 
   return (
     <>
-      {/* â•â• Hero â•â• */}
+      {/* ══ Hero ══ */}
       <section className="relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
-        {/* Photo + dark overlay (Bible Â§06 semi-transparent treatment) */}
+        {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
         <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
@@ -65,7 +65,7 @@ export default async function ProgramsPage() {
               className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
               style={{ animationDelay: '0ms' }}
             >
-              UGC-Recognised Â· 100% Online
+              UGC-Recognised · 100% Online
             </p>
 
             <h1
@@ -111,7 +111,7 @@ export default async function ProgramsPage() {
         </div>
       </section>
 
-      {/* â•â• Grid â•â• */}
+      {/* ══ Grid ══ */}
       <ProgramsGrid programmes={programmes} nextBatch={config.nextBatch} />
     </>
   )

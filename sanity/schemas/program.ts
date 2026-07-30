@@ -50,6 +50,7 @@ export default defineType({
       options: {
         list: [
           { title: 'Management',             value: 'Management'             },
+          { title: 'Computer Applications',  value: 'Computer Applications'  },
           { title: 'Information Technology', value: 'Information Technology' },
           { title: 'Commerce',               value: 'Commerce'               },
           { title: 'Arts',                   value: 'Arts'                   },

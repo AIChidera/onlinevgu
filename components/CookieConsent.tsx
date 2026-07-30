@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { IconCookie } from '@tabler/icons-react'
-
 type Consent = 'accepted' | 'rejected'
 const STORAGE_KEY = 'vgu_cookie_consent'
 
@@ -67,16 +65,7 @@ export default function CookieConsent() {
 
         <div className="p-5">
           {/* Header row */}
-          <div className="flex items-center gap-3 mb-3">
-            <div
-              className="flex-none w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(135deg, #C04036, #821a12)',
-                boxShadow: '0 4px 14px rgba(192,64,54,0.32)',
-              }}
-            >
-              <IconCookie size={18} stroke={2} className="text-white" />
-            </div>
+          <div className="mb-3">
             <h2 className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">
               We use cookies
             </h2>

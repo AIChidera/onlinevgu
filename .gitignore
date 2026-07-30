@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# agent tooling scratch space (background agent worktrees)
+.claude/worktrees/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -1,36 +1,74 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   IconLayoutDashboard,
-  IconVideo,
-  IconCalendarEvent,
-  IconClipboardCheck,
+  IconClipboardList,
+  IconCreditCard,
+  IconChartBar,
+  IconLogin,
+  IconHeadset,
+  IconArrowUpRight,
 } from '@tabler/icons-react'
 
 export const metadata: Metadata = {
-  title: 'Student Portal - Coming Soon | Online VGU',
+  title: 'Student Portal - Online VGU',
   description:
-    'The Online VGU LMS - your dashboard for courses, live classes, assignments, and academic progress. Launching soon for enrolled students.',
+    'Quick access for enrolled Online VGU students - LMS, examination forms, exam fee payment, results, student login, and academic support.',
   alternates: { canonical: 'https://onlinevgu.com/student-portal' },
   openGraph: {
-    title: 'Student Portal - Coming Soon | Online VGU',
-    description: 'The Online VGU LMS - launching soon for enrolled students.',
+    title: 'Student Portal - Online VGU',
+    description: 'Quick access to LMS, exams, results, and support for enrolled students.',
     url: 'https://onlinevgu.com/student-portal',
   },
 }
 
-const FEATURES = [
-  { Icon: IconLayoutDashboard, label: 'Personalised dashboard' },
-  { Icon: IconVideo,           label: 'Live & recorded classes' },
-  { Icon: IconClipboardCheck,  label: 'Assignments & grades' },
-  { Icon: IconCalendarEvent,   label: 'Calendar sync' },
+// Same destinations as the footer's "For Enrolled Students" column - kept in
+// one place here (external systems, not built by us) so enrolled students
+// have a single obvious page to bookmark rather than hunting the footer.
+const QUICK_ACCESS = [
+  {
+    Icon:  IconLayoutDashboard,
+    label: 'LMS',
+    desc:  'BBA & MBA learners',
+    href:  'https://lms.onlinevgu.com/login',
+  },
+  {
+    Icon:  IconLayoutDashboard,
+    label: 'LMS',
+    desc:  'BA, BCA, MCA, M.Sc., MA English, MAJMC',
+    href:  'https://ol.vgu.universitycopilot.com/login',
+  },
+  {
+    Icon:  IconClipboardList,
+    label: 'Examination Forms',
+    desc:  'Register for upcoming exams',
+    href:  'https://vguerp.epravesh.com/public/login',
+  },
+  {
+    Icon:  IconCreditCard,
+    label: 'Examination Fee Payment',
+    desc:  'Pay your exam fee online',
+    href:  'https://smartpay.easebuzz.in/168702/f96d8ee7dc46400ba2df37045bc2db65',
+  },
+  {
+    Icon:  IconChartBar,
+    label: 'Results',
+    desc:  'Check your semester results',
+    href:  'https://vguerp.epravesh.com/public/login',
+  },
+  {
+    Icon:  IconLogin,
+    label: 'Student Login',
+    desc:  'VGU ERP student portal',
+    href:  'https://vguerp.epravesh.com/public/login',
+  },
 ]
 
 export default function StudentPortalPage() {
   return (
     <main>
       <section
-        className="relative overflow-hidden flex flex-col items-center justify-center min-h-[calc(100dvh-72px)] px-5"
+        className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #821a12 38%, #2d0f0b 68%, #110805 100%)' }}
       >
         {/* Dot grid texture */}
@@ -48,49 +86,63 @@ export default function StudentPortalPage() {
         <div className="absolute -bottom-40 -left-40 w-[480px] h-[480px] rounded-full bg-vgu-yellow/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
         {/* Content */}
-        <div className="relative z-10 text-center max-w-[640px] mx-auto py-20 md:py-24">
+        <div className="relative z-10 mx-auto max-w-[900px] px-5 md:px-8 lg:px-12 py-16 md:py-20 text-center">
 
           {/* Eyebrow */}
           <p className="text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-yellow mb-5">
-            Online VGU Â· LMS
+            Online VGU · Student Portal
           </p>
 
           {/* Heading */}
-          <h1 className="font-heading font-bold text-[36px] md:text-[52px] tracking-[-1px] leading-[1.15] text-white mb-5 md:mb-6">
-            Your learning hub.{' '}
-            <span className="text-vgu-yellow">Coming soon.</span>
+          <h1 className="font-heading font-bold text-[32px] md:text-[46px] tracking-[-1px] leading-[1.15] text-white mb-5">
+            Everything you need, one page away.
           </h1>
 
           {/* Body */}
-          <p className="text-[16px] md:text-[18px] font-body leading-[1.7] text-white/70 mb-8 max-w-[500px] mx-auto">
-            The Online VGU Student Portal is where you&apos;ll attend classes, submit
-            assignments, track grades, and connect with faculty. We&apos;re putting the
-            finishing touches on it.
+          <p className="text-[16px] md:text-[18px] font-body leading-[1.7] text-white/70 mb-10 max-w-[560px] mx-auto">
+            Quick access to your LMS, exam forms, fee payment, results, and support -
+            whichever program you&apos;re enrolled in.
           </p>
 
-          {/* Pulse badge */}
-          <div className="inline-flex items-center gap-2.5 rounded-full bg-white/10 border border-white/20 px-5 py-2.5 mb-8 md:mb-10">
-            <span className="relative flex h-2.5 w-2.5 flex-none" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-vgu-yellow opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-vgu-yellow" />
-            </span>
-            <span className="text-[13px] font-body font-semibold text-white/80">Launching soon</span>
-          </div>
-
-          {/* Feature chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-10 md:mb-12">
-            {FEATURES.map(({ Icon, label }) => (
-              <div
-                key={label}
-                className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3.5 py-1.5"
+          {/* Quick access grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left mb-10">
+            {QUICK_ACCESS.map((item, i) => (
+              <a
+                key={item.label + item.desc}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 60}ms` }}
+                className="group flex items-start gap-3.5 rounded-2xl bg-white/[0.06] border border-white/10 hover:border-vgu-yellow/40 hover:bg-white/[0.09] p-4 transition-all duration-200"
               >
-                <Icon size={14} stroke={2} className="text-vgu-yellow/85" />
-                <span className="text-[12px] md:text-[13px] font-body font-medium text-white/80">
-                  {label}
-                </span>
-              </div>
+                <div className="flex-none w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-vgu-yellow/15 transition-colors duration-200">
+                  <item.Icon size={20} stroke={1.75} className="text-vgu-yellow" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5">
+                    <p className="font-heading font-bold text-[15px] text-white leading-tight">{item.label}</p>
+                    <IconArrowUpRight size={14} stroke={2.25} className="flex-none text-white/40 group-hover:text-vgu-yellow transition-colors duration-200" />
+                  </div>
+                  <p className="text-[12.5px] font-body text-white/55 mt-1 leading-snug">{item.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
+
+          {/* Academic support - separated, since it's a conversation not a login */}
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-3.5 rounded-2xl bg-white/[0.06] border border-white/10 hover:border-vgu-yellow/40 hover:bg-white/[0.09] px-5 py-4 text-left transition-all duration-200 mb-10 w-full sm:w-auto"
+          >
+            <div className="flex-none w-11 h-11 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-vgu-yellow/15 transition-colors duration-200">
+              <IconHeadset size={20} stroke={1.75} className="text-vgu-yellow" />
+            </div>
+            <div>
+              <p className="font-heading font-bold text-[15px] text-white leading-tight">Academic Support</p>
+              <p className="text-[12.5px] font-body text-white/55 mt-1 leading-snug">Reach the student support team directly</p>
+            </div>
+          </Link>
 
           {/* CTAs */}
           <div className="flex items-center justify-center gap-3 md:gap-4 flex-wrap">

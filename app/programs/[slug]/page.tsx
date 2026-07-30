@@ -19,6 +19,7 @@ import {
   IconHeadset,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import BrandIcon from '@/components/ui/BrandIcon'
 import type { CurriculumYear } from './CurriculumPreview'
 import KeyOutcomes from './KeyOutcomes'
 import CurriculumPreview from './CurriculumPreview'
@@ -84,7 +85,7 @@ const HERO_IMAGES: Record<string, string> = {
   'bca':      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1400&q=80&auto=format&fit=crop',
   'mca':      'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1400&q=80&auto=format&fit=crop',
   'bba':      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&q=80&auto=format&fit=crop',
-  'bba-aaft': 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1400&q=80&auto=format&fit=crop',
+  'bba-aaft': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80&auto=format&fit=crop',
   'ba':       'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop',
   'ma':       'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1400&q=80&auto=format&fit=crop',
   'msc':      'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1400&q=80&auto=format&fit=crop',
@@ -98,7 +99,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹75,000/yr', totalFee: '₹1,50,000', emi: '₹6,250/month',
     nextBatch: 'July 2026', popular: true,
-    description: "VGU's flagship MBA for working professionals. Live weekend classes, 8 specialisations, and real-world case studies.",
+    description: "VGU's flagship MBA for working professionals. Live weekend classes, 9 specialisations, and real-world case studies.",
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -107,14 +108,14 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       'Live weekend classes - attend from anywhere in India',
-      '8 specialisations: Marketing, HR, Finance, Operations, Healthcare, Agri-Business, IT Management, International Business',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      '9 specialisations: Human Resource Management, Finance Management, Marketing, Digital Marketing, Agri Business, IT Management, International Business Management, Operations Management, Healthcare Management',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Dedicated placement cell with 500+ hiring partners',
       'AI-proctored exams - appear from home, no exam centre needed',
       'Merit scholarships up to 50% available',
       'UGC-entitled degree - identical to an on-campus MBA certificate',
     ],
-    specialisations: ['Marketing', 'Finance', 'Human Resources', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
+    specialisations: ['Human Resource Management', 'Finance Management', 'Marketing', 'Digital Marketing', 'Agri Business', 'IT Management', 'International Business Management', 'Operations Management', 'Healthcare Management'],
     careerRoles: ['Business Manager', 'Finance Director', 'Marketing Manager', 'HR Manager', 'Operations Manager', 'Healthcare Administrator', 'IT Manager', 'International Business Manager'],
     avgSalaryAfter: '₹10-18 LPA',
     topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Accenture', 'Amazon', 'HDFC Bank', 'ICICI Bank', 'Reliance Industries', 'Tata Group', 'Hindustan Unilever'],
@@ -129,7 +130,7 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Business Environment', credits: 3, type: 'Core' },
           { name: 'Business Communication', credits: 2, type: 'Core' },
         ]},
-        { label: 'Semester 2', totalCredits: 25, courses: [
+        { label: 'Semester 2', totalCredits: 27, courses: [
           { name: 'Human Resource Management', credits: 3, type: 'Core' },
           { name: 'Financial Management', credits: 4, type: 'Core' },
           { name: 'Marketing Management', credits: 3, type: 'Core' },
@@ -147,17 +148,17 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Supply Chain Management', credits: 3, type: 'Core' },
           { name: 'Strategic Management', credits: 3, type: 'Core' },
           { name: 'Entrepreneurship & Innovation Management', credits: 2, type: 'Core' },
-          { name: 'Elective 1', credits: 3, type: 'Elective' },
-          { name: 'Elective 2', credits: 3, type: 'Elective' },
-          { name: 'Elective 3', credits: 3, type: 'Elective' },
-          { name: 'Elective 4', credits: 3, type: 'Elective' },
+          { name: 'Marketing Elective', credits: 3, type: 'Elective' },
+          { name: 'Finance Management Elective', credits: 3, type: 'Elective' },
+          { name: 'Human Resource Management Elective', credits: 3, type: 'Elective' },
+          { name: 'Operations Management Elective', credits: 3, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 20, courses: [
           { name: 'Research Project', credits: 8, type: 'Core' },
           { name: 'Corporate Readiness', credits: 3, type: 'Core' },
           { name: 'Indian Knowledge System', credits: 3, type: 'Core' },
-          { name: 'Elective 5', credits: 3, type: 'Elective' },
-          { name: 'Elective 6', credits: 3, type: 'Elective' },
+          { name: 'Healthcare Management Elective', credits: 3, type: 'Elective' },
+          { name: 'IT Management Elective', credits: 3, type: 'Elective' },
         ]},
       ]},
     ],
@@ -175,13 +176,13 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       'Industry-aligned curriculum: C, Java, Python, Machine Learning, Cloud, IoT, Blockchain',
-      '3 specialisations: AI & Data Science, Cloud Tech & Cybersecurity, Cloud Computing & Full Stack',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      '3 specialisations: Artificial Intelligence & Data Science, Cloud Technology & Cyber Security, Cyber Crime & Forensic Science',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Hackathons and semester projects with industry judges',
       'Cloud and cybersecurity certification prep tracks',
       'Dedicated tech placement cell',
     ],
-    specialisations: ['Cloud Tech & Cybersecurity', 'AI & Data Science', 'Cloud Computing & Full Stack'],
+    specialisations: ['Artificial Intelligence & Data Science', 'Cloud Technology & Cyber Security', 'Cyber Crime & Forensic Science'],
     careerRoles: ['Software Developer', 'Data Scientist', 'Machine Learning Engineer', 'Cybersecurity Analyst', 'DevOps Engineer', 'Web Developer', 'Blockchain Developer', 'Database Administrator'],
     avgSalaryAfter: '₹6-14 LPA',
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Oracle'],
@@ -201,19 +202,19 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Data Structures and Algorithms Using C', credits: 4, type: 'Core' },
           { name: 'Machine Learning with Python', credits: 4, type: 'Core' },
           { name: 'Computer Networks', credits: 4, type: 'Core' },
-          { name: 'Introduction to Data Science', credits: 3, type: 'Core' },
           { name: 'Linux and Shell Programming', credits: 4, type: 'Core' },
+          { name: 'Introduction to Data Science (Artificial Intelligence & Data Science)', credits: 3, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
         { label: 'Semester 3', totalCredits: 25, courses: [
-          { name: 'Deep Learning', credits: 4, type: 'Core' },
-          { name: 'Natural Language Processing', credits: 4, type: 'Core' },
           { name: 'Artificial Intelligence & Intelligent Agents', credits: 3, type: 'Core' },
           { name: 'Big Data Analytics', credits: 4, type: 'Core' },
           { name: 'Internet of Things', credits: 4, type: 'Core' },
           { name: 'Cloud Security', credits: 3, type: 'Core' },
           { name: 'Cryptography', credits: 3, type: 'Core' },
+          { name: 'Deep Learning (Artificial Intelligence & Data Science)', credits: 4, type: 'Elective' },
+          { name: 'Natural Language Processing (Artificial Intelligence & Data Science)', credits: 4, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 21, courses: [
           { name: 'Cloud Operations', credits: 4, type: 'Core' },
@@ -240,7 +241,7 @@ const PROGRAMS: ProgramDetail[] = [
     highlights: [
       'Integrated ACCA, CMA & FM professional certification tracks',
       'Save 60% vs standalone ACCA/CMA certification costs',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Faculty with CFA and international banking experience',
       'AI for Finance module in the final semester',
       'UGC-entitled MBA with international finance specialisation',
@@ -264,9 +265,9 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Introduction to Research Method', credits: 3, type: 'Core' },
           { name: 'Corporate and Business Law', credits: 4, type: 'Core' },
           { name: 'Corporate Management - I', credits: 3, type: 'Core' },
-          { name: 'Elective 1 (ACCA/CMA/FM Track)', credits: 4, type: 'Elective' },
-          { name: 'Elective 2', credits: 4, type: 'Elective' },
-          { name: 'Elective 3', credits: 4, type: 'Elective' },
+          { name: 'Audit & Assurance (ACCA)', credits: 4, type: 'Elective' },
+          { name: 'Internal Control (CMA)', credits: 4, type: 'Elective' },
+          { name: 'SEBI Investor Certification (FM)', credits: 4, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
@@ -274,17 +275,17 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Financial Management for Managers', credits: 4, type: 'Core' },
           { name: 'Corporate Management - II', credits: 4, type: 'Core' },
           { name: 'Human Resource Management', credits: 3, type: 'Core' },
-          { name: 'Elective 4', credits: 4, type: 'Elective' },
-          { name: 'Elective 5', credits: 4, type: 'Elective' },
-          { name: 'Elective 6', credits: 4, type: 'Elective' },
+          { name: 'Costing (ACCA)', credits: 4, type: 'Elective' },
+          { name: 'Cost Accounting (CMA)', credits: 4, type: 'Elective' },
+          { name: 'Mutual Funds (FM)', credits: 4, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 24, courses: [
           { name: 'AI for Finance', credits: 4, type: 'Core' },
           { name: 'Taxation', credits: 4, type: 'Core' },
           { name: 'Corporate Management - III', credits: 4, type: 'Core' },
-          { name: 'Elective 7', credits: 4, type: 'Elective' },
-          { name: 'Elective 8', credits: 4, type: 'Elective' },
-          { name: 'Elective 9', credits: 4, type: 'Elective' },
+          { name: 'Financial Reporting (ACCA)', credits: 4, type: 'Elective' },
+          { name: 'Performance Analysis (CMA)', credits: 4, type: 'Elective' },
+          { name: 'Equity Derivatives (FM)', credits: 4, type: 'Elective' },
         ]},
       ]},
     ],
@@ -294,7 +295,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹1,00,000/yr', totalFee: '₹2,00,000', emi: '₹8,333/month',
     nextBatch: 'July 2026',
-    description: "An MBA for finance pros in the digital era. Covers UPI, cloud ERP, accounting analytics, and AI-driven audit.",
+    description: 'An MBA built around the tools modern finance teams actually run on - SAP FICO, TallyPrime, Zoho Books, Power BI, and AI-for-finance - with a 1-year paid internship at a CA firm or industry desk.',
     eligibility: [
       "Any bachelor's degree from a UGC-recognised university",
       'Minimum 50% aggregate marks',
@@ -302,12 +303,12 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      'Digital finance stack: UPI, digital payments, cloud ERP, and open banking',
-      'Accounting analytics: Excel-to-Power-BI pipelines, forecasting, and audit analytics',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
-      'AI for Finance & Accounting module in the final semester',
-      'Aligned with modern CFO office skill expectations',
-      'UGC-entitled MBA with a digital finance and analytics specialisation',
+      '1-year paid internship integrated into the curriculum with CA firms and industry',
+      'Hands-on with 15+ real tools: SAP FICO, SAP S/4HANA, TallyPrime, Zoho Books, QuickBooks, Xero, Power BI, and AI platforms',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
+      'Certifications earned: ICA course completion, SAP FICO/HANA end-user, Zoho Books',
+      '360-degree career support across India, USA, UK, and Australia',
+      'UGC-entitled MBA with a digital finance and accounting analytics focus',
     ],
     specialisations: ['Digital Finance', 'Accounting Analytics', 'FinTech Operations'],
     careerRoles: ['Finance Analyst', 'FP&A Analyst', 'Accounting Analytics Lead', 'FinTech Product Analyst', 'Audit Analytics Manager', 'Digital Finance Manager', 'Controller', 'Risk & Compliance Analyst'],
@@ -315,50 +316,52 @@ const PROGRAMS: ProgramDetail[] = [
     topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Razorpay', 'PayU', 'Zoho', 'Infosys BPM', 'Genpact', 'WNS'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', totalCredits: 23, courses: [
-          { name: 'Managerial Economics', credits: 3, type: 'Core' },
-          { name: 'Financial Accounting', credits: 4, type: 'Core' },
-          { name: 'Organisational Behaviour', credits: 3, type: 'Core' },
-          { name: 'Business Statistics', credits: 4, type: 'Core' },
-          { name: 'Digital Finance Foundations', credits: 3, type: 'Core' },
-          { name: 'Business Communication', credits: 3, type: 'Core' },
-          { name: 'Spreadsheet Modelling Lab', credits: 3, type: 'Core' },
-        ]},
-        { label: 'Semester 2', totalCredits: 24, courses: [
-          { name: 'Corporate Finance', credits: 4, type: 'Core' },
-          { name: 'Management Accounting', credits: 4, type: 'Core' },
+        { label: 'Semester 1', totalCredits: 24, courses: [
+          { name: 'Managerial Concepts and Organizational Behaviour', credits: 4, type: 'Core' },
+          { name: 'Business Environment', credits: 3, type: 'Core' },
           { name: 'Marketing Management', credits: 3, type: 'Core' },
-          { name: 'Cloud ERP Systems', credits: 3, type: 'Core' },
-          { name: 'Financial Reporting Standards', credits: 4, type: 'Core' },
-          { name: 'Data Visualisation for Finance', credits: 3, type: 'Core' },
           { name: 'Legal Aspects of Business', credits: 3, type: 'Core' },
+          { name: 'Accounting for Managers (IND AS)', credits: 4, type: 'Core' },
+          { name: 'Business Communication', credits: 3, type: 'Core' },
+          { name: 'Business Analytics I', credits: 4, type: 'Core' },
+        ]},
+        { label: 'Semester 2', totalCredits: 25, courses: [
+          { name: 'Financial Management', credits: 4, type: 'Core' },
+          { name: 'Marketing Management II', credits: 3, type: 'Core' },
+          { name: 'Human Resource Management', credits: 3, type: 'Core' },
+          { name: 'International Business Management', credits: 3, type: 'Core' },
+          { name: 'Digital Accounting: Tally', credits: 4, type: 'Core' },
+          { name: 'Direct Tax with Simulation', credits: 4, type: 'Core' },
+          { name: 'GST with Simulation', credits: 4, type: 'Core' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
         { label: 'Semester 3', totalCredits: 23, courses: [
-          { name: 'Digital Payments and Open Banking', credits: 4, type: 'Core' },
-          { name: 'Accounting Analytics with Power BI', credits: 4, type: 'Core' },
-          { name: 'Financial Modelling and Valuation', credits: 4, type: 'Core' },
-          { name: 'Risk and Compliance', credits: 3, type: 'Core' },
-          { name: 'Elective 1', credits: 4, type: 'Elective' },
-          { name: 'Elective 2', credits: 4, type: 'Elective' },
+          { name: 'Project Management', credits: 3, type: 'Core' },
+          { name: 'Entrepreneurship and Innovation & Design', credits: 3, type: 'Core' },
+          { name: 'Research Methodology', credits: 3, type: 'Core' },
+          { name: 'Internship - I', credits: 4, type: 'Core' },
+          { name: 'Digital Accounting: ZOHO Books', credits: 2, type: 'Core' },
+          { name: 'Business Analytics II', credits: 3, type: 'Core' },
+          { name: 'SAP-FICO', credits: 3, type: 'Core' },
+          { name: 'Generally Accepted Accounting Principles (US GAAP)', credits: 2, type: 'Core' },
         ]},
-        { label: 'Semester 4', totalCredits: 22, courses: [
-          { name: 'AI for Finance and Accounting', credits: 4, type: 'Core' },
-          { name: 'Audit Analytics', credits: 4, type: 'Core' },
-          { name: 'Capstone Project', credits: 8, type: 'Core' },
-          { name: 'Corporate Readiness', credits: 3, type: 'Core' },
-          { name: 'Elective 3', credits: 3, type: 'Elective' },
+        { label: 'Semester 4', totalCredits: 20, courses: [
+          { name: 'Internship - II', credits: 6, type: 'Core' },
+          { name: 'AI for Finance', credits: 4, type: 'Core' },
+          { name: 'Costing & Auditing', credits: 4, type: 'Core' },
+          { name: 'QuickBooks', credits: 3, type: 'Core' },
+          { name: 'Xero', credits: 3, type: 'Core' },
         ]},
       ]},
     ],
   },
   {
-    slug: 'bba-aaft', name: 'BBA-AAFT', fullName: 'BBA in Media & Entertainment Management (AAFT)',
+    slug: 'bba-aaft', name: 'BBA-AAFT', fullName: 'BBA in Accounting Analytics & Financial Technology',
     level: 'ug', duration: '3 Years', semesters: 6,
-    feePerYear: '₹60,000/yr', totalFee: '₹1,80,000', emi: '₹5,000/month',
+    feePerYear: '₹44,000/yr', totalFee: '₹1,32,000', emi: '₹3,667/month',
     nextBatch: 'July 2026',
-    description: "A BBA delivered with AAFT, India's leading media school. Business fundamentals meets film, TV, streaming, and entertainment.",
+    description: 'A BBA built for the accounting and fintech stack employers actually use - Tally, GST, Advanced Excel, Power BI, and AI-for-finance tools, with a paid internship at a CA firm.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream - Science, Commerce, or Arts',
@@ -366,80 +369,77 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      'BBA delivered in partnership with AAFT - founded in 1993, alumni across every major Indian production house',
-      '4 specialisation tracks: Film & Television Business, Digital Media Management, Event & Live Entertainment, Advertising & PR',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
-      'Live sessions with AAFT industry faculty from production, streaming, and advertising',
-      'Portfolio project - business plan for a real media venture or IP',
+      '1-year paid internship integrated into the curriculum with leading CA firms',
+      'Hands-on with 12+ real tools: TallyPrime, Zoho Books, Advanced Excel, Power BI, GST, TDS, ITR filing, and AI platforms',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
+      '4 industry certifications earned during the program, including Cambridge English',
+      'A new applied elective every semester - Tally to GST to Excel to Power BI',
       'UGC-entitled BBA - valid for MBA admission at any Indian university',
     ],
-    specialisations: ['Film & Television Business', 'Digital Media Management', 'Event & Live Entertainment', 'Advertising & PR'],
-    careerRoles: ['Production Coordinator', 'Line Producer', 'Content Strategist', 'OTT Operations Executive', 'Talent Manager', 'Advertising Account Executive', 'Event Manager', 'PR Executive'],
+    specialisations: ['Digital Accounting', 'Taxation & Analytics', 'Financial Technology', 'Analytics & Auditing'],
+    careerRoles: ['Accounts Executive', 'Junior Accountant', 'AP/AR Executive', 'Senior Accountant', 'Financial Analyst', 'Tax Associate', 'MIS Analyst', 'Forensic Accountant'],
     avgSalaryAfter: '₹4-9 LPA',
-    topHirers: ['Yash Raj Films', 'Dharma Productions', 'Excel Entertainment', 'Sony Pictures', 'Netflix India', 'Amazon Prime Video', 'JioCinema', 'Zee Media', 'Star TV', 'Ogilvy', 'Wavemaker', 'BookMyShow'],
+    topHirers: ['Deloitte', 'KPMG', 'EY', 'PwC', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 'TCS', 'Infosys', 'Genpact', 'WNS', 'Reliance Industries'],
     curriculum: [
       { year: 'Year 1', semesters: [
-        { label: 'Semester 1', totalCredits: 22, courses: [
+        { label: 'Semester 1', totalCredits: 21, courses: [
           { name: 'Fundamentals of Management', credits: 3, type: 'Core' },
-          { name: 'Introduction to Media and Entertainment Industry', credits: 4, type: 'Core' },
-          { name: 'Business Communication', credits: 3, type: 'Core' },
           { name: 'Business Accounting', credits: 4, type: 'Core' },
-          { name: 'History of Cinema and Television', credits: 3, type: 'Core' },
-          { name: 'Environmental Science', credits: 3, type: 'Core' },
-          { name: 'Elective 1', credits: 2, type: 'Elective' },
+          { name: 'Business Law', credits: 3, type: 'Core' },
+          { name: 'Business Economics', credits: 3, type: 'Core' },
+          { name: 'Business Statistics', credits: 3, type: 'Core' },
+          { name: 'Business Communication', credits: 3, type: 'Core' },
+          { name: 'Digital Accounting: Tally', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 2', totalCredits: 22, courses: [
-          { name: 'Managerial Economics', credits: 3, type: 'Core' },
-          { name: 'Principles of Marketing', credits: 3, type: 'Core' },
-          { name: 'Media Laws and Ethics', credits: 4, type: 'Core' },
-          { name: 'Storytelling for Business', credits: 3, type: 'Core' },
           { name: 'Human Resource Management', credits: 3, type: 'Core' },
-          { name: 'Statistics for Business', credits: 4, type: 'Core' },
-          { name: 'Elective 2', credits: 2, type: 'Elective' },
+          { name: 'Marketing Management', credits: 3, type: 'Core' },
+          { name: 'Financial Accounting', credits: 4, type: 'Core' },
+          { name: 'Business Environment', credits: 3, type: 'Core' },
+          { name: 'E-Commerce', credits: 4, type: 'Core' },
+          { name: 'Environmental Science', credits: 3, type: 'Core' },
+          { name: 'Taxation & Analytics: GST with Simulation', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
-        { label: 'Semester 3', totalCredits: 21, courses: [
-          { name: 'Production Management', credits: 4, type: 'Core' },
-          { name: 'Digital Media Platforms and OTT', credits: 4, type: 'Core' },
-          { name: 'Advertising and Brand Management', credits: 3, type: 'Core' },
-          { name: 'Business Environment', credits: 3, type: 'Core' },
-          { name: 'Financial Management for Media', credits: 3, type: 'Core' },
-          { name: 'Elective 3', credits: 2, type: 'Elective' },
-          { name: 'Elective 4', credits: 2, type: 'Elective' },
+        { label: 'Semester 3', totalCredits: 19, courses: [
+          { name: 'Strategic Management', credits: 3, type: 'Core' },
+          { name: 'Enterprise Resource Planning', credits: 5, type: 'Core' },
+          { name: 'Cost Accounting', credits: 4, type: 'Core' },
+          { name: 'Business Research Methods', credits: 3, type: 'Core' },
+          { name: 'Advanced MS Excel', credits: 2, type: 'Elective' },
+          { name: 'Direct Tax', credits: 2, type: 'Elective' },
         ]},
-        { label: 'Semester 4', totalCredits: 22, courses: [
-          { name: 'Event and Live Entertainment Management', credits: 4, type: 'Core' },
-          { name: 'Public Relations and Corporate Communication', credits: 3, type: 'Core' },
-          { name: 'Media Research and Analytics', credits: 4, type: 'Core' },
-          { name: 'IP Rights and Content Licensing', credits: 3, type: 'Core' },
-          { name: 'Distribution and Exhibition', credits: 3, type: 'Core' },
-          { name: 'Elective 5', credits: 2, type: 'Elective' },
-          { name: 'Elective 6', credits: 3, type: 'Elective' },
+        { label: 'Semester 4', totalCredits: 21, courses: [
+          { name: 'Operations Management', credits: 5, type: 'Core' },
+          { name: 'Corporate Finance', credits: 3, type: 'Core' },
+          { name: 'Taxation', credits: 5, type: 'Core' },
+          { name: 'Internship - I', credits: 4, type: 'Core' },
+          { name: 'Cambridge English', credits: 2, type: 'Elective' },
+          { name: 'ZOHO Books', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 3', semesters: [
         { label: 'Semester 5', totalCredits: 22, courses: [
-          { name: 'Strategic Management', credits: 4, type: 'Core' },
-          { name: 'International Media Business', credits: 3, type: 'Core' },
-          { name: 'Talent Management and Casting', credits: 3, type: 'Core' },
-          { name: 'Content Marketing and Social Media', credits: 3, type: 'Core' },
-          { name: 'Entrepreneurship in Media', credits: 4, type: 'Core' },
-          { name: 'Elective 7', credits: 2, type: 'Elective' },
-          { name: 'Elective 8', credits: 3, type: 'Elective' },
+          { name: 'Financial Statement Analysis', credits: 5, type: 'Core' },
+          { name: 'Auditing Principles', credits: 4, type: 'Core' },
+          { name: 'Entrepreneurship Development', credits: 4, type: 'Core' },
+          { name: 'Internship - II', credits: 5, type: 'Core' },
+          { name: 'Finalization of Accounts', credits: 2, type: 'Elective' },
+          { name: 'AI for Finance', credits: 2, type: 'Elective' },
         ]},
-        { label: 'Semester 6', totalCredits: 20, courses: [
-          { name: 'Capstone Media Business Plan', credits: 8, type: 'Core' },
-          { name: 'Corporate Readiness', credits: 3, type: 'Core' },
+        { label: 'Semester 6', totalCredits: 19, courses: [
+          { name: 'Capstone Project', credits: 8, type: 'Core' },
+          { name: 'Corporate Readiness', credits: 4, type: 'Core' },
           { name: 'Indian Knowledge System', credits: 3, type: 'Core' },
-          { name: 'Elective 9', credits: 3, type: 'Elective' },
-          { name: 'Elective 10', credits: 3, type: 'Elective' },
+          { name: 'Power BI', credits: 2, type: 'Elective' },
+          { name: 'Costing & Auditing', credits: 2, type: 'Elective' },
         ]},
       ]},
     ],
   },
   {
-    slug: 'ma', name: 'MA', fullName: 'Master of Arts in English',
+    slug: 'ma', name: 'MA English', fullName: 'Master of Arts in English',
     level: 'pg', duration: '2 Years', semesters: 4,
     feePerYear: '₹36,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
@@ -452,7 +452,7 @@ const PROGRAMS: ProgramDetail[] = [
     highlights: [
       'Specialised MA in English - UGC-NET aligned curriculum',
       'British, American, and Indian Literature in English covered across all four semesters',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Full dissertation in Semester 4 under faculty supervision',
       'Language & Linguistics modules in every semester',
       'Strong preparation for civil services and academic careers',
@@ -512,7 +512,7 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       '4 specialisations: General Management, Digital Marketing, Retail Management, FinTech',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Research Project and Corporate Readiness modules in final year',
       'Industry mentors from Fortune 500 companies and startups',
       'Dedicated placement support from day one',
@@ -531,7 +531,7 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Entrepreneurship Development', credits: 3, type: 'Core' },
           { name: 'Business Communication', credits: 3, type: 'Core' },
           { name: 'Environmental Science', credits: 3, type: 'Core' },
-          { name: 'Elective 1', credits: 2, type: 'Elective' },
+          { name: 'Fundamentals of Financial Technology (FinTech)', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 2', totalCredits: 22, courses: [
           { name: 'Managerial Economics', credits: 3, type: 'Core' },
@@ -540,7 +540,7 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Human Resource Management', credits: 3, type: 'Core' },
           { name: 'Principles of Marketing', credits: 3, type: 'Core' },
           { name: 'Business Analytics', credits: 4, type: 'Core' },
-          { name: 'Elective 2', credits: 2, type: 'Elective' },
+          { name: 'Introduction to Digital Marketing (Digital Marketing)', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
@@ -550,8 +550,8 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'System Analysis and Design', credits: 3, type: 'Core' },
           { name: 'Business Ethics and CSR', credits: 3, type: 'Core' },
           { name: 'Business Policy and Strategic Management', credits: 3, type: 'Core' },
-          { name: 'Elective 3', credits: 2, type: 'Elective' },
-          { name: 'Elective 4', credits: 2, type: 'Elective' },
+          { name: 'Management Accounting (General Management)', credits: 2, type: 'Elective' },
+          { name: 'Store Operations and Inventory (Retail Management)', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 21, courses: [
           { name: 'Business Research Methods', credits: 4, type: 'Core' },
@@ -559,8 +559,8 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'E-Commerce', credits: 3, type: 'Core' },
           { name: 'Cyber Crimes and Law', credits: 3, type: 'Core' },
           { name: 'International Business', credits: 3, type: 'Core' },
-          { name: 'Elective 5', credits: 2, type: 'Elective' },
-          { name: 'Elective 6', credits: 2, type: 'Elective' },
+          { name: 'Search Engine Marketing (Digital Marketing)', credits: 2, type: 'Elective' },
+          { name: 'Banking Service Design & Blueprinting (FinTech)', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 3', semesters: [
@@ -570,15 +570,15 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Enterprise Resource Planning', credits: 3, type: 'Core' },
           { name: 'Total Quality Management', credits: 3, type: 'Core' },
           { name: 'Project Management', credits: 4, type: 'Core' },
-          { name: 'Elective 7', credits: 2, type: 'Elective' },
-          { name: 'Elective 8', credits: 2, type: 'Elective' },
+          { name: 'Cost Accounting (General Management)', credits: 2, type: 'Elective' },
+          { name: 'E-Retailing (Retail Management)', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 6', totalCredits: 19, courses: [
           { name: 'Research Project', credits: 8, type: 'Core' },
           { name: 'Corporate Tax Management', credits: 4, type: 'Core' },
           { name: 'Corporate Readiness', credits: 3, type: 'Core' },
-          { name: 'Elective 9', credits: 2, type: 'Elective' },
-          { name: 'Elective 10', credits: 2, type: 'Elective' },
+          { name: 'Content Strategy (Digital Marketing)', credits: 2, type: 'Elective' },
+          { name: 'Digital Banking Trends & Omni-Channel Experience (FinTech)', credits: 2, type: 'Elective' },
         ]},
       ]},
     ],
@@ -588,7 +588,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹44,000/yr', totalFee: '₹1,32,000',
     nextBatch: 'July 2026',
-    description: "A career-ready BCA with hands-on coding labs every semester. Tracks in AI, Blockchain, Cloud, UX Design, and Data Science.",
+    description: 'A career-ready BCA with hands-on coding labs every semester. Tracks in Artificial Intelligence, Data Science, CTIS, Blockchain, and UI & UX.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Mathematics or Computer Science preferred',
@@ -596,14 +596,14 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      '6 specialisation tracks: General, UX Design, Data Science, Cloud & Information Security, Blockchain, Artificial Intelligence',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      '5 specialisation tracks: Artificial Intelligence, Data Science, CTIS, Blockchain, UI & UX',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Hands-on programming labs every semester - C, C++, Java, Python, DBMS, Graphics',
       'Major Project in final semester for portfolio and placement',
       'Indian Knowledge System and Universal Human Values modules',
       'UGC-entitled BCA - qualifies for MCA admission at any university',
     ],
-    specialisations: ['General', 'Artificial Intelligence', 'Data Science', 'UX Design', 'Cloud Technology & Information Security', 'Blockchain Technology'],
+    specialisations: ['Artificial Intelligence', 'Data Science', 'CTIS', 'Blockchain', 'UI & UX'],
     careerRoles: ['Software Developer', 'AI Developer', 'ML Engineer', 'Data Analyst', 'UX/UI Designer', 'Blockchain Developer', 'Cloud Engineer', 'Cybersecurity Analyst', 'Web Application Developer'],
     avgSalaryAfter: '₹4-9 LPA',
     topHirers: ['TCS', 'Infosys', 'Wipro', 'HCL', 'IBM', 'Tech Mahindra', 'Accenture', 'Amazon', 'Google', 'Microsoft', 'Cognizant', 'Capgemini', 'Flipkart', 'LTIMindtree', 'Mphasis', 'Oracle'],
@@ -616,7 +616,7 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Principle of Programming Languages', credits: 4, type: 'Core' },
           { name: 'Fundamentals of C Lab', credits: 4, type: 'Core' },
           { name: 'PC Software and Automation', credits: 2, type: 'Core' },
-          { name: 'Elective 1', credits: 2, type: 'Elective' },
+          { name: 'Multimedia Systems', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 2', totalCredits: 20, courses: [
           { name: 'Object Oriented Programming with C++', credits: 4, type: 'Core' },
@@ -625,7 +625,7 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'OOP with C++ Lab', credits: 2, type: 'Core' },
           { name: 'Data Structures Lab', credits: 2, type: 'Core' },
           { name: 'Soft Skill and Professional Aptitude', credits: 2, type: 'Core' },
-          { name: 'Elective 2', credits: 2, type: 'Elective' },
+          { name: 'Introduction to UX Design (UI & UX)', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
@@ -635,8 +635,8 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Internet and Web Application', credits: 4, type: 'Core' },
           { name: 'DBMS Lab', credits: 2, type: 'Core' },
           { name: 'Internet & Web Programming Lab', credits: 2, type: 'Core' },
-          { name: 'Elective 3', credits: 2, type: 'Elective' },
-          { name: 'Elective 4', credits: 2, type: 'Elective' },
+          { name: 'Artificial Intelligence', credits: 2, type: 'Elective' },
+          { name: 'Fundamentals of Blockchain Technology (Blockchain)', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 20, courses: [
           { name: 'Programming in Java', credits: 4, type: 'Core' },
@@ -644,8 +644,8 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Computer Graphics and Visualization', credits: 4, type: 'Core' },
           { name: 'Computer Graphics Lab', credits: 2, type: 'Core' },
           { name: 'Programming in Java Lab', credits: 2, type: 'Core' },
-          { name: 'Elective 5', credits: 2, type: 'Elective' },
-          { name: 'Elective 6', credits: 2, type: 'Elective' },
+          { name: 'Machine Learning (Data Science)', credits: 2, type: 'Elective' },
+          { name: 'Cloud Web Services (CTIS)', credits: 2, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 3', semesters: [
@@ -655,16 +655,16 @@ const PROGRAMS: ProgramDetail[] = [
           { name: 'Python Programming', credits: 4, type: 'Core' },
           { name: 'Python Lab', credits: 2, type: 'Core' },
           { name: 'Project Formulation and Appraisal', credits: 4, type: 'Core' },
-          { name: 'Elective 7', credits: 2, type: 'Elective' },
-          { name: 'Elective 8', credits: 2, type: 'Elective' },
+          { name: 'Data Mining & Prediction (Data Science)', credits: 2, type: 'Elective' },
+          { name: 'Usability Testing (UI & UX)', credits: 2, type: 'Elective' },
         ]},
         { label: 'Semester 6', totalCredits: 22, courses: [
           { name: 'Major Project', credits: 8, type: 'Core' },
           { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
           { name: 'Universal Human Values', credits: 4, type: 'Core' },
           { name: 'Automation Concepts and Techniques', credits: 2, type: 'Core' },
-          { name: 'Elective 9', credits: 2, type: 'Elective' },
-          { name: 'Elective 10', credits: 2, type: 'Elective' },
+          { name: 'Software Project Management', credits: 2, type: 'Elective' },
+          { name: 'Blockchain Economics (Blockchain)', credits: 2, type: 'Elective' },
         ]},
       ]},
     ],
@@ -674,7 +674,7 @@ const PROGRAMS: ProgramDetail[] = [
     level: 'ug', duration: '3 Years', semesters: 6,
     feePerYear: '₹24,000/yr', totalFee: '₹72,000',
     nextBatch: 'July 2026',
-    description: 'A flexible BA with 8 streams including Economics, Political Science, Literature, and Psychology. Strong civil services base.',
+    description: 'A flexible BA where you pick 3 discipline streams from 7 at the start and follow all 3 through every semester - Economics, Political Science, English Literature, History, Public Policy, International Relations, or Computer Applications. Strong civil services base.',
     eligibility: [
       '10+2 or equivalent from any recognised board',
       'Any stream accepted',
@@ -682,14 +682,14 @@ const PROGRAMS: ProgramDetail[] = [
       'No entrance exam required',
     ],
     highlights: [
-      '8 specialisation streams: Economics, Political Science, English Literature, History, Psychology, Public Policy, International Relations, Computer Applications',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Choose 3 discipline streams from 7 at admission, and study all 3 through every semester',
+      '7 streams available: Economics, Political Science, English Literature, History, Public Policy & Development, International Relations, Computer Applications',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Microsoft Office Practices and Visual Design Tool in Year 1',
-      'Computer Applications module in Year 3',
       'Indian Knowledge System and Environmental Science curriculum',
       'Strong foundation for UPSC, state civil services, and UGC-NET',
     ],
-    specialisations: ['Economics', 'Psychology', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications'],
+    specialisations: ['Economics', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications'],
     careerRoles: ['Economic Analyst', 'Policy Analyst', 'ESG Analyst', 'Content Writer', 'Social Media Strategist', 'Editor', 'Civil Services Officer', 'UX Researcher', 'Data Analyst', 'Journalist'],
     avgSalaryAfter: '₹3-6 LPA',
     topHirers: ['NDTV', 'The Hindu', 'Times of India', 'HT Media', 'NITI Aayog', 'UPSC', 'State PSCs', 'TCS', 'Amazon', 'Hindustan Unilever', 'NGOs & Think Tanks'],
@@ -698,48 +698,48 @@ const PROGRAMS: ProgramDetail[] = [
         { label: 'Semester 1', totalCredits: 22, courses: [
           { name: 'English-I', credits: 6, type: 'Core' },
           { name: 'Microsoft Office Practices', credits: 4, type: 'Core' },
-          { name: 'Elective I - Subject 1', credits: 4, type: 'Elective' },
-          { name: 'Elective II - Subject 2', credits: 4, type: 'Elective' },
-          { name: 'Elective III - Subject 3', credits: 4, type: 'Elective' },
+          { name: 'Microeconomics (Economics)', credits: 4, type: 'Elective' },
+          { name: 'Political Theory (Political Science)', credits: 4, type: 'Elective' },
+          { name: 'Introduction to Literature (English Literature)', credits: 4, type: 'Elective' },
         ]},
         { label: 'Semester 2', totalCredits: 22, courses: [
           { name: 'English-II', credits: 6, type: 'Core' },
           { name: 'Visual Design Tool', credits: 4, type: 'Core' },
-          { name: 'Elective I', credits: 4, type: 'Elective' },
-          { name: 'Elective II', credits: 4, type: 'Elective' },
-          { name: 'Elective III', credits: 4, type: 'Elective' },
+          { name: 'Macroeconomics (Economics)', credits: 4, type: 'Elective' },
+          { name: 'Indian Political System (Political Science)', credits: 4, type: 'Elective' },
+          { name: 'Indian Writing in English (English Literature)', credits: 4, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 2', semesters: [
         { label: 'Semester 3', totalCredits: 22, courses: [
           { name: 'Communication Skills', credits: 6, type: 'Core' },
           { name: 'Entrepreneurship Development', credits: 4, type: 'Core' },
-          { name: 'Elective I', credits: 4, type: 'Elective' },
-          { name: 'Elective II', credits: 4, type: 'Elective' },
-          { name: 'Elective III', credits: 4, type: 'Elective' },
+          { name: 'Economics of Development and Planning (Economics)', credits: 4, type: 'Elective' },
+          { name: 'Western Political Thought (Political Science)', credits: 4, type: 'Elective' },
+          { name: 'British Poetry & Drama, 14th-17th Century (English Literature)', credits: 4, type: 'Elective' },
         ]},
         { label: 'Semester 4', totalCredits: 21, courses: [
           { name: 'Foundation of Mathematics', credits: 6, type: 'Core' },
           { name: 'Universal Human Values', credits: 3, type: 'Core' },
-          { name: 'Elective I', credits: 4, type: 'Elective' },
-          { name: 'Elective II', credits: 4, type: 'Elective' },
-          { name: 'Elective III', credits: 4, type: 'Elective' },
+          { name: 'Foreign Trade and Public Finance (Economics)', credits: 4, type: 'Elective' },
+          { name: 'Comparative Politics & Government (Political Science)', credits: 4, type: 'Elective' },
+          { name: '20th Century British Literature (English Literature)', credits: 4, type: 'Elective' },
         ]},
       ]},
       { year: 'Year 3', semesters: [
         { label: 'Semester 5', totalCredits: 20, courses: [
           { name: 'Elementary of Computer Applications', credits: 6, type: 'Core' },
           { name: 'Computer Applications Lab', credits: 2, type: 'Core' },
-          { name: 'Elective I', credits: 4, type: 'Elective' },
-          { name: 'Elective II', credits: 4, type: 'Elective' },
-          { name: 'Elective III', credits: 4, type: 'Elective' },
+          { name: 'Indian Economy (Economics)', credits: 4, type: 'Elective' },
+          { name: 'International Politics (Political Science)', credits: 4, type: 'Elective' },
+          { name: "Women's Writing (English Literature)", credits: 4, type: 'Elective' },
         ]},
         { label: 'Semester 6', totalCredits: 22, courses: [
           { name: 'Environmental Science', credits: 6, type: 'Core' },
           { name: 'Indian Knowledge System', credits: 4, type: 'Core' },
-          { name: 'Elective I', credits: 4, type: 'Elective' },
-          { name: 'Elective II', credits: 4, type: 'Elective' },
-          { name: 'Elective III', credits: 4, type: 'Elective' },
+          { name: 'Statistical Techniques (Economics)', credits: 4, type: 'Elective' },
+          { name: 'Introduction to the Constitution of India (Political Science)', credits: 4, type: 'Elective' },
+          { name: 'Literary Criticism (English Literature)', credits: 4, type: 'Elective' },
         ]},
       ]},
     ],
@@ -757,7 +757,7 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       'Advanced mathematics: Abstract Algebra, Topology, Integral Transforms, Tensor Analysis, Fluid Mechanics',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Programming modules: MAT-LAB, C++, and Artificial Intelligence in Semester 4',
       'Research dissertation (Major Project) in Semester 4',
       'Aligned with UGC-NET Mathematics syllabus',
@@ -818,13 +818,13 @@ const PROGRAMS: ProgramDetail[] = [
     ],
     highlights: [
       'Full-spectrum media training: print, radio, TV, digital, advertising, and PR',
-      'Free Coursera Premium access for the full course duration - 7,000+ courses',
+      'Free Coursera Premium access for the full course duration - 10,000+ courses',
       'Photography and Video Production Techniques in Semester 3',
       'Digital Journalism, Rural Journalism, and Environment Journalism in Semester 4',
       'Research Project under faculty supervision in the final semester',
       'UGC-entitled degree - recognised for journalism and media roles',
     ],
-    specialisations: ['Digital Journalism', 'Public Relations & Corporate Communication', 'Broadcast Media', 'Multimedia Journalism'],
+    specialisations: [],
     careerRoles: ['Reporter', 'Anchor', 'Podcast Creator', 'Video Producer', 'Advertising Copywriter', 'PR Manager', 'Digital Marketing Executive', 'Media Analyst'],
     avgSalaryAfter: '₹4-9 LPA',
     topHirers: ['Times Group', 'NDTV', 'Hindustan Times', 'Ogilvy', 'Weber Shandwick', 'Edelman', 'Republic TV', 'News18'],
@@ -1092,8 +1092,6 @@ export default async function ProgramPage({ params }: Props) {
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="text-white">{config.nextBatch} admissions are open</span>
-                  <span className="w-1 h-1 rounded-full bg-white/35 flex-none" />
-                  <span className="text-vgu-yellow">12 seats left</span>
                 </span>
               </span>
             </div>
@@ -1131,6 +1129,19 @@ export default async function ProgramPage({ params }: Props) {
       </section>
 
       <PlacementStatsStrip slug={prog.slug} />
+
+      {/* ══ Fees & scholarships ══ - financing and merit support surfaced
+          right after the hero and stats strip, ahead of curriculum/faculty
+          detail, since affordability is one of the first things a
+          prospective student needs to confirm before reading further. */}
+      {extras && (
+        <FeesScholarships
+          totalFee={prog.totalFee}
+          duration={prog.duration}
+          feeBreakdown={extras.feeBreakdown}
+          scholarshipTiers={SCHOLARSHIP_TIERS}
+        />
+      )}
 
       {/* ══ Main content ══ */}
       <section className="bg-neutral-50 pt-12 pb-8 px-5 md:px-8 lg:px-12 md:pt-12 md:pb-16">
@@ -1238,68 +1249,66 @@ export default async function ProgramPage({ params }: Props) {
       {/* ══ Faculty ══ - authority-based trust follows peer proof. */}
       <FacultySection slug={prog.slug} />
 
-      {/* ══ Coursera Premium value stack ══ - what's included, positioned right
-          before the price to raise perceived value ahead of the fee reveal. */}
+      {/* ══ Included learning platforms value stack ══ - what's included,
+          positioned right before the price to raise perceived value ahead
+          of the fee reveal. Coursera and LinkedIn Learning share one card
+          under a single "included" header instead of two separate stacked
+          banners, so adding LinkedIn Learning doesn't add height or a
+          second competing block - it reads as one bundled benefit. */}
       <section className="bg-white py-10 lg:py-12 px-5 md:px-8 lg:px-12 border-t border-neutral-100">
         <div className="mx-auto max-w-[1280px]">
-          <div data-animate="fade-up" className="rounded-2xl overflow-hidden">
-            <div className="relative bg-[#0056D2] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-              {/* Dot texture */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 pointer-events-none opacity-[0.05]"
-                style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
-              />
-              {/* Depth gradient */}
-              <div aria-hidden="true" className="absolute inset-0 pointer-events-none bg-gradient-to-br from-transparent to-black/20" />
+          <div data-animate="fade-up" className="rounded-2xl overflow-hidden border border-neutral-200">
 
-              <div className="relative flex items-center gap-3.5 flex-1 min-w-0">
-                <div className="flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                  <Image
-                    src="/assets/trust/coursera.svg"
-                    alt="Coursera"
-                    width={30}
-                    height={30}
-                    className="rounded-md"
-                  />
+            {/* Shared header strip */}
+            <div className="flex items-center justify-between px-6 py-2.5 bg-neutral-900">
+              <p className="text-[11px] font-heading font-bold uppercase tracking-[0.08em] text-white/60">
+                Included with every program
+              </p>
+              <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
+                Zero extra cost
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+              {/* Coursera */}
+              <div className="relative flex items-center gap-3.5 px-6 py-5" style={{ background: 'linear-gradient(135deg, #0056D2 0%, #00368a 100%)' }}>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                  style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                />
+                <div className="relative flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                  <Image src="/assets/trust/coursera.svg" alt="Coursera" width={30} height={30} className="rounded-md" />
                 </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                    <p className="font-heading font-bold text-[16px] text-white leading-tight">
-                      Coursera Premium
-                    </p>
-                    <span className="rounded-full bg-vgu-yellow px-2.5 py-0.5 text-[10px] font-heading font-bold text-neutral-900">
-                      Included Free
-                    </span>
-                  </div>
-                  <p className="text-[12px] font-body text-white/75 leading-snug">
-                    7,000+ courses from Google, IBM, Meta &amp; top universities - for the full duration of your program
+                <div className="relative min-w-0">
+                  <p className="font-heading font-bold text-[15px] text-white leading-tight">Coursera Premium</p>
+                  <p className="text-[12px] font-body text-white/75 leading-snug mt-0.5">
+                    10,000+ courses from Google, IBM, Meta &amp; top universities
                   </p>
                 </div>
               </div>
 
-              <div className="relative flex flex-wrap gap-2">
-                {['Stackable certifications', 'Learn at your pace', 'Zero extra cost'].map(item => (
-                  <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[11px] font-body text-white/90">
-                    <span className="text-vgu-yellow font-bold text-[10px]">✓</span>
-                    {item}
-                  </span>
-                ))}
+              {/* LinkedIn Learning */}
+              <div className="relative flex items-center gap-3.5 px-6 py-5" style={{ background: 'linear-gradient(135deg, #0A66C2 0%, #084d92 100%)' }}>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                  style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}
+                />
+                <div className="relative flex-none w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm overflow-hidden">
+                  <BrandIcon name="LinkedIn Learning" />
+                </div>
+                <div className="relative min-w-0">
+                  <p className="font-heading font-bold text-[15px] text-white leading-tight">LinkedIn Learning</p>
+                  <p className="text-[12px] font-body text-white/75 leading-snug mt-0.5">
+                    Expert-led courses in business, tech &amp; creative skills
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* ══ Fees & scholarships ══ */}
-      {extras && (
-        <FeesScholarships
-          totalFee={prog.totalFee}
-          duration={prog.duration}
-          feeBreakdown={extras.feeBreakdown}
-          scholarshipTiers={SCHOLARSHIP_TIERS}
-        />
-      )}
 
       <CertificatePreview
         programName={prog.name}
@@ -1312,6 +1321,7 @@ export default async function ProgramPage({ params }: Props) {
         programName={prog.name}
         programLevel={prog.level === 'pg' ? 'pg' : 'ug'}
         documents={REQUIRED_DOCUMENTS}
+        eligibility={prog.eligibility}
       />
       <ProgramFAQ slug={prog.slug} faqs={mappedFaqs} />
       <RelatedPrograms programs={relatedPrograms} />
@@ -1395,14 +1405,20 @@ function EnrollmentCard({ prog }: { prog: EnrollmentProg }) {
       {/* Body */}
       <div className="p-6">
 
-        {/* Coursera Premium callout */}
-        <div className="flex items-center gap-3 rounded-xl bg-[#0056D2]/8 border border-[#0056D2]/20 px-4 py-3 mb-3">
-          <div className="w-8 h-8 rounded-lg bg-[#0056D2] flex items-center justify-center flex-none shadow-sm">
-            <Image src="/assets/trust/coursera.svg" alt="Coursera" width={22} height={22} className="rounded-md" />
+        {/* Coursera + LinkedIn Learning callout - one row, overlapping badges,
+            so pairing the two platforms doesn't cost any extra sidebar height. */}
+        <div className="flex items-center gap-3 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-3 mb-3">
+          <div className="flex-none flex items-center -space-x-2">
+            <div className="w-8 h-8 rounded-lg bg-[#0056D2] ring-2 ring-white flex items-center justify-center shadow-sm">
+              <Image src="/assets/trust/coursera.svg" alt="Coursera" width={20} height={20} className="rounded-sm" />
+            </div>
+            <div className="w-8 h-8 rounded-lg bg-[#0A66C2] ring-2 ring-white flex items-center justify-center shadow-sm overflow-hidden">
+              <BrandIcon name="LinkedIn Learning" />
+            </div>
           </div>
           <div>
-            <p className="font-heading font-bold text-[13px] text-neutral-900">Coursera Premium - Included Free</p>
-            <p className="text-[11px] font-body text-neutral-500">7,000+ courses for the full course duration</p>
+            <p className="font-heading font-bold text-[13px] text-neutral-900">Coursera + LinkedIn Learning</p>
+            <p className="text-[11px] font-body text-neutral-500">Both included free, for your full course duration</p>
           </div>
         </div>
 
@@ -1424,8 +1440,6 @@ function EnrollmentCard({ prog }: { prog: EnrollmentProg }) {
           <div>
             <p className="inline-flex items-center flex-wrap gap-x-1.5 font-heading font-bold text-[13px] text-neutral-900">
               {prog.nextBatch} admissions are open
-              <span className="w-1 h-1 rounded-full bg-neutral-300 flex-none" />
-              <span className="text-vgu-red">12 seats left</span>
             </p>
             <p className="text-[11px] font-body text-neutral-500 mt-0.5">Enroll before seats fill up</p>
           </div>

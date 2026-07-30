@@ -4,41 +4,94 @@ import { IconPhone, IconMail, IconMapPin } from '@tabler/icons-react'
 import { getSiteConfig } from '@/lib/sanity'
 import FooterLinkGroup from './FooterLinkGroup'
 
+// Grouped Undergraduate-then-Postgraduate, most-popular-first within each
+// group (MBA leads PG - it's flagged "Most Popular" sitewide) - mirrors the
+// exact grouping/order already used in the navbar's Programs mega menu.
 const PROGRAM_LINKS = [
   { label: 'BBA',      href: '/programs/bba'      },
   { label: 'BBA-AAFT', href: '/programs/bba-aaft' },
+  { label: 'BCA',      href: '/programs/bca'      },
+  { label: 'BA',       href: '/programs/ba'       },
   { label: 'MBA',      href: '/programs/mba'      },
   { label: 'MBA-IF',   href: '/programs/mba-if'   },
   { label: 'MBA-DFAA', href: '/programs/mba-dfaa' },
-  { label: 'BCA',      href: '/programs/bca'      },
   { label: 'MCA',      href: '/programs/mca'      },
-  { label: 'BA',       href: '/programs/ba'       },
-  { label: 'MA',       href: '/programs/ma'       },
+  { label: 'MA English', href: '/programs/ma'     },
   { label: 'M.Sc',     href: '/programs/msc'      },
   { label: 'MAJMC',    href: '/programs/majmc'    },
 ]
 
+// Merges the site's "about/discover" links with its action/support links into
+// one column - the live site's own "Discover Us" mostly duplicates content we
+// already place elsewhere (Terms in the bottom bar, CIQA in Resources), so a
+// standalone column for it would be nearly empty. Folding it into Company
+// keeps every real link while freeing a column for "For Enrolled Students"
+// below. Leadership, Community, and Approvals and Accreditation are kept as
+// `#` placeholders - they're dead links on the live site too, reproduced here
+// exactly as-is rather than pointed somewhere real.
+//
+// Ordered top-to-bottom as a funnel: who we are -> what we offer/produce ->
+// answer objections/get help -> take action. Apply Now sits last on purpose -
+// it's the strongest commitment ask, so it lands as the final item a scanning
+// eye reaches, right after Download Brochure (the lower-commitment version of
+// the same ask). "Student Portal" moved out of this column entirely - it's
+// for enrolled students, not prospects, so it now lives in "For Enrolled
+// Students" instead. Renamed "Careers" -> "Placements" to match the label
+// the navbar already uses for the same /placements page and avoid reading as
+// a VGU staff-hiring page.
 const COMPANY_LINKS = [
-  { label: 'About VGU',   href: '/about'      },
-  { label: 'Campus Life', href: '/#campus'    },
-  { label: 'Blog',        href: '/blog'       },
-  { label: 'Careers',     href: '/placements' },
-]
-
-const SUPPORT_LINKS = [
+  { label: 'About VGU',                     href: '/about'      },
+  { label: 'Leadership',                    href: '#'           },
+  { label: 'Community',                     href: '#'           },
+  { label: 'Approvals and Accreditation',   href: '#'           },
+  { label: 'Campus Life',                   href: '/#campus'    },
+  { label: 'Blog',                          href: '/blog'       },
+  { label: 'Placements',                    href: '/placements' },
   { label: 'FAQs',              href: '/#faq'               },
   { label: 'Contact Us',        href: '/contact'            },
-  { label: 'Apply Now',         href: '#counsellor',        applyTrigger: true },
   { label: 'Download Brochure', href: '/apply#brochure', brochureTrigger: true },
-  { label: 'Student Portal',    href: '/student-portal'       },
+  { label: 'Apply Now',         href: '#counsellor',        applyTrigger: true },
 ]
 
+// Ordered trust/compliance documents first (the column's real job for a
+// prospect is proving legitimacy - UGC Approval leads since "UGC Entitled"
+// is the credibility signal called out at the top of the homepage), then the
+// one policy doc that matters right before paying (Refund Policy), then the
+// lower-urgency engagement/notice content last. Academic Calendar, Newsletter,
+// Announcements, and Important Notices all point at their own dedicated,
+// anchored section on /updates (see app/updates/page.tsx) rather than a raw
+// PDF link, so Academic Calendar and Newsletter are no longer external/newTab.
 const RESOURCE_LINKS = [
-  { label: 'AICTE - NOC',   href: '/documents/aicte-noc.pdf',     newTab: true },
-  { label: 'UGC Approval',  href: '/documents/ugc-approval.pdf',  newTab: true },
-  { label: 'Refund Policy', href: '/documents/refund-policy.pdf', newTab: true },
-  { label: 'CIQA',          href: 'https://cdoevgu.com/ciqa.php', newTab: true },
+  { label: 'UGC Approval',       href: '/documents/ugc-approval.pdf',  newTab: true },
+  { label: 'AICTE - NOC',        href: '/documents/aicte-noc.pdf',     newTab: true },
+  { label: 'CIQA',               href: 'https://cdoevgu.com/ciqa.php', newTab: true },
+  { label: 'Refund Policy',      href: '/documents/refund-policy.pdf', newTab: true },
+  { label: 'Academic Calendar',  href: '/updates#academic-calendar' },
+  { label: 'Newsletter',         href: '/updates#newsletter' },
+  { label: 'Announcements',      href: '/updates#announcements' },
+  { label: 'Important Notices',  href: '/updates#notices' },
 ]
+
+// For enrolled students - all real external systems (LMS, ERP, payment
+// gateway), same hrefs as the live site. "Student Portal" (our own hub, see
+// /student-portal) leads the column as the one-stop overview, same pattern
+// as "About VGU" leading Company - then specific direct-access links follow
+// in the order a student actually uses them: LMS (daily/weekly use) first,
+// then the seasonal exam flow in its real sequence (register via Exam Form,
+// then pay Exam Fee, then check Result once it's out). The old dead
+// "Existing Learners" `#` placeholder is dropped - Student Portal now covers
+// that exact purpose for real, so keeping a dead link next to a working one
+// would just read as broken.
+const ENROLLED_LINKS = [
+  { label: 'Student Portal',                                href: '/student-portal' },
+  { label: 'LMS 1 (BBA, MBA)',                              href: 'https://lms.onlinevgu.com/login',                                     newTab: true },
+  { label: 'LMS 2 (BA, BCA, MCA, M.Sc., MA English, MAJMC)', href: 'https://ol.vgu.universitycopilot.com/login',                          newTab: true },
+  { label: 'Exam Form',                                     href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
+  { label: 'Exam Fee',                                      href: 'https://smartpay.easebuzz.in/168702/f96d8ee7dc46400ba2df37045bc2db65', newTab: true },
+  { label: 'Result',                                        href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
+]
+
+const MAPS_URL = 'https://www.google.com/maps/place/Vivekananda+Global+University/@26.8120353,75.8915397,17z/data=!3m1!4b1!4m6!3m5!1s0x396dc873264c3df3:0x4c7b45a9ce474b8!8m2!3d26.8120353!4d75.8915397!16s%2Fm%2F012wp4bp'
 
 const SOCIALS = [
   {
@@ -106,8 +159,6 @@ export default async function Footer() {
     Facebook:      config.socials.facebook,
   }
 
-  // For the map link URL - collapse address to one line and URL-encode
-  const mapQuery = encodeURIComponent(config.address.replace(/\n/g, ', '))
 
   return (
     <footer className="bg-vgu-dark text-white/80 pt-16 pb-6 font-body">
@@ -166,22 +217,27 @@ export default async function Footer() {
                   <IconMail size={14} className="flex-none text-white/40" />
                   {config.email}
                 </a>
-                <a
-                  href={`https://maps.google.com/?q=${mapQuery}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex min-h-[44px] items-start gap-2.5 py-2.5 text-white/55 hover:text-white/80 transition-colors duration-150 lg:min-h-0 lg:py-0"
-                >
+                <div className="flex min-h-[44px] items-start gap-2.5 py-2.5 text-white/55 lg:min-h-0 lg:py-0">
                   <IconMapPin size={14} className="flex-none text-white/40 mt-[14px] lg:mt-[2px]" />
-                  {config.address.replace(/\n/g, ', ')}
-                </a>
+                  <span>{config.address.replace(/\n/g, ', ')}</span>
+                </div>
               </div>
+
+              {/* Get Directions - exact live-site Google Maps place link */}
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center min-h-[44px] rounded-md bg-black hover:bg-neutral-900 text-white font-heading font-semibold text-[14px] px-6 py-3 transition-all duration-200"
+              >
+                Get Directions
+              </a>
             </div>
 
-            {/* Programs / Company / Support / Resources - stacked accordions on mobile, plain columns on desktop */}
+            {/* Programs / Company / For Enrolled Students / Resources - stacked accordions on mobile, plain columns on desktop */}
             <FooterLinkGroup title="Programs" links={PROGRAM_LINKS} delay={80} />
             <FooterLinkGroup title="Company" links={COMPANY_LINKS} delay={160} />
-            <FooterLinkGroup title="Support" links={SUPPORT_LINKS} delay={240} />
+            <FooterLinkGroup title="For Enrolled Students" links={ENROLLED_LINKS} delay={240} />
             <FooterLinkGroup title="Resources" links={RESOURCE_LINKS} delay={320} />
           </div>
 

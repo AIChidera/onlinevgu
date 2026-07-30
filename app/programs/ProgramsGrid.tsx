@@ -27,12 +27,13 @@ type Filter = 'all' | 'ug' | 'pg' | 'cert'
 // without leaving the brand. Swap to all vgu-red for monochrome.
 const DISC_ACCENT: Record<string, string> = {
   'Management':             '#C04036', // vgu-red
-  'Information Technology': '#FFA412', // vgu-yellow
-  'Commerce':               '#821a12', // vgu-red-dark
+  'Computer Applications':  '#FFA412', // vgu-yellow
+  'Information Technology': '#821a12', // vgu-red-dark
   'Arts':                   '#C04036', // vgu-red
   'Science':                '#FFA412', // vgu-yellow
-  'Data Science':           '#821a12', // vgu-red-dark
-  'Media & Journalism':     '#C04036', // vgu-red
+  'Media & Journalism':     '#821a12', // vgu-red-dark
+  'Commerce':               '#C04036', // vgu-red
+  'Data Science':           '#FFA412', // vgu-yellow
 }
 
 export default function ProgramsGrid({
@@ -65,8 +66,6 @@ export default function ProgramsGrid({
             </p>
             <p className="inline-flex items-center flex-wrap gap-x-1.5 text-[16px] font-body text-neutral-500">
               <span>{visible.length} program{visible.length !== 1 ? 's' : ''} · {nextBatch} admissions open</span>
-              <span className="w-1 h-1 rounded-full bg-neutral-400 flex-none" />
-              <span className="text-vgu-red font-semibold">12 seats left</span>
             </p>
           </div>
 
@@ -196,15 +195,10 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
         )}
 
         {!p.image && meta && (
-          <>
-            <div
-              className="absolute inset-0 opacity-[0.07]"
-              style={{ backgroundImage: 'radial-gradient(circle,rgba(255,255,255,0.9) 1px,transparent 1px)', backgroundSize: '18px 18px' }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <meta.Icon size={110} stroke={0.7} className="text-white opacity-[0.10]" />
-            </div>
-          </>
+          <div
+            className="absolute inset-0 opacity-[0.07]"
+            style={{ backgroundImage: 'radial-gradient(circle,rgba(255,255,255,0.9) 1px,transparent 1px)', backgroundSize: '18px 18px' }}
+          />
         )}
 
         {(meta?.badge || p.popular) && (

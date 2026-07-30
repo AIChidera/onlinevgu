@@ -5,7 +5,7 @@ export const siteSettings = defineType({
   title: 'Site Settings',
   type: 'document',
   fields: [
-    // â”€â”€ Admissions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Admissions ────────────────────────────────────────────────
     defineField({
       name: 'nextBatch',
       title: 'Next Batch Start Date',
@@ -21,7 +21,7 @@ export const siteSettings = defineType({
       initialValue: true,
     }),
 
-    // â”€â”€ Contact â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Contact ───────────────────────────────────────────────────
     defineField({
       name: 'phoneDisplay',
       title: 'Phone Number',
@@ -47,7 +47,7 @@ export const siteSettings = defineType({
       description: 'Shown in footer and Privacy page.',
     }),
 
-    // â”€â”€ Key Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Key Stats ─────────────────────────────────────────────────
     defineField({
       name: 'statLearners',
       title: 'Learners Enrolled (stat)',
@@ -94,8 +94,8 @@ export const siteSettings = defineType({
       name: 'statCourseraCount',
       title: 'Coursera Courses (stat)',
       type: 'string',
-      description: 'E.g. "7,000+".',
-      initialValue: '7,000+',
+      description: 'E.g. "10,000+".',
+      initialValue: '10,000+',
     }),
     defineField({
       name: 'statYearEstablished',
@@ -104,7 +104,7 @@ export const siteSettings = defineType({
       initialValue: '2012',
     }),
 
-    // â”€â”€ Social Media (stored as plain strings, not url type) â”€â”€â”€â”€â”€â”€â”€
+    // ── Social Media (stored as plain strings, not url type) ───────
     // The Sanity v5 url field validator crashes when opened in a direct
     // editor with no pre-existing value. Using string type is equivalent
     // for storage and avoids the issue.
@@ -139,7 +139,7 @@ export const siteSettings = defineType({
       description: 'Full URL including https://.',
     }),
 
-    // â”€â”€ Brochure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Brochure ──────────────────────────────────────────────────
     defineField({
       name: 'defaultBrochurePdf',
       title: 'Default Brochure (PDF)',

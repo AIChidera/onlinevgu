@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   PortableTextBlock,
   SanityBlogPost,
   SanityBlogPostSummary,
@@ -259,7 +259,7 @@ export const FALLBACK_POSTS: SanityBlogPost[] = [
       block('Where the two credentials sit in the market', 'h2'),
       block("For product companies in consumer tech, B.Tech from a recognised institution still dominates the SDE entry filter. For IT services, banking tech, and enterprise software, MCA is an accepted and often preferred credential - particularly when the candidate has a strong project portfolio. The gap has narrowed significantly since 2022.", 'normal'),
       block('What the VGU MCA covers now', 'h2'),
-      block("The curriculum was updated in 2024 to include the Google Agentic AI lab track, DASCA-mapped data science modules, and a capstone project assessed by an industry reviewer. Every enrolled student has free access to 7,000+ Coursera courses from day one. The placement cell starts technical interview preparation in semester three.", 'normal'),
+      block("The curriculum was updated in 2024 to include the Google Agentic AI lab track, DASCA-mapped data science modules, and a capstone project assessed by an industry reviewer. Every enrolled student has free access to 10,000+ Coursera courses from day one. The placement cell starts technical interview preparation in semester three.", 'normal'),
       block('The honest comparison', 'h2'),
       block("A B.Tech from a tier-one institution is a stronger credential for entry into top-tier product companies. An MCA from a UGC-entitled NAAC A+ university is a fully valid credential for a wide range of technical roles, and the two-year duration means you are in the job market sooner. If you already have a BCA or B.Sc in Computer Science, the MCA is the direct continuation most IT employers expect.", 'normal'),
       block('Where VGU MCA graduates have placed', 'h2'),
@@ -329,8 +329,8 @@ export const FALLBACK_POSTS: SanityBlogPost[] = [
   {
     _id:         'fallback-coursera-bundle',
     slug:        'how-to-use-vgu-coursera-bundle-strategically',
-    title:       '7,000+ Free Courses: How to Actually Use the Coursera Bundle',
-    excerpt:     "Every enrolled VGU learner gets institutional access to 7,000+ Coursera courses. Very few use it strategically. Here is the difference between collecting certificates and building a portfolio that recruiters notice.",
+    title:       '10,000+ Free Courses: How to Actually Use the Coursera Bundle',
+    excerpt:     "Every enrolled VGU learner gets institutional access to 10,000+ Coursera courses. Very few use it strategically. Here is the difference between collecting certificates and building a portfolio that recruiters notice.",
     category:    'Education',
     publishedAt: '2026-06-09T09:00:00.000Z',
     readTime:    '4 min read',

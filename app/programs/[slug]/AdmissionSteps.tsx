@@ -1,4 +1,4 @@
-import { IconForms, IconFileCheck, IconCreditCard, IconDeviceLaptop, IconFileText } from '@tabler/icons-react'
+import { IconFileText, IconCheck } from '@tabler/icons-react'
 import SketchSparkle from '@/components/ui/sketch/SketchSparkle'
 
 interface Doc { name: string; note: string; level?: 'ug' | 'pg'; optional?: boolean }
@@ -10,19 +10,20 @@ const PALETTE = [
 ]
 
 const STEPS = [
-  { num: '01', Icon: IconForms,        title: 'Apply Online',     desc: 'Fill the 5-minute form. No entrance exam, no hassle.',                          time: '5 min',   ...PALETTE[0] },
-  { num: '02', Icon: IconFileCheck,    title: 'Verify Documents', desc: 'Upload soft copies of your degree and ID. Our team verifies within 24 hours.',  time: '24 hrs',  ...PALETTE[1] },
-  { num: '03', Icon: IconCreditCard,   title: 'Pay & Enroll',     desc: 'Pay the full fee or choose a no-cost EMI plan. Instant enrollment confirmation.', time: 'Instant', ...PALETTE[2] },
-  { num: '04', Icon: IconDeviceLaptop, title: 'Start Learning',   desc: 'Access the LMS immediately. Your first live session starts within 7 days.',      time: '7 days',  ...PALETTE[0] },
+  { num: '01', title: 'Apply Online',     desc: 'Fill the 5-minute form. No entrance exam, no hassle.',                          time: '5 min',   ...PALETTE[0] },
+  { num: '02', title: 'Verify Documents', desc: 'Upload soft copies of your degree and ID. Our team verifies within 24 hours.',  time: '24 hrs',  ...PALETTE[1] },
+  { num: '03', title: 'Pay & Enroll',     desc: 'Pay the full fee or choose a no-cost EMI plan. Instant enrollment confirmation.', time: 'Instant', ...PALETTE[2] },
+  { num: '04', title: 'Start Learning',   desc: 'Access the LMS immediately. Your first live session starts within 7 days.',      time: '7 days',  ...PALETTE[0] },
 ]
 
 interface Props {
   programName:  string
   programLevel: 'ug' | 'pg'
   documents:    Doc[]
+  eligibility?: string[]
 }
 
-export default function AdmissionSteps({ programName, programLevel, documents }: Props) {
+export default function AdmissionSteps({ programName, programLevel, documents, eligibility = [] }: Props) {
   const visibleDocs = documents.filter(d => !d.level || d.level === programLevel)
 
   return (
@@ -45,6 +46,25 @@ export default function AdmissionSteps({ programName, programLevel, documents }:
           <p className="mt-3 text-[16px] font-body text-white/55 max-w-[440px] mx-auto">
             No campus visit, no entrance exam. Everything happens online.
           </p>
+
+          {/* Eligibility - folded into the header as plain inline chips (no
+              card, no boxed label) rather than a second boxed subsection, so
+              it reads as "who this is for" context attached to the intro
+              copy instead of competing with the Documents card grid below
+              for the same "checklist in a box" visual role. */}
+          {eligibility.length > 0 && (
+            <div data-animate="fade-up" className="mt-6 flex flex-wrap items-center justify-center gap-2 max-w-[640px] mx-auto">
+              {eligibility.map(item => (
+                <span
+                  key={item}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-3.5 py-1.5 text-[12.5px] font-body text-white/70 leading-none"
+                >
+                  <IconCheck size={12} stroke={3} className="flex-none text-vgu-yellow" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Steps */}
@@ -62,9 +82,8 @@ export default function AdmissionSteps({ programName, programLevel, documents }:
                 className="w-20 h-20 rounded-full flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1"
                 style={{ background: s.grad, boxShadow: `0 8px 32px ${s.shadow}` }}
               >
-                <s.Icon size={28} stroke={1.5} className="text-white" />
+                <span className="font-heading font-bold text-[28px] text-white">{s.num}</span>
               </div>
-              <span className="text-[11px] font-heading font-bold uppercase tracking-[0.08em] text-white/35 mb-1">Step {s.num}</span>
               <h3 className="font-heading font-bold text-[17px] text-white mb-2">{s.title}</h3>
               <p className="hidden md:block text-[14px] font-body text-white/55 leading-relaxed max-w-[200px] flex-1">{s.desc}</p>
               <span className="mt-3 inline-flex rounded-full px-3 py-1 text-[11px] font-body font-semibold bg-white/10 border border-white/15 text-white/60">
@@ -74,33 +93,40 @@ export default function AdmissionSteps({ programName, programLevel, documents }:
           ))}
         </div>
 
-        {/* Documents */}
+        {/* Documents - a single consolidated checklist card with divided
+            rows, not a card-per-item grid. A grid of big rounded cards reads
+            as a feature/benefit pattern (like ProgramHighlights); this is
+            just a paperwork checklist, so it's styled like one - closer to
+            how upGrad and Manipal present the same content, as a plain list
+            rather than a promo grid. Keeps it visually distinct from the
+            Eligibility chips above instead of reading as a second copy of
+            the same "grid of boxes" idea. */}
         {visibleDocs.length > 0 && (
-          <div data-animate="fade-up">
+          <div data-animate="fade-up" className="mx-auto max-w-[720px]">
             <p className="text-[11px] font-heading font-bold uppercase tracking-[0.08em] text-white/35 mb-4 text-center">
               Have these ready before you apply
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] divide-y divide-white/[0.06] overflow-hidden">
               {visibleDocs.map((d, i) => (
                 <div
                   key={d.name}
                   data-animate="fade-up"
                   style={{ animationDelay: `${i * 40}ms` }}
-                  className="flex items-start gap-3 rounded-xl bg-white/[0.05] border border-white/[0.09] p-4 hover:border-white/[0.18] transition-colors duration-200"
+                  className="flex items-center gap-3.5 px-5 py-4"
                 >
-                  <div className="flex-none w-8 h-8 rounded-lg bg-vgu-yellow/10 border border-vgu-yellow/20 flex items-center justify-center mt-0.5">
+                  <div className="flex-none w-8 h-8 rounded-lg bg-vgu-yellow/10 border border-vgu-yellow/20 flex items-center justify-center">
                     <IconFileText size={15} stroke={1.75} className="text-vgu-yellow" />
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                      <p className="font-heading font-semibold text-[16px] text-white/90">{d.name}</p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-heading font-semibold text-[15px] text-white/90">{d.name}</p>
                       {d.optional && (
                         <span className="rounded-full bg-white/10 text-white/40 text-[10px] font-heading font-bold uppercase tracking-[0.06em] px-2 py-0.5">
                           Optional
                         </span>
                       )}
                     </div>
-                    <p className="text-[13px] font-body text-white/45 leading-[1.5]">{d.note}</p>
+                    <p className="text-[13px] font-body text-white/45 leading-[1.4]">{d.note}</p>
                   </div>
                 </div>
               ))}

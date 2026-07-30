@@ -30,7 +30,7 @@ export const resend = {
 export const FROM_ADDRESS   = 'Online VGU <onboarding@resend.dev>'
 export const ADMISSIONS_EMAIL = 'aachidera41@gmail.com'
 
-// â”€â”€ Templates â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Templates ──────────────────────────────────────────────────
 
 export function leadConfirmationHtml(name: string, program: string) {
   return `
@@ -53,11 +53,11 @@ export function leadConfirmationHtml(name: string, program: string) {
            style="display:inline-block;margin-top:24px;padding:14px 32px;
                   background:#C04036;color:#fff;border-radius:9999px;
                   text-decoration:none;font-weight:600">
-          Explore programs â†’
+          Explore programs →
         </a>
       </div>
       <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
-        Â© ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
+        © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
       </div>
     </div>
   `

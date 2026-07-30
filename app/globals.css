@@ -67,6 +67,23 @@
   animation: vguFadeIn 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ── Hirer/logo strip infinite ticker (HirerStrip.tsx) ──────────── */
+/* Track renders the item list twice back to back; translating exactly
+   -50% moves it by one full copy's width, so the loop has no visible
+   seam. Duration is set per-instance via --vgu-ticker-duration so pace
+   (not total loop time) stays constant regardless of item count. */
+@keyframes vguTickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.vgu-ticker-track {
+  animation: vguTickerScroll var(--vgu-ticker-duration, 30s) linear infinite;
+}
+.vgu-ticker-pause:hover .vgu-ticker-track,
+.vgu-ticker-pause:focus-within .vgu-ticker-track {
+  animation-play-state: paused;
+}
+
 /* Platform video - GPU-composited Ken Burns pan (all sizes) */
 @keyframes videoPanRight {
   0%   { transform: scale(1.12) translateX(-4%); }

@@ -3,6 +3,7 @@ export type Level = 'ug' | 'pg' | 'cert'
 export type Discipline =
   | 'Management'
   | 'Information Technology'
+  | 'Computer Applications'
   | 'Commerce'
   | 'Arts'
   | 'Science'
@@ -11,6 +12,7 @@ export type Discipline =
 
 export const DISCIPLINE_ORDER: Discipline[] = [
   'Management',
+  'Computer Applications',
   'Information Technology',
   'Arts',
   'Science',
@@ -47,7 +49,7 @@ export const PROGRAMMES: Programme[] = [
     slug: 'mba', name: 'MBA', fullName: 'Master of Business Administration',
     level: 'pg', discipline: 'Management', duration: '2 Years', fee: '₹75,000/yr',
     popular: true,
-    specialisations: ['Marketing', 'Finance', 'Human Resources', 'Operations', 'Healthcare', 'Agri-Business', 'IT Management', 'International Business'],
+    specialisations: ['Human Resource Management', 'Finance Management', 'Marketing', 'Digital Marketing', 'Agri Business', 'IT Management', 'International Business Management', 'Operations Management', 'Healthcare Management'],
     image: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&auto=format&fit=crop',
   },
   {
@@ -63,23 +65,23 @@ export const PROGRAMMES: Programme[] = [
     image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80&auto=format&fit=crop',
   },
   {
-    slug: 'bba-aaft', name: 'BBA-AAFT', fullName: 'BBA in Media & Entertainment Management (AAFT)',
-    level: 'ug', discipline: 'Management', duration: '3 Years', fee: '₹60,000/yr',
-    specialisations: ['Film & Television Business', 'Digital Media Management', 'Event & Live Entertainment', 'Advertising & PR'],
-    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80&auto=format&fit=crop',
+    slug: 'bba-aaft', name: 'BBA-AAFT', fullName: 'BBA in Accounting Analytics & Financial Technology',
+    level: 'ug', discipline: 'Management', duration: '3 Years', fee: '₹44,000/yr',
+    specialisations: ['Digital Accounting', 'Taxation & Analytics', 'Financial Technology', 'Analytics & Auditing'],
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80&auto=format&fit=crop',
   },
 
-  // ── Information Technology ──────────────────────────────────────
+  // ── Computer Applications ──────────────────────────────────────
   {
     slug: 'bca', name: 'BCA', fullName: 'Bachelor of Computer Applications',
-    level: 'ug', discipline: 'Information Technology', duration: '3 Years', fee: '₹44,000/yr',
-    specialisations: ['General', 'UX Design', 'Data Science', 'Cloud Technology & Information Security', 'Blockchain Technology', 'Artificial Intelligence'],
+    level: 'ug', discipline: 'Computer Applications', duration: '3 Years', fee: '₹44,000/yr',
+    specialisations: ['Artificial Intelligence', 'Data Science', 'CTIS', 'Blockchain', 'UI & UX'],
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80&auto=format&fit=crop',
   },
   {
     slug: 'mca', name: 'MCA', fullName: 'Master of Computer Applications',
     level: 'pg', discipline: 'Information Technology', duration: '2 Years', fee: '₹75,000/yr',
-    specialisations: ['AI & Data Science', 'Cloud Tech & Cybersecurity', 'Cloud Computing & Full Stack'],
+    specialisations: ['Artificial Intelligence & Data Science', 'Cloud Technology & Cyber Security', 'Cyber Crime & Forensic Science'],
     image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80&auto=format&fit=crop',
   },
 
@@ -87,11 +89,11 @@ export const PROGRAMMES: Programme[] = [
   {
     slug: 'ba', name: 'BA', fullName: 'Bachelor of Arts',
     level: 'ug', discipline: 'Arts', duration: '3 Years', fee: '₹24,000/yr',
-    specialisations: ['Economics', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications', 'Psychology'],
+    specialisations: ['Economics', 'Political Science', 'Public Policy & Development', 'International Relations', 'English Literature', 'History', 'Computer Applications'],
     image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop',
   },
   {
-    slug: 'ma', name: 'MA', fullName: 'Master of Arts in English',
+    slug: 'ma', name: 'MA English', fullName: 'Master of Arts in English',
     level: 'pg', discipline: 'Arts', duration: '2 Years', fee: '₹36,000/yr',
     specialisations: [],
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80&auto=format&fit=crop',
@@ -107,9 +109,9 @@ export const PROGRAMMES: Programme[] = [
 
   // ── Media & Journalism ─────────────────────────────────────────
   {
-    slug: 'majmc', name: 'MAJMC', fullName: 'Master of Arts in Journalism & Mass Communication',
+    slug: 'majmc', name: 'MAJMC', fullName: 'Master of Arts in Journalism and Mass Communication',
     level: 'pg', discipline: 'Media & Journalism', duration: '2 Years', fee: '₹36,000/yr',
-    specialisations: ['Digital Journalism', 'Broadcast Media', 'Public Relations & Corporate Communication', 'Multimedia Journalism'],
+    specialisations: [],
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80&auto=format&fit=crop',
   },
 ]

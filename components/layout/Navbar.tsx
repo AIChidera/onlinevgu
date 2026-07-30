@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import {
   IconMenu2,
   IconX,
@@ -14,18 +14,51 @@ import {
   IconBriefcase,
   IconArticle,
   IconPhone,
-  IconChevronRight,
   IconChevronDown,
   IconArrowRight,
+  IconArrowUpRight,
+  IconLink,
+  IconChartBar,
+  IconLayoutDashboard,
 } from '@tabler/icons-react'
 import { PROGRAMMES } from '@/app/programs/data'
 
 const NAV_LINKS = [
-  { label: 'About',      href: '/about',         Icon: IconInfoCircle      },
-  { label: 'Programs',   href: '/programs',      Icon: IconSchool          },
-  { label: 'Admissions', href: '/#how-to-apply', Icon: IconClipboardCheck  },
-  { label: 'Placements', href: '/placements',    Icon: IconBriefcase       },
-  { label: 'Blog',       href: '/blog',          Icon: IconArticle         },
+  { label: 'About',       href: '/about',          Icon: IconInfoCircle   },
+  { label: 'Programs',    href: '/programs',       Icon: IconSchool       },
+  { label: 'Quick Links', href: '/student-portal', Icon: IconLink         },
+  { label: 'Placements',  href: '/placements',     Icon: IconBriefcase    },
+  { label: 'Blog',        href: '/blog',           Icon: IconArticle      },
+]
+
+// Mirrors the live site's "Quick Links" navbar menu (Examination + Existing
+// Learner categories), with "Result" folded in here as its own category per
+// admin direction rather than kept as a separate top-level nav item.
+const QUICK_LINKS = [
+  {
+    category: 'Examination',
+    Icon: IconClipboardCheck,
+    items: [
+      { label: 'Exam Form', href: 'https://vguerp.epravesh.com/public/login' },
+      { label: 'Exam Fee',  href: 'https://smartpay.easebuzz.in/168702/f96d8ee7dc46400ba2df37045bc2db65' },
+    ],
+  },
+  {
+    category: 'Results',
+    Icon: IconChartBar,
+    items: [
+      { label: 'Sem I & II',      href: 'https://ol.vgu.universitycopilot.com/login' },
+      { label: 'Sem III Onwards', href: 'https://vguerp.epravesh.com/public/login' },
+    ],
+  },
+  {
+    category: 'Existing Learner',
+    Icon: IconLayoutDashboard,
+    items: [
+      { label: 'LMS 1 (BBA, MBA)',                              href: 'https://lms.onlinevgu.com/login' },
+      { label: 'LMS 2 (BA, BCA, MCA, M.Sc., MA English, MAJMC)', href: 'https://ol.vgu.universitycopilot.com/login' },
+    ],
+  },
 ]
 
 const UG_PROGRAMMES = PROGRAMMES.filter(p => p.level === 'ug')
@@ -39,14 +72,50 @@ function isNavActive(href: string, pathname: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
+// Debounced-close hover state for the desktop mega menus. A raw onMouseLeave
+// -> setOpen(false) snaps the menu shut on any brief/spurious "leave" signal
+// (a sub-pixel gap between trigger and panel, a coalesced mouse event, a dev
+// hot-reload hiccup) - the menu opens instantly but only closes after a short
+// delay, and that delay is cancelled if the pointer re-enters (trigger or
+// panel) before it fires. This is the standard fix for hover dropdowns that
+// flicker shut and need several attempts to stay open.
+const CLOSE_DELAY_MS = 150
+
+function useHoverMenu() {
+  const [open, setOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }, [])
+  const openNow = useCallback(() => { cancelClose(); setOpen(true) }, [cancelClose])
+  const scheduleClose = useCallback(() => {
+    cancelClose()
+    closeTimer.current = setTimeout(() => setOpen(false), CLOSE_DELAY_MS)
+  }, [cancelClose])
+  const closeNow = useCallback(() => { cancelClose(); setOpen(false) }, [cancelClose])
+
+  useEffect(() => cancelClose, [cancelClose])
+
+  // Stable object identity (only changes when `open` changes) so effects that
+  // depend on the menu can list it directly instead of just its `.open` field.
+  return useMemo(() => ({ open, openNow, scheduleClose, closeNow }), [open, openNow, scheduleClose, closeNow])
+}
+
 export default function Navbar() {
   const pathname                      = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
-  const [programsOpen, setProgramsOpen] = useState(false)
+  const programsMenu                  = useHoverMenu()
+  const quickLinksMenu                = useHoverMenu()
+  const [mobileQuickLinksOpen, setMobileQuickLinksOpen] = useState(false)
   const drawerRef                     = useRef<HTMLDivElement>(null)
   const hamburgerRef                  = useRef<HTMLButtonElement>(null)
   const programsRef                   = useRef<HTMLDivElement>(null)
+  const quickLinksRef                 = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -56,21 +125,25 @@ export default function Navbar() {
 
   // Close drawer / programs menu on escape
   useEffect(() => {
-    if (!mobileOpen && !programsOpen) return
+    if (!mobileOpen && !programsMenu.open && !quickLinksMenu.open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return
       setMobileOpen(false)
-      setProgramsOpen(false)
+      programsMenu.closeNow()
+      quickLinksMenu.closeNow()
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [mobileOpen, programsOpen])
+  }, [mobileOpen, programsMenu, quickLinksMenu])
 
   // A client-side route change (clicking a program link) should always
   // collapse the menu - otherwise it can be left open, hovering over stale
   // content, on the page that was just navigated to.
   useEffect(() => {
-    setProgramsOpen(false)
+    programsMenu.closeNow()
+    quickLinksMenu.closeNow()
+    setMobileQuickLinksOpen(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   // Close on any tap outside the drawer - checked against the actual click
@@ -135,18 +208,18 @@ export default function Navbar() {
                     key={link.label}
                     ref={programsRef}
                     className="relative"
-                    onMouseEnter={() => setProgramsOpen(true)}
-                    onMouseLeave={() => setProgramsOpen(false)}
-                    onFocus={() => setProgramsOpen(true)}
+                    onMouseEnter={() => { programsMenu.openNow(); quickLinksMenu.closeNow() }}
+                    onMouseLeave={() => programsMenu.scheduleClose()}
+                    onFocus={() => { programsMenu.openNow(); quickLinksMenu.closeNow() }}
                     onBlur={(e) => {
-                      if (!programsRef.current?.contains(e.relatedTarget as Node)) setProgramsOpen(false)
+                      if (!programsRef.current?.contains(e.relatedTarget as Node)) programsMenu.closeNow()
                     }}
                   >
                     <a
                       href={link.href}
                       aria-current={active ? 'page' : undefined}
                       aria-haspopup="true"
-                      aria-expanded={programsOpen}
+                      aria-expanded={programsMenu.open}
                       className={[
                         'relative inline-flex items-center gap-1 font-heading font-medium text-[15px] transition-colors duration-150',
                         'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
@@ -159,7 +232,7 @@ export default function Navbar() {
                       <IconChevronDown
                         size={14}
                         stroke={2}
-                        className={`transition-transform duration-200 ${programsOpen ? 'rotate-180' : ''}`}
+                        className={`transition-transform duration-200 ${programsMenu.open ? 'rotate-180' : ''}`}
                       />
                     </a>
 
@@ -167,16 +240,18 @@ export default function Navbar() {
                         carries the visual gap as its own top padding instead, so that
                         gap is still "inside" this hoverable element rather than being
                         genuinely empty space the mouse can fall through and lose hover
-                        state while crossing from the trigger down to the panel. */}
+                        state while crossing from the trigger down to the panel. The
+                        debounced useHoverMenu close (see above) is the real fix for
+                        flicker; this padding bridge just keeps the common case clean. */}
                     <div
                       className={[
                         'absolute left-1/2 top-full w-[540px] -translate-x-1/2 pt-4 transition-all duration-200',
-                        programsOpen
+                        programsMenu.open
                           ? 'visible translate-y-0 opacity-100'
                           : 'invisible -translate-y-1 opacity-0 pointer-events-none',
                       ].join(' ')}
-                      onMouseEnter={() => setProgramsOpen(true)}
-                      onMouseLeave={() => setProgramsOpen(false)}
+                      onMouseEnter={() => programsMenu.openNow()}
+                      onMouseLeave={() => programsMenu.scheduleClose()}
                     >
                       <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-[0_20px_48px_rgba(17,24,39,0.14)]">
                         <div className="grid grid-cols-2 gap-8">
@@ -251,6 +326,92 @@ export default function Navbar() {
                               ))}
                             </ul>
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+
+              if (link.label === 'Quick Links') {
+                return (
+                  <div
+                    key={link.label}
+                    ref={quickLinksRef}
+                    className="relative"
+                    onMouseEnter={() => { quickLinksMenu.openNow(); programsMenu.closeNow() }}
+                    onMouseLeave={() => quickLinksMenu.scheduleClose()}
+                    onFocus={() => { quickLinksMenu.openNow(); programsMenu.closeNow() }}
+                    onBlur={(e) => {
+                      if (!quickLinksRef.current?.contains(e.relatedTarget as Node)) quickLinksMenu.closeNow()
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      aria-current={active ? 'page' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={quickLinksMenu.open}
+                      className={[
+                        'relative inline-flex items-center gap-1 font-heading font-medium text-[15px] transition-colors duration-150',
+                        'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
+                        active
+                          ? 'text-vgu-red after:w-full'
+                          : 'text-neutral-900 hover:text-vgu-red after:w-0 hover:after:w-full',
+                      ].join(' ')}
+                    >
+                      {link.label}
+                      <IconChevronDown
+                        size={14}
+                        stroke={2}
+                        className={`transition-transform duration-200 ${quickLinksMenu.open ? 'rotate-180' : ''}`}
+                      />
+                    </Link>
+
+                    <div
+                      className={[
+                        'absolute left-1/2 top-full w-[320px] -translate-x-1/2 pt-4 transition-all duration-200',
+                        quickLinksMenu.open
+                          ? 'visible translate-y-0 opacity-100'
+                          : 'invisible -translate-y-1 opacity-0 pointer-events-none',
+                      ].join(' ')}
+                      onMouseEnter={() => quickLinksMenu.openNow()}
+                      onMouseLeave={() => quickLinksMenu.scheduleClose()}
+                    >
+                      <div className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_20px_48px_rgba(17,24,39,0.14)]">
+                        {QUICK_LINKS.map((group, gi) => (
+                          <div key={group.category} className={gi > 0 ? 'mt-4 pt-4 border-t border-neutral-100' : ''}>
+                            <p className="mb-2 flex items-center gap-1.5 text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red">
+                              <group.Icon size={13} stroke={2} />
+                              {group.category}
+                            </p>
+                            <ul className="flex flex-col gap-0.5">
+                              {group.items.map((item) => (
+                                <li key={item.label}>
+                                  <a
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group -mx-2.5 flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 transition-colors duration-150 hover:bg-neutral-50"
+                                  >
+                                    <span className="font-heading font-semibold text-[14px] text-neutral-900 transition-colors group-hover:text-vgu-red">
+                                      {item.label}
+                                    </span>
+                                    <IconArrowUpRight size={14} className="flex-none text-neutral-300 transition-colors group-hover:text-vgu-red" />
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+
+                        <div className="mt-4 pt-4 border-t border-neutral-100">
+                          <Link
+                            href="/student-portal"
+                            className="group inline-flex items-center gap-1.5 text-[14px] font-heading font-semibold text-vgu-red transition-colors duration-150 hover:text-vgu-red-dark"
+                          >
+                            All quick access
+                            <IconArrowRight size={15} className="transition-transform duration-150 group-hover:translate-x-1" />
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -355,13 +516,74 @@ export default function Navbar() {
               >
                 <IconHome size={20} stroke={1.75} className={pathname === '/' ? 'text-white' : 'text-vgu-red'} />
                 <span className="flex-1">Home</span>
-                <IconChevronRight
-                  size={16}
-                  className={pathname === '/' ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
-                />
               </Link>
               {NAV_LINKS.map((link) => {
                 const active = isNavActive(link.href, pathname)
+
+                if (link.label === 'Quick Links') {
+                  return (
+                    <div key={link.label} className="flex flex-col">
+                      <button
+                        type="button"
+                        onClick={() => setMobileQuickLinksOpen((v) => !v)}
+                        aria-expanded={mobileQuickLinksOpen}
+                        className={[
+                          'group flex items-center gap-3.5 rounded-2xl px-4 py-3.5 min-h-[44px] font-heading font-semibold text-[16px] transition-all duration-200',
+                          active
+                            ? 'bg-vgu-red text-white shadow-[0_6px_20px_rgba(192,64,54,0.32)]'
+                            : 'text-neutral-800 hover:bg-neutral-50',
+                        ].join(' ')}
+                      >
+                        <link.Icon size={20} stroke={1.75} className={active ? 'text-white' : 'text-vgu-red'} />
+                        <span className="flex-1 text-left">{link.label}</span>
+                        <IconChevronDown
+                          size={16}
+                          stroke={2}
+                          className={[
+                            'transition-transform duration-200',
+                            mobileQuickLinksOpen ? 'rotate-180' : '',
+                            active ? 'text-white' : 'text-neutral-400',
+                          ].join(' ')}
+                        />
+                      </button>
+
+                      {mobileQuickLinksOpen && (
+                        <div className="ml-4 mt-1 mb-1.5 flex flex-col gap-3 border-l-2 border-neutral-100 py-2 pl-4">
+                          {QUICK_LINKS.map((group) => (
+                            <div key={group.category}>
+                              <p className="mb-1.5 text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">
+                                {group.category}
+                              </p>
+                              <div className="flex flex-col gap-0.5">
+                                {group.items.map((item) => (
+                                  <a
+                                    key={item.label}
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex min-h-[40px] items-center justify-between gap-2 rounded-lg px-2 py-2 text-[14px] font-body font-medium text-neutral-700 transition-colors duration-150 hover:bg-neutral-50 hover:text-vgu-red"
+                                    onClick={() => setMobileOpen(false)}
+                                  >
+                                    {item.label}
+                                    <IconArrowUpRight size={14} className="flex-none text-neutral-300" />
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                          <Link
+                            href="/student-portal"
+                            className="text-[14px] font-heading font-semibold text-vgu-red"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            All quick access
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  )
+                }
+
                 return (
                   <a
                     key={link.label}
@@ -377,10 +599,6 @@ export default function Navbar() {
                   >
                     <link.Icon size={20} stroke={1.75} className={active ? 'text-white' : 'text-vgu-red'} />
                     <span className="flex-1">{link.label}</span>
-                    <IconChevronRight
-                      size={16}
-                      className={active ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
-                    />
                   </a>
                 )
               })}
@@ -397,10 +615,6 @@ export default function Navbar() {
               >
                 <IconPhone size={20} stroke={1.75} className={pathname === '/contact' ? 'text-white' : 'text-vgu-red'} />
                 <span className="flex-1">Contact</span>
-                <IconChevronRight
-                  size={16}
-                  className={pathname === '/contact' ? 'text-white/70' : 'text-neutral-300 group-hover:text-vgu-red/50'}
-                />
               </Link>
             </div>
           </nav>

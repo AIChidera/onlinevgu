@@ -17,7 +17,7 @@ import {
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
-// â”€â”€ Part B: Explorer panels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Part B: Explorer panels ───────────────────────────────────────
 interface Panel {
   label: string
   tag:   string
@@ -36,7 +36,7 @@ const PANELS: Panel[] = [
     tag:     'Live & recorded',
     title:   'Never miss a moment.',
     desc:    'Attend live sessions or catch up with full recordings. Everything is available 24/7 on the platform.',
-    bullets: ['Weekend & evening schedules', 'HD video with Q&A chat', 'Attendance auto-tracked', 'Lifetime access to recordings'],
+    bullets: ['Weekend & evening schedules', 'HD video with Q&A chat', 'Attendance auto-tracked', 'Recordings available for your full program duration'],
     Icon:    IconVideo,
     color:   '#C04036',
   },
@@ -68,11 +68,11 @@ const PANELS: Panel[] = [
     color:   '#C04036',
   },
   {
-    label:   'Coursera',
+    label:   'Learning Platforms',
     tag:     'Included free',
-    title:   '7,000+ courses. Zero extra cost.',
-    desc:    'Every VGU program includes a full Coursera licence. Learn from Google, IBM, Meta, and more at your own pace.',
-    bullets: ['Google, IBM, Meta courses', 'Completion certificates', 'LinkedIn shareable badges', 'No extra subscription fee'],
+    title:   '10,000+ courses. Two platforms. Zero extra cost.',
+    desc:    'Every VGU program includes a full Coursera licence plus LinkedIn Learning access. Learn from Google, IBM, Meta, and thousands of expert-led courses at your own pace.',
+    bullets: ['Google, IBM, Meta courses on Coursera', 'Expert-led courses on LinkedIn Learning', 'Completion certificates from both', 'No extra subscription fee'],
     Icon:    IconCertificate,
     color:   '#0056D2',
   },
@@ -88,12 +88,12 @@ const PANELS: Panel[] = [
 ]
 
 const BOTTOM_STATS = [
-  { value: '200+',    label: 'Live sessions / month', Icon: IconVideo      },
-  { value: '500+',    label: 'Expert mentors',        Icon: IconUserHeart  },
-  { value: '25,000+', label: 'E-resources',           Icon: IconBooks      },
+  { value: '200+',    label: 'Live sessions / month' },
+  { value: '500+',    label: 'Expert mentors'        },
+  { value: '25,000+', label: 'E-resources'           },
 ]
 
-// â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Component ─────────────────────────────────────────────────────
 export default function CourseExperienceSection() {
   const [playing, setPlaying]   = useState(false)
   const [activePanel, setActivePanel] = useState(0)
@@ -123,9 +123,9 @@ export default function CourseExperienceSection() {
 
   return (
     <div id="course-experience">
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ══════════════════════════════════════════════════════
           PART A - VIDEO BANNER
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      ══════════════════════════════════════════════════════ */}
       <div
         className="relative overflow-hidden group cursor-pointer min-h-[480px] md:min-h-[560px] lg:min-h-[640px]"
         onClick={togglePlay}
@@ -207,9 +207,9 @@ export default function CourseExperienceSection() {
         </div>
       </div>
 
-      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      {/* ══════════════════════════════════════════════════════
           PART B - PLATFORM EXPLORER
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      ══════════════════════════════════════════════════════ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-14 px-5 md:px-8 lg:px-12 lg:py-20">
         <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
         <div className="relative z-10 mx-auto max-w-[1280px]">
@@ -288,7 +288,7 @@ export default function CourseExperienceSection() {
                     </div>
                   </div>
                   <p className="mt-3 text-center text-[12px] text-neutral-400 font-body">
-                    {panel.label} Â· VGU Platform
+                    {panel.label} · VGU Platform
                   </p>
                 </div>
               </div>
@@ -322,24 +322,19 @@ export default function CourseExperienceSection() {
           </div>
 
           {/* Bottom stat pills:
-              Mobile  â†’ tight horizontal row per card (icon left, value right)
-              Tablet+ â†’ centered 3-col grid (icon on top) */}
+              Mobile  → tight horizontal row per card (icon left, value right)
+              Tablet+ → centered 3-col grid (icon on top) */}
           <div className="mt-6 flex flex-col gap-2 sm:grid sm:grid-cols-3 sm:gap-3">
             {BOTTOM_STATS.map((s, i) => (
               <div
                 key={s.label}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
-                className="flex items-center gap-4 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-all duration-200 hover:border-vgu-red hover:shadow-[0_4px_16px_rgba(192,64,54,0.12)]
-                           sm:flex-col sm:items-stretch sm:gap-0 sm:text-center sm:px-5 sm:py-4 sm:hover:-translate-y-0.5"
+                className="flex items-baseline gap-2 rounded-xl border border-neutral-200 bg-white px-4 py-3 transition-all duration-200 hover:border-vgu-red hover:shadow-[0_4px_16px_rgba(192,64,54,0.12)]
+                           sm:flex-col sm:gap-0 sm:items-center sm:text-center sm:px-5 sm:py-4 sm:hover:-translate-y-0.5"
               >
-                <div className="flex-none sm:flex sm:justify-center sm:mb-2">
-                  <s.Icon size={20} stroke={1.5} className="text-vgu-red/60" />
-                </div>
-                <div className="flex-1 min-w-0 flex items-baseline gap-2 sm:flex-none sm:flex-col sm:gap-0 sm:items-stretch">
-                  <div className="font-heading font-black text-[24px] leading-none text-vgu-red sm:text-[28px]">{s.value}</div>
-                  <div className="text-[12px] font-body text-neutral-500 leading-tight sm:mt-1">{s.label}</div>
-                </div>
+                <div className="font-heading font-black text-[24px] leading-none text-vgu-red sm:text-[28px]">{s.value}</div>
+                <div className="text-[12px] font-body text-neutral-500 leading-tight sm:mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -350,7 +345,7 @@ export default function CourseExperienceSection() {
 }
 
 
-// â”€â”€ Per-panel contextual mockup sketches â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Per-panel contextual mockup sketches ──────────────────────────
 
 function PanelMockup({ index, color }: { index: number; color: string }) {
   switch (index) {
@@ -370,7 +365,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           </div>
           <div className="absolute bottom-0 left-0 right-0 px-2.5 pb-2.5 pt-6" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)' }}>
             <p className="text-[10px] font-bold text-white leading-tight">Strategic Management</p>
-            <p className="text-[8px] text-white/50">Dr. Arjun Mehta Â· Week 4 / 12</p>
+            <p className="text-[8px] text-white/50">Dr. Arjun Mehta · Week 4 / 12</p>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10">
             <div className="h-full w-[45%] bar-fill" style={{ background: color }} />
@@ -405,9 +400,9 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[11px] font-bold text-white leading-tight">Rahul Verma</p>
-              <p className="text-[9px] text-white/50">VP Product Â· Flipkart</p>
+              <p className="text-[9px] text-white/50">VP Product · Flipkart</p>
             </div>
-            <span className="text-[10px] font-bold text-vgu-yellow flex-none">â˜… 4.9</span>
+            <span className="text-[10px] font-bold text-vgu-yellow flex-none">★ 4.9</span>
           </div>
           <div className="flex gap-1.5 mb-3.5">
             {['Product', 'Strategy', 'MBA'].map(t => (
@@ -464,7 +459,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
     case 3: return ( // Library
       <div className="flex flex-col gap-2.5">
         <div className="flex items-center gap-2 rounded-lg px-2.5 py-2 bg-white/10 border border-white/15">
-          <span className="text-[11px] text-white/35">âŒ•</span>
+          <span className="text-[11px] text-white/35">⌕</span>
           <span className="text-[9px] text-white/65">International Finance</span>
         </div>
         <p className="text-[8px] text-white/30">3 results in your library</p>
@@ -502,7 +497,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
               </div>
               <p className="text-[10px] font-bold text-white/85 leading-tight">Google Project Management</p>
             </div>
-            <p className="text-[8px] text-white/40 mb-2.5">Certificate Â· 6 months Â· Google</p>
+            <p className="text-[8px] text-white/40 mb-2.5">Certificate · 6 months · Google</p>
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-[8px] text-white/35">Progress</span>
               <span className="text-[9px] font-bold text-vgu-yellow">72%</span>
@@ -513,8 +508,8 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
           </div>
         </div>
         {[
-          { label: 'IBM Data Science',   brand: 'IBM'  },
-          { label: 'Meta Front-End Dev', brand: 'Meta' },
+          { label: 'IBM Data Science',              brand: 'IBM'               },
+          { label: 'Excel Skills · LinkedIn Learning', brand: 'LinkedIn Learning' },
         ].map((c) => (
           <div key={c.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 bg-white/[0.04] border border-white/10">
             <div className="w-4 h-4 rounded-sm overflow-hidden flex-none">
@@ -528,7 +523,7 @@ function PanelMockup({ index, color }: { index: number; color: string }) {
 
     case 5: return ( // Career Centre
       <div className="flex flex-col gap-2.5">
-        <p className="text-[8px] text-white/35">500+ live openings Â· Updated today</p>
+        <p className="text-[8px] text-white/35">500+ live openings · Updated today</p>
         {[
           { role: 'Business Analyst', company: 'TCS',       status: 'Applied',     statusBg: color     },
           { role: 'Product Manager',  company: 'Razorpay',  status: 'Shortlisted', statusBg: '#22c55e' },

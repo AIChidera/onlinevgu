@@ -1,5 +1,5 @@
 export const BRAND_ICON_NAMES = new Set([
-  'Coursera','Google','IBM','Meta','Microsoft','Amazon','AWS','DeepLearning.AI',
+  'Coursera','LinkedIn Learning','Google','IBM','Meta','Microsoft','Amazon','AWS','DeepLearning.AI',
   'Accenture','Deloitte','KPMG','EY','PwC','Grant Thornton',
   'TCS','Infosys','Wipro','HCL','HCL Tech','Oracle','Cognizant','Capgemini','Tech Mahindra','LTIMindtree','Mphasis',
   'Razorpay','HDFC Bank','ICICI Bank','SBI','Axis Bank','Kotak Mahindra Bank','Kotak Mahindra','Bajaj Finserv','HDFC Life','ICICI Prudential',
@@ -21,6 +21,14 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Coursera">
         <rect width="24" height="24" rx="4" fill="#0056D2"/>
         <path d="M17 16.8A7 7 0 1 1 17 7.2" stroke="white" strokeWidth="2.4" strokeLinecap="round"/>
+      </svg>
+    )
+    case 'LinkedIn Learning': return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="LinkedIn Learning">
+        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
+        <rect x="4.5" y="9.5" width="3" height="9.5" rx="0.5" fill="white"/>
+        <circle cx="6" cy="6" r="1.9" fill="white"/>
+        <path d="M10.5 19V9.5h2.9v1.3c.5-.85 1.5-1.55 2.9-1.55 2.2 0 3.7 1.4 3.7 4.3V19h-3v-4.9c0-1.25-.5-2.05-1.6-2.05-.9 0-1.4.6-1.65 1.2-.1.22-.12.53-.12.83V19z" fill="white"/>
       </svg>
     )
     case 'Google': return (

@@ -1,54 +1,35 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { IconClock, IconArrowRight } from '@tabler/icons-react'
-
-// Bible §07: real urgency only. Update this when the next intake changes.
-const INTAKE_DATE = new Date('2026-07-01T00:00:00')
-
-function getDaysLeft() {
-  const diff = INTAKE_DATE.getTime() - Date.now()
-  return Math.max(0, Math.floor(diff / 86400000))
-}
+import { IconAward } from '@tabler/icons-react'
 
 /**
- * Slim amber strip mounted above the Hero. Bible §07: subtle amber, not aggressive red.
- * Bible §10: real intake countdowns build genuine scarcity without pressure-selling.
+ * Slim strip mounted above the Hero. Leads with VGU's Google Agentic AI
+ * recognition (the strongest, most differentiated credibility hook), with
+ * admissions status as a secondary clause. No countdown - a specific "closes
+ * in N days" claim needs a real, currently-true target date to stay honest,
+ * and hardcoding one here just becomes stale again the next time intake
+ * dates roll over. If a future intake gets its own countdown, drive it from
+ * a real config date rather than a literal string.
  */
 export default function IntakeCountdown({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
-  const [days, setDays] = useState<number | null>(null)
-
-  useEffect(() => {
-    setDays(getDaysLeft())
-    const id = setInterval(() => setDays(getDaysLeft()), 60_000)
-    return () => clearInterval(id)
-  }, [])
-
   return (
     <div className="bg-vgu-yellow border-b border-neutral-900/10">
-      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-3 px-5 md:px-8 lg:px-12 py-2.5">
-        <div className="flex items-center gap-2.5 text-[13px] md:text-[14px] font-heading font-semibold text-neutral-900 leading-tight">
-          <IconClock size={16} stroke={2.25} className="flex-none" />
-          {days !== null && days > 0 ? (
-            <span>
-              {nextBatch} intake closes in{' '}
-              <strong className="font-bold">{days} days</strong>
-              <span className="hidden sm:inline"> · Application deadline 25 June 2026</span>
-            </span>
-          ) : (
-            <span>
-              {nextBatch} intake, applications open
-              <span className="hidden sm:inline"> · Deadline 25 June 2026</span>
-            </span>
-          )}
+      <div className="mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 max-w-[1280px] px-5 md:px-8 lg:px-12 py-2.5">
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="flex-none flex items-center justify-center w-6 h-6 rounded-full bg-vgu-red">
+            <IconAward size={14} stroke={2.25} className="text-white" />
+          </span>
+          <span className="inline-flex items-center rounded-full bg-vgu-red px-3 py-1 text-[11px] md:text-[12px] font-heading font-bold uppercase tracking-[0.03em] text-white animate-pulse">
+            Rajasthan&apos;s First Google Agentic AI University
+          </span>
         </div>
-        <a
-          href="#counsellor"
-          data-apply-trigger
-          className="hidden sm:inline-flex flex-none items-center gap-1 text-[13px] font-heading font-bold text-neutral-900 underline underline-offset-4 decoration-2 decoration-neutral-900/40 hover:decoration-neutral-900"
-        >
-          Apply now <IconArrowRight size={14} stroke={2.5} />
-        </a>
+        <div className="hidden sm:inline-flex flex-none items-center gap-2">
+          <span className="relative flex h-2 w-2 flex-none">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          <span className="text-[13px] md:text-[14px] font-heading font-semibold text-neutral-900">
+            {nextBatch} admissions open
+          </span>
+        </div>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import SectionWrapper from '@/components/layout/SectionWrapper'
+﻿import SectionWrapper from '@/components/layout/SectionWrapper'
 import Button from '@/components/ui/Button'
 import BrandIcon from '@/components/ui/BrandIcon'
 
@@ -14,7 +14,7 @@ export default function CourseraSection() {
             Powered by Coursera
           </p>
           <h2 className="font-heading text-[28px] font-extrabold leading-tight tracking-tight text-neutral-900 md:text-[38px]">
-            Get free access to 7,000+<br />
+            Get free access to 10,000+<br />
             courses on Coursera
           </h2>
           <p className="mt-4 text-[15px] text-neutral-600 leading-relaxed max-w-[460px] lg:text-[17px]">
@@ -60,7 +60,7 @@ export default function CourseraSection() {
             {/* Big number */}
             <div className="mb-6 rounded-xl bg-neutral-50 p-5 text-center">
               <div className="font-heading text-[56px] font-black leading-none text-neutral-900">
-                7,000+
+                10,000+
               </div>
               <div className="mt-1 text-[14px] text-neutral-500">courses available</div>
             </div>

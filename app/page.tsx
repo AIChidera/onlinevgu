@@ -65,7 +65,7 @@ function buildFaqJsonLd(faqs: SanityFaq[]) {
   }
 }
 
-// Parse a stat string like "50,000+" â†’ 50000, "4.8/5" â†’ 4.8, "95%" â†’ 95
+// Parse a stat string like "50,000+" → 50000, "4.8/5" → 4.8, "95%" → 95
 function parseStat(s: string | undefined | null, fallback: number): number {
   if (!s) return fallback
   const match = s.match(/[\d,]+(\.\d+)?/)

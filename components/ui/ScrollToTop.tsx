@@ -44,7 +44,10 @@ export default function ScrollToTop() {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       className={[
-        'lg:hidden fixed right-6 z-40 w-11 h-11 rounded-full bg-white border border-neutral-200',
+        'fixed right-6 z-40 w-11 h-11 rounded-full bg-white border border-neutral-200',
+        // Mobile: cleared above the sticky bottom CTA bar on program pages.
+        // Desktop: no sticky bar exists, so it just stacks above the WhatsApp FAB instead.
+        'bottom-[calc(max(1.5rem,env(safe-area-inset-bottom)+8px)+64px)] lg:bottom-24',
         'shadow-[0_4px_16px_rgba(17,24,39,0.12)] flex items-center justify-center text-neutral-600',
         'hover:text-vgu-red hover:border-vgu-red/30 hover:shadow-[0_6px_20px_rgba(192,64,54,0.18)]',
         'transition-[opacity,transform] duration-300 ease-out',
@@ -52,9 +55,6 @@ export default function ScrollToTop() {
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 translate-y-2 pointer-events-none',
       ].join(' ')}
-      style={{
-        bottom: 'calc(max(1.5rem, env(safe-area-inset-bottom) + 8px) + 64px)',
-      }}
     >
       <IconChevronUp size={18} stroke={2.25} />
     </button>

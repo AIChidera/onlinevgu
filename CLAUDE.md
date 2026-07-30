@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # ONLINE VGU — CURSOR RULES
 # Read this entire file before making any suggestion or edit.
 # Every decision here was made deliberately. Do not override.
@@ -234,7 +234,7 @@ and are not listed in page.tsx. The sections below are the body.
 4.  ImpactSection      (stats/impact — 50,000+, 95%, etc.)
 5.  CampusImmersionsSection  (campus life / immersion experience)
 6.  Testimonials       (3-col cards, #F9FAFB bg)
-7.  CourseExperienceSection  (Coursera integration, 7,000+ courses)
+7.  CourseExperienceSection  (Coursera integration, 10,000+ courses)
 8.  FeaturesSection    (Why VGU — 6-item icon grid, #F9FAFB bg)
 9.  StepsSection       (Admission timeline — 4 steps, vertical on mobile)
 10. FaqSection         (accordion, max-width 800px)
@@ -452,26 +452,25 @@ Key stats (use only these):
   4.8/5     Student rating
   2012      Year established
   500+      Hiring partners
-  7,000+    Coursera courses available
+  10,000+    Coursera courses available
 
 UG Programs:
-  B.Com    · 3 Years · ₹45,000/year
-  BBA      · 3 Years · ₹55,000/year
-  BCA      · 3 Years · ₹60,000/year
-  BA       · 3 Years · ₹40,000/year
-  B.Sc     · 3 Years · ₹50,000/year
-  B.Lib    · 1 Year  · ₹35,000/year
+  BBA       · 3 Years · ₹44,000/year
+  BBA-AAFT  · 3 Years · ₹44,000/year  (Accounting Analytics & Financial Technology)
+  BCA       · 3 Years · ₹44,000/year
+  BA        · 3 Years · ₹24,000/year  (choose 3 discipline streams of 7)
 
 PG Programs:
-  MBA      · 2 Years · ₹85,000/year  [MOST POPULAR]
-  MCA      · 2 Years · ₹75,000/year
-  M.Com    · 2 Years · ₹55,000/year
-  MA       · 2 Years · ₹50,000/year
-  M.Lib    · 1 Year  · ₹40,000/year
-  MBA-HC   · 2 Years · ₹90,000/year  (Healthcare Management)
+  MBA       · 2 Years · ₹75,000/year   [MOST POPULAR]
+  MBA-IF    · 2 Years · ₹1,20,000/year (International Finance - ACCA/CMA/FM tracks)
+  MBA-DFAA  · 2 Years · ₹1,00,000/year (Digital Finance & Accounting Analytics)
+  MCA       · 2 Years · ₹75,000/year
+  MA        · 2 Years · ₹36,000/year  (English)
+  M.Sc      · 2 Years · ₹36,000/year  (Mathematics)
+  MAJMC     · 2 Years · ₹36,000/year
 
 MBA quick facts:
-  Total fee: ₹1,70,000   EMI: ₹7,084/month   Next batch: July 2026
+  Total fee: ₹1,50,000   EMI: ₹6,250/month   Next batch: July 2026
 
 
 # ------------------------------------------------------------

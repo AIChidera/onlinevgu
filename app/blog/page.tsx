@@ -6,7 +6,6 @@ import { FALLBACK_POST_SUMMARIES } from '@/lib/blogFallbacks'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import BlogIndex from './BlogIndex'
 import BlogHeroCarousel from './BlogHeroCarousel'
-import BlogNewsletterStrip from './BlogNewsletterStrip'
 
 export const revalidate = 3600
 
@@ -49,10 +48,10 @@ export default async function BlogPage() {
           the empty state (light background) keeps the standard Breadcrumb */}
       {!hasContent && <Breadcrumb items={[{ label: 'Blog' }]} />}
 
-      {/* â•â• Hero carousel â•â• */}
+      {/* ══ Hero carousel ══ */}
       {hasContent && <BlogHeroCarousel slides={heroSlides} />}
 
-      {/* â•â• Empty state (only when no posts at all) â•â• */}
+      {/* ══ Empty state (only when no posts at all) ══ */}
       {!hasContent && (
         <section className="bg-neutral-50 px-5 md:px-8 lg:px-12 py-20 lg:py-28">
           <div className="mx-auto max-w-[600px] text-center">
@@ -85,7 +84,7 @@ export default async function BlogPage() {
         </section>
       )}
 
-      {/* â•â• Stats trust strip â•â• */}
+      {/* ══ Stats trust strip ══ */}
       {hasContent && (
         <section className="group relative bg-white border-y border-neutral-100 overflow-hidden px-5 md:px-8 lg:px-12 py-4 md:py-6">
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 150% at 0% 50%, rgba(192,64,54,0.06) 0%, transparent 100%)' }} />
@@ -132,7 +131,7 @@ export default async function BlogPage() {
         </section>
       )}
 
-      {/* â•â• Filter + grid (with section heading) â•â• */}
+      {/* ══ Filter + grid (with section heading) ══ */}
       {hasContent && (
         <BlogIndex
           posts={allPosts}
@@ -142,10 +141,7 @@ export default async function BlogPage() {
         />
       )}
 
-      {/* â•â• Newsletter strip â•â• */}
-      {hasContent && <BlogNewsletterStrip />}
-
-      {/* â•â• Closing CTA â•â• */}
+      {/* ══ Closing CTA ══ */}
       {hasContent && (
         <section className="bg-neutral-50 px-5 md:px-8 lg:px-12 py-16 lg:py-24">
           <div data-animate="fade-up" className="mx-auto max-w-[760px] text-center">

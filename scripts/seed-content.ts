@@ -75,7 +75,7 @@ async function seedSiteSettings() {
     statRating:          '4.8/5',
     statPrograms:        '30+',
     statHiringPartners:  '500+',
-    statCourseraCount:   '7,000+',
+    statCourseraCount:   '10,000+',
     statYearEstablished: '2012',
     socialInstagram:     'https://www.instagram.com/vgujaipur/',
     socialLinkedIn:      'https://www.linkedin.com/school/vgu/',
@@ -238,7 +238,7 @@ const MILESTONES = [
   [2018, 'NAAC accreditation - A grade achieved'],
   [2019, 'Online division scaled - programs open to learners nationwide'],
   [2021, 'NAAC A+ reaccreditation - highest grade achieved'],
-  [2022, 'Coursera institutional partnership - 7,000+ courses added free for all students'],
+  [2022, 'Coursera institutional partnership - 10,000+ courses added free for all students'],
   [2023, '50,000+ online learners milestone crossed'],
   [2024, 'WES Canada recognition extended to online programs'],
 ] as const

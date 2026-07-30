@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
-import { IconTrendingUp, IconMapPin, IconQuote } from '@tabler/icons-react'
+import { IconTrendingUp, IconMapPin } from '@tabler/icons-react'
 
 interface Testimonial {
   name:          string
@@ -388,14 +388,15 @@ function StoryCard({ t, index, visible }: { t: Testimonial; index: number; visib
           </div>
         )}
 
-        {/* Quote */}
+        {/* Quote - typographic mark behind, matching the homepage Testimonials pattern */}
         <div className="relative flex-1 mb-5">
-          <IconQuote
-            size={18}
-            stroke={1.5}
-            className="absolute -top-1 -left-1 text-vgu-red/15"
+          <div
             aria-hidden="true"
-          />
+            className="absolute -top-2 -left-1 select-none pointer-events-none font-heading font-extrabold leading-none text-vgu-red/[0.15]"
+            style={{ fontSize: '56px', lineHeight: 1 }}
+          >
+            &ldquo;
+          </div>
           <p className="relative text-[16px] font-body leading-[1.7] text-neutral-600 pl-6">
             {t.quote}
           </p>

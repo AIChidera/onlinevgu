@@ -42,7 +42,7 @@ export default async function TermsPage() {
   return (
     <main className="bg-white">
 
-      {/* â”€â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─── Hero ─────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #110805 0%, #4a0d08 45%, #821a12 100%)' }}
@@ -56,7 +56,7 @@ export default async function TermsPage() {
             <div className="inline-flex items-center gap-2 mb-5 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
               <IconFileText size={14} className="text-vgu-yellow" stroke={2} />
               <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
-                Legal Â· Terms
+                Legal · Terms
               </span>
             </div>
 
@@ -74,14 +74,14 @@ export default async function TermsPage() {
                 <IconClock size={14} stroke={2} className="text-vgu-yellow/80" />
                 Last updated: {LAST_UPDATED}
               </span>
-              <span className="hidden sm:inline text-white/20">Â·</span>
-              <span>Governed by the laws of India Â· Jurisdiction: Jaipur, Rajasthan</span>
+              <span className="hidden sm:inline text-white/20">·</span>
+              <span>Governed by the laws of India · Jurisdiction: Jaipur, Rajasthan</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* â”€â”€â”€ Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ─── Content ──────────────────────────────────────────── */}
       <section className="py-12 md:py-16 lg:py-20 px-5 md:px-8 lg:px-12">
         <div className="mx-auto max-w-[1280px] grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-8 lg:gap-16">
 
@@ -237,7 +237,7 @@ export default async function TermsPage() {
                 items={[
                   'Google OAuth 2.0 for account authentication',
                   'Google Calendar for class schedule and event synchronisation',
-                  'Coursera for access to 7,000+ supplementary online courses',
+                  'Coursera for access to 10,000+ supplementary online courses',
                   'Supabase for secure data storage',
                   'Resend for transactional email delivery',
                 ]}
@@ -370,7 +370,7 @@ export default async function TermsPage() {
   )
 }
 
-/* â”€â”€â”€ Subcomponents â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Subcomponents ───────────────────────────────────────── */
 
 function Section({
   id,

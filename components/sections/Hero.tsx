@@ -8,36 +8,6 @@ import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 const HERO_IMAGE_SRC =
   'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80&auto=format&fit=crop'
 
-// ─── Seat counter ────────────────────────────────────────────────────────────
-// Deterministic: every visitor sees the same number on a given calendar day.
-// Monotonically decreasing: simulates daily sales seeded by day index so the
-// value never jumps up. Urgency-weighted so burn rate accelerates near deadline.
-const SEATS_OPEN  = new Date(2026, 3, 1)   // April 1 - window opens at MAX_SEATS
-const SEATS_CLOSE = new Date(2026, 6, 31)  // July 31 - floors at MIN_SEATS
-const MAX_SEATS   = 60
-const MIN_SEATS   = 3
-
-function seededFloat(n: number): number {
-  const x = Math.sin(n) * 43758.5453
-  return x - Math.floor(x)          // 0..1, deterministic for any given n
-}
-
-function getSeatsLeft(): number {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  if (today <= SEATS_OPEN)  return MAX_SEATS
-  if (today >= SEATS_CLOSE) return MIN_SEATS
-  const totalDays  = Math.round((SEATS_CLOSE.getTime() - SEATS_OPEN.getTime()) / 86_400_000)
-  const daysPassed = Math.round((today.getTime()       - SEATS_OPEN.getTime()) / 86_400_000)
-  let seats = MAX_SEATS
-  for (let d = 0; d < daysPassed && seats > MIN_SEATS; d++) {
-    const urgency    = (d + 1) / totalDays               // grows 0 → 1 over window
-    const dailySales = Math.round(seededFloat(d * 127.1 + 311.7) * urgency * 2.5)
-    seats = Math.max(MIN_SEATS, seats - dailySales)
-  }
-  return seats
-}
-
 export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
   return (
     <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
@@ -123,8 +93,6 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
               <span className="inline-flex items-center gap-1.5 text-[12px] font-body text-white/75">
                 <IconCheck size={11} stroke={2.5} className="text-white/55 flex-none" />
                 {nextBatch} admissions are open
-                <span className="w-1 h-1 rounded-full bg-white/35 flex-none" />
-                <span className="text-vgu-yellow font-semibold">{getSeatsLeft()} seats left</span>
               </span>
             </div>
           </div>

@@ -19,7 +19,7 @@ export default function FooterLinkGroup({ title, links, delay = 0 }: { title: st
         aria-controls={panelId}
         className="flex w-full min-h-[44px] items-center justify-between py-3 lg:pointer-events-none lg:min-h-0 lg:py-0 lg:mb-4"
       >
-        <h5 className="font-heading text-[12px] font-semibold uppercase tracking-[0.08em] text-white">
+        <h5 className="text-left font-heading text-[12px] font-semibold uppercase tracking-[0.08em] text-white">
           {title}
         </h5>
         <IconChevronDown
