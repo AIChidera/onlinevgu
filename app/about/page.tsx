@@ -18,6 +18,7 @@ import {
   IconMessages,
   IconMicrophone2,
   IconBriefcase,
+  IconUserCircle,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -96,6 +97,16 @@ const PEDAGOGY = [
   { title: 'Discussion Forums',         body: 'Peer and faculty discussion boards for every course, open around the clock.', Icon: IconMessages },
   { title: 'Industry Expert Talk',      body: 'Guest sessions from industry leaders connecting classroom learning to real-world practice.', Icon: IconMicrophone2 },
   { title: 'Placement Support',         body: 'End-to-end placement assistance, from resume building to interview preparation.', Icon: IconBriefcase },
+]
+
+// Role-only placeholders - no names/bios/photos until the university provides
+// real leadership profiles. The live onlinevgu.com's "Leadership" nav entry
+// links nowhere (href="#"), so there was no existing content to draw from.
+const LEADERSHIP_ROLES = [
+  { role: 'Chancellor' },
+  { role: 'Vice-Chancellor' },
+  { role: 'Registrar' },
+  { role: 'Director, Online Education (CDOE)' },
 ]
 
 const CAMPUS_IMAGE_SRC =
@@ -196,7 +207,7 @@ export default async function AboutPage() {
   return (
     <div>
       {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
-      <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
+      <section id="overview" className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px] scroll-mt-24">
         <Image
           src={HERO_IMAGE_SRC}
           alt=""
@@ -264,9 +275,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Stats strip - arc sweeps across the achievement numbers ══ */}
+      {/* ══ Stats strip - no flourish, the gradient stat cards already carry
+          enough visual weight on their own ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white border-b border-neutral-200">
-        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-8 md:py-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-6">
@@ -412,9 +423,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Accreditations - monogram (VGU-V) in a credibility section ══ */}
+      {/* ══ Accreditations - no flourish, the 6-card logo/badge grid is
+          already visually dense ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="monogram" color="red-dark" opacity={0.05} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
@@ -535,8 +546,6 @@ export default async function AboutPage() {
           This is the formal, university-wide "how we teach" overview: a
           university-level fact, not something worth repeating per program. ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-16 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
-
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
@@ -577,10 +586,50 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Campus Experience - arc (digital reach spanning the physical) ══ */}
+      {/* ══ Leadership - role cards only. No names/bios yet (see LEADERSHIP_ROLES) ══ */}
+      <section id="leadership" className="sketch-hover-group group relative overflow-hidden bg-white py-16 px-5 md:px-8 lg:px-12 lg:py-24 scroll-mt-24">
+        <SketchFlourish shape="monogram" color="red" opacity={0.04} strokeWidth={20} />
+
+        <div className="relative z-10 mx-auto max-w-[1280px]">
+          <div data-animate="fade-up" className="text-center mb-12">
+            <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
+              Leadership
+            </p>
+            <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
+              Guided by experienced academic leadership
+            </h2>
+            <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
+              Full leadership profiles are being added. Here is how the university is led.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {LEADERSHIP_ROLES.map((l, i) => (
+              <div
+                key={l.role}
+                data-animate="fade-up"
+                style={{ animationDelay: `${i * 60}ms` }}
+                className="flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white p-6 hover:border-vgu-red/20 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(192,64,54,0.10)] transition-all duration-200"
+              >
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-neutral-50 border border-neutral-200">
+                  <IconUserCircle size={32} stroke={1.5} className="text-neutral-300" />
+                </div>
+                <h3 className="font-heading font-bold text-[16px] text-neutral-900 leading-snug">
+                  {l.role}
+                </h3>
+                <p className="mt-1.5 text-[13px] font-body text-neutral-400">
+                  Profile coming soon
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ Campus Experience - no flourish, the beige background already sets
+          this section apart and the image/proof-strip/feature list carry
+          plenty of visual weight on their own ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-10 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} />
-        <SketchFlourish shape="arc" color="red" opacity={0.04} strokeWidth={20} className="rotate-180" />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
@@ -719,9 +768,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ History timeline - wave conveys the flow of time ══ */}
+      {/* ══ History timeline - no flourish, the sticky stat panel plus the
+          full card timeline are already the busiest section on the page ══ */}
       <section className="sketch-hover-group group relative overflow-hidden bg-neutral-50 py-12 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="wave" color="red" opacity={0.04} strokeWidth={20} />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-16 items-start">
@@ -854,9 +903,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ══ Alumni Community - swoop (sweeping sense of a large, growing community) ══ */}
-      <section className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24">
-        <SketchFlourish shape="swoop" color="red" opacity={0.04} strokeWidth={20} />
+      {/* ══ Alumni Community - no flourish, the feature cards and testimonial
+          cards already fill this section with visual interest ══ */}
+      <section id="community" className="sketch-hover-group group relative overflow-hidden bg-white py-12 px-5 md:px-8 lg:px-12 lg:py-24 scroll-mt-24">
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">

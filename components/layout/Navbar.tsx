@@ -61,6 +61,15 @@ const QUICK_LINKS = [
   },
 ]
 
+// Mirrors the live site's "About" navbar dropdown (Overview / Leadership /
+// Community), pointing at anchor sections on the single /about page rather
+// than separate routes.
+const ABOUT_LINKS = [
+  { label: 'Overview',   href: '/about#overview' },
+  { label: 'Leadership', href: '/about#leadership' },
+  { label: 'Community',  href: '/about#community' },
+]
+
 const UG_PROGRAMMES = PROGRAMMES.filter(p => p.level === 'ug')
 const PG_PROGRAMMES = PROGRAMMES.filter(p => p.level === 'pg')
 const DISCIPLINE_COUNT = new Set(PROGRAMMES.map(p => p.discipline)).size
@@ -109,11 +118,14 @@ export default function Navbar() {
   const pathname                      = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [mobileOpen, setMobileOpen]   = useState(false)
+  const aboutMenu                      = useHoverMenu()
   const programsMenu                  = useHoverMenu()
   const quickLinksMenu                = useHoverMenu()
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const [mobileQuickLinksOpen, setMobileQuickLinksOpen] = useState(false)
   const drawerRef                     = useRef<HTMLDivElement>(null)
   const hamburgerRef                  = useRef<HTMLButtonElement>(null)
+  const aboutRef                       = useRef<HTMLDivElement>(null)
   const programsRef                   = useRef<HTMLDivElement>(null)
   const quickLinksRef                 = useRef<HTMLDivElement>(null)
 
@@ -125,23 +137,26 @@ export default function Navbar() {
 
   // Close drawer / programs menu on escape
   useEffect(() => {
-    if (!mobileOpen && !programsMenu.open && !quickLinksMenu.open) return
+    if (!mobileOpen && !aboutMenu.open && !programsMenu.open && !quickLinksMenu.open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return
       setMobileOpen(false)
+      aboutMenu.closeNow()
       programsMenu.closeNow()
       quickLinksMenu.closeNow()
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [mobileOpen, programsMenu, quickLinksMenu])
+  }, [mobileOpen, aboutMenu, programsMenu, quickLinksMenu])
 
   // A client-side route change (clicking a program link) should always
   // collapse the menu - otherwise it can be left open, hovering over stale
   // content, on the page that was just navigated to.
   useEffect(() => {
+    aboutMenu.closeNow()
     programsMenu.closeNow()
     quickLinksMenu.closeNow()
+    setMobileAboutOpen(false)
     setMobileQuickLinksOpen(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
@@ -202,15 +217,80 @@ export default function Navbar() {
             {NAV_LINKS.map((link) => {
               const active = isNavActive(link.href, pathname)
 
+              if (link.label === 'About') {
+                return (
+                  <div
+                    key={link.label}
+                    ref={aboutRef}
+                    className="relative"
+                    onMouseEnter={() => { aboutMenu.openNow(); programsMenu.closeNow(); quickLinksMenu.closeNow() }}
+                    onMouseLeave={() => aboutMenu.scheduleClose()}
+                    onFocus={() => { aboutMenu.openNow(); programsMenu.closeNow(); quickLinksMenu.closeNow() }}
+                    onBlur={(e) => {
+                      if (!aboutRef.current?.contains(e.relatedTarget as Node)) aboutMenu.closeNow()
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      aria-current={active ? 'page' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={aboutMenu.open}
+                      className={[
+                        'relative inline-flex items-center gap-1 font-heading font-medium text-[15px] transition-colors duration-150',
+                        'after:absolute after:bottom-[-22px] after:left-0 after:h-[3px] after:rounded-full after:bg-vgu-red after:transition-all after:duration-300',
+                        active
+                          ? 'text-vgu-red after:w-full'
+                          : 'text-neutral-900 hover:text-vgu-red after:w-0 hover:after:w-full',
+                      ].join(' ')}
+                    >
+                      {link.label}
+                      <IconChevronDown
+                        size={14}
+                        stroke={2}
+                        className={`transition-transform duration-200 ${aboutMenu.open ? 'rotate-180' : ''}`}
+                      />
+                    </Link>
+
+                    <div
+                      className={[
+                        'absolute left-1/2 top-full w-56 -translate-x-1/2 pt-4 transition-all duration-200',
+                        aboutMenu.open
+                          ? 'visible translate-y-0 opacity-100'
+                          : 'invisible -translate-y-1 opacity-0 pointer-events-none',
+                      ].join(' ')}
+                      onMouseEnter={() => aboutMenu.openNow()}
+                      onMouseLeave={() => aboutMenu.scheduleClose()}
+                    >
+                      <div className="rounded-2xl border border-neutral-200 bg-white p-2 shadow-[0_20px_48px_rgba(17,24,39,0.14)]">
+                        <ul className="flex flex-col gap-0.5">
+                          {ABOUT_LINKS.map((item) => (
+                            <li key={item.label}>
+                              <Link
+                                href={item.href}
+                                className="group flex items-center rounded-lg px-3 py-2.5 transition-colors duration-150 hover:bg-neutral-50"
+                              >
+                                <span className="font-heading font-semibold text-[14px] text-neutral-900 transition-colors group-hover:text-vgu-red">
+                                  {item.label}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+
               if (link.label === 'Programs') {
                 return (
                   <div
                     key={link.label}
                     ref={programsRef}
                     className="relative"
-                    onMouseEnter={() => { programsMenu.openNow(); quickLinksMenu.closeNow() }}
+                    onMouseEnter={() => { programsMenu.openNow(); aboutMenu.closeNow(); quickLinksMenu.closeNow() }}
                     onMouseLeave={() => programsMenu.scheduleClose()}
-                    onFocus={() => { programsMenu.openNow(); quickLinksMenu.closeNow() }}
+                    onFocus={() => { programsMenu.openNow(); aboutMenu.closeNow(); quickLinksMenu.closeNow() }}
                     onBlur={(e) => {
                       if (!programsRef.current?.contains(e.relatedTarget as Node)) programsMenu.closeNow()
                     }}
@@ -339,9 +419,9 @@ export default function Navbar() {
                     key={link.label}
                     ref={quickLinksRef}
                     className="relative"
-                    onMouseEnter={() => { quickLinksMenu.openNow(); programsMenu.closeNow() }}
+                    onMouseEnter={() => { quickLinksMenu.openNow(); aboutMenu.closeNow(); programsMenu.closeNow() }}
                     onMouseLeave={() => quickLinksMenu.scheduleClose()}
-                    onFocus={() => { quickLinksMenu.openNow(); programsMenu.closeNow() }}
+                    onFocus={() => { quickLinksMenu.openNow(); aboutMenu.closeNow(); programsMenu.closeNow() }}
                     onBlur={(e) => {
                       if (!quickLinksRef.current?.contains(e.relatedTarget as Node)) quickLinksMenu.closeNow()
                     }}
@@ -519,6 +599,51 @@ export default function Navbar() {
               </Link>
               {NAV_LINKS.map((link) => {
                 const active = isNavActive(link.href, pathname)
+
+                if (link.label === 'About') {
+                  return (
+                    <div key={link.label} className="flex flex-col">
+                      <button
+                        type="button"
+                        onClick={() => setMobileAboutOpen((v) => !v)}
+                        aria-expanded={mobileAboutOpen}
+                        className={[
+                          'group flex items-center gap-3.5 rounded-2xl px-4 py-3.5 min-h-[44px] font-heading font-semibold text-[16px] transition-all duration-200',
+                          active
+                            ? 'bg-vgu-red text-white shadow-[0_6px_20px_rgba(192,64,54,0.32)]'
+                            : 'text-neutral-800 hover:bg-neutral-50',
+                        ].join(' ')}
+                      >
+                        <link.Icon size={20} stroke={1.75} className={active ? 'text-white' : 'text-vgu-red'} />
+                        <span className="flex-1 text-left">{link.label}</span>
+                        <IconChevronDown
+                          size={16}
+                          stroke={2}
+                          className={[
+                            'transition-transform duration-200',
+                            mobileAboutOpen ? 'rotate-180' : '',
+                            active ? 'text-white' : 'text-neutral-400',
+                          ].join(' ')}
+                        />
+                      </button>
+
+                      {mobileAboutOpen && (
+                        <div className="ml-4 mt-1 mb-1.5 flex flex-col gap-0.5 border-l-2 border-neutral-100 py-2 pl-4">
+                          {ABOUT_LINKS.map((item) => (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              className="flex min-h-[40px] items-center gap-2 rounded-lg px-2 py-2 text-[14px] font-body font-medium text-neutral-700 transition-colors duration-150 hover:bg-neutral-50 hover:text-vgu-red"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {item.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                }
 
                 if (link.label === 'Quick Links') {
                   return (

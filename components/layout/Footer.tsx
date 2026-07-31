@@ -8,23 +8,23 @@ import FooterLinkGroup from './FooterLinkGroup'
 // group (MBA leads PG - it's flagged "Most Popular" sitewide) - mirrors the
 // exact grouping/order already used in the navbar's Programs mega menu.
 const PROGRAM_LINKS = [
-  { label: 'BBA',      href: '/programs/bba'      },
-  { label: 'BBA-AAFT', href: '/programs/bba-aaft' },
-  { label: 'BCA',      href: '/programs/bca'      },
-  { label: 'BA',       href: '/programs/ba'       },
-  { label: 'MBA',      href: '/programs/mba'      },
-  { label: 'MBA-IF',   href: '/programs/mba-if'   },
-  { label: 'MBA-DFAA', href: '/programs/mba-dfaa' },
-  { label: 'MCA',      href: '/programs/mca'      },
-  { label: 'MA English', href: '/programs/ma'     },
-  { label: 'M.Sc',     href: '/programs/msc'      },
-  { label: 'MAJMC',    href: '/programs/majmc'    },
+  { label: 'Online BBA',      href: '/programs/bba'      },
+  { label: 'Online BBA-AAFT', href: '/programs/bba-aaft' },
+  { label: 'Online BCA',      href: '/programs/bca'      },
+  { label: 'Online BA',       href: '/programs/ba'       },
+  { label: 'Online MBA',      href: '/programs/mba'      },
+  { label: 'Online MBA-IF',   href: '/programs/mba-if'   },
+  { label: 'Online MBA-DFAA', href: '/programs/mba-dfaa' },
+  { label: 'Online MCA',      href: '/programs/mca'      },
+  { label: 'Online MA English', href: '/programs/ma'     },
+  { label: 'Online M.Sc',     href: '/programs/msc'      },
+  { label: 'Online MAJMC',    href: '/programs/majmc'    },
 ]
 
 // Merges the site's "about/discover" links with its action/support links into
 // one column - the live site's own "Discover Us" mostly duplicates content we
 // already place elsewhere (Terms in the bottom bar, CIQA in Resources), so a
-// standalone column for it would be nearly empty. Folding it into Company
+// standalone column for it would be nearly empty. Folding it into Discover Us
 // keeps every real link while freeing a column for "For Enrolled Students"
 // below. Leadership, Community, and Approvals and Accreditation are kept as
 // `#` placeholders - they're dead links on the live site too, reproduced here
@@ -72,23 +72,18 @@ const RESOURCE_LINKS = [
   { label: 'Important Notices',  href: '/updates#notices' },
 ]
 
-// For enrolled students - all real external systems (LMS, ERP, payment
-// gateway), same hrefs as the live site. "Student Portal" (our own hub, see
-// /student-portal) leads the column as the one-stop overview, same pattern
-// as "About VGU" leading Company - then specific direct-access links follow
-// in the order a student actually uses them: LMS (daily/weekly use) first,
-// then the seasonal exam flow in its real sequence (register via Exam Form,
-// then pay Exam Fee, then check Result once it's out). The old dead
-// "Existing Learners" `#` placeholder is dropped - Student Portal now covers
-// that exact purpose for real, so keeping a dead link next to a working one
-// would just read as broken.
+// For enrolled students - same order as the live site's column (LMS 1, LMS 2,
+// Exam Fee, Exam Form, Result), same hrefs too. The live site's last item is
+// a dead "Existing Learners" `#` placeholder; we swap in "Student Portal"
+// (our own real hub, see /student-portal) in that exact slot since it's the
+// working equivalent of the same "everything else for enrolled students" idea.
 const ENROLLED_LINKS = [
-  { label: 'Student Portal',                                href: '/student-portal' },
-  { label: 'LMS 1 (BBA, MBA)',                              href: 'https://lms.onlinevgu.com/login',                                     newTab: true },
-  { label: 'LMS 2 (BA, BCA, MCA, M.Sc., MA English, MAJMC)', href: 'https://ol.vgu.universitycopilot.com/login',                          newTab: true },
-  { label: 'Exam Form',                                     href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
-  { label: 'Exam Fee',                                      href: 'https://smartpay.easebuzz.in/168702/f96d8ee7dc46400ba2df37045bc2db65', newTab: true },
-  { label: 'Result',                                        href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
+  { label: 'LMS 1 (BBA, MBA)',                                      href: 'https://lms.onlinevgu.com/login',                                     newTab: true },
+  { label: 'LMS 2 (BA, BCA, MCA, M.Sc., Maths, MA English, MA JMC)', href: 'https://ol.vgu.universitycopilot.com/login',                          newTab: true },
+  { label: 'Exam Fee',                                              href: 'https://smartpay.easebuzz.in/168702/f96d8ee7dc46400ba2df37045bc2db65', newTab: true },
+  { label: 'Exam Form',                                             href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
+  { label: 'Result',                                                href: 'https://vguerp.epravesh.com/public/login',                            newTab: true },
+  { label: 'Student Portal',                                        href: '/student-portal' },
 ]
 
 const MAPS_URL = 'https://www.google.com/maps/place/Vivekananda+Global+University/@26.8120353,75.8915397,17z/data=!3m1!4b1!4m6!3m5!1s0x396dc873264c3df3:0x4c7b45a9ce474b8!8m2!3d26.8120353!4d75.8915397!16s%2Fm%2F012wp4bp'
@@ -234,11 +229,14 @@ export default async function Footer() {
               </a>
             </div>
 
-            {/* Programs / Company / For Enrolled Students / Resources - stacked accordions on mobile, plain columns on desktop */}
-            <FooterLinkGroup title="Programs" links={PROGRAM_LINKS} delay={80} />
-            <FooterLinkGroup title="Company" links={COMPANY_LINKS} delay={160} />
-            <FooterLinkGroup title="For Enrolled Students" links={ENROLLED_LINKS} delay={240} />
-            <FooterLinkGroup title="Resources" links={RESOURCE_LINKS} delay={320} />
+            {/* Company / Programs / Resources / For Enrolled Students - matches the
+                live site's column order (Discover Us, Online Programs, Resources,
+                For Enrolled Students) exactly. Stacked accordions on mobile,
+                plain columns on desktop. */}
+            <FooterLinkGroup title="Discover Us" links={COMPANY_LINKS} delay={80} />
+            <FooterLinkGroup title="Online Programs" links={PROGRAM_LINKS} delay={160} />
+            <FooterLinkGroup title="Resources" links={RESOURCE_LINKS} delay={240} />
+            <FooterLinkGroup title="For Enrolled Students" links={ENROLLED_LINKS} delay={320} />
           </div>
 
           {/* Bottom bar */}
