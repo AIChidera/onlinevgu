@@ -276,10 +276,6 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             <IconChevronRight size={20} />
           </button>
         </div>
-
-        <p className="text-[13px] font-body text-white/35">
-          {active + 1} / {total}
-        </p>
       </div>
 
       </div>{/* end animated wrapper */}
