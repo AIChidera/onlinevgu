@@ -1,19 +1,36 @@
+import Image from 'next/image'
+import { HIRER_LOGO_IMAGES } from './hirerLogoImages'
+
+// Names handled by the inline single-color SVG paths below - all sourced
+// directly from the `simple-icons` npm package (CC0, verified official brand
+// data) or, for the learning-platform partners, hand-authored against the
+// real published mark. Everything else with a real logo lives in
+// HIRER_LOGO_IMAGES instead (multi-color wordmarks that don't reduce well to
+// a single-color icon), and is rendered as an actual image below.
 export const BRAND_ICON_NAMES = new Set([
-  'Coursera','LinkedIn Learning','Google','IBM','Meta','Microsoft','Amazon','AWS','DeepLearning.AI',
-  'Accenture','Deloitte','KPMG','EY','PwC','Grant Thornton',
-  'TCS','Infosys','Wipro','HCL','HCL Tech','Oracle','Cognizant','Capgemini','Tech Mahindra','LTIMindtree','Mphasis',
-  'Razorpay','HDFC Bank','ICICI Bank','SBI','Axis Bank','Kotak Mahindra Bank','Kotak Mahindra','Bajaj Finserv','HDFC Life','ICICI Prudential',
-  'HSBC','Standard Chartered','Citibank','JP Morgan',
-  'Flipkart','Swiggy','Zomato','Paytm','PhonePe',
+  'Coursera','LinkedIn Learning','Google','Meta','Microsoft','Amazon','AWS','DeepLearning.AI',
+  'Accenture',
+  'TCS','Infosys','Wipro','HCL','HCL Tech',
+  'Razorpay','HDFC Bank','ICICI Bank','SBI','Axis Bank',
+  'HSBC',
+  'Swiggy','Zomato','Paytm','PhonePe','Zoho',"Byju's",
   'Apollo Hospitals','Fortis Healthcare','Max Healthcare',"Dr. Reddy's",'Manipal Hospitals','Cipla','Sun Pharma','Biocon',
-  'Tata Group','Reliance Industries','Hindustan Unilever','ITC','Mahindra',
-  'NDTV','The Hindu','Times of India','HT Media','Hindustan Times','Times Group','Republic TV','News18',
-  'Ogilvy','Weber Shandwick','Edelman',
-  'RBI','ISRO','NITI Aayog',
+  'Tata Group','Reliance Industries','Mahindra',
+  'ISRO',
   'QS',
+  'Grant Thornton','HDFC Life','ICICI Prudential',
 ])
 
 export default function BrandIcon({ name, className = 'w-full h-full' }: { name: string; className?: string }) {
+  const imageSrc = HIRER_LOGO_IMAGES[name]
+  if (imageSrc) {
+    return (
+      <span className={`relative block ${className}`}>
+        <Image src={imageSrc} alt={name} fill unoptimized className="object-contain p-1" />
+      </span>
+    )
+  }
+
   switch (name) {
 
     /* ── Global tech platforms ───────────────────────────────────── */
@@ -37,14 +54,6 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
         <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
         <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-      </svg>
-    )
-    case 'IBM': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="IBM">
-        <rect width="24" height="24" rx="3" fill="white"/>
-        {[2,5,8,11,14,17,20].map((y, i) => (
-          <rect key={y} x={i % 2 === 0 ? 1 : 3} y={y} width={i % 2 === 0 ? 22 : 18} height="2" rx="0.5" fill="#006699"/>
-        ))}
       </svg>
     )
     case 'Meta': return (
@@ -97,39 +106,8 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <path d="m.66 16.95 13.242-4.926L.66 6.852V0l22.68 9.132v5.682L.66 24Z" fill="white"/>
       </svg>
     )
-    /* Deloitte: green #86BC25, "D." mark - D shape + signature dot */
-    case 'Deloitte': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Deloitte">
-        <rect width="24" height="24" rx="3" fill="#86BC25"/>
-        <path d="M5 7h5.5Q15 7 15 12Q15 17 10.5 17H5z" stroke="white" strokeWidth="1.8" fill="none" strokeLinejoin="round"/>
-        <circle cx="18.5" cy="17" r="2" fill="white"/>
-      </svg>
-    )
-    /* KPMG: navy #00338D, "K" letterform */
-    case 'KPMG': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="KPMG">
-        <rect width="24" height="24" rx="3" fill="#00338D"/>
-        <path d="M5 7v10M5 12l7-5M5 12l7 5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
-    /* EY: yellow #FFE600, black "EY" letterforms */
-    case 'EY': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="EY">
-        <rect width="24" height="24" rx="3" fill="#FFE600"/>
-        <path d="M3 8h7M3 12h5M3 16h7" stroke="#1A1A1A" strokeWidth="2.2" strokeLinecap="round"/>
-        <path d="M15 8l4.5 5M19.5 8L15 13" stroke="#1A1A1A" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="17.5" y1="13" x2="17.5" y2="17" stroke="#1A1A1A" strokeWidth="2.2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* PwC: red #E0301E, "pwc" letterform approximation */
-    case 'PwC': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="PwC">
-        <rect width="24" height="24" rx="3" fill="#E0301E"/>
-        <circle cx="8" cy="12" r="4.5" stroke="white" strokeWidth="2" fill="none"/>
-        <path d="M14 8.5v7M18 8.5v7M14 12h4" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* Grant Thornton: purple #A72080, abstract arc + dot mark */
+    /* Grant Thornton: not currently displayed anywhere on the site - kept as
+       a placeholder shape only, not a verified real mark. */
     case 'Grant Thornton': return (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Grant Thornton">
         <rect width="24" height="24" rx="3" fill="#A72080"/>
@@ -138,22 +116,19 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
       </svg>
     )
 
-    /* ── Indian IT / tech services ────────────────────────────────── */
-    /* TCS: real Simple Icons path - official TCS logomark, #EE3984 */
+    /* ── Indian IT / tech services - official Simple Icons paths ──── */
     case 'TCS': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Tata Consultancy Services">
         <rect width="24" height="24" rx="4" fill="white"/>
         <path d="M24 16.262c0-1.305-.522-2.174-1.827-3.088l-1.785-1.24c-.033-.022-.06-.045-.092-.068-.629-.473-.91-.912-.91-1.43 0-.696.567-1.13 1.371-1.13 1.022 0 1.503.477 2.111.477.479 0 .805-.326.805-.804 0-.348-.174-.631-.631-.848-.718-.348-1.503-.48-2.35-.48-.892 0-1.676.262-2.241.697a.984.984 0 0 0 0-.001 3.64 3.64 0 0 0-.326.283l-.008.01c-.65.695-1.19 1.714-1.623 3.145l-.501 1.652c-.893 2.912-2.306 4.304-4.504 4.304-2.415 0-3.938-1.675-3.938-4.153v.026-.025c0-2.468 1.509-4.159 3.69-4.174l.03-.002a4.857 4.857 0 0 1 2.089.457c.282.13.522.174.74.174.1 0 .192-.017.279-.041.362-.103.592-.408.592-.83 0-.326-.196-.653-.653-.87-.827-.414-1.894-.653-3.046-.653-.86 0-1.653.152-2.359.436-2.117.851-3.452 2.886-3.452 5.545l.002-.024-.001.024c0 .931.169 1.783.479 2.536-.452.985-1.143 1.509-2.046 1.509-1.087 0-1.804-.63-1.806-2.06V9.477h2.546c.588 0 .979-.348.979-.848s-.39-.848-.98-.848H2.09V5.563c0-.653-.435-1.088-1.044-1.088C.435 4.475 0 4.911 0 5.563v10.285c0 2.393 1.37 3.655 3.7 3.655.486.001.97-.08 1.43-.24h.005a3.49 3.49 0 0 0 1.81-1.514c1.034 1.117 2.565 1.775 4.48 1.775.999 0 1.868-.195 2.65-.607h.003c1.588-.827 2.72-2.502 3.503-5.068l.457-1.5a2.984 2.984 0 0 1-.162-.234c.308.492.785.953 1.468 1.43l1.631 1.13c.244.17.463.34.668.51.289.322.378.67.378 1.078 0 .935-.74 1.566-1.807 1.566-1.022 0-1.893-.522-2.371-.522s-.806.325-.806.804c0 .348.174.63.632.848.631.304 1.653.566 2.567.566 1.153 0 2.111-.348 2.785-.957a1.59 1.59 0 0 0 .156-.161A3.104 3.104 0 0 0 24 16.262z" fill="#EE3984"/>
       </svg>
     )
-    /* Infosys: real Simple Icons path - official wordmark, #007CC3 */
     case 'Infosys': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Infosys">
         <rect width="24" height="24" rx="3" fill="white"/>
         <path d="M23.2734 7.5703c-.3984 0-.7246.3282-.7246.7266 0 .4013.3262.7246.7246.7246.3982 0 .7266-.3233.7266-.7246 0-.3984-.3284-.7266-.7266-.7266zm0 .1074c.3395 0 .6192.2795.6192.6192 0 .3396-.2797.6172-.6192.6172-.3397 0-.6171-.2776-.6171-.6172 0-.3397.2774-.6192.6171-.6192zm-15.1367.0547c-.9001 0-1.549.5917-1.6387 1.6406h-.6953v.5215h.6856c.0028 1.6664-.002 3.334-.002 4.998h.7774c-.0022-1.6659-.002-3.3319-.002-4.998h1.748c-.646.5242-1.0663 1.3739-1.0663 2.334 0 1.593 1.1564 2.8848 2.582 2.8848 1.4258 0 2.582-1.2918 2.582-2.8848 0-.1896-.0174-.3753-.0488-.5547.2565.4131.7488.6133 1.4082.8985.7784.329 1.2129.6165 1.2129 1.1074 0 .5885-.556.8955-1.1817.8906-.611 0-1.0883-.249-1.6191-.7305v.9239c.3239.2088.8256.3281 1.3691.3281.6844-.0023 2.0918-.249 2.0918-1.6758-.0044-.8557-.715-1.2239-1.4863-1.5586-.9383-.4653-1.2965-.5629-1.2871-1.0957 0-.7088.6178-.9219 1.0996-.9219.2099 0 .3891.0293.5586.086.3163.1194.4209.3553.5332.6113.5283 1.2356 1.0344 2.4811 1.5488 3.7227-.2464.5637-.526 1.1519-.7168 1.5273l-.0039.0098-.1601.2969-.1797.336h.7617c.3322-.7342 1.7436-4.1688 2.0469-4.9083.1995.533.6857.7467 1.4297 1.0684.7783.329 1.2148.6166 1.2148 1.1074 0 .5886-.5562.8936-1.1816.8887-.6348 0-1.1257-.2685-1.6817-.7871l-.0507-.041v.9413c.3115.259.8713.4102 1.4824.4102.6844-.0022 2.0918-.249 2.0918-1.6758-.0042-.8557-.7151-1.2258-1.4863-1.5605-.9384-.4654-1.2593-.563-1.25-1.0957 0-.709.5787-.9219 1.0605-.9219.5483 0 .8958.2037 1.379.5547V9.584c-.3923-.1381-.7212-.1915-1.1642-.1895-.8912-.0018-1.6966.3234-1.9004 1.0762l-1.1054 2.7344-.1153.3437-.1015-.3437c-.5022-1.2089-.9934-2.4236-1.4863-3.6309-.3154-.0828-.8307-.201-1.1934-.1953-.0377-.0007-.0758-.0002-.1152 0-1.0302-.002-2.0235.4332-2.0235 1.457 0 .0596.0022.1155.006.17-.412-.9813-1.3036-1.6602-2.338-1.6602-.1245 0-.2472.0085-.3672.0273H7.254c-.1194-.733.2228-1.1503.7383-1.1503.6472-.0006.9242.192 1.205.4511 0 0 .0195-.0007.0274 0 .0038-.2457.002-.5318.002-.7949-.185-.0857-.5061-.1465-1.0899-.1465zM0 7.756v7.1367h.8594V7.7559zm23 .1386v.7657h.1387v-.3086h.164l.1192.3086h.1543l-.1407-.3301c.0494-.0248.1329-.0518.1329-.1875 0-.2224-.1673-.248-.3125-.248zm.1387.1328h.1543c.0834 0 .1289.0337.1289.1016 0 .068-.0524.0996-.1172.0996h-.166zM4.1719 9.3555c-.945 0-1.3429.3359-1.6582.6738a.2474.2474 0 00-.0352.0644h-.0078v-.043l-.0098-.623H1.707v5.4649h.7754v-3.9961c.0226-.4905.7134-.9746 1.252-.9746.6477 0 1.1777.4364 1.1777 1.039v3.9317h.7754c-.0019-1.429-.002-2.858-.002-4.2871-.0234-.4835-.6094-1.25-1.5136-1.25zm6.2832.5566c.9741-.0175 1.7825 1.0214 1.8047 2.3184.022 1.297-.7504 2.3614-1.7246 2.3789-.9742.0171-1.7825-1.0195-1.8047-2.3164-.0221-1.2971.7503-2.3634 1.7246-2.3809Z" fill="#007CC3"/>
       </svg>
     )
-    /* Wipro: real Simple Icons path - official flower/rainbow mark, #341C53 */
     case 'Wipro': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Wipro">
         <rect width="24" height="24" rx="3" fill="white"/>
@@ -168,89 +143,22 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <path d="M21.3968 10.4013l-1.0971 2.4399H24l-.3435.7629H17.294l1.4331-3.2028zm-6.3985 1.0896h2.4633c-.0152-.5377-.5358-.911-1.5672-1.0592-2.0348-.2994-4.2354-.1718-5.802.6934-1.2346.6859-1.329 1.7176-.099 2.2232 1.0357.4218 3.2106.4656 4.767.201 1.0077-.1712 1.7776-.502 2.2093-.9974H14.454c-.3262.251-.7526.376-1.25.3804-1.4124.0094-1.5988-.4182-1.3525-.9106.293-.5801.9075-.8966 1.8447-.9216.7381-.0199 1.1029.1436 1.3021.3908M0 13.6067h2.604l.5578-1.2789h2.553l-.5732 1.2771h2.635l1.4457-3.2031h-2.653l-.4769 1.0807H3.5421l.4831-1.0807-2.5781-.0006Z" fill="white"/>
       </svg>
     )
-    /* Oracle: red ellipse mark on white (visible at small size) */
-    case 'Oracle': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Oracle">
-        <rect width="24" height="24" rx="3" fill="white"/>
-        <ellipse cx="12" cy="12" rx="9.5" ry="6" fill="#F80000"/>
-        <ellipse cx="12" cy="12" rx="5.5" ry="3" fill="white"/>
-      </svg>
-    )
-    case 'Cognizant': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Cognizant">
-        <rect width="24" height="24" rx="3" fill="#1B62B0"/>
-        <path d="M19 8A8 8 0 1 0 19 16" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-        <circle cx="19" cy="12" r="2.5" fill="white"/>
-      </svg>
-    )
-    case 'Capgemini': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Capgemini">
-        <rect width="24" height="24" rx="3" fill="#003057"/>
-        <path d="M12 4L4 20L12 16.5L20 20Z" fill="white" fillOpacity="0.92"/>
-        <circle cx="12" cy="11" r="2.5" fill="#003057"/>
-      </svg>
-    )
-    case 'Tech Mahindra': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Tech Mahindra">
-        <rect width="24" height="24" rx="3" fill="#00A6A4"/>
-        <path d="M3 7l4.5 10L12 7l4.5 10L21 7" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
-    case 'LTIMindtree': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="LTIMindtree">
-        <rect width="24" height="24" rx="3" fill="#1A5E20"/>
-        <path d="M4 17V7l4 7 4-7 4 7" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="4" y1="17" x2="20" y2="17" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    )
-    case 'Mphasis': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Mphasis">
-        <rect width="24" height="24" rx="3" fill="#0C2461"/>
-        <path d="M4 17V7l4 5 4-5 4 5 4-5v10" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
 
-    /* ── Global banking ──────────────────────────────────────────── */
-    /* HSBC: real Simple Icons path - official 4-triangle hexagon mark, #DB0011 */
+    /* ── Global banking (already accurate, unaffected by this pass) ── */
     case 'HSBC': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="HSBC">
         <rect width="24" height="24" rx="3" fill="white"/>
         <path d="m24 12.007-5.996 5.997V5.996L24 12.007zm-5.996-6.01H6.01l5.996 6.01 5.997-6.01zM0 12.006l6.01 5.997V5.996L0 12.007zm6.01 5.997h11.994l-5.997-5.997-5.996 5.997z" fill="#DB0011"/>
       </svg>
     )
-    /* Standard Chartered: #0B3D91 blue, S-wave mark */
-    case 'Standard Chartered': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Standard Chartered">
-        <rect width="24" height="24" rx="3" fill="#0B3D91"/>
-        <path d="M17 9.5Q14 7 11 9.5Q8 12 11 13.5Q14 15 11 17" stroke="white" strokeWidth="2.4" fill="none" strokeLinecap="round"/>
-      </svg>
-    )
-    /* Citibank: #003B8D blue, C arc with distinctive red arc (the Citi arc mark) */
-    case 'Citibank': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Citibank">
-        <rect width="24" height="24" rx="4" fill="#003B8D"/>
-        <path d="M17 9.5A6.5 6.5 0 1 0 17 14.5" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-        <path d="M7 7A7 7 0 0 1 17 7" stroke="#E31837" strokeWidth="2.8" fill="none" strokeLinecap="round"/>
-      </svg>
-    )
-    /* JP Morgan: #0033A0 blue, J letterform */
-    case 'JP Morgan': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="JP Morgan">
-        <rect width="24" height="24" rx="3" fill="#0033A0"/>
-        <line x1="9" y1="7" x2="15" y2="7" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <path d="M12 7v9Q12 19 9 19Q7 19 7 17" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      </svg>
-    )
 
     /* ── Indian fintech / payments ────────────────────────────────── */
-    /* Razorpay: real Simple Icons path - the "R" lightning bolt mark */
     case 'Razorpay': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Razorpay">
         <rect width="24" height="24" rx="4" fill="#0C2451"/>
         <path d="M22.436 0l-11.91 7.773-1.174 4.276 6.625-4.297L11.65 24h4.391l6.395-24zM14.26 10.098L3.389 17.166 1.564 24h9.008l3.688-13.902Z" fill="#2D80F2"/>
       </svg>
     )
-    /* Paytm: real Simple Icons path - official logomark, #20336B */
     case 'Paytm': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Paytm">
         <rect width="24" height="24" rx="3" fill="white"/>
@@ -264,22 +172,29 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <path d="M10.206 9.941h2.949v4.692c-.402.201-.938.268-1.34.268-1.072 0-1.609-.536-1.609-1.743V9.941zm13.47 4.816c-1.523 6.449-7.985 10.442-14.433 8.919C2.794 22.154-1.199 15.691.324 9.243 1.847 2.794 8.309-1.199 14.757.324c6.449 1.523 10.442 7.985 8.919 14.433zm-6.231-5.888a.887.887 0 0 0-.871-.871h-1.609l-3.686-4.222c-.335-.402-.871-.536-1.407-.402l-1.274.401c-.201.067-.268.335-.134.469l4.021 3.82H6.386c-.201 0-.335.134-.335.335v.67c0 .469.402.871.871.871h.938v3.217c0 2.413 1.273 3.82 3.418 3.82.67 0 1.206-.067 1.877-.335v2.145c0 .603.469 1.072 1.072 1.072h.938a.432.432 0 0 0 .402-.402V9.874h1.542c.201 0 .335-.134.335-.335v-.67z" fill="white"/>
       </svg>
     )
+    /* Zoho: real Simple Icons path, #E42527 */
+    case 'Zoho': return (
+      <svg viewBox="0 0 24 24" className={className} aria-label="Zoho">
+        <rect width="24" height="24" rx="3" fill="white"/>
+        <path d="M8.66 6.897a1.299 1.299 0 0 0-1.205.765l-.642 1.44-.062-.385A1.291 1.291 0 0 0 5.27 7.648l-4.185.678A1.291 1.291 0 0 0 .016 9.807l.678 4.18a1.293 1.293 0 0 0 1.27 1.087c.074 0 .143-.01.216-.017l4.18-.678c.436-.07.784-.351.96-.723l2.933 1.307a1.304 1.304 0 0 0 .988.026c.321-.12.575-.365.716-.678l.28-.629.038.276a1.297 1.297 0 0 0 1.455 1.103l3.712-.501a1.29 1.29 0 0 0 1.03.514h4.236c.713 0 1.29-.58 1.291-1.291V9.545c0-.712-.58-1.291-1.291-1.291h-4.236c-.079 0-.155.008-.23.022a1.309 1.309 0 0 0-.275-.288c-.275-.21-.614-.3-.958-.253l-4.197.571c-.155.021-.3.07-.432.14L9.159 7.01a1.27 1.27 0 0 0-.499-.113zm-.025.705c.077 0 .159.013.24.052l2.971 1.324c-.128.238-.18.508-.142.782l.357 2.596h.002l-.745 1.672a.59.59 0 0 1-.777.296l-3.107-1.385-.004-.041-.41-2.526L8.1 7.95a.589.589 0 0 1 .536-.348zm-3.159.733c.125 0 .245.039.343.112.13.09.21.227.237.382l.234 1.446-.56 1.259a1.27 1.27 0 0 0-.026.987c.12.322.364.575.678.717l.295.131a.585.585 0 0 1-.428.314l-4.185.678a.59.59 0 0 1-.674-.485l-.678-4.18a.588.588 0 0 1 .485-.674l4.185-.678c.03-.004.064-.01.094-.01zm11.705.09a.59.59 0 0 1 .415.173 1.287 1.287 0 0 0-.416.947v4.237c0 .033.003.065.005.097l-3.55.482a.586.586 0 0 1-.66-.502l-.191-1.403.899-2.017a1.29 1.29 0 0 0-.333-1.5l3.754-.51c.026-.004.051-.004.077-.004zm1.3.532h4.227c.326 0 .588.266.588.588v4.237a.589.589 0 0 1-.588.588h-4.237a.564.564 0 0 1-.12-.013c.47-.246.758-.765.684-1.318zm-5.988.309.254.113c.296.133.43.48.296.777l-.432.97-.207-1.465a.58.58 0 0 1 .09-.395zm5.39.538.453 3.325a.583.583 0 0 1-.453.65zM6.496 11.545l.17 1.052a.588.588 0 0 1-.293-.776zm3.985 4.344a.588.588 0 0 0-.612.603c0 .358.244.61.601.61a.582.582 0 0 0 .607-.608c0-.35-.242-.605-.596-.605zm5.545 0a.588.588 0 0 0-.612.603c0 .358.245.61.602.61a.582.582 0 0 0 .606-.608c0-.35-.24-.605-.596-.605zm-8.537.018a.047.047 0 0 0-.048.047v.085c0 .026.021.047.048.047h.52l-.623.9a.052.052 0 0 0-.009.027v.027c0 .026.021.047.048.047h.815a.047.047 0 0 0 .047-.047v-.085a.047.047 0 0 0-.047-.047h-.55l.606-.9a.05.05 0 0 0 .008-.026v-.028a.047.047 0 0 0-.047-.047zm5.303 0a.047.047 0 0 0-.047.047v1.086c0 .026.02.047.047.047h.135a.047.047 0 0 0 .047-.047v-.454h.545v.454c0 .026.02.047.047.047h.134a.047.047 0 0 0 .047-.047v-1.086a.047.047 0 0 0-.047-.047h-.134a.047.047 0 0 0-.047.047v.453h-.545v-.453a.047.047 0 0 0-.047-.047zm-2.324.164c.25 0 .372.194.372.425 0 .219-.109.425-.358.426-.242 0-.375-.197-.375-.419 0-.235.108-.432.36-.432zm5.545 0c.25 0 .372.194.372.425 0 .219-.108.425-.358.426-.242 0-.374-.197-.374-.419 0-.235.108-.432.36-.432z" fill="#E42527"/>
+      </svg>
+    )
 
     /* ── Indian banking ───────────────────────────────────────────── */
-    /* HDFC Bank: real Simple Icons path - H-grid logo mark, #004B8D */
     case 'HDFC Bank': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="HDFC Bank">
         <rect width="24" height="24" rx="4" fill="#004B8D"/>
         <path d="M.572 0v10.842h3.712V4.485h6.381V0Zm12.413 0v4.485h6.383v6.357h4.06V0Zm-4.64 8.53v6.938h6.963V8.53ZM.572 13.153V24h10.093v-4.486h-6.38v-6.361zm18.796 0v6.361h-6.383V24h10.443V13.153Z" fill="white"/>
       </svg>
     )
-    /* ICICI Bank: real Simple Icons path - official mark, #AE282E */
     case 'ICICI Bank': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="ICICI Bank">
         <rect width="24" height="24" rx="3" fill="white"/>
         <path d="M21.9258 2.0961C19.279-1.6476 12.698-.2426 7.2138 5.2416c-5.484 5.475-7.7865 12.9625-5.1397 16.7062.8728 1.2386 2.1837 1.902 3.7386 2.0522 1.0516.0078 1.9129-1.1846 2.6158-2.7774.7252-1.6678 1.1694-3.218 1.5138-4.6592.5077-2.2934.544-3.934.29-4.2786-.435-.5801-1.4321-.435-2.5561.2176-.544.2991-1.26.0997-.408-.9336.8612-1.0425 4.2605-3.5625 5.4933-3.9523 1.3415-.3898 2.8734.136 2.3568 1.6226-.3706 1.0847-5.0473 13.486-1.596 12.2719 1.1049-.747 2.205-1.6497 3.2639-2.7086 5.4841-5.475 7.7865-12.9625 5.1396-16.7063zm-5.3662 3.209c-1.0969 1.0968-2.52 1.4865-3.1364.852-.6617-.6345-.272-2.0577.8249-3.1726 1.1058-1.115 2.529-1.4594 3.1454-.834.6345.6436.2448 2.0487-.834 3.1545z" fill="#AE282E"/>
       </svg>
     )
+    /* SBI: not currently displayed anywhere on the site - kept as a
+       placeholder shape only, not a verified real mark. */
     case 'SBI': return (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="State Bank of India">
         <rect width="24" height="24" rx="3" fill="#1F4E9C"/>
@@ -287,28 +202,14 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <circle cx="12" cy="10" r="2" fill="white"/>
       </svg>
     )
-    /* Axis Bank: real Simple Icons path - clean A-triangle mark, #971A4D */
     case 'Axis Bank': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Axis Bank">
         <rect width="24" height="24" rx="3" fill="#971A4D"/>
         <path d="M11.978 1.596 0 22.404h7.453l8.265-14.369Zm.027 12.896 4.533 7.903H24l-4.533-7.903z" fill="white"/>
       </svg>
     )
-    case 'Bajaj Finserv': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Bajaj Finserv">
-        <rect width="24" height="24" rx="3" fill="#0066CC"/>
-        <path d="M5 7h7Q13 7 13 10Q13 13 10 13H5z" stroke="white" strokeWidth="1.8" fill="none" strokeLinejoin="round"/>
-        <path d="M5 13h8Q17 13 17 17Q17 17 12 17H5z" stroke="white" strokeWidth="1.8" fill="none" strokeLinejoin="round"/>
-      </svg>
-    )
-    case 'Kotak Mahindra':
-    case 'Kotak Mahindra Bank': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Kotak Mahindra Bank">
-        <rect width="24" height="24" rx="3" fill="#C40000"/>
-        <path d="M5 7v10M5 12l8-5M5 12l8 5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="16" y1="7" x2="16" y2="17" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-      </svg>
-    )
+    /* HDFC Life / ICICI Prudential: not currently displayed anywhere on the
+       site - kept as placeholder shapes only, not verified real marks. */
     case 'HDFC Life': return (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="HDFC Life">
         <rect width="24" height="24" rx="3" fill="#004088"/>
@@ -324,31 +225,28 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
     )
 
     /* ── E-commerce & consumer tech ──────────────────────────────── */
-    /* Flipkart: blue #2874F0, shopping bag mark */
-    case 'Flipkart': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Flipkart">
-        <rect width="24" height="24" rx="3" fill="#2874F0"/>
-        <path d="M8 10V8Q8 4 12 4Q16 4 16 8v2" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
-        <path d="M6 10h12l-1.5 10H7.5z" stroke="white" strokeWidth="1.8" fill="none" strokeLinejoin="round"/>
-        <line x1="10" y1="14" x2="14" y2="14" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    )
-    /* Swiggy: real Simple Icons path - official S-swirl mark, #FC8019 */
     case 'Swiggy': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Swiggy">
         <rect width="24" height="24" rx="4" fill="white"/>
         <path d="M12.034 24c-.376-.411-2.075-2.584-3.95-5.513-.547-.916-.901-1.63-.833-1.814.178-.48 3.355-.743 4.333-.308.298.132.29.307.29.409 0 .44-.022 1.619-.022 1.619a.441.441 0 1 0 .883-.002l-.005-2.939c0-.255-.278-.319-.331-.329-.511-.002-1.548-.006-2.661-.006-2.457 0-3.006.101-3.423-.172-.904-.591-2.383-4.577-2.417-6.819C3.849 4.964 5.723 2.225 8.362.868A8.13 8.13 0 0 1 12.026 0c4.177 0 7.617 3.153 8.075 7.209l.001.011c.084.981-5.321 1.189-6.39.904-.164-.044-.206-.212-.206-.284L13.5 4.996a.442.442 0 0 0-.884.002l.009 3.866a.33.33 0 0 0 .268.32l3.354-.001c1.79 0 2.542.207 3.042.588.333.254.461.739.349 1.37C18.633 16.755 12.273 23.71 12.034 24z" fill="#FC8019"/>
       </svg>
     )
-    /* Zomato: real Simple Icons path - official logomark, #E23744 */
     case 'Zomato': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Zomato">
         <rect width="24" height="24" rx="4" fill="white"/>
         <path d="M19.615 9.45l-1.258.473-.167.71-.446.021-.115.978h.408l-.211 1.51c-.131.939.036 1.381.865 1.381.488 0 .91-.175 1.135-.297l.145-.9c-.167.083-.436.19-.618.19-.247 0-.276-.13-.225-.488l.189-1.396h.843c.03-.206.131-.877.16-1h-.865zm-3.779 1.002c-.115.002-.236.01-.361.026a3.592 3.592 0 0 0-1.347.432l.26.789c.269-.15.615-.28.978-.326.538-.066.757.1.79.375.014.109.004.199-.005.289l-.014.056a3.46 3.46 0 0 0-1.097-.036c-.518.063-.943.273-1.204.6a1.324 1.324 0 0 0-.225 1.034c.127.583.553.84 1.199.76.45-.055.812-.27 1.076-.63a2.665 2.665 0 0 1-.03.304 1.74 1.74 0 0 1-.072.29l1.244.001a3.657 3.657 0 0 1-.001-.365c.036-.459.118-1.143.247-2.051a2.397 2.397 0 0 0-.002-.59c-.08-.644-.628-.969-1.436-.958zm6.536.063c-1.194 0-2.107 1.067-2.107 2.342 0 .959.552 1.693 1.628 1.693 1.2 0 2.107-1.067 2.107-2.35 0-.95-.538-1.685-1.628-1.685zm-11.777.041c-.538 0-1.12.465-1.52 1.236.102-.504.08-1.076.051-1.198a8.964 8.964 0 0 1-1.287.122 6.9 6.9 0 0 1-.073 1.243l-.167 1.145c-.066.45-.138.969-.211 1.297h1.353c.007-.199.058-.511.094-.786l.116-.786c.095-.511.502-1.114.815-1.114.182 0 .175.176.124.504l-.131.885c-.066.45-.138.969-.211 1.297h1.367c.008-.199.051-.512.088-.786l.116-.786c.094-.512.502-1.114.814-1.114.182 0 .175.168.146.396l-.327 2.29H13l.438-2.609c.095-.649.044-1.236-.676-1.236-.523 0-1.09.443-1.49 1.182.087-.61.036-1.182-.677-1.182zm-4.88.008c-1.177 0-2.08 1.053-2.08 2.312 0 .946.546 1.67 1.608 1.67 1.185 0 2.08-1.052 2.08-2.319 0-.938-.531-1.663-1.607-1.663zm-5.126.091c-.05.39-.102.778-.175 1.13.328-.008.619-.016 1.411-.016l-1.81 1.96-.015.703c.444-.03.997-.039 1.63-.039.566 0 1.134.008 1.497.039.065-.458.13-.763.21-1.137-.275.015-.755.023-1.512.023l1.81-1.969.023-.694c-.437.023-.83.03-1.52.03-.749 0-.975-.007-1.549-.03zm4.988.927c.255 0 .408.228.408.701 0 .687-.276 1.251-.626 1.251-.261 0-.414-.236-.414-.702 0-.694.283-1.25.632-1.25zm16.629 0c.254 0 .407.228.407.701 0 .687-.276 1.251-.625 1.251-.262 0-.415-.236-.415-.702 0-.694.284-1.25.633-1.25zM15.51 12.64c.206-.003.403.024.55.058l-.013.118c-.075.44-.39.881-.848.938-.31.037-.578-.148-.608-.39a.538.538 0 0 1 .114-.41c.117-.159.336-.268.599-.3.069-.009.138-.013.206-.014Z" fill="#E23744"/>
       </svg>
     )
+    /* Byju's: real Simple Icons path, #813588 */
+    case "Byju's": return (
+      <svg viewBox="0 0 24 24" className={className} aria-label="Byju's">
+        <rect width="24" height="24" rx="4" fill="#813588"/>
+        <path d="M2.327.016A2.325 2.325 0 0 0 0 2.34v19.32a2.325 2.325 0 0 0 2.327 2.323h19.346A2.325 2.325 0 0 0 24 21.66V2.34A2.325 2.325 0 0 0 21.673.016zm10.054 3.496a3.443 3.443 0 0 1 .07 0 4.317 4.317 0 0 1 3.267 1.462 4.447 4.447 0 0 1 .961 2.365 4.157 4.157 0 0 1-.456 2.27 5.024 5.024 0 0 1 2.424 2.008 5.237 5.237 0 0 1 .73 3.374 4.68 4.68 0 0 1-1.15 2.466 4.84 4.84 0 0 1-2.26 1.535l-4.987 1.439a1.494 1.494 0 0 1-.41.058 1.497 1.497 0 0 1-1.432-1.075L5.524 6.909a1.487 1.487 0 0 1 1.018-1.841l4.956-1.429a3.443 3.443 0 0 1 .883-.127zm.248.861a3.091 3.091 0 0 0-.855.122L6.94 5.888a.744.744 0 0 0-.51.922l3.53 12.206a.745.745 0 0 0 .921.509l4.664-1.345a4.085 4.085 0 0 0-.896-8.003 3.297 3.297 0 0 0 1.138-2.272 3.479 3.479 0 0 0-.928-2.549 2.989 2.989 0 0 0-2.23-.983Z" fill="white"/>
+      </svg>
+    )
 
-    /* ── Healthcare ───────────────────────────────────────────────── */
+    /* ── Healthcare (not currently displayed anywhere on the site - kept
+       as placeholder shapes only, not verified real marks) ──────────── */
     case 'Apollo Hospitals': return (
       <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Apollo Hospitals">
         <rect width="24" height="24" rx="3" fill="#003781"/>
@@ -403,36 +301,19 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
       </svg>
     )
 
-    /* ── Conglomerates / FMCG ────────────────────────────────────── */
-    /* Tata Group: real Simple Icons path, correct color #486AAE */
+    /* ── Conglomerates - official Simple Icons paths ─────────────── */
     case 'Tata Group': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Tata Group">
         <rect width="24" height="24" rx="3" fill="#486AAE"/>
         <path d="M9.774 11.568c.193-1.322.168-2.013-1.768-1.906-2.223.124-4.476.265-7.849 1.027A5.63 5.63 0 0 0 0 12c0 1.52.618 2.99 1.787 4.254 1.06 1.144 2.556 2.095 4.326 2.752a15.48 15.48 0 0 0 2.014.588c.13-.527.959-3.907 1.616-7.823l.03-.202m14.07-.88c-3.372-.762-5.624-.902-7.846-1.026-1.937-.107-1.962.584-1.768 1.906l.046.298c.65 3.848 1.458 7.16 1.598 7.72C20.595 18.508 24 15.516 24 12c0-.443-.054-.88-.157-1.311m-.491-1.324a7.163 7.163 0 0 0-1.14-1.618c-1.06-1.144-2.555-2.095-4.325-2.752-1.784-.662-3.82-1.011-5.887-1.011-2.068 0-4.103.35-5.887 1.01-1.77.658-3.266 1.61-4.326 2.753A7.17 7.17 0 0 0 .648 9.366c2.304-.557 6.245-1.293 9.904-1.37.353-.008.596.105.756.307.196.248.18 1.128.175 1.522l-.104 10.18a18.507 18.507 0 0 0 1.244 0l-.104-10.18c-.005-.394-.02-1.274.175-1.522.16-.202.403-.315.756-.308 3.658.078 7.597.813 9.902 1.37z" fill="white"/>
       </svg>
     )
-    /* Reliance Industries: real Simple Icons path - official mark, #D1AB66 (gold) */
     case 'Reliance Industries': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Reliance Industries">
         <rect width="24" height="24" rx="3" fill="white"/>
         <path d="M7.65 18.44c.717-1.506 1.356-3.046 1.661-4.787.119 1.818 1.2 3.435 1.72 5.177.199.842.214 1.714-.107 2.584-.349.948-.911 1.759-1.582 2.488C7.528 21.936 6.97 20.11 7.65 18.44zm11.547 3.765c-.825.623-1.902.716-2.744.311 0 0-.229-.093-.439-.34-1.6-1.868-3.215-3.725-4.828-5.583 1.431.264 3-.438 3.805-1.712.81-1.212.777-2.942.016-4.154-.916-1.324-2.695-1.758-4.19-1.555-2.588.373-4.447 2.722-5.026 5.182-.595 2.799-.166 5.44.761 7.932a6.87 6.87 0 0 0 .856 1.538c-2.727-1.215-5.137-3.45-6.402-6.457-1.4-3.232-1.372-7.324.294-10.606C2.608 4.225 4.923 1.876 7.789.884c1.157-.49 2.47-.746 3.81-.786h.716c1.91.057 3.838.55 5.435 1.466 3.548 1.807 6.232 6.3 6.244 10.314.123 4.153-1.674 7.915-4.797 10.327z" fill="#D1AB66"/>
       </svg>
     )
-    case 'Hindustan Unilever': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Hindustan Unilever">
-        <rect width="24" height="24" rx="3" fill="#003399"/>
-        <path d="M5 7v6Q5 17 12 17Q19 17 19 13V7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-      </svg>
-    )
-    case 'ITC': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="ITC">
-        <rect width="24" height="24" rx="3" fill="#006400"/>
-        <line x1="4" y1="4" x2="20" y2="4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="12" y1="4" x2="12" y2="20" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <path d="M4 12Q4 8 7 8Q10 8 10 12Q10 16 7 16" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.7"/>
-      </svg>
-    )
-    /* Mahindra: real Simple Icons path - official logomark, #DD052B */
     case 'Mahindra': return (
       <svg viewBox="0 0 24 24" className={className} aria-label="Mahindra">
         <rect width="24" height="24" rx="3" fill="white"/>
@@ -440,123 +321,12 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
       </svg>
     )
 
-    /* ── Indian media ────────────────────────────────────────────── */
-    /* NDTV: #E60026 red, N + aerial mark */
-    case 'NDTV': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="NDTV">
-        <rect width="24" height="24" rx="3" fill="#E60026"/>
-        <path d="M5 17V7l6 10V7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="14" y1="7" x2="20" y2="7" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="17" y1="7" x2="17" y2="17" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* The Hindu: dark maroon #3C1A1A, serif H mark */
-    case 'The Hindu': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="The Hindu">
-        <rect width="24" height="24" rx="3" fill="#3C1A1A"/>
-        <line x1="5" y1="8" x2="5" y2="16" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="5" y1="12" x2="11" y2="12" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="11" y1="8" x2="11" y2="16" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="14" y1="8" x2="20" y2="8" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.7"/>
-        <line x1="17" y1="8" x2="17" y2="16" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.7"/>
-      </svg>
-    )
-    /* Times of India: #CC0000 red, bold T letterform */
-    case 'Times of India': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Times of India">
-        <rect width="24" height="24" rx="3" fill="#CC0000"/>
-        <line x1="4" y1="8" x2="20" y2="8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="12" y1="8" x2="12" y2="18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-      </svg>
-    )
-    /* HT Media / Hindustan Times: #C8001D red, H-T letterforms */
-    case 'HT Media':
-    case 'Hindustan Times': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="HT Media">
-        <rect width="24" height="24" rx="3" fill="#C8001D"/>
-        <line x1="4" y1="8" x2="4" y2="16" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="4" y1="12" x2="9.5" y2="12" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="9.5" y1="8" x2="9.5" y2="16" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="12" y1="8" x2="20" y2="8" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-        <line x1="16" y1="8" x2="16" y2="16" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* Times Group: #CC0000 red, T mark (parent of TOI) */
-    case 'Times Group': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Times Group">
-        <rect width="24" height="24" rx="3" fill="#CC0000"/>
-        <line x1="4" y1="8" x2="20" y2="8" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="12" y1="8" x2="12" y2="18" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-        <line x1="8" y1="18" x2="16" y2="18" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.55"/>
-      </svg>
-    )
-    /* Republic TV: dark bg, R mark in red */
-    case 'Republic TV': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Republic TV">
-        <rect width="24" height="24" rx="3" fill="#0D0D0D"/>
-        <path d="M6 16V8h5Q13 8 13 11Q13 14 10 14H6" stroke="#FF2929" strokeWidth="2" fill="none" strokeLinejoin="round"/>
-        <path d="M10 14L14 16" stroke="#FF2929" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* News18: #CC2200 red, N mark */
-    case 'News18': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="News18">
-        <rect width="24" height="24" rx="3" fill="#CC2200"/>
-        <path d="M5 17V7l8 10V7" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="15" y1="7" x2="20" y2="7" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-        <line x1="15" y1="12" x2="20" y2="12" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-        <line x1="15" y1="17" x2="20" y2="17" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    )
-
-    /* ── PR / Communications ──────────────────────────────────────── */
-    /* Ogilvy: #EF3D3B red, O circle mark */
-    case 'Ogilvy': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Ogilvy">
-        <rect width="24" height="24" rx="3" fill="#EF3D3B"/>
-        <circle cx="12" cy="12" r="7" stroke="white" strokeWidth="2.5" fill="none"/>
-      </svg>
-    )
-    /* Weber Shandwick: #0F52BA blue, W letterform */
-    case 'Weber Shandwick': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Weber Shandwick">
-        <rect width="24" height="24" rx="3" fill="#0F52BA"/>
-        <path d="M4 8l3.5 9L11 8l3.5 9L18 8" stroke="white" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
-    /* Edelman: #003B8E deep blue, E letterform */
-    case 'Edelman': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Edelman">
-        <rect width="24" height="24" rx="3" fill="#003B8E"/>
-        <path d="M6 8h10M6 12h8M6 16h10" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-      </svg>
-    )
-
     /* ── Public sector / research ─────────────────────────────────── */
-    /* RBI: #1A237E navy, R mark with gold ring */
-    case 'RBI': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Reserve Bank of India">
-        <rect width="24" height="24" rx="3" fill="#1A237E"/>
-        <circle cx="12" cy="12" r="8" stroke="#FFA412" strokeWidth="1.5" fill="none" opacity="0.7"/>
-        <path d="M9 16V8h4Q14.5 8 14.5 11Q14.5 14 12 14H9" stroke="white" strokeWidth="2" fill="none" strokeLinejoin="round" strokeLinecap="round"/>
-        <path d="M12 14L15 16" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    )
-    /* ISRO: #003777 blue, rocket + orbital ellipse */
+    /* ISRO: real Simple Icons path, #F58220 */
     case 'ISRO': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="ISRO">
-        <rect width="24" height="24" rx="3" fill="#003777"/>
-        <path d="M12 19V6" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-        <path d="M9 9L12 6L15 9" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-        <ellipse cx="12" cy="14" rx="6.5" ry="3" stroke="#F47B20" strokeWidth="1.8" fill="none"/>
-      </svg>
-    )
-    /* NITI Aayog: saffron + blue, N mark */
-    case 'NITI Aayog': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="NITI Aayog">
-        <rect width="24" height="24" rx="3" fill="#0B3B8C"/>
-        <path d="M5 17V7l10 10V7" stroke="#FF9933" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-        <line x1="16" y1="7" x2="16" y2="17" stroke="#FF9933" strokeWidth="2.2" strokeLinecap="round"/>
+      <svg viewBox="0 0 24 24" className={className} aria-label="ISRO">
+        <rect width="24" height="24" rx="3" fill="white"/>
+        <path d="M12.5293.5067 5.9449 13.856l4.7616-5.7348 1.8261 15.372ZM5.4597 3.8449l-.528 1.085 1.8526.4203.5185-1.0755Zm2.243.528L7.178 5.4548l1.8526.4202.5146-1.0755Zm6.0003 1.3772-.518 1.0822 1.8499.423.5213-1.0754Zm2.2435.528-.5151 1.079 1.8493.423.5213-1.0755Zm-7.0452 6.6765a2.1418 2.1418 0 0 0-.1954.0096l-.2395.58c.6854-.1159.9826.077 1.2392.7908H.0034L0 14.8366h2.3446v.2819s-.928-.3607-1.7216.3507c-.6196.715-.1017 1.4138-.1017 1.4138s.518-.289 1.3246-.1514c.7507.1346.7117.492.7117.492s-.1015.4428-.705.3576c-.6065-.0918-.5608-.6982-.5608-.6982l-.6688.4423s.2584.4352.8315.5756l.4902.7591h.7637l-.5773-.7439a2.1576 2.1576 0 0 0 .1972-.043c1.459-.3901.948-1.4992-.1345-1.7876-.7507-.1967-1.5708.1706-1.5708.1706s.1114-.9248 1.4494-.705c.7639.1346 1.0297.436 1.0297.436v-1.1505h1.5047l-.6292.2949s.3312.364.436.8297c.1019.4886-.1082.584-.2462.5937-.0752-.0656-.4948-.6462-.4948-.6462l-.2988.2559 1.0528 1.6363h.7281s-.6624-.8261-.7738-.9642c.1672-.0132.4007-.0682.5592-.2722.108.056.2399.1018.3948.1146.4754.0359.7608-.1932.7608-.1932v1.315h.7609v-2.9643H8.502l-.6287.2949s.3312.364.436.8297c.0984.4886-.1113.584-.2524.5937-.0687-.0656-.4954-.6462-.4954-.6462l-.292.2559 1.0399 1.6329h.7342s-.6587-.8227-.7636-.9608c.2425-.0197.6324-.1313.7111-.692.0966-.7273-.2259-1.171-.3462-1.308h.9009v2.9608h.7636v-2.9609h.3966v-.5016h-.5536c-.301-1.0756-.6648-1.3793-1.2511-1.3804Zm4.992.331c-.2213 0-.4129.177-.4129.423 0 .2149.1814.4163.413.4163.2647 0 .4298-.2225.4298-.4163 0-.223-.1729-.423-.4299-.423zm-.7704 1.059v.4954c.9849.0002 1.9698-.0002 2.9547-.0006-.41.0953-.7541.2821-1.0263.561-.1377.1441-.2695.3543-.3875.6427-.0525.115-.0982.2396-.144.3807.8494.0031 1.3867.046 1.6165.1277.1604.0655.3082.1476.4558.2524.1836.1346.2785.2688.3017.4033h-1.7313l-.5902.5937h2.0294c.5935-.4558.8823-.8231.8823-1.115 0-.1346-.0586-.2523-.1604-.3638-.2329-.2294-.548-.384-.9382-.453-.2067-.0328-.5704-.0553-1.0817-.0553a7.5038 7.5038 0 0 0 .2164-.335c.1014-.131.2067-.1931.305-.1931.2722 0 .7084.1671 1.315.505l.5964-.6a5.6666 5.6666 0 0 0-.6818-.3513L24 14.84v-.4954zm-7.0272.492v.8654s.0034.2297-.4558.4626c-.2002.1038-.403.1448-.5761.157a1.078 1.078 0 0 0 .0384-.1768c.0941-.7279-.232-1.1714-.353-1.3082zm7.4277.4067v2.5508h.7309v-2.5508zm4.5509.0028v2.5514h.7348v-1.738c.1967-.0852.3902-.1249.5869-.1249.2067 0 .364.0497.479.1576.1473.1574.2125.3968.1898.7315l.6134-.6032c.0197-.315-.0494-.5581-.2163-.7185-.128-.125-.2889-.1966-.4886-.1966-.1936 0-.4068.0652-.6428.1932-.2067.1049-.3806.2294-.5214.3801v-.6326zm2.9908.0006v1.8984s.0131.3734.249.5473c.174.1146.4068.105.4068.105h1.9837v-1.8656c0-.3325-.1855-.6851-.5411-.6851zm1.7894.6642c.1882.0023.1678.0486.1678.3553v.849l-1.141-.0034s-.1081.0137-.1378-.026c-.0359-.0459-.0198-.0983-.0198-.3474v-.8263c.377.0002 1.1308-.0011 1.1308-.0011z" fill="#F58220"/>
       </svg>
     )
 

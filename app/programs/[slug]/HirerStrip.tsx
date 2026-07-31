@@ -1,5 +1,6 @@
 'use client'
 import BrandIcon, { BRAND_ICON_NAMES } from '@/components/ui/BrandIcon'
+import { HIRER_LOGO_IMAGES } from '@/components/ui/hirerLogoImages'
 
 interface BrandMeta { abbr: string; bg: string; abbrSize: string; label: string }
 
@@ -29,6 +30,11 @@ const BRAND_META: Record<string, BrandMeta> = {
   'LTIMindtree':          { abbr: 'LTI',  bg: 'linear-gradient(135deg,#1A5E20,#0f3a14)', abbrSize: '13px', label: 'IT Services'            },
   'Mphasis':              { abbr: 'M',    bg: 'linear-gradient(135deg,#0C2461,#071640)', abbrSize: '22px', label: 'IT Services'            },
   'Persistent Systems':   { abbr: 'Ps',   bg: 'linear-gradient(135deg,#003865,#002244)', abbrSize: '16px', label: 'IT Services'            },
+  'Genpact':              { abbr: 'Ge',   bg: 'linear-gradient(135deg,#00857C,#005a54)', abbrSize: '16px', label: 'BPO & Analytics'        },
+  'WNS':                  { abbr: 'WNS',  bg: 'linear-gradient(135deg,#00A0DC,#0074a1)', abbrSize: '13px', label: 'BPO & Analytics'        },
+  'Infosys BPM':          { abbr: 'Inf',  bg: 'linear-gradient(135deg,#007CC3,#005a8f)', abbrSize: '14px', label: 'BPO & Analytics'        },
+  'PayU':                 { abbr: 'Pay',  bg: 'linear-gradient(135deg,#111827,#000000)', abbrSize: '13px', label: 'Fintech'                },
+  'Zoho':                 { abbr: 'Zo',   bg: 'linear-gradient(135deg,#E42527,#a91c1e)', abbrSize: '16px', label: 'SaaS & Productivity'    },
   'Oracle':               { abbr: 'Or',   bg: 'linear-gradient(135deg,#C0392B,#8e1f15)', abbrSize: '16px', label: 'Enterprise Tech'        },
   'HDFC Bank':            { abbr: 'H',    bg: 'linear-gradient(135deg,#004B8F,#003366)', abbrSize: '22px', label: 'Banking & Finance'      },
   'ICICI Bank':           { abbr: 'I.',   bg: 'linear-gradient(135deg,#F37420,#c55c18)', abbrSize: '18px', label: 'Banking & Finance'      },
@@ -36,6 +42,12 @@ const BRAND_META: Record<string, BrandMeta> = {
   'Axis Bank':            { abbr: 'Ax',   bg: 'linear-gradient(135deg,#991F2B,#6e161f)', abbrSize: '16px', label: 'Banking & Finance'      },
   'Bajaj Finserv':        { abbr: 'BFS',  bg: 'linear-gradient(135deg,#0066CC,#004d99)', abbrSize: '13px', label: 'Financial Services'     },
   'Kotak Mahindra Bank':  { abbr: 'K',    bg: 'linear-gradient(135deg,#C40000,#8c0000)', abbrSize: '22px', label: 'Banking'                },
+  'Kotak Mahindra':       { abbr: 'K',    bg: 'linear-gradient(135deg,#C40000,#8c0000)', abbrSize: '22px', label: 'Banking'                },
+  'Citibank':             { abbr: 'C',    bg: 'linear-gradient(135deg,#003B8E,#00224f)', abbrSize: '22px', label: 'Global Bank'            },
+  'JP Morgan':            { abbr: 'JPM',  bg: 'linear-gradient(135deg,#000000,#1a1a1a)', abbrSize: '13px', label: 'Investment Banking'     },
+  'Standard Chartered':   { abbr: 'SC',   bg: 'linear-gradient(135deg,#0473BC,#03528a)', abbrSize: '16px', label: 'Global Bank'            },
+  'HSBC':                 { abbr: 'H',    bg: 'linear-gradient(135deg,#DB0011,#a5000d)', abbrSize: '22px', label: 'Global Bank'            },
+  'RBI':                  { abbr: 'RBI',  bg: 'linear-gradient(135deg,#1A237E,#11174d)', abbrSize: '13px', label: 'Central Bank'           },
   'HDFC Life':            { abbr: 'HDI',  bg: 'linear-gradient(135deg,#004088,#002755)', abbrSize: '13px', label: 'Insurance'              },
   'ICICI Prudential':     { abbr: 'IP',   bg: 'linear-gradient(135deg,#F37420,#c55c18)', abbrSize: '16px', label: 'Insurance'              },
   'Hindustan Unilever':   { abbr: 'HUL',  bg: 'linear-gradient(135deg,#003399,#002070)', abbrSize: '13px', label: 'FMCG'                   },
@@ -58,6 +70,13 @@ const BRAND_META: Record<string, BrandMeta> = {
   'The Hindu':            { abbr: 'TH',   bg: 'linear-gradient(135deg,#3C1A1A,#1a0d0d)', abbrSize: '16px', label: 'Print Media'            },
   'Times of India':       { abbr: 'TOI',  bg: 'linear-gradient(135deg,#D40000,#9e0000)', abbrSize: '13px', label: 'News Media'             },
   'HT Media':             { abbr: 'HT',   bg: 'linear-gradient(135deg,#2D2D2D,#1a1a1a)', abbrSize: '16px', label: 'News Media'             },
+  'Hindustan Times':      { abbr: 'HT',   bg: 'linear-gradient(135deg,#2D2D2D,#1a1a1a)', abbrSize: '16px', label: 'News Media'             },
+  'Times Group':          { abbr: 'TG',   bg: 'linear-gradient(135deg,#D40000,#9e0000)', abbrSize: '16px', label: 'News Media'             },
+  'Republic TV':          { abbr: 'R.',   bg: 'linear-gradient(135deg,#0D0D0D,#000000)', abbrSize: '20px', label: 'News Media'             },
+  'News18':               { abbr: 'N18',  bg: 'linear-gradient(135deg,#CC2200,#991a00)', abbrSize: '13px', label: 'News Media'             },
+  'Ogilvy':               { abbr: 'Og',   bg: 'linear-gradient(135deg,#EF3D3B,#b32d2b)', abbrSize: '16px', label: 'Advertising & PR'       },
+  'Edelman':              { abbr: 'Ed',   bg: 'linear-gradient(135deg,#003B8E,#00224f)', abbrSize: '16px', label: 'Public Relations'       },
+  'Weber Shandwick':      { abbr: 'WS',   bg: 'linear-gradient(135deg,#0F52BA,#0a3980)', abbrSize: '16px', label: 'Public Relations'       },
   'NITI Aayog':           { abbr: 'NA',   bg: 'linear-gradient(135deg,#0066CC,#004d99)', abbrSize: '16px', label: 'Policy Think Tank'      },
   'UPSC':                 { abbr: 'U',    bg: 'linear-gradient(135deg,#1A237E,#11174d)', abbrSize: '22px', label: 'Civil Services'         },
   'State PSCs':           { abbr: 'PSC',  bg: 'linear-gradient(135deg,#37474F,#263238)', abbrSize: '13px', label: 'Civil Services'         },
@@ -81,7 +100,7 @@ function getFallback(name: string): BrandMeta {
 
 function HirerCard({ name }: { name: string }) {
   const meta = BRAND_META[name] ?? getFallback(name)
-  const hasSvg = BRAND_ICON_NAMES.has(name)
+  const hasSvg = BRAND_ICON_NAMES.has(name) || Object.prototype.hasOwnProperty.call(HIRER_LOGO_IMAGES, name)
   return (
     <div className="group flex-none w-[220px] bg-white hover:bg-vgu-red/[0.03] transition-colors duration-150 px-5 py-4 flex items-center gap-3 border-r border-neutral-100 cursor-default">
       <div className="w-11 h-11 rounded-xl flex-none overflow-hidden shadow-sm transition-transform duration-200 group-hover:scale-110">
