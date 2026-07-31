@@ -4,6 +4,9 @@
 // against the live company brand by eye before being committed here. See
 // public/logos/hirers/ for the actual files.
 export const HIRER_LOGO_IMAGES: Record<string, string> = {
+  'Amazon':              '/logos/hirers/amazon.svg',
+  'AWS':                 '/logos/hirers/aws.svg',
+  'LinkedIn Learning':   '/logos/hirers/linkedin-learning.png',
   'Bajaj Finserv':       '/logos/hirers/bajaj-finserv.svg',
   'Capgemini':           '/logos/hirers/capgemini.svg',
   'Citibank':            '/logos/hirers/citi.svg',

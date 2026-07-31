@@ -8,7 +8,7 @@ import { HIRER_LOGO_IMAGES } from './hirerLogoImages'
 // HIRER_LOGO_IMAGES instead (multi-color wordmarks that don't reduce well to
 // a single-color icon), and is rendered as an actual image below.
 export const BRAND_ICON_NAMES = new Set([
-  'Coursera','LinkedIn Learning','Google','Meta','Microsoft','Amazon','AWS','DeepLearning.AI',
+  'Coursera','Google','Meta','Microsoft','DeepLearning.AI',
   'Accenture',
   'TCS','Infosys','Wipro','HCL','HCL Tech',
   'Razorpay','HDFC Bank','ICICI Bank','SBI','Axis Bank',
@@ -26,7 +26,12 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
   if (imageSrc) {
     return (
       <span className={`relative block ${className}`}>
-        <Image src={imageSrc} alt={name} fill unoptimized className="object-contain p-1" />
+        {/* loading="eager" - these sit inside horizontally-animated tickers where
+            native lazy-loading's viewport check doesn't reliably trigger for cards
+            positioned past the initial visible window, leaving them blank until
+            manually scrolled/inspected. They're tiny decorative icons, so eager
+            loading costs nothing meaningful. */}
+        <Image src={imageSrc} alt={name} fill unoptimized loading="eager" className="object-contain p-1" />
       </span>
     )
   }
@@ -34,18 +39,11 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
   switch (name) {
 
     /* ── Global tech platforms ───────────────────────────────────── */
+    /* Real Coursera path - official Simple Icons data */
     case 'Coursera': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Coursera">
-        <rect width="24" height="24" rx="4" fill="#0056D2"/>
-        <path d="M17 16.8A7 7 0 1 1 17 7.2" stroke="white" strokeWidth="2.4" strokeLinecap="round"/>
-      </svg>
-    )
-    case 'LinkedIn Learning': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="LinkedIn Learning">
-        <rect width="24" height="24" rx="4" fill="#0A66C2"/>
-        <rect x="4.5" y="9.5" width="3" height="9.5" rx="0.5" fill="white"/>
-        <circle cx="6" cy="6" r="1.9" fill="white"/>
-        <path d="M10.5 19V9.5h2.9v1.3c.5-.85 1.5-1.55 2.9-1.55 2.2 0 3.7 1.4 3.7 4.3V19h-3v-4.9c0-1.25-.5-2.05-1.6-2.05-.9 0-1.4.6-1.65 1.2-.1.22-.12.53-.12.83V19z" fill="white"/>
+      <svg viewBox="0 0 24 24" className={className} aria-label="Coursera">
+        <rect width="24" height="24" rx="4" fill="white"/>
+        <path d="M11.374 23.977c-4.183-.21-8.006-2.626-9.959-6.347-2.097-3.858-1.871-8.864.732-12.454C4.748 1.338 9.497-.698 14.281.23c4.583.857 8.351 4.494 9.358 8.911 1.122 4.344-.423 9.173-3.925 12.04-2.289 1.953-5.295 2.956-8.34 2.797zm7.705-8.05a588.737 588.737 0 0 0-3.171-1.887c-.903 1.483-2.885 2.248-4.57 1.665-2.024-.639-3.394-2.987-2.488-5.134.801-2.009 2.79-2.707 4.357-2.464a4.19 4.19 0 0 1 2.623 1.669c1.077-.631 2.128-1.218 3.173-1.855-2.03-3.118-6.151-4.294-9.656-2.754-3.13 1.423-4.89 4.68-4.388 7.919.54 3.598 3.73 6.486 7.716 6.404a7.664 7.664 0 0 0 6.404-3.563z" fill="#0056D2"/>
       </svg>
     )
     case 'Google': return (
@@ -68,21 +66,6 @@ export default function BrandIcon({ name, className = 'w-full h-full' }: { name:
         <rect x="12.5" y="1" width="10.5" height="10.5" fill="#7FBA00"/>
         <rect x="1" y="12.5" width="10.5" height="10.5" fill="#00A4EF"/>
         <rect x="12.5" y="12.5" width="10.5" height="10.5" fill="#FFB900"/>
-      </svg>
-    )
-    case 'Amazon': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="Amazon">
-        <rect width="24" height="24" rx="3" fill="#232F3E"/>
-        <path d="M5.5 15.5Q12 18.5 18.5 15.5" stroke="#FF9900" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
-        <path d="M17 14l2.5 1.5-2.5 1.5" stroke="#FF9900" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    )
-    case 'AWS': return (
-      <svg viewBox="0 0 24 24" fill="none" className={className} aria-label="AWS">
-        <rect width="24" height="24" rx="3" fill="#232F3E"/>
-        <path d="M5 14Q8.5 9 12 9Q15.5 9 19 14" stroke="#FF9900" strokeWidth="2" fill="none" strokeLinecap="round"/>
-        <path d="M3 17.5Q12 21 21 17.5" stroke="#FF9900" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-        <path d="M19.5 15.8l2 1.7-2 1.5" stroke="#FF9900" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     )
     case 'DeepLearning.AI': return (
