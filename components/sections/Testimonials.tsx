@@ -59,7 +59,7 @@ const STORIES: Story[] = [
     name:            'Straight From Our Learners',
     role:            '',
     program:         'Real Story',
-    quote:           'This learner takes you through their honest, first-person journey with Online VGU: the doubts, the challenges, and what changed along the way.',
+    quote:           'An honest account of the doubts that come before choosing an online degree, and how this learner worked past them to finish a UGC-entitled Online VGU program, all without a single campus visit.',
     outcomes:        [],
     avatar:          'https://img.youtube.com/vi/K5zbXlB9E1k/hqdefault.jpg',
     photo:           'https://img.youtube.com/vi/K5zbXlB9E1k/maxresdefault.jpg',
