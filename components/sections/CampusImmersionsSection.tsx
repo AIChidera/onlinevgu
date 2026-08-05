@@ -169,16 +169,14 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
             {/* Real event video - autoplays (muted) once scrolled into view */}
             {card.videoId && <ScrollPlayVideo videoId={card.videoId} title={card.title} />}
 
-            {/* Single tag - top-left */}
-            <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
-              {card.tag}
-            </span>
-
             {/* Scrim + content */}
             <div
               className="absolute inset-x-0 bottom-0 p-5 pt-20 pointer-events-none"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }}
             >
+              <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-vgu-yellow/90 mb-1">
+                {card.tag}
+              </p>
               <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-white">
                 {card.title}
               </h3>
@@ -229,15 +227,13 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
                 {/* Real event video - only the centered card plays, once scrolled into view */}
                 {card.videoId && offset === 0 && <ScrollPlayVideo videoId={card.videoId} title={card.title} />}
 
-                {/* Single tag - top-left */}
-                <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
-                  {card.tag}
-                </span>
-
                 <div
                   className="absolute inset-x-0 bottom-0 p-5 pt-16 pointer-events-none"
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)' }}
                 >
+                  <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-vgu-yellow/90 mb-1">
+                    {card.tag}
+                  </p>
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-white">
                     {card.title}
                   </h3>
