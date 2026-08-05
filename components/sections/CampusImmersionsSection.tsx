@@ -174,7 +174,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
               className="absolute inset-x-0 bottom-0 p-5 pt-20 pointer-events-none"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }}
             >
-              <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-vgu-yellow/90 mb-1">
+              <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-white/60 mb-1">
                 {card.tag}
               </p>
               <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-white">
@@ -231,7 +231,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
                   className="absolute inset-x-0 bottom-0 p-5 pt-16 pointer-events-none"
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)' }}
                 >
-                  <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-vgu-yellow/90 mb-1">
+                  <p className="text-[10px] font-heading font-bold uppercase tracking-wider text-white/60 mb-1">
                     {card.tag}
                   </p>
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-white">
