@@ -251,14 +251,12 @@ export default async function PlacementsPage() {
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
                   Apply Now
-                  <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
                 <a
                   href="/programs"
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                 >
                   Browse Programs
-                  <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
               </div>
             </div>

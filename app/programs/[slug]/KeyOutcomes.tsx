@@ -1,5 +1,3 @@
-import { IconCheck } from '@tabler/icons-react'
-
 export default function KeyOutcomes({ outcomes }: { outcomes: string[] }) {
   const safe = (Array.isArray(outcomes) ? outcomes : []).map(o => o.replace(/—/g, '-').replace(/–/g, '-'))
   if (!safe.length) return null
@@ -13,7 +11,7 @@ export default function KeyOutcomes({ outcomes }: { outcomes: string[] }) {
           style={{ animationDelay: `${i * 60}ms` }}
           className="flex items-start gap-3"
         >
-          <IconCheck size={16} stroke={2.5} className="flex-none text-vgu-red mt-0.5 shrink-0" />
+          <span className="flex-none w-1.5 h-1.5 rounded-full bg-vgu-red mt-[9px]" aria-hidden="true" />
           <p className="font-body text-[16px] lg:text-[17px] leading-[1.65] text-neutral-800">{o}</p>
         </div>
       ))}

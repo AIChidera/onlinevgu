@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { IconX, IconLock, IconRocket, IconCheck, IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
+import { IconX, IconLock, IconCheck, IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import PhoneField from '@/components/ui/PhoneField'
 
 function sanitizeText(v: string) {
@@ -431,7 +431,7 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
                 disabled={submitting || !canSubmit}
                 className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(192,64,54,0.32)] hover:shadow-[0_6px_28px_rgba(192,64,54,0.44)] hover:-translate-y-0.5 active:translate-y-0"
               >
-                {submitting ? 'Submitting…' : <>Start My Application <IconRocket size={16} /></>}
+                {submitting ? 'Submitting…' : 'Start My Application'}
               </button>
 
               <p className="flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400 -mt-1">

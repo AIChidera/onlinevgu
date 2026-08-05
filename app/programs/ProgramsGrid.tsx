@@ -207,7 +207,17 @@ function ProgramCard({ programme: p, meta }: { programme: ProgramGridItem; meta:
           </span>
         )}
 
-        <span className="absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-heading font-bold text-white uppercase tracking-wide border border-white/25 bg-black/20 backdrop-blur-sm">
+        {/* Yellow for UG, red for PG so the two read as visually distinct at a
+            glance, not just different letters. Certificates keep the original
+            neutral treatment since they're neither. */}
+        <span
+          className={[
+            'absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wide shadow-sm',
+            p.level === 'ug' ? 'bg-vgu-yellow text-neutral-900'
+              : p.level === 'pg' ? 'bg-vgu-red text-white'
+              : 'text-white border border-white/25 bg-black/20 backdrop-blur-sm',
+          ].join(' ')}
+        >
           {levelLabel}
         </span>
 

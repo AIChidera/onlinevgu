@@ -2,7 +2,7 @@ import {
   IconClipboardList,
   IconSchool,
   IconCreditCard,
-  IconRocket,
+  IconDeviceLaptop,
   IconArrowRight,
 } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
@@ -31,7 +31,7 @@ export default function StepsSection({ nextBatch = 'July 2026' }: { nextBatch?: 
       badge:  'Step 4',
       title:  'Start Learning',
       body:   `Get instant portal access. Live classes from ${nextBatch}.`,
-      Icon:   IconRocket,
+      Icon:   IconDeviceLaptop,
     },
   ]
 

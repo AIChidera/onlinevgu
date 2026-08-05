@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { IconX, IconPlayerPlay, IconArrowRight, IconTrendingUp } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import ScrollPlayVideo from '@/components/ui/ScrollPlayVideo'
+import { extractYouTubeId } from '@/lib/youtube'
 import type { SanityTestimonial } from '@/lib/sanity'
 
 const COLOR_TO_GRADIENT: Record<string, string> = {
@@ -24,6 +26,7 @@ function fromSanity(t: SanityTestimonial): Story {
     videoBg:         COLOR_TO_GRADIENT[t.colorTheme] ?? COLOR_TO_GRADIENT.red,
     videoLabel:      t.videoLabel ?? '',
     videoUrl:        t.videoUrl,
+    videoId:         extractYouTubeId(t.videoUrl),
     // Optional new fields - Sanity may not have these yet
     before:          (t as unknown as { before?: string }).before,
     after:           (t as unknown as { after?: string }).after,
@@ -42,6 +45,7 @@ interface Story {
   videoBg:          string
   videoLabel:       string
   videoUrl?:        string
+  videoId?:         string  // real YouTube video - plays inline on scroll-in instead of the placeholder modal
   photo?:           string  // large photo for left panel background
   before?:          string  // Bible §09 transformation: starting point
   after?:           string  // Bible §09 transformation: outcome
@@ -49,6 +53,21 @@ interface Story {
 }
 
 const STORIES: Story[] = [
+  {
+    // Real footage from VGU's official YouTube channel (@vguonline) - plays
+    // inline once scrolled into view, no invented quote/outcome data.
+    name:            'Straight From Our Learners',
+    role:            '',
+    program:         'Real Story',
+    quote:           'This learner takes you through their honest, first-person journey with Online VGU: the doubts, the challenges, and what changed along the way.',
+    outcomes:        [],
+    avatar:          'https://img.youtube.com/vi/K5zbXlB9E1k/hqdefault.jpg',
+    photo:           'https://img.youtube.com/vi/K5zbXlB9E1k/maxresdefault.jpg',
+    videoBg:         'from-[#065f46] to-[#022c22]',
+    videoLabel:      'From Doubt to Success · 2 min',
+    videoUrl:        'https://www.youtube.com/watch?v=K5zbXlB9E1k',
+    videoId:         'K5zbXlB9E1k',
+  },
   {
     name:            'Priya Sharma',
     role:            'MBA · Class of 2023',
@@ -76,20 +95,6 @@ const STORIES: Story[] = [
     photo:           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop',
     videoBg:         'from-[#1e3a8a] to-[#0f172a]',
     videoLabel:      'Arjun\'s story · 2 min',
-  },
-  {
-    name:            'Kavya Nair',
-    role:            'MBA Healthcare · Class of 2023',
-    program:         'MBA Healthcare',
-    quote:           'Hospital administration is a niche I never thought I could enter without a clinical background. VGU\'s healthcare MBA opened those doors. Apollo Hospitals called me before convocation.',
-    before:          'Pharma sales rep · no admin background',
-    after:           'Healthcare Manager, Apollo Hospitals',
-    headlineOutcome: 'Hired before convocation',
-    outcomes:        ['Apollo Hospitals offer', 'Healthcare manager', 'Zero entrance exam'],
-    avatar:          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80&auto=format&fit=crop',
-    photo:           'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80&auto=format&fit=crop',
-    videoBg:         'from-[#065f46] to-[#022c22]',
-    videoLabel:      'Kavya\'s experience · 3 min',
   },
   {
     name:            'Rahul Verma',
@@ -177,10 +182,13 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
           >
             {/* LEFT - video panel (real student photo + tinted gradient) */}
             <div
-              className="relative min-h-[280px] md:min-h-[420px] flex items-center justify-center cursor-pointer group/video overflow-hidden"
-              onClick={() => setModalOpen(true)}
-              role="button"
-              aria-label={`Play ${story.videoLabel}`}
+              className={[
+                'relative min-h-[280px] md:min-h-[420px] flex items-center justify-center overflow-hidden',
+                story.videoId ? '' : 'cursor-pointer group/video',
+              ].join(' ')}
+              onClick={story.videoId ? undefined : () => setModalOpen(true)}
+              role={story.videoId ? undefined : 'button'}
+              aria-label={story.videoId ? undefined : `Play ${story.videoLabel}`}
             >
               {story.photo && (
                 <Image
@@ -191,31 +199,44 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
                   sizes="(max-width: 768px) 100vw, 55vw"
                 />
               )}
-              {/* Brand tint over photo for legibility */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${story.videoBg} ${story.photo ? 'opacity-55' : ''}`} />
 
-              {/* Decorative circles */}
-              <div className="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-white/5" />
-              <div className="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-white/5" />
+              {story.videoId ? (
+                /* Real video - autoplays (muted) once scrolled into view */
+                <ScrollPlayVideo videoId={story.videoId} title={story.videoLabel} />
+              ) : (
+                <>
+                  {/* Brand tint over photo for legibility */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${story.videoBg} ${story.photo ? 'opacity-55' : ''}`} />
 
-              {/* Play button (placeholder - opens "video coming soon" modal) */}
-              <div className="relative z-10 flex items-center justify-center">
-                <div className="absolute w-28 h-28 rounded-full border-2 border-white/20 group-hover/video:scale-110 transition-transform duration-300" />
-                <div className="absolute w-20 h-20 rounded-full border-2 border-white/35 animate-ping opacity-60" />
-                <div className="relative w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/50 flex items-center justify-center group-hover/video:scale-110 group-hover/video:bg-white/30 transition-all duration-200">
-                  <IconPlayerPlay size={24} className="text-white ml-1" fill="white" />
-                </div>
-              </div>
+                  {/* Decorative circles */}
+                  <div className="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-white/5" />
+                  <div className="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-white/5" />
+
+                  {/* Play button (placeholder - opens "video coming soon" modal) */}
+                  <div className="relative z-10 flex items-center justify-center">
+                    <div className="absolute w-28 h-28 rounded-full border-2 border-white/20 group-hover/video:scale-110 transition-transform duration-300" />
+                    <div className="absolute w-20 h-20 rounded-full border-2 border-white/35 animate-ping opacity-60" />
+                    <div className="relative w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/50 flex items-center justify-center group-hover/video:scale-110 group-hover/video:bg-white/30 transition-all duration-200">
+                      <IconPlayerPlay size={24} className="text-white ml-1" fill="white" />
+                    </div>
+                  </div>
+                </>
+              )}
 
               {/* Bottom label */}
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex items-end justify-between">
+              <div
+                className="absolute bottom-0 left-0 right-0 z-10 flex items-end justify-between p-5 pt-14 pointer-events-none"
+                style={story.videoId ? { background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' } : undefined}
+              >
                 <div>
                   <p className="font-heading font-bold text-[15px] text-white">{story.name}</p>
                   <p className="text-[12px] font-body text-white/65">{story.videoLabel}</p>
                 </div>
-                <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3 py-1 text-[11px] font-body font-semibold text-white/85 uppercase tracking-wide">
-                  {story.program}
-                </span>
+                {story.program && (
+                  <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/25 px-3 py-1 text-[11px] font-body font-semibold text-white/85 uppercase tracking-wide">
+                    {story.program}
+                  </span>
+                )}
               </div>
             </div>
 

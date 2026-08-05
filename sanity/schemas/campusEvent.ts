@@ -56,6 +56,12 @@ export default defineType({
       description: 'Landscape photo. 1200×800px recommended.',
     }),
     defineField({
+      name: 'videoUrl',
+      title: 'Video URL (optional)',
+      type: 'string',
+      description: 'Full URL to a YouTube video. If set, the card plays this video inline once scrolled into view, instead of just showing the photo.',
+    }),
+    defineField({
       name: 'colorTheme',
       title: 'Card Color Theme',
       type: 'string',

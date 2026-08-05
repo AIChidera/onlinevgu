@@ -12,6 +12,8 @@ import {
   IconChevronRight,
 } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import ScrollPlayVideo from '@/components/ui/ScrollPlayVideo'
+import { extractYouTubeId } from '@/lib/youtube'
 import type { SanityCampusEvent } from '@/lib/sanity'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,18 +34,21 @@ interface Card {
   gradient: string
   Icon:     AnyIcon
   image?:   string
+  videoId?: string  // real YouTube video - plays inline on scroll-in when this card is active
 }
 
 function fromSanityEvent(e: SanityCampusEvent): Card {
   const theme = THEME_MAP[e.colorTheme] ?? THEME_MAP.blue
   const firstTag = (e.tags ?? [])[0]
+  const videoId = extractYouTubeId(e.videoUrl)
   return {
     title:    e.title,
     subtitle: e.subtitle ?? '',
     tag:      firstTag?.label?.toUpperCase() ?? 'EVENT',
     gradient: theme.gradient,
     Icon:     theme.Icon,
-    image:    e.photoUrl ?? undefined,
+    image:    e.photoUrl ?? (videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : undefined),
+    videoId,
   }
 }
 
@@ -55,7 +60,8 @@ const CARDS: Card[] = [
     tag:      'FLAGSHIP',
     gradient: 'from-[#C04036] via-[#9b2f26] to-[#821a12]',
     Icon:     IconStar,
-    image:    'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=640&q=80&auto=format&fit=crop',
+    image:    'https://img.youtube.com/vi/Wpc1GJwGMqA/maxresdefault.jpg',
+    videoId:  'Wpc1GJwGMqA',
   },
   {
     title:    'Open-air movie nights',
@@ -87,7 +93,8 @@ const CARDS: Card[] = [
     tag:      'MILESTONE',
     gradient: 'from-[#b45309] via-[#92400e] to-[#78350f]',
     Icon:     IconCertificate,
-    image:    'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=640&q=80&auto=format&fit=crop',
+    image:    'https://img.youtube.com/vi/GskP8W79f04/maxresdefault.jpg',
+    videoId:  'GskP8W79f04',
   },
 ]
 
@@ -159,6 +166,9 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
               </>
             )}
 
+            {/* Real event video - autoplays (muted) once scrolled into view */}
+            {card.videoId && <ScrollPlayVideo videoId={card.videoId} title={card.title} />}
+
             {/* Single tag - top-left */}
             <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
               {card.tag}
@@ -166,7 +176,7 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
 
             {/* Scrim + content */}
             <div
-              className="absolute inset-x-0 bottom-0 p-5 pt-20"
+              className="absolute inset-x-0 bottom-0 p-5 pt-20 pointer-events-none"
               style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }}
             >
               <h3 className="font-heading font-bold text-[17px] leading-[1.3] text-white">
@@ -216,13 +226,16 @@ export default function CampusImmersionsSection({ events: sanityEvents = [] }: {
                   </>
                 )}
 
+                {/* Real event video - only the centered card plays, once scrolled into view */}
+                {card.videoId && offset === 0 && <ScrollPlayVideo videoId={card.videoId} title={card.title} />}
+
                 {/* Single tag - top-left */}
                 <span className="absolute top-3 left-3 z-10 rounded-full bg-vgu-yellow px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider text-neutral-900 shadow-sm">
                   {card.tag}
                 </span>
 
                 <div
-                  className="absolute inset-x-0 bottom-0 p-5 pt-16"
+                  className="absolute inset-x-0 bottom-0 p-5 pt-16 pointer-events-none"
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)' }}
                 >
                   <h3 className="font-heading font-bold text-[18px] leading-[1.3] text-white">

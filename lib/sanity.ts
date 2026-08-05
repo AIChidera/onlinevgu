@@ -54,6 +54,7 @@ export interface SanityCampusEvent {
   subtitle:     string
   tags:         { label: string; color: 'gold' | 'red' | 'green' }[]
   photoUrl:     string | null
+  videoUrl?:    string | null
   colorTheme:   'blue' | 'orange' | 'green' | 'purple' | 'red'
   displayOrder: number
 }
@@ -258,6 +259,7 @@ export const getCampusEvents = unstable_cache(
       `*[_type == "campusEvent"] | order(displayOrder asc) {
         _id, title, subtitle, tags,
         "photoUrl": photo.asset->url,
+        videoUrl,
         colorTheme, displayOrder
       }`,
       {}

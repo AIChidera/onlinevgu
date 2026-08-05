@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { IconArrowRight, IconCheck } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 
 // TODO: swap with a real VGU campus / student photo when the asset is ready
@@ -69,32 +68,20 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
               >
                 Apply Now
-                <IconArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
               </a>
               <a
                 href="#programs"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
               >
                 Explore Programs
-                <IconArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
               </a>
             </div>
 
             {/* Trust micro-strip */}
-            <div className="flex flex-wrap gap-x-5 gap-y-1.5">
-              <span className="inline-flex items-center gap-1.5 text-[12px] font-body text-white/75">
-                <IconCheck size={11} stroke={2.5} className="text-white/55 flex-none" />
-                No entrance exam
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-[12px] font-body text-white/75">
-                <IconCheck size={11} stroke={2.5} className="text-white/55 flex-none" />
-                UGC recognised
-              </span>
-              <span className="inline-flex items-center gap-1.5 text-[12px] font-body text-white/75">
-                <IconCheck size={11} stroke={2.5} className="text-white/55 flex-none" />
-                {nextBatch} admissions are open
-              </span>
-            </div>
+            <p className="text-[12px] font-body text-white/75">
+              No entrance exam <span className="text-white/35">·</span> UGC recognised{' '}
+              <span className="text-white/35">·</span> {nextBatch} admissions are open
+            </p>
           </div>
         </div>
 

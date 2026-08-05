@@ -1,4 +1,4 @@
-import { IconFileText, IconCheck } from '@tabler/icons-react'
+import { IconFileText } from '@tabler/icons-react'
 import SketchSparkle from '@/components/ui/sketch/SketchSparkle'
 
 interface Doc { name: string; note: string; level?: 'ug' | 'pg'; optional?: boolean }
@@ -57,9 +57,8 @@ export default function AdmissionSteps({ programName, programLevel, documents, e
               {eligibility.map(item => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-3.5 py-1.5 text-[12.5px] font-body text-white/70 leading-none"
+                  className="inline-flex items-center rounded-full bg-white/[0.06] px-3.5 py-1.5 text-[12.5px] font-body text-white/70 leading-none"
                 >
-                  <IconCheck size={12} stroke={3} className="flex-none text-vgu-yellow" />
                   {item}
                 </span>
               ))}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { IconCheck, IconBook, IconBriefcase } from '@tabler/icons-react'
+import { IconBook, IconBriefcase } from '@tabler/icons-react'
 import { SPEC_DETAILS } from './specialisationDetails'
 
 export default function SpecialisationCards({ specialisations }: { specialisations: string[] }) {
@@ -97,9 +97,8 @@ export default function SpecialisationCards({ specialisations }: { specialisatio
                         {(detail?.skills ?? ['Industry curriculum', 'Practical case studies', 'Expert mentorship']).map(skill => (
                           <span
                             key={skill}
-                            className="inline-flex items-center gap-1.5 rounded bg-vgu-red/[0.06] border border-vgu-red/[0.14] px-2.5 py-1.5 text-[12px] font-body font-medium text-vgu-red leading-none"
+                            className="inline-flex items-center rounded bg-vgu-red/[0.06] border border-vgu-red/[0.14] px-2.5 py-1.5 text-[12px] font-body font-medium text-vgu-red leading-none"
                           >
-                            <IconCheck size={12} stroke={2.5} className="flex-none" />
                             {skill}
                           </span>
                         ))}

@@ -89,17 +89,17 @@ export default function CertificatePreview({ programName, programFullName, sampl
             <div data-animate="slide-from-right" className="flex justify-center">
               <button
                 onClick={() => setOpen(true)}
-                className="group relative w-full max-w-[480px] cursor-zoom-in rounded-2xl"
+                className={`group relative w-full cursor-zoom-in rounded-2xl ${sampleImageUrl ? 'max-w-[360px]' : 'max-w-[480px]'}`}
                 aria-label="View sample certificate"
               >
                 {sampleImageUrl ? (
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.22)] border border-neutral-200">
+                  <div className="relative w-full aspect-[1648/2336] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.22)] border border-neutral-200">
                     <Image
                       src={sampleImageUrl}
                       fill
                       alt={`${programName} sample certificate`}
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 480px"
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 360px"
                     />
                   </div>
                 ) : (
@@ -125,7 +125,7 @@ export default function CertificatePreview({ programName, programFullName, sampl
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="relative z-10 w-full max-w-[760px]">
+          <div className={`relative z-10 ${sampleImageUrl ? 'w-fit max-w-full' : 'w-full max-w-[760px]'}`}>
             <button
               onClick={() => setOpen(false)}
               className="absolute -top-5 -right-5 z-20 w-10 h-10 rounded-full bg-white shadow-xl flex items-center justify-center hover:bg-neutral-100 transition-colors duration-150"
@@ -134,15 +134,14 @@ export default function CertificatePreview({ programName, programFullName, sampl
               <IconX size={18} className="text-neutral-700" />
             </button>
             {sampleImageUrl ? (
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(17,24,39,0.35)]">
-                <Image
-                  src={sampleImageUrl}
-                  fill
-                  alt={`${programName} sample certificate`}
-                  className="object-contain"
-                  sizes="760px"
-                />
-              </div>
+              <Image
+                src={sampleImageUrl}
+                width={1648}
+                height={2336}
+                alt={`${programName} sample certificate`}
+                className="block w-auto h-auto max-w-[88vw] max-h-[85dvh] rounded-2xl shadow-[0_32px_80px_rgba(17,24,39,0.35)]"
+                sizes="(max-width: 640px) 88vw, 600px"
+              />
             ) : (
               <Certificate programName={programName} programFullName={programFullName} foundedIn={foundedIn} />
             )}

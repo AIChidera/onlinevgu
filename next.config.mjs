@@ -9,7 +9,7 @@ const config = {
     styledComponents: true,
   },
   images: {
-    domains: ['images.unsplash.com', 'cdn.sanity.io', 'blog.vgu.ac.in'],
+    domains: ['images.unsplash.com', 'cdn.sanity.io', 'blog.vgu.ac.in', 'img.youtube.com'],
   },
   webpack: (cfg, { isServer }) => {
     if (!isServer) {

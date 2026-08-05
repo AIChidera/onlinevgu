@@ -190,8 +190,14 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
           </span>
         )}
 
-        {/* Top-right: level pill */}
-        <span className="absolute top-3 right-3 z-10 rounded-full bg-white/95 backdrop-blur-sm border border-vgu-red/20 px-2.5 py-1 text-[10px] font-heading font-bold text-vgu-red uppercase tracking-wider">
+        {/* Top-right: level pill - yellow for UG, red for PG so the two read
+            as visually distinct at a glance, not just different letters */}
+        <span
+          className={[
+            'absolute top-3 right-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider shadow-sm',
+            p.level === 'ug' ? 'bg-vgu-yellow text-neutral-900' : 'bg-vgu-red text-white',
+          ].join(' ')}
+        >
           {levelLabel}
         </span>
       </div>
@@ -278,7 +284,12 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
           </span>
         )}
 
-        <span className="absolute top-3 right-3 z-10 rounded-full bg-white/95 backdrop-blur-sm border border-vgu-red/20 px-2.5 py-1 text-[10px] font-heading font-bold text-vgu-red uppercase tracking-wider">
+        <span
+          className={[
+            'absolute top-3 right-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-heading font-bold uppercase tracking-wider shadow-sm',
+            p.level === 'ug' ? 'bg-vgu-yellow text-neutral-900' : 'bg-vgu-red text-white',
+          ].join(' ')}
+        >
           {levelLabel}
         </span>
       </div>

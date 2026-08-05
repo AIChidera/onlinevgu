@@ -12,7 +12,6 @@ import {
   IconBriefcase,
   IconPlayerPause,
   IconPlayerPlay,
-  IconCheck,
 } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
@@ -309,10 +308,8 @@ export default function CourseExperienceSection() {
                 </p>
                 <ul className="mt-4 md:mt-6 flex flex-col gap-2">
                   {panel.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-[16px] font-body text-neutral-700 leading-snug md:leading-normal">
-                      <span className="flex-none w-5 h-5 rounded-full bg-vgu-red/10 flex items-center justify-center mt-0.5">
-                        <IconCheck size={11} className="text-vgu-red" stroke={3} />
-                      </span>
+                    <li key={b} className="flex items-start gap-2.5 text-[16px] font-body text-neutral-700 leading-snug md:leading-normal">
+                      <span className="flex-none w-1.5 h-1.5 rounded-full bg-vgu-red mt-[9px]" aria-hidden="true" />
                       {b}
                     </li>
                   ))}
