@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import LeadForm from './LeadForm'
 
 interface EnquiryModalProps {
@@ -9,6 +9,9 @@ interface EnquiryModalProps {
 }
 
 export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
+  const dialogRef = useRef<HTMLDivElement | null>(null)
+  const triggerRef = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     if (!isOpen) return
     const scrollY = window.scrollY
@@ -31,6 +34,19 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
     return () => document.removeEventListener('keydown', handleKey)
   }, [onClose])
 
+  // Move focus into the dialog on open, and return it to whatever
+  // triggered the modal once it closes - matches ApplyModal's pattern.
+  useEffect(() => {
+    if (isOpen) {
+      triggerRef.current = document.activeElement as HTMLElement | null
+      const id = requestAnimationFrame(() => dialogRef.current?.focus())
+      return () => cancelAnimationFrame(id)
+    } else {
+      triggerRef.current?.focus()
+      triggerRef.current = null
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
@@ -43,7 +59,12 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
 
       {/* Panel - flex column: header pinned, form scrolls */}
       <div
-        className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90dvh] sm:h-auto sm:max-h-[90dvh]"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="enquiry-modal-title"
+        tabIndex={-1}
+        className="relative z-10 w-full max-w-[460px] animate-rise-in rounded-t-2xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[90dvh] sm:h-auto sm:max-h-[90dvh] focus:outline-none"
         onClick={e => e.stopPropagation()}
       >
         {/* Header - pinned, never scrolls */}
@@ -66,7 +87,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             </span>
             <span className="text-[13px] font-medium text-white/80">Counsellors available now</span>
           </div>
-          <h2 className="font-heading text-[22px] font-extrabold text-white leading-snug">
+          <h2 id="enquiry-modal-title" className="font-heading text-[22px] font-extrabold text-white leading-snug">
             Talk to a free counsellor
           </h2>
           <p className="mt-1 text-[14px] text-white/75">

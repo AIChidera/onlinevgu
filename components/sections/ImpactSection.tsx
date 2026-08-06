@@ -66,7 +66,7 @@ interface ImpactProps {
   statCountries?: number   // fallback 40
   statPlacement?: number   // fallback 95
   statRating?:    number   // fallback 4.8
-  statCoursera?:  number   // fallback 7,000
+  statCoursera?:  number   // fallback 10,000
 }
 
 export default function ImpactSection({
@@ -74,7 +74,7 @@ export default function ImpactSection({
   statCountries = 40,
   statPlacement = 95,
   statRating    = 4.8,
-  statCoursera  = 7000,
+  statCoursera  = 10000,
 }: ImpactProps) {
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0 })
 

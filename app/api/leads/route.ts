@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   try {
     const supabaseAdmin = createAdminClient()
     if (supabaseAdmin) {
-      await supabaseAdmin.from('leads').insert({
+      const { error } = await supabaseAdmin.from('leads').insert({
         name: data.name,
         email: data.email,
         phone: data.phone,
@@ -68,14 +68,15 @@ export async function POST(req: NextRequest) {
         utm_campaign: data.utmCampaign,
         ip_address: ip,
       })
+      if (error) console.error('[leads] Supabase insert failed:', error.message)
     }
-  } catch {
-    // Non-fatal - still send emails
+  } catch (err) {
+    console.error('[leads] Supabase insert threw:', err)
   }
 
   // Send emails (non-blocking failures)
   try {
-    await Promise.allSettled([
+    const results = await Promise.allSettled([
       resend.emails.send({
         from: FROM_ADDRESS,
         to: data.email,
@@ -97,8 +98,11 @@ export async function POST(req: NextRequest) {
         }),
       }),
     ])
-  } catch {
-    // Non-fatal
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[leads] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
+    })
+  } catch (err) {
+    console.error('[leads] Resend threw:', err)
   }
 
   return NextResponse.json({ success: true }, { status: 201 })

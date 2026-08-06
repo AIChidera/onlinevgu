@@ -1,5 +1,6 @@
 ﻿export const revalidate = 3600
 
+import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
@@ -24,6 +25,18 @@ const CourseExperienceSection = dynamic(
   () => import('@/components/sections/CourseExperienceSection'),
   { ssr: false }
 )
+
+export const metadata: Metadata = {
+  title: 'Online VGU - UGC-Entitled Online Degrees from Vivekananda Global University',
+  description:
+    'NAAC A+ accredited online UG and PG degrees - BBA, BCA, BA, MBA, MCA and more. UGC-entitled, 100% online, no entrance exam. Trusted by 50,000+ learners across India.',
+  alternates: { canonical: 'https://onlinevgu.com' },
+  openGraph: {
+    title: 'Online VGU - UGC-Entitled Online Degrees from Vivekananda Global University',
+    description: 'NAAC A+ accredited online degrees. UGC-entitled, 100% online, no entrance exam. 50,000+ learners across 40+ countries.',
+    url: 'https://onlinevgu.com',
+  },
+}
 
 function buildOrgJsonLd(phoneTel: string, address: string) {
   return {
@@ -106,7 +119,7 @@ export default async function HomePage() {
         statCountries={parseStat(siteSettings?.statCountries,  40)}
         statPlacement={parseStat(siteSettings?.statPlacement,  95)}
         statRating={parseStat(siteSettings?.statRating,        4.8)}
-        statCoursera={parseStat(siteSettings?.statCourseraCount, 7000)}
+        statCoursera={parseStat(siteSettings?.statCourseraCount, 10000)}
       />
       <CampusImmersionsSection events={campusEvents} />
       <Testimonials stories={testimonials} />

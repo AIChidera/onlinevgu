@@ -1,6 +1,7 @@
 ﻿import type { MetadataRoute } from 'next'
 import { PROGRAMMES } from './programs/data'
-import { getAllPrograms } from '@/lib/sanity'
+import { getAllPrograms, getAllBlogPostSlugs } from '@/lib/sanity'
+import { FALLBACK_POST_SUMMARIES } from '@/lib/blogFallbacks'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = 'https://onlinevgu.com'
@@ -12,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/apply`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/about`,    lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/blog`,     lastModified: now, changeFrequency: 'weekly',  priority: 0.6 },
   ]
 
   const sanityPrograms = await getAllPrograms()
@@ -26,5 +28,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     }))
 
-  return [...statics, ...programs]
+  const sanitySlugs = await getAllBlogPostSlugs()
+  const blogSlugs = sanitySlugs.length > 0 ? sanitySlugs : FALLBACK_POST_SUMMARIES.map(p => p.slug)
+
+  const blogPosts: MetadataRoute.Sitemap = blogSlugs.map(slug => ({
+    url: `${base}/blog/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...statics, ...programs, ...blogPosts]
 }

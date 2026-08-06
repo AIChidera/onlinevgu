@@ -77,16 +77,17 @@ export async function POST(req: NextRequest) {
   try {
     const supabaseAdmin = createAdminClient()
     if (supabaseAdmin) {
-      await supabaseAdmin.from('brochure_requests').insert({
+      const { error } = await supabaseAdmin.from('brochure_requests').insert({
         name: data.name,
         email: data.email,
         phone: data.phone,
         program_interest: data.programInterest,
         ip_address: ip,
       })
+      if (error) console.error('[brochure] Supabase insert failed:', error.message)
     }
-  } catch {
-    // Non-fatal
+  } catch (err) {
+    console.error('[brochure] Supabase insert threw:', err)
   }
 
   // Pull the right PDF from Sanity (per-program → defaults to siteSettings).
@@ -101,7 +102,7 @@ export async function POST(req: NextRequest) {
        brochure to this email shortly.`
 
   try {
-    await Promise.allSettled([
+    const results = await Promise.allSettled([
       resend.emails.send({
         from: FROM_ADDRESS,
         to: data.email,
@@ -141,8 +142,11 @@ export async function POST(req: NextRequest) {
         `,
       }),
     ])
-  } catch {
-    // Non-fatal
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[brochure] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
+    })
+  } catch (err) {
+    console.error('[brochure] Resend threw:', err)
   }
 
   return NextResponse.json({ success: true }, { status: 201 })

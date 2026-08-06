@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
   try {
     const supabaseAdmin = createAdminClient()
     if (supabaseAdmin) {
-      await supabaseAdmin.from('applications').insert({
+      const { error } = await supabaseAdmin.from('applications').insert({
         name:       data.name,
         email:      data.email,
         phone:      data.phone,
@@ -65,13 +65,14 @@ export async function POST(req: NextRequest) {
         source:     data.source ?? 'modal-apply',
         ip_address: ip,
       })
+      if (error) console.error('[applications] Supabase insert failed:', error.message)
     }
-  } catch {
-    // Non-fatal - still send emails
+  } catch (err) {
+    console.error('[applications] Supabase insert threw:', err)
   }
 
   try {
-    await Promise.allSettled([
+    const results = await Promise.allSettled([
       resend.emails.send({
         from:    FROM_ADDRESS,
         to:      data.email,
@@ -85,8 +86,11 @@ export async function POST(req: NextRequest) {
         html:    notificationHtml(data),
       }),
     ])
-  } catch {
-    // Non-fatal
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[applications] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
+    })
+  } catch (err) {
+    console.error('[applications] Resend threw:', err)
   }
 
   return NextResponse.json({ success: true }, { status: 201 })

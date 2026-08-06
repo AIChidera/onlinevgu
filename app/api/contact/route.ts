@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ContactSchema } from '@/lib/validations'
+import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
 
 async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
@@ -51,7 +52,24 @@ export async function POST(req: NextRequest) {
   const data = parsed.data
 
   try {
-    await Promise.allSettled([
+    const supabaseAdmin = createAdminClient()
+    if (supabaseAdmin) {
+      const { error } = await supabaseAdmin.from('contact_messages').insert({
+        name:       data.name,
+        email:      data.email,
+        phone:      data.phone,
+        subject:    data.subject,
+        message:    data.message,
+        ip_address: ip,
+      })
+      if (error) console.error('[contact] Supabase insert failed:', error.message)
+    }
+  } catch (err) {
+    console.error('[contact] Supabase insert threw:', err)
+  }
+
+  try {
+    const results = await Promise.allSettled([
       resend.emails.send({
         from: FROM_ADDRESS,
         to: data.email,
@@ -98,8 +116,11 @@ export async function POST(req: NextRequest) {
         `,
       }),
     ])
-  } catch {
-    // Non-fatal
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[contact] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
+    })
+  } catch (err) {
+    console.error('[contact] Resend threw:', err)
   }
 
   return NextResponse.json({ success: true }, { status: 201 })
