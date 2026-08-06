@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { IconAward } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
 
 // TODO: swap with a real VGU campus / student photo when the asset is ready
@@ -56,9 +57,21 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
             Built for working professionals. Study evenings and weekends. Finish in 2-3 years.
           </p>
 
+          {/* Ranking badge - last trust signal before the CTAs, distinct from
+              the eyebrow above and the plain trust-strip below */}
+          <div
+            className="anim-load-left mt-8 inline-flex items-center gap-2 rounded-[4px] border border-vgu-yellow/40 bg-white/10 backdrop-blur-sm px-3.5 py-2 w-fit"
+            style={{ animationDelay: '175ms' }}
+          >
+            <IconAward size={16} className="text-vgu-yellow flex-none" stroke={2} />
+            <span className="text-[13px] font-heading font-semibold text-white">
+              Top Online University in Rajasthan
+            </span>
+          </div>
+
           {/* CTAs */}
           <div
-            className="anim-load-left relative mt-12 flex flex-col gap-4"
+            className="anim-load-left relative mt-5 flex flex-col gap-4"
             style={{ animationDelay: '210ms' }}
           >
             <div className="flex flex-wrap items-center gap-3">
