@@ -58,13 +58,17 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
           </p>
 
           {/* Ranking badge - last trust signal before the CTAs, distinct from
-              the eyebrow above and the plain trust-strip below */}
+              the eyebrow above and the plain trust-strip below. Solid gold
+              fill (not glass) so it's the boldest colored element in the
+              hero - deliberately, since it's the newest, strongest claim. */}
           <div
-            className="anim-load-left mt-8 inline-flex items-center gap-2 rounded-[4px] border border-vgu-yellow/40 bg-white/10 backdrop-blur-sm px-3.5 py-2 w-fit"
+            className="anim-load-left vgu-badge-shimmer relative overflow-hidden mt-8 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-vgu-yellow to-vgu-gold pl-2 pr-4 py-2 w-fit shadow-[0_4px_20px_rgba(255,164,18,0.4)]"
             style={{ animationDelay: '175ms' }}
           >
-            <IconAward size={16} className="text-vgu-yellow flex-none" stroke={2} />
-            <span className="text-[13px] font-heading font-semibold text-white">
+            <span className="flex-none flex items-center justify-center w-6 h-6 rounded-full bg-white">
+              <IconAward size={14} className="text-vgu-red" stroke={2.5} />
+            </span>
+            <span className="text-[13px] font-heading font-extrabold text-neutral-900 tracking-tight">
               Top Online University in Rajasthan
             </span>
           </div>

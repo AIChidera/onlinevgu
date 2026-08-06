@@ -118,6 +118,26 @@
   animation: barFill 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ── Hero ranking badge - one-shot light sweep after entrance settles ── */
+@keyframes vguBadgeShimmer {
+  from { transform: translateX(-120%) skewX(-20deg); }
+  to   { transform: translateX(220%)  skewX(-20deg); }
+}
+.vgu-badge-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: vguBadgeShimmer 1.1s cubic-bezier(0.22, 1, 0.36, 1) 900ms 1 both;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vgu-badge-shimmer::after { animation: none !important; content: none; }
+}
+
 /* Platform video banner - exact viewport fill on desktop */
 @media (min-width: 1024px) {
   .platform-video-banner {
