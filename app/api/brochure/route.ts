@@ -19,7 +19,10 @@ async function fetchBrochureAttachment(programName: string) {
       console.warn(`[brochure] PDF for ${programName} exceeds 10MB, skipping attach`)
       return null
     }
-    return { filename, content: buf }
+    // Resend's JSON API expects attachment content as base64, not a raw
+    // Buffer - a Buffer silently serializes to {type:"Buffer",data:[...]}
+    // over the wire, so the email sends fine but the PDF never shows up.
+    return { filename, content: buf.toString('base64') }
   } catch (e) {
     console.warn(`[brochure] attachment fetch failed: ${(e as Error).message}`)
     return null
