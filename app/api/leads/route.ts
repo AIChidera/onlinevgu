@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { LeadSchema } from '@/lib/validations'
+import { waitUntil } from '@vercel/functions'
+import { LeadSchema, type LeadInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL, leadConfirmationHtml, leadNotificationHtml } from '@/lib/resend'
 
@@ -74,7 +75,14 @@ export async function POST(req: NextRequest) {
     console.error('[leads] Supabase insert threw:', err)
   }
 
-  // Send emails (non-blocking failures)
+  // Fire emails in the background - don't make the visitor wait on Resend's
+  // round trip before the button gets to stop spinning.
+  waitUntil(sendLeadEmails(data))
+
+  return NextResponse.json({ success: true }, { status: 201 })
+}
+
+async function sendLeadEmails(data: LeadInput) {
   try {
     const results = await Promise.allSettled([
       resend.emails.send({
@@ -104,6 +112,4 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('[leads] Resend threw:', err)
   }
-
-  return NextResponse.json({ success: true }, { status: 201 })
 }

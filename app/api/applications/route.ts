@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { waitUntil } from '@vercel/functions'
 import { ApplicationSchema } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
@@ -71,6 +72,18 @@ export async function POST(req: NextRequest) {
     console.error('[applications] Supabase insert threw:', err)
   }
 
+  // Fire emails in the background - don't make the visitor wait on Resend's
+  // round trip. waitUntil keeps the function alive long enough to finish
+  // sending after the response has already gone back to the browser.
+  waitUntil(sendApplicationEmails(data))
+
+  return NextResponse.json({ success: true }, { status: 201 })
+}
+
+async function sendApplicationEmails(data: {
+  name: string; email: string; phone: string
+  level: 'ug' | 'pg'; programme: string; intake: string
+}) {
   try {
     const results = await Promise.allSettled([
       resend.emails.send({
@@ -92,8 +105,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('[applications] Resend threw:', err)
   }
-
-  return NextResponse.json({ success: true }, { status: 201 })
 }
 
 function confirmationHtml(name: string, programme: string): string {

@@ -168,9 +168,8 @@ export default function BrochureModal() {
           )}
         </div>
 
-        {/* Form / success - safety-net scroll only */}
-        <div className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-5" style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}>
-          {submitted ? (
+        {submitted ? (
+          <div className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-5">
             <div className="text-center py-4">
               <div className="w-14 h-14 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mx-auto mb-4">
                 <IconCheck size={26} className="text-green-600" />
@@ -190,49 +189,60 @@ export default function BrochureModal() {
                 Done
               </button>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
-              <input
-                name="name" type="text" placeholder="Your full name" required
-                maxLength={100} autoComplete="name"
-                value={form.name} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
-              />
-              <PhoneField
-                name="mobile"
-                placeholder="Mobile number"
-                required
-                maxLength={15}
-                value={form.mobile}
-                onChange={handleChange}
-                dialCode={dialCode}
-                onDialChange={setDialCode}
-              />
-              <input
-                name="email" type="email" placeholder="Email address" required
-                maxLength={254} autoComplete="email"
-                value={form.email} onChange={handleChange}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
-              />
-
-              {/* Program - dropdown only when not pre-filled (saves a row when it is) */}
-              {!program && (
-                <select
-                  value={program}
-                  onChange={e => setProgram(e.target.value)}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
+            {/* Fields - only this area scrolls, if it ever needs to */}
+            <div
+              className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-5"
+              style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
+            >
+              <div className="flex flex-col gap-2.5">
+                <input
+                  name="name" type="text" placeholder="Your full name" required
+                  maxLength={100} autoComplete="name"
+                  value={form.name} onChange={handleChange}
+                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                />
+                <PhoneField
+                  name="mobile"
+                  placeholder="Mobile number"
                   required
-                  disabled={programmes.length === 0}
-                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none disabled:opacity-50"
-                >
-                  <option value="" disabled>
-                    {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
-                  </option>
-                  {programmes.map(p => <option key={p} value={p}>{p}</option>)}
-                </select>
-              )}
+                  maxLength={15}
+                  value={form.mobile}
+                  onChange={handleChange}
+                  dialCode={dialCode}
+                  onDialChange={setDialCode}
+                />
+                <input
+                  name="email" type="email" placeholder="Email address" required
+                  maxLength={254} autoComplete="email"
+                  value={form.email} onChange={handleChange}
+                  className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors"
+                />
 
+                {/* Program - dropdown only when not pre-filled (saves a row when it is) */}
+                {!program && (
+                  <select
+                    value={program}
+                    onChange={e => setProgram(e.target.value)}
+                    required
+                    disabled={programmes.length === 0}
+                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 focus:bg-white transition-colors appearance-none disabled:opacity-50"
+                  >
+                    <option value="" disabled>
+                      {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
+                    </option>
+                    {programmes.map(p => <option key={p} value={p}>{p}</option>)}
+                  </select>
+                )}
+              </div>
+            </div>
+
+            {/* Footer - pinned, never scrolls out of view */}
+            <div className="flex-none bg-white px-6 pt-3 pb-5 border-t border-neutral-100">
               {submitError && (
-                <p className="rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
+                <p className="mb-3 rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
                   {submitError}
                 </p>
               )}
@@ -245,13 +255,13 @@ export default function BrochureModal() {
                 {submitting ? 'Sending…' : 'Send My Brochure'}
               </button>
 
-              <p className="flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400">
+              <p className="mt-2 flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400">
                 <IconLock size={11} />
                 Free · Instant email · No spam.
               </p>
-            </form>
-          )}
-        </div>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   )

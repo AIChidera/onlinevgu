@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ContactSchema } from '@/lib/validations'
+import { waitUntil } from '@vercel/functions'
+import { ContactSchema, type ContactInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
 
@@ -68,6 +69,14 @@ export async function POST(req: NextRequest) {
     console.error('[contact] Supabase insert threw:', err)
   }
 
+  // Fire emails in the background - don't make the visitor wait on Resend's
+  // round trip before the button gets to stop spinning.
+  waitUntil(sendContactEmails(data))
+
+  return NextResponse.json({ success: true }, { status: 201 })
+}
+
+async function sendContactEmails(data: ContactInput) {
   try {
     const results = await Promise.allSettled([
       resend.emails.send({
@@ -122,6 +131,4 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('[contact] Resend threw:', err)
   }
-
-  return NextResponse.json({ success: true }, { status: 201 })
 }

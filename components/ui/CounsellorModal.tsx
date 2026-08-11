@@ -158,14 +158,14 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
 
-      {/* Modal card - max-h-95dvh on mobile, max-h-90vh on desktop, so the
-            counsellor form never triggers an inner scroll on standard phones. */}
+      {/* Modal card - the card itself no longer scrolls (that used to carry
+            the image column off-screen too); only the form fields inside the
+            right column scroll, and the submit button stays pinned. */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Talk to a Counsellor"
-        className="relative z-10 w-full max-w-[900px] rounded-t-2xl sm:rounded-2xl shadow-2xl bg-vgu-beige max-h-[95dvh] sm:max-h-[90vh] overflow-y-auto"
-        style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
+        className="relative z-10 w-full max-w-[900px] rounded-t-2xl sm:rounded-2xl shadow-2xl bg-vgu-beige max-h-[95dvh] sm:max-h-[90vh] overflow-hidden flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Close button */}
@@ -177,7 +177,7 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
           <IconX size={18} className="text-neutral-700" />
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 flex-1 min-h-0">
           {/* Left: counsellor image */}
           <div className="relative hidden lg:block min-h-[520px]">
             <div
@@ -224,104 +224,127 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
             </div>
           </div>
 
-          {/* Right: form - padding trimmed so the panel fits on a 667-tall phone */}
-          <div className="flex flex-col justify-center px-6 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
-            <span className="inline-flex items-center gap-2 self-start rounded-full px-3 py-1 text-[11px] font-body font-bold uppercase tracking-[0.08em] mb-3 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
-              <IconHeadset size={12} />
-              Talk to a Counsellor
-            </span>
-
-            <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-2 sm:text-[28px]">
-              Have Questions?{' '}
-              <span className="text-vgu-red">We&apos;re Here to Help.</span>
-            </h2>
-            <p className="text-[13px] font-body leading-[1.55] text-neutral-500 mb-4 max-w-[380px]">
-              Free, no-obligation guidance on programs, fees, and eligibility.
-            </p>
-
+          {/* Right: form column - its own flex column so the submit button
+                can stay pinned below the scrolling fields, independent of
+                the image column on the left. */}
+          <div className="flex flex-col min-h-0">
             {submitted ? (
-              <div className="rounded-2xl bg-green-50 border border-green-200 px-6 py-8 text-center">
-                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
-                  <IconThumbUp size={22} className="text-green-600" />
-                </div>
-                <p className="font-heading font-bold text-[18px] text-neutral-900 mb-1">
-                  We&apos;ve got your details!
-                </p>
-                <p className="text-[14px] font-body text-neutral-500 mb-5">
-                  Ananya will call you within 2 hours.
-                </p>
+              <div className="flex-1 min-h-0 overflow-y-auto flex flex-col justify-center px-6 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+                <span className="inline-flex items-center gap-2 self-start rounded-full px-3 py-1 text-[11px] font-body font-bold uppercase tracking-[0.08em] mb-3 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
+                  <IconHeadset size={12} />
+                  Talk to a Counsellor
+                </span>
+                <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-2 sm:text-[28px]">
+                  Have Questions?{' '}
+                  <span className="text-vgu-red">We&apos;re Here to Help.</span>
+                </h2>
+                <div className="rounded-2xl bg-green-50 border border-green-200 px-6 py-8 text-center">
+                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                    <IconThumbUp size={22} className="text-green-600" />
+                  </div>
+                  <p className="font-heading font-bold text-[18px] text-neutral-900 mb-1">
+                    We&apos;ve got your details!
+                  </p>
+                  <p className="text-[14px] font-body text-neutral-500 mb-5">
+                    Ananya will call you within 2 hours.
+                  </p>
 
-                <p className="text-[12px] font-body font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-3">
-                  Need a quicker answer?
-                </p>
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeModal}
-                  className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold text-white transition-colors duration-150"
-                  style={{ backgroundColor: '#25D366' }}
-                  onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1da851')}
-                  onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#25D366')}
-                >
-                  <IconBrandWhatsapp size={18} />
-                  Chat on WhatsApp
-                </a>
+                  <p className="text-[12px] font-body font-semibold uppercase tracking-[0.06em] text-neutral-400 mb-3">
+                    Need a quicker answer?
+                  </p>
+                  <a
+                    href={waHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeModal}
+                    className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[14px] font-heading font-semibold text-white transition-colors duration-150"
+                    style={{ backgroundColor: '#25D366' }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1da851')}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#25D366')}
+                  >
+                    <IconBrandWhatsapp size={18} />
+                    Chat on WhatsApp
+                  </a>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-2.5" noValidate>
-                <input
-                  name="name" type="text" placeholder="Your full name" required
-                  maxLength={100}
-                  value={form.name} onChange={handleChange}
-                  autoComplete="name"
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
-                />
-                <PhoneField
-                  name="mobile"
-                  placeholder="Mobile number"
-                  required
-                  maxLength={15}
-                  value={form.mobile}
-                  onChange={handleChange}
-                  dialCode={dialCode}
-                  onDialChange={setDialCode}
-                />
-                <input
-                  name="email" type="email" placeholder="Email address" required
-                  maxLength={254}
-                  value={form.email} onChange={handleChange}
-                  autoComplete="email"
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
-                />
-                <select
-                  name="programme" required value={form.programme} onChange={handleChange}
-                  disabled={programmes.length === 0}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none disabled:opacity-50"
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col min-h-0 flex-1">
+                {/* Fields - only this area scrolls, if it ever needs to */}
+                <div
+                  className="flex-1 min-h-0 overflow-y-auto px-6 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pt-10"
+                  style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
                 >
-                  <option value="" disabled>
-                    {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
-                  </option>
-                  {programmes.map(p => <option key={p} value={p}>{p}</option>)}
-                </select>
+                  <span className="inline-flex items-center gap-2 self-start rounded-full px-3 py-1 text-[11px] font-body font-bold uppercase tracking-[0.08em] mb-3 bg-vgu-red-dark/10 border border-vgu-red-dark/20 text-vgu-red-dark">
+                    <IconHeadset size={12} />
+                    Talk to a Counsellor
+                  </span>
 
-                {submitError && (
-                  <p className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
-                    {submitError}
+                  <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-2 sm:text-[28px]">
+                    Have Questions?{' '}
+                    <span className="text-vgu-red">We&apos;re Here to Help.</span>
+                  </h2>
+                  <p className="text-[13px] font-body leading-[1.55] text-neutral-500 mb-4 max-w-[380px]">
+                    Free, no-obligation guidance on programs, fees, and eligibility.
                   </p>
-                )}
 
-                <button
-                  type="submit" disabled={submitting}
-                  className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60"
-                >
-                  {submitting ? 'Sending...' : 'Talk to a Counsellor'}
-                </button>
+                  <div className="flex flex-col gap-2.5">
+                    <input
+                      name="name" type="text" placeholder="Your full name" required
+                      maxLength={100}
+                      value={form.name} onChange={handleChange}
+                      autoComplete="name"
+                      className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                    />
+                    <PhoneField
+                      name="mobile"
+                      placeholder="Mobile number"
+                      required
+                      maxLength={15}
+                      value={form.mobile}
+                      onChange={handleChange}
+                      dialCode={dialCode}
+                      onDialChange={setDialCode}
+                    />
+                    <input
+                      name="email" type="email" placeholder="Email address" required
+                      maxLength={254}
+                      value={form.email} onChange={handleChange}
+                      autoComplete="email"
+                      className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors"
+                    />
+                    <select
+                      name="programme" required value={form.programme} onChange={handleChange}
+                      disabled={programmes.length === 0}
+                      className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-[15px] font-body text-neutral-700 focus:outline-none focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-colors appearance-none disabled:opacity-50"
+                    >
+                      <option value="" disabled>
+                        {programmes.length === 0 ? 'Loading programs...' : 'Select a program'}
+                      </option>
+                      {programmes.map(p => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                  </div>
+                </div>
 
-                <p className="flex items-center gap-1.5 text-[11px] font-body text-neutral-400">
-                  <IconLock size={11} />
-                  Free consultation · No obligation · Reply in 2 min.
-                </p>
+                {/* Footer - pinned, never scrolls out of view */}
+                <div className="flex-none px-6 pt-3 pb-6 sm:px-8 sm:pb-8 lg:px-10 lg:pb-10">
+                  {submitError && (
+                    <p className="mb-2.5 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] font-body text-red-600">
+                      {submitError}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit" disabled={submitting}
+                    className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-colors duration-150 disabled:opacity-60"
+                  >
+                    {submitting ? 'Sending...' : 'Talk to a Counsellor'}
+                  </button>
+
+                  <p className="mt-2.5 flex items-center gap-1.5 text-[11px] font-body text-neutral-400">
+                    <IconLock size={11} />
+                    Free consultation · No obligation · Reply in 2 min.
+                  </p>
+                </div>
               </form>
             )}
           </div>

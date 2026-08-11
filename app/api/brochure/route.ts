@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { BrochureSchema } from '@/lib/validations'
+import { waitUntil } from '@vercel/functions'
+import { BrochureSchema, type BrochureInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
 import { getBrochureUrlForProgram } from '@/lib/sanity'
@@ -93,8 +94,16 @@ export async function POST(req: NextRequest) {
     console.error('[brochure] Supabase insert threw:', err)
   }
 
-  // Pull the right PDF from Sanity (per-program → defaults to siteSettings).
-  // Runs in parallel with the email composition for minimal added latency.
+  // Fetching the PDF from Sanity and sending both emails can take a few
+  // seconds combined - do it in the background so the visitor's button
+  // doesn't sit spinning that whole time. waitUntil keeps the function
+  // alive long enough to finish after the response has already gone back.
+  waitUntil(sendBrochureEmails(data))
+
+  return NextResponse.json({ success: true }, { status: 201 })
+}
+
+async function sendBrochureEmails(data: BrochureInput) {
   const attachment = await fetchBrochureAttachment(data.programInterest)
 
   const bodyCopy = attachment
@@ -151,6 +160,4 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('[brochure] Resend threw:', err)
   }
-
-  return NextResponse.json({ success: true }, { status: 201 })
 }

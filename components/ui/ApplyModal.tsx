@@ -219,13 +219,8 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
           </div>
         </div>
 
-        {/* ══ Form body ══ - flex-1 + overflow-y-auto is a safety net only;
-              steps are sized to fit inside the modal without scrolling. */}
-        <div
-          className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4"
-          style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
-        >
-          {submitted ? (
+        {submitted ? (
+          <div className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4">
             <div className="py-6 text-center">
               <div className="relative inline-flex mb-4">
                 <div className="absolute inset-0 rounded-full bg-green-200/50 animate-ping [animation-duration:2s]" />
@@ -243,185 +238,206 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
                 Done
               </button>
             </div>
-          ) : step === 1 ? (
-            /* ─── STEP 1 - Level + Programme ─── */
-            <div className="flex flex-col gap-4">
-              {/* Level */}
-              <div>
-                <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
-                  What do you want to study?
-                </p>
-                <div className="grid grid-cols-2 gap-2.5">
-                  {(['ug', 'pg'] as const).map(lvl => (
-                    <button
-                      key={lvl}
-                      type="button"
-                      onClick={() => setForm(prev => ({ ...prev, level: lvl, programme: '' }))}
-                      className={[
-                        'group relative rounded-xl border-2 px-4 py-3 text-left transition-all duration-200',
-                        form.level === lvl
-                          ? 'border-vgu-red bg-vgu-red/[0.04] shadow-[0_0_0_3px_rgba(192,64,54,0.10)]'
-                          : 'border-neutral-200 bg-neutral-50 hover:border-vgu-red/40 hover:bg-white hover:shadow-sm',
-                      ].join(' ')}
-                    >
-                      {form.level === lvl && (
-                        <span className="absolute top-2 right-2 w-5 h-5 rounded-full bg-vgu-red flex items-center justify-center">
-                          <IconCheck size={10} className="text-white" stroke={3} />
-                        </span>
-                      )}
-                      <p className={[
-                        'font-heading font-bold text-[14px] transition-colors duration-150',
-                        form.level === lvl ? 'text-vgu-red' : 'text-neutral-800 group-hover:text-neutral-900',
-                      ].join(' ')}>
-                        {lvl === 'ug' ? 'Undergraduate' : 'Postgraduate'}
-                      </p>
-                      <p className="mt-0.5 text-[11px] font-body text-neutral-500">
-                        {lvl === 'ug' ? '3-year bachelor\'s degrees' : '1-2 year master\'s degrees'}
-                      </p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Programme pills */}
-              {form.level && (
+          </div>
+        ) : step === 1 ? (
+          /* ─── STEP 1 - Level + Programme ─── */
+          <>
+            {/* Fields - only this area scrolls, if it ever needs to */}
+            <div
+              className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4"
+              style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
+            >
+              <div className="flex flex-col gap-4">
+                {/* Level */}
                 <div>
                   <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
-                    Choose your program
+                    What do you want to study?
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {programmes.length === 0 ? (
-                      <p className="text-[12px] font-body text-neutral-400">Loading programs…</p>
-                    ) : programmes.map(p => (
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {(['ug', 'pg'] as const).map(lvl => (
                       <button
-                        key={p}
+                        key={lvl}
                         type="button"
-                        onClick={() => setForm(prev => ({ ...prev, programme: p }))}
+                        onClick={() => setForm(prev => ({ ...prev, level: lvl, programme: '' }))}
                         className={[
-                          'rounded-full border-2 px-3.5 py-1.5 text-[13px] font-heading font-semibold transition-all duration-150',
-                          form.programme === p
-                            ? 'bg-vgu-red border-vgu-red text-white shadow-[0_2px_12px_rgba(192,64,54,0.28)]'
-                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-vgu-red/50 hover:text-vgu-red hover:shadow-sm',
+                          'group relative rounded-xl border-2 px-4 py-3 text-left transition-all duration-200',
+                          form.level === lvl
+                            ? 'border-vgu-red bg-vgu-red/[0.04] shadow-[0_0_0_3px_rgba(192,64,54,0.10)]'
+                            : 'border-neutral-200 bg-neutral-50 hover:border-vgu-red/40 hover:bg-white hover:shadow-sm',
                         ].join(' ')}
                       >
-                        {p}
+                        {form.level === lvl && (
+                          <span className="absolute top-2 right-2 w-5 h-5 rounded-full bg-vgu-red flex items-center justify-center">
+                            <IconCheck size={10} className="text-white" stroke={3} />
+                          </span>
+                        )}
+                        <p className={[
+                          'font-heading font-bold text-[14px] transition-colors duration-150',
+                          form.level === lvl ? 'text-vgu-red' : 'text-neutral-800 group-hover:text-neutral-900',
+                        ].join(' ')}>
+                          {lvl === 'ug' ? 'Undergraduate' : 'Postgraduate'}
+                        </p>
+                        <p className="mt-0.5 text-[11px] font-body text-neutral-500">
+                          {lvl === 'ug' ? '3-year bachelor\'s degrees' : '1-2 year master\'s degrees'}
+                        </p>
                       </button>
                     ))}
                   </div>
                 </div>
-              )}
 
-              {/* Continue button - pinned at the bottom of the step */}
+                {/* Programme pills */}
+                {form.level && (
+                  <div>
+                    <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
+                      Choose your program
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {programmes.length === 0 ? (
+                        <p className="text-[12px] font-body text-neutral-400">Loading programs…</p>
+                      ) : programmes.map(p => (
+                        <button
+                          key={p}
+                          type="button"
+                          onClick={() => setForm(prev => ({ ...prev, programme: p }))}
+                          className={[
+                            'rounded-full border-2 px-3.5 py-1.5 text-[13px] font-heading font-semibold transition-all duration-150',
+                            form.programme === p
+                              ? 'bg-vgu-red border-vgu-red text-white shadow-[0_2px_12px_rgba(192,64,54,0.28)]'
+                              : 'border-neutral-200 bg-white text-neutral-600 hover:border-vgu-red/50 hover:text-vgu-red hover:shadow-sm',
+                          ].join(' ')}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer - pinned, never scrolls out of view */}
+            <div className="flex-none bg-white px-6 pt-3 pb-5 border-t border-neutral-100">
               <button
                 type="button"
                 disabled={!canAdvance}
                 onClick={() => setStep(2)}
-                className="mt-1 w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(192,64,54,0.32)] hover:shadow-[0_6px_28px_rgba(192,64,54,0.44)]"
+                className="w-full rounded-full bg-vgu-red hover:bg-vgu-red-dark text-white py-3 text-[15px] font-semibold font-heading transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(192,64,54,0.32)] hover:shadow-[0_6px_28px_rgba(192,64,54,0.44)]"
               >
                 Continue <IconArrowRight size={16} />
               </button>
             </div>
-          ) : (
-            /* ─── STEP 2 - Details + Intake + Consent + Submit ─── */
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              {/* Pre-selected program chip - shown when jumped from a slug page */}
-              {form.programme && (
-                <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-2.5">
-                  <div>
-                    <p className="text-[10px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">Applying for</p>
-                    <p className="text-[13px] font-heading font-bold text-neutral-900">{form.programme}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setStep(1)}
-                    className="text-[12px] font-body font-semibold text-vgu-red hover:underline flex-none"
-                  >
-                    Change
-                  </button>
-                </div>
-              )}
-
-              {/* Personal details */}
-              <div>
-                <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
-                  Your details
-                </p>
-                <div className="flex flex-col gap-2.5">
-                  <input
-                    name="name" type="text" placeholder="Full name" required
-                    maxLength={100} autoComplete="name"
-                    value={form.name} onChange={handleChange}
-                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
-                  />
-                  <input
-                    name="email" type="email" placeholder="Email address" required
-                    maxLength={254} autoComplete="email"
-                    value={form.email} onChange={handleChange}
-                    className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
-                  />
-                  <PhoneField
-                    name="mobile"
-                    placeholder="Mobile number"
-                    required
-                    maxLength={15}
-                    value={form.mobile}
-                    onChange={handleChange}
-                    dialCode={dialCode}
-                    onDialChange={setDialCode}
-                  />
-                </div>
-              </div>
-
-              {/* Intake - single row on every viewport */}
-              <div>
-                <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
-                  When do you plan to start?
-                </p>
-                <div className="grid grid-cols-4 gap-2">
-                  {INTAKE_OPTIONS.map(o => (
+          </>
+        ) : (
+          /* ─── STEP 2 - Details + Intake + Consent + Submit ─── */
+          <form onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
+            {/* Fields - only this area scrolls, if it ever needs to */}
+            <div
+              className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4"
+              style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
+            >
+              <div className="flex flex-col gap-4">
+                {/* Pre-selected program chip - shown when jumped from a slug page */}
+                {form.programme && (
+                  <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-2.5">
+                    <div>
+                      <p className="text-[10px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">Applying for</p>
+                      <p className="text-[13px] font-heading font-bold text-neutral-900">{form.programme}</p>
+                    </div>
                     <button
-                      key={o.value}
                       type="button"
-                      onClick={() => setForm(prev => ({ ...prev, intake: o.value }))}
-                      className={[
-                        'relative rounded-lg border-2 px-2 py-2 text-center transition-all duration-150',
-                        form.intake === o.value
-                          ? 'border-vgu-red bg-vgu-red/[0.04] shadow-[0_0_0_3px_rgba(192,64,54,0.08)]'
-                          : 'border-neutral-200 bg-neutral-50 hover:border-vgu-red/40 hover:bg-white',
-                      ].join(' ')}
+                      onClick={() => setStep(1)}
+                      className="text-[12px] font-body font-semibold text-vgu-red hover:underline flex-none"
                     >
-                      <span className={[
-                        'block font-heading font-bold text-[12px] leading-tight',
-                        form.intake === o.value ? 'text-vgu-red' : 'text-neutral-800',
-                      ].join(' ')}>
-                        {o.label}
-                      </span>
-                      {o.popular && (
-                        <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 rounded-full bg-vgu-yellow px-1.5 py-0.5 text-[8px] font-body font-bold text-neutral-900 leading-none whitespace-nowrap">
-                          Next batch
-                        </span>
-                      )}
+                      Change
                     </button>
-                  ))}
+                  </div>
+                )}
+
+                {/* Personal details */}
+                <div>
+                  <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
+                    Your details
+                  </p>
+                  <div className="flex flex-col gap-2.5">
+                    <input
+                      name="name" type="text" placeholder="Full name" required
+                      maxLength={100} autoComplete="name"
+                      value={form.name} onChange={handleChange}
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
+                    />
+                    <input
+                      name="email" type="email" placeholder="Email address" required
+                      maxLength={254} autoComplete="email"
+                      value={form.email} onChange={handleChange}
+                      className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-[15px] font-body text-neutral-900 placeholder-neutral-400 focus:outline-none focus:bg-white focus:border-vgu-red focus:ring-2 focus:ring-vgu-red/10 transition-all"
+                    />
+                    <PhoneField
+                      name="mobile"
+                      placeholder="Mobile number"
+                      required
+                      maxLength={15}
+                      value={form.mobile}
+                      onChange={handleChange}
+                      dialCode={dialCode}
+                      onDialChange={setDialCode}
+                    />
+                  </div>
                 </div>
+
+                {/* Intake - single row on every viewport */}
+                <div>
+                  <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
+                    When do you plan to start?
+                  </p>
+                  <div className="grid grid-cols-4 gap-2">
+                    {INTAKE_OPTIONS.map(o => (
+                      <button
+                        key={o.value}
+                        type="button"
+                        onClick={() => setForm(prev => ({ ...prev, intake: o.value }))}
+                        className={[
+                          'relative rounded-lg border-2 px-2 py-2 text-center transition-all duration-150',
+                          form.intake === o.value
+                            ? 'border-vgu-red bg-vgu-red/[0.04] shadow-[0_0_0_3px_rgba(192,64,54,0.08)]'
+                            : 'border-neutral-200 bg-neutral-50 hover:border-vgu-red/40 hover:bg-white',
+                        ].join(' ')}
+                      >
+                        <span className={[
+                          'block font-heading font-bold text-[12px] leading-tight',
+                          form.intake === o.value ? 'text-vgu-red' : 'text-neutral-800',
+                        ].join(' ')}>
+                          {o.label}
+                        </span>
+                        {o.popular && (
+                          <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 rounded-full bg-vgu-yellow px-1.5 py-0.5 text-[8px] font-body font-bold text-neutral-900 leading-none whitespace-nowrap">
+                            Next batch
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Consent */}
+                <label className="flex items-start gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox" name="consent" required
+                    checked={form.consent}
+                    onChange={handleChange}
+                    className="mt-[3px] flex-none accent-[#C04036]"
+                  />
+                  <span className="text-[11px] font-body text-neutral-500 leading-[1.5]">
+                    I authorise VGU to contact me via call, SMS, email, and WhatsApp.
+                    This overrides any DNC/NDNC registration.
+                  </span>
+                </label>
               </div>
+            </div>
 
-              {/* Consent */}
-              <label className="flex items-start gap-2.5 cursor-pointer">
-                <input
-                  type="checkbox" name="consent" required
-                  checked={form.consent}
-                  onChange={handleChange}
-                  className="mt-[3px] flex-none accent-[#C04036]"
-                />
-                <span className="text-[11px] font-body text-neutral-500 leading-[1.5]">
-                  I authorise VGU to contact me via call, SMS, email, and WhatsApp.
-                  This overrides any DNC/NDNC registration.
-                </span>
-              </label>
-
+            {/* Footer - pinned, never scrolls out of view */}
+            <div className="flex-none bg-white px-6 pt-3 pb-5 border-t border-neutral-100">
               {submitError && (
-                <p className="rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
+                <p className="mb-3 rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
                   {submitError}
                 </p>
               )}
@@ -434,13 +450,13 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
                 {submitting ? 'Submitting…' : 'Start My Application'}
               </button>
 
-              <p className="flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400 -mt-1">
+              <p className="mt-2 flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400">
                 <IconLock size={11} />
                 Your details are safe. We never spam or share your information.
               </p>
-            </form>
-          )}
-        </div>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   )
