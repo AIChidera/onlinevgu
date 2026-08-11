@@ -22,14 +22,6 @@ const FAQ_DATA: Record<string, FAQ[]> = {
     { q: 'Can I switch specialisations after enrolling?', a: 'Specialisation choice is confirmed at the end of Semester 2. Switching before that point is allowed with counsellor approval.' },
     { q: 'What happens if I miss live sessions?', a: 'Every session is recorded. Recordings stay accessible until the end of the programme. There is no penalty for watching asynchronously, though live attendance has a small bonus weighting.' },
   ],
-  'mba-healthcare': [
-    { q: 'Do I need a medical degree to apply?', a: 'No. Any bachelor\'s degree from a UGC-recognised university qualifies. Students with MBBS, BDS, B.Sc Nursing, or allied health backgrounds are preferred but not required.' },
-    { q: 'Is this the same as a general MBA?', a: 'The core management subjects are the same. Healthcare adds hospital administration, health policy, pharma operations, and medical finance - subjects directly relevant to the sector.' },
-    { q: 'Will this help me move into hospital management?', a: 'Yes. The programme is specifically designed for that transition. Case studies come from real hospital operations and the faculty includes working healthcare executives.' },
-    { q: 'Are there industry partnerships for projects?', a: 'Yes. We have tie-ups with hospitals in major cities for live case study access. Students work on real operational problems, not simulated scenarios.' },
-    { q: 'What does the CMO-led session involve?', a: 'Senior healthcare leaders - CMOs, COOs, and CEOs from hospital groups - take a full session each semester. These are live discussions on real cases, not pre-recorded lectures.' },
-    { q: 'Is the degree valid for government healthcare roles?', a: 'Yes. The UGC-recognised MBA from VGU qualifies you for management-level healthcare roles in both public and private sectors.' },
-  ],
   bca: [
     { q: 'Do I need coding experience to join?', a: 'No prior coding experience is needed. The programme starts with C programming basics and builds up to full-stack development over three years.' },
     { q: 'Is this degree equivalent to an on-campus BCA?', a: 'Yes. VGU is UGC-entitled and the degree has identical legal standing to an on-campus BCA. Employers and higher education institutions treat it the same.' },
@@ -46,22 +38,6 @@ const FAQ_DATA: Record<string, FAQ[]> = {
     { q: 'Can I do an internship during the programme?', a: 'Yes. The curriculum includes a formal internship track in Year 2. We also support students who find their own internships and credit that experience.' },
     { q: 'How are weekend classes structured?', a: 'Live sessions are held on Saturday and Sunday, typically 2-3 hours per day. Weekday study is self-paced via recorded content and assignments.' },
   ],
-  bcom: [
-    { q: 'Is this degree valid for CA articleship?', a: 'Yes. B.Com from VGU is a UGC-recognised degree and meets the educational qualification for ICAI CA articleship registration.' },
-    { q: 'Do I need Commerce at 10+2 level?', a: 'No. Science and Arts streams are also accepted. Minimum 45% marks required. The first year covers accounting fundamentals to bring all students to the same level.' },
-    { q: 'Is Tally taught practically or just theoretically?', a: 'Practically. You get access to Tally software and ERP practice environments from Semester 2 onwards. The assessment includes hands-on tasks, not just theory papers.' },
-    { q: 'What are my options after B.Com?', a: 'CA/CMA articleship, M.Com, MBA, banking exams, or direct roles in accounting, taxation, and finance. The degree opens all of these paths.' },
-    { q: 'Is the GST content up to date?', a: 'Our faculty update modules in real time as regulations change. GST provisions are taught against the current law, not a static textbook version.' },
-    { q: 'Can I appear for bank PO exams after B.Com?', a: 'Yes. Bank PO, Clerk, and other IBPS exams are open to any graduate. B.Com gives you a relevant background that helps with the financial awareness paper.' },
-  ],
-  mcom: [
-    { q: 'Is M.Com from VGU recognised for lecturer jobs?', a: 'Yes. VGU is NAAC A+ accredited and the M.Com is UGC-entitled, which satisfies the academic qualification for lecturer positions at the college level (along with UGC-NET).' },
-    { q: 'Does this programme help with CA/CMA preparation?', a: 'Yes. The advanced accounting, taxation, and corporate law modules align closely with CA Final and CMA syllabus topics. Faculty also provide guidance on exam strategy.' },
-    { q: 'Is there a dissertation requirement?', a: 'Yes. Semester 4 includes a research dissertation. You choose a topic in your specialisation area with faculty supervision throughout.' },
-    { q: 'What is the difference between M.Com and MBA?', a: 'M.Com goes deeper into accounting, taxation, and financial research. MBA focuses on management and leadership. M.Com is the better choice if you want a finance/accounting career or academia.' },
-    { q: 'Can working professionals manage M.Com alongside a job?', a: 'Yes. Live sessions are on weekends. The workload is structured for people with professional commitments - typically 8-10 hours of study per week.' },
-    { q: 'What roles do M.Com graduates move into?', a: 'Senior accountant, tax consultant, financial analyst, audit manager, finance controller, and investment analyst roles are common. Many also pursue teaching or research.' },
-  ],
   ma: [
     { q: 'Is MA from VGU valid for UGC-NET?', a: 'Yes. You need a postgraduate degree from a UGC-recognised institution to appear for UGC-NET. VGU MA meets this requirement fully.' },
     { q: 'Can I use this for civil services preparation?', a: 'Yes. Many students choose MA precisely for this reason. The Political Science and Economics specialisations are directly relevant to the GS papers. Faculty also provide optional guidance on optional subjects.' },
@@ -75,27 +51,6 @@ const FAQ_DATA: Record<string, FAQ[]> = {
     { q: 'Is this BA equivalent to an on-campus degree?', a: 'Yes. VGU is UGC-entitled and the degree has the same legal standing as an on-campus BA. It is valid for government exams, teaching positions, and higher education admission.' },
     { q: 'Can I pursue MA or LLB after this?', a: 'Yes. BA from VGU qualifies you for MA admission at any university and LLB admission at any recognised law school.' },
     { q: 'How is the research project in Year 3 structured?', a: 'You work on a guided research project of 8,000-10,000 words in your specialisation area. A faculty supervisor reviews your work across two semesters.' },
-  ],
-  bsc: [
-    { q: 'Is a Science background required at 10+2?', a: 'Yes. You need 10+2 with Science and Mathematics. Minimum 45% marks required.' },
-    { q: 'Is this B.Sc valid for MCA or M.Sc admission?', a: 'Yes. B.Sc from VGU is a UGC-recognised degree and is accepted for MCA and M.Sc admission at any standard university.' },
-    { q: 'What kind of data roles can I get after B.Sc?', a: 'Data analyst, research associate, and junior data scientist roles are realistic exits, especially through the Computer Science or Mathematics specialisation. The Python and statistics modules are directly employable.' },
-    { q: 'Does the programme include practical lab work?', a: 'Lab sessions are conducted via online simulation tools and datasets. Physical experiments are not possible in the online format, but data and computing work is fully hands-on.' },
-    { q: 'Is ISRO or ICAR reachable after this degree?', a: 'Some positions in organisations like ISRO and ICAR require a B.Sc as minimum qualification. This degree meets that requirement. Specific roles may have additional requirements like GATE scores.' },
-  ],
-  mlib: [
-    { q: 'What is the eligibility for M.Lib admission?', a: 'A B.Lib.I.Sc or equivalent from a UGC-recognised university with minimum 50% marks is required. No entrance exam.' },
-    { q: 'Does M.Lib qualify me for head librarian positions?', a: 'Yes. M.Lib is the standard academic qualification for senior librarian and library director positions in universities, government institutions, and public libraries.' },
-    { q: 'Is this programme valid for government librarian recruitment?', a: 'Yes. M.Lib from a UGC-entitled university is accepted in government recruitment criteria for senior library posts.' },
-    { q: 'Is there a dissertation?', a: 'Yes. The second semester includes a research dissertation in an area of library and information science. Faculty guidance is provided throughout.' },
-    { q: 'Can I take this alongside B.Lib?', a: 'No. M.Lib requires a completed B.Lib as the entry qualification.' },
-  ],
-  blib: [
-    { q: 'What qualifications do I need for B.Lib?', a: 'Any bachelor\'s degree from a recognised university with minimum 45% marks. The degree can be from any stream.' },
-    { q: 'Is B.Lib from VGU valid for school librarian jobs?', a: 'Yes. B.Lib is the standard qualification for school and college librarian positions. Most recruitment boards specify this degree as the minimum requirement.' },
-    { q: 'Can I upgrade to M.Lib after this?', a: 'Yes. B.Lib is the required qualification for M.Lib admission. You can continue with VGU or any other recognised university.' },
-    { q: 'Is this a 1-year or 2-year programme?', a: 'B.Lib is a 1-year programme (2 semesters). It is a focused professional qualification, not a 3-year general degree.' },
-    { q: 'Is the degree recognised for government recruitment?', a: 'Yes. B.Lib from a UGC-entitled university is accepted for government library posts at state and central level.' },
   ],
 }
 

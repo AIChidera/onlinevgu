@@ -7,36 +7,44 @@ import type { SanityFaq } from '@/lib/sanity'
 
 const FAQS = [
   {
-    q: 'Are VGU online degrees valid and recognised by employers?',
-    a: "Yes. VGU's online degrees are UGC-entitled (under the UGC's Distance Education Bureau), which means they carry the same legal standing as on-campus degrees from UGC-recognised universities. They are accepted by government employers, PSUs, and private companies alike.",
+    q: 'Is an Online VGU degree valid for government jobs, private companies, and higher education?',
+    a: "Online VGU offers UGC-entitled online degree programs, making them valid for employment in the private sector, eligible government opportunities (subject to recruitment rules), and higher education in India and abroad. Students can also use these degrees to pursue postgraduate programs, competitive examinations, and professional certifications, provided they meet the respective eligibility criteria.",
   },
   {
-    q: 'Do I need to visit the campus at any point?',
-    a: 'No. Admissions, coursework, exams, and graduation are all 100% online. There is no mandatory campus visit. Optional on-campus immersion workshops are organised periodically but are never compulsory.',
+    q: 'Why should I choose Online VGU over other online universities in India?',
+    a: 'Online VGU combines academic excellence with career-focused learning through industry-oriented curriculum, experienced faculty, AI-powered learning resources, flexible study schedules, career assistance, affordable fees, and a modern Learning Management System (LMS). Students also benefit from recorded lectures, expert mentorship, and an online learning experience designed for working professionals and fresh graduates alike.',
   },
   {
-    q: 'Can I pursue a VGU online degree while working full-time?',
-    a: 'Absolutely - the programs are designed for working professionals. Live sessions are scheduled on evenings and weekends, and all classes are recorded so you can study at midnight or 6am, at your own pace.',
+    q: 'Who can apply for Online VGU degree programs?',
+    a: "Online VGU welcomes students, working professionals, entrepreneurs, homemakers, and career changers. Eligibility depends on the selected program. Undergraduate programs generally require successful completion of 10+2 from a recognized board, while postgraduate programs require a bachelor's degree from a recognized university. Applicants should always verify the specific eligibility criteria for their chosen course before applying.",
   },
   {
-    q: 'What is the minimum eligibility for online programs?',
-    a: "For UG programs (B.Com, BBA, BCA, BA, B.Sc, B.Lib): 10+2 or equivalent from any recognised board, any stream, minimum 45% marks. For PG programs (MBA, MCA, M.Com, MA, M.Lib, Healthcare MBA): any bachelor's degree from a UGC-recognised university, minimum 50% marks.",
+    q: 'Can working professionals study at Online VGU without leaving their jobs?',
+    a: 'Absolutely. Online VGU is designed for learners who want to continue their education while managing work or personal commitments. Students can attend live classes, access recorded lectures, complete assignments online, and study from anywhere at their own pace, making it an ideal choice for busy professionals.',
   },
   {
-    q: 'Is there an entrance exam?',
-    a: "No entrance exam is required for admission to VGU's online programs. Admission is based on merit from your qualifying examination marks.",
+    q: 'How does the Online VGU learning platform work?',
+    a: 'After admission is confirmed, students receive login credentials for the Online VGU Learning Management System (LMS). Through the platform, learners can access live and recorded lectures, digital study materials, assignments, quizzes, discussion forums, examinations, and academic support all from a computer, tablet, or smartphone with internet access.',
   },
   {
-    q: 'How are exams conducted?',
-    a: 'Exams are conducted online through our AI-proctored exam portal at the end of each semester. You appear from home using a laptop with a webcam. The system ensures academic integrity without requiring a physical exam centre.',
+    q: 'Does Online VGU provide placement and career support?',
+    a: "Yes. Online VGU offers career support services that may include career guidance, resume-building assistance, LinkedIn profile optimization, interview preparation, and industry interactions. The university focuses on improving students' employability by combining academic learning with practical and industry-relevant skills.",
   },
   {
-    q: 'What EMI options are available?',
-    a: 'No-cost EMI plans start at ₹2,999/month through 12 partner banks including HDFC, ICICI, Axis, SBI, and Kotak. You can also pay semester-wise. Merit scholarships of up to 50% are available.',
+    q: 'Are Online VGU examinations conducted online?',
+    a: 'Yes. Online VGU provides a flexible examination process, allowing eligible students to appear for assessments through its online examination system as per university guidelines. Students receive detailed instructions, schedules, and technical requirements before examinations to ensure a smooth experience.',
   },
   {
-    q: 'Will the degree certificate mention "online" or "distance"?',
-    a: 'No. The degree certificate issued by Vivekananda Global University does not state "online" or "distance." It is identical in format and language to the on-campus degree certificate.',
+    q: 'Which online courses are available at Online VGU?',
+    a: 'Online VGU offers a wide range of undergraduate and postgraduate programs in fields such as Management, Computer Applications, Commerce, Journalism & Mass Communication, Science, Arts, and more. Popular programs include Online MBA, Online MCA, Online BBA, Online BCA, Online M.Com, Online M.A., and Online M.Sc., helping learners build career-ready skills across multiple industries.',
+  },
+  {
+    q: 'How can I apply for admission to Online VGU?',
+    a: 'The admission process is completely online. Applicants need to register on the Online VGU admission portal, complete the application form, upload the required documents, pay the registration and academic fees, and submit the application for verification. Once the university verifies the documents, admission is confirmed, and students receive access to the online learning platform.',
+  },
+  {
+    q: 'Is Online VGU among the top online universities in India?',
+    a: 'Yes. Online VGU is considered one of the leading online universities in India, offering UGC-entitled online degree programs, flexible learning, experienced faculty, industry-focused curriculum, and career support. With programs like Online MBA, Online BBA, Online BCA, Online MCA, Online M.Com, Online MA, and Online MSc, Online VGU helps students and working professionals earn a recognized degree while learning from anywhere in India.',
   },
 ]
 

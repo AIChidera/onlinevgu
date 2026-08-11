@@ -1,18 +1,17 @@
 import { defineField, defineType } from 'sanity'
 
 const PROGRAM_SLUGS = [
-  { title: 'MBA',              value: 'mba'            },
-  { title: 'MBA Healthcare',   value: 'mba-healthcare' },
-  { title: 'MCA',              value: 'mca'            },
-  { title: 'BCA',              value: 'bca'            },
-  { title: 'BBA',              value: 'bba'            },
-  { title: 'B.Com',            value: 'bcom'           },
-  { title: 'M.Com',            value: 'mcom'           },
-  { title: 'BA',               value: 'ba'             },
-  { title: 'MA',               value: 'ma'             },
-  { title: 'B.Sc',             value: 'bsc'            },
-  { title: 'M.Lib',            value: 'mlib'           },
-  { title: 'B.Lib',            value: 'blib'           },
+  { title: 'BBA',       value: 'bba'       },
+  { title: 'BBA-AAFT',  value: 'bba-aaft'  },
+  { title: 'BCA',       value: 'bca'       },
+  { title: 'BA',        value: 'ba'        },
+  { title: 'MBA',       value: 'mba'       },
+  { title: 'MBA-IF',    value: 'mba-if'    },
+  { title: 'MBA-DFAA',  value: 'mba-dfaa'  },
+  { title: 'MCA',       value: 'mca'       },
+  { title: 'MA English',value: 'ma'        },
+  { title: 'M.Sc',      value: 'msc'       },
+  { title: 'MAJMC',     value: 'majmc'     },
 ]
 
 export default defineType({

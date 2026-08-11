@@ -22,7 +22,7 @@ export default defineType({
       name: 'program',
       title: 'Program (display text)',
       type: 'string',
-      description: 'E.g. "MBA" or "MBA Healthcare". Used in filter tabs if added later.',
+      description: 'E.g. "MBA" or "BCA". Used in filter tabs if added later.',
     }),
     defineField({
       name: 'quote',
