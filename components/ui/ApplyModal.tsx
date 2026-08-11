@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { IconX, IconLock, IconCheck, IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
+import { IconX, IconCheck, IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import PhoneField from '@/components/ui/PhoneField'
 
 function sanitizeText(v: string) {
@@ -176,7 +176,7 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
         onClick={e => e.stopPropagation()}
       >
         {/* ══ Compact red header ══ */}
-        <div className="flex-none relative bg-vgu-red px-6 pt-5 pb-4 overflow-hidden">
+        <div className="flex-none relative bg-vgu-red px-6 pt-5 pb-3 overflow-hidden">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute -top-14 -right-14 w-56 h-56 rounded-full bg-white/[0.07]" />
             <div className="absolute -bottom-16 -left-8  w-44 h-44 rounded-full bg-black/[0.12]" />
@@ -213,9 +213,23 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
                 </span>
               )}
             </div>
-            <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-white">
-              {submitted ? 'Application started!' : step === 1 ? 'Choose Your Program' : 'Almost Done'}
-            </h2>
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-heading font-bold text-[22px] tracking-[-0.5px] leading-[1.15] text-white">
+                {submitted ? 'Application started!' : step === 1 ? 'Choose Your Program' : 'Almost Done'}
+              </h2>
+              {/* Applying-for chip folded into the header (not the scrollable
+                  body) so step 2 has one less section competing for height */}
+              {step === 2 && !submitted && form.programme && (
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="flex-none inline-flex items-center gap-1.5 rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-[12px] font-heading font-bold text-white transition-colors duration-150"
+                >
+                  {form.programme}
+                  <span className="text-white/70 font-normal">· Change</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -332,33 +346,16 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
           <form onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
             {/* Fields - only this area scrolls, if it ever needs to */}
             <div
-              className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-4"
+              className="flex-1 min-h-0 overflow-y-auto bg-white px-6 py-3"
               style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y', overscrollBehaviorY: 'contain' }}
             >
-              <div className="flex flex-col gap-4">
-                {/* Pre-selected program chip - shown when jumped from a slug page */}
-                {form.programme && (
-                  <div className="flex items-center justify-between gap-2 rounded-xl bg-neutral-50 border border-neutral-200 px-4 py-2.5">
-                    <div>
-                      <p className="text-[10px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400">Applying for</p>
-                      <p className="text-[13px] font-heading font-bold text-neutral-900">{form.programme}</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="text-[12px] font-body font-semibold text-vgu-red hover:underline flex-none"
-                    >
-                      Change
-                    </button>
-                  </div>
-                )}
-
+              <div className="flex flex-col gap-3">
                 {/* Personal details */}
                 <div>
-                  <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
+                  <p className="mb-1.5 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
                     Your details
                   </p>
-                  <div className="flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-2">
                     <input
                       name="name" type="text" placeholder="Full name" required
                       maxLength={100} autoComplete="name"
@@ -386,7 +383,7 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
 
                 {/* Intake - single row on every viewport */}
                 <div>
-                  <p className="mb-2 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
+                  <p className="mb-1.5 text-[11px] font-body font-bold uppercase tracking-[0.08em] text-neutral-400">
                     When do you plan to start?
                   </p>
                   <div className="grid grid-cols-4 gap-2">
@@ -426,7 +423,7 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
                     onChange={handleChange}
                     className="mt-[3px] flex-none accent-[#C04036]"
                   />
-                  <span className="text-[11px] font-body text-neutral-500 leading-[1.5]">
+                  <span className="text-[11px] font-body text-neutral-500 leading-[1.4]">
                     I authorise VGU to contact me via call, SMS, email, and WhatsApp.
                     This overrides any DNC/NDNC registration.
                   </span>
@@ -435,9 +432,9 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
             </div>
 
             {/* Footer - pinned, never scrolls out of view */}
-            <div className="flex-none bg-white px-6 pt-3 pb-5 border-t border-neutral-100">
+            <div className="flex-none bg-white px-6 pt-2.5 pb-4 border-t border-neutral-100">
               {submitError && (
-                <p className="mb-3 rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
+                <p className="mb-2.5 rounded-xl bg-red-50 border border-red-200 px-3 py-2 text-[12px] font-body text-red-600">
                   {submitError}
                 </p>
               )}
@@ -449,11 +446,6 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
               >
                 {submitting ? 'Submitting…' : 'Start My Application'}
               </button>
-
-              <p className="mt-2 flex items-center justify-center gap-1.5 text-[11px] font-body text-neutral-400">
-                <IconLock size={11} />
-                Your details are safe. We never spam or share your information.
-              </p>
             </div>
           </form>
         )}

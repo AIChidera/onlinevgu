@@ -3,32 +3,12 @@ import { waitUntil } from '@vercel/functions'
 import { LeadSchema, type LeadInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
 import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL, leadConfirmationHtml, leadNotificationHtml } from '@/lib/resend'
-
-// Rate limiting - only active when Upstash env vars are set
-async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
-  const url = process.env.UPSTASH_REDIS_REST_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN
-  if (!url || !token) return { success: true }
-
-  try {
-    const { Ratelimit } = await import('@upstash/ratelimit')
-    const { Redis } = await import('@upstash/redis')
-    const redis = new Redis({ url, token })
-    const ratelimit = new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(5, '10 m'),
-      analytics: false,
-    })
-    return await ratelimit.limit(`leads:${ip}`)
-  } catch {
-    return { success: true }
-  }
-}
+import { checkRateLimit } from '@/lib/rateLimit'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
 
-  const { success: rateLimitOk } = await checkRateLimit(ip)
+  const { success: rateLimitOk } = await checkRateLimit(`leads:${ip}`)
   if (!rateLimitOk) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again in a few minutes.' },
