@@ -40,7 +40,7 @@ async function checkRateLimit(ip: string): Promise<{ success: boolean }> {
       limiter: Ratelimit.slidingWindow(5, '10 m'),
       analytics: false,
     })
-    return ratelimit.limit(`brochure:${ip}`)
+    return await ratelimit.limit(`brochure:${ip}`)
   } catch {
     return { success: true }
   }
