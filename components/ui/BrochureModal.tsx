@@ -44,17 +44,18 @@ export default function BrochureModal() {
       .catch(() => {})
   }, [])
 
-  // Intercept any click on an element carrying data-brochure-trigger
+  // Intercept any click on an element carrying data-brochure-trigger.
+  // Deliberately does not reset `form` here - this modal lives in the root
+  // layout and never unmounts, so whatever was already typed should still
+  // be there on reopen unless a hard refresh happened.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const trigger = (e.target as HTMLElement).closest('[data-brochure-trigger]') as HTMLElement | null
       if (!trigger) return
       e.preventDefault()
-      setProgram(trigger.dataset.program ?? '')
-      setForm(INITIAL_FORM)
-      setSubmitted(false)
+      const triggerProgram = trigger.dataset.program
+      if (triggerProgram) setProgram(triggerProgram)
       setSubmitError('')
-      setSubmitEmail('')
       setOpen(true)
     }
     document.addEventListener('click', handleClick)

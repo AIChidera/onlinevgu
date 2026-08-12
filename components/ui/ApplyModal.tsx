@@ -34,6 +34,8 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
   const [programList, setProgramList] = useState<{ name: string; level: string }[]>([])
   const triggerRef = useRef<HTMLElement | null>(null)
   const dialogRef  = useRef<HTMLDivElement | null>(null)
+  const formRef    = useRef(form)
+  useEffect(() => { formRef.current = form }, [form])
 
   useEffect(() => {
     fetch('/api/programs')
@@ -55,6 +57,11 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
   }, [submitted])
 
   useEffect(() => {
+    // Deliberately does NOT reset `form` to INITIAL_FORM here. This modal
+    // lives in the root layout and never unmounts across navigation or
+    // close/reopen, so whatever the visitor already typed should still be
+    // there if they come back without a hard refresh - resetting on every
+    // open used to wipe it out immediately.
     const handleClick = (e: MouseEvent) => {
       const trigger = (e.target as HTMLElement).closest('[data-apply-trigger]')
       if (trigger) {
@@ -63,12 +70,17 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
         const programName  = trigger.getAttribute('data-program') ?? ''
         const programLevel = (trigger.getAttribute('data-program-level') ?? '') as '' | 'ug' | 'pg'
         if (programName && programLevel) {
-          setForm({ ...INITIAL_FORM, level: programLevel, programme: programName })
+          // A specific program CTA is explicit fresh intent - update the
+          // selection, but keep any personal details already filled in.
+          setForm(prev => ({ ...prev, level: programLevel, programme: programName }))
           setStep(2)
         } else {
-          setForm(INITIAL_FORM)
-          setStep(1)
+          // Generic "Apply Now" - leave the form exactly as it was. Resume
+          // at step 2 if a program was already picked in this session.
+          const current = formRef.current
+          setStep(current.level && current.programme ? 2 : 1)
         }
+        setSubmitError('')
         setOpen(true)
       }
     }

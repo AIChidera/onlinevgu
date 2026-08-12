@@ -2,10 +2,13 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { IconCheck, IconSend, IconChevronDown } from '@tabler/icons-react'
 import { ContactSchema, type ContactInput } from '@/lib/validations'
 import PhoneField from '@/components/ui/PhoneField'
+import { getDraft, updateDraft, clearDraft } from '@/lib/formDraftStore'
+
+const FORM_ID = 'contact-form'
 
 const SUBJECT_OPTIONS = [
   'General enquiry',
@@ -23,17 +26,33 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ phone = '+91 80350 18677', phoneTel = '+918035018677' }: ContactFormProps) {
+  const draft = getDraft<ContactInput & { dialCode?: string }>(FORM_ID)
+
   const [submitted, setSubmitted]     = useState(false)
   const [serverError, setServerError] = useState('')
-  const [dialCode, setDialCode]       = useState('+91')
+  const [dialCode, setDialCode]       = useState(draft?.dialCode || '+91')
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({
     resolver: zodResolver(ContactSchema),
+    defaultValues: draft as Partial<ContactInput> | undefined,
   })
+
+  // Keep the in-memory draft in sync while the visitor types, so the form
+  // comes back exactly as they left it if they navigate away and return -
+  // wiped only by clearDraft (on success) or a hard refresh.
+  useEffect(() => {
+    const subscription = watch((values) => updateDraft(FORM_ID, values))
+    return () => subscription.unsubscribe()
+  }, [watch])
+
+  useEffect(() => {
+    updateDraft(FORM_ID, { dialCode })
+  }, [dialCode])
 
   const onSubmit = async (data: ContactInput) => {
     setServerError('')
@@ -47,6 +66,7 @@ export default function ContactForm({ phone = '+91 80350 18677', phoneTel = '+91
         const body = await res.json().catch(() => ({}))
         throw new Error(body?.error || 'Something went wrong. Please try again.')
       }
+      clearDraft(FORM_ID)
       setSubmitted(true)
     } catch (err: unknown) {
       setServerError(err instanceof Error ? err.message : 'Something went wrong.')

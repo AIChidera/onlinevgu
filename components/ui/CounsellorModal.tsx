@@ -64,6 +64,9 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
   useEffect(() => {
     const handleOpen = () => setOpen(true)
 
+    // Deliberately does not reset name/mobile/email here - this modal lives
+    // in the root layout and never unmounts, so whatever was already typed
+    // should still be there on reopen unless a hard refresh happened.
     const handleClick = (e: MouseEvent) => {
       const el = e.target as HTMLElement
       const anchor = el.closest('a[href="#counsellor"], [data-counsellor-trigger]')
@@ -71,7 +74,8 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
         e.preventDefault()
         triggerRef.current = anchor as HTMLElement
         const programName = anchor.getAttribute('data-program') ?? ''
-        setForm({ ...INITIAL_FORM, programme: programName })
+        if (programName) setForm(prev => ({ ...prev, programme: programName }))
+        setSubmitError('')
         setOpen(true)
       }
     }

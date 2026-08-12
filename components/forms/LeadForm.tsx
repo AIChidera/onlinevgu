@@ -7,6 +7,9 @@ import { LeadSchema, type LeadInput } from '@/lib/validations'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import PhoneField from '@/components/ui/PhoneField'
+import { getDraft, updateDraft, clearDraft } from '@/lib/formDraftStore'
+
+const FORM_ID = 'lead-form'
 
 // Hardcoded fallback - mirrors real VGU programs; used while API loads or if it fails
 const PROGRAMS_FALLBACK = [
@@ -22,9 +25,11 @@ interface LeadFormProps {
 }
 
 export default function LeadForm({ onSuccess, source = 'website', compact = false }: LeadFormProps) {
+  const draft = getDraft<LeadInput & { dialCode?: string }>(FORM_ID)
+
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState('')
-  const [dialCode, setDialCode] = useState('+91')
+  const [dialCode, setDialCode] = useState(draft?.dialCode || '+91')
   const [programs, setPrograms] = useState<string[]>(PROGRAMS_FALLBACK)
 
   useEffect(() => {
@@ -41,11 +46,24 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<LeadInput>({
     resolver: zodResolver(LeadSchema),
-    defaultValues: { source },
+    defaultValues: draft ? { source, ...draft } : { source },
   })
+
+  // Keep the in-memory draft in sync while the visitor types, so the form
+  // comes back exactly as they left it if they navigate away and return -
+  // wiped only by clearDraft (on success) or a hard refresh.
+  useEffect(() => {
+    const subscription = watch((values) => updateDraft(FORM_ID, values))
+    return () => subscription.unsubscribe()
+  }, [watch])
+
+  useEffect(() => {
+    updateDraft(FORM_ID, { dialCode })
+  }, [dialCode])
 
   const onSubmit = async (data: LeadInput) => {
     setServerError('')
@@ -59,6 +77,7 @@ export default function LeadForm({ onSuccess, source = 'website', compact = fals
         const body = await res.json().catch(() => ({}))
         throw new Error(body?.error || 'Something went wrong. Please try again.')
       }
+      clearDraft(FORM_ID)
       setSubmitted(true)
       onSuccess?.()
     } catch (err: unknown) {

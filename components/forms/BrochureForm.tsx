@@ -8,6 +8,9 @@ import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import PhoneField from '@/components/ui/PhoneField'
 import { downloadFile } from '@/lib/downloadFile'
+import { getDraft, updateDraft, clearDraft } from '@/lib/formDraftStore'
+
+const FORM_ID = 'brochure-form'
 
 // Hardcoded fallback - mirrors real VGU programs; used while API loads or if it fails
 const PROGRAMS_FALLBACK = [
@@ -21,9 +24,11 @@ interface BrochureFormProps {
 }
 
 export default function BrochureForm({ onSuccess, program }: BrochureFormProps) {
+  const draft = getDraft<BrochureInput & { dialCode?: string }>(FORM_ID)
+
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState('')
-  const [dialCode, setDialCode] = useState('+91')
+  const [dialCode, setDialCode] = useState(draft?.dialCode || '+91')
   const [programs, setPrograms] = useState<string[]>(PROGRAMS_FALLBACK)
 
   useEffect(() => {
@@ -40,11 +45,24 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<BrochureInput>({
     resolver: zodResolver(BrochureSchema),
-    defaultValues: { programInterest: program || '' },
+    defaultValues: { programInterest: program || '', ...draft },
   })
+
+  // Keep the in-memory draft in sync while the visitor types, so the form
+  // comes back exactly as they left it if they navigate away and return -
+  // wiped only by clearDraft (on success) or a hard refresh.
+  useEffect(() => {
+    const subscription = watch((values) => updateDraft(FORM_ID, values))
+    return () => subscription.unsubscribe()
+  }, [watch])
+
+  useEffect(() => {
+    updateDraft(FORM_ID, { dialCode })
+  }, [dialCode])
 
   const onSubmit = async (data: BrochureInput) => {
     setServerError('')
@@ -64,6 +82,7 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
       const { pdfUrl, pdfFilename } = await res.json().catch(() => ({ pdfUrl: null, pdfFilename: '' }))
       if (pdfUrl) await downloadFile(pdfUrl, pdfFilename || 'VGU-brochure.pdf')
 
+      clearDraft(FORM_ID)
       setSubmitted(true)
       onSuccess?.()
     } catch (err: unknown) {
