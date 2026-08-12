@@ -7,6 +7,7 @@ import { BrochureSchema, type BrochureInput } from '@/lib/validations'
 import Input from '@/components/ui/Input'
 import Button from '@/components/ui/Button'
 import PhoneField from '@/components/ui/PhoneField'
+import { downloadFile } from '@/lib/downloadFile'
 
 // Hardcoded fallback - mirrors real VGU programs; used while API loads or if it fails
 const PROGRAMS_FALLBACK = [
@@ -57,6 +58,12 @@ export default function BrochureForm({ onSuccess, program }: BrochureFormProps) 
         const body = await res.json().catch(() => ({}))
         throw new Error(body?.error || 'Something went wrong. Please try again.')
       }
+
+      // Download the PDF to the student's device first, before showing the
+      // success state - the email is a backup, not the primary delivery.
+      const { pdfUrl, pdfFilename } = await res.json().catch(() => ({ pdfUrl: null, pdfFilename: '' }))
+      if (pdfUrl) await downloadFile(pdfUrl, pdfFilename || 'VGU-brochure.pdf')
+
       setSubmitted(true)
       onSuccess?.()
     } catch (err: unknown) {

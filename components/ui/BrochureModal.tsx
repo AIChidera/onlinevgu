@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { IconDownload, IconLock, IconX, IconMail, IconCheck } from '@tabler/icons-react'
 import PhoneField from '@/components/ui/PhoneField'
+import { downloadFile } from '@/lib/downloadFile'
 
 function sanitizeText(v: string) {
   return v.replace(/<[^>]*>/g, '').replace(/javascript\s*:/gi, '').replace(/on\w+\s*=\s*/gi, '').replace(/[<>]/g, '')
@@ -110,6 +111,12 @@ export default function BrochureModal() {
         const body = await res.json().catch(() => ({}))
         throw new Error(body?.error || 'Something went wrong. Please try again.')
       }
+
+      // Download the PDF to the student's device first, before showing the
+      // success state - the email is a backup, not the primary delivery.
+      const { pdfUrl, pdfFilename } = await res.json().catch(() => ({ pdfUrl: null, pdfFilename: '' }))
+      if (pdfUrl) await downloadFile(pdfUrl, pdfFilename || 'VGU-brochure.pdf')
+
       setSubmitEmail(form.email)
       setSubmitted(true)
     } catch (err: unknown) {

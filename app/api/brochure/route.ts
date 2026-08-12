@@ -75,13 +75,23 @@ export async function POST(req: NextRequest) {
     console.error('[brochure] Supabase insert threw:', err)
   }
 
-  // Fetching the PDF from Sanity and sending both emails can take a few
-  // seconds combined - do it in the background so the visitor's button
-  // doesn't sit spinning that whole time. waitUntil keeps the function
-  // alive long enough to finish after the response has already gone back.
+  // Just the PDF's URL - a cached metadata lookup, not the file itself - so
+  // the browser can start its own download immediately. The heavier work
+  // (fetching the PDF bytes, sending both emails) still happens in the
+  // background via waitUntil so the response isn't held up by it.
+  let pdfUrl: string | null = null
+  let pdfFilename = ''
+  try {
+    const resolved = await getBrochureUrlForProgram(data.programInterest)
+    pdfUrl = resolved.url
+    pdfFilename = resolved.filename
+  } catch (err) {
+    console.error('[brochure] PDF URL lookup failed:', err)
+  }
+
   waitUntil(sendBrochureEmails(data))
 
-  return NextResponse.json({ success: true }, { status: 201 })
+  return NextResponse.json({ success: true, pdfUrl, pdfFilename }, { status: 201 })
 }
 
 async function sendBrochureEmails(data: BrochureInput) {
