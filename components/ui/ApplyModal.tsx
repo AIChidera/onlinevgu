@@ -164,7 +164,7 @@ export default function ApplyModal({ nextBatch = 'July 2026' }: { nextBatch?: st
       className="fixed inset-0 z-[200] flex items-end sm:items-center sm:justify-center p-0 sm:p-6"
       onClick={closeModal}
     >
-      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/70 animate-fade-in" aria-hidden="true" />
 
       <div
         ref={dialogRef}

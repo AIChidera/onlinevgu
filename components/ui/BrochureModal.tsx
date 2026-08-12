@@ -133,7 +133,7 @@ export default function BrochureModal() {
       onClick={closeModal}
     >
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/60 animate-fade-in" aria-hidden="true" />
 
       {/* Modal card - compressed so it fits without scrolling on phones too */}
       <div

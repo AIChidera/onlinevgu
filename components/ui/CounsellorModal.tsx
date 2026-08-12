@@ -156,7 +156,7 @@ export default function CounsellorModal({ whatsappUrl }: { whatsappUrl?: string 
       onClick={closeModal}
     >
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/60 animate-fade-in" aria-hidden="true" />
 
       {/* Modal card - the card itself no longer scrolls (that used to carry
             the image column off-screen too); only the form fields inside the
