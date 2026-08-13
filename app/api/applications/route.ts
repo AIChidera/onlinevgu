@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { ApplicationSchema } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
-import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
+import { resend, FROM_ADDRESS } from '@/lib/resend'
 import { checkRateLimit } from '@/lib/rateLimit'
+import { appendToSheet, SHEET_TABS, istTimestamp } from '@/lib/googleSheets'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
@@ -53,39 +54,43 @@ export async function POST(req: NextRequest) {
     console.error('[applications] Supabase insert threw:', err)
   }
 
-  // Fire emails in the background - don't make the visitor wait on Resend's
-  // round trip. waitUntil keeps the function alive long enough to finish
-  // sending after the response has already gone back to the browser.
-  waitUntil(sendApplicationEmails(data))
+  // Fire the confirmation email and the Sheets row in the background -
+  // waitUntil keeps the function alive long enough to finish after the
+  // response has already gone back to the browser.
+  waitUntil(notifyApplication(data, ip))
 
   return NextResponse.json({ success: true }, { status: 201 })
 }
 
-async function sendApplicationEmails(data: {
+async function notifyApplication(data: {
   name: string; email: string; phone: string
   level: 'ug' | 'pg'; programme: string; intake: string
-}) {
-  try {
-    const results = await Promise.allSettled([
-      resend.emails.send({
-        from:    FROM_ADDRESS,
-        to:      data.email,
-        subject: 'Your VGU application has started',
-        html:    confirmationHtml(data.name, data.programme),
-      }),
-      resend.emails.send({
-        from:    FROM_ADDRESS,
-        to:      ADMISSIONS_EMAIL,
-        subject: `New application: ${data.name} - ${data.programme} (${data.level.toUpperCase()})`,
-        html:    notificationHtml(data),
-      }),
-    ])
-    results.forEach((r, i) => {
-      if (r.status === 'rejected') console.error(`[applications] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
-    })
-  } catch (err) {
-    console.error('[applications] Resend threw:', err)
-  }
+  consent: boolean; source?: string
+}, ip: string) {
+  const results = await Promise.allSettled([
+    resend.emails.send({
+      from:    FROM_ADDRESS,
+      to:      data.email,
+      subject: 'Your VGU application has started',
+      html:    confirmationHtml(data.name, data.programme),
+    }),
+    appendToSheet(SHEET_TABS.APPLICATIONS, [
+      istTimestamp(),
+      data.name,
+      data.email,
+      data.phone,
+      data.level.toUpperCase(),
+      data.programme,
+      data.intake,
+      data.consent ? 'Yes' : 'No',
+      data.source ?? 'modal-apply',
+      ip,
+    ]),
+  ])
+  const labels = ['confirmation email', 'Sheets row']
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`[applications] ${labels[i]} failed:`, r.reason)
+  })
 }
 
 function confirmationHtml(name: string, programme: string): string {
@@ -122,30 +127,3 @@ function confirmationHtml(name: string, programme: string): string {
   `
 }
 
-function notificationHtml(data: {
-  name: string; email: string; phone: string
-  level: string; programme: string; intake: string
-}): string {
-  const row = (label: string, value: string, highlight = false) => `
-    <tr>
-      <td style="padding:10px 12px;color:#6B7280;font-size:13px;white-space:nowrap">${label}</td>
-      <td style="padding:10px 12px;color:${highlight ? '#C04036' : '#111827'};font-size:14px;font-weight:${highlight ? 700 : 400}">${value}</td>
-    </tr>`
-  return `
-    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
-      <div style="background:#111827;padding:16px 24px">
-        <p style="color:#9CA3AF;margin:0;font-size:11px;text-transform:uppercase;letter-spacing:0.08em">New Application - Online VGU</p>
-      </div>
-      <div style="padding:24px;background:#fff">
-        <table style="width:100%;border-collapse:collapse">
-          ${row('Name',      data.name)}
-          ${row('Email',     data.email)}
-          ${row('Phone',     data.phone)}
-          ${row('Level',     data.level.toUpperCase())}
-          ${row('Programme', data.programme, true)}
-          ${row('Intake',    data.intake)}
-        </table>
-      </div>
-    </div>
-  `
-}

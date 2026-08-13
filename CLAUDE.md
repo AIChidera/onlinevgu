@@ -401,8 +401,10 @@ a placeholder box or image inside the aspect-ratio container.
 # ------------------------------------------------------------
 
 SUPABASE (lib/supabase.ts):
-  Tables: leads, brochure_requests
+  Tables: leads, brochure_requests, contact_messages, applications
   RLS: INSERT public / SELECT authenticated only
+  Source of truth / durable backup for every submission - always insert
+  here first, regardless of whether Sheets or Resend succeed.
   Env vars: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY,
             SUPABASE_SERVICE_ROLE_KEY (server-side only)
 
@@ -414,9 +416,26 @@ SANITY (lib/sanity.ts):
             SANITY_API_TOKEN
 
 RESEND (lib/resend.ts):
-  Triggers: lead confirmation to user + counsellor notification
+  Triggers: submitter-facing confirmation email only (lead, brochure,
+  contact, application). Never send an admin/internal notification email -
+  that channel was replaced by Google Sheets (see below).
   Brochure: additional email with PDF attachment
   Env var: RESEND_API_KEY
+
+GOOGLE SHEETS (lib/googleSheets.ts):
+  Replaces the old "notify admin by email" step for every form. Each
+  submission appends one row to its own tab in a single spreadsheet, via
+  a Google service account (server-to-server, no OAuth flow) - the exact
+  same "official SDK + service credential" pattern as Supabase/Resend/
+  Upstash, so admin/sales can filter and work leads directly in Sheets.
+  Tabs (lib/googleSheets.ts SHEET_TABS): Leads, Brochure Requests,
+  Contact Messages, Applications - one row per submission, in the same
+  field order as that route's Supabase insert, timestamped in IST.
+  Missing credentials degrade to a silent no-op + console warning, same
+  as Resend/Upstash - a submission never fails because Sheets isn't
+  configured.
+  Env vars: GOOGLE_SHEETS_CLIENT_EMAIL, GOOGLE_SHEETS_PRIVATE_KEY,
+            GOOGLE_SHEETS_SPREADSHEET_ID
 
 UPSTASH (rate limiting):
   Limit: 5 requests per IP per 10 minutes on all API routes
@@ -432,12 +451,13 @@ POST /api/leads:
   2. Extract UTM params from request body
   3. Insert to Supabase leads table
   4. Send Resend confirmation email to user
-  5. Send Resend notification to admissions@onlinevgu.com
+  5. Append a row to the "Leads" Google Sheet tab (replaces admin email)
   6. Apply Upstash rate limiting
   Returns: 200 / 400 (validation) / 429 (rate limit) / 500 (server)
 
 POST /api/brochure:
-  Same as leads + brochure delivery email + brochure_requests table
+  Same as leads + brochure delivery email + brochure_requests table +
+  "Brochure Requests" tab
 
 
 # ------------------------------------------------------------
@@ -585,6 +605,9 @@ Required keys:
   RESEND_API_KEY
   UPSTASH_REDIS_REST_URL
   UPSTASH_REDIS_REST_TOKEN
+  GOOGLE_SHEETS_CLIENT_EMAIL
+  GOOGLE_SHEETS_PRIVATE_KEY
+  GOOGLE_SHEETS_SPREADSHEET_ID
 
 NEXT_PUBLIC_ prefix = safe to expose to browser
 All others = server-side only, never import in client components

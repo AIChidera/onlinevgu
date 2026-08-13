@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { ContactSchema, type ContactInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
-import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
+import { resend, FROM_ADDRESS } from '@/lib/resend'
 import { checkRateLimit } from '@/lib/rateLimit'
+import { appendToSheet, SHEET_TABS, istTimestamp } from '@/lib/googleSheets'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
@@ -50,66 +51,55 @@ export async function POST(req: NextRequest) {
     console.error('[contact] Supabase insert threw:', err)
   }
 
-  // Fire emails in the background - don't make the visitor wait on Resend's
-  // round trip before the button gets to stop spinning.
-  waitUntil(sendContactEmails(data))
+  // Fire the confirmation email and the Sheets row in the background - don't
+  // make the visitor wait on either round trip before the button stops
+  // spinning.
+  waitUntil(notifyContactMessage(data, ip))
 
   return NextResponse.json({ success: true }, { status: 201 })
 }
 
-async function sendContactEmails(data: ContactInput) {
-  try {
-    const results = await Promise.allSettled([
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: data.email,
-        subject: `We received your message - VGU Online`,
-        html: `
-          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
-            <div style="background:#C04036;padding:24px 32px">
-              <h1 style="color:#fff;margin:0;font-size:22px">Online VGU</h1>
-            </div>
-            <div style="padding:32px;background:#fff">
-              <h2 style="color:#111827">Hi ${data.name},</h2>
-              <p style="color:#4B5563;line-height:1.7">
-                Thanks for reaching out. We have received your message and will
-                respond within <strong>24 hours</strong>.
-              </p>
-              <p style="color:#4B5563;line-height:1.7">
-                For urgent enquiries, call us at
-                <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
-                (Mon-Sat, 9am-7pm IST).
-              </p>
-            </div>
-            <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
-              © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
-            </div>
+async function notifyContactMessage(data: ContactInput, ip: string) {
+  const results = await Promise.allSettled([
+    resend.emails.send({
+      from: FROM_ADDRESS,
+      to: data.email,
+      subject: `We received your message - VGU Online`,
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+          <div style="background:#C04036;padding:24px 32px">
+            <h1 style="color:#fff;margin:0;font-size:22px">Online VGU</h1>
           </div>
-        `,
-      }),
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: ADMISSIONS_EMAIL,
-        subject: `Contact form: ${data.subject} - ${data.name}`,
-        html: `
-          <div style="font-family:Arial,sans-serif;max-width:600px">
-            <h2 style="color:#C04036">Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${data.name}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>Phone:</strong> ${data.phone}</p>
-            <p><strong>Subject:</strong> ${data.subject}</p>
-            <p><strong>Message:</strong></p>
-            <blockquote style="border-left:3px solid #C04036;margin:0;padding:12px 16px;background:#F9FAFB;color:#374151">
-              ${data.message.replace(/\n/g, '<br>')}
-            </blockquote>
+          <div style="padding:32px;background:#fff">
+            <h2 style="color:#111827">Hi ${data.name},</h2>
+            <p style="color:#4B5563;line-height:1.7">
+              Thanks for reaching out. We have received your message and will
+              respond within <strong>24 hours</strong>.
+            </p>
+            <p style="color:#4B5563;line-height:1.7">
+              For urgent enquiries, call us at
+              <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
+              (Mon-Sat, 9am-7pm IST).
+            </p>
           </div>
-        `,
-      }),
-    ])
-    results.forEach((r, i) => {
-      if (r.status === 'rejected') console.error(`[contact] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
-    })
-  } catch (err) {
-    console.error('[contact] Resend threw:', err)
-  }
+          <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
+            © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
+          </div>
+        </div>
+      `,
+    }),
+    appendToSheet(SHEET_TABS.CONTACT, [
+      istTimestamp(),
+      data.name,
+      data.email,
+      data.phone,
+      data.subject,
+      data.message,
+      ip,
+    ]),
+  ])
+  const labels = ['confirmation email', 'Sheets row']
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`[contact] ${labels[i]} failed:`, r.reason)
+  })
 }

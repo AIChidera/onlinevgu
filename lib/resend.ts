@@ -28,7 +28,6 @@ export const resend = {
 }
 
 export const FROM_ADDRESS   = 'Online VGU <admissions@admissions.onlinevgu.com>'
-export const ADMISSIONS_EMAIL = 'aachidera41@gmail.com'
 
 // ── Templates ──────────────────────────────────────────────────
 
@@ -63,29 +62,3 @@ export function leadConfirmationHtml(name: string, program: string) {
   `
 }
 
-export function leadNotificationHtml(data: {
-  name: string
-  email: string
-  phone: string
-  program: string
-  source?: string
-  utmSource?: string
-  utmCampaign?: string
-}) {
-  return `
-    <div style="font-family:Arial,sans-serif;max-width:600px">
-      <h2 style="color:#C04036">New Lead - Online VGU</h2>
-      <table style="width:100%;border-collapse:collapse">
-        ${Object.entries(data)
-          .map(
-            ([k, v]) => `
-          <tr>
-            <td style="padding:8px 12px;background:#F9FAFB;font-weight:600;width:40%">${k}</td>
-            <td style="padding:8px 12px;border-bottom:1px solid #E5E7EB">${v ?? '-'}</td>
-          </tr>`
-          )
-          .join('')}
-      </table>
-    </div>
-  `
-}

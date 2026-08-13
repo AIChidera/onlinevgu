@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { LeadSchema, type LeadInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
-import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL, leadConfirmationHtml, leadNotificationHtml } from '@/lib/resend'
+import { resend, FROM_ADDRESS, leadConfirmationHtml } from '@/lib/resend'
 import { checkRateLimit } from '@/lib/rateLimit'
+import { appendToSheet, SHEET_TABS, istTimestamp } from '@/lib/googleSheets'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
@@ -55,41 +56,38 @@ export async function POST(req: NextRequest) {
     console.error('[leads] Supabase insert threw:', err)
   }
 
-  // Fire emails in the background - don't make the visitor wait on Resend's
-  // round trip before the button gets to stop spinning.
-  waitUntil(sendLeadEmails(data))
+  // Fire the confirmation email and the Sheets row in the background - don't
+  // make the visitor wait on either round trip before the button stops
+  // spinning.
+  waitUntil(notifyLead(data, ip))
 
   return NextResponse.json({ success: true }, { status: 201 })
 }
 
-async function sendLeadEmails(data: LeadInput) {
-  try {
-    const results = await Promise.allSettled([
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: data.email,
-        subject: 'We received your enquiry - VGU Online',
-        html: leadConfirmationHtml(data.name, data.programInterest ?? 'your chosen program'),
-      }),
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: ADMISSIONS_EMAIL,
-        subject: `New lead: ${data.name} - ${data.programInterest ?? 'Not specified'}`,
-        html: leadNotificationHtml({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          program: data.programInterest ?? 'Not specified',
-          source: data.source,
-          utmSource: data.utmSource,
-          utmCampaign: data.utmCampaign,
-        }),
-      }),
-    ])
-    results.forEach((r, i) => {
-      if (r.status === 'rejected') console.error(`[leads] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
-    })
-  } catch (err) {
-    console.error('[leads] Resend threw:', err)
-  }
+async function notifyLead(data: LeadInput, ip: string) {
+  const results = await Promise.allSettled([
+    resend.emails.send({
+      from: FROM_ADDRESS,
+      to: data.email,
+      subject: 'We received your enquiry - VGU Online',
+      html: leadConfirmationHtml(data.name, data.programInterest ?? 'your chosen program'),
+    }),
+    appendToSheet(SHEET_TABS.LEADS, [
+      istTimestamp(),
+      data.name,
+      data.email,
+      data.phone,
+      data.programInterest ?? 'Not specified',
+      data.source ?? 'website',
+      data.intake ?? '',
+      data.utmSource ?? '',
+      data.utmMedium ?? '',
+      data.utmCampaign ?? '',
+      ip,
+    ]),
+  ])
+  const labels = ['confirmation email', 'Sheets row']
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`[leads] ${labels[i]} failed:`, r.reason)
+  })
 }

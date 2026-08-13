@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { waitUntil } from '@vercel/functions'
 import { BrochureSchema, type BrochureInput } from '@/lib/validations'
 import { createAdminClient } from '@/lib/supabase'
-import { resend, FROM_ADDRESS, ADMISSIONS_EMAIL } from '@/lib/resend'
+import { resend, FROM_ADDRESS } from '@/lib/resend'
 import { getBrochureUrlForProgram } from '@/lib/sanity'
 import { checkRateLimit } from '@/lib/rateLimit'
+import { appendToSheet, SHEET_TABS, istTimestamp } from '@/lib/googleSheets'
 
 // Downloads the PDF from Sanity's CDN so it can be attached to the email.
 // Skips silently on failure (request still succeeds without attachment).
@@ -89,12 +90,12 @@ export async function POST(req: NextRequest) {
     console.error('[brochure] PDF URL lookup failed:', err)
   }
 
-  waitUntil(sendBrochureEmails(data))
+  waitUntil(notifyBrochureRequest(data, ip))
 
   return NextResponse.json({ success: true, pdfUrl, pdfFilename }, { status: 201 })
 }
 
-async function sendBrochureEmails(data: BrochureInput) {
+async function notifyBrochureRequest(data: BrochureInput, ip: string) {
   const attachment = await fetchBrochureAttachment(data.programInterest)
 
   const bodyCopy = attachment
@@ -104,51 +105,45 @@ async function sendBrochureEmails(data: BrochureInput) {
        Vivekananda Global University. Our admissions team will send your program
        brochure to this email shortly.`
 
-  try {
-    const results = await Promise.allSettled([
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: data.email,
-        subject: `Your VGU brochure for ${data.programInterest}`,
-        html: `
-          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
-            <div style="background:#C04036;padding:24px 32px">
-              <h1 style="color:#fff;margin:0;font-size:22px">Online VGU</h1>
-            </div>
-            <div style="padding:32px;background:#fff">
-              <h2 style="color:#111827">Hi ${data.name},</h2>
-              <p style="color:#4B5563;line-height:1.7">${bodyCopy}</p>
-              <p style="color:#4B5563;line-height:1.7">
-                A counsellor may reach out to answer any questions.
-                You can also call us at
-                <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
-                (Mon-Sat, 9am-7pm IST).
-              </p>
-            </div>
-            <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
-              © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
-            </div>
+  const results = await Promise.allSettled([
+    resend.emails.send({
+      from: FROM_ADDRESS,
+      to: data.email,
+      subject: `Your VGU brochure for ${data.programInterest}`,
+      html: `
+        <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">
+          <div style="background:#C04036;padding:24px 32px">
+            <h1 style="color:#fff;margin:0;font-size:22px">Online VGU</h1>
           </div>
-        `,
-        ...(attachment ? { attachments: [attachment] } : {}),
-      }),
-      resend.emails.send({
-        from: FROM_ADDRESS,
-        to: ADMISSIONS_EMAIL,
-        subject: `Brochure request: ${data.name} - ${data.programInterest}`,
-        html: `
-          <p><strong>Name:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Phone:</strong> ${data.phone}</p>
-          <p><strong>Program:</strong> ${data.programInterest}</p>
-          <p><strong>PDF sent:</strong> ${attachment ? attachment.filename : 'No PDF on file - admin to follow up'}</p>
-        `,
-      }),
-    ])
-    results.forEach((r, i) => {
-      if (r.status === 'rejected') console.error(`[brochure] Email ${i === 0 ? 'to submitter' : 'to admissions'} failed:`, r.reason)
-    })
-  } catch (err) {
-    console.error('[brochure] Resend threw:', err)
-  }
+          <div style="padding:32px;background:#fff">
+            <h2 style="color:#111827">Hi ${data.name},</h2>
+            <p style="color:#4B5563;line-height:1.7">${bodyCopy}</p>
+            <p style="color:#4B5563;line-height:1.7">
+              A counsellor may reach out to answer any questions.
+              You can also call us at
+              <a href="tel:+918035018677" style="color:#C04036">+91 80350 18677</a>
+              (Mon-Sat, 9am-7pm IST).
+            </p>
+          </div>
+          <div style="padding:16px 32px;background:#F9FAFB;font-size:12px;color:#9CA3AF">
+            © ${new Date().getFullYear()} Vivekananda Global University. All rights reserved.
+          </div>
+        </div>
+      `,
+      ...(attachment ? { attachments: [attachment] } : {}),
+    }),
+    appendToSheet(SHEET_TABS.BROCHURE, [
+      istTimestamp(),
+      data.name,
+      data.email,
+      data.phone,
+      data.programInterest,
+      attachment ? `Yes - ${attachment.filename}` : 'No PDF on file - follow up',
+      ip,
+    ]),
+  ])
+  const labels = ['confirmation email', 'Sheets row']
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`[brochure] ${labels[i]} failed:`, r.reason)
+  })
 }
