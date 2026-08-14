@@ -1,4 +1,3 @@
-'use client'
 import BrandIcon, { BRAND_ICON_NAMES } from '@/components/ui/BrandIcon'
 import { HIRER_LOGO_IMAGES } from '@/components/ui/hirerLogoImages'
 

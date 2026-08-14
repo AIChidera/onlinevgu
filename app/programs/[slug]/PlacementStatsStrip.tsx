@@ -1,5 +1,3 @@
-'use client'
-
 import { IconTrendingUp, IconCash, IconBriefcase, IconAward } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 
