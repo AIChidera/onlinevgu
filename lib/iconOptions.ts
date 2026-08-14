@@ -31,6 +31,13 @@ export const ICON_OPTIONS = [
   { title: 'WhatsApp (chat)',              value: 'brandWhatsapp'   },
   { title: 'Mail (email)',                 value: 'mail'            },
   { title: 'Lifebuoy (student support)',   value: 'lifebuoy'        },
+  { title: 'Building (company/office)',    value: 'building'        },
+  { title: 'Document (resume/file)',       value: 'fileText'        },
+  { title: 'LinkedIn (professional)',      value: 'brandLinkedin'   },
+  { title: 'Shopping cart (e-commerce)',   value: 'shoppingCart'    },
+  { title: 'Stethoscope (healthcare)',     value: 'stethoscope'     },
+  { title: 'User check (verified/vetted)', value: 'userCheck'       },
+  { title: 'Message (single chat)',        value: 'message'         },
 ] as const
 
 export type IconOptionValue = (typeof ICON_OPTIONS)[number]['value']

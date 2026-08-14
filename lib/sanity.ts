@@ -38,6 +38,9 @@ export interface SanityTestimonial {
   videoLabel:    string
   videoUrl?:     string
   displayOrder:  number
+  // Only populated by getPlacementsTestimonials() - used in Success Stories.
+  company?:      string
+  journey?:      string
 }
 
 export interface SanityFaq {
@@ -400,6 +403,68 @@ export interface SanityCounsellor {
   languages:    string[]
   photoUrl:     string | null
   displayOrder: number
+}
+
+export interface SanityPlacementsPageStatCard {
+  value?:  string
+  label:   string
+  detail:  string
+  icon:    string
+}
+
+export interface SanityPlacementsPageCard {
+  title: string
+  body:  string
+  icon:  string
+}
+
+export interface SanityPlacementsPageIndustry {
+  title:     string
+  body:      string
+  companies: string
+  icon:      string
+}
+
+export interface SanityPlacementsPageProcessStep {
+  badge: string
+  title: string
+  body:  string
+  time:  string
+  icon:  string
+}
+
+// Singleton - one document total. Every field is optional; components fall
+// back to their current hardcoded copy for anything left blank.
+export interface SanityPlacementsPage {
+  heroImageUrl?:           string | null
+  heroEyebrow?:            string
+  heroHeadingLine1?:       string
+  heroHeadingHighlight?:   string
+  heroSubtext?:            string
+  heroPrimaryCtaLabel?:    string
+  heroSecondaryCtaLabel?:  string
+  statsCards?:             SanityPlacementsPageStatCard[]
+  supportEyebrow?:         string
+  supportHeading?:         string
+  supportSubtext?:         string
+  supportServices?:        SanityPlacementsPageCard[]
+  hiringEyebrow?:          string
+  hiringHeading?:          string
+  hiringSubtext?:          string
+  hiringFooterText?:       string
+  industriesEyebrow?:      string
+  industriesHeading?:      string
+  industriesSubtext?:      string
+  industries?:             SanityPlacementsPageIndustry[]
+  processEyebrow?:         string
+  processHeading?:         string
+  processSubtext?:         string
+  processSteps?:           SanityPlacementsPageProcessStep[]
+  processFooterText?:      string
+  successEyebrow?:         string
+  successHeading?:         string
+  successCtaPrimaryLabel?:   string
+  successCtaSecondaryLabel?: string
 }
 
 // ────────────────────────────────────────────────────────────
@@ -906,4 +971,42 @@ export const getCounsellors = unstable_cache(
   },
   ['counsellors'],
   { revalidate: 3600, tags: ['counsellor'] }
+)
+
+export const getPlacementsPage = unstable_cache(
+  async (): Promise<SanityPlacementsPage | null> => {
+    return sanityClient.fetch<SanityPlacementsPage | null>(
+      `*[_type == "placementsPage"][0] {
+        "heroImageUrl": heroImage.asset->url,
+        heroEyebrow, heroHeadingLine1, heroHeadingHighlight, heroSubtext,
+        heroPrimaryCtaLabel, heroSecondaryCtaLabel,
+        statsCards,
+        supportEyebrow, supportHeading, supportSubtext, supportServices,
+        hiringEyebrow, hiringHeading, hiringSubtext, hiringFooterText,
+        industriesEyebrow, industriesHeading, industriesSubtext, industries,
+        processEyebrow, processHeading, processSubtext, processSteps, processFooterText,
+        successEyebrow, successHeading, successCtaPrimaryLabel, successCtaSecondaryLabel
+      }`,
+      {}
+    )
+  },
+  ['placements-page'],
+  { revalidate: 3600, tags: ['placementsPage'] }
+)
+
+export const getPlacementsTestimonials = unstable_cache(
+  async (): Promise<SanityTestimonial[]> => {
+    return sanityClient.fetch<SanityTestimonial[]>(
+      `*[_type == "testimonial" && showOnPlacementsPage == true] | order(displayOrder asc) {
+        _id, name, role, program, quote,
+        outcomes,
+        "avatarUrl": avatar.asset->url,
+        colorTheme, videoLabel, videoUrl,
+        displayOrder, company, journey
+      }`,
+      {}
+    )
+  },
+  ['placements-testimonials'],
+  { revalidate: 3600, tags: ['testimonial'] }
 )

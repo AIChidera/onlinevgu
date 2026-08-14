@@ -25,6 +25,13 @@ import {
   IconBrandWhatsapp,
   IconMail,
   IconLifebuoy,
+  IconBuilding,
+  IconFileText,
+  IconBrandLinkedin,
+  IconShoppingCart,
+  IconStethoscope,
+  IconUserCheck,
+  IconMessage,
 } from '@tabler/icons-react'
 import type { ComponentType } from 'react'
 import { ICON_OPTIONS } from '@/lib/iconOptions'
@@ -66,6 +73,13 @@ export const ICON_MAP: Record<string, IconComponent> = {
   brandWhatsapp:  IconBrandWhatsapp,
   mail:           IconMail,
   lifebuoy:       IconLifebuoy,
+  building:       IconBuilding,
+  fileText:       IconFileText,
+  brandLinkedin:  IconBrandLinkedin,
+  shoppingCart:   IconShoppingCart,
+  stethoscope:    IconStethoscope,
+  userCheck:      IconUserCheck,
+  message:        IconMessage,
 }
 
 export { ICON_OPTIONS }

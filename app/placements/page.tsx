@@ -1,30 +1,11 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
-import {
-  IconTrendingUp,
-  IconBuilding,
-  IconAward,
-  IconUsers,
-  IconBrain,
-  IconHeadset,
-  IconFileText,
-  IconBrandLinkedin,
-  IconClock,
-  IconDeviceLaptop,
-  IconBuildingBank,
-  IconBriefcase,
-  IconShoppingCart,
-  IconStethoscope,
-  IconUserCheck,
-  IconClipboardList,
-  IconMessage,
-  IconCertificate,
-  IconArrowRight,
-} from '@tabler/icons-react'
+import { IconBriefcase, IconArrowRight } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import HirerStrip from '@/app/programs/[slug]/HirerStrip'
-import { getSiteConfig } from '@/lib/sanity'
+import { getSiteConfig, getPlacementsPage, getPlacementsTestimonials } from '@/lib/sanity'
+import { getIcon } from '@/lib/iconMap'
 
 export const revalidate = 3600
 
@@ -43,134 +24,42 @@ export const metadata: Metadata = {
   },
 }
 
-function buildStats(config: { stats: { placement: string; hiringPartners: string; learners: string; countries: string } }) {
-  return [
-    { value: config.stats.placement,      label: 'Placement rate',  detail: 'Class of 2023, within 6 months',              Icon: IconTrendingUp },
-    { value: config.stats.hiringPartners, label: 'Hiring partners', detail: 'Across India and abroad',                     Icon: IconBuilding   },
-    { value: '25+',                       label: 'Top recruiters',  detail: 'TCS, Deloitte, Amazon and more',              Icon: IconAward      },
-    { value: config.stats.learners,       label: 'Alumni network',  detail: `Across ${config.stats.countries} countries`,  Icon: IconUsers      },
-  ]
-}
-
-const SUPPORT_SERVICES = [
-  {
-    title: 'AI Placement Portal',
-    body:  'Personalised job matches scored against your skills, goals, and location preferences.',
-    Icon:  IconBrain,
-  },
-  {
-    title: 'Unlimited Mock Interviews',
-    body:  'One-on-one practice rounds with industry mentors and recruiters, as many as you need.',
-    Icon:  IconHeadset,
-  },
-  {
-    title: 'Resume Review',
-    body:  'Personalised feedback from recruiters at the firms you actually want to work at.',
-    Icon:  IconFileText,
-  },
-  {
-    title: 'LinkedIn Optimisation',
-    body:  'Recruiter-ready profile, properly tagged, with a portfolio that gets clicks.',
-    Icon:  IconBrandLinkedin,
-  },
-  {
-    title: 'Industry Expert Sessions',
-    body:  'Hiring managers and HR leads share what they actually look for in candidates.',
-    Icon:  IconUsers,
-  },
-  {
-    title: 'Year-round Placement Cell',
-    body:  'Dedicated support that runs all twelve months, not just at the end of your program.',
-    Icon:  IconClock,
-  },
+const DEFAULT_SUPPORT_SERVICES = [
+  { title: 'AI Placement Portal',       body: 'Personalised job matches scored against your skills, goals, and location preferences.', icon: 'brain' },
+  { title: 'Unlimited Mock Interviews', body: 'One-on-one practice rounds with industry mentors and recruiters, as many as you need.', icon: 'headset' },
+  { title: 'Resume Review',             body: 'Personalised feedback from recruiters at the firms you actually want to work at.', icon: 'fileText' },
+  { title: 'LinkedIn Optimisation',     body: 'Recruiter-ready profile, properly tagged, with a portfolio that gets clicks.', icon: 'brandLinkedin' },
+  { title: 'Industry Expert Sessions',  body: 'Hiring managers and HR leads share what they actually look for in candidates.', icon: 'users' },
+  { title: 'Year-round Placement Cell', body: 'Dedicated support that runs all twelve months, not just at the end of your program.', icon: 'clock' },
 ]
 
-const HIRERS = [
-  'TCS', 'Infosys', 'Wipro', 'Accenture', 'HCL',
-  'IBM', 'Deloitte', 'EY', 'KPMG', 'Cognizant',
-  'Amazon', 'Flipkart', 'HDFC Bank', 'ICICI Bank', 'Bajaj Finserv',
-  'Reliance Industries', 'Tata Group', 'Mahindra', 'Zomato', 'PhonePe',
-  'Tech Mahindra', 'Capgemini', 'LTIMindtree', 'Axis Bank', 'Mphasis',
+const DEFAULT_INDUSTRIES = [
+  { title: 'IT Services & Tech',    body: 'Application development, cloud, DevOps, data engineering, product roles.', companies: 'TCS · Infosys · HCL · Wipro · Cognizant', icon: 'deviceLaptop' },
+  { title: 'BFSI & Fintech',        body: 'Banking operations, insurance, lending, fintech product, risk and compliance.', companies: 'HDFC Bank · ICICI Bank · Axis Bank · Bajaj Finserv · PhonePe', icon: 'buildingBank' },
+  { title: 'Consulting & Advisory', body: 'Strategy, audit, tax, technology consulting, and process advisory.', companies: 'Deloitte · EY · KPMG · Accenture · Capgemini', icon: 'briefcase' },
+  { title: 'E-commerce & Internet', body: 'Product, operations, growth, category management, and partnerships.', companies: 'Amazon · Flipkart · Zomato', icon: 'shoppingCart' },
+  { title: 'Conglomerates',         body: 'Operations, projects, supply chain, and leadership rotation programs.', companies: 'Tata Group · Reliance Industries · Mahindra', icon: 'building' },
+  { title: 'Healthcare & Pharma',   body: 'Healthcare administration, hospital operations, pharma management.', companies: 'Apollo · Fortis · Cipla · Sun Pharma', icon: 'stethoscope' },
 ]
 
-const INDUSTRIES = [
-  {
-    title:     'IT Services & Tech',
-    body:      'Application development, cloud, DevOps, data engineering, product roles.',
-    companies: 'TCS · Infosys · HCL · Wipro · Cognizant',
-    Icon:      IconDeviceLaptop,
-  },
-  {
-    title:     'BFSI & Fintech',
-    body:      'Banking operations, insurance, lending, fintech product, risk and compliance.',
-    companies: 'HDFC Bank · ICICI Bank · Axis Bank · Bajaj Finserv · PhonePe',
-    Icon:      IconBuildingBank,
-  },
-  {
-    title:     'Consulting & Advisory',
-    body:      'Strategy, audit, tax, technology consulting, and process advisory.',
-    companies: 'Deloitte · EY · KPMG · Accenture · Capgemini',
-    Icon:      IconBriefcase,
-  },
-  {
-    title:     'E-commerce & Internet',
-    body:      'Product, operations, growth, category management, and partnerships.',
-    companies: 'Amazon · Flipkart · Zomato',
-    Icon:      IconShoppingCart,
-  },
-  {
-    title:     'Conglomerates',
-    body:      'Operations, projects, supply chain, and leadership rotation programs.',
-    companies: 'Tata Group · Reliance Industries · Mahindra',
-    Icon:      IconBuilding,
-  },
-  {
-    title:     'Healthcare & Pharma',
-    body:      'Healthcare administration, hospital operations, pharma management.',
-    companies: 'Apollo · Fortis · Cipla · Sun Pharma',
-    Icon:      IconStethoscope,
-  },
+const DEFAULT_PROCESS_STEPS = [
+  { badge: 'Stage 1', title: 'Profile Build',          body: 'Resume rebuild, LinkedIn polish, skill mapping. We baseline where you are.', time: '1-2 weeks', icon: 'userCheck' },
+  { badge: 'Stage 2', title: 'Pre-Placement Training', body: 'Mock interviews, group discussions, aptitude prep, industry sessions.', time: '4 weeks', icon: 'clipboardList' },
+  { badge: 'Stage 3', title: 'Interview Scheduling',   body: 'Recruiter matches via the AI portal. We book slots, prep you, debrief after.', time: 'Rolling', icon: 'message' },
+  { badge: 'Stage 4', title: 'Offer & Onboarding',     body: 'Negotiation guidance, joining support, alumni network introduction.', time: 'On offer', icon: 'certificate' },
 ]
 
-const PROCESS_STEPS = [
-  {
-    badge: 'Stage 1',
-    title: 'Profile Build',
-    body:  'Resume rebuild, LinkedIn polish, skill mapping. We baseline where you are.',
-    time:  '1-2 weeks',
-    Icon:  IconUserCheck,
-  },
-  {
-    badge: 'Stage 2',
-    title: 'Pre-Placement Training',
-    body:  'Mock interviews, group discussions, aptitude prep, industry sessions.',
-    time:  '4 weeks',
-    Icon:  IconClipboardList,
-  },
-  {
-    badge: 'Stage 3',
-    title: 'Interview Scheduling',
-    body:  'Recruiter matches via the AI portal. We book slots, prep you, debrief after.',
-    time:  'Rolling',
-    Icon:  IconMessage,
-  },
-  {
-    badge: 'Stage 4',
-    title: 'Offer & Onboarding',
-    body:  'Negotiation guidance, joining support, alumni network introduction.',
-    time:  'On offer',
-    Icon:  IconCertificate,
-  },
-]
+const DEFAULT_STORY_AVATAR =
+  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&q=80&auto=format&fit=crop'
 
-const SUCCESS_STORIES = [
+const DEFAULT_SUCCESS_STORIES = [
   {
     name:    'Ananya Sharma',
     program: 'MBA · 2023 batch',
     journey: 'Sales Executive → Product Manager',
     company: 'Razorpay',
     quote:   'The mock interviews felt harder than the real ones. By the time I sat in the Razorpay PM round, the pressure felt familiar.',
-    avatar:  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&q=80&auto=format&fit=crop',
+    avatar:  DEFAULT_STORY_AVATAR,
   },
   {
     name:    'Vikram Iyer',
@@ -190,16 +79,90 @@ const SUCCESS_STORIES = [
   },
 ]
 
+function fillTags(template: string, tags: Record<string, string>): string {
+  return Object.entries(tags).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), template)
+}
+
 export default async function PlacementsPage() {
-  const config = await getSiteConfig()
-  const STATS = buildStats(config)
+  const [config, placements, successStoriesRaw] = await Promise.all([
+    getSiteConfig(),
+    getPlacementsPage(),
+    getPlacementsTestimonials(),
+  ])
+  const tags = {
+    placement:      config.stats.placement,
+    hiringPartners: config.stats.hiringPartners,
+    countries:      config.stats.countries,
+  }
+
+  // ── Hero ──────────────────────────────────────────────────────
+  const heroImageSrc          = placements?.heroImageUrl || HERO_IMAGE_SRC
+  const heroEyebrow           = placements?.heroEyebrow || 'Placements & Careers'
+  const heroHeadingLine1      = placements?.heroHeadingLine1 || 'Built for'
+  const heroHeadingHighlight  = placements?.heroHeadingHighlight || 'real careers.'
+  const heroSubtext           = fillTags(placements?.heroSubtext || '{placement} of our 2023 batch placed within six months. Every learner gets the same support - no asterisks.', tags)
+  const heroPrimaryCtaLabel   = placements?.heroPrimaryCtaLabel || 'Apply Now'
+  const heroSecondaryCtaLabel = placements?.heroSecondaryCtaLabel || 'Browse Programs'
+
+  // ── Stats strip - the big number always stays live/computed for 3 of
+  // the 4 cards; only "Top recruiters" has no live source. ──────────
+  const statsCms = placements?.statsCards ?? []
+  const STATS = [
+    { value: config.stats.placement,      label: statsCms[0]?.label || 'Placement rate',  detail: statsCms[0]?.detail || 'Class of 2023, within 6 months', Icon: getIcon(statsCms[0]?.icon || 'trendingUp') },
+    { value: config.stats.hiringPartners, label: statsCms[1]?.label || 'Hiring partners', detail: statsCms[1]?.detail || 'Across India and abroad',        Icon: getIcon(statsCms[1]?.icon || 'building') },
+    { value: statsCms[2]?.value || '25+', label: statsCms[2]?.label || 'Top recruiters',  detail: statsCms[2]?.detail || 'TCS, Deloitte, Amazon and more', Icon: getIcon(statsCms[2]?.icon || 'award') },
+    { value: config.stats.learners,       label: statsCms[3]?.label || 'Alumni network',  detail: statsCms[3]?.detail || `Across ${config.stats.countries} countries`, Icon: getIcon(statsCms[3]?.icon || 'users') },
+  ]
+
+  // ── Career Support ────────────────────────────────────────────
+  const supportEyebrow = placements?.supportEyebrow || 'How we support you'
+  const supportHeading = placements?.supportHeading || 'A placement cell that actually places you.'
+  const supportSubtext = placements?.supportSubtext || 'Every Online VGU learner gets the same end-to-end placement support that on-campus students receive. No extra cost, no asterisks.'
+  const SUPPORT_SERVICES = (placements?.supportServices?.length ? placements.supportServices : DEFAULT_SUPPORT_SERVICES).map(s => ({
+    title: s.title, body: s.body, Icon: getIcon(s.icon),
+  }))
+
+  // ── Hiring Partners ───────────────────────────────────────────
+  const hiringEyebrow    = placements?.hiringEyebrow || 'Where you\'ll work'
+  const hiringHeading    = fillTags(placements?.hiringHeading || '{hiringPartners} companies hire VGU graduates', tags)
+  const hiringSubtext    = placements?.hiringSubtext || 'From India\'s biggest conglomerates to global tech firms across IT, finance, consulting, and more.'
+  const hiringFooterText = placements?.hiringFooterText || 'And 475+ more recruiters across India and abroad.'
+
+  // ── Industries ────────────────────────────────────────────────
+  const industriesEyebrow = placements?.industriesEyebrow || 'Industries we place into'
+  const industriesHeading = placements?.industriesHeading || 'Hiring across every major sector.'
+  const industriesSubtext = placements?.industriesSubtext || 'Wherever your career heads next, the same team supports you with industry-specific prep, recruiter relationships, and alumni connections.'
+  const INDUSTRIES = (placements?.industries?.length ? placements.industries : DEFAULT_INDUSTRIES).map(ind => ({
+    title: ind.title, body: ind.body, companies: ind.companies, Icon: getIcon(ind.icon),
+  }))
+
+  // ── Placement Process ─────────────────────────────────────────
+  const processEyebrow    = placements?.processEyebrow || 'Your placement journey'
+  const processHeading    = placements?.processHeading || 'From profile build to first day of work.'
+  const processSubtext    = placements?.processSubtext || 'A four-stage process the placement cell runs with you, end-to-end.'
+  const processFooterText = placements?.processFooterText || 'Placement support included with every program.'
+  const PROCESS_STEPS = (placements?.processSteps?.length ? placements.processSteps : DEFAULT_PROCESS_STEPS).map(s => ({
+    badge: s.badge, title: s.title, body: s.body, time: s.time, Icon: getIcon(s.icon),
+  }))
+
+  // ── Success Stories ───────────────────────────────────────────
+  const successEyebrow           = placements?.successEyebrow || 'Real outcomes'
+  const successHeading           = placements?.successHeading || 'Where Online VGU degrees actually go.'
+  const successCtaPrimaryLabel   = placements?.successCtaPrimaryLabel || 'Apply Now'
+  const successCtaSecondaryLabel = placements?.successCtaSecondaryLabel || 'Browse Programs'
+  const SUCCESS_STORIES = successStoriesRaw.length > 0
+    ? successStoriesRaw.map(t => ({
+        name: t.name, program: t.role, journey: t.journey || '', company: t.company || '',
+        quote: t.quote, avatar: t.avatarUrl || DEFAULT_STORY_AVATAR,
+      }))
+    : DEFAULT_SUCCESS_STORIES
 
   return (
     <div>
       {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
       <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
         <Image
-          src={HERO_IMAGE_SRC}
+          src={heroImageSrc}
           alt=""
           fill
           priority
@@ -222,22 +185,22 @@ export default async function PlacementsPage() {
               className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-6"
               style={{ animationDelay: '0ms' }}
             >
-              Placements &amp; Careers
+              {heroEyebrow}
             </p>
 
             <h1
               className="anim-load-left font-heading font-bold tracking-tight leading-[1.05] text-white text-[36px] md:text-[48px] lg:text-[56px]"
               style={{ animationDelay: '70ms' }}
             >
-              Built for<br />
-              <span className="text-vgu-yellow">real careers.</span>
+              {heroHeadingLine1}<br />
+              <span className="text-vgu-yellow">{heroHeadingHighlight}</span>
             </h1>
 
             <p
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[600px]"
               style={{ animationDelay: '140ms' }}
             >
-              {config.stats.placement} of our 2023 batch placed within six months. Every learner gets the same support - no asterisks.
+              {heroSubtext}
             </p>
 
             <div
@@ -250,13 +213,13 @@ export default async function PlacementsPage() {
                   data-apply-trigger
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
-                  Apply Now
+                  {heroPrimaryCtaLabel}
                 </a>
                 <a
                   href="/programs"
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                 >
-                  Browse Programs
+                  {heroSecondaryCtaLabel}
                 </a>
               </div>
             </div>
@@ -311,13 +274,13 @@ export default async function PlacementsPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              How we support you
+              {supportEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              A placement cell that actually places you.
+              {supportHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
-              Every Online VGU learner gets the same end-to-end placement support that on-campus students receive. No extra cost, no asterisks.
+              {supportSubtext}
             </p>
           </div>
 
@@ -390,24 +353,24 @@ export default async function PlacementsPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Where you&apos;ll work
+              {hiringEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              {config.stats.hiringPartners} companies hire VGU graduates
+              {hiringHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
-              From India&apos;s biggest conglomerates to global tech firms across IT, finance, consulting, and more.
+              {hiringSubtext}
             </p>
           </div>
 
-          <HirerStrip hirers={HIRERS} />
+          <HirerStrip hirers={config.hiringPartnersList} />
 
           <p
             data-animate="fade-up"
             style={{ animationDelay: '180ms' }}
             className="mt-10 text-center text-[13px] font-body text-neutral-400"
           >
-            And 475+ more recruiters across India and abroad.
+            {hiringFooterText}
           </p>
         </div>
       </section>
@@ -420,13 +383,13 @@ export default async function PlacementsPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Industries we place into
+              {industriesEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              Hiring across every major sector.
+              {industriesHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-600 max-w-[600px] mx-auto lg:text-[17px]">
-              Wherever your career heads next, the same team supports you with industry-specific prep, recruiter relationships, and alumni connections.
+              {industriesSubtext}
             </p>
           </div>
 
@@ -511,13 +474,13 @@ export default async function PlacementsPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-14">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Your placement journey
+              {processEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              From profile build to first day of work.
+              {processHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[540px] mx-auto lg:text-[17px]">
-              A four-stage process the placement cell runs with you, end-to-end.
+              {processSubtext}
             </p>
           </div>
 
@@ -595,7 +558,7 @@ export default async function PlacementsPage() {
             className="mt-10 md:mt-12 text-center"
           >
             <p className="text-[13px] font-body text-neutral-500">
-              Placement support included with every program.
+              {processFooterText}
             </p>
           </div>
         </div>
@@ -608,10 +571,10 @@ export default async function PlacementsPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Real outcomes
+              {successEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-neutral-900 md:text-[40px] max-w-[660px] mx-auto">
-              Where Online VGU degrees actually go.
+              {successHeading}
             </h2>
           </div>
 
@@ -703,14 +666,14 @@ export default async function PlacementsPage() {
               data-apply-trigger
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
-              Apply Now
+              {successCtaPrimaryLabel}
               <IconArrowRight size={16} />
             </a>
             <a
               href="/programs"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-8 py-3.5 transition-all duration-200"
             >
-              Browse Programs
+              {successCtaSecondaryLabel}
             </a>
           </div>
         </div>

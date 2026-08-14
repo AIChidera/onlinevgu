@@ -2,6 +2,7 @@ import { siteSettings } from './siteSettings'
 import homePage from './homePage'
 import aboutPage from './aboutPage'
 import contactPage from './contactPage'
+import placementsPage from './placementsPage'
 import program from './program'
 import testimonial from './testimonial'
 import faculty from './faculty'
@@ -17,6 +18,7 @@ export const schemaTypes = [
   homePage,
   aboutPage,
   contactPage,
+  placementsPage,
   program,
   testimonial,
   faculty,

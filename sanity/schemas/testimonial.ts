@@ -89,6 +89,25 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'showOnPlacementsPage',
+      title: 'Show on Placements Page (Success Stories)',
+      type: 'boolean',
+      description: 'Tick to include this student in the Placements page\'s Success Stories.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'company',
+      title: 'Current Company',
+      type: 'string',
+      description: 'Only shown in Success Stories on the Placements page. E.g. "Razorpay".',
+    }),
+    defineField({
+      name: 'journey',
+      title: 'Career Journey',
+      type: 'string',
+      description: 'Only shown in Success Stories on the Placements page. E.g. "Sales Executive → Product Manager".',
+    }),
+    defineField({
       name: 'displayOrder',
       title: 'Display Order',
       type: 'number',

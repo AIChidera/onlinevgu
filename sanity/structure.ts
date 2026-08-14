@@ -78,6 +78,25 @@ export function structure(S: StructureBuilder) {
             ])
         ),
 
+      // ── Placements ──────────────────────────────────────────────
+      S.listItem()
+        .title('Placements')
+        .child(
+          S.list()
+            .title('Placements')
+            .items([
+              S.documentTypeListItem('placementsPage').title('Placements Page Content'),
+              S.divider(),
+              S.listItem()
+                .title('Success Stories shown on Placements')
+                .child(
+                  S.documentList()
+                    .title('Success Stories shown on Placements')
+                    .filter('_type == "testimonial" && showOnPlacementsPage == true')
+                ),
+            ])
+        ),
+
       // ── Programs ────────────────────────────────────────────────
       S.listItem()
         .title('Programs')
