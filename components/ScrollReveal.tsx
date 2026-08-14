@@ -47,10 +47,21 @@ export default function ScrollReveal() {
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     )
 
-    function processEl(el: HTMLElement) {
-      if (processed.has(el)) return
+    // Split into a write phase (classList.add) and a read phase
+    // (getBoundingClientRect) instead of interleaving them per-element - doing
+    // both inside one loop forces the browser to recompute layout on every
+    // single iteration ("layout thrashing"), which showed up as ~3.5s of pure
+    // Style & Layout time in production Lighthouse runs on pages with dozens
+    // of [data-animate] elements. Batching all writes before all reads lets
+    // the browser coalesce that into effectively one layout pass.
+    function markReady(el: HTMLElement): boolean {
+      if (processed.has(el)) return false
       processed.add(el)
       el.classList.add('sr-ready')
+      return true
+    }
+
+    function checkAndReveal(el: HTMLElement) {
       const { top, bottom } = el.getBoundingClientRect()
       if (top < window.innerHeight && bottom > 0) {
         // Two rAFs: the first lets the browser commit the .sr-ready (opacity:0)
@@ -62,16 +73,21 @@ export default function ScrollReveal() {
       }
     }
 
-    document.querySelectorAll<HTMLElement>('[data-animate]').forEach(processEl)
+    const initialEls = Array.from(document.querySelectorAll<HTMLElement>('[data-animate]')).filter(markReady)
+    initialEls.forEach(checkAndReveal)
 
     // Pick up elements added later (dynamic imports, client-side navigation).
+    // These arrive one at a time, not as one big batch, so there's no
+    // meaningful thrashing to split here.
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType !== Node.ELEMENT_NODE) return
           const el = node as HTMLElement
-          if (el.dataset?.animate) processEl(el)
-          el.querySelectorAll<HTMLElement>('[data-animate]').forEach(processEl)
+          if (el.dataset?.animate && markReady(el)) checkAndReveal(el)
+          el.querySelectorAll<HTMLElement>('[data-animate]').forEach(child => {
+            if (markReady(child)) checkAndReveal(child)
+          })
         })
       })
     })
