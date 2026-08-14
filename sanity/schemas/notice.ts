@@ -52,8 +52,8 @@ export default defineType({
     defineField({
       name: 'externalUrl',
       title: 'External Link',
-      type: 'url',
-      description: 'Optional. Use instead of an attachment to link off-site (e.g. an external notice portal). If both are set, the attachment takes priority.',
+      type: 'string',
+      description: 'Full URL including https://. Optional. Use instead of an attachment to link off-site (e.g. an external notice portal). If both are set, the attachment takes priority.',
     }),
   ],
 

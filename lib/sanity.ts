@@ -204,6 +204,50 @@ export interface SanityProgram {
   certificateSampleUrl?:  string
 }
 
+export interface SanityHomePageStep {
+  badge: string
+  title: string
+  body:  string
+  icon:  string
+}
+
+export interface SanityHomePageTrustLogo {
+  name:    string
+  logoUrl: string | null
+  scale:   number
+}
+
+export interface SanityHomePagePlatformCard {
+  heading:     string
+  description: string
+  statValue:   string
+  statLabel:   string
+}
+
+// Singleton - one document total. Every field is optional; components fall
+// back to their current hardcoded copy for anything left blank.
+export interface SanityHomePage {
+  heroImageUrl?:           string | null
+  heroEyebrow?:            string
+  heroHeadingPrefix?:      string
+  heroHeadingHighlight?:   string
+  heroHeadingSuffix?:      string
+  heroSubtext?:            string
+  heroBadgeText?:          string
+  heroPrimaryCtaLabel?:    string
+  heroSecondaryCtaLabel?:  string
+  trustBarEyebrow?:        string
+  trustBarLogos?:          SanityHomePageTrustLogo[]
+  coursePlatformsEyebrow?: string
+  coursePlatformsHeading?: string
+  courseraCard?:           SanityHomePagePlatformCard
+  linkedinCard?:           SanityHomePagePlatformCard
+  stepsEyebrow?:           string
+  stepsHeading?:           string
+  stepsSubtext?:           string
+  steps?:                  SanityHomePageStep[]
+}
+
 // ────────────────────────────────────────────────────────────
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
@@ -589,4 +633,27 @@ export const getProgramBySlug = unstable_cache(
   },
   ['program-by-slug'],
   { revalidate: 3600, tags: ['program'] }
+)
+
+export const getHomePage = unstable_cache(
+  async (): Promise<SanityHomePage | null> => {
+    return sanityClient.fetch<SanityHomePage | null>(
+      `*[_type == "homePage"][0] {
+        "heroImageUrl": heroImage.asset->url,
+        heroEyebrow, heroHeadingPrefix, heroHeadingHighlight, heroHeadingSuffix,
+        heroSubtext, heroBadgeText, heroPrimaryCtaLabel, heroSecondaryCtaLabel,
+        trustBarEyebrow,
+        "trustBarLogos": trustBarLogos[] {
+          name, "logoUrl": logo.asset->url, scale
+        },
+        coursePlatformsEyebrow, coursePlatformsHeading,
+        courseraCard, linkedinCard,
+        stepsEyebrow, stepsHeading, stepsSubtext,
+        steps
+      }`,
+      {}
+    )
+  },
+  ['home-page'],
+  { revalidate: 3600, tags: ['homePage'] }
 )

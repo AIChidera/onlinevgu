@@ -3,18 +3,34 @@
 import Image from 'next/image'
 import { IconAward } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'
+import type { SanityHomePage } from '@/lib/sanity'
 
 // TODO: swap with a real VGU campus / student photo when the asset is ready
 const HERO_IMAGE_SRC =
   'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80&auto=format&fit=crop'
 
-export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
+interface HeroProps {
+  nextBatch?: string
+  home?: SanityHomePage | null
+}
+
+export default function Hero({ nextBatch = 'July 2026', home }: HeroProps) {
+  const imageSrc      = home?.heroImageUrl || HERO_IMAGE_SRC
+  const eyebrow        = home?.heroEyebrow || 'UGC-Entitled · Online Degrees'
+  const headingPrefix  = home?.heroHeadingPrefix || 'Your next'
+  const headingHighlight = home?.heroHeadingHighlight || 'promotion'
+  const headingSuffix  = home?.heroHeadingSuffix || 'starts here.'
+  const subtext        = home?.heroSubtext || 'Built for working professionals. Study evenings and weekends. Finish in 2-3 years.'
+  const badgeText       = home?.heroBadgeText || 'Top Online University in Rajasthan'
+  const primaryCta     = home?.heroPrimaryCtaLabel || 'Apply Now'
+  const secondaryCta   = home?.heroSecondaryCtaLabel || 'Explore Programs'
+
   return (
     <section className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
       {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
       <Image
-        src={HERO_IMAGE_SRC}
+        src={imageSrc}
         alt=""
         fill
         priority
@@ -34,7 +50,7 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
             className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
             style={{ animationDelay: '0ms' }}
           >
-            UGC-Entitled · Online Degrees
+            {eyebrow}
           </p>
 
           <h1
@@ -42,19 +58,19 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
                        text-[44px] md:text-[60px] lg:text-[72px]"
             style={{ animationDelay: '70ms' }}
           >
-            Your next{' '}
+            {headingPrefix}{' '}
             <span className="relative inline-block text-vgu-yellow">
-              promotion
+              {headingHighlight}
               <SketchCircle delayMs={600} />
             </span><br />
-            starts here.
+            {headingSuffix}
           </h1>
 
           <p
             className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/70 md:text-white/85 max-w-[620px]"
             style={{ animationDelay: '140ms' }}
           >
-            Built for working professionals. Study evenings and weekends. Finish in 2-3 years.
+            {subtext}
           </p>
 
           {/* Ranking badge - last trust signal before the CTAs, distinct from
@@ -69,7 +85,7 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
               <IconAward size={14} className="text-vgu-red" stroke={2.5} />
             </span>
             <span className="text-[13px] font-heading font-extrabold text-neutral-900 tracking-tight">
-              Top Online University in Rajasthan
+              {badgeText}
             </span>
           </div>
 
@@ -84,13 +100,13 @@ export default function Hero({ nextBatch = 'July 2026' }: { nextBatch?: string }
                 data-apply-trigger
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
               >
-                Apply Now
+                {primaryCta}
               </a>
               <a
                 href="#programs"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
               >
-                Explore Programs
+                {secondaryCta}
               </a>
             </div>
 

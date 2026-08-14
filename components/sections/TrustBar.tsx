@@ -1,7 +1,7 @@
 import Image from 'next/image'
+import type { SanityHomePage } from '@/lib/sanity'
 
-
-const LOGOS = [
+const DEFAULT_LOGOS = [
   { name: 'NAAC A+',          src: '/logos/naac-grade-a-plus.png', scale: 1.25  },
   { name: 'UGC · DEB',        src: '/logos/ugc-entitled.png',      scale: 1.25  },
   { name: 'AICTE',            src: '/logos/aicte-approved.png',    scale: 1     },
@@ -9,7 +9,12 @@ const LOGOS = [
   { name: 'Coursera Partner', src: '/assets/trust/coursera.svg',   scale: 0.72  },
 ]
 
-export default function TrustBar() {
+export default function TrustBar({ home }: { home?: SanityHomePage | null }) {
+  const eyebrow = home?.trustBarEyebrow || 'Accredited · Recognised · Ranked'
+  const LOGOS = home?.trustBarLogos?.length
+    ? home.trustBarLogos.map(l => ({ name: l.name, src: l.logoUrl || '', scale: l.scale || 1 })).filter(l => l.src)
+    : DEFAULT_LOGOS
+
   return (
     <div className="bg-neutral-50 border-b border-neutral-200">
       <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 py-10 md:py-12 lg:py-16">
@@ -19,7 +24,7 @@ export default function TrustBar() {
           data-animate="fade-up"
           className="text-center text-[11px] md:text-[12px] font-body font-bold uppercase tracking-[0.08em] text-vgu-red mb-6 md:mb-8"
         >
-          Accredited · Recognised · Ranked
+          {eyebrow}
         </p>
 
         {/* Mobile: single horizontal swipe row - keeps the strip to one compact

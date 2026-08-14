@@ -19,6 +19,7 @@ import {
   getAllPrograms,
   getSiteSettings,
   getSiteConfig,
+  getHomePage,
 } from '@/lib/sanity'
 
 const CourseExperienceSection = dynamic(
@@ -87,13 +88,14 @@ function parseStat(s: string | undefined | null, fallback: number): number {
 }
 
 export default async function HomePage() {
-  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings, config] = await Promise.all([
+  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings, config, homePage] = await Promise.all([
     getTestimonials(),
     getHomeFaqs(),
     getCampusEvents(),
     getAllPrograms(),
     getSiteSettings(),
     getSiteConfig(),
+    getHomePage(),
   ])
 
   const faqJsonLd = buildFaqJsonLd(faqs)
@@ -111,8 +113,8 @@ export default async function HomePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
-      <Hero nextBatch={config.nextBatch} />
-      <TrustBar />
+      <Hero nextBatch={config.nextBatch} home={homePage} />
+      <TrustBar home={homePage} />
       <ProgramsSection programmes={sanityPrograms.length > 0 ? sanityPrograms : undefined} />
       <ImpactSection
         statLearners={parseStat(siteSettings?.statLearners,    50000)}
@@ -124,8 +126,8 @@ export default async function HomePage() {
       <CampusImmersionsSection events={campusEvents} />
       <Testimonials stories={testimonials} />
       <CourseExperienceSection />
-      <FeaturesSection />
-      <StepsSection nextBatch={config.nextBatch} />
+      <FeaturesSection home={homePage} />
+      <StepsSection nextBatch={config.nextBatch} home={homePage} />
       <FaqSection faqs={faqs} />
     </>
   )

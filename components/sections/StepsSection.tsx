@@ -1,39 +1,34 @@
-import {
-  IconClipboardList,
-  IconSchool,
-  IconCreditCard,
-  IconDeviceLaptop,
-  IconArrowRight,
-} from '@tabler/icons-react'
+import { IconArrowRight } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import { getIcon } from '@/lib/iconMap'
+import type { SanityHomePage } from '@/lib/sanity'
 
-export default function StepsSection({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
-  const STEPS = [
-    {
-      badge:  'Step 1',
-      title:  'Register Online',
-      body:   'Fill the application form in under 2 minutes. A counsellor calls you within 2 hours.',
-      Icon:   IconClipboardList,
-    },
-    {
-      badge:  'Step 2',
-      title:  'Choose Your Program',
-      body:   'Pick your degree and specialisation. Our advisors help you find the best fit.',
-      Icon:   IconSchool,
-    },
-    {
-      badge:  'Step 3',
-      title:  'Pay Your Fees',
-      body:   'Pay securely online in minutes. No-cost EMI available from ₹2,999/month.',
-      Icon:   IconCreditCard,
-    },
-    {
-      badge:  'Step 4',
-      title:  'Start Learning',
-      body:   `Get instant portal access. Live classes from ${nextBatch}.`,
-      Icon:   IconDeviceLaptop,
-    },
-  ]
+const DEFAULT_STEPS = [
+  { badge: 'Step 1', title: 'Register Online',    body: 'Fill the application form in under 2 minutes. A counsellor calls you within 2 hours.', icon: 'clipboardList' },
+  { badge: 'Step 2', title: 'Choose Your Program', body: 'Pick your degree and specialisation. Our advisors help you find the best fit.',          icon: 'school'        },
+  { badge: 'Step 3', title: 'Pay Your Fees',       body: 'Pay securely online in minutes. No-cost EMI available from ₹2,999/month.',                icon: 'creditCard'    },
+  { badge: 'Step 4', title: 'Start Learning',      body: 'Get instant portal access. Live classes from {nextBatch}.',                               icon: 'deviceLaptop'  },
+]
+
+interface StepsSectionProps {
+  nextBatch?: string
+  home?: SanityHomePage | null
+}
+
+export default function StepsSection({ nextBatch = 'July 2026', home }: StepsSectionProps) {
+  const eyebrow = home?.stepsEyebrow || 'Simple Admissions'
+  const heading = home?.stepsHeading || 'From form to first class, in under 30 minutes.'
+  const subtext = home?.stepsSubtext || 'No entrance exam. No campus visit. Enrol 100% online.'
+
+  // {nextBatch} is a merge tag - lets CMS copy stay accurate as the real
+  // next-batch date (Site Settings) changes, without editing this text too.
+  const rawSteps = home?.steps?.length ? home.steps : DEFAULT_STEPS
+  const STEPS = rawSteps.map(s => ({
+    badge: s.badge,
+    title: s.title,
+    body:  s.body.replace('{nextBatch}', nextBatch),
+    Icon:  getIcon(s.icon),
+  }))
 
   const MICROCOPY = [
     { label: 'Next intake',             value: nextBatch },
@@ -60,13 +55,13 @@ export default function StepsSection({ nextBatch = 'July 2026' }: { nextBatch?: 
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-12 md:mb-14">
           <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-            Simple Admissions
+            {eyebrow}
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
-            From form to first class, in under 30 minutes.
+            {heading}
           </h2>
           <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-600 max-w-[520px] mx-auto lg:text-[17px]">
-            No entrance exam. No campus visit. Enrol 100% online.
+            {subtext}
           </p>
         </div>
 

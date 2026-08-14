@@ -2,6 +2,7 @@
 
 import BrandIcon from '@/components/ui/BrandIcon'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
+import type { SanityHomePage } from '@/lib/sanity'
 import {
   IconBriefcase,
   IconCode,
@@ -34,7 +35,12 @@ const LEARNING_CATEGORIES = [
 // Coursera's own content partners, one level below the platform itself -
 // folding LinkedIn Learning into that same grid as a 7th logo would
 // misrepresent it as a "partner brand" rather than a bundled platform.
-const PLATFORMS = [
+// name/subLabel/items (the partner-logo and category sub-grids) stay
+// code-driven - they're tied to BrandIcon's fixed icon set and to
+// LEARNING_CATEGORIES' fixed icon imports, so free-text CMS values could
+// silently render blank. Only heading/desc/stat text is CMS-editable
+// (see FeaturesSection's `home` prop below).
+const DEFAULT_PLATFORMS = [
   {
     key: 'coursera',
     name: 'Coursera',
@@ -57,7 +63,25 @@ const PLATFORMS = [
   },
 ]
 
-export default function FeaturesSection() {
+export default function FeaturesSection({ home }: { home?: SanityHomePage | null }) {
+  const eyebrow = home?.coursePlatformsEyebrow || 'Why Online VGU'
+  const heading = home?.coursePlatformsHeading || '10,000+ courses. Two platforms. Included free.'
+
+  const overrides: Record<string, { heading?: string; description?: string; statValue?: string; statLabel?: string } | undefined> = {
+    coursera: home?.courseraCard,
+    'linkedin-learning': home?.linkedinCard,
+  }
+  const PLATFORMS = DEFAULT_PLATFORMS.map(p => {
+    const o = overrides[p.key]
+    return {
+      ...p,
+      heading:   o?.heading || p.heading,
+      desc:      o?.description || p.desc,
+      statValue: o?.statValue || p.statValue,
+      statLabel: o?.statLabel || p.statLabel,
+    }
+  })
+
   return (
     <section id="features" className="sketch-hover-group group relative overflow-hidden bg-vgu-beige py-12 lg:py-24">
       <SketchFlourish shape="swoop"    color="red-dark" opacity={0.07} strokeWidth={20} />
@@ -67,10 +91,10 @@ export default function FeaturesSection() {
         {/* Header */}
         <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
           <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-            Why Online VGU
+            {eyebrow}
           </p>
           <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[36px] lg:text-[40px]">
-            10,000+ courses. Two platforms. Included free.
+            {heading}
           </h2>
         </div>
 
