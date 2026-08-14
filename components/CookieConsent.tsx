@@ -32,7 +32,7 @@ export default function CookieConsent() {
     setTimeout(() => setShow(false), 350)
   }
 
-  if (!show) return null
+  if (!show || pathname?.startsWith('/studio')) return null
 
   return (
     /* Outer positioner - floating card, docked to the bottom-right corner at every

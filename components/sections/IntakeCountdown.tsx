@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 /**
  * Slim strip mounted above the Hero. Leads with VGU's Google Agentic AI
@@ -20,6 +23,8 @@ import Link from 'next/link'
  * instead of a clean reveal. Not worth the fragility for a decorative touch.)
  */
 export default function IntakeCountdown({ nextBatch = 'July 2026' }: { nextBatch?: string }) {
+  const pathname = usePathname()
+  if (pathname?.startsWith('/studio')) return null
   return (
     <div className="bg-vgu-red-dark border-b border-vgu-gold/[0.18]">
       <div className="mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 max-w-[1280px] px-5 md:px-8 lg:px-12 py-2.5">

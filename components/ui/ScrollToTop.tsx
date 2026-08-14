@@ -1,11 +1,13 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { IconChevronUp } from '@tabler/icons-react'
 
 const HIDE_DELAY_MS = 1500
 const MIN_SCROLL_Y  = 500
 
 export default function ScrollToTop() {
+  const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -35,6 +37,8 @@ export default function ScrollToTop() {
       clearHideTimer()
     }
   }, [])
+
+  if (pathname?.startsWith('/studio')) return null
 
   return (
     <button
