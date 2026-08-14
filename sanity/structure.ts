@@ -48,9 +48,18 @@ export function structure(S: StructureBuilder) {
           S.list()
             .title('About')
             .items([
+              S.documentTypeListItem('aboutPage').title('About Page Content'),
+              S.divider(),
               S.listItem()
                 .title('Milestones (History Timeline)')
                 .child(S.documentTypeList('milestone').title('Milestones')),
+              S.listItem()
+                .title('Testimonials shown on About')
+                .child(
+                  S.documentList()
+                    .title('Testimonials shown on About')
+                    .filter('_type == "testimonial" && showOnAboutPage == true')
+                ),
             ])
         ),
 

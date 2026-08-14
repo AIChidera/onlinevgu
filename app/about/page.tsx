@@ -1,23 +1,9 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getMilestones, getSiteConfig } from '@/lib/sanity'
+import { getMilestones, getSiteConfig, getAboutPage, getAboutTestimonials } from '@/lib/sanity'
+import { getIcon } from '@/lib/iconMap'
 import {
-  IconAward,
-  IconUsers,
-  IconGlobe,
-  IconBuildingBank,
-  IconSchool,
-  IconCertificate,
-  IconTrendingUp,
-  IconBrain,
   IconArrowRight,
-  IconVideo,
-  IconBroadcast,
-  IconPlayerPlay,
-  IconClipboardCheck,
-  IconMessages,
-  IconMicrophone2,
-  IconBriefcase,
   IconUserCircle,
 } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -41,109 +27,68 @@ export const metadata: Metadata = {
   },
 }
 
-function buildStats(config: { foundingYear: number; stats: { learners: string; countries: string } }) {
-  return [
-    { value: String(config.foundingYear), label: 'Year established',    detail: 'Jaipur, Rajasthan',         Icon: IconBuildingBank },
-    { value: 'NAAC A+',                   label: 'Accreditation grade', detail: '3.29 / 4.0 CGPA · Valid 2027', Icon: IconAward     },
-    { value: config.stats.learners,       label: 'Online learners',     detail: 'Across India & abroad',     Icon: IconUsers        },
-    { value: config.stats.countries,      label: 'Countries',           detail: 'Global alumni network',     Icon: IconGlobe        },
-  ]
-}
-
-const VALUES = [
-  {
-    title: 'Accessible quality',
-    body:  'Every Indian deserves access to a degree from a great university - not just those who can afford to leave home.',
-    Icon:  IconSchool,
-  },
-  {
-    title: 'Employer credibility',
-    body:  'UGC-entitled degrees. No asterisks, no footnotes. The same certificate an on-campus student receives.',
-    Icon:  IconCertificate,
-  },
-  {
-    title: 'Real outcomes',
-    body:  '95% placement rate - built on 500+ hiring partners and a placement cell that works year-round.',
-    Icon:  IconTrendingUp,
-  },
-  {
-    title: 'Faculty with practice',
-    body:  'Professors who consult for Fortune 500 companies and publish active research - not just career academics.',
-    Icon:  IconBrain,
-  },
-]
-
 // Accreditation color styles - dynamic data values, inline styles permitted
-const ACC_STYLES = {
+const ACC_STYLES: Record<string, { bar: string; bg: string; text: string; border: string; cardBg: string }> = {
   red:  { bar: '#C04036', bg: 'rgba(192,64,54,0.06)',  text: '#C04036', border: 'rgba(192,64,54,0.20)',  cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(192,64,54,0.05) 100%)'  },
   yel:  { bar: '#FFA412', bg: 'rgba(255,164,18,0.10)', text: '#7a4d00', border: 'rgba(255,164,18,0.35)', cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(255,164,18,0.07) 100%)' },
   dark: { bar: '#821a12', bg: 'rgba(130,26,18,0.06)',  text: '#821a12', border: 'rgba(130,26,18,0.20)',  cardBg: 'linear-gradient(135deg, #ffffff 55%, rgba(130,26,18,0.05) 100%)'  },
 }
 
-const ACCREDITATIONS = [
-  { name: 'UGC',     full: 'University Grants Commission',                  detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.', s: ACC_STYLES.red,  logo: '/logos/ugc-entitled.png',      status: 'Entitled',   ghost: 'U' },
-  { name: 'NAAC A+', full: 'National Assessment and Accreditation Council', detail: 'Highest grade, 3.29 / 4.0 CGPA. First cycle accreditation in 2022, valid through 2027.',                  s: ACC_STYLES.yel,  logo: '/logos/naac-grade-a-plus.png', status: 'A+ Grade',   ghost: 'N' },
-  { name: 'AICTE',   full: 'All India Council for Technical Education',     detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',               s: ACC_STYLES.dark, logo: '/logos/aicte-approved.png',    status: 'Approved',   ghost: 'A' },
-  { name: 'NIRF',    full: 'National Institutional Ranking Framework',      detail: 'Ranked by the Ministry of Education under the University and Management categories.',                          s: ACC_STYLES.red,  logo: null,                     status: 'Ranked',     ghost: 'N' },
-  { name: 'AIU',     full: 'Association of Indian Universities',            detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',               s: ACC_STYLES.yel,  logo: null,                     status: 'Member',     ghost: 'A' },
-  { name: 'WES',     full: 'World Education Services, Canada',              detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',         s: ACC_STYLES.dark, logo: null,                     status: 'Recognised', ghost: 'W' },
+const DEFAULT_VALUES = [
+  { title: 'Accessible quality',    body: 'Every Indian deserves access to a degree from a great university - not just those who can afford to leave home.', icon: 'school' },
+  { title: 'Employer credibility',  body: 'UGC-entitled degrees. No asterisks, no footnotes. The same certificate an on-campus student receives.', icon: 'certificate' },
+  { title: 'Real outcomes',         body: '95% placement rate - built on 500+ hiring partners and a placement cell that works year-round.', icon: 'trendingUp' },
+  { title: 'Faculty with practice', body: 'Professors who consult for Fortune 500 companies and publish active research - not just career academics.', icon: 'brain' },
 ]
 
-const PEDAGOGY = [
-  { title: 'AI-Powered Video Lectures', body: 'Structured video modules with AI-generated summaries and topic breakdowns, so revision takes minutes, not hours.', Icon: IconVideo },
-  { title: 'Live Interactive Classes',  body: 'Weekend live sessions with faculty, with real-time Q&A and doubt-clearing built in.', Icon: IconBroadcast },
-  { title: 'Recorded Sessions',         body: 'Missed a class? Every live session is recorded and stays available to rewatch anytime.', Icon: IconPlayerPlay },
-  { title: 'Smart Assessment Tools',    body: 'Auto-graded quizzes and proctored exams that give instant feedback on where you stand.', Icon: IconClipboardCheck },
-  { title: 'Discussion Forums',         body: 'Peer and faculty discussion boards for every course, open around the clock.', Icon: IconMessages },
-  { title: 'Industry Expert Talk',      body: 'Guest sessions from industry leaders connecting classroom learning to real-world practice.', Icon: IconMicrophone2 },
-  { title: 'Placement Support',         body: 'End-to-end placement assistance, from resume building to interview preparation.', Icon: IconBriefcase },
+const DEFAULT_ACCREDITATIONS = [
+  { name: 'UGC',     fullName: 'University Grants Commission',                  detail: 'Distance Education Bureau entitlement, degrees carry the same legal standing as on-campus qualifications.', colorStyle: 'red',  logoUrl: '/logos/ugc-entitled.png',      status: 'Entitled',   ghostLetter: 'U' },
+  { name: 'NAAC A+', fullName: 'National Assessment and Accreditation Council', detail: 'Highest grade, 3.29 / 4.0 CGPA. First cycle accreditation in 2022, valid through 2027.',                  colorStyle: 'yel',  logoUrl: '/logos/naac-grade-a-plus.png', status: 'A+ Grade',   ghostLetter: 'N' },
+  { name: 'AICTE',   fullName: 'All India Council for Technical Education',     detail: 'Approved programs in Technology and Management, ensuring curriculum meets national standards.',               colorStyle: 'dark', logoUrl: '/logos/aicte-approved.png',    status: 'Approved',   ghostLetter: 'A' },
+  { name: 'NIRF',    fullName: 'National Institutional Ranking Framework',      detail: 'Ranked by the Ministry of Education under the University and Management categories.',                          colorStyle: 'red',  logoUrl: null,                            status: 'Ranked',     ghostLetter: 'N' },
+  { name: 'AIU',     fullName: 'Association of Indian Universities',            detail: 'Member institution, VGU degrees are recognised for equivalence by all AIU member universities.',               colorStyle: 'yel',  logoUrl: null,                            status: 'Member',     ghostLetter: 'A' },
+  { name: 'WES',     fullName: 'World Education Services, Canada',              detail: 'International degree recognition, VGU graduates can use their degree for immigration and work abroad.',         colorStyle: 'dark', logoUrl: null,                            status: 'Recognised', ghostLetter: 'W' },
+]
+
+const DEFAULT_PEDAGOGY = [
+  { title: 'AI-Powered Video Lectures', body: 'Structured video modules with AI-generated summaries and topic breakdowns, so revision takes minutes, not hours.', icon: 'video' },
+  { title: 'Live Interactive Classes',  body: 'Weekend live sessions with faculty, with real-time Q&A and doubt-clearing built in.', icon: 'broadcast' },
+  { title: 'Recorded Sessions',         body: 'Missed a class? Every live session is recorded and stays available to rewatch anytime.', icon: 'playerPlay' },
+  { title: 'Smart Assessment Tools',    body: 'Auto-graded quizzes and proctored exams that give instant feedback on where you stand.', icon: 'clipboardCheck' },
+  { title: 'Discussion Forums',         body: 'Peer and faculty discussion boards for every course, open around the clock.', icon: 'messages' },
+  { title: 'Industry Expert Talk',      body: 'Guest sessions from industry leaders connecting classroom learning to real-world practice.', icon: 'microphone2' },
+  { title: 'Placement Support',         body: 'End-to-end placement assistance, from resume building to interview preparation.', icon: 'briefcase' },
 ]
 
 // Role-only placeholders - no names/bios/photos until the university provides
 // real leadership profiles. The live onlinevgu.com's "Leadership" nav entry
 // links nowhere (href="#"), so there was no existing content to draw from.
-const LEADERSHIP_ROLES = [
-  { role: 'Chancellor' },
-  { role: 'Vice-Chancellor' },
-  { role: 'Registrar' },
-  { role: 'Director, Online Education (CDOE)' },
-]
+const DEFAULT_LEADERSHIP_ROLES = ['Chancellor', 'Vice-Chancellor', 'Registrar', 'Director, Online Education (CDOE)']
 
 const CAMPUS_IMAGE_SRC =
   'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80&auto=format&fit=crop'
 
-const CAMPUS_FEATURES = [
-  {
-    title: 'In-person campus immersions',
-    body:  'Step onto campus multiple times a year for workshops, labs, and hands-on sessions with faculty who bring real industry experience.',
-    Icon:  IconSchool,
-  },
-  {
-    title: 'Graduation ceremony on campus',
-    body:  'Cross the same stage as every VGU student and receive your degree in Jaipur. A moment earned - properly celebrated.',
-    Icon:  IconCertificate,
-  },
-  {
-    title: 'Faculty and peer meetups',
-    body:  'Connect face-to-face with classmates and professors. Build relationships that outlast the program.',
-    Icon:  IconUsers,
-  },
+const DEFAULT_CAMPUS_FEATURES = [
+  { title: 'In-person campus immersions',   body: 'Step onto campus multiple times a year for workshops, labs, and hands-on sessions with faculty who bring real industry experience.', icon: 'school' },
+  { title: 'Graduation ceremony on campus', body: 'Cross the same stage as every VGU student and receive your degree in Jaipur. A moment earned - properly celebrated.', icon: 'certificate' },
+  { title: 'Faculty and peer meetups',      body: 'Connect face-to-face with classmates and professors. Build relationships that outlast the program.', icon: 'users' },
 ]
 
-const HIRERS = [
-  'TCS', 'Infosys', 'Wipro', 'Accenture', 'HCL',
-  'IBM', 'Deloitte', 'EY', 'KPMG', 'Cognizant',
-  'Amazon', 'Flipkart', 'HDFC Bank', 'ICICI Bank', 'Bajaj Finserv',
-  'Reliance Industries', 'Tata Group', 'Mahindra', 'Zomato', 'PhonePe',
-  'Tech Mahindra', 'Capgemini', 'LTIMindtree', 'Axis Bank', 'Mphasis',
+const DEFAULT_CAMPUS_PROOF_STATS = [
+  { value: '3×',   label: 'Immersions per year' },
+  { value: '100%', label: 'On-campus degree' },
+  { value: '50K+', label: 'Alumni network' },
 ]
 
-const ALUMNI_TESTIMONIALS = [
+const DEFAULT_ALUMNI_AVATAR =
+  'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=160&q=80&auto=format&fit=crop'
+
+const DEFAULT_ALUMNI_TESTIMONIALS = [
   {
     quote:   'The MBA from VGU gave me the same degree as an on-campus student. My employer never asked if it was online.',
     name:    'Rahul Sharma',
     program: 'MBA · 2023 batch',
-    avatar:  'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=160&q=80&auto=format&fit=crop',
+    avatar:  DEFAULT_ALUMNI_AVATAR,
   },
   {
     quote:   'Working full-time in Hyderabad meant I couldn\'t relocate. VGU let me earn my MCA without giving up my job or my family.',
@@ -159,28 +104,11 @@ const ALUMNI_TESTIMONIALS = [
   },
 ]
 
-function buildAlumniFeatures(config: { stats: { learners: string; hiringPartners: string; placement: string; countries: string } }) {
-  return [
-    {
-      stat:  config.stats.learners,
-      label: 'Learners and counting',
-      body:  `Online learners from across India and ${config.stats.countries} countries. A community that grows every semester.`,
-      Icon:  IconGlobe,
-    },
-    {
-      stat:  config.stats.hiringPartners,
-      label: 'Hiring partners',
-      body:  'AI-powered placement portal, unlimited mock interviews, and a placement cell working year-round.',
-      Icon:  IconTrendingUp,
-    },
-    {
-      stat:  config.stats.placement,
-      label: 'Placement rate',
-      body:  'Class of 2023. Built on real employer relationships and a curriculum aligned with what companies hire for.',
-      Icon:  IconAward,
-    },
-  ]
-}
+const DEFAULT_HISTORY_CHIPS = [
+  { label: 'QS 95th in India',  year: '2025' },
+  { label: 'Google AI Campus',  year: '2024' },
+  { label: 'IIRF 37th Pvt Uni', year: '2026' },
+]
 
 const MILESTONES = [
   { year: '2012', tag: 'Foundation',  event: 'VGU established in Jaipur under Rajasthan Private Universities Act (No. 11/2012)' },
@@ -193,23 +121,131 @@ const MILESTONES = [
   { year: '2026', tag: 'Rankings',    event: 'IIRF ranked 37th Private University in India' },
 ]
 
+// Merge-tag substitution for CMS text fields that need to stay accurate as
+// live stats change (founding year, learner/country/hiring-partner counts).
+function fillTags(template: string, tags: Record<string, string>): string {
+  return Object.entries(tags).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), template)
+}
+
 export default async function AboutPage() {
-  const [sanityMilestones, config] = await Promise.all([getMilestones(), getSiteConfig()])
+  const [sanityMilestones, config, about, aboutTestimonials] = await Promise.all([
+    getMilestones(),
+    getSiteConfig(),
+    getAboutPage(),
+    getAboutTestimonials(),
+  ])
   const activeMilestones =
     sanityMilestones.length > 0
       ? sanityMilestones.map(m => ({ year: String(m.year), tag: (m as { tag?: string }).tag ?? '', event: m.event }))
       : MILESTONES
 
-  const STATS = buildStats(config)
-  const ALUMNI_FEATURES = buildAlumniFeatures(config)
   const yearsOld = new Date().getFullYear() - config.foundingYear
+  const tags = {
+    foundingYear:   String(config.foundingYear),
+    countries:      config.stats.countries,
+    learners:       config.stats.learners,
+    hiringPartners: config.stats.hiringPartners,
+  }
+
+  // ── Hero ──────────────────────────────────────────────────────
+  const heroImageSrc         = about?.heroImageUrl || HERO_IMAGE_SRC
+  const heroEyebrow          = about?.heroEyebrow || 'About Vivekananda Global University'
+  const heroHeadingLine1     = about?.heroHeadingLine1 || 'years of'
+  const heroHeadingLine2     = about?.heroHeadingLine2 || 'academic excellence.'
+  const heroSubtext          = fillTags(about?.heroSubtext || 'Founded in {foundingYear} in Jaipur, VGU has grown into one of India\'s most respected NAAC A+ universities - now bringing that same quality online to learners across {countries} countries.', tags)
+  const heroPrimaryCtaLabel  = about?.heroPrimaryCtaLabel || 'Apply Now'
+  const heroSecondaryCtaLabel = about?.heroSecondaryCtaLabel || 'Our Programs'
+
+  // ── Stats strip - the big number always stays live/computed;
+  // only label/detail/icon are CMS-editable, except the NAAC card's value
+  // which has no live source of its own. ──────────────────────────
+  const statsCms = about?.statsCards ?? []
+  const STATS = [
+    { value: String(config.foundingYear), label: statsCms[0]?.label || 'Year established',    detail: statsCms[0]?.detail || 'Jaipur, Rajasthan',           Icon: getIcon(statsCms[0]?.icon || 'buildingBank') },
+    { value: statsCms[1]?.value || 'NAAC A+',    label: statsCms[1]?.label || 'Accreditation grade', detail: statsCms[1]?.detail || '3.29 / 4.0 CGPA · Valid 2027', Icon: getIcon(statsCms[1]?.icon || 'award') },
+    { value: config.stats.learners,       label: statsCms[2]?.label || 'Online learners',     detail: statsCms[2]?.detail || 'Across India & abroad',       Icon: getIcon(statsCms[2]?.icon || 'users') },
+    { value: config.stats.countries,      label: statsCms[3]?.label || 'Countries',           detail: statsCms[3]?.detail || 'Global alumni network',       Icon: getIcon(statsCms[3]?.icon || 'globe') },
+  ]
+
+  // ── Mission & Values ─────────────────────────────────────────
+  const valuesEyebrow    = about?.valuesEyebrow || 'Our mission'
+  const valuesHeading    = about?.valuesHeading || 'Making great education accessible to every serious learner.'
+  const valuesPullQuote  = about?.valuesPullQuote || 'Geography, cost, or life stage should not determine the quality of education someone receives.'
+  const valuesParagraph  = about?.valuesParagraph || 'VGU Online exists to make a NAAC A+ degree available to working professionals, rural students, and career-changers - wherever they are. The certificate, legal standing, and employer recognition are identical to the on-campus version.'
+  const VALUES = (about?.values?.length ? about.values : DEFAULT_VALUES).map(v => ({
+    title: v.title, body: v.body, Icon: getIcon(v.icon),
+  }))
+
+  // ── Accreditations ───────────────────────────────────────────
+  const accreditationsEyebrow = about?.accreditationsEyebrow || 'Recognised by'
+  const accreditationsHeading = about?.accreditationsHeading || 'Accreditations & Recognition'
+  const ACCREDITATIONS = (about?.accreditations?.length ? about.accreditations : DEFAULT_ACCREDITATIONS).map(a => ({
+    name: a.name, full: a.fullName, detail: a.detail,
+    s: ACC_STYLES[a.colorStyle] ?? ACC_STYLES.red,
+    logo: a.logoUrl ?? null, status: a.status, ghost: a.ghostLetter,
+  }))
+
+  // ── Pedagogy ──────────────────────────────────────────────────
+  const pedagogyEyebrow = about?.pedagogyEyebrow || 'How we teach'
+  const pedagogyHeading = about?.pedagogyHeading || 'Our Pedagogy'
+  const pedagogySubtext = about?.pedagogySubtext || 'Every VGU program is built on the same instructional foundation - designed for working adults who need flexibility without losing structure.'
+  const PEDAGOGY = (about?.pedagogy?.length ? about.pedagogy : DEFAULT_PEDAGOGY).map(p => ({
+    title: p.title, body: p.body, Icon: getIcon(p.icon),
+  }))
+
+  // ── Leadership ────────────────────────────────────────────────
+  const leadershipEyebrow = about?.leadershipEyebrow || 'Leadership'
+  const leadershipHeading = about?.leadershipHeading || 'Guided by experienced academic leadership'
+  const leadershipSubtext = about?.leadershipSubtext || 'Full leadership profiles are being added. Here is how the university is led.'
+  const LEADERSHIP_ROLES = about?.leadershipRoles?.length ? about.leadershipRoles : DEFAULT_LEADERSHIP_ROLES
+
+  // ── Campus Experience ────────────────────────────────────────
+  const campusEyebrow      = about?.campusEyebrow || 'Campus experience'
+  const campusHeadingLine1 = about?.campusHeadingLine1 || 'Your degree is online.'
+  const campusHeadingLine2 = about?.campusHeadingLine2 || 'Your university is real.'
+  const campusParagraph    = about?.campusParagraph || 'Online doesn\'t mean isolated. VGU brings you to campus for immersions, connects you with faculty in person, and celebrates your graduation on the same stage as every other VGU student.'
+  const campusImageSrc     = about?.campusImageUrl || CAMPUS_IMAGE_SRC
+  const campusCtaLabel     = about?.campusCtaLabel || 'Explore programs'
+  const CAMPUS_FEATURES = (about?.campusFeatures?.length ? about.campusFeatures : DEFAULT_CAMPUS_FEATURES).map(f => ({
+    title: f.title, body: f.body, Icon: getIcon(f.icon),
+  }))
+  const CAMPUS_PROOF_STATS = about?.campusProofStats?.length === 3 ? about.campusProofStats : DEFAULT_CAMPUS_PROOF_STATS
+
+  // ── Hiring Partners (copy only - company list lives on Site Settings) ──
+  const hiringEyebrow  = about?.hiringEyebrow || 'Hiring partners'
+  const hiringHeading  = fillTags(about?.hiringHeading || '{hiringPartners} companies hire VGU graduates', tags)
+  const hiringSubtext  = about?.hiringSubtext || 'From India\'s biggest conglomerates to global tech firms - a VGU degree opens real doors.'
+  const hiringCtaLabel = about?.hiringCtaLabel || 'Start your career journey'
+
+  // ── History ───────────────────────────────────────────────────
+  const historyEyebrow     = about?.historyEyebrow || 'Our history'
+  const historyHeading     = about?.historyHeading || 'Years of steady impact'
+  const historyParagraph   = about?.historyParagraph || 'From a single campus in Jaipur to a globally accessible online university - a decade-plus of making quality education reachable for every serious learner.'
+  const historyNaacCaption = about?.historyNaacCaption || 'First cycle 2022 · 3.29/4.0 CGPA · Valid 2027'
+  const HISTORY_CHIPS = about?.historyChips?.length ? about.historyChips : DEFAULT_HISTORY_CHIPS
+
+  // ── Alumni Community ─────────────────────────────────────────
+  const alumniEyebrow  = about?.alumniEyebrow || 'Alumni community'
+  const alumniHeading  = fillTags(about?.alumniHeading || 'Join {learners} learners who didn\'t wait.', tags)
+  const alumniSubtext  = fillTags(about?.alumniSubtext || 'Working professionals, fresh graduates, and career-changers from across India and {countries} countries - one alumni network.', tags)
+  const alumniCtaPrimaryLabel   = about?.alumniCtaPrimaryLabel || 'Apply Now'
+  const alumniCtaSecondaryLabel = about?.alumniCtaSecondaryLabel || 'Browse programs'
+  const alumniCms = about?.alumniFeatures ?? []
+  const ALUMNI_FEATURES = [
+    { stat: config.stats.learners,       label: alumniCms[0]?.label || 'Learners and counting', body: alumniCms[0]?.body || `Online learners from across India and ${config.stats.countries} countries. A community that grows every semester.`, Icon: getIcon(alumniCms[0]?.icon || 'globe') },
+    { stat: config.stats.hiringPartners, label: alumniCms[1]?.label || 'Hiring partners',       body: alumniCms[1]?.body || 'AI-powered placement portal, unlimited mock interviews, and a placement cell working year-round.', Icon: getIcon(alumniCms[1]?.icon || 'trendingUp') },
+    { stat: config.stats.placement,      label: alumniCms[2]?.label || 'Placement rate',        body: alumniCms[2]?.body || 'Class of 2023. Built on real employer relationships and a curriculum aligned with what companies hire for.', Icon: getIcon(alumniCms[2]?.icon || 'award') },
+  ]
+  const ALUMNI_TESTIMONIALS = aboutTestimonials.length > 0
+    ? aboutTestimonials.map(t => ({ quote: t.quote, name: t.name, program: t.role, avatar: t.avatarUrl || DEFAULT_ALUMNI_AVATAR }))
+    : DEFAULT_ALUMNI_TESTIMONIALS
 
   return (
     <div>
       {/* ══ Hero - swoop yellow (whisper-faint on the photo) ══ */}
       <section id="overview" className="sketch-hover-group group relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px] scroll-mt-24">
         <Image
-          src={HERO_IMAGE_SRC}
+          src={heroImageSrc}
           alt=""
           fill
           priority
@@ -230,23 +266,22 @@ export default async function AboutPage() {
               className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-yellow mb-6"
               style={{ animationDelay: '0ms' }}
             >
-              About Vivekananda Global University
+              {heroEyebrow}
             </p>
 
             <h1
               className="anim-load-left font-heading font-bold tracking-tight leading-[1.05] text-white text-[36px] md:text-[48px] lg:text-[56px]"
               style={{ animationDelay: '70ms' }}
             >
-              {yearsOld} years of<br />
-              <span className="text-vgu-yellow">academic excellence.</span>
+              {yearsOld} {heroHeadingLine1}<br />
+              <span className="text-vgu-yellow">{heroHeadingLine2}</span>
             </h1>
 
             <p
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[580px]"
               style={{ animationDelay: '140ms' }}
             >
-              Founded in {config.foundingYear} in Jaipur, VGU has grown into one of India&apos;s most respected
-              NAAC A+ universities - now bringing that same quality online to learners across {config.stats.countries} countries.
+              {heroSubtext}
             </p>
 
             <div
@@ -259,13 +294,13 @@ export default async function AboutPage() {
                   data-apply-trigger
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
                 >
-                  Apply Now
+                  {heroPrimaryCtaLabel}
                 </a>
                 <a
                   href="/programs"
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
                 >
-                  Our Programs
+                  {heroSecondaryCtaLabel}
                 </a>
               </div>
             </div>
@@ -323,10 +358,10 @@ export default async function AboutPage() {
             {/* Left */}
             <div data-animate="slide-from-left">
               <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-                Our mission
+                {valuesEyebrow}
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-6 md:text-[40px]">
-                Making great education accessible to every serious learner.
+                {valuesHeading}
               </h2>
 
               {/* Pull-quote - typographic treatment per Design Bible testimonial card spec */}
@@ -338,15 +373,12 @@ export default async function AboutPage() {
                   &ldquo;
                 </div>
                 <p className="text-[17px] font-body leading-[1.7] text-neutral-700 italic">
-                  Geography, cost, or life stage should not determine the quality of
-                  education someone receives.
+                  {valuesPullQuote}
                 </p>
               </div>
 
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 lg:text-[17px]">
-                VGU Online exists to make a NAAC A+ degree available to working professionals,
-                rural students, and career-changers - wherever they are. The certificate, legal
-                standing, and employer recognition are identical to the on-campus version.
+                {valuesParagraph}
               </p>
             </div>
 
@@ -428,10 +460,10 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Recognised by
+              {accreditationsEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              Accreditations &amp; Recognition
+              {accreditationsHeading}
             </h2>
           </div>
 
@@ -547,14 +579,13 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              How we teach
+              {pedagogyEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              Our Pedagogy
+              {pedagogyHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
-              Every VGU program is built on the same instructional foundation - designed for
-              working adults who need flexibility without losing structure.
+              {pedagogySubtext}
             </p>
           </div>
 
@@ -591,20 +622,20 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Leadership
+              {leadershipEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              Guided by experienced academic leadership
+              {leadershipHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[560px] mx-auto lg:text-[17px]">
-              Full leadership profiles are being added. Here is how the university is led.
+              {leadershipSubtext}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {LEADERSHIP_ROLES.map((l, i) => (
+            {LEADERSHIP_ROLES.map((role, i) => (
               <div
-                key={l.role}
+                key={role}
                 data-animate="fade-up"
                 style={{ animationDelay: `${i * 60}ms` }}
                 className="flex flex-col items-center text-center rounded-2xl border border-neutral-200 bg-white p-6 hover:border-vgu-red/20 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(192,64,54,0.10)] transition-all duration-200"
@@ -613,7 +644,7 @@ export default async function AboutPage() {
                   <IconUserCircle size={32} stroke={1.5} className="text-neutral-300" />
                 </div>
                 <h3 className="font-heading font-bold text-[16px] text-neutral-900 leading-snug">
-                  {l.role}
+                  {role}
                 </h3>
                 <p className="mt-1.5 text-[13px] font-body text-neutral-400">
                   Profile coming soon
@@ -635,13 +666,13 @@ export default async function AboutPage() {
             {/* Left: copy + features */}
             <div data-animate="slide-from-left">
               <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-                Campus experience
+                {campusEyebrow}
               </p>
               <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-5 md:text-[40px]">
-                Your degree is online.<br />Your university is real.
+                {campusHeadingLine1}<br />{campusHeadingLine2}
               </h2>
               <p className="text-[16px] font-body leading-[1.7] text-neutral-600 mb-5 lg:mb-8 lg:text-[17px]">
-                Online doesn&apos;t mean isolated. VGU brings you to campus for immersions, connects you with faculty in person, and celebrates your graduation on the same stage as every other VGU student.
+                {campusParagraph}
               </p>
 
               {/* Mobile: snap-scroll strip */}
@@ -691,7 +722,7 @@ export default async function AboutPage() {
                 href="/programs"
                 className="inline-flex items-center gap-2 mt-6 md:mt-8 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red hover:text-white font-heading font-semibold text-[16px] rounded-md px-[30px] py-3 transition-all duration-200"
               >
-                Explore programs
+                {campusCtaLabel}
                 <IconArrowRight size={15} />
               </a>
             </div>
@@ -700,7 +731,7 @@ export default async function AboutPage() {
             <div data-animate="slide-from-right" className="flex flex-col gap-4">
               <div className="relative rounded-2xl overflow-hidden aspect-video md:aspect-[4/3] shadow-[0_20px_56px_rgba(0,0,0,0.14)]">
                 <Image
-                  src={CAMPUS_IMAGE_SRC}
+                  src={campusImageSrc}
                   alt="VGU students at campus graduation ceremony"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -711,18 +742,14 @@ export default async function AboutPage() {
 
               {/* Proof strip */}
               <div className="mockup-float grid grid-cols-3 divide-x divide-neutral-200 rounded-xl border border-neutral-200 bg-white overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.07)]">
-                <div className="flex flex-col items-center py-4 md:py-7 px-4">
-                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">3×</span>
-                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Immersions<br/>per year</span>
-                </div>
-                <div className="flex flex-col items-center py-4 md:py-7 px-4">
-                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">100%</span>
-                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">On-campus<br/>degree</span>
-                </div>
-                <div className="flex flex-col items-center py-4 md:py-7 px-4">
-                  <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">50K+</span>
-                  <span className="mt-1.5 text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">Alumni<br/>network</span>
-                </div>
+                {CAMPUS_PROOF_STATS.map((stat) => (
+                  <div key={stat.label} className="flex flex-col items-center py-4 md:py-7 px-4">
+                    <span className="font-heading font-black text-[28px] text-vgu-yellow leading-none">{stat.value}</span>
+                    <span className="mt-1.5 max-w-[9ch] text-[11px] font-heading font-semibold text-neutral-500 uppercase tracking-[0.06em] text-center leading-tight">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -737,17 +764,17 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-10">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Hiring partners
+              {hiringEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 md:text-[40px]">
-              {config.stats.hiringPartners} companies hire VGU graduates
+              {hiringHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[540px] mx-auto lg:text-[17px]">
-              From India&apos;s biggest conglomerates to global tech firms - a VGU degree opens real doors.
+              {hiringSubtext}
             </p>
           </div>
 
-          <HirerStrip hirers={HIRERS} />
+          <HirerStrip hirers={config.hiringPartnersList} />
 
           <div
             data-animate="fade-up"
@@ -759,7 +786,7 @@ export default async function AboutPage() {
               data-apply-trigger
               className="inline-flex items-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] rounded-md px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
-              Start your career journey
+              {hiringCtaLabel}
               <IconArrowRight size={16} />
             </a>
           </div>
@@ -780,7 +807,7 @@ export default async function AboutPage() {
                 style={{ background: 'linear-gradient(145deg, #ffffff 50%, rgba(192,64,54,0.06) 100%)' }}
               >
                 <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-4">
-                  Our history
+                  {historyEyebrow}
                 </p>
 
                 {/* Big display year counter */}
@@ -788,15 +815,14 @@ export default async function AboutPage() {
                   {yearsOld}+
                 </div>
                 <h2 className="font-heading font-bold text-[24px] md:text-[28px] tracking-[-0.5px] leading-[1.2] text-neutral-900 mb-4">
-                  Years of steady impact
+                  {historyHeading}
                 </h2>
 
                 {/* Red rule */}
                 <div className="w-10 h-[3px] rounded-full mb-5" style={{ background: 'linear-gradient(to right, #C04036, #821a12)' }} />
 
                 <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-                  From a single campus in Jaipur to a globally accessible online university -
-                  a decade-plus of making quality education reachable for every serious learner.
+                  {historyParagraph}
                 </p>
 
                 {/* NAAC card */}
@@ -809,17 +835,13 @@ export default async function AboutPage() {
                   </div>
                   <div>
                     <div className="font-heading font-bold text-[15px] text-neutral-900 leading-tight">NAAC A+ Accredited</div>
-                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">First cycle 2022 · 3.29/4.0 CGPA · Valid 2027</div>
+                    <div className="text-[12px] font-body text-neutral-500 mt-0.5">{historyNaacCaption}</div>
                   </div>
                 </div>
 
                 {/* Recent achievement chips */}
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {[
-                    { label: 'QS 95th in India', year: '2025' },
-                    { label: 'Google AI Campus', year: '2024' },
-                    { label: 'IIRF 37th Pvt Uni', year: '2026' },
-                  ].map((chip) => (
+                  {HISTORY_CHIPS.map((chip) => (
                     <span
                       key={chip.label}
                       className="inline-flex items-center gap-1 rounded-full border border-vgu-red/30 bg-vgu-red/[0.06] px-3 py-1.5 text-[11px] font-heading font-semibold text-vgu-red shadow-sm"
@@ -908,13 +930,13 @@ export default async function AboutPage() {
         <div className="relative z-10 mx-auto max-w-[1280px]">
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Alumni community
+              {alumniEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[28px] tracking-[-0.5px] leading-[1.15] text-neutral-900 md:text-[40px] max-w-[640px] mx-auto">
-              Join {config.stats.learners} learners who didn&apos;t wait.
+              {alumniHeading}
             </h2>
             <p className="mt-4 text-[16px] font-body leading-[1.7] text-neutral-500 max-w-[520px] mx-auto lg:text-[17px]">
-              Working professionals, fresh graduates, and career-changers from across India and {config.stats.countries} countries - one alumni network.
+              {alumniSubtext}
             </p>
           </div>
 
@@ -1052,14 +1074,14 @@ export default async function AboutPage() {
               data-apply-trigger
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vgu-red hover:bg-vgu-red-dark text-white hover:text-white font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-9 py-4 transition-all duration-200 shadow-[0_8px_24px_rgba(192,64,54,0.30)] hover:shadow-[0_14px_36px_rgba(130,26,18,0.40)] hover:-translate-y-0.5"
             >
-              Apply Now
+              {alumniCtaPrimaryLabel}
               <IconArrowRight size={16} />
             </a>
             <a
               href="/programs"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vgu-red text-vgu-red hover:bg-vgu-red/5 font-heading font-semibold text-[16px] whitespace-nowrap rounded-md px-8 py-3.5 transition-all duration-200"
             >
-              Browse programs
+              {alumniCtaSecondaryLabel}
             </a>
           </div>
         </div>

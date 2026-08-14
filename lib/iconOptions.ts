@@ -5,10 +5,24 @@
 // this the single source of truth avoids the schema's dropdown and the
 // component's lookup table drifting out of sync.
 export const ICON_OPTIONS = [
-  { title: 'Clipboard (register/apply)', value: 'clipboardList' },
-  { title: 'Graduation cap (program)',   value: 'school'        },
-  { title: 'Credit card (payment)',      value: 'creditCard'    },
-  { title: 'Laptop (learning)',          value: 'deviceLaptop'  },
+  { title: 'Clipboard (register/apply)',   value: 'clipboardList'   },
+  { title: 'Graduation cap (program)',     value: 'school'          },
+  { title: 'Credit card (payment)',        value: 'creditCard'      },
+  { title: 'Laptop (learning)',            value: 'deviceLaptop'    },
+  { title: 'Bank building (institution)',  value: 'buildingBank'    },
+  { title: 'Award / medal (achievement)',  value: 'award'           },
+  { title: 'People / group (community)',   value: 'users'           },
+  { title: 'Globe (international/reach)',  value: 'globe'           },
+  { title: 'Certificate (credential)',     value: 'certificate'     },
+  { title: 'Trending up (growth/outcome)', value: 'trendingUp'      },
+  { title: 'Brain (expertise/research)',   value: 'brain'           },
+  { title: 'Video camera (video content)', value: 'video'           },
+  { title: 'Broadcast (live class)',       value: 'broadcast'       },
+  { title: 'Play button (recordings)',     value: 'playerPlay'      },
+  { title: 'Clipboard check (assessment)', value: 'clipboardCheck'  },
+  { title: 'Chat bubbles (discussion)',    value: 'messages'        },
+  { title: 'Microphone (guest talk)',      value: 'microphone2'     },
+  { title: 'Briefcase (career/jobs)',      value: 'briefcase'       },
 ] as const
 
 export type IconOptionValue = (typeof ICON_OPTIONS)[number]['value']

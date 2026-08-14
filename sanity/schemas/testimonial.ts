@@ -82,6 +82,13 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'showOnAboutPage',
+      title: 'Show on About Page (Alumni Community)',
+      type: 'boolean',
+      description: 'Tick to include this student in the About page\'s Alumni Community testimonials.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'displayOrder',
       title: 'Display Order',
       type: 'number',

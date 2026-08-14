@@ -79,6 +79,7 @@ export interface SanitySiteSettings {
   socialFacebook:     string | null
   socialYouTube:      string | null
   socialX:            string | null
+  hiringPartners:     string[] | null
 }
 
 export interface SanityFaculty {
@@ -248,6 +249,92 @@ export interface SanityHomePage {
   steps?:                  SanityHomePageStep[]
 }
 
+export interface SanityAboutPageIconCard {
+  title?: string
+  label?: string
+  body:   string
+  icon:   string
+}
+
+export interface SanityAboutPageStatCard {
+  value?:  string
+  label:   string
+  detail:  string
+  icon:    string
+}
+
+export interface SanityAboutPageAccreditation {
+  name:        string
+  fullName:    string
+  detail:      string
+  colorStyle:  'red' | 'yel' | 'dark'
+  logoUrl?:    string | null
+  status:      string
+  ghostLetter: string
+}
+
+export interface SanityAboutPageProofStat {
+  value: string
+  label: string
+}
+
+export interface SanityAboutPageChip {
+  label: string
+  year:  string
+}
+
+// Singleton - one document total. Every field is optional; components fall
+// back to their current hardcoded copy for anything left blank.
+export interface SanityAboutPage {
+  heroImageUrl?:          string | null
+  heroEyebrow?:           string
+  heroHeadingLine1?:      string
+  heroHeadingLine2?:      string
+  heroSubtext?:           string
+  heroPrimaryCtaLabel?:   string
+  heroSecondaryCtaLabel?: string
+  statsCards?:            SanityAboutPageStatCard[]
+  valuesEyebrow?:         string
+  valuesHeading?:         string
+  valuesPullQuote?:       string
+  valuesParagraph?:       string
+  values?:                SanityAboutPageIconCard[]
+  accreditationsEyebrow?: string
+  accreditationsHeading?: string
+  accreditations?:        SanityAboutPageAccreditation[]
+  pedagogyEyebrow?:       string
+  pedagogyHeading?:       string
+  pedagogySubtext?:       string
+  pedagogy?:              SanityAboutPageIconCard[]
+  leadershipEyebrow?:     string
+  leadershipHeading?:     string
+  leadershipSubtext?:     string
+  leadershipRoles?:       string[]
+  campusEyebrow?:         string
+  campusHeadingLine1?:    string
+  campusHeadingLine2?:    string
+  campusParagraph?:       string
+  campusImageUrl?:        string | null
+  campusCtaLabel?:        string
+  campusFeatures?:        SanityAboutPageIconCard[]
+  campusProofStats?:      SanityAboutPageProofStat[]
+  hiringEyebrow?:         string
+  hiringHeading?:         string
+  hiringSubtext?:         string
+  hiringCtaLabel?:        string
+  historyEyebrow?:        string
+  historyHeading?:        string
+  historyParagraph?:      string
+  historyNaacCaption?:    string
+  historyChips?:          SanityAboutPageChip[]
+  alumniEyebrow?:         string
+  alumniHeading?:         string
+  alumniSubtext?:         string
+  alumniFeatures?:        SanityAboutPageIconCard[]
+  alumniCtaPrimaryLabel?:   string
+  alumniCtaSecondaryLabel?: string
+}
+
 // ────────────────────────────────────────────────────────────
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
@@ -321,7 +408,8 @@ export const getSiteSettings = unstable_cache(
         phoneDisplay, whatsappNumber, admissionsEmail, address,
         statLearners, statCountries, statPlacement, statRating,
         statPrograms, statHiringPartners, statCourseraCount, statYearEstablished,
-        socialInstagram, socialLinkedIn, socialFacebook, socialYouTube, socialX
+        socialInstagram, socialLinkedIn, socialFacebook, socialYouTube, socialX,
+        hiringPartners
       }`,
       {}
     )
@@ -362,6 +450,9 @@ export interface SiteConfig {
     youtube:   string
     x:         string
   }
+  // Company names shown in the hiring-partner ticker on About/Placements -
+  // distinct from stats.hiringPartners, which is just the "500+" count.
+  hiringPartnersList: string[]
 }
 
 const WHATSAPP_DEFAULT_MESSAGE = 'Hi%2C%20I%20want%20to%20know%20more%20about%20VGU%20online%20programs'
@@ -394,6 +485,13 @@ const FALLBACKS = {
     youtube:   'https://www.youtube.com/@VGUVITCampusJaipur',
     x:         'https://x.com/JaipurVgu',
   },
+  hiringPartnersList: [
+    'TCS', 'Infosys', 'Wipro', 'Accenture', 'HCL',
+    'IBM', 'Deloitte', 'EY', 'KPMG', 'Cognizant',
+    'Amazon', 'Flipkart', 'HDFC Bank', 'ICICI Bank', 'Bajaj Finserv',
+    'Reliance Industries', 'Tata Group', 'Mahindra', 'Zomato', 'PhonePe',
+    'Tech Mahindra', 'Capgemini', 'LTIMindtree', 'Axis Bank', 'Mphasis',
+  ],
 } as const
 
 export async function getSiteConfig(): Promise<SiteConfig> {
@@ -434,6 +532,7 @@ export async function getSiteConfig(): Promise<SiteConfig> {
       youtube:   s?.socialYouTube   || FALLBACKS.socials.youtube,
       x:         s?.socialX         || FALLBACKS.socials.x,
     },
+    hiringPartnersList: (s?.hiringPartners?.length ? s.hiringPartners : FALLBACKS.hiringPartnersList) as string[],
   }
 }
 
@@ -656,4 +755,53 @@ export const getHomePage = unstable_cache(
   },
   ['home-page'],
   { revalidate: 3600, tags: ['homePage'] }
+)
+
+export const getAboutPage = unstable_cache(
+  async (): Promise<SanityAboutPage | null> => {
+    return sanityClient.fetch<SanityAboutPage | null>(
+      `*[_type == "aboutPage"][0] {
+        "heroImageUrl": heroImage.asset->url,
+        heroEyebrow, heroHeadingLine1, heroHeadingLine2, heroSubtext,
+        heroPrimaryCtaLabel, heroSecondaryCtaLabel,
+        statsCards,
+        valuesEyebrow, valuesHeading, valuesPullQuote, valuesParagraph, values,
+        accreditationsEyebrow, accreditationsHeading,
+        "accreditations": accreditations[] {
+          name, fullName, detail, colorStyle,
+          "logoUrl": logo.asset->url,
+          status, ghostLetter
+        },
+        pedagogyEyebrow, pedagogyHeading, pedagogySubtext, pedagogy,
+        leadershipEyebrow, leadershipHeading, leadershipSubtext, leadershipRoles,
+        campusEyebrow, campusHeadingLine1, campusHeadingLine2, campusParagraph,
+        "campusImageUrl": campusImage.asset->url,
+        campusCtaLabel, campusFeatures, campusProofStats,
+        hiringEyebrow, hiringHeading, hiringSubtext, hiringCtaLabel,
+        historyEyebrow, historyHeading, historyParagraph, historyNaacCaption, historyChips,
+        alumniEyebrow, alumniHeading, alumniSubtext, alumniFeatures,
+        alumniCtaPrimaryLabel, alumniCtaSecondaryLabel
+      }`,
+      {}
+    )
+  },
+  ['about-page'],
+  { revalidate: 3600, tags: ['aboutPage'] }
+)
+
+export const getAboutTestimonials = unstable_cache(
+  async (): Promise<SanityTestimonial[]> => {
+    return sanityClient.fetch<SanityTestimonial[]>(
+      `*[_type == "testimonial" && showOnAboutPage == true] | order(displayOrder asc) {
+        _id, name, role, program, quote,
+        outcomes,
+        "avatarUrl": avatar.asset->url,
+        colorTheme, videoLabel, videoUrl,
+        displayOrder
+      }`,
+      {}
+    )
+  },
+  ['about-testimonials'],
+  { revalidate: 3600, tags: ['testimonial'] }
 )

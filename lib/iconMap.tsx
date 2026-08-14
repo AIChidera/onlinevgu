@@ -3,6 +3,20 @@ import {
   IconSchool,
   IconCreditCard,
   IconDeviceLaptop,
+  IconBuildingBank,
+  IconAward,
+  IconUsers,
+  IconGlobe,
+  IconCertificate,
+  IconTrendingUp,
+  IconBrain,
+  IconVideo,
+  IconBroadcast,
+  IconPlayerPlay,
+  IconClipboardCheck,
+  IconMessages,
+  IconMicrophone2,
+  IconBriefcase,
 } from '@tabler/icons-react'
 import type { ComponentType } from 'react'
 import { ICON_OPTIONS } from '@/lib/iconOptions'
@@ -18,10 +32,24 @@ export type IconComponent = ComponentType<{ size?: string | number; stroke?: str
 // name that fails to render. Add a new icon here (import + entry) and to
 // ICON_OPTIONS in lib/iconOptions.ts whenever a new section needs one.
 export const ICON_MAP: Record<string, IconComponent> = {
-  clipboardList: IconClipboardList,
-  school:        IconSchool,
-  creditCard:    IconCreditCard,
-  deviceLaptop:  IconDeviceLaptop,
+  clipboardList:  IconClipboardList,
+  school:         IconSchool,
+  creditCard:     IconCreditCard,
+  deviceLaptop:   IconDeviceLaptop,
+  buildingBank:   IconBuildingBank,
+  award:          IconAward,
+  users:          IconUsers,
+  globe:          IconGlobe,
+  certificate:    IconCertificate,
+  trendingUp:     IconTrendingUp,
+  brain:          IconBrain,
+  video:          IconVideo,
+  broadcast:      IconBroadcast,
+  playerPlay:     IconPlayerPlay,
+  clipboardCheck: IconClipboardCheck,
+  messages:       IconMessages,
+  microphone2:    IconMicrophone2,
+  briefcase:      IconBriefcase,
 }
 
 export { ICON_OPTIONS }

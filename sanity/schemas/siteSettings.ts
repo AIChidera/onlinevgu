@@ -139,6 +139,15 @@ export const siteSettings = defineType({
       description: 'Full URL including https://.',
     }),
 
+    // ── Hiring Partners ───────────────────────────────────────────
+    defineField({
+      name: 'hiringPartners',
+      title: 'Hiring Partners (company names)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Shown in the scrolling hiring-partner strip on both the About and Placements pages - one shared list, so it only needs updating in one place. Leave empty to keep the default list. Order doesn\'t matter, it scrolls continuously.',
+    }),
+
     // ── Brochure ──────────────────────────────────────────────────
     defineField({
       name: 'defaultBrochurePdf',
