@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { IconDownload, IconChevronDown } from '@tabler/icons-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ProgramsGrid from './ProgramsGrid'
-import { getAllPrograms, getSiteConfig } from '@/lib/sanity'
+import { getAllPrograms, getSiteConfig, getProgramsListingPage } from '@/lib/sanity'
 import { PROGRAMMES } from './data'
 
 const HERO_IMAGE_SRC = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=80&auto=format&fit=crop'
@@ -22,8 +22,16 @@ export const metadata: Metadata = {
   },
 }
 
+function fillTags(template: string, tags: Record<string, string>): string {
+  return Object.entries(tags).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), template)
+}
+
 export default async function ProgramsPage() {
-  const [sanityPrograms, config] = await Promise.all([getAllPrograms(), getSiteConfig()])
+  const [sanityPrograms, config, listing] = await Promise.all([
+    getAllPrograms(),
+    getSiteConfig(),
+    getProgramsListingPage(),
+  ])
 
   // Build a slug→image map from the hardcoded fallback so we can fill gaps
   // when Sanity programmes don't yet have a hero image uploaded in the CMS.
@@ -41,6 +49,16 @@ export default async function ProgramsPage() {
 
   const count = programmes.length
   const disciplineCount = new Set(programmes.map(p => p.discipline)).size
+  const tags = { count: String(count), disciplineCount: String(disciplineCount) }
+
+  const heroImageSrc          = listing?.heroImageUrl || HERO_IMAGE_SRC
+  const heroEyebrow           = listing?.heroEyebrow || 'UGC-Recognised · 100% Online'
+  const heroHeadingLine1      = listing?.heroHeadingLine1 || 'Pick the degree that'
+  const heroHeadingLine2Prefix = listing?.heroHeadingLine2Prefix || 'fits'
+  const heroHeadingHighlight  = listing?.heroHeadingHighlight || 'your life.'
+  const heroSubtext           = fillTags(listing?.heroSubtext || '{count} online programs across {disciplineCount} disciplines. Learn from wherever you are.', tags)
+  const heroPrimaryCtaLabel   = listing?.heroPrimaryCtaLabel || 'Browse Programs'
+  const heroSecondaryCtaLabel = listing?.heroSecondaryCtaLabel || 'Download Brochure'
 
   return (
     <>
@@ -48,7 +66,7 @@ export default async function ProgramsPage() {
       <section className="relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
         {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
-        <Image src={HERO_IMAGE_SRC} alt="" fill className="object-cover object-center" sizes="100vw" priority />
+        <Image src={heroImageSrc} alt="" fill className="object-cover object-center" sizes="100vw" priority />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         {/* Breadcrumb - pinned to the hero's own top edge, independent of the
@@ -65,7 +83,7 @@ export default async function ProgramsPage() {
               className="anim-load-left text-[12px] font-heading font-semibold uppercase tracking-[0.08em] mb-6 text-vgu-yellow"
               style={{ animationDelay: '0ms' }}
             >
-              UGC-Recognised · 100% Online
+              {heroEyebrow}
             </p>
 
             <h1
@@ -73,15 +91,15 @@ export default async function ProgramsPage() {
                          text-[32px] md:text-[42px] lg:text-[48px]"
               style={{ animationDelay: '70ms' }}
             >
-              Pick the degree that<br />
-              fits <span className="text-vgu-yellow">your life.</span>
+              {heroHeadingLine1}<br />
+              {heroHeadingLine2Prefix} <span className="text-vgu-yellow">{heroHeadingHighlight}</span>
             </h1>
 
             <p
               className="anim-load-left mt-8 text-[16px] lg:text-[17px] font-body leading-[1.7] text-white/85 max-w-[620px]"
               style={{ animationDelay: '140ms' }}
             >
-              {count} online programs across {disciplineCount} disciplines. Learn from wherever you are.
+              {heroSubtext}
             </p>
 
             {/* CTAs */}
@@ -93,7 +111,7 @@ export default async function ProgramsPage() {
                 href="#programs-grid"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-md bg-white text-vgu-red font-heading font-bold text-[17px] px-10 py-[18px] transition-all duration-200 shadow-[0_6px_32px_rgba(255,255,255,0.22)] hover:shadow-[0_10px_48px_rgba(255,255,255,0.36)] hover:scale-[1.03] active:scale-[0.98]"
               >
-                Browse Programs
+                {heroPrimaryCtaLabel}
                 <IconChevronDown size={18} className="transition-transform duration-200 group-hover:translate-y-0.5" />
               </a>
               <a
@@ -102,7 +120,7 @@ export default async function ProgramsPage() {
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/60 bg-transparent hover:bg-white/10 hover:border-white text-white font-heading font-semibold text-[15px] px-7 py-[15px] transition-all duration-200"
               >
                 <IconDownload size={15} className="transition-transform duration-200 group-hover:translate-y-0.5" />
-                Download Brochure
+                {heroSecondaryCtaLabel}
               </a>
             </div>
 

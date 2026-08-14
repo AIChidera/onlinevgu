@@ -467,6 +467,19 @@ export interface SanityPlacementsPage {
   successCtaSecondaryLabel?: string
 }
 
+// Singleton - one document total. Every field is optional; the /programs
+// listing page falls back to its current hardcoded copy for anything blank.
+export interface SanityProgramsListingPage {
+  heroImageUrl?:           string | null
+  heroEyebrow?:            string
+  heroHeadingLine1?:       string
+  heroHeadingLine2Prefix?: string
+  heroHeadingHighlight?:   string
+  heroSubtext?:            string
+  heroPrimaryCtaLabel?:    string
+  heroSecondaryCtaLabel?:  string
+}
+
 // ────────────────────────────────────────────────────────────
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
@@ -1009,4 +1022,19 @@ export const getPlacementsTestimonials = unstable_cache(
   },
   ['placements-testimonials'],
   { revalidate: 3600, tags: ['testimonial'] }
+)
+
+export const getProgramsListingPage = unstable_cache(
+  async (): Promise<SanityProgramsListingPage | null> => {
+    return sanityClient.fetch<SanityProgramsListingPage | null>(
+      `*[_type == "programsListingPage"][0] {
+        "heroImageUrl": heroImage.asset->url,
+        heroEyebrow, heroHeadingLine1, heroHeadingLine2Prefix, heroHeadingHighlight,
+        heroSubtext, heroPrimaryCtaLabel, heroSecondaryCtaLabel
+      }`,
+      {}
+    )
+  },
+  ['programs-listing-page'],
+  { revalidate: 3600, tags: ['programsListingPage'] }
 )

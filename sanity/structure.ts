@@ -104,6 +104,8 @@ export function structure(S: StructureBuilder) {
           S.list()
             .title('Programs')
             .items([
+              S.documentTypeListItem('programsListingPage').title('Programs Listing Page Content'),
+              S.divider(),
               S.documentTypeListItem('program').title('All Programs'),
             ])
         ),
