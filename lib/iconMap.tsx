@@ -17,6 +17,14 @@ import {
   IconMessages,
   IconMicrophone2,
   IconBriefcase,
+  IconBolt,
+  IconCircleCheck,
+  IconClock,
+  IconPhone,
+  IconHeadset,
+  IconBrandWhatsapp,
+  IconMail,
+  IconLifebuoy,
 } from '@tabler/icons-react'
 import type { ComponentType } from 'react'
 import { ICON_OPTIONS } from '@/lib/iconOptions'
@@ -50,6 +58,14 @@ export const ICON_MAP: Record<string, IconComponent> = {
   messages:       IconMessages,
   microphone2:    IconMicrophone2,
   briefcase:      IconBriefcase,
+  bolt:           IconBolt,
+  circleCheck:    IconCircleCheck,
+  clock:          IconClock,
+  phone:          IconPhone,
+  headset:        IconHeadset,
+  brandWhatsapp:  IconBrandWhatsapp,
+  mail:           IconMail,
+  lifebuoy:       IconLifebuoy,
 }
 
 export { ICON_OPTIONS }

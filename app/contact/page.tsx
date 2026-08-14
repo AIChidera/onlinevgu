@@ -1,37 +1,28 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  IconPhone,
-  IconBrandWhatsapp,
-  IconMail,
   IconMapPin,
   IconClock,
   IconArrowRight,
   IconHeadset,
-  IconBolt,
-  IconCircleCheck,
   IconBrandLinkedin,
   IconBrandInstagram,
   IconBrandYoutube,
   IconBrandX,
   IconBrandFacebook,
-  IconUsers,
-  IconLifebuoy,
-  IconAward,
-  IconBriefcase,
   IconPlus,
 } from '@tabler/icons-react'
 import ContactForm from '@/components/forms/ContactForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
-import { getSiteConfig, type SiteConfig } from '@/lib/sanity'
+import { getSiteConfig, getContactPage, getCounsellors, type SiteConfig } from '@/lib/sanity'
+import { getIcon } from '@/lib/iconMap'
 
-
-const TRUST_PILLS = [
-  { Icon: IconBolt,        label: 'Response within 2 hours' },
-  { Icon: IconCircleCheck, label: 'Free · No obligation'    },
-  { Icon: IconClock,       label: 'Mon-Sat, 9am-7pm IST'    },
+const DEFAULT_TRUST_PILLS = [
+  { label: 'Response within 2 hours', icon: 'bolt' },
+  { label: 'Free · No obligation',    icon: 'circleCheck' },
+  { label: 'Mon-Sat, 9am-7pm IST',    icon: 'clock' },
 ]
 
 function buildSocialItems(config: SiteConfig) {
@@ -44,10 +35,10 @@ function buildSocialItems(config: SiteConfig) {
   ]
 }
 
-const OFFICE_HOURS = [
-  { d: 'Monday - Friday', h: '9:00 am - 7:00 pm' },
-  { d: 'Saturday',         h: '9:00 am - 5:00 pm' },
-  { d: 'Sunday',           h: 'Closed'            },
+const DEFAULT_OFFICE_HOURS = [
+  { day: 'Monday - Friday', hours: '9:00 am - 7:00 pm' },
+  { day: 'Saturday',        hours: '9:00 am - 5:00 pm' },
+  { day: 'Sunday',          hours: 'Closed' },
 ]
 
 const MAP_EMBED_URL =
@@ -56,77 +47,33 @@ const MAP_EMBED_URL =
 const MAP_PLACE_URL =
   'https://www.google.com/maps/search/?api=1&query=Vivekananda+Global+University+VGU+Campus+Jagatpura+Jaipur+Rajasthan+303012'
 
-function buildMiniFaqs(config: SiteConfig) {
-  return [
-    {
-      q: 'Are VGU online degrees UGC-recognised?',
-      a: "Yes. VGU's online programmes are UGC-entitled through the Distance Education Bureau (DEB), and the university is NAAC A+ accredited. Your degree is fully recognised by employers, government bodies, and other universities in India.",
-    },
-    {
-      q: 'Can I pay fees in monthly EMIs?',
-      a: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.',
-    },
-    {
-      q: 'How long does the application process take?',
-      a: 'Most applications are reviewed within 2-3 business days. A counsellor will reach out to confirm your details, request any missing documents, and guide you through the next steps.',
-    },
-    {
-      q: 'Can I visit the campus before enrolling?',
-      a: `Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email ${config.email} or call ${config.phone} to schedule a guided tour.`,
-    },
-  ]
-}
+const DEFAULT_MINI_FAQS = [
+  { question: 'Are VGU online degrees UGC-recognised?', answer: 'Yes. VGU\'s online programmes are UGC-entitled through the Distance Education Bureau (DEB), and the university is NAAC A+ accredited. Your degree is fully recognised by employers, government bodies, and other universities in India.' },
+  { question: 'Can I pay fees in monthly EMIs?', answer: 'Yes. We offer 0% interest EMI plans starting from ₹2,999/month through our finance partners. A counsellor can walk you through the options that match your programme and budget.' },
+  { question: 'How long does the application process take?', answer: 'Most applications are reviewed within 2-3 business days. A counsellor will reach out to confirm your details, request any missing documents, and guide you through the next steps.' },
+  { question: 'Can I visit the campus before enrolling?', answer: 'Yes. The VGU campus in Jagatpura, Jaipur is open for visits Monday to Saturday. Email {email} or call {phone} to schedule a guided tour.' },
+]
 
-function buildDepartments(config: SiteConfig) {
-  const mailto = (subject: string) => `mailto:${config.email}?subject=${encodeURIComponent(subject)}`
-  return [
-    { Icon: IconUsers,      label: 'Admissions',           desc: 'Programme info, eligibility, fees, and the application process.',       href: mailto('Admissions enquiry') },
-    { Icon: IconLifebuoy,   label: 'Student Support',      desc: 'LMS access, exam queries, and technical issues for enrolled students.', href: mailto('Student support')    },
-    { Icon: IconAward,      label: 'Alumni Relations',     desc: 'Reconnect with VGU, share your updates, or join the alumni network.',   href: mailto('Alumni')             },
-    { Icon: IconBriefcase,  label: 'Press & Partnerships', desc: 'Media enquiries, corporate tie-ups, and content collaborations.',       href: mailto('Press / Partnership') },
-  ]
-}
+const DEFAULT_DEPARTMENTS = [
+  { label: 'Admissions',           desc: 'Programme info, eligibility, fees, and the application process.',       emailSubject: 'Admissions enquiry',  icon: 'users' },
+  { label: 'Student Support',      desc: 'LMS access, exam queries, and technical issues for enrolled students.', emailSubject: 'Student support',     icon: 'lifebuoy' },
+  { label: 'Alumni Relations',     desc: 'Reconnect with VGU, share your updates, or join the alumni network.',   emailSubject: 'Alumni',              icon: 'award' },
+  { label: 'Press & Partnerships', desc: 'Media enquiries, corporate tie-ups, and content collaborations.',       emailSubject: 'Press / Partnership', icon: 'briefcase' },
+]
 
-function buildContactChannels(config: SiteConfig) {
-  return [
-    {
-      Icon:    IconPhone,
-      label:   'Admission queries',
-      primary: config.phone,
-      sub:     'Mon-Sat, 9am-7pm IST',
-      href:    `tel:${config.phoneTel}`,
-      cta:     'Call now',
-    },
-    {
-      Icon:    IconHeadset,
-      label:   'Student helpline',
-      primary: '+91 95490 86333',
-      sub:     'For enrolled students',
-      href:    'tel:+919549086333',
-      cta:     'Call now',
-    },
-    {
-      Icon:    IconBrandWhatsapp,
-      label:   'WhatsApp',
-      primary: config.phone,
-      sub:     'Usually replies in 15 min',
-      href:    config.whatsappUrl,
-      cta:     'Chat now',
-    },
-    {
-      Icon:    IconMail,
-      label:   'Email',
-      primary: config.email,
-      sub:     'Replies within 24 hours',
-      href:    `mailto:${config.email}`,
-      cta:     'Send email',
-    },
-  ]
-}
+const DEFAULT_CHANNELS = [
+  { label: 'Admission queries', sub: 'Mon-Sat, 9am-7pm IST',       cta: 'Call now',   icon: 'phone' },
+  { label: 'Student helpline',  sub: 'For enrolled students',       cta: 'Call now',   icon: 'headset' },
+  { label: 'WhatsApp',          sub: 'Usually replies in 15 min',   cta: 'Chat now',   icon: 'brandWhatsapp' },
+  { label: 'Email',             sub: 'Replies within 24 hours',     cta: 'Send email', icon: 'mail' },
+]
 
-const COUNSELLORS = [
+const DEFAULT_COUNSELLOR_PHOTO =
+  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop&crop=faces'
+
+const DEFAULT_COUNSELLORS = [
   {
-    photo:     'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop&crop=faces',
+    photo:     DEFAULT_COUNSELLOR_PHOTO,
     name:      'Priya Sharma',
     role:      'MBA & PG Specialist',
     bio:       "Helps working professionals choose between MBA, MCA, and management programmes. 8 years guiding senior managers and entrepreneurs.",
@@ -159,13 +106,79 @@ export const metadata: Metadata = {
   },
 }
 
+function fillTags(template: string, tags: Record<string, string>): string {
+  return Object.entries(tags).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), template)
+}
+
 export default async function ContactPage() {
-  const config = await getSiteConfig()
+  const [config, contact, counsellors] = await Promise.all([
+    getSiteConfig(),
+    getContactPage(),
+    getCounsellors(),
+  ])
   const SOCIAL_ITEMS = buildSocialItems(config)
-  const MINI_FAQS = buildMiniFaqs(config)
-  const DEPARTMENTS = buildDepartments(config)
-  const CONTACT_CHANNELS = buildContactChannels(config)
   const addressLines = config.addressLines
+  const tags = { email: config.email, phone: config.phone }
+
+  // ── Hero ──────────────────────────────────────────────────────
+  const heroBadgeLabel      = contact?.heroBadgeLabel || 'Talk to a counsellor'
+  const heroHeadingLine1    = contact?.heroHeadingLine1 || 'Real people.'
+  const heroHeadingHighlight = contact?.heroHeadingHighlight || 'Honest answers.'
+  const heroSubtext         = contact?.heroSubtext || 'No chatbots. No hold queues. A trained VGU admissions counsellor will answer your questions for free.'
+  const TRUST_PILLS = (contact?.trustPills?.length ? contact.trustPills : DEFAULT_TRUST_PILLS).map(t => ({
+    label: t.label, Icon: getIcon(t.icon),
+  }))
+
+  // ── Quick channels - label/sub/cta/icon are CMS-editable; the actual
+  // phone/email/WhatsApp value + link always uses the live Site Settings. ──
+  const channelsCms = contact?.contactChannels ?? []
+  const CONTACT_CHANNELS = [
+    { Icon: getIcon(channelsCms[0]?.icon || DEFAULT_CHANNELS[0].icon), label: channelsCms[0]?.label || DEFAULT_CHANNELS[0].label, primary: config.phone, sub: channelsCms[0]?.sub || DEFAULT_CHANNELS[0].sub, href: `tel:${config.phoneTel}`, cta: channelsCms[0]?.cta || DEFAULT_CHANNELS[0].cta },
+    { Icon: getIcon(channelsCms[1]?.icon || DEFAULT_CHANNELS[1].icon), label: channelsCms[1]?.label || DEFAULT_CHANNELS[1].label, primary: '+91 95490 86333', sub: channelsCms[1]?.sub || DEFAULT_CHANNELS[1].sub, href: 'tel:+919549086333', cta: channelsCms[1]?.cta || DEFAULT_CHANNELS[1].cta },
+    { Icon: getIcon(channelsCms[2]?.icon || DEFAULT_CHANNELS[2].icon), label: channelsCms[2]?.label || DEFAULT_CHANNELS[2].label, primary: config.phone, sub: channelsCms[2]?.sub || DEFAULT_CHANNELS[2].sub, href: config.whatsappUrl, cta: channelsCms[2]?.cta || DEFAULT_CHANNELS[2].cta },
+    { Icon: getIcon(channelsCms[3]?.icon || DEFAULT_CHANNELS[3].icon), label: channelsCms[3]?.label || DEFAULT_CHANNELS[3].label, primary: config.email, sub: channelsCms[3]?.sub || DEFAULT_CHANNELS[3].sub, href: `mailto:${config.email}`, cta: channelsCms[3]?.cta || DEFAULT_CHANNELS[3].cta },
+  ]
+
+  // ── Reach Us card stack ───────────────────────────────────────
+  const addressCardLabel = contact?.addressCardLabel || 'Campus address'
+  const officeHoursLabel = contact?.officeHoursLabel || 'Office hours (IST)'
+  const OFFICE_HOURS = contact?.officeHours?.length ? contact.officeHours : DEFAULT_OFFICE_HOURS
+  const socialsLabel = contact?.socialsLabel || 'Find us on'
+
+  // ── Form section header ──────────────────────────────────────
+  const formEyebrow = contact?.formEyebrow || 'Send us a message'
+  const formHeading = contact?.formHeading || 'Tell us how we can help'
+
+  // ── Map ───────────────────────────────────────────────────────
+  const mapEyebrow = contact?.mapEyebrow || 'Visit our campus'
+  const mapHeading = contact?.mapHeading || 'Find us in Jaipur'
+  const mapSubtext = contact?.mapSubtext || 'Drop by the VGU campus in Jagatpura for a guided tour, or attend one of our scheduled immersion events.'
+
+  // ── Departments ───────────────────────────────────────────────
+  const departmentsEyebrow = contact?.departmentsEyebrow || 'Find the right team'
+  const departmentsHeading = contact?.departmentsHeading || 'Who would you like to reach?'
+  const deptCms = contact?.departments ?? []
+  const mailto = (subject: string) => `mailto:${config.email}?subject=${encodeURIComponent(subject)}`
+  const DEPARTMENTS = DEFAULT_DEPARTMENTS.map((d, i) => ({
+    Icon: getIcon(deptCms[i]?.icon || d.icon),
+    label: deptCms[i]?.label || d.label,
+    desc: deptCms[i]?.desc || d.desc,
+    href: mailto(deptCms[i]?.emailSubject || d.emailSubject),
+  }))
+
+  // ── Mini-FAQ ──────────────────────────────────────────────────
+  const miniFaqEyebrow = contact?.miniFaqEyebrow || 'Before you contact us'
+  const miniFaqHeading = contact?.miniFaqHeading || 'Quick answers'
+  const MINI_FAQS = (contact?.miniFaqs?.length ? contact.miniFaqs : DEFAULT_MINI_FAQS).map(f => ({
+    q: f.question, a: fillTags(f.answer, tags),
+  }))
+
+  // ── Counsellors ───────────────────────────────────────────────
+  const counsellorsEyebrow = contact?.counsellorsEyebrow || 'Meet your counsellors'
+  const counsellorsHeading = contact?.counsellorsHeading || 'Real people you\'ll actually talk to'
+  const COUNSELLORS = counsellors.length > 0
+    ? counsellors.map(c => ({ photo: c.photoUrl || DEFAULT_COUNSELLOR_PHOTO, name: c.name, role: c.role, bio: c.bio, languages: c.languages ?? [] }))
+    : DEFAULT_COUNSELLORS
 
   return (
     <div>
@@ -191,20 +204,19 @@ export default async function ContactPage() {
             <div className="inline-flex items-center gap-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm px-3.5 py-1.5 border border-white/15">
               <IconHeadset size={14} className="text-vgu-yellow" stroke={2} />
               <span className="text-[11px] md:text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-white/90">
-                Talk to a counsellor
+                {heroBadgeLabel}
               </span>
             </div>
 
             {/* Headline */}
             <h1 className="font-heading font-bold text-[36px] md:text-[52px] lg:text-[60px] tracking-[-1px] leading-[1.1] text-white mb-4 md:mb-6">
-              Real people.{' '}
-              <span className="text-vgu-yellow">Honest answers.</span>
+              {heroHeadingLine1}{' '}
+              <span className="text-vgu-yellow">{heroHeadingHighlight}</span>
             </h1>
 
             {/* Body */}
             <p className="text-[16px] md:text-[18px] font-body leading-[1.7] text-white/75 max-w-[600px]">
-              No chatbots. No hold queues. A trained VGU admissions counsellor
-              will answer your questions for free.
+              {heroSubtext}
             </p>
 
             {/* Trust pill row */}
@@ -281,10 +293,10 @@ export default async function ContactPage() {
           {/* Section header */}
           <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Send us a message
+              {formEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
-              Tell us how we can help
+              {formHeading}
             </h2>
           </div>
 
@@ -326,7 +338,7 @@ export default async function ContactPage() {
                 </div>
                 <div className="min-w-0 pt-0.5">
                   <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1.5">
-                    Campus address
+                    {addressCardLabel}
                   </p>
                   <address className="not-italic text-[14px] md:text-[15px] leading-[1.6] text-neutral-700 font-body group-hover:text-vgu-red transition-colors duration-200">
                     Vivekananda Global University<br />
@@ -360,17 +372,17 @@ export default async function ContactPage() {
                 </div>
                 <div className="min-w-0 flex-1 pt-0.5">
                   <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-2.5">
-                    Office hours (IST)
+                    {officeHoursLabel}
                   </p>
                   <ul className="flex flex-col gap-1.5">
                     {OFFICE_HOURS.map((row) => (
                       <li
-                        key={row.d}
+                        key={row.day}
                         className="flex items-center justify-between gap-3 text-[13px] md:text-[14px] font-body"
                       >
-                        <span className="text-neutral-600">{row.d}</span>
-                        <span className={row.h === 'Closed' ? 'text-neutral-400' : 'font-semibold text-neutral-900'}>
-                          {row.h}
+                        <span className="text-neutral-600">{row.day}</span>
+                        <span className={row.hours === 'Closed' ? 'text-neutral-400' : 'font-semibold text-neutral-900'}>
+                          {row.hours}
                         </span>
                       </li>
                     ))}
@@ -388,7 +400,7 @@ export default async function ContactPage() {
                            transition-all duration-300"
               >
                 <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-3">
-                  Find us on
+                  {socialsLabel}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {SOCIAL_ITEMS.map((s) => (
@@ -422,14 +434,13 @@ export default async function ContactPage() {
           {/* Section header */}
           <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-10">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Visit our campus
+              {mapEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900 mb-3">
-              Find us in Jaipur
+              {mapHeading}
             </h2>
             <p className="text-[16px] font-body leading-[1.7] text-neutral-500">
-              Drop by the VGU campus in Jagatpura for a guided tour, or attend one of our scheduled
-              immersion events.
+              {mapSubtext}
             </p>
           </div>
 
@@ -461,7 +472,7 @@ export default async function ContactPage() {
                 </div>
                 <div className="min-w-0 pt-0.5">
                   <p className="text-[11px] font-heading font-semibold uppercase tracking-[0.08em] text-neutral-400 mb-1">
-                    Campus address
+                    {addressCardLabel}
                   </p>
                   <p className="font-heading font-bold text-[14px] text-neutral-900 leading-snug">
                     Vivekananda Global University
@@ -505,10 +516,10 @@ export default async function ContactPage() {
           {/* Section header */}
           <div data-animate="fade-up" className="max-w-[680px] mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Find the right team
+              {departmentsEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
-              Who would you like to reach?
+              {departmentsHeading}
             </h2>
           </div>
 
@@ -563,10 +574,10 @@ export default async function ContactPage() {
           {/* Section header */}
           <div data-animate="fade-up" className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Before you contact us
+              {miniFaqEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
-              Quick answers
+              {miniFaqHeading}
             </h2>
           </div>
 
@@ -625,12 +636,10 @@ export default async function ContactPage() {
           {/* Section header */}
           <div data-animate="fade-up" className="text-center max-w-[640px] mx-auto mb-10 md:mb-14">
             <p className="text-[12px] font-heading font-semibold uppercase tracking-[0.08em] text-vgu-red mb-3">
-              Meet your counsellors
+              {counsellorsEyebrow}
             </p>
             <h2 className="font-heading font-bold text-[26px] md:text-[36px] lg:text-[40px] tracking-[-0.5px] leading-[1.15] text-neutral-900">
-              Real people you&apos;ll{' '}
-              <br className="sm:hidden" />
-              actually talk to
+              {counsellorsHeading}
             </h2>
           </div>
 

@@ -63,6 +63,21 @@ export function structure(S: StructureBuilder) {
             ])
         ),
 
+      // ── Contact ─────────────────────────────────────────────────
+      S.listItem()
+        .title('Contact')
+        .child(
+          S.list()
+            .title('Contact')
+            .items([
+              S.documentTypeListItem('contactPage').title('Contact Page Content'),
+              S.divider(),
+              S.listItem()
+                .title('Counsellors')
+                .child(S.documentTypeList('counsellor').title('Counsellors')),
+            ])
+        ),
+
       // ── Programs ────────────────────────────────────────────────
       S.listItem()
         .title('Programs')

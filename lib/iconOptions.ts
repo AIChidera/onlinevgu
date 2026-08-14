@@ -23,6 +23,14 @@ export const ICON_OPTIONS = [
   { title: 'Chat bubbles (discussion)',    value: 'messages'        },
   { title: 'Microphone (guest talk)',      value: 'microphone2'     },
   { title: 'Briefcase (career/jobs)',      value: 'briefcase'       },
+  { title: 'Lightning bolt (speed)',       value: 'bolt'            },
+  { title: 'Check circle (confirmation)',  value: 'circleCheck'     },
+  { title: 'Clock (hours/time)',           value: 'clock'           },
+  { title: 'Phone (call)',                 value: 'phone'           },
+  { title: 'Headset (support)',            value: 'headset'         },
+  { title: 'WhatsApp (chat)',              value: 'brandWhatsapp'   },
+  { title: 'Mail (email)',                 value: 'mail'            },
+  { title: 'Lifebuoy (student support)',   value: 'lifebuoy'        },
 ] as const
 
 export type IconOptionValue = (typeof ICON_OPTIONS)[number]['value']

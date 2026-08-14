@@ -335,6 +335,73 @@ export interface SanityAboutPage {
   alumniCtaSecondaryLabel?: string
 }
 
+export interface SanityContactPageTrustPill {
+  label: string
+  icon:  string
+}
+
+export interface SanityContactPageChannel {
+  label: string
+  sub:   string
+  cta:   string
+  icon:  string
+}
+
+export interface SanityContactPageOfficeHour {
+  day:   string
+  hours: string
+}
+
+export interface SanityContactPageDepartment {
+  label:        string
+  desc:         string
+  emailSubject: string
+  icon:         string
+}
+
+export interface SanityContactPageFaq {
+  question: string
+  answer:   string
+}
+
+// Singleton - one document total. Every field is optional; components fall
+// back to their current hardcoded copy for anything left blank.
+export interface SanityContactPage {
+  heroBadgeLabel?:      string
+  heroHeadingLine1?:    string
+  heroHeadingHighlight?: string
+  heroSubtext?:         string
+  trustPills?:          SanityContactPageTrustPill[]
+  contactChannels?:     SanityContactPageChannel[]
+  addressCardLabel?:    string
+  officeHoursLabel?:    string
+  officeHours?:         SanityContactPageOfficeHour[]
+  socialsLabel?:        string
+  formEyebrow?:         string
+  formHeading?:         string
+  mapEyebrow?:          string
+  mapHeading?:          string
+  mapSubtext?:          string
+  departmentsEyebrow?:  string
+  departmentsHeading?:  string
+  departments?:         SanityContactPageDepartment[]
+  miniFaqEyebrow?:      string
+  miniFaqHeading?:      string
+  miniFaqs?:            SanityContactPageFaq[]
+  counsellorsEyebrow?:  string
+  counsellorsHeading?:  string
+}
+
+export interface SanityCounsellor {
+  _id:          string
+  name:         string
+  role:         string
+  bio:          string
+  languages:    string[]
+  photoUrl:     string | null
+  displayOrder: number
+}
+
 // ────────────────────────────────────────────────────────────
 // Queries - all wrapped with unstable_cache for guaranteed
 // function-level caching that is independent of how the
@@ -804,4 +871,39 @@ export const getAboutTestimonials = unstable_cache(
   },
   ['about-testimonials'],
   { revalidate: 3600, tags: ['testimonial'] }
+)
+
+export const getContactPage = unstable_cache(
+  async (): Promise<SanityContactPage | null> => {
+    return sanityClient.fetch<SanityContactPage | null>(
+      `*[_type == "contactPage"][0] {
+        heroBadgeLabel, heroHeadingLine1, heroHeadingHighlight, heroSubtext, trustPills,
+        contactChannels,
+        addressCardLabel, officeHoursLabel, officeHours, socialsLabel,
+        formEyebrow, formHeading,
+        mapEyebrow, mapHeading, mapSubtext,
+        departmentsEyebrow, departmentsHeading, departments,
+        miniFaqEyebrow, miniFaqHeading, miniFaqs,
+        counsellorsEyebrow, counsellorsHeading
+      }`,
+      {}
+    )
+  },
+  ['contact-page'],
+  { revalidate: 3600, tags: ['contactPage'] }
+)
+
+export const getCounsellors = unstable_cache(
+  async (): Promise<SanityCounsellor[]> => {
+    return sanityClient.fetch<SanityCounsellor[]>(
+      `*[_type == "counsellor"] | order(displayOrder asc) {
+        _id, name, role, bio, languages,
+        "photoUrl": photo.asset->url,
+        displayOrder
+      }`,
+      {}
+    )
+  },
+  ['counsellors'],
+  { revalidate: 3600, tags: ['counsellor'] }
 )
