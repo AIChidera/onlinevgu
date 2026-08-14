@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import { IconAward } from '@tabler/icons-react'
 import SketchCircle   from '@/components/ui/sketch/SketchCircle'

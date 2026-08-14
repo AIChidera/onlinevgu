@@ -1,6 +1,4 @@
-﻿'use client'
-
-import BrandIcon from '@/components/ui/BrandIcon'
+﻿import BrandIcon from '@/components/ui/BrandIcon'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import type { SanityHomePage } from '@/lib/sanity'
 import {
