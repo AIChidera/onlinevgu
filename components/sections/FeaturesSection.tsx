@@ -8,6 +8,11 @@ import {
   IconPalette,
   IconUsersGroup,
   IconSpeakerphone,
+  IconCertificate,
+  IconAward,
+  IconChecklist,
+  IconTrendingUp,
+  IconCreditCard,
 } from '@tabler/icons-react'
 
 const COURSERA_PARTNERS = ['Google', 'IBM', 'Meta', 'AWS', 'Microsoft', 'DeepLearning.AI']
@@ -59,6 +64,20 @@ const DEFAULT_PLATFORMS = [
     statValue: 'Included',
     statLabel: 'for your full program duration',
   },
+]
+
+// Real, already-verified facts used elsewhere on this site (TrustBar,
+// ImpactSection, MBA program page, Placements page) - restated here as a
+// short scannable strip rather than invented. Tied to a fixed icon set,
+// same reasoning as COURSERA_PARTNERS/LEARNING_CATEGORIES above, so this
+// stays code-driven rather than a free-text CMS field.
+const SELLING_POINTS = [
+  { label: 'UGC-Entitled Degree',        Icon: IconCertificate },
+  { label: 'NAAC A+ Accredited',         Icon: IconAward       },
+  { label: 'No Entrance Exam',           Icon: IconChecklist   },
+  { label: '95% Placement Support',      Icon: IconTrendingUp  },
+  { label: 'Industry-Linked Curriculum', Icon: IconBriefcase   },
+  { label: 'Merit Scholarships & EMI',   Icon: IconCreditCard  },
 ]
 
 export default function FeaturesSection({ home }: { home?: SanityHomePage | null }) {
@@ -155,6 +174,28 @@ export default function FeaturesSection({ home }: { home?: SanityHomePage | null
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Selling points strip - short, factual summary restating verified
+            facts already used elsewhere on this site (TrustBar, ImpactSection,
+            program pages), consolidated here for scannability and SEO. */}
+        <div data-animate="fade-up" className="mt-10 md:mt-12">
+          <p className="text-center text-[15px] md:text-[16px] font-body text-neutral-700 leading-[1.7] max-w-[720px] mx-auto mb-6">
+            Online VGU is the digital-learning arm of Vivekananda Global University, a NAAC A+ accredited, UGC-entitled university. Every degree pairs an industry-linked curriculum with real placement support, so it counts with employers, not just on a certificate.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {SELLING_POINTS.map((point) => (
+              <div
+                key={point.label}
+                className="flex flex-col items-center gap-2 text-center rounded-xl px-3 py-4 bg-white/60 border border-vgu-red-dark/10"
+              >
+                <point.Icon size={20} className="text-vgu-red-dark flex-none" stroke={1.75} />
+                <span className="text-[12px] font-heading font-semibold text-neutral-800 leading-tight">
+                  {point.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
