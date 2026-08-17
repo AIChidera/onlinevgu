@@ -208,8 +208,8 @@ function ProgramCard({ programme: p, meta, delay = 0 }: { programme: Programme; 
           {p.name}
         </h3>
 
-        {/* Italic outcome line */}
-        <p className="font-body italic text-[16px] text-neutral-600 leading-[1.5] mb-4">
+        {/* Outcome line - matches onlinevgu.com's plain (non-italic) card copy */}
+        <p className="font-body text-[16px] text-neutral-600 leading-[1.5] mb-4">
           {meta?.outcome ?? 'Industry-aligned, UGC-entitled online degree.'}
         </p>
 
@@ -299,7 +299,7 @@ function MobileProgramCard({ programme: p, meta, delay = 0 }: { programme: Progr
           {p.name}
         </h3>
 
-        <p className="font-body italic text-[16px] text-neutral-600 leading-[1.5] mb-3">
+        <p className="font-body text-[16px] text-neutral-600 leading-[1.5] mb-3">
           {meta?.outcome ?? 'Industry-aligned, UGC-entitled online degree.'}
         </p>
 
