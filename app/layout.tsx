@@ -1,5 +1,5 @@
 ﻿import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, DM_Sans } from 'next/font/google'
+import { Heebo, Roboto } from 'next/font/google'
 import './globals.css'
 import SiteNav from '@/components/layout/SiteNav'
 import SiteFooter from '@/components/layout/SiteFooter'
@@ -13,16 +13,23 @@ import IntakeCountdown from '@/components/sections/IntakeCountdown'
 import { getSiteConfig } from '@/lib/sanity'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const heebo = Heebo({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  // Live onlinevgu.com sets headings to Heebo 700. Loading the fuller
+  // 400-900 range here because this design system also uses semibold,
+  // extrabold and black for badges, stat numbers and buttons - all real
+  // Heebo cuts, unlike Roboto below.
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-heading',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  // Matches live onlinevgu.com's body font. Roboto's static family only
+  // ships 400/500/700/900 (no 600/800) - font-semibold body text will
+  // fall back to the browser's nearest available weight (usually 700).
+  weight: ['400', '500', '700'],
   variable: '--font-body',
   display: 'swap',
 })
@@ -73,7 +80,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const config = await getSiteConfig()
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${plusJakartaSans.variable} ${dmSans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${heebo.variable} ${roboto.variable}`}>
       <body className="font-body antialiased">
         {/* GTM noscript fallback, must be the first element inside body */}
         {process.env.NEXT_PUBLIC_GTM_ID && (

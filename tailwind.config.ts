@@ -23,8 +23,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-heading)', 'Plus Jakarta Sans', 'sans-serif'],
-        body:    ['var(--font-body)',    'DM Sans',           'sans-serif'],
+        heading: ['var(--font-heading)', 'Heebo',  'sans-serif'],
+        body:    ['var(--font-body)',    'Roboto', 'sans-serif'],
       },
       borderRadius: {
         sm:   '4px',
