@@ -869,7 +869,7 @@ export const getProgramBySlug = unstable_cache(
         eligibility, highlights, specialisations,
         careerRoles, avgSalaryAfter, topHirers,
         curriculum,
-        "heroImageUrl":          heroImage.asset->url,
+        "heroImageUrl":          heroImage.asset->url + "?w=1600&q=75&auto=format",
         "certificateSampleUrl": certificateSample.asset->url
       }`,
       { slug }
@@ -883,7 +883,7 @@ export const getHomePage = unstable_cache(
   async (): Promise<SanityHomePage | null> => {
     return sanityClient.fetch<SanityHomePage | null>(
       `*[_type == "homePage"][0] {
-        "heroImageUrl": heroImage.asset->url,
+        "heroImageUrl": heroImage.asset->url + "?w=1600&q=75&auto=format",
         heroEyebrow, heroHeadingPrefix, heroHeadingHighlight, heroHeadingSuffix,
         heroSubtext, heroBadgeText, heroPrimaryCtaLabel, heroSecondaryCtaLabel,
         trustBarEyebrow,
@@ -906,7 +906,7 @@ export const getAboutPage = unstable_cache(
   async (): Promise<SanityAboutPage | null> => {
     return sanityClient.fetch<SanityAboutPage | null>(
       `*[_type == "aboutPage"][0] {
-        "heroImageUrl": heroImage.asset->url,
+        "heroImageUrl": heroImage.asset->url + "?w=1600&q=75&auto=format",
         heroEyebrow, heroHeadingLine1, heroHeadingLine2, heroSubtext,
         heroPrimaryCtaLabel, heroSecondaryCtaLabel,
         statsCards,
@@ -990,7 +990,7 @@ export const getPlacementsPage = unstable_cache(
   async (): Promise<SanityPlacementsPage | null> => {
     return sanityClient.fetch<SanityPlacementsPage | null>(
       `*[_type == "placementsPage"][0] {
-        "heroImageUrl": heroImage.asset->url,
+        "heroImageUrl": heroImage.asset->url + "?w=1600&q=75&auto=format",
         heroEyebrow, heroHeadingLine1, heroHeadingHighlight, heroSubtext,
         heroPrimaryCtaLabel, heroSecondaryCtaLabel,
         statsCards,
@@ -1028,7 +1028,7 @@ export const getProgramsListingPage = unstable_cache(
   async (): Promise<SanityProgramsListingPage | null> => {
     return sanityClient.fetch<SanityProgramsListingPage | null>(
       `*[_type == "programsListingPage"][0] {
-        "heroImageUrl": heroImage.asset->url,
+        "heroImageUrl": heroImage.asset->url + "?w=1600&q=75&auto=format",
         heroEyebrow, heroHeadingLine1, heroHeadingLine2Prefix, heroHeadingHighlight,
         heroSubtext, heroPrimaryCtaLabel, heroSecondaryCtaLabel
       }`,

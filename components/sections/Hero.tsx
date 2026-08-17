@@ -32,6 +32,7 @@ export default function Hero({ nextBatch = 'July 2026', home }: HeroProps) {
         alt=""
         fill
         priority
+        unoptimized
         sizes="100vw"
         className="object-cover object-center"
       />

@@ -66,7 +66,7 @@ export default async function ProgramsPage() {
       <section className="relative flex items-center overflow-hidden min-h-[480px] lg:min-h-[560px]">
 
         {/* Photo + dark overlay (Bible §06 semi-transparent treatment) */}
-        <Image src={heroImageSrc} alt="" fill className="object-cover object-center" sizes="100vw" priority />
+        <Image src={heroImageSrc} alt="" fill className="object-cover object-center" sizes="100vw" priority unoptimized />
         <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
 
         {/* Breadcrumb - pinned to the hero's own top edge, independent of the
