@@ -6,6 +6,7 @@ import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
 import ProgramsSection from '@/components/sections/ProgramsSection'
 import ImpactSection from '@/components/sections/ImpactSection'
+import PlacementsHighlight from '@/components/sections/PlacementsHighlight'
 import CampusImmersionsSection from '@/components/sections/CampusImmersionsSection'
 import Testimonials from '@/components/sections/Testimonials'
 import FeaturesSection from '@/components/sections/FeaturesSection'
@@ -14,6 +15,7 @@ import FaqSection from '@/components/sections/FaqSection'
 import type { SanityFaq } from '@/lib/sanity'
 import {
   getTestimonials,
+  getPlacementsTestimonials,
   getHomeFaqs,
   getCampusEvents,
   getAllPrograms,
@@ -88,8 +90,9 @@ function parseStat(s: string | undefined | null, fallback: number): number {
 }
 
 export default async function HomePage() {
-  const [testimonials, faqs, campusEvents, sanityPrograms, siteSettings, config, homePage] = await Promise.all([
+  const [testimonials, placementStories, faqs, campusEvents, sanityPrograms, siteSettings, config, homePage] = await Promise.all([
     getTestimonials(),
+    getPlacementsTestimonials(),
     getHomeFaqs(),
     getCampusEvents(),
     getAllPrograms(),
@@ -123,6 +126,7 @@ export default async function HomePage() {
         statRating={parseStat(siteSettings?.statRating,        4.8)}
         statCoursera={parseStat(siteSettings?.statCourseraCount, 10000)}
       />
+      <PlacementsHighlight stories={placementStories} />
       <CampusImmersionsSection events={campusEvents} />
       <Testimonials stories={testimonials} />
       <CourseExperienceSection />

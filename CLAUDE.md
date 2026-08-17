@@ -238,13 +238,16 @@ and are not listed in page.tsx. The sections below are the body.
 2.  TrustBar           (NAAC, UGC, AICTE, QS, Coursera logo strip)
 3.  ProgramsSection    (tabbed UG/PG, 3-col card grid)
 4.  ImpactSection      (stats/impact — 50,000+, 95%, etc.)
-5.  CampusImmersionsSection  (campus life / immersion experience)
-6.  Testimonials       (3-col cards, #F9FAFB bg)
-7.  CourseExperienceSection  (Coursera integration, 10,000+ courses)
-8.  FeaturesSection    (Why VGU — 6-item icon grid, #F9FAFB bg)
-9.  StepsSection       (Admission timeline — 4 steps, vertical on mobile)
-10. FaqSection         (accordion, max-width 800px)
-11. AccreditationStrip (accreditation logos, bottom of page)
+5.  PlacementsHighlight (3 success-story cards pulled from the Placements
+                         page's testimonials, #F9FAFB bg, CTA to /placements —
+                         joined directly under ImpactSection, no color break)
+6.  CampusImmersionsSection  (campus life / immersion experience)
+7.  Testimonials       (3-col cards, #F9FAFB bg)
+8.  CourseExperienceSection  (Coursera integration, 10,000+ courses)
+9.  FeaturesSection    (Why VGU — 6-item icon grid, #F9FAFB bg)
+10. StepsSection       (Admission timeline — 4 steps, vertical on mobile)
+11. FaqSection         (accordion, max-width 800px)
+12. AccreditationStrip (accreditation logos, bottom of page)
 
 
 # ------------------------------------------------------------
