@@ -99,13 +99,13 @@ export default defineType({
       name: 'company',
       title: 'Current Company',
       type: 'string',
-      description: 'Only shown in Success Stories on the Placements page. E.g. "Razorpay".',
+      description: 'Shown as a badge in Success Stories (Placements page) and the homepage Testimonials "Career path" line, if this student is featured there too. E.g. "Razorpay".',
     }),
     defineField({
       name: 'journey',
       title: 'Career Journey',
       type: 'string',
-      description: 'Only shown in Success Stories on the Placements page. E.g. "Sales Executive → Product Manager".',
+      description: 'Shown in Success Stories (Placements page) and the homepage Testimonials "Career path" line, if this student is featured there too. E.g. "Sales Executive → Product Manager".',
     }),
     defineField({
       name: 'displayOrder',

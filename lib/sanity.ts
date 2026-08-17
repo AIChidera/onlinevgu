@@ -38,7 +38,9 @@ export interface SanityTestimonial {
   videoLabel:    string
   videoUrl?:     string
   displayOrder:  number
-  // Only populated by getPlacementsTestimonials() - used in Success Stories.
+  // company and journey are populated by both getTestimonials() (homepage
+  // "Career path" line) and getPlacementsTestimonials() (Success Stories) -
+  // one field, filled in once in Studio, shown on both pages.
   company?:      string
   journey?:      string
 }
@@ -494,7 +496,7 @@ export const getTestimonials = unstable_cache(
         outcomes,
         "avatarUrl": avatar.asset->url,
         colorTheme, videoLabel, videoUrl,
-        displayOrder
+        displayOrder, company, journey
       }`,
       {}
     )

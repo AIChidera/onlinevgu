@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { IconX, IconPlayerPlay, IconArrowRight, IconTrendingUp } from '@tabler/icons-react'
+import { IconX, IconPlayerPlay, IconArrowRight, IconTrendingUp, IconBriefcase } from '@tabler/icons-react'
 import SketchFlourish from '@/components/ui/sketch/SketchFlourish'
 import ScrollPlayVideo from '@/components/ui/ScrollPlayVideo'
 import { extractYouTubeId } from '@/lib/youtube'
@@ -27,12 +27,23 @@ function fromSanity(t: SanityTestimonial): Story {
     videoLabel:      t.videoLabel ?? '',
     videoUrl:        t.videoUrl,
     videoId:         extractYouTubeId(t.videoUrl),
-    // Optional new fields - Sanity may not have these yet
-    before:          (t as unknown as { before?: string }).before,
-    after:           (t as unknown as { after?: string }).after,
-    headlineOutcome: (t as unknown as { headlineOutcome?: string }).headlineOutcome,
+    // journey is the same field Placements' Success Stories use (e.g.
+    // "Sales Executive → Product Manager") - split for the before/after
+    // arrow display below instead of asking admin to fill two fields.
+    ...splitJourney(t.journey),
+    // No dedicated "headline outcome" field in Sanity - the first Key
+    // Outcome chip doubles as the prominent badge at the top of the card.
+    headlineOutcome: t.outcomes?.[0],
     photo:           (t as unknown as { photoUrl?: string }).photoUrl ?? t.avatarUrl ?? '',
+    company:         t.company,
   }
+}
+
+function splitJourney(journey?: string): { before?: string; after?: string } {
+  if (!journey) return {}
+  const parts = journey.split('→').map(s => s.trim())
+  if (parts.length !== 2 || !parts[0] || !parts[1]) return {}
+  return { before: parts[0], after: parts[1] }
 }
 
 interface Story {
@@ -50,6 +61,7 @@ interface Story {
   before?:          string  // Bible §09 transformation: starting point
   after?:           string  // Bible §09 transformation: outcome
   headlineOutcome?: string  // Bible §09: one specific outcome chip
+  company?:         string  // hiring company - matches the Placements "Career path" badge
 }
 
 const STORIES: Story[] = [
@@ -76,6 +88,7 @@ const STORIES: Story[] = [
     before:          'Operations Lead, mid-tier IT firm',
     after:           'Senior Manager, Deloitte',
     headlineOutcome: '40% salary hike in 6 months',
+    company:         'Deloitte',
     outcomes:        ['40% salary hike', 'Placed at Deloitte', 'Promoted in 6 months'],
     avatar:          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop',
     photo:           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80&auto=format&fit=crop',
@@ -90,6 +103,7 @@ const STORIES: Story[] = [
     before:          'School-leaver, no industry experience',
     after:           'Full-stack engineer, Infosys Digital',
     headlineOutcome: 'Hired before final exams',
+    company:         'Infosys Digital',
     outcomes:        ['3 freelance clients', 'Infosys Digital offer', 'Full-stack engineer'],
     avatar:          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop',
     photo:           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop',
@@ -104,6 +118,7 @@ const STORIES: Story[] = [
     before:          'Junior dev · 2 years experience',
     after:           'Cloud architect, Amazon India',
     headlineOutcome: 'Amazon India offer · pre-graduation',
+    company:         'Amazon India',
     outcomes:        ['Amazon India offer', 'IBM & Google certs', 'Cloud architect role'],
     avatar:          'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&auto=format&fit=crop',
     photo:           'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80&auto=format&fit=crop',
@@ -276,11 +291,22 @@ export default function Testimonials({ stories: sanityStories = [] }: { stories?
                   <p className="font-heading font-bold text-[15px] text-neutral-900">{story.name}</p>
                   <p className="text-[12px] font-body text-neutral-500">{story.role}</p>
                   {story.before && story.after && (
-                    <div className="mt-2 flex items-center flex-wrap gap-x-1.5 gap-y-0.5 text-[12px] font-body">
-                      <span className="text-neutral-500">{story.before}</span>
-                      <IconArrowRight size={12} className="text-vgu-red flex-none" stroke={2.25} />
-                      <span className="font-semibold text-neutral-900">{story.after}</span>
-                    </div>
+                    <>
+                      <p className="mt-3 text-[10px] font-heading font-semibold uppercase tracking-[0.06em] text-neutral-400">
+                        Career path
+                      </p>
+                      <div className="mt-1 flex items-center flex-wrap gap-x-1.5 gap-y-0.5 text-[12px] font-body">
+                        <span className="text-neutral-500">{story.before}</span>
+                        <IconArrowRight size={12} className="text-vgu-red flex-none" stroke={2.25} />
+                        <span className="font-semibold text-neutral-900">{story.after}</span>
+                      </div>
+                    </>
+                  )}
+                  {story.company && (
+                    <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-vgu-yellow/15 border border-vgu-yellow/35 px-2.5 py-1 text-[11px] font-heading font-bold text-[#7a4d00]">
+                      <IconBriefcase size={11} stroke={2} />
+                      {story.company}
+                    </span>
                   )}
                 </div>
               </div>
